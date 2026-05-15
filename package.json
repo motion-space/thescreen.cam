@@ -6,10 +6,15 @@
   "scripts": {
     "dev": "astro dev --host 127.0.0.1",
     "build": "astro build",
-    "preview": "astro preview --host 127.0.0.1"
+    "preview": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler deploy"
   },
   "devDependencies": {
     "@astrojs/sitemap": "^3.2.1",
-    "astro": "^5.7.13"
+    "astro": "^5.7.13",
+    "wrangler": "^4.91.0"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "12"
   }
 }
