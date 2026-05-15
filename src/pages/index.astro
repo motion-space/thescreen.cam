@@ -1,0 +1,407 @@
+---
+import "../styles/global.css";
+
+const siteUrl = "https://thescreen.cam";
+const title = "ScreenCam - Native macOS screen recording studio";
+const description =
+  "ScreenCam is a dark-only macOS screen recorder and editor with ScreenCaptureKit capture, deterministic camera plans, timeline editing, and export-ready preview.";
+
+const promises = [
+  {
+    kicker: "01 / Capture",
+    title: "A floating recorder, built for the desktop.",
+    tags: ["Display", "Window", "Area", "60 fps"]
+  },
+  {
+    kicker: "02 / Plan",
+    title: "Cursor events become a clean camera path.",
+    tags: ["Clicks", "Scrolls", "Focus", "Zoom"]
+  },
+  {
+    kicker: "03 / Finish",
+    title: "Preview and export read the same frame math.",
+    tags: ["Timeline", "Inspector", "MP4", "Native"]
+  }
+];
+
+const steps = ["Select target", "Record clean pixels", "Refine motion", "Export final cut"];
+
+const inspector = [
+  ["Frame", "Scale", "126%"],
+  ["Cursor", "Style", "Native"],
+  ["Curve", "Ease", "Smooth"],
+  ["Export", "Size", "4K"]
+];
+
+const details = [
+  ["ScreenCaptureKit", "Native capture"],
+  ["System audio", "Explicit toggle"],
+  ["Microphone", "Level aware"],
+  ["Camera planner", "Deterministic"],
+  ["Frame evaluator", "Shared preview/export"],
+  ["Manual cursor edits", "Deferred by design"]
+];
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "ScreenCam",
+  applicationCategory: "MultimediaApplication",
+  operatingSystem: "macOS 15+",
+  url: siteUrl,
+  image: `${siteUrl}/og.svg`,
+  description,
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "USD",
+    availability: "https://schema.org/PreOrder"
+  },
+  featureList: [
+    "Native macOS screen recording",
+    "Floating desktop recording toolbar",
+    "Display, window, and area capture modes",
+    "Deterministic camera planning",
+    "Timeline editing with frame, cursor, and curve inspector",
+    "Shared preview and export frame evaluator"
+  ]
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#050505" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-title" content="ScreenCam" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={siteUrl} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ScreenCam" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={siteUrl} />
+    <meta property="og:image" content={`${siteUrl}/og.svg`} />
+    <meta property="og:image:type" content="image/svg+xml" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="ScreenCam landing page product preview" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteUrl}/og.svg`} />
+    <meta name="twitter:image:alt" content="ScreenCam landing page product preview" />
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <a class="brand" href="/" aria-label="ScreenCam home">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span>ScreenCam</span>
+      </a>
+      <nav class="nav-links" aria-label="Page sections">
+        <a href="#flow">Flow</a>
+        <a href="#editor">Editor</a>
+        <a href="#export">Export</a>
+      </nav>
+      <a class="nav-cta" href="#beta">Join beta</a>
+    </header>
+
+    <main id="main">
+      <section class="hero" aria-labelledby="hero-title">
+        <canvas class="capture-canvas" data-capture-canvas aria-hidden="true"></canvas>
+
+        <div class="hero-copy">
+          <p class="eyebrow">Native macOS 15+ screen studio</p>
+          <h1 id="hero-title">ScreenCam</h1>
+          <p class="hero-line">Record the desktop. Reframe the story.</p>
+          <div class="hero-actions" aria-label="Primary calls to action">
+            <a class="button button-primary" href="#beta">Get early access</a>
+            <a class="button button-ghost" href="#editor">See the editor</a>
+          </div>
+        </div>
+
+        <div class="hero-product" aria-label="ScreenCam product interface preview">
+          <div class="floating-toolbar" aria-hidden="true">
+            <span class="toolbar-dot"></span>
+            <span class="toolbar-mode active">Display</span>
+            <span class="toolbar-mode">Window</span>
+            <span class="toolbar-mode">Area</span>
+            <span class="toolbar-level"></span>
+            <span class="toolbar-rec"></span>
+          </div>
+
+          <div class="capture-frame">
+            <div class="capture-topbar">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class="capture-grid">
+              <div class="focus-box">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <div class="cursor-trace"></div>
+            </div>
+          </div>
+
+          <div class="mini-timeline" aria-hidden="true">
+            <span class="clip clip-red"></span>
+            <span class="clip clip-cyan"></span>
+            <span class="clip clip-green"></span>
+            <span class="playhead"></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="signal-strip" aria-label="Product signals">
+        <span>Dark only</span>
+        <span>ScreenCaptureKit</span>
+        <span>Shared preview/export math</span>
+        <span>NSPanel recorder</span>
+      </section>
+
+      <section class="section promise-section" aria-labelledby="promise-title">
+        <div class="section-heading">
+          <p class="eyebrow">Product promise</p>
+          <h2 id="promise-title">A recorder that already knows the edit.</h2>
+        </div>
+        <div class="promise-grid">
+          {
+            promises.map((item) => (
+              <article class="promise-card">
+                <p>{item.kicker}</p>
+                <h3>{item.title}</h3>
+                <div class="tag-row">
+                  {item.tags.map((tag) => (
+                    <span>{tag}</span>
+                  ))}
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="section flow-section" id="flow" aria-labelledby="flow-title">
+        <div class="section-heading compact">
+          <p class="eyebrow">Workflow</p>
+          <h2 id="flow-title">Four beats. No clutter.</h2>
+        </div>
+        <ol class="flow-list">
+          {
+            steps.map((step, index) => (
+              <li>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <strong>{step}</strong>
+              </li>
+            ))
+          }
+        </ol>
+      </section>
+
+      <section class="editor-section" id="editor" aria-labelledby="editor-title">
+        <div class="editor-copy">
+          <p class="eyebrow">Editor</p>
+          <h2 id="editor-title">Preview, timeline, inspector.</h2>
+          <p>TraceCam structure. Native macOS behavior.</p>
+        </div>
+
+        <div class="editor-shell" aria-label="ScreenCam editor preview">
+          <div class="editor-header">
+            <div class="window-lights" aria-hidden="true"><span></span><span></span><span></span></div>
+            <span>00:42 - 7 camera clips - 3840x2160</span>
+            <button type="button" aria-label="Export preview">Export</button>
+          </div>
+          <div class="editor-body">
+            <div class="preview-pane">
+              <div class="preview-stage">
+                <div class="stage-window">
+                  <span class="stage-pill"></span>
+                  <span class="stage-pill short"></span>
+                  <span class="stage-block"></span>
+                </div>
+                <div class="zoom-region"></div>
+                <div class="cursor-dot"></div>
+              </div>
+              <div class="timeline-pane" aria-hidden="true">
+                <span class="track-label">Camera</span>
+                <div class="track">
+                  <span class="segment red"></span>
+                  <span class="segment green"></span>
+                  <span class="segment cyan"></span>
+                  <span class="segment amber"></span>
+                </div>
+                <span class="timeline-cursor"></span>
+              </div>
+            </div>
+            <aside class="inspector-pane">
+              <div class="inspector-tabs" aria-label="Inspector tabs">
+                <span class="active">Frame</span>
+                <span>Cursor</span>
+                <span>Curve</span>
+              </div>
+              {
+                inspector.map(([group, label, value]) => (
+                  <div class="inspector-row">
+                    <span>{group}</span>
+                    <strong>{label}</strong>
+                    <em>{value}</em>
+                  </div>
+                ))
+              }
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="section plan-section" aria-labelledby="plan-title">
+        <div class="plan-visual" aria-hidden="true">
+          <span class="node n1"></span>
+          <span class="node n2"></span>
+          <span class="node n3"></span>
+          <span class="node n4"></span>
+          <svg viewBox="0 0 980 240" preserveAspectRatio="none">
+            <path d="M20 172 C170 42 300 52 430 118 S680 226 958 76" />
+            <path d="M20 172 C170 42 300 52 430 118 S680 226 958 76" />
+          </svg>
+        </div>
+        <div class="section-heading wide">
+          <p class="eyebrow">Camera plan</p>
+          <h2 id="plan-title">Same input. Same shot. Every time.</h2>
+        </div>
+      </section>
+
+      <section class="section detail-section" id="export" aria-labelledby="detail-title">
+        <div class="section-heading compact">
+          <p class="eyebrow">Details</p>
+          <h2 id="detail-title">Built like a Mac app.</h2>
+        </div>
+        <div class="detail-grid">
+          {
+            details.map(([name, value]) => (
+              <div class="detail-row">
+                <span>{name}</span>
+                <strong>{value}</strong>
+              </div>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="beta-section" id="beta" aria-labelledby="beta-title">
+        <p class="eyebrow">Private beta</p>
+        <h2 id="beta-title">thescreen.cam</h2>
+        <p>Dark editor. Native recorder. Deterministic motion.</p>
+        <a class="button button-primary" href="mailto:hello@thescreen.cam?subject=ScreenCam%20beta">Request access</a>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>ScreenCam</span>
+      <span>macOS 15+</span>
+      <span>Dark by design</span>
+    </footer>
+
+    <script is:inline>
+      (() => {
+        const canvas = document.querySelector("[data-capture-canvas]");
+        if (!canvas) return;
+
+        const context = canvas.getContext("2d", { alpha: true });
+        const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+        let width = 0;
+        let height = 0;
+        let raf = 0;
+        let pointerX = 0.62;
+        let pointerY = 0.36;
+
+        const resize = () => {
+          const ratio = Math.min(window.devicePixelRatio || 1, 2);
+          const rect = canvas.getBoundingClientRect();
+          width = Math.max(1, Math.floor(rect.width));
+          height = Math.max(1, Math.floor(rect.height));
+          canvas.width = Math.floor(width * ratio);
+          canvas.height = Math.floor(height * ratio);
+          context.setTransform(ratio, 0, 0, ratio, 0, 0);
+        };
+
+        const draw = (time = 0) => {
+          context.clearRect(0, 0, width, height);
+          context.fillStyle = "#050505";
+          context.fillRect(0, 0, width, height);
+
+          context.strokeStyle = "rgba(244, 241, 232, 0.08)";
+          context.lineWidth = 1;
+          for (let x = 0; x < width; x += 72) {
+            context.beginPath();
+            context.moveTo(x, 0);
+            context.lineTo(x, height);
+            context.stroke();
+          }
+          for (let y = 0; y < height; y += 72) {
+            context.beginPath();
+            context.moveTo(0, y);
+            context.lineTo(width, y);
+            context.stroke();
+          }
+
+          const cx = width * pointerX;
+          const cy = height * pointerY;
+          const pulse = mediaQuery.matches ? 0 : Math.sin(time / 420) * 8;
+
+          context.strokeStyle = "rgba(203, 255, 77, 0.72)";
+          context.lineWidth = 2;
+          context.beginPath();
+          context.arc(cx, cy, 40 + pulse, 0, Math.PI * 2);
+          context.stroke();
+
+          context.strokeStyle = "rgba(54, 227, 255, 0.5)";
+          context.beginPath();
+          context.moveTo(width * 0.12, height * 0.68);
+          context.bezierCurveTo(width * 0.32, height * 0.2, width * 0.56, height * 0.88, cx, cy);
+          context.stroke();
+
+          context.fillStyle = "#ff405c";
+          context.beginPath();
+          context.arc(cx + 28, cy + 24, 7, 0, Math.PI * 2);
+          context.fill();
+
+          if (!mediaQuery.matches && !document.hidden) {
+            raf = window.requestAnimationFrame(draw);
+          }
+        };
+
+        const start = () => {
+          window.cancelAnimationFrame(raf);
+          resize();
+          draw();
+        };
+
+        window.addEventListener("resize", start, { passive: true });
+        window.addEventListener(
+          "pointermove",
+          (event) => {
+            pointerX = event.clientX / Math.max(1, window.innerWidth);
+            pointerY = event.clientY / Math.max(1, window.innerHeight);
+          },
+          { passive: true }
+        );
+        document.addEventListener("visibilitychange", start);
+        mediaQuery.addEventListener("change", start);
+        start();
+      })();
+    </script>
+  </body>
+</html>
