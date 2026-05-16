@@ -3,3 +3,10 @@ node_modules/
 dist/
 .DS_Store
 npm-debug.log*
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
