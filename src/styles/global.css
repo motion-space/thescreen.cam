@@ -324,6 +324,7 @@ p {
   font-size: 0.72rem;
   line-height: 1;
   font-weight: 820;
+  min-width: 4.8em;
 }
 
 .button-subtle {
@@ -791,6 +792,8 @@ p {
 }
 
 .feature-card strong {
+  display: inline-block;
+  min-width: 4.8em;
   color: var(--text);
   font-weight: 860;
 }

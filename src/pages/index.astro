@@ -5,35 +5,9 @@ const siteUrl = "https://thescreen.cam";
 const title = "ScreenCam - Native macOS screen recording, directed after capture";
 const description =
   "ScreenCam is a native macOS screen recorder for sharp capture, high-refresh workflows, manual camera control, curve tuning, and preview-accurate export.";
-const releaseManifestUrl = "https://download.thescreen.cam/release/latest.json";
-const nightlyManifestUrl = "https://download.thescreen.cam/nightly/latest.json";
-const releaseDownloadFallback = "https://download.thescreen.cam/release/latest.zip";
-const nightlyDownloadFallback = "https://download.thescreen.cam/nightly/latest.zip";
-
-const formatPackageSize = (bytes: unknown) => {
-  if (typeof bytes !== "number" || !Number.isFinite(bytes) || bytes <= 0) return null;
-  const mib = bytes / 1024 / 1024;
-  return `${mib.toFixed(mib >= 10 ? 1 : 2)} MiB`;
-};
-
-const getDownloadManifest = async (url: string) => {
-  try {
-    const response = await fetch(url);
-    if (!response.ok) return null;
-    return await response.json();
-  } catch {
-    return null;
-  }
-};
-
-const releaseManifest = await getDownloadManifest(releaseManifestUrl);
-const nightlyManifest = await getDownloadManifest(nightlyManifestUrl);
-const downloadPath =
-  typeof releaseManifest?.artifact?.url === "string" ? releaseManifest.artifact.url : releaseDownloadFallback;
-const nightlyPath =
-  typeof nightlyManifest?.artifact?.url === "string" ? nightlyManifest.artifact.url : nightlyDownloadFallback;
-
-const packageSizeFallback = formatPackageSize(releaseManifest?.artifact?.size) ?? "19.0 MiB";
+const downloadPath = "/api/download/release";
+const nightlyPath = "/api/download/nightly";
+const packageSizeFallback = "...";
 const features = [
   {
     number: "01",
@@ -64,7 +38,7 @@ const structuredData = {
   operatingSystem: "macOS 15+",
   url: siteUrl,
   image: `${siteUrl}/og.png`,
-  downloadUrl: downloadPath,
+  downloadUrl: `${siteUrl}${downloadPath}`,
   description,
   offers: {
     "@type": "Offer",
@@ -128,7 +102,7 @@ const structuredData = {
         <img src="/icon-192.png" width="32" height="32" alt="" decoding="async" />
         <span>ScreenCam</span>
       </a>
-      <a class="header-download" href={downloadPath}>Download</a>
+      <a class="header-download" href={downloadPath} data-release-download>Download</a>
     </header>
 
     <main id="main">
@@ -142,11 +116,11 @@ const structuredData = {
               High-resolution recording with a camera you can shape after the take.
             </p>
             <div class="hero-actions" aria-label="Download ScreenCam">
-              <a class="button button-primary download-button" href={downloadPath}>
+              <a class="button button-primary download-button" href={downloadPath} data-release-download>
                 <span>Download for macOS</span>
-                <small data-release-size>{packageSizeFallback}</small>
+                <small data-release-size aria-live="polite">{packageSizeFallback}</small>
               </a>
-              <a class="button button-subtle" href={nightlyPath}>Nightly</a>
+              <a class="button button-subtle" href={nightlyPath} data-nightly-download>Nightly</a>
             </div>
           </div>
 
@@ -232,7 +206,7 @@ const structuredData = {
               {feature.number === "01" ? (
                 <p>
                   <span>Native macOS app.</span>{" "}
-                  <strong data-release-size>{packageSizeFallback}</strong>{" "}
+                  <strong data-release-size aria-live="polite">{packageSizeFallback}</strong>{" "}
                   <span>download.</span>
                 </p>
               ) : (
@@ -249,18 +223,48 @@ const structuredData = {
           <h2 id="download-title">Start with the stable build.</h2>
         </div>
         <div class="download-actions">
-          <a class="button button-primary" href={downloadPath}>Download production</a>
-          <a class="nightly-link" href={nightlyPath}>Nightly build</a>
+          <a class="button button-primary" href={downloadPath} data-release-download>Download production</a>
+          <a class="nightly-link" href={nightlyPath} data-nightly-download>Nightly build</a>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
       <span>ScreenCam</span>
-      <a href={downloadPath}>Download</a>
+      <a href={downloadPath} data-release-download>Download</a>
       <span>macOS 15+</span>
     </footer>
     <script is:inline>
+      (() => {
+        const formatSize = (bytes) => {
+          if (!Number.isFinite(bytes) || bytes <= 0) return null;
+          const mib = bytes / 1024 / 1024;
+          return `${mib.toFixed(mib >= 10 ? 1 : 2)} MiB`;
+        };
+
+        const updateLinks = (selector, url) => {
+          if (typeof url !== "string" || !url) return;
+          document.querySelectorAll(selector).forEach((link) => {
+            link.href = url;
+          });
+        };
+
+        fetch("/api/downloads.json", { cache: "no-store" })
+          .then((response) => (response.ok ? response.json() : null))
+          .then((payload) => {
+            updateLinks("[data-release-download]", payload?.release?.url);
+            updateLinks("[data-nightly-download]", payload?.nightly?.url);
+
+            const releaseSize = formatSize(payload?.release?.size);
+            if (releaseSize) {
+              document.querySelectorAll("[data-release-size]").forEach((target) => {
+                target.textContent = releaseSize;
+              });
+            }
+          })
+          .catch(() => {});
+      })();
+
       (() => {
         document.querySelectorAll("[data-toolbar-toggle]").forEach((button) => {
           button.addEventListener("click", () => {
