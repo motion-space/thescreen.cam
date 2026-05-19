@@ -1,0 +1,122 @@
+---
+import "../styles/global.css";
+
+const siteUrl = "https://thescreen.cam";
+const title = "Privacy Policy - ScreenCam";
+const description =
+  "ScreenCam's privacy policy explains how the macOS app handles recordings, permissions, purchases, and website data.";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#050505" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="apple-mobile-web-app-title" content="ScreenCam" />
+    <meta name="robots" content="index, follow" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={`${siteUrl}/privacy`} />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="ScreenCam" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={`${siteUrl}/privacy`} />
+    <meta property="og:image" content={`${siteUrl}/og.png`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteUrl}/og.png`} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div class="header-mask" aria-hidden="true">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <header class="site-header" aria-label="Primary navigation">
+      <a class="brand" href="/" aria-label="ScreenCam home">
+        <img src="/icon-192.png" width="32" height="32" alt="" decoding="async" />
+        <span>ScreenCam</span>
+      </a>
+      <a class="header-download" href="/">Home</a>
+    </header>
+
+    <main id="main" class="legal-page">
+      <article class="legal-document">
+        <p class="eyebrow">Privacy</p>
+        <h1>Privacy Policy</h1>
+        <p class="legal-updated">Last updated: May 19, 2026</p>
+
+        <section>
+          <h2>Overview</h2>
+          <p>
+            ScreenCam is a native macOS screen recording and editing app. The app is designed to
+            process recordings locally on your Mac. We do not collect analytics, telemetry,
+            advertising identifiers, or personal data from the ScreenCam app.
+          </p>
+        </section>
+
+        <section>
+          <h2>Recordings and local files</h2>
+          <p>
+            Screen recordings, camera video, microphone audio, system audio, cursor data, exported
+            videos, workspace files, and custom wallpaper files stay on your device or in locations
+            you choose. ScreenCam does not upload this content to ScreenCam servers.
+          </p>
+        </section>
+
+        <section>
+          <h2>Permissions</h2>
+          <p>
+            ScreenCam may ask macOS for screen recording, microphone, camera, and file access
+            permissions. These permissions are used only to provide recording, editing, exporting,
+            and user-selected file features. You can manage these permissions in System Settings.
+          </p>
+        </section>
+
+        <section>
+          <h2>Purchases</h2>
+          <p>
+            ScreenCam Pro subscriptions and purchases are processed by Apple through the Mac App
+            Store. ScreenCam reads purchase and subscription status from StoreKit so the app can
+            unlock Pro features. ScreenCam does not receive or store your payment card details.
+          </p>
+        </section>
+
+        <section>
+          <h2>Website</h2>
+          <p>
+            When you visit thescreen.cam, our hosting and infrastructure providers may process
+            standard server log data such as IP address, browser user agent, request URL, and request
+            time for security, diagnostics, and delivery of the website. The website does not use
+            advertising trackers.
+          </p>
+        </section>
+
+        <section>
+          <h2>Changes and contact</h2>
+          <p>
+            We may update this policy as ScreenCam changes. If you have privacy questions, contact
+            us at <a href="mailto:cats_juice@outlook.com">cats_juice@outlook.com</a>.
+          </p>
+        </section>
+      </article>
+    </main>
+
+    <footer class="site-footer">
+      <span>ScreenCam</span>
+      <a href="/privacy">Privacy</a>
+      <span>macOS 15+</span>
+    </footer>
+  </body>
+</html>
