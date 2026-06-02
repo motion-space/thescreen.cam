@@ -1,5 +1,7 @@
 ---
 import "../styles/global.css";
+import { Footer } from "../components/footer";
+import { SiteHeader } from "../components/site-header";
 
 const siteUrl = "https://thescreen.cam";
 const title = "Privacy Policy - ScreenCam";
@@ -34,22 +36,9 @@ const description =
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={`${siteUrl}/og.png`} />
   </head>
-  <body>
+  <body class="font-sans antialiased bg-background text-foreground">
     <a class="skip-link" href="#main">Skip to content</a>
-
-    <div class="header-mask" aria-hidden="true">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-
-    <header class="site-header" aria-label="Primary navigation">
-      <a class="brand" href="/" aria-label="ScreenCam home">
-        <img src="/icon-192.png" width="32" height="32" alt="" decoding="async" />
-        <span>ScreenCam</span>
-      </a>
-      <a class="header-download" href="/">Home</a>
-    </header>
+    <SiteHeader client:load />
 
     <main id="main" class="legal-page">
       <article class="legal-document">
@@ -113,12 +102,6 @@ const description =
       </article>
     </main>
 
-    <footer class="site-footer">
-      <span>ScreenCam</span>
-      <a href="/support">Support</a>
-      <a href="/terms">Terms</a>
-      <a href="/privacy">Privacy</a>
-      <span>macOS 15+</span>
-    </footer>
+    <Footer showProductLinks={false} client:load />
   </body>
 </html>
