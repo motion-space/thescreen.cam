@@ -312,6 +312,7 @@
 
   .trace-slider {
     @apply relative h-6 w-full;
+    touch-action: none;
   }
 
   .trace-slider-native {

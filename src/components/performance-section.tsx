@@ -104,7 +104,7 @@ export function PerformanceSection() {
           <div className="space-y-4">
             <div className="flex items-center justify-between text-sm">
               <span className="text-muted-foreground uppercase tracking-widest text-xs">App Size</span>
-              <span className="text-muted-foreground text-xs">Mac App Store: about 20MB</span>
+              <span className="text-muted-foreground text-xs">about 20MB vs 600MB</span>
             </div>
             <div className="space-y-3">
               <div className="flex items-center gap-4">
@@ -113,7 +113,7 @@ export function PerformanceSection() {
                   <motion.div
                     className="h-full bg-gradient-to-r from-accent to-accent/70 rounded-full"
                     initial={{ width: 0 }}
-                    animate={isInView ? { width: "20%" } : {}}
+                    animate={isInView ? { width: "3.3%" } : {}}
                     transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.6 }}
                   />
                 </div>
@@ -124,7 +124,7 @@ export function PerformanceSection() {
                   <motion.div
                     className="h-full bg-muted-foreground/40 rounded-full"
                     initial={{ width: 0 }}
-                    animate={isInView ? { width: "68%" } : {}}
+                    animate={isInView ? { width: "100%" } : {}}
                     transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.7 }}
                   />
                 </div>

@@ -2,6 +2,7 @@
 
 import { motion, PanInfo, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import type { PointerEvent as ReactPointerEvent } from "react";
 import { Hand } from "lucide-react";
 import { Slider } from "./slider";
 
@@ -91,7 +92,8 @@ function InteractiveTimeline() {
   const [playheadPosition, setPlayheadPosition] = useState(45);
   const [isDraggingCenter, setIsDraggingCenter] = useState(false);
   const [hasDraggedOnce, setHasDraggedOnce] = useState(false);
-  const lastMousePos = useRef<{ x: number; y: number } | null>(null);
+  const activePreviewPointerRef = useRef<number | null>(null);
+  const lastPointerPos = useRef<{ x: number; y: number } | null>(null);
 
   const handleAnchorDrag = (id: string, info: PanInfo) => {
     if (!timelineRef.current) return;
@@ -105,28 +107,43 @@ function InteractiveTimeline() {
     }));
   };
 
-  const handleTimelineClick = (e: React.MouseEvent) => {
+  const seekTimelineAtClientX = (clientX: number) => {
     if (!timelineRef.current) return;
     const rect = timelineRef.current.getBoundingClientRect();
-    const position = ((e.clientX - rect.left) / rect.width) * 100;
+    const position = ((clientX - rect.left) / rect.width) * 100;
     setPlayheadPosition(Math.max(0, Math.min(100, position)));
   };
 
-  const handlePreviewMouseDown = (e: React.MouseEvent) => {
-    if (!selectedAnchor || !previewRef.current) return;
-    setIsDraggingCenter(true);
-    setHasDraggedOnce(true);
-    lastMousePos.current = { x: e.clientX, y: e.clientY };
+  const handleTimelinePointerDown = (e: ReactPointerEvent<HTMLDivElement>) => {
+    seekTimelineAtClientX(e.clientX);
   };
 
-  const handlePreviewMouseMove = (e: React.MouseEvent) => {
-    if (!isDraggingCenter || !selectedAnchor || !previewRef.current || !lastMousePos.current) return;
+  const handlePreviewPointerDown = (e: ReactPointerEvent<HTMLDivElement>) => {
+    if (!selectedAnchor || !previewRef.current) return;
+    activePreviewPointerRef.current = e.pointerId;
+    e.currentTarget.setPointerCapture(e.pointerId);
+    setIsDraggingCenter(true);
+    setHasDraggedOnce(true);
+    lastPointerPos.current = { x: e.clientX, y: e.clientY };
+    e.preventDefault();
+  };
+
+  const handlePreviewPointerMove = (e: ReactPointerEvent<HTMLDivElement>) => {
+    if (
+      activePreviewPointerRef.current !== e.pointerId ||
+      !isDraggingCenter ||
+      !selectedAnchor ||
+      !previewRef.current ||
+      !lastPointerPos.current
+    ) {
+      return;
+    }
 
     const rect = previewRef.current.getBoundingClientRect();
-    const deltaX = (e.clientX - lastMousePos.current.x) / rect.width * 100;
-    const deltaY = (e.clientY - lastMousePos.current.y) / rect.height * 100;
+    const deltaX = (e.clientX - lastPointerPos.current.x) / rect.width * 100;
+    const deltaY = (e.clientY - lastPointerPos.current.y) / rect.height * 100;
 
-    lastMousePos.current = { x: e.clientX, y: e.clientY };
+    lastPointerPos.current = { x: e.clientX, y: e.clientY };
 
     setAnchors(prev => prev.map(a => {
       if (a.id !== selectedAnchor) return a;
@@ -137,14 +154,26 @@ function InteractiveTimeline() {
     }));
   };
 
-  const handlePreviewMouseUp = () => {
+  const endPreviewDrag = () => {
     setIsDraggingCenter(false);
-    lastMousePos.current = null;
+    activePreviewPointerRef.current = null;
+    lastPointerPos.current = null;
   };
 
-  const handlePreviewMouseLeave = () => {
-    setIsDraggingCenter(false);
-    lastMousePos.current = null;
+  const handlePreviewPointerUp = (e: ReactPointerEvent<HTMLDivElement>) => {
+    if (activePreviewPointerRef.current !== e.pointerId) return;
+    e.currentTarget.releasePointerCapture(e.pointerId);
+    endPreviewDrag();
+  };
+
+  const handlePreviewPointerCancel = (e: ReactPointerEvent<HTMLDivElement>) => {
+    if (activePreviewPointerRef.current !== e.pointerId) return;
+    endPreviewDrag();
+  };
+
+  const handlePreviewPointerLeave = (e: ReactPointerEvent<HTMLDivElement>) => {
+    if (e.pointerType !== "mouse" || activePreviewPointerRef.current !== e.pointerId) return;
+    endPreviewDrag();
   };
 
   const selectedAnchorData = anchors.find(a => a.id === selectedAnchor);
@@ -154,11 +183,12 @@ function InteractiveTimeline() {
       {/* Preview window */}
       <div
         ref={previewRef}
-        className="relative aspect-video rounded-xl bg-card border border-border/50 overflow-hidden select-none"
-        onMouseDown={handlePreviewMouseDown}
-        onMouseMove={handlePreviewMouseMove}
-        onMouseUp={handlePreviewMouseUp}
-        onMouseLeave={handlePreviewMouseLeave}
+        className="relative aspect-video rounded-xl bg-card border border-border/50 overflow-hidden select-none touch-none"
+        onPointerDown={handlePreviewPointerDown}
+        onPointerMove={handlePreviewPointerMove}
+        onPointerUp={handlePreviewPointerUp}
+        onPointerCancel={handlePreviewPointerCancel}
+        onPointerLeave={handlePreviewPointerLeave}
         style={{ cursor: selectedAnchor ? (isDraggingCenter ? 'grabbing' : 'grab') : 'default' }}
       >
         <ZoomPreviewCanvas anchor={selectedAnchorData} />
@@ -195,8 +225,8 @@ function InteractiveTimeline() {
       {/* Timeline */}
       <div
         ref={timelineRef}
-        className="relative h-24 rounded-xl bg-card/50 border border-border/50 cursor-pointer overflow-hidden"
-        onClick={handleTimelineClick}
+        className="relative h-24 rounded-xl bg-card/50 border border-border/50 cursor-pointer overflow-hidden touch-none"
+        onPointerDown={handleTimelinePointerDown}
       >
         {/* Time markers */}
         <div className="absolute top-2 left-0 right-0 flex justify-between px-4 text-[10px] font-mono text-muted-foreground/50">
@@ -215,7 +245,7 @@ function InteractiveTimeline() {
             {anchors.map((anchor) => (
               <motion.div
                 key={anchor.id}
-                className={`absolute top-0 bottom-0 w-1 cursor-ew-resize group ${
+                className={`absolute top-0 bottom-0 w-1 cursor-ew-resize touch-none group ${
                   selectedAnchor === anchor.id ? "z-10" : "z-0"
                 }`}
                 style={{ left: `${((anchor.position - 10) / 80) * 100}%` }}
@@ -223,6 +253,11 @@ function InteractiveTimeline() {
                 dragMomentum={false}
                 dragElastic={0}
                 onDrag={(_, info) => handleAnchorDrag(anchor.id, info)}
+                onPointerDown={(e) => {
+                  e.stopPropagation();
+                  setSelectedAnchor(anchor.id);
+                  setPlayheadPosition(anchor.position);
+                }}
                 onClick={(e) => {
                   e.stopPropagation();
                   setSelectedAnchor(anchor.id);

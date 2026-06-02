@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useCallback, useEffect, useRef } from "react";
-import type { MouseEvent as ReactMouseEvent } from "react";
+import type { PointerEvent as ReactPointerEvent } from "react";
 
 export function ZoomFeatureSection() {
   return (
@@ -226,6 +226,7 @@ function CanvasZoomDemo() {
   const playStartRef = useRef<number | null>(null);
   const playTimeRef = useRef(0);
   const previewTimeRef = useRef<number | null>(null);
+  const activeTimelinePointerRef = useRef<number | null>(null);
   const uiElementsRef = useRef<UIElement[]>([]);
 
   const generateUIElements = useCallback((width: number, height: number) => {
@@ -464,24 +465,58 @@ function CanvasZoomDemo() {
     animationRef.current = requestCanvasFrame(render);
   }, [drawCursorWithBlur, drawTransformedFrame, generateUIElements]);
 
-  const handleTimelineMouseMove = useCallback((event: ReactMouseEvent<HTMLDivElement>) => {
+  const previewTimelineAtClientX = useCallback((clientX: number) => {
     if (previewTimeRef.current === null && playStartRef.current !== null) {
       playTimeRef.current = wrapTime(performance.now() - playStartRef.current);
     }
-    previewTimeRef.current = timelineTimeFromClientX(timelineContainerRef.current, event.clientX);
+    previewTimeRef.current = timelineTimeFromClientX(timelineContainerRef.current, clientX);
   }, []);
 
-  const handleTimelineMouseLeave = useCallback(() => {
+  const resumeTimelinePlayback = useCallback(() => {
     previewTimeRef.current = null;
     playStartRef.current = performance.now() - playTimeRef.current;
   }, []);
 
-  const handleTimelineClick = useCallback((event: ReactMouseEvent<HTMLDivElement>) => {
-    const timeMs = timelineTimeFromClientX(timelineContainerRef.current, event.clientX);
+  const seekTimelineToClientX = useCallback((clientX: number) => {
+    const timeMs = timelineTimeFromClientX(timelineContainerRef.current, clientX);
     playStartRef.current = performance.now() - timeMs;
     playTimeRef.current = timeMs;
     previewTimeRef.current = timeMs;
   }, []);
+
+  const handleTimelinePointerMove = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
+    const activePointerId = activeTimelinePointerRef.current;
+    if (activePointerId !== null && event.pointerId !== activePointerId) return;
+    previewTimelineAtClientX(event.clientX);
+  }, [previewTimelineAtClientX]);
+
+  const handleTimelinePointerLeave = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
+    if (event.pointerType !== "mouse" || activeTimelinePointerRef.current !== null) return;
+    resumeTimelinePlayback();
+  }, [resumeTimelinePlayback]);
+
+  const handleTimelinePointerDown = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
+    activeTimelinePointerRef.current = event.pointerId;
+    event.currentTarget.setPointerCapture(event.pointerId);
+    seekTimelineToClientX(event.clientX);
+    event.preventDefault();
+  }, [seekTimelineToClientX]);
+
+  const handleTimelinePointerUp = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
+    if (activeTimelinePointerRef.current !== event.pointerId) return;
+    event.currentTarget.releasePointerCapture(event.pointerId);
+    activeTimelinePointerRef.current = null;
+
+    if (event.pointerType !== "mouse") {
+      resumeTimelinePlayback();
+    }
+  }, [resumeTimelinePlayback]);
+
+  const handleTimelinePointerCancel = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
+    if (activeTimelinePointerRef.current !== event.pointerId) return;
+    activeTimelinePointerRef.current = null;
+    resumeTimelinePlayback();
+  }, [resumeTimelinePlayback]);
 
   useEffect(() => {
     playStartRef.current = null;
@@ -514,10 +549,12 @@ function CanvasZoomDemo() {
 
         <div
           ref={timelineContainerRef}
-          className="relative h-[217px] select-none border-t border-white/[0.07] bg-[#101010]/95 [box-shadow:inset_0_1px_0_rgba(255,255,255,0.04)]"
-          onMouseMove={handleTimelineMouseMove}
-          onMouseLeave={handleTimelineMouseLeave}
-          onClick={handleTimelineClick}
+          className="relative h-[217px] cursor-pointer select-none touch-none border-t border-white/[0.07] bg-[#101010]/95 [box-shadow:inset_0_1px_0_rgba(255,255,255,0.04)]"
+          onPointerMove={handleTimelinePointerMove}
+          onPointerLeave={handleTimelinePointerLeave}
+          onPointerDown={handleTimelinePointerDown}
+          onPointerUp={handleTimelinePointerUp}
+          onPointerCancel={handleTimelinePointerCancel}
           aria-label="Timeline preview tracks"
         >
           <canvas
