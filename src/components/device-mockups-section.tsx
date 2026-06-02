@@ -74,6 +74,8 @@ export function DeviceMockupsSection() {
                 <img
                   src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/iPhone%2017%20Pro%20Max-kj34LciT8o3bTr44ashNVpOXqE7MwD.webp"
                   alt="iPhone 17 Pro Max"
+                  loading="lazy"
+                  decoding="async"
                   className="w-[55px] md:w-[76px] lg:w-[92px] h-auto object-contain"
                   style={{
                     filter: 'drop-shadow(0 24px 46px rgba(0,0,0,0.48))',
@@ -104,6 +106,8 @@ export function DeviceMockupsSection() {
                 <img
                   src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Studio%20Display-6aWG7MxpqgCdzYGGF9nJRypUmyN1i4.webp"
                   alt="ScreenCam running on Studio Display with MacBook"
+                  loading="lazy"
+                  decoding="async"
                   className="w-[360px] md:w-[560px] lg:w-[720px] h-auto object-contain"
                   style={{
                     filter: 'drop-shadow(0 42px 84px rgba(0,0,0,0.38))',
@@ -134,6 +138,8 @@ export function DeviceMockupsSection() {
                 <img
                   src="/1447.webp"
                   alt="ScreenCam app running on MacBook Pro"
+                  loading="lazy"
+                  decoding="async"
                   className="device-mockup-macbook h-auto object-contain"
                   style={{
                     width: '501px',

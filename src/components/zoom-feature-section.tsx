@@ -223,6 +223,8 @@ function CanvasZoomDemo() {
   const frameCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const cameraBlurCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const animationRef = useRef<number>(0);
+  const isDemoVisibleRef = useRef(false);
+  const isRenderLoopRunningRef = useRef(false);
   const playStartRef = useRef<number | null>(null);
   const playTimeRef = useRef(0);
   const previewTimeRef = useRef<number | null>(null);
@@ -390,6 +392,8 @@ function CanvasZoomDemo() {
   }, [drawCursor]);
 
   const render = useCallback((timestamp: number) => {
+    if (!isRenderLoopRunningRef.current) return;
+
     const canvas = canvasRef.current;
     const preview = previewRef.current;
     if (!canvas || !preview) return;
@@ -405,11 +409,13 @@ function CanvasZoomDemo() {
     const width = rect.width;
     const height = rect.height;
     if (width <= 0 || height <= 0) {
-      animationRef.current = requestCanvasFrame(render);
+      if (isRenderLoopRunningRef.current) {
+        animationRef.current = requestCanvasFrame(render);
+      }
       return;
     }
 
-    const dpr = window.devicePixelRatio || 1;
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     const targetWidth = Math.round(width * dpr);
     const targetHeight = Math.round(height * dpr);
 
@@ -435,7 +441,9 @@ function CanvasZoomDemo() {
     const frameCanvas = ensureScratchCanvas(frameCanvasRef, targetWidth, targetHeight);
     const frameCtx = frameCanvas.getContext("2d");
     if (!frameCtx) {
-      animationRef.current = requestCanvasFrame(render);
+      if (isRenderLoopRunningRef.current) {
+        animationRef.current = requestCanvasFrame(render);
+      }
       return;
     }
 
@@ -462,7 +470,9 @@ function CanvasZoomDemo() {
     drawStatusBadge(ctx, width, height, previewTimeRef.current === null ? "Auto-playing demo" : "Timeline preview", timestamp);
     drawTimelineCanvas(timelineCanvasRef.current, timelineContainerRef.current, playTimeMs, previewTimeRef.current);
 
-    animationRef.current = requestCanvasFrame(render);
+    if (isRenderLoopRunningRef.current) {
+      animationRef.current = requestCanvasFrame(render);
+    }
   }, [drawCursorWithBlur, drawTransformedFrame, generateUIElements]);
 
   const previewTimelineAtClientX = useCallback((clientX: number) => {
@@ -519,13 +529,48 @@ function CanvasZoomDemo() {
   }, [resumeTimelinePlayback]);
 
   useEffect(() => {
-    playStartRef.current = null;
-    animationRef.current = requestCanvasFrame(render);
+    const start = () => {
+      if (isRenderLoopRunningRef.current || !isDemoVisibleRef.current || document.hidden) return;
+      isRenderLoopRunningRef.current = true;
+      animationRef.current = requestCanvasFrame(render);
+    };
 
-    return () => {
+    const stop = () => {
+      isRenderLoopRunningRef.current = false;
       if (animationRef.current) {
         cancelCanvasFrame(animationRef.current);
       }
+    };
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isDemoVisibleRef.current = entry.isIntersecting;
+        if (entry.isIntersecting) {
+          start();
+        } else {
+          stop();
+        }
+      },
+      { rootMargin: "240px" }
+    );
+
+    if (previewRef.current) {
+      observer.observe(previewRef.current);
+    }
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        stop();
+      } else {
+        start();
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      stop();
     };
   }, [render]);
 
@@ -643,7 +688,7 @@ function drawTimelineCanvas(
   const height = rect.height;
   if (width <= 0 || height <= 0) return;
 
-  const dpr = window.devicePixelRatio || 1;
+  const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
   const targetWidth = Math.round(width * dpr);
   const targetHeight = Math.round(height * dpr);
   if (canvas.width !== targetWidth || canvas.height !== targetHeight) {

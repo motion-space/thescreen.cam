@@ -98,14 +98,18 @@ export function ShaderBackground() {
   const mouseRef = useRef({ x: 0.5, y: 0.5 });
   const targetMouseRef = useRef({ x: 0.5, y: 0.5 });
   const animationRef = useRef<number>(0);
+  const frameTimerRef = useRef<number>(0);
+  const isVisibleRef = useRef(true);
+  const isRunningRef = useRef(false);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
     const gl = canvas.getContext("webgl", {
-      antialias: true,
+      antialias: false,
       alpha: false,
+      powerPreference: "low-power",
     });
     if (!gl) return;
 
@@ -145,15 +149,23 @@ export function ShaderBackground() {
 
     // Resize handler
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio, 2);
-      canvas.width = window.innerWidth * dpr;
-      canvas.height = window.innerHeight * dpr;
-      canvas.style.width = `${window.innerWidth}px`;
-      canvas.style.height = `${window.innerHeight}px`;
+      const parent = canvas.parentElement;
+      const rect = parent?.getBoundingClientRect();
+      const width = Math.max(1, Math.round(rect?.width || window.innerWidth));
+      const height = Math.max(1, Math.round(rect?.height || window.innerHeight));
+      const dpr = 1;
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
       gl.viewport(0, 0, canvas.width, canvas.height);
     };
     resize();
     window.addEventListener("resize", resize);
+    const resizeObserver = new ResizeObserver(resize);
+    if (canvas.parentElement) {
+      resizeObserver.observe(canvas.parentElement);
+    }
 
     // Mouse handler
     const handleMouseMove = (e: MouseEvent) => {
@@ -165,25 +177,67 @@ export function ShaderBackground() {
     window.addEventListener("mousemove", handleMouseMove);
 
     // Animation loop
-    const startTime = Date.now();
-    const render = () => {
+    const startTime = performance.now();
+    const scheduleNextFrame = () => {
+      frameTimerRef.current = window.setTimeout(() => {
+        animationRef.current = requestAnimationFrame(render);
+      }, 1000 / 30);
+    };
+
+    const stop = () => {
+      isRunningRef.current = false;
+      cancelAnimationFrame(animationRef.current);
+      window.clearTimeout(frameTimerRef.current);
+    };
+
+    const render = (timestamp: number) => {
+      if (!isRunningRef.current) return;
+
       // Smooth mouse interpolation
       mouseRef.current.x += (targetMouseRef.current.x - mouseRef.current.x) * 0.05;
       mouseRef.current.y += (targetMouseRef.current.y - mouseRef.current.y) * 0.05;
 
-      const time = (Date.now() - startTime) / 1000;
+      const time = (timestamp - startTime) / 1000;
       gl.uniform1f(uTime, time);
       gl.uniform2f(uResolution, canvas.width, canvas.height);
       gl.uniform2f(uMouse, mouseRef.current.x, mouseRef.current.y);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      scheduleNextFrame();
+    };
+
+    const start = () => {
+      if (isRunningRef.current || !isVisibleRef.current || document.hidden) return;
+      isRunningRef.current = true;
       animationRef.current = requestAnimationFrame(render);
     };
-    render();
+
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        stop();
+      } else {
+        start();
+      }
+    };
+
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisibleRef.current = entry.isIntersecting;
+      if (entry.isIntersecting) {
+        start();
+      } else {
+        stop();
+      }
+    });
+    observer.observe(canvas);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    start();
 
     return () => {
       window.removeEventListener("resize", resize);
       window.removeEventListener("mousemove", handleMouseMove);
-      cancelAnimationFrame(animationRef.current);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      resizeObserver.disconnect();
+      observer.disconnect();
+      stop();
       gl.deleteProgram(program);
       gl.deleteShader(vs);
       gl.deleteShader(fs);
@@ -194,7 +248,7 @@ export function ShaderBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 w-full h-full pointer-events-none"
+      className="absolute inset-0 h-full w-full pointer-events-none"
       style={{ zIndex: 0 }}
     />
   );
