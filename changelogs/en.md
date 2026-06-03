@@ -1,0 +1,60 @@
+# 1.0.2
+
+- Preview playback no longer blocks editor close or native file panels during heavy composited rendering.
+- Camera beauty adjustments avoid runaway preview CPU usage.
+- Aspect ratio menus show shape previews for each preset.
+- Editor presets save without crashing the preset menu.
+- Device mockups shrink their screen opening when needed so recordings cover the screen without letterboxing.
+- Paywall purchases avoid binding Apple's confirmation dialog to a specific app window.
+
+# 1.0.1
+
+- New recordings are autosaved as .cam workspaces in a configurable default location before the editor opens.
+- Recording settings show autosaved workspace and raw recording cache size, with cleanup for old or all cache items.
+- Settings add Appearance controls for theme color, toolbar material, and tooltip material.
+- Settings add Open at Login, larger shortcut keycaps while recording, removable shortcut bindings, and recent error-log export.
+- The File menu adds lazy Recent and Default Directory submenus for opening saved workspaces.
+- The editor header adds preset save, rename, reorder, delete, apply, share, and import actions.
+- The editor header adds more export canvas aspect presets, source crop controls, and 5K-capped source exports.
+- The editor title can reveal the workspace in Finder.
+- Timeline track order persists as an editor preference while hidden tracks reset per session.
+- Timeline and source crop support trackpad pinch zoom, with panning in the crop sheet after zooming.
+- Area selection supports typed dimensions, center guides, aspect ratio presets, and Shift/Option resize shortcuts.
+- Timeline preview controls add playback speeds from 0.25x to 2x.
+- Camera beauty filters can be previewed and toggled while recording, saved as defaults, adjusted later, and refined with face-aware shape controls.
+- Default camera animation settings use a softer spring profile and stronger motion blur for smoother zooms.
+- Preview camera motion keeps edge-clamped zoom-in and zoom-out paths straight and uses directional motion blur from the correct zoom center.
+- Cursor playback follows recorded movement with less lag.
+- Cursor position and camera focus stay aligned after source cropping.
+- Camera overlays stay synchronized with their frame during preview playback.
+- Recording stop switches to Processing immediately and keeps finalization alive longer.
+- The floating recording toolbar stays visible when switching desktops during recording.
+- Recording toolbar audio meters show clearer level movement.
+- Area capture selection reliably comes to the front from the floating recording toolbar.
+- Window and area capture selection work on secondary displays.
+- Declining screen recording permission cancels recording without showing an error.
+- Capture selection controls avoid Intel TestFlight crashes, including target hover, menu bar status menu updates, and reopening from the Dock.
+- The capture selection cancel button responds across the full circular control.
+- Hovering the capture selection start button no longer crashes the app.
+- Recordings with system audio enabled finish without hanging in Processing.
+- Closing or quitting with an unsaved editor shows ScreenCam's close flow instead of the system document save panel.
+- Workspace autosave waits while native file panels are open and writes .cam packages more safely.
+- Timeline scrubbing and interrupted interactions no longer leave preview playback frozen or jumping to the end.
+- Resizing or dragging timeline clips no longer jumps the playhead when grabbing a clip.
+- Preview audio mute and volume controls stay in sync, animate smoothly, and no longer add undo steps.
+- Color pickers accept typed hex values and keep drag handles anchored while adjusting color.
+- Inspector labels use Screen and Device terminology, and the size preset picker matches other menu controls.
+- Tooltips appear on recording controls, inspector tabs, and undo/redo shortcuts.
+- Clear tooltip material keeps hover bubbles visible on white backgrounds.
+- Exported MP4 videos use Preview-compatible H.264 frame ordering, avoid quarantine metadata, and keep normal-speed audio timing.
+- Source-resolution export sizing uses the final preview composition, including frame padding, fixed canvas size, and mockup size.
+- Exported canvases avoid edge black bars caused by pixel rounding.
+- Display mockup exports render animated wallpaper and frame backgrounds correctly inside the screen frame.
+- Laptop mockup exports clip recording content to rounded screen corners.
+- Mockup zooms can follow cursor movement past the source edge without snapping the enlarged device to the canvas edge.
+- Repeated recording clips export from the correct source frames instead of stale tail frames.
+- 4K exports start reliably on high-resolution recordings instead of stalling around 3%.
+- Long exports with animated wallpapers or camera overlays no longer stall near 79%.
+- Full-volume audio exports preserve rendered H.264 video bitrate instead of inflating file size during audio muxing.
+- Recording, preview playback, high-resolution export, and large keyboard timelines use less CPU and memory.
+- Editor traffic-light buttons keep native positioning during fullscreen transitions.

@@ -38,6 +38,10 @@ export function MotionBlurText({
   const lastTime = useRef(Date.now());
   const velocity = useRef({ x: 0, y: 0 });
   const rafId = useRef<number | null>(null);
+  const selectionFrameRef = useRef<number>(0);
+  const [selectedCharIndexes, setSelectedCharIndexes] = useState<Set<number>>(
+    () => new Set()
+  );
 
   const [charStates, setCharStates] = useState<CharState[]>(
     letters.map(() => ({ blurX: 0, blurY: 0, offsetX: 0, offsetY: 0 }))
@@ -157,10 +161,45 @@ export function MotionBlurText({
     };
   }, []);
 
+  useEffect(() => {
+    const updateSelectedChars = () => {
+      window.cancelAnimationFrame(selectionFrameRef.current);
+      selectionFrameRef.current = window.requestAnimationFrame(() => {
+        const selection = window.getSelection();
+
+        if (!selection || selection.isCollapsed || selection.rangeCount === 0) {
+          setSelectedCharIndexes(new Set());
+          return;
+        }
+
+        const nextSelectedIndexes = new Set<number>();
+
+        charRefs.current.forEach((charEl, i) => {
+          if (!charEl) return;
+
+          for (let rangeIndex = 0; rangeIndex < selection.rangeCount; rangeIndex += 1) {
+            if (selection.getRangeAt(rangeIndex).intersectsNode(charEl)) {
+              nextSelectedIndexes.add(i);
+              break;
+            }
+          }
+        });
+
+        setSelectedCharIndexes(nextSelectedIndexes);
+      });
+    };
+
+    document.addEventListener("selectionchange", updateSelectedChars);
+    return () => {
+      window.cancelAnimationFrame(selectionFrameRef.current);
+      document.removeEventListener("selectionchange", updateSelectedChars);
+    };
+  }, []);
+
   return (
     <div
       ref={containerRef}
-      className={`-my-[0.38em] inline-flex overflow-hidden py-[0.38em] ${className}`}
+      className={`-mx-[0.04em] -my-[0.38em] inline-flex overflow-hidden px-[0.04em] py-[0.38em] ${className}`}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
@@ -189,6 +228,7 @@ export function MotionBlurText({
       {letters.map((letter, i) => {
         const state = charStates[i] || { blurX: 0, blurY: 0, offsetX: 0, offsetY: 0 };
         const hasHoverBlur = Math.abs(state.blurX) > 0.5 || Math.abs(state.blurY) > 0.5;
+        const isSelected = selectedCharIndexes.has(i);
         const displayLetter = letter === " " ? "\u00A0" : letter;
         const charDelay = delay + i * CHAR_STAGGER_SECONDS;
 
@@ -215,7 +255,7 @@ export function MotionBlurText({
             }}
           >
             <motion.span
-              className="motion-blur-text-glyph"
+              className={`motion-blur-text-glyph ${isSelected ? "is-selection-active" : ""}`}
               initial={{
                 filter: "blur(18px)",
                 y: "0.26em",

@@ -14,9 +14,21 @@ interface ZoomAnchor {
   centerY: number; // 0-100
 }
 
+interface ZoomFrame extends ZoomAnchor {
+  displayScale?: number;
+}
+
 const MOCK_PLAYBACK_DURATION_MS = 4200;
 const TIMELINE_TRACK_INSET_PX = 16;
 const PLAYHEAD_LINE_WIDTH_PX = 2;
+const BASELINE_PREVIEW_FRAME: ZoomFrame = {
+  id: "playback",
+  position: 0,
+  scale: 1,
+  displayScale: 1,
+  centerX: 50,
+  centerY: 50,
+};
 
 export function CustomControlsSection() {
   return (
@@ -92,12 +104,12 @@ function InteractiveTimeline() {
     { id: "2", position: 45, scale: 3.5, centerX: 70, centerY: 30 },
     { id: "3", position: 75, scale: 2.5, centerX: 50, centerY: 60 },
   ]);
-  const [selectedAnchor, setSelectedAnchor] = useState<string | null>("2");
-  const [playheadPosition, setPlayheadPosition] = useState(45);
+  const [selectedAnchor, setSelectedAnchor] = useState<string | null>(null);
+  const [playheadPosition, setPlayheadPosition] = useState(0);
   const [isDraggingCenter, setIsDraggingCenter] = useState(false);
   const [hasDraggedOnce, setHasDraggedOnce] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [playbackAnchorData, setPlaybackAnchorData] = useState<ZoomAnchor | null>(null);
+  const [playbackAnchorData, setPlaybackAnchorData] = useState<ZoomFrame | null>(null);
   const activePreviewPointerRef = useRef<number | null>(null);
   const activePreviewTouchRef = useRef<number | null>(null);
   const isPreviewDraggingRef = useRef(false);
@@ -120,6 +132,16 @@ function InteractiveTimeline() {
   useEffect(() => () => {
     cancelAnimationFrame(playbackAnimationRef.current);
   }, []);
+
+  const selectAnchor = (id: string) => {
+    selectedAnchorRef.current = id;
+    setSelectedAnchor(id);
+  };
+
+  const clearSelectedAnchor = () => {
+    selectedAnchorRef.current = null;
+    setSelectedAnchor(null);
+  };
 
   const updatePlaybackPosition = (position: number) => {
     const nextPosition = clampPercent(position);
@@ -144,17 +166,13 @@ function InteractiveTimeline() {
   };
 
   const completePlayback = () => {
-    const finalAnchor = [...anchors].sort((a, b) => a.position - b.position).at(-1);
-
     updatePlaybackPosition(100);
     cancelAnimationFrame(playbackAnimationRef.current);
     playbackAnimationRef.current = 0;
     isPlaybackPausedRef.current = false;
     setIsPlaying(false);
-
-    if (finalAnchor) {
-      setSelectedAnchor(finalAnchor.id);
-    }
+    setPlaybackAnchorData(null);
+    clearSelectedAnchor();
   };
 
   const runPlaybackFrame = (timestamp: number) => {
@@ -181,6 +199,7 @@ function InteractiveTimeline() {
       ? clampPercent(latestPlayheadPositionRef.current)
       : 0;
 
+    clearSelectedAnchor();
     playbackStartPositionRef.current = startPosition;
     playbackStartTimeRef.current = performance.now();
     isPlaybackPausedRef.current = false;
@@ -215,6 +234,7 @@ function InteractiveTimeline() {
   const seekTimelineAtClientX = (clientX: number) => {
     if (!timelineRef.current) return;
     stopPlayback();
+    clearSelectedAnchor();
     const rect = timelineRef.current.getBoundingClientRect();
     const trackLeft = rect.left + TIMELINE_TRACK_INSET_PX;
     const trackWidth = Math.max(1, rect.width - TIMELINE_TRACK_INSET_PX * 2);
@@ -338,13 +358,14 @@ function InteractiveTimeline() {
 
   const handlePreviewTouchMove = (e: ReactTouchEvent<HTMLDivElement>) => {
     const touch = getActivePreviewTouch(e.touches);
-    if (!touch) return;
+    if (!touch || !isPreviewDraggingRef.current) return;
 
     updatePreviewCenterDrag(touch.clientX, touch.clientY);
     e.preventDefault();
   };
 
   const handlePreviewTouchEnd = (e: ReactTouchEvent<HTMLDivElement>) => {
+    if (!isPreviewDraggingRef.current && activePreviewTouchRef.current === null) return;
     if (!changedTouchesIncludeActiveTouch(e.changedTouches)) return;
 
     activePreviewTouchRef.current = null;
@@ -355,7 +376,10 @@ function InteractiveTimeline() {
   };
 
   const selectedAnchorData = anchors.find(a => a.id === selectedAnchor);
-  const previewAnchorData = playbackAnchorData ?? selectedAnchorData;
+  const controlsAnchorData = selectedAnchorData ?? BASELINE_PREVIEW_FRAME;
+  const hasSelectedAnchor = Boolean(selectedAnchorData);
+  const playheadFrameData = sampleZoomAnchorFrame(anchors, playheadPosition);
+  const previewAnchorData = playbackAnchorData ?? selectedAnchorData ?? playheadFrameData;
   const playheadLeft = timelinePositionStyle(playheadPosition);
 
   return (
@@ -375,7 +399,7 @@ function InteractiveTimeline() {
         onTouchCancel={handlePreviewTouchEnd}
         style={{
           cursor: selectedAnchor ? (isDraggingCenter ? 'grabbing' : 'grab') : 'default',
-          touchAction: "none",
+          touchAction: selectedAnchor ? "none" : "auto",
         }}
       >
         <ZoomPreviewCanvas anchor={previewAnchorData} />
@@ -409,7 +433,7 @@ function InteractiveTimeline() {
 
       </div>
 
-      <div className="relative h-24 rounded-xl bg-card/50 border border-border/50 overflow-hidden">
+      <div className="relative h-28 rounded-xl bg-card/50 border border-border/50 overflow-hidden">
         <motion.button
           type="button"
           aria-label={isPlaying ? "Pause mock timeline playback" : "Play mock timeline playback"}
@@ -460,13 +484,13 @@ function InteractiveTimeline() {
                   onPointerDown={(e) => {
                     e.stopPropagation();
                     stopPlayback();
-                    setSelectedAnchor(anchor.id);
+                    selectAnchor(anchor.id);
                     setPlayheadPosition(anchor.position);
                   }}
                   onClick={(e) => {
                     e.stopPropagation();
                     stopPlayback();
-                    setSelectedAnchor(anchor.id);
+                    selectAnchor(anchor.id);
                     setPlayheadPosition(anchor.position);
                   }}
                   whileHover={{ scale: 1.2 }}
@@ -511,56 +535,76 @@ function InteractiveTimeline() {
       </div>
 
       {/* Anchor controls */}
-      {selectedAnchorData && (
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="flex items-center gap-6 p-4 rounded-xl bg-card/50 border border-border/50"
-        >
-          <div className="flex-1">
-            <label className="text-xs text-muted-foreground mb-2 block">Scale</label>
-            <Slider
-              ariaLabel="Scale"
-              min={1}
-              max={5}
-              step={0.1}
-              unit="x"
-              formatter={(value) => `${value.toFixed(1)}x`}
-              value={selectedAnchorData.scale}
-              onChange={(value) => {
-                stopPlayback();
-                setAnchors(prev => prev.map(a =>
-                  a.id === selectedAnchor ? { ...a, scale: value } : a
-                ));
-              }}
-            />
+      <motion.div
+        aria-disabled={!hasSelectedAnchor}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: hasSelectedAnchor ? 1 : 0.42, y: 0 }}
+        className="flex items-center gap-6 p-4 rounded-xl bg-card/50 border border-border/50"
+      >
+        <div className="flex-1">
+          <label className="text-xs text-muted-foreground mb-2 block">Scale</label>
+          <Slider
+            ariaLabel="Scale"
+            disabled={!hasSelectedAnchor}
+            min={1}
+            max={5}
+            step={0.1}
+            unit="x"
+            formatter={(value) => `${value.toFixed(1)}x`}
+            value={controlsAnchorData.scale}
+            onChange={(value) => {
+              if (!selectedAnchor) return;
+
+              stopPlayback();
+              setAnchors(prev => prev.map(a =>
+                a.id === selectedAnchor ? { ...a, scale: value } : a
+              ));
+            }}
+          />
+        </div>
+        <div className="text-right">
+          <div className="text-2xl font-mono text-foreground">{controlsAnchorData.scale.toFixed(1)}x</div>
+          <div className="text-xs text-muted-foreground">
+            Center: {Math.round(controlsAnchorData.centerX)}%, {Math.round(controlsAnchorData.centerY)}%
           </div>
-          <div className="text-right">
-            <div className="text-2xl font-mono text-foreground">{selectedAnchorData.scale.toFixed(1)}x</div>
-            <div className="text-xs text-muted-foreground">
-              Center: {Math.round(selectedAnchorData.centerX)}%, {Math.round(selectedAnchorData.centerY)}%
-            </div>
-          </div>
-        </motion.div>
-      )}
+        </div>
+      </motion.div>
     </div>
   );
 }
 
-function sampleZoomAnchorFrame(anchors: ZoomAnchor[], position: number): ZoomAnchor | null {
+function sampleZoomAnchorFrame(anchors: ZoomAnchor[], position: number): ZoomFrame {
   const sortedAnchors = [...anchors].sort((a, b) => a.position - b.position);
-  if (!sortedAnchors.length) return null;
-
   const safePosition = clampPercent(position);
+
+  if (!sortedAnchors.length) {
+    return {
+      ...BASELINE_PREVIEW_FRAME,
+      position: safePosition,
+    };
+  }
+
   const firstAnchor = sortedAnchors[0];
   const lastAnchor = sortedAnchors[sortedAnchors.length - 1];
 
   if (safePosition <= firstAnchor.position) {
-    return { ...firstAnchor, id: "playback", position: safePosition };
+    return interpolateZoomFrame(
+      { ...BASELINE_PREVIEW_FRAME, position: 0 },
+      firstAnchor,
+      safePosition,
+      0,
+      firstAnchor.position,
+    );
   }
 
   if (safePosition >= lastAnchor.position) {
-    return { ...lastAnchor, id: "playback", position: safePosition };
+    return interpolateZoomFrame(
+      lastAnchor,
+      { ...BASELINE_PREVIEW_FRAME, position: 100 },
+      safePosition,
+      lastAnchor.position,
+      100,
+    );
   }
 
   for (let index = 1; index < sortedAnchors.length; index += 1) {
@@ -569,19 +613,38 @@ function sampleZoomAnchorFrame(anchors: ZoomAnchor[], position: number): ZoomAnc
 
     if (safePosition > next.position) continue;
 
-    const segmentProgress = clamp01((safePosition - previous.position) / Math.max(1, next.position - previous.position));
-    const easedProgress = smoothstep(segmentProgress);
-
-    return {
-      id: "playback",
-      position: safePosition,
-      scale: lerp(previous.scale, next.scale, easedProgress),
-      centerX: lerp(previous.centerX, next.centerX, easedProgress),
-      centerY: lerp(previous.centerY, next.centerY, easedProgress),
-    };
+    return interpolateZoomFrame(previous, next, safePosition, previous.position, next.position);
   }
 
-  return { ...lastAnchor, id: "playback", position: safePosition };
+  return interpolateZoomFrame(
+    lastAnchor,
+    { ...BASELINE_PREVIEW_FRAME, position: 100 },
+    safePosition,
+    lastAnchor.position,
+    100,
+  );
+}
+
+function interpolateZoomFrame(
+  previous: ZoomFrame,
+  next: ZoomFrame,
+  position: number,
+  previousPosition: number,
+  nextPosition: number,
+): ZoomFrame {
+  const segmentProgress = clamp01((position - previousPosition) / Math.max(1, nextPosition - previousPosition));
+  const easedProgress = smoothstep(segmentProgress);
+  const previousDisplayScale = previous.displayScale ?? previous.scale;
+  const nextDisplayScale = next.displayScale ?? next.scale;
+
+  return {
+    id: "playback",
+    position,
+    scale: lerp(previous.scale, next.scale, easedProgress),
+    displayScale: lerp(previousDisplayScale, nextDisplayScale, easedProgress),
+    centerX: lerp(previous.centerX, next.centerX, easedProgress),
+    centerY: lerp(previous.centerY, next.centerY, easedProgress),
+  };
 }
 
 function clampPercent(value: number): number {
@@ -610,20 +673,16 @@ function lerp(from: number, to: number, progress: number): number {
   return from + (to - from) * progress;
 }
 
-function ZoomPreviewCanvas({ anchor }: { anchor?: ZoomAnchor }) {
+function ZoomPreviewCanvas({ anchor }: { anchor?: ZoomFrame }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const frameRef = useRef({ scale: anchor?.scale ?? 1, centerX: anchor?.centerX ?? 50, centerY: anchor?.centerY ?? 50 });
-  const targetRef = useRef({ scale: anchor?.scale ?? 1, centerX: anchor?.centerX ?? 50, centerY: anchor?.centerY ?? 50 });
+  const frameRef = useRef(getPreviewFrameState(anchor));
+  const targetRef = useRef(getPreviewFrameState(anchor));
   const startRenderRef = useRef<() => void>(() => {});
 
   useEffect(() => {
-    targetRef.current = {
-      scale: anchor?.scale ?? 1,
-      centerX: anchor?.centerX ?? 50,
-      centerY: anchor?.centerY ?? 50,
-    };
+    targetRef.current = getPreviewFrameState(anchor);
     startRenderRef.current();
-  }, [anchor?.scale, anchor?.centerX, anchor?.centerY]);
+  }, [anchor?.scale, anchor?.displayScale, anchor?.centerX, anchor?.centerY]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -658,6 +717,7 @@ function ZoomPreviewCanvas({ anchor }: { anchor?: ZoomAnchor }) {
       const current = frameRef.current;
       const target = targetRef.current;
       current.scale += (target.scale - current.scale) * 0.11;
+      current.displayScale += (target.displayScale - current.displayScale) * 0.11;
       current.centerX += (target.centerX - current.centerX) * 0.11;
       current.centerY += (target.centerY - current.centerY) * 0.11;
 
@@ -665,6 +725,7 @@ function ZoomPreviewCanvas({ anchor }: { anchor?: ZoomAnchor }) {
 
       const isSettled =
         Math.abs(target.scale - current.scale) < 0.005 &&
+        Math.abs(target.displayScale - current.displayScale) < 0.005 &&
         Math.abs(target.centerX - current.centerX) < 0.05 &&
         Math.abs(target.centerY - current.centerY) < 0.05;
 
@@ -710,11 +771,22 @@ function ZoomPreviewCanvas({ anchor }: { anchor?: ZoomAnchor }) {
   return <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none" aria-hidden="true" />;
 }
 
+function getPreviewFrameState(anchor?: ZoomFrame) {
+  const scale = anchor?.scale ?? 1;
+
+  return {
+    scale,
+    displayScale: anchor?.displayScale ?? scale,
+    centerX: anchor?.centerX ?? 50,
+    centerY: anchor?.centerY ?? 50,
+  };
+}
+
 function drawZoomPreview(
   ctx: CanvasRenderingContext2D,
   width: number,
   height: number,
-  frame: { scale: number; centerX: number; centerY: number }
+  frame: { scale: number; displayScale: number; centerX: number; centerY: number }
 ) {
   ctx.clearRect(0, 0, width, height);
 
@@ -733,7 +805,7 @@ function drawZoomPreview(
   drawPreviewScene(ctx, width, height);
   ctx.restore();
 
-  drawPreviewZoomBadge(ctx, frame.scale);
+  drawPreviewZoomBadge(ctx, frame.displayScale);
 }
 
 function drawPreviewScene(ctx: CanvasRenderingContext2D, width: number, height: number) {

@@ -6,6 +6,7 @@ import { MagneticButton } from "./magnetic-button";
 
 const appStoreUrl = "https://apps.apple.com/cn/app/screencam-screen-studio/id6770877568?l=en-GB&mt=12";
 const navLinks = [
+  { label: "Changelog", href: "/changelog" },
   { label: "Support", href: "/support" },
   { label: "Privacy", href: "/privacy" },
   { label: "Terms", href: "/terms" },

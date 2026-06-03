@@ -1,0 +1,56 @@
+---
+import "../../styles/global.css";
+import ChangelogPage from "../../components/changelog-page.astro";
+
+const changelogs = import.meta.glob("../../../changelogs/*.md", { eager: true });
+const defaultLang = "en";
+
+function getLanguageMeta() {
+  return Object.keys(changelogs)
+    .map((path) => {
+      const code = path.match(/\/([^/]+)\.md$/)?.[1] ?? defaultLang;
+
+      return {
+        code,
+        label: code === "zh-Hans" ? "简体中文" : "English",
+        href: code === defaultLang ? "/changelog" : `/changelog/${code}`,
+      };
+    })
+    .sort((a, b) => (a.code === defaultLang ? -1 : b.code === defaultLang ? 1 : a.label.localeCompare(b.label)));
+}
+
+export function getStaticPaths() {
+  const paths = Object.keys(import.meta.glob("../../../changelogs/*.md", { eager: true }));
+
+  return paths
+    .map((path) => {
+      const code = path.match(/\/([^/]+)\.md$/)?.[1] ?? "en";
+
+      return {
+        code,
+        label: code === "zh-Hans" ? "简体中文" : "English",
+        href: code === "en" ? "/changelog" : `/changelog/${code}`,
+      };
+    })
+    .sort((a, b) => (a.code === "en" ? -1 : b.code === "en" ? 1 : a.label.localeCompare(b.label)))
+    .filter((language) => language.code !== "en")
+    .map((language) => ({
+      params: { lang: language.code },
+      props: { language },
+    }));
+}
+
+const { language } = Astro.props;
+const languageMeta = getLanguageMeta();
+const changelogModule = changelogs[`../../../changelogs/${language.code}.md`] as { Content: any };
+const description = "Follow ScreenCam release notes, product improvements, bug fixes, and update history.";
+---
+
+<ChangelogPage
+  Content={changelogModule.Content}
+  canonicalPath={language.href}
+  currentLang={language.code}
+  description={description}
+  languages={languageMeta}
+  title="Changelog - ScreenCam"
+/>

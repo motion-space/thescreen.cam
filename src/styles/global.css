@@ -88,6 +88,7 @@
   body {
     @apply bg-background text-foreground;
   }
+
 }
 
 .header-mask {
@@ -198,6 +199,69 @@
     @apply text-foreground underline decoration-foreground/30 underline-offset-4 transition-colors hover:decoration-foreground;
   }
 
+  .changelog-page {
+    @apply pt-32;
+  }
+
+  .changelog-document {
+    @apply max-w-4xl;
+  }
+
+  .changelog-hero {
+    @apply mb-14 flex flex-col gap-7;
+  }
+
+  .changelog-hero .legal-updated {
+    @apply mb-0;
+  }
+
+  .changelog-language-nav {
+    @apply flex w-fit shrink-0 rounded-full border border-border/70 bg-foreground/[0.04] p-1 shadow-[inset_0_1px_0_rgba(255,255,255,0.06)];
+  }
+
+  .changelog-language-nav a {
+    @apply whitespace-nowrap rounded-full px-4 py-2 text-sm leading-none text-muted-foreground no-underline transition-colors hover:text-foreground;
+  }
+
+  .changelog-language-nav a.active {
+    @apply bg-foreground text-background;
+  }
+
+  .changelog-markdown {
+    @apply border-t border-border/60;
+  }
+
+  .changelog-markdown h1 {
+    @apply relative mb-6 pt-10 text-[clamp(2rem,5vw,4rem)] font-semibold leading-none text-foreground;
+  }
+
+  .changelog-markdown h1::before {
+    content: "#";
+    color: var(--accent);
+    @apply absolute -left-6 top-10 translate-y-[0.28em] text-2xl font-semibold leading-none md:-left-8 md:text-3xl;
+  }
+
+  .changelog-markdown h1 a {
+    @apply text-foreground no-underline transition-colors hover:text-accent;
+  }
+
+  .changelog-markdown h1:not(:first-child) {
+    @apply mt-10 border-t border-border/60;
+  }
+
+  .changelog-markdown ul {
+    @apply space-y-4 pb-2;
+  }
+
+  .changelog-markdown li {
+    @apply relative pl-6 text-base leading-8 text-muted-foreground;
+  }
+
+  .changelog-markdown li::before {
+    content: "";
+    @apply absolute left-0 top-[0.9rem] h-1.5 w-1.5 rounded-full bg-foreground/70;
+  }
+
   .support-channel-list {
     @apply mt-6 flex flex-wrap gap-3;
   }
@@ -238,6 +302,39 @@
     display: inline-block;
     transform-origin: 50% 100%;
     will-change: filter, transform;
+  }
+
+  .hero-motion-title ::selection {
+    background: transparent;
+    color: currentColor;
+    text-shadow: none;
+  }
+
+  .hero-motion-title .motion-blur-text-glyph.is-selection-active {
+    animation: hero-selection-drop-blur 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  @keyframes hero-selection-drop-blur {
+    0% {
+      text-shadow:
+        0 -0.09em 0 rgba(255, 255, 255, 0),
+        0 -0.045em 0 rgba(255, 255, 255, 0);
+    }
+
+    42% {
+      text-shadow:
+        0 0.018em 0 rgba(255, 255, 255, 0.22),
+        0 0.045em 0 rgba(255, 255, 255, 0.16),
+        0 0.085em 0 rgba(255, 255, 255, 0.1);
+    }
+
+    100% {
+      text-shadow:
+        0 0.035em 0 rgba(255, 255, 255, 0.28),
+        0 0.075em 0 rgba(255, 255, 255, 0.18),
+        0 0.13em 0 rgba(255, 255, 255, 0.11),
+        0 -0.035em 0 rgba(255, 255, 255, 0.16);
+    }
   }
 
   .liquid-glass-cta {

@@ -19,6 +19,7 @@ const footerLinks = {
   ],
   resources: [
     { label: "App Store", href: appStoreUrl, external: true },
+    { label: "Changelog", href: "/changelog" },
     { label: "Support", href: "/support" },
   ],
   legal: [

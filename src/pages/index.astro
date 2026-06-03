@@ -6,6 +6,7 @@ import { FAQSection } from "../components/faq-section";
 import { Footer } from "../components/footer";
 import { Hero } from "../components/hero";
 import { PerformanceSection } from "../components/performance-section";
+import { SmoothScroll } from "../components/smooth-scroll";
 import { ZoomFeatureSection } from "../components/zoom-feature-section";
 
 const siteUrl = "https://thescreen.cam";
@@ -71,6 +72,7 @@ const structuredData = {
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   </head>
   <body class="font-sans antialiased bg-background">
+    <SmoothScroll client:load />
     <main>
       <Hero client:load />
       <ZoomFeatureSection client:load />

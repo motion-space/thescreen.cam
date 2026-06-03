@@ -6,7 +6,7 @@ import { SiteHeader } from "../components/site-header";
 const siteUrl = "https://thescreen.cam";
 const title = "Privacy Policy - ScreenCam";
 const description =
-  "ScreenCam's privacy policy explains how the macOS app handles recordings, permissions, purchases, and website data.";
+  "ScreenCam's privacy policy explains how the macOS app handles recordings, permissions, optional analytics, purchases, and website data.";
 ---
 
 <!doctype html>
@@ -44,14 +44,15 @@ const description =
       <article class="legal-document">
         <p class="eyebrow">Privacy</p>
         <h1>Privacy Policy</h1>
-        <p class="legal-updated">Last updated: May 19, 2026</p>
+        <p class="legal-updated">Last updated: June 3, 2026</p>
 
         <section>
           <h2>Overview</h2>
           <p>
             ScreenCam is a native macOS screen recording and editing app. The app is designed to
-            process recordings locally on your Mac. We do not collect analytics, telemetry,
-            advertising identifiers, or personal data from the ScreenCam app.
+            process recordings locally on your Mac. ScreenCam may make network requests for app
+            functionality such as App Store purchase status and, when you choose to enable it,
+            optional anonymous usage analytics. We do not use advertising trackers in the app.
           </p>
         </section>
 
@@ -61,6 +62,22 @@ const description =
             Screen recordings, camera video, microphone audio, system audio, cursor data, exported
             videos, workspace files, and custom wallpaper files stay on your device or in locations
             you choose. ScreenCam does not upload this content to ScreenCam servers.
+          </p>
+        </section>
+
+        <section>
+          <h2>Anonymous usage analytics</h2>
+          <p>
+            ScreenCam may ask whether you want to share anonymous usage analytics to help us
+            understand which recording and editing features work well. You can turn analytics
+            sharing on or off at any time in the app. If analytics sharing is disabled, ScreenCam
+            does not send usage analytics.
+          </p>
+          <p class="mt-4">
+            Analytics are limited to product usage, diagnostics, and performance information, such
+            as feature interactions, app version, macOS version, and general device information. We
+            never collect screen content, audio, camera video, project files, file names, or typed
+            text through analytics.
           </p>
         </section>
 
