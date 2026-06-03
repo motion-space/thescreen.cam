@@ -14,13 +14,16 @@ export function LiquidGlassMaterial() {
     if (!ctx) return;
 
     let raf = 0;
+    let frameTimer = 0;
+    let isRunning = false;
+    let isVisible = true;
     let width = 0;
     let height = 0;
     let dpr = 1;
 
     const resize = () => {
       const rect = parent.getBoundingClientRect();
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       width = Math.max(1, Math.round(rect.width));
       height = Math.max(1, Math.round(rect.height));
       canvas.width = Math.round(width * dpr);
@@ -31,6 +34,8 @@ export function LiquidGlassMaterial() {
     };
 
     const draw = (time: number) => {
+      if (!isRunning) return;
+
       const t = time * 0.001;
       ctx.clearRect(0, 0, width, height);
 
@@ -102,17 +107,50 @@ export function LiquidGlassMaterial() {
       roundedRect(ctx, 0.5, 0.5, width - 1, height - 1, radius - 0.5);
       ctx.stroke();
 
+      frameTimer = window.setTimeout(() => {
+        raf = requestAnimationFrame(draw);
+      }, 1000 / 24);
+    };
+
+    const start = () => {
+      if (isRunning || !isVisible || document.hidden) return;
+      isRunning = true;
       raf = requestAnimationFrame(draw);
+    };
+
+    const stop = () => {
+      isRunning = false;
+      cancelAnimationFrame(raf);
+      window.clearTimeout(frameTimer);
     };
 
     const observer = new ResizeObserver(resize);
     observer.observe(parent);
+    const visibilityObserver = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+      if (entry.isIntersecting) {
+        start();
+      } else {
+        stop();
+      }
+    });
+    visibilityObserver.observe(parent);
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        stop();
+      } else {
+        start();
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
     resize();
-    raf = requestAnimationFrame(draw);
+    start();
 
     return () => {
       observer.disconnect();
-      cancelAnimationFrame(raf);
+      visibilityObserver.disconnect();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      stop();
     };
   }, []);
 

@@ -343,6 +343,7 @@ function ZoomPreviewCanvas({ anchor }: { anchor?: ZoomAnchor }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const frameRef = useRef({ scale: anchor?.scale ?? 1, centerX: anchor?.centerX ?? 50, centerY: anchor?.centerY ?? 50 });
   const targetRef = useRef({ scale: anchor?.scale ?? 1, centerX: anchor?.centerX ?? 50, centerY: anchor?.centerY ?? 50 });
+  const startRenderRef = useRef<() => void>(() => {});
 
   useEffect(() => {
     targetRef.current = {
@@ -350,6 +351,7 @@ function ZoomPreviewCanvas({ anchor }: { anchor?: ZoomAnchor }) {
       centerX: anchor?.centerX ?? 50,
       centerY: anchor?.centerY ?? 50,
     };
+    startRenderRef.current();
   }, [anchor?.scale, anchor?.centerX, anchor?.centerY]);
 
   useEffect(() => {
@@ -364,10 +366,11 @@ function ZoomPreviewCanvas({ anchor }: { anchor?: ZoomAnchor }) {
     let height = 0;
     let dpr = 1;
     let raf = 0;
+    let isRunning = false;
 
     const resize = () => {
       const rect = parent.getBoundingClientRect();
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       width = Math.max(1, Math.round(rect.width));
       height = Math.max(1, Math.round(rect.height));
       canvas.width = Math.round(width * dpr);
@@ -375,9 +378,12 @@ function ZoomPreviewCanvas({ anchor }: { anchor?: ZoomAnchor }) {
       canvas.style.width = `${width}px`;
       canvas.style.height = `${height}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      start();
     };
 
     const render = () => {
+      if (!isRunning) return;
+
       const current = frameRef.current;
       const target = targetRef.current;
       current.scale += (target.scale - current.scale) * 0.11;
@@ -385,16 +391,47 @@ function ZoomPreviewCanvas({ anchor }: { anchor?: ZoomAnchor }) {
       current.centerY += (target.centerY - current.centerY) * 0.11;
 
       drawZoomPreview(ctx, width, height, current);
+
+      const isSettled =
+        Math.abs(target.scale - current.scale) < 0.005 &&
+        Math.abs(target.centerX - current.centerX) < 0.05 &&
+        Math.abs(target.centerY - current.centerY) < 0.05;
+
+      if (isSettled) {
+        frameRef.current = { ...target };
+        drawZoomPreview(ctx, width, height, frameRef.current);
+        isRunning = false;
+        return;
+      }
+
+      raf = requestAnimationFrame(render);
+    };
+
+    function start() {
+      if (isRunning || document.hidden) return;
+      isRunning = true;
       raf = requestAnimationFrame(render);
     };
 
     const observer = new ResizeObserver(resize);
     observer.observe(parent);
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        isRunning = false;
+        cancelAnimationFrame(raf);
+      } else {
+        start();
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    startRenderRef.current = start;
     resize();
-    raf = requestAnimationFrame(render);
 
     return () => {
       observer.disconnect();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      startRenderRef.current = () => {};
+      isRunning = false;
       cancelAnimationFrame(raf);
     };
   }, []);
