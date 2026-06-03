@@ -19,21 +19,23 @@ export function Hero() {
       {/* Main content */}
       <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-7xl flex-col justify-center px-6 pt-24 md:px-12">
         {/* Hero text */}
-        <div className="w-full -translate-y-[calc(clamp(1.8rem,8.64vw,8.64rem)+7.2rem)] md:-translate-y-[clamp(1.8rem,8.64vw,8.64rem)]">
-          <h1 className="hero-motion-title text-[4.3rem] font-bold leading-[0.84] tracking-[-0.04em] text-foreground min-[390px]:text-[4.5rem] min-[430px]:text-[4.8rem] md:text-[clamp(2.5rem,12vw,12rem)] md:leading-[0.9]">
-            <span className="block">
-              <span className="block">
+        <div className="hero-title-wrap">
+          <h1 className="hero-motion-title">
+            <span className="hero-title-line">
+              <span className="hero-title-part">
                 <MotionBlurText delay={0.2}>Capture</MotionBlurText>
               </span>
-              <span className="block">
+              <span className="hero-title-space" aria-hidden="true"> </span>
+              <span className="hero-title-part">
                 <MotionBlurText delay={0.36}>Sharp.</MotionBlurText>
               </span>
             </span>
-            <span className="block">
-              <span className="block">
+            <span className="hero-title-line">
+              <span className="hero-title-part">
                 <MotionBlurText delay={0.52}>Direct</MotionBlurText>
               </span>
-              <span className="block">
+              <span className="hero-title-space" aria-hidden="true"> </span>
+              <span className="hero-title-part">
                 <MotionBlurText delay={0.66}>The Frame.</MotionBlurText>
               </span>
             </span>
