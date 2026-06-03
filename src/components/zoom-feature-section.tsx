@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useCallback, useEffect, useRef } from "react";
-import type { PointerEvent as ReactPointerEvent } from "react";
+import type { PointerEvent as ReactPointerEvent, TouchEvent as ReactTouchEvent } from "react";
 
 export function ZoomFeatureSection() {
   return (
@@ -137,6 +137,7 @@ const ZOOM_CLIP_START_MS = 900;
 const ZOOM_CLIP_END_MS = 6680;
 const ZOOM_OUT_START_MS = ZOOM_CLIP_END_MS - AUTO_ZOOM_MS;
 const CAMERA_MOTION_BLUR_STRENGTH = 50;
+const CAMERA_MOTION_BLUR_TRANSITION_MS = 260;
 const CURSOR_MOTION_BLUR_STRENGTH = 50;
 
 const POINTS = {
@@ -229,6 +230,7 @@ function CanvasZoomDemo() {
   const playTimeRef = useRef(0);
   const previewTimeRef = useRef<number | null>(null);
   const activeTimelinePointerRef = useRef<number | null>(null);
+  const activeTimelineTouchRef = useRef<number | null>(null);
   const uiElementsRef = useRef<UIElement[]>([]);
 
   const generateUIElements = useCallback((width: number, height: number) => {
@@ -496,9 +498,15 @@ function CanvasZoomDemo() {
 
   const handleTimelinePointerMove = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
     const activePointerId = activeTimelinePointerRef.current;
-    if (activePointerId !== null && event.pointerId !== activePointerId) return;
+    if (activePointerId !== null) {
+      if (event.pointerId !== activePointerId) return;
+      seekTimelineToClientX(event.clientX);
+      event.preventDefault();
+      return;
+    }
+
     previewTimelineAtClientX(event.clientX);
-  }, [previewTimelineAtClientX]);
+  }, [previewTimelineAtClientX, seekTimelineToClientX]);
 
   const handleTimelinePointerLeave = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
     if (event.pointerType !== "mouse" || activeTimelinePointerRef.current !== null) return;
@@ -514,7 +522,9 @@ function CanvasZoomDemo() {
 
   const handleTimelinePointerUp = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
     if (activeTimelinePointerRef.current !== event.pointerId) return;
-    event.currentTarget.releasePointerCapture(event.pointerId);
+    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      event.currentTarget.releasePointerCapture(event.pointerId);
+    }
     activeTimelinePointerRef.current = null;
 
     if (event.pointerType !== "mouse") {
@@ -527,6 +537,56 @@ function CanvasZoomDemo() {
     activeTimelinePointerRef.current = null;
     resumeTimelinePlayback();
   }, [resumeTimelinePlayback]);
+
+  const getActiveTimelineTouch = useCallback((touches: TouchList) => {
+    const activeTouchId = activeTimelineTouchRef.current;
+    if (activeTouchId === null) return touches.item(0);
+
+    for (let index = 0; index < touches.length; index += 1) {
+      const touch = touches.item(index);
+      if (touch?.identifier === activeTouchId) return touch;
+    }
+
+    return null;
+  }, []);
+
+  const changedTouchesIncludeActiveTimelineTouch = useCallback((touches: TouchList) => {
+    const activeTouchId = activeTimelineTouchRef.current;
+    if (activeTouchId === null) return touches.length > 0;
+
+    for (let index = 0; index < touches.length; index += 1) {
+      if (touches.item(index)?.identifier === activeTouchId) return true;
+    }
+
+    return false;
+  }, []);
+
+  const handleTimelineTouchStart = useCallback((event: ReactTouchEvent<HTMLDivElement>) => {
+    const touch = event.touches.item(0);
+    if (!touch) return;
+
+    activeTimelineTouchRef.current = touch.identifier;
+    seekTimelineToClientX(touch.clientX);
+    event.preventDefault();
+  }, [seekTimelineToClientX]);
+
+  const handleTimelineTouchMove = useCallback((event: ReactTouchEvent<HTMLDivElement>) => {
+    const touch = getActiveTimelineTouch(event.touches);
+    if (!touch) return;
+
+    seekTimelineToClientX(touch.clientX);
+    event.preventDefault();
+  }, [getActiveTimelineTouch, seekTimelineToClientX]);
+
+  const handleTimelineTouchEnd = useCallback((event: ReactTouchEvent<HTMLDivElement>) => {
+    if (!changedTouchesIncludeActiveTimelineTouch(event.changedTouches)) return;
+
+    activeTimelineTouchRef.current = null;
+    if (activeTimelinePointerRef.current === null) {
+      resumeTimelinePlayback();
+    }
+    event.preventDefault();
+  }, [changedTouchesIncludeActiveTimelineTouch, resumeTimelinePlayback]);
 
   useEffect(() => {
     const start = () => {
@@ -600,11 +660,16 @@ function CanvasZoomDemo() {
           onPointerDown={handleTimelinePointerDown}
           onPointerUp={handleTimelinePointerUp}
           onPointerCancel={handleTimelinePointerCancel}
+          onTouchStart={handleTimelineTouchStart}
+          onTouchMove={handleTimelineTouchMove}
+          onTouchEnd={handleTimelineTouchEnd}
+          onTouchCancel={handleTimelineTouchEnd}
+          style={{ touchAction: "none" }}
           aria-label="Timeline preview tracks"
         >
           <canvas
             ref={timelineCanvasRef}
-            className="absolute inset-0 h-full w-full"
+            className="pointer-events-none absolute inset-0 h-full w-full"
           />
         </div>
       </div>
@@ -1240,9 +1305,14 @@ function drawCameraShaderMotionBlur(
   dpr: number,
   blur: CameraShaderMotionBlur
 ) {
-  ctx.fillStyle = "#141414";
-  ctx.fillRect(0, 0, width, height);
-  ctx.drawImage(frameCanvas, 0, 0, width, height);
+  const drawSharpFrame = () => {
+    ctx.globalAlpha = 1;
+    ctx.globalCompositeOperation = "source-over";
+    ctx.filter = "none";
+    ctx.fillStyle = "#141414";
+    ctx.fillRect(0, 0, width, height);
+    ctx.drawImage(frameCanvas, 0, 0, width, height);
+  };
 
   const strength = clamp(blur.strength, 0, 1);
   const hasZoomMotion = Math.abs(blur.zoomMotion) > 0.0001;
@@ -1250,6 +1320,7 @@ function drawCameraShaderMotionBlur(
   let panLength = Math.hypot(panMotion.x, panMotion.y);
 
   if (strength <= 0.001 || (!hasZoomMotion && panLength < 0.05)) {
+    drawSharpFrame();
     return;
   }
 
@@ -1260,6 +1331,7 @@ function drawCameraShaderMotionBlur(
     const maxRadius = maxDistanceToCorners(blur.focusPoint, width, height);
     const zoomMotionLength = Math.abs(zoomMotion) * strength * maxRadius;
     if (zoomMotionLength < 0.05) {
+      drawSharpFrame();
       return;
     }
 
@@ -1276,11 +1348,11 @@ function drawCameraShaderMotionBlur(
   const blurCanvas = ensureScratchCanvas(blurCanvasRef, targetWidth, targetHeight);
   const blurCtx = blurCanvas.getContext("2d");
   if (!blurCtx) {
+    drawSharpFrame();
     return;
   }
 
   const sampleCount = 41;
-  const weightSum = shaderWeightSum(sampleCount);
 
   blurCtx.setTransform(1, 0, 0, 1, 0, 0);
   blurCtx.clearRect(0, 0, targetWidth, targetHeight);
@@ -1288,11 +1360,17 @@ function drawCameraShaderMotionBlur(
   blurCtx.globalCompositeOperation = "source-over";
   blurCtx.imageSmoothingEnabled = true;
   blurCtx.imageSmoothingQuality = "high";
+  blurCtx.filter = "none";
 
-  for (let index = 1; index < sampleCount; index += 1) {
+  let accumulatedWeight = 0;
+
+  for (let index = 0; index < sampleCount; index += 1) {
     const t = index / (sampleCount - 1);
+    const sampleWeight = shaderSampleWeight(t);
+    const nextWeight = accumulatedWeight + sampleWeight;
+
     blurCtx.save();
-    blurCtx.globalAlpha = (shaderSampleWeight(t) / weightSum) * 0.85;
+    blurCtx.globalAlpha = accumulatedWeight <= 0 ? 1 : sampleWeight / nextWeight;
 
     if (hasZoomMotion) {
       const radialScale = 1 + zoomMotion * strength * t;
@@ -1306,11 +1384,19 @@ function drawCameraShaderMotionBlur(
 
     blurCtx.drawImage(frameCanvas, 0, 0, width, height);
     blurCtx.restore();
+    accumulatedWeight = nextWeight;
   }
 
   blurCtx.globalAlpha = 1;
   blurCtx.globalCompositeOperation = "source-over";
+  blurCtx.filter = "none";
+
+  ctx.save();
+  ctx.globalAlpha = 1;
+  ctx.globalCompositeOperation = "source-over";
+  ctx.filter = "none";
   ctx.drawImage(blurCanvas, 0, 0, width, height);
+  ctx.restore();
 }
 
 function cameraShaderMotionBlur(
@@ -1319,7 +1405,7 @@ function cameraShaderMotionBlur(
   width: number,
   height: number
 ): CameraShaderMotionBlur {
-  const strength = clamp(CAMERA_MOTION_BLUR_STRENGTH, 0, 100) / 100;
+  const strength = (clamp(CAMERA_MOTION_BLUR_STRENGTH, 0, 100) / 100) * cameraMotionBlurTransitionMultiplier(timeMs);
 
   if (strength <= 0.001) {
     return {
@@ -1348,6 +1434,27 @@ function cameraShaderMotionBlur(
     focusPoint: { x: frame.cameraFocus.x * width, y: frame.cameraFocus.y * height },
     strength,
   };
+}
+
+function cameraMotionBlurTransitionMultiplier(timeMs: number): number {
+  const wrappedTime = wrapTime(timeMs);
+  const segment = CAMERA_SEGMENTS.find((entry) => wrappedTime >= entry.startMs && wrappedTime <= entry.endMs);
+
+  if (!segment || !isCameraMotionSegment(segment)) {
+    return 0;
+  }
+
+  const fadeIn = smoothstep(clamp((wrappedTime - segment.startMs) / CAMERA_MOTION_BLUR_TRANSITION_MS, 0, 1));
+  const fadeOut = smoothstep(clamp((segment.endMs - wrappedTime) / CAMERA_MOTION_BLUR_TRANSITION_MS, 0, 1));
+
+  return fadeIn * fadeOut;
+}
+
+function isCameraMotionSegment(segment: typeof CAMERA_SEGMENTS[number]): boolean {
+  return (
+    Math.abs(segment.toZoom - segment.fromZoom) > 0.0001 ||
+    normalizedDistance(segment.fromFocus, segment.toFocus) > 0.0008
+  );
 }
 
 function cameraCompositionOffset(frame: MotionFrame, width: number, height: number): Point {
@@ -1759,6 +1866,11 @@ function wrapTime(timeMs: number): number {
 
 function lerp(from: number, to: number, progress: number): number {
   return from + (to - from) * progress;
+}
+
+function smoothstep(value: number): number {
+  const t = clamp(value, 0, 1);
+  return t * t * (3 - 2 * t);
 }
 
 function clamp(value: number, min: number, max: number): number {

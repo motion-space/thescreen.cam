@@ -18,6 +18,12 @@ interface CharState {
 }
 
 const CHAR_STAGGER_SECONDS = 0.03;
+const ENTRY_EASE = [0.16, 1, 0.3, 1] as const;
+const ENTRY_BLUR_TRANSITION = {
+  duration: 0.76,
+  ease: ENTRY_EASE,
+  times: [0, 0.44, 1],
+};
 
 export function MotionBlurText({
   children,
@@ -196,7 +202,7 @@ export function MotionBlurText({
             animate={{ y: 0, rotateX: 0, opacity: 1 }}
             transition={{
               duration: 1,
-              ease: [0.16, 1, 0.3, 1],
+              ease: ENTRY_EASE,
               delay: charDelay,
             }}
             className="relative inline-block will-change-transform"
@@ -208,12 +214,25 @@ export function MotionBlurText({
                 : "none",
             }}
           >
-            <span
+            <motion.span
               className="motion-blur-text-glyph"
-              style={{ animationDelay: `${charDelay}s` }}
+              initial={{
+                filter: "blur(18px)",
+                y: "0.26em",
+                scaleY: 1.2,
+              }}
+              animate={{
+                filter: ["blur(18px)", "blur(9px)", "blur(0px)"],
+                y: ["0.26em", "0.11em", "0em"],
+                scaleY: [1.2, 1.1, 1],
+              }}
+              transition={{
+                ...ENTRY_BLUR_TRANSITION,
+                delay: charDelay,
+              }}
             >
               {displayLetter}
-            </span>
+            </motion.span>
           </motion.span>
         );
       })}

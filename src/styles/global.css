@@ -235,9 +235,7 @@
   }
 
   .motion-blur-text-glyph {
-    animation: motion-blur-text-glyph-entry 760ms cubic-bezier(0.16, 1, 0.3, 1);
     display: inline-block;
-    filter: none;
     transform-origin: 50% 100%;
     will-change: filter, transform;
   }
@@ -373,22 +371,5 @@
 
   .trace-slider-native:disabled + .trace-slider-visual {
     @apply opacity-40;
-  }
-}
-
-@keyframes motion-blur-text-glyph-entry {
-  0% {
-    filter: blur(18px);
-    transform: translateY(0.26em) scaleY(1.2);
-  }
-
-  44% {
-    filter: blur(9px);
-    transform: translateY(0.11em) scaleY(1.1);
-  }
-
-  100% {
-    filter: blur(0);
-    transform: translateY(0) scaleY(1);
   }
 }

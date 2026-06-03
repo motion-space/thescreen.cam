@@ -2,8 +2,8 @@
 
 import { motion, PanInfo, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import type { PointerEvent as ReactPointerEvent } from "react";
-import { Hand } from "lucide-react";
+import type { PointerEvent as ReactPointerEvent, TouchEvent as ReactTouchEvent } from "react";
+import { Hand, Pause, Play } from "lucide-react";
 import { Slider } from "./slider";
 
 interface ZoomAnchor {
@@ -13,6 +13,10 @@ interface ZoomAnchor {
   centerX: number; // 0-100
   centerY: number; // 0-100
 }
+
+const MOCK_PLAYBACK_DURATION_MS = 4200;
+const TIMELINE_TRACK_INSET_PX = 16;
+const PLAYHEAD_LINE_WIDTH_PX = 2;
 
 export function CustomControlsSection() {
   return (
@@ -92,47 +96,151 @@ function InteractiveTimeline() {
   const [playheadPosition, setPlayheadPosition] = useState(45);
   const [isDraggingCenter, setIsDraggingCenter] = useState(false);
   const [hasDraggedOnce, setHasDraggedOnce] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [playbackAnchorData, setPlaybackAnchorData] = useState<ZoomAnchor | null>(null);
   const activePreviewPointerRef = useRef<number | null>(null);
+  const activePreviewTouchRef = useRef<number | null>(null);
+  const isPreviewDraggingRef = useRef(false);
   const lastPointerPos = useRef<{ x: number; y: number } | null>(null);
+  const selectedAnchorRef = useRef<string | null>(selectedAnchor);
+  const playbackAnimationRef = useRef<number>(0);
+  const playbackStartTimeRef = useRef(0);
+  const playbackStartPositionRef = useRef(0);
+  const latestPlayheadPositionRef = useRef(playheadPosition);
+  const isPlaybackPausedRef = useRef(false);
+
+  useEffect(() => {
+    selectedAnchorRef.current = selectedAnchor;
+  }, [selectedAnchor]);
+
+  useEffect(() => {
+    latestPlayheadPositionRef.current = playheadPosition;
+  }, [playheadPosition]);
+
+  useEffect(() => () => {
+    cancelAnimationFrame(playbackAnimationRef.current);
+  }, []);
+
+  const updatePlaybackPosition = (position: number) => {
+    const nextPosition = clampPercent(position);
+    latestPlayheadPositionRef.current = nextPosition;
+    setPlayheadPosition(nextPosition);
+    setPlaybackAnchorData(sampleZoomAnchorFrame(anchors, nextPosition));
+  };
+
+  const stopPlayback = () => {
+    cancelAnimationFrame(playbackAnimationRef.current);
+    playbackAnimationRef.current = 0;
+    isPlaybackPausedRef.current = false;
+    setIsPlaying(false);
+    setPlaybackAnchorData(null);
+  };
+
+  const pausePlayback = () => {
+    cancelAnimationFrame(playbackAnimationRef.current);
+    playbackAnimationRef.current = 0;
+    isPlaybackPausedRef.current = true;
+    setIsPlaying(false);
+  };
+
+  const completePlayback = () => {
+    const finalAnchor = [...anchors].sort((a, b) => a.position - b.position).at(-1);
+
+    updatePlaybackPosition(100);
+    cancelAnimationFrame(playbackAnimationRef.current);
+    playbackAnimationRef.current = 0;
+    isPlaybackPausedRef.current = false;
+    setIsPlaying(false);
+
+    if (finalAnchor) {
+      setSelectedAnchor(finalAnchor.id);
+    }
+  };
+
+  const runPlaybackFrame = (timestamp: number) => {
+    const startPosition = playbackStartPositionRef.current;
+    const remainingDistance = Math.max(0, 100 - startPosition);
+    const duration = Math.max(250, MOCK_PLAYBACK_DURATION_MS * (remainingDistance / 100));
+    const progress = clamp01((timestamp - playbackStartTimeRef.current) / duration);
+    const nextPosition = startPosition + remainingDistance * progress;
+
+    updatePlaybackPosition(nextPosition);
+
+    if (progress >= 1) {
+      completePlayback();
+      return;
+    }
+
+    playbackAnimationRef.current = requestAnimationFrame(runPlaybackFrame);
+  };
+
+  const startPlayback = () => {
+    cancelAnimationFrame(playbackAnimationRef.current);
+
+    const startPosition = isPlaybackPausedRef.current
+      ? clampPercent(latestPlayheadPositionRef.current)
+      : 0;
+
+    playbackStartPositionRef.current = startPosition;
+    playbackStartTimeRef.current = performance.now();
+    isPlaybackPausedRef.current = false;
+    setIsPlaying(true);
+    updatePlaybackPosition(startPosition);
+    playbackAnimationRef.current = requestAnimationFrame(runPlaybackFrame);
+  };
+
+  const handlePlaybackToggle = () => {
+    if (isPlaying) {
+      pausePlayback();
+      return;
+    }
+
+    startPlayback();
+  };
 
   const handleAnchorDrag = (id: string, info: PanInfo) => {
     if (!timelineRef.current) return;
+    stopPlayback();
     const rect = timelineRef.current.getBoundingClientRect();
+    const trackWidth = Math.max(1, rect.width - TIMELINE_TRACK_INSET_PX * 2);
 
     setAnchors(prev => prev.map(anchor => {
       if (anchor.id !== id) return anchor;
-      const deltaPercent = (info.delta.x / rect.width) * 100;
-      const newPosition = Math.max(0, Math.min(100, anchor.position + deltaPercent));
+      const deltaPercent = (info.delta.x / trackWidth) * 100;
+      const newPosition = clampPercent(anchor.position + deltaPercent);
       return { ...anchor, position: newPosition };
     }));
   };
 
   const seekTimelineAtClientX = (clientX: number) => {
     if (!timelineRef.current) return;
+    stopPlayback();
     const rect = timelineRef.current.getBoundingClientRect();
-    const position = ((clientX - rect.left) / rect.width) * 100;
-    setPlayheadPosition(Math.max(0, Math.min(100, position)));
+    const trackLeft = rect.left + TIMELINE_TRACK_INSET_PX;
+    const trackWidth = Math.max(1, rect.width - TIMELINE_TRACK_INSET_PX * 2);
+    const position = ((clientX - trackLeft) / trackWidth) * 100;
+    setPlayheadPosition(clampPercent(position));
   };
 
   const handleTimelinePointerDown = (e: ReactPointerEvent<HTMLDivElement>) => {
     seekTimelineAtClientX(e.clientX);
   };
 
-  const handlePreviewPointerDown = (e: ReactPointerEvent<HTMLDivElement>) => {
-    if (!selectedAnchor || !previewRef.current) return;
-    activePreviewPointerRef.current = e.pointerId;
-    e.currentTarget.setPointerCapture(e.pointerId);
+  const beginPreviewCenterDrag = (clientX: number, clientY: number) => {
+    if (!selectedAnchorRef.current || !previewRef.current) return;
+    stopPlayback();
+    isPreviewDraggingRef.current = true;
     setIsDraggingCenter(true);
     setHasDraggedOnce(true);
-    lastPointerPos.current = { x: e.clientX, y: e.clientY };
-    e.preventDefault();
+    lastPointerPos.current = { x: clientX, y: clientY };
   };
 
-  const handlePreviewPointerMove = (e: ReactPointerEvent<HTMLDivElement>) => {
+  const updatePreviewCenterDrag = (clientX: number, clientY: number) => {
+    const activeAnchorId = selectedAnchorRef.current;
+
     if (
-      activePreviewPointerRef.current !== e.pointerId ||
-      !isDraggingCenter ||
-      !selectedAnchor ||
+      !isPreviewDraggingRef.current ||
+      !activeAnchorId ||
       !previewRef.current ||
       !lastPointerPos.current
     ) {
@@ -140,13 +248,13 @@ function InteractiveTimeline() {
     }
 
     const rect = previewRef.current.getBoundingClientRect();
-    const deltaX = (e.clientX - lastPointerPos.current.x) / rect.width * 100;
-    const deltaY = (e.clientY - lastPointerPos.current.y) / rect.height * 100;
+    const deltaX = (clientX - lastPointerPos.current.x) / rect.width * 100;
+    const deltaY = (clientY - lastPointerPos.current.y) / rect.height * 100;
 
-    lastPointerPos.current = { x: e.clientX, y: e.clientY };
+    lastPointerPos.current = { x: clientX, y: clientY };
 
     setAnchors(prev => prev.map(a => {
-      if (a.id !== selectedAnchor) return a;
+      if (a.id !== activeAnchorId) return a;
       // Inverted: drag right -> content moves right -> center moves left
       const newCenterX = Math.max(0, Math.min(100, a.centerX - deltaX));
       const newCenterY = Math.max(0, Math.min(100, a.centerY - deltaY));
@@ -154,15 +262,33 @@ function InteractiveTimeline() {
     }));
   };
 
+  const handlePreviewPointerDown = (e: ReactPointerEvent<HTMLDivElement>) => {
+    if (!selectedAnchorRef.current || !previewRef.current) return;
+    activePreviewPointerRef.current = e.pointerId;
+    beginPreviewCenterDrag(e.clientX, e.clientY);
+    e.currentTarget.setPointerCapture(e.pointerId);
+    e.preventDefault();
+  };
+
+  const handlePreviewPointerMove = (e: ReactPointerEvent<HTMLDivElement>) => {
+    if (activePreviewPointerRef.current !== e.pointerId) return;
+    updatePreviewCenterDrag(e.clientX, e.clientY);
+    e.preventDefault();
+  };
+
   const endPreviewDrag = () => {
+    isPreviewDraggingRef.current = false;
     setIsDraggingCenter(false);
     activePreviewPointerRef.current = null;
+    activePreviewTouchRef.current = null;
     lastPointerPos.current = null;
   };
 
   const handlePreviewPointerUp = (e: ReactPointerEvent<HTMLDivElement>) => {
     if (activePreviewPointerRef.current !== e.pointerId) return;
-    e.currentTarget.releasePointerCapture(e.pointerId);
+    if (e.currentTarget.hasPointerCapture(e.pointerId)) {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    }
     endPreviewDrag();
   };
 
@@ -176,7 +302,61 @@ function InteractiveTimeline() {
     endPreviewDrag();
   };
 
+  const getActivePreviewTouch = (touches: TouchList) => {
+    const activeTouchId = activePreviewTouchRef.current;
+    if (activeTouchId === null) return touches.item(0);
+
+    for (let index = 0; index < touches.length; index += 1) {
+      const touch = touches.item(index);
+      if (touch?.identifier === activeTouchId) return touch;
+    }
+
+    return null;
+  };
+
+  const changedTouchesIncludeActiveTouch = (touches: TouchList) => {
+    const activeTouchId = activePreviewTouchRef.current;
+    if (activeTouchId === null) return touches.length > 0;
+
+    for (let index = 0; index < touches.length; index += 1) {
+      if (touches.item(index)?.identifier === activeTouchId) return true;
+    }
+
+    return false;
+  };
+
+  const handlePreviewTouchStart = (e: ReactTouchEvent<HTMLDivElement>) => {
+    const touch = e.touches.item(0);
+    if (!touch || !selectedAnchorRef.current || !previewRef.current) return;
+
+    activePreviewTouchRef.current = touch.identifier;
+    if (!isPreviewDraggingRef.current) {
+      beginPreviewCenterDrag(touch.clientX, touch.clientY);
+    }
+    e.preventDefault();
+  };
+
+  const handlePreviewTouchMove = (e: ReactTouchEvent<HTMLDivElement>) => {
+    const touch = getActivePreviewTouch(e.touches);
+    if (!touch) return;
+
+    updatePreviewCenterDrag(touch.clientX, touch.clientY);
+    e.preventDefault();
+  };
+
+  const handlePreviewTouchEnd = (e: ReactTouchEvent<HTMLDivElement>) => {
+    if (!changedTouchesIncludeActiveTouch(e.changedTouches)) return;
+
+    activePreviewTouchRef.current = null;
+    if (activePreviewPointerRef.current === null) {
+      endPreviewDrag();
+    }
+    e.preventDefault();
+  };
+
   const selectedAnchorData = anchors.find(a => a.id === selectedAnchor);
+  const previewAnchorData = playbackAnchorData ?? selectedAnchorData;
+  const playheadLeft = timelinePositionStyle(playheadPosition);
 
   return (
     <div className="space-y-6">
@@ -189,19 +369,26 @@ function InteractiveTimeline() {
         onPointerUp={handlePreviewPointerUp}
         onPointerCancel={handlePreviewPointerCancel}
         onPointerLeave={handlePreviewPointerLeave}
-        style={{ cursor: selectedAnchor ? (isDraggingCenter ? 'grabbing' : 'grab') : 'default' }}
+        onTouchStart={handlePreviewTouchStart}
+        onTouchMove={handlePreviewTouchMove}
+        onTouchEnd={handlePreviewTouchEnd}
+        onTouchCancel={handlePreviewTouchEnd}
+        style={{
+          cursor: selectedAnchor ? (isDraggingCenter ? 'grabbing' : 'grab') : 'default',
+          touchAction: "none",
+        }}
       >
-        <ZoomPreviewCanvas anchor={selectedAnchorData} />
+        <ZoomPreviewCanvas anchor={previewAnchorData} />
 
         {/* Drag overlay - shows when anchor is selected and never dragged before */}
         <AnimatePresence>
-          {selectedAnchor && !isDraggingCenter && !hasDraggedOnce && (
+          {selectedAnchor && !isDraggingCenter && !hasDraggedOnce && !isPlaying && !playbackAnchorData && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="absolute inset-0 bg-black/50 backdrop-blur-[1px] flex items-center justify-center z-10"
+              className="pointer-events-none absolute inset-0 bg-black/50 backdrop-blur-[1px] flex items-center justify-center z-10"
             >
               <motion.div
                 className="flex flex-col items-center gap-3"
@@ -222,85 +409,105 @@ function InteractiveTimeline() {
 
       </div>
 
-      {/* Timeline */}
-      <div
-        ref={timelineRef}
-        className="relative h-24 rounded-xl bg-card/50 border border-border/50 cursor-pointer overflow-hidden touch-none"
-        onPointerDown={handleTimelinePointerDown}
-      >
-        {/* Time markers */}
-        <div className="absolute top-2 left-0 right-0 flex justify-between px-4 text-[10px] font-mono text-muted-foreground/50">
-          <span>00:00</span>
-          <span>00:15</span>
-          <span>00:30</span>
-          <span>00:45</span>
-          <span>01:00</span>
-        </div>
-
-        {/* Track background */}
-        <div className="absolute top-10 left-4 right-4 h-10 rounded-lg bg-secondary/30 border border-border/30">
-          {/* Zoom clip */}
-          <div className="absolute inset-y-1 left-[10%] right-[10%] rounded-md bg-accent/20 border border-accent/30">
-            {/* Anchors */}
-            {anchors.map((anchor) => (
-              <motion.div
-                key={anchor.id}
-                className={`absolute top-0 bottom-0 w-1 cursor-ew-resize touch-none group ${
-                  selectedAnchor === anchor.id ? "z-10" : "z-0"
-                }`}
-                style={{ left: `${((anchor.position - 10) / 80) * 100}%` }}
-                drag="x"
-                dragMomentum={false}
-                dragElastic={0}
-                onDrag={(_, info) => handleAnchorDrag(anchor.id, info)}
-                onPointerDown={(e) => {
-                  e.stopPropagation();
-                  setSelectedAnchor(anchor.id);
-                  setPlayheadPosition(anchor.position);
-                }}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setSelectedAnchor(anchor.id);
-                  setPlayheadPosition(anchor.position);
-                }}
-                whileHover={{ scale: 1.2 }}
-                whileDrag={{ scale: 1.3 }}
-              >
-                {/* Anchor line */}
-                <div className={`absolute inset-y-0 left-1/2 w-0.5 -translate-x-1/2 transition-colors ${
-                  selectedAnchor === anchor.id ? "bg-accent" : "bg-accent/50 group-hover:bg-accent/80"
-                }`} />
-
-                {/* Anchor handle */}
-                <motion.div
-                  className={`absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full border-2 transition-colors ${
-                    selectedAnchor === anchor.id
-                      ? "bg-accent border-accent shadow-lg shadow-accent/30"
-                      : "bg-card border-accent/50 group-hover:border-accent"
-                  }`}
-                  layoutId={`anchor-${anchor.id}`}
-                />
-
-                {/* Scale label */}
-                <div className={`absolute -bottom-5 left-1/2 -translate-x-1/2 text-[10px] font-mono whitespace-nowrap transition-colors ${
-                  selectedAnchor === anchor.id ? "text-accent" : "text-muted-foreground"
-                }`}>
-                  {anchor.scale.toFixed(1)}x
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* Playhead */}
-        <motion.div
-          className="absolute top-8 bottom-2 w-0.5 bg-foreground z-20 pointer-events-none"
-          style={{ left: `${4 + (playheadPosition / 100) * 92}%` }}
-          animate={{ left: `${4 + (playheadPosition / 100) * 92}%` }}
-          transition={{ duration: 0.2 }}
+      <div className="relative h-24 rounded-xl bg-card/50 border border-border/50 overflow-hidden">
+        <motion.button
+          type="button"
+          aria-label={isPlaying ? "Pause mock timeline playback" : "Play mock timeline playback"}
+          title={isPlaying ? "Pause" : "Play"}
+          className="absolute left-3 top-10 z-30 flex h-10 w-8 items-center justify-center text-muted-foreground transition-colors hover:text-foreground touch-none"
+          onClick={handlePlaybackToggle}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.96 }}
         >
-          <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-3 h-3 bg-foreground rounded-sm rotate-45" />
-        </motion.div>
+          {isPlaying ? (
+            <Pause className="h-5 w-5" aria-hidden="true" />
+          ) : (
+            <Play className="h-5 w-5 translate-x-0.5" aria-hidden="true" />
+          )}
+        </motion.button>
+
+        {/* Timeline */}
+        <div
+          ref={timelineRef}
+          className="absolute inset-y-0 left-12 right-0 cursor-pointer touch-none"
+          onPointerDown={handleTimelinePointerDown}
+        >
+          {/* Time markers */}
+          <div className="absolute top-2 left-0 right-0 flex justify-between px-4 text-[10px] font-mono text-muted-foreground/50">
+            <span>00:00</span>
+            <span>00:15</span>
+            <span>00:30</span>
+            <span>00:45</span>
+            <span>01:00</span>
+          </div>
+
+          {/* Track background */}
+          <div className="absolute top-10 left-4 right-4 h-10 rounded-lg bg-secondary/30 border border-border/30">
+            {/* Zoom clip */}
+            <div className="absolute inset-y-1 -left-px -right-px rounded-md bg-accent/20 border border-accent/30">
+              {/* Anchors */}
+              {anchors.map((anchor) => (
+                <motion.div
+                  key={anchor.id}
+                  className={`absolute top-0 bottom-0 w-1 cursor-ew-resize touch-none group ${
+                    selectedAnchor === anchor.id ? "z-10" : "z-0"
+                  }`}
+                  style={{ left: `${clampPercent(anchor.position)}%` }}
+                  drag="x"
+                  dragMomentum={false}
+                  dragElastic={0}
+                  onDrag={(_, info) => handleAnchorDrag(anchor.id, info)}
+                  onPointerDown={(e) => {
+                    e.stopPropagation();
+                    stopPlayback();
+                    setSelectedAnchor(anchor.id);
+                    setPlayheadPosition(anchor.position);
+                  }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    stopPlayback();
+                    setSelectedAnchor(anchor.id);
+                    setPlayheadPosition(anchor.position);
+                  }}
+                  whileHover={{ scale: 1.2 }}
+                  whileDrag={{ scale: 1.3 }}
+                >
+                  {/* Anchor line */}
+                  <div className={`absolute inset-y-0 left-1/2 w-0.5 -translate-x-1/2 transition-colors ${
+                    selectedAnchor === anchor.id ? "bg-accent" : "bg-accent/50 group-hover:bg-accent/80"
+                  }`} />
+
+                  {/* Anchor handle */}
+                  <motion.div
+                    className={`absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full border-2 transition-colors ${
+                      selectedAnchor === anchor.id
+                        ? "bg-accent border-accent shadow-lg shadow-accent/30"
+                        : "bg-card border-accent/50 group-hover:border-accent"
+                    }`}
+                    layoutId={`anchor-${anchor.id}`}
+                  />
+
+                  {/* Scale label */}
+                  <div className={`absolute -bottom-5 left-1/2 -translate-x-1/2 text-[10px] font-mono whitespace-nowrap transition-colors ${
+                    selectedAnchor === anchor.id ? "text-accent" : "text-muted-foreground"
+                  }`}>
+                    {anchor.scale.toFixed(1)}x
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Playhead */}
+          <motion.div
+            className="absolute top-8 bottom-2 w-0.5 bg-foreground z-20 pointer-events-none"
+            style={{ left: playheadLeft }}
+            animate={{ left: playheadLeft }}
+            transition={{ duration: isPlaying ? 0 : 0.2 }}
+          >
+            <div className="absolute -top-1 left-1/2 -translate-x-1/2 w-3 h-3 bg-foreground rounded-sm rotate-45" />
+          </motion.div>
+        </div>
       </div>
 
       {/* Anchor controls */}
@@ -321,6 +528,7 @@ function InteractiveTimeline() {
               formatter={(value) => `${value.toFixed(1)}x`}
               value={selectedAnchorData.scale}
               onChange={(value) => {
+                stopPlayback();
                 setAnchors(prev => prev.map(a =>
                   a.id === selectedAnchor ? { ...a, scale: value } : a
                 ));
@@ -337,6 +545,69 @@ function InteractiveTimeline() {
       )}
     </div>
   );
+}
+
+function sampleZoomAnchorFrame(anchors: ZoomAnchor[], position: number): ZoomAnchor | null {
+  const sortedAnchors = [...anchors].sort((a, b) => a.position - b.position);
+  if (!sortedAnchors.length) return null;
+
+  const safePosition = clampPercent(position);
+  const firstAnchor = sortedAnchors[0];
+  const lastAnchor = sortedAnchors[sortedAnchors.length - 1];
+
+  if (safePosition <= firstAnchor.position) {
+    return { ...firstAnchor, id: "playback", position: safePosition };
+  }
+
+  if (safePosition >= lastAnchor.position) {
+    return { ...lastAnchor, id: "playback", position: safePosition };
+  }
+
+  for (let index = 1; index < sortedAnchors.length; index += 1) {
+    const previous = sortedAnchors[index - 1];
+    const next = sortedAnchors[index];
+
+    if (safePosition > next.position) continue;
+
+    const segmentProgress = clamp01((safePosition - previous.position) / Math.max(1, next.position - previous.position));
+    const easedProgress = smoothstep(segmentProgress);
+
+    return {
+      id: "playback",
+      position: safePosition,
+      scale: lerp(previous.scale, next.scale, easedProgress),
+      centerX: lerp(previous.centerX, next.centerX, easedProgress),
+      centerY: lerp(previous.centerY, next.centerY, easedProgress),
+    };
+  }
+
+  return { ...lastAnchor, id: "playback", position: safePosition };
+}
+
+function clampPercent(value: number): number {
+  return Math.max(0, Math.min(100, value));
+}
+
+function timelinePositionStyle(position: number): string {
+  const progress = clampPercent(position) / 100;
+  const percentage = progress * 100;
+  const offset =
+    TIMELINE_TRACK_INSET_PX -
+    TIMELINE_TRACK_INSET_PX * 2 * progress -
+    PLAYHEAD_LINE_WIDTH_PX * progress;
+  return `calc(${percentage}% + ${offset}px)`;
+}
+
+function clamp01(value: number): number {
+  return Math.max(0, Math.min(1, value));
+}
+
+function smoothstep(value: number): number {
+  return value * value * (3 - 2 * value);
+}
+
+function lerp(from: number, to: number, progress: number): number {
+  return from + (to - from) * progress;
 }
 
 function ZoomPreviewCanvas({ anchor }: { anchor?: ZoomAnchor }) {
