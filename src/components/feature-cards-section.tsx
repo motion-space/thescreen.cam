@@ -483,6 +483,7 @@ function LiquidDomCanvasToolbarThumb({
     width: 1,
   });
   const wallpaperFrameRequestRef = useRef(0);
+  const activeWallpaperTouchRef = useRef<number | null>(null);
   const activeIdRef = useRef<string | null>(null);
   const hitTargetsRef = useRef<CanvasToolbarHit[]>([]);
   const tooltipRef = useRef<CanvasTooltipState>({
@@ -819,6 +820,160 @@ function LiquidDomCanvasToolbarThumb({
     requestWallpaperFrame(true);
   };
 
+  const getActiveWallpaperTouch = (touches: TouchList) => {
+    const activeTouchId = activeWallpaperTouchRef.current;
+    if (activeTouchId === null) return touches.item(0);
+
+    for (let index = 0; index < touches.length; index += 1) {
+      const touch = touches.item(index);
+      if (touch?.identifier === activeTouchId) return touch;
+    }
+
+    return null;
+  };
+
+  const changedTouchesIncludeActiveWallpaperTouch = (touches: TouchList) => {
+    const activeTouchId = activeWallpaperTouchRef.current;
+    if (activeTouchId === null) return touches.length > 0;
+
+    for (let index = 0; index < touches.length; index += 1) {
+      if (touches.item(index)?.identifier === activeTouchId) return true;
+    }
+
+    return false;
+  };
+
+  const startWallpaperTouchDrag = (event: TouchEvent) => {
+    if (
+      event.target instanceof Element &&
+      event.target.closest("button")
+    ) {
+      return;
+    }
+
+    const touch = event.touches.item(0);
+    const target = thumbRef.current;
+    if (!touch || !target) return;
+
+    const state = wallpaperTransitionRef.current;
+    if (state.isTransitioning && !state.isDragging) return;
+
+    const rect = target.getBoundingClientRect();
+    activeWallpaperTouchRef.current = touch.identifier;
+    wallpaperDragRef.current = {
+      currentX: touch.clientX,
+      isDragging: false,
+      pointerId: touch.identifier,
+      startX: touch.clientX,
+      startY: touch.clientY,
+      width: Math.max(1, rect.width),
+    };
+  };
+
+  const updateWallpaperTouchDrag = (event: TouchEvent) => {
+    const drag = wallpaperDragRef.current;
+    const touch = getActiveWallpaperTouch(event.touches);
+    if (!touch || drag.pointerId !== touch.identifier) return;
+
+    drag.currentX = touch.clientX;
+    const deltaX = touch.clientX - drag.startX;
+    const deltaY = touch.clientY - drag.startY;
+    const absX = Math.abs(deltaX);
+    const absY = Math.abs(deltaY);
+
+    if (!drag.isDragging) {
+      if (
+        absY > canvasWallpaperDragStartDistance &&
+        absY > absX * 1.25
+      ) {
+        activeWallpaperTouchRef.current = null;
+        resetCanvasWallpaperDrag(drag);
+        return;
+      }
+
+      if (
+        absX < canvasWallpaperDragStartDistance ||
+        absX < absY * 1.1
+      ) {
+        return;
+      }
+
+      drag.isDragging = true;
+      setIsWallpaperSwitching(true);
+      hideToolbarTooltip();
+    }
+
+    event.preventDefault();
+    previewCanvasWallpaperDrag(
+      wallpaperTransitionRef.current,
+      deltaX,
+      drag.width,
+    );
+    requestWallpaperFrame();
+  };
+
+  const finishWallpaperTouchDrag = (
+    event: TouchEvent,
+    shouldCancel = false,
+  ) => {
+    const drag = wallpaperDragRef.current;
+    if (
+      drag.pointerId === null ||
+      !changedTouchesIncludeActiveWallpaperTouch(event.changedTouches)
+    ) {
+      return;
+    }
+
+    const wasDragging = drag.isDragging;
+    const deltaX = drag.currentX - drag.startX;
+    const dragWidth = drag.width;
+    activeWallpaperTouchRef.current = null;
+    resetCanvasWallpaperDrag(drag);
+
+    if (!wasDragging) return;
+
+    event.preventDefault();
+    previewCanvasWallpaperDrag(
+      wallpaperTransitionRef.current,
+      deltaX,
+      dragWidth,
+    );
+
+    const shouldCommit =
+      !shouldCancel &&
+      Math.abs(deltaX) >= getCanvasWallpaperDragThreshold(dragWidth);
+    const shouldAnimate = finishCanvasWallpaperDrag(
+      wallpaperTransitionRef.current,
+      shouldCommit,
+      performance.now(),
+    );
+
+    setIsWallpaperSwitching(shouldAnimate);
+    requestWallpaperFrame(true);
+  };
+
+  useEffect(() => {
+    const thumb = thumbRef.current;
+    if (!thumb) return;
+
+    const options = { passive: false };
+    const cancelWallpaperTouchDrag = (event: TouchEvent) => {
+      finishWallpaperTouchDrag(event, true);
+    };
+
+    thumb.addEventListener("touchstart", startWallpaperTouchDrag, options);
+    thumb.addEventListener("touchmove", updateWallpaperTouchDrag, options);
+    thumb.addEventListener("touchend", finishWallpaperTouchDrag, options);
+    thumb.addEventListener("touchcancel", cancelWallpaperTouchDrag, options);
+
+    return () => {
+      thumb.removeEventListener("touchstart", startWallpaperTouchDrag);
+      thumb.removeEventListener("touchmove", updateWallpaperTouchDrag);
+      thumb.removeEventListener("touchend", finishWallpaperTouchDrag);
+      thumb.removeEventListener("touchcancel", cancelWallpaperTouchDrag);
+    };
+  });
+
   useEffect(() => {
     const canvas = wallpaperCanvasRef.current;
     const parent = thumbRef.current;
@@ -908,6 +1063,7 @@ function LiquidDomCanvasToolbarThumb({
     <div
       ref={thumbRef}
       className="relative aspect-[4/3] cursor-grab select-none overflow-hidden rounded-[8px] bg-blue-950 active:cursor-grabbing"
+      data-screen-cam-drag-surface
       style={{ touchAction: "pan-y" }}
       onPointerCancel={(event) => finishWallpaperDrag(event, true)}
       onPointerDown={startWallpaperDrag}
@@ -918,6 +1074,7 @@ function LiquidDomCanvasToolbarThumb({
         ref={wallpaperCanvasRef}
         aria-hidden="true"
         className="absolute inset-0 block h-full w-full"
+        style={{ touchAction: "pan-y" }}
       />
       {canUseLiquidDom && (
         <LiquidCoreGlassCanvas
@@ -934,6 +1091,7 @@ function LiquidDomCanvasToolbarThumb({
         aria-label="Liquid glass recording toolbar preview"
         className="absolute inset-0 z-10 h-full w-full"
         data-liquid-dom-toolbar-thumb
+        style={{ touchAction: "pan-y" }}
         onPointerLeave={() => {
           activeIdRef.current = null;
           setTooltipVisible(false);
@@ -1326,6 +1484,7 @@ function LiquidCoreGlassCanvas({
       ref={canvasRef}
       aria-hidden="true"
       className="absolute inset-0 block h-full w-full"
+      style={{ touchAction: "pan-y" }}
     />
   );
 }
@@ -2780,6 +2939,7 @@ function KeyCap({
 
 function BeautyThumb({ copy }: { copy: FeatureCardsCopy["beautyThumb"] }) {
   const comparisonWindowRef = useRef<HTMLDivElement>(null);
+  const activeComparisonTouchRef = useRef<number | null>(null);
   const beforeVideoRef = useRef<HTMLVideoElement>(null);
   const afterVideoRef = useRef<HTMLVideoElement>(null);
   const canLoadMediaRef = useRef(false);
@@ -2877,6 +3037,92 @@ function BeautyThumb({ copy }: { copy: FeatureCardsCopy["beautyThumb"] }) {
     setIsHandleDragging(false);
     setHandleY(beautyHandleRestY);
   };
+
+  const getActiveComparisonTouch = (touches: TouchList) => {
+    const activeTouchId = activeComparisonTouchRef.current;
+    if (activeTouchId === null) return touches.item(0);
+
+    for (let index = 0; index < touches.length; index += 1) {
+      const touch = touches.item(index);
+      if (touch?.identifier === activeTouchId) return touch;
+    }
+
+    return null;
+  };
+
+  const changedTouchesIncludeActiveComparisonTouch = (touches: TouchList) => {
+    const activeTouchId = activeComparisonTouchRef.current;
+    if (activeTouchId === null) return touches.length > 0;
+
+    for (let index = 0; index < touches.length; index += 1) {
+      if (touches.item(index)?.identifier === activeTouchId) return true;
+    }
+
+    return false;
+  };
+
+  const handleComparisonTouchStart = (event: TouchEvent) => {
+    const touch = event.touches.item(0);
+    const target = comparisonWindowRef.current;
+    if (!touch || !target) return;
+
+    activeComparisonTouchRef.current = touch.identifier;
+    dragRectRef.current = target.getBoundingClientRect();
+    cancelScheduledComparisonDrag();
+    setIsHandleDragging(true);
+    applyComparisonDragPosition(
+      touch.clientX,
+      touch.clientY,
+      dragRectRef.current,
+    );
+    event.preventDefault();
+  };
+
+  const handleComparisonTouchMove = (event: TouchEvent) => {
+    const touch = getActiveComparisonTouch(event.touches);
+    if (!touch || activeComparisonTouchRef.current === null) return;
+
+    scheduleComparisonDragPosition(touch.clientX, touch.clientY);
+    event.preventDefault();
+  };
+
+  const handleComparisonTouchEnd = (event: TouchEvent) => {
+    if (!changedTouchesIncludeActiveComparisonTouch(event.changedTouches)) return;
+
+    const touch = getActiveComparisonTouch(event.changedTouches);
+    if (touch) {
+      applyComparisonDragPosition(
+        touch.clientX,
+        touch.clientY,
+        dragRectRef.current,
+      );
+    }
+
+    activeComparisonTouchRef.current = null;
+    cancelScheduledComparisonDrag();
+    dragRectRef.current = null;
+    setIsHandleDragging(false);
+    setHandleY(beautyHandleRestY);
+    event.preventDefault();
+  };
+
+  useEffect(() => {
+    const comparisonWindow = comparisonWindowRef.current;
+    if (!comparisonWindow) return;
+
+    const options = { passive: false };
+    comparisonWindow.addEventListener("touchstart", handleComparisonTouchStart, options);
+    comparisonWindow.addEventListener("touchmove", handleComparisonTouchMove, options);
+    comparisonWindow.addEventListener("touchend", handleComparisonTouchEnd, options);
+    comparisonWindow.addEventListener("touchcancel", handleComparisonTouchEnd, options);
+
+    return () => {
+      comparisonWindow.removeEventListener("touchstart", handleComparisonTouchStart);
+      comparisonWindow.removeEventListener("touchmove", handleComparisonTouchMove);
+      comparisonWindow.removeEventListener("touchend", handleComparisonTouchEnd);
+      comparisonWindow.removeEventListener("touchcancel", handleComparisonTouchEnd);
+    };
+  });
 
   const handleKeyDown = (event: ReactKeyboardEvent<HTMLDivElement>) => {
     if (
@@ -3055,6 +3301,7 @@ function BeautyThumb({ copy }: { copy: FeatureCardsCopy["beautyThumb"] }) {
         aria-valuemin={0}
         aria-valuenow={Math.round(split)}
         className="absolute z-10 cursor-ew-resize touch-none overflow-hidden border border-white/10 bg-black shadow-[0_18px_48px_rgba(0,0,0,0.36)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/70"
+        data-screen-cam-drag-surface
         onKeyDown={handleKeyDown}
         onPointerCancel={handlePointerEnd}
         onPointerDown={handlePointerDown}

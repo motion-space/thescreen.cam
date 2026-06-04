@@ -5,15 +5,21 @@ import tailwindcss from "@tailwindcss/vite";
 
 import cloudflare from "@astrojs/cloudflare";
 
+const isDevServer = process.argv.includes("dev");
+
 export default defineConfig({
   site: "https://thescreen.cam",
   output: "static",
   devToolbar: {
     enabled: false
   },
+  server: {
+    host: true
+  },
   integrations: [sitemap(), react()],
 
   vite: {
+    ...(isDevServer ? { optimizeDeps: { force: true } } : {}),
     plugins: [tailwindcss()],
     build: {
       cssCodeSplit: false,

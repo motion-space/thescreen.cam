@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useCallback, useEffect, useRef } from "react";
-import type { PointerEvent as ReactPointerEvent, TouchEvent as ReactTouchEvent } from "react";
+import type { PointerEvent as ReactPointerEvent } from "react";
 import type { ZoomFeatureCopy } from "../lib/translations";
 
 type ZoomFeatureSectionProps = {
@@ -632,7 +632,7 @@ function CanvasZoomDemo({ copy }: { copy: ZoomFeatureCopy }) {
     return false;
   }, []);
 
-  const handleTimelineTouchStart = useCallback((event: ReactTouchEvent<HTMLDivElement>) => {
+  const handleTimelineTouchStart = useCallback((event: TouchEvent) => {
     const touch = event.touches.item(0);
     if (!touch) return;
 
@@ -641,7 +641,7 @@ function CanvasZoomDemo({ copy }: { copy: ZoomFeatureCopy }) {
     event.preventDefault();
   }, [seekTimelineToClientX]);
 
-  const handleTimelineTouchMove = useCallback((event: ReactTouchEvent<HTMLDivElement>) => {
+  const handleTimelineTouchMove = useCallback((event: TouchEvent) => {
     const touch = getActiveTimelineTouch(event.touches);
     if (!touch) return;
 
@@ -649,7 +649,7 @@ function CanvasZoomDemo({ copy }: { copy: ZoomFeatureCopy }) {
     event.preventDefault();
   }, [getActiveTimelineTouch, seekTimelineToClientX]);
 
-  const handleTimelineTouchEnd = useCallback((event: ReactTouchEvent<HTMLDivElement>) => {
+  const handleTimelineTouchEnd = useCallback((event: TouchEvent) => {
     if (!changedTouchesIncludeActiveTimelineTouch(event.changedTouches)) return;
 
     activeTimelineTouchRef.current = null;
@@ -658,6 +658,24 @@ function CanvasZoomDemo({ copy }: { copy: ZoomFeatureCopy }) {
     }
     event.preventDefault();
   }, [changedTouchesIncludeActiveTimelineTouch, resumeTimelinePlayback]);
+
+  useEffect(() => {
+    const timeline = timelineContainerRef.current;
+    if (!timeline) return;
+
+    const options = { passive: false };
+    timeline.addEventListener("touchstart", handleTimelineTouchStart, options);
+    timeline.addEventListener("touchmove", handleTimelineTouchMove, options);
+    timeline.addEventListener("touchend", handleTimelineTouchEnd, options);
+    timeline.addEventListener("touchcancel", handleTimelineTouchEnd, options);
+
+    return () => {
+      timeline.removeEventListener("touchstart", handleTimelineTouchStart);
+      timeline.removeEventListener("touchmove", handleTimelineTouchMove);
+      timeline.removeEventListener("touchend", handleTimelineTouchEnd);
+      timeline.removeEventListener("touchcancel", handleTimelineTouchEnd);
+    };
+  }, [handleTimelineTouchEnd, handleTimelineTouchMove, handleTimelineTouchStart]);
 
   useEffect(() => {
     const start = () => {
@@ -726,15 +744,12 @@ function CanvasZoomDemo({ copy }: { copy: ZoomFeatureCopy }) {
         <div
           ref={timelineContainerRef}
           className="relative h-[217px] cursor-pointer select-none touch-none border-t border-white/[0.07] bg-[#101010]/95 [box-shadow:inset_0_1px_0_rgba(255,255,255,0.04)]"
+          data-screen-cam-drag-surface
           onPointerMove={handleTimelinePointerMove}
           onPointerLeave={handleTimelinePointerLeave}
           onPointerDown={handleTimelinePointerDown}
           onPointerUp={handleTimelinePointerUp}
           onPointerCancel={handleTimelinePointerCancel}
-          onTouchStart={handleTimelineTouchStart}
-          onTouchMove={handleTimelineTouchMove}
-          onTouchEnd={handleTimelineTouchEnd}
-          onTouchCancel={handleTimelineTouchEnd}
           style={{ touchAction: "none" }}
           aria-label={copy.timelineAria}
         >

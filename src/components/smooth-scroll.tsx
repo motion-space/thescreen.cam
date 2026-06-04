@@ -14,6 +14,7 @@ function isSafari() {
 export function SmoothScroll() {
   useEffect(() => {
     const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const coarsePointerQuery = window.matchMedia("(pointer: coarse)");
     let lenis: Lenis | null = null;
     let startFrameId = 0;
 
@@ -31,7 +32,7 @@ export function SmoothScroll() {
         return;
       }
 
-      if (isSafari()) {
+      if (isSafari() || coarsePointerQuery.matches) {
         setNativeSmoothScroll(true);
         return;
       }
@@ -42,16 +43,18 @@ export function SmoothScroll() {
         autoRaf: true,
         duration: 0.58,
         easing: (time) => 1 - Math.pow(1 - time, 4),
+        prevent: (node) => node.closest("[data-screen-cam-drag-surface]") !== null,
         smoothWheel: true,
         syncTouch: false,
         wheelMultiplier: 0.9,
       });
     };
 
-    const handleMotionPreferenceChange = () => {
+    const refreshScrollMode = () => {
+      setNativeSmoothScroll(false);
+      destroyLenis();
+
       if (reducedMotionQuery.matches) {
-        setNativeSmoothScroll(false);
-        destroyLenis();
         return;
       }
 
@@ -59,11 +62,13 @@ export function SmoothScroll() {
     };
 
     startFrameId = window.requestAnimationFrame(startLenis);
-    reducedMotionQuery.addEventListener("change", handleMotionPreferenceChange);
+    reducedMotionQuery.addEventListener("change", refreshScrollMode);
+    coarsePointerQuery.addEventListener("change", refreshScrollMode);
 
     return () => {
       window.cancelAnimationFrame(startFrameId);
-      reducedMotionQuery.removeEventListener("change", handleMotionPreferenceChange);
+      reducedMotionQuery.removeEventListener("change", refreshScrollMode);
+      coarsePointerQuery.removeEventListener("change", refreshScrollMode);
       setNativeSmoothScroll(false);
       destroyLenis();
     };

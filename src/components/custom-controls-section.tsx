@@ -2,7 +2,7 @@
 
 import { motion, PanInfo, AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import type { PointerEvent as ReactPointerEvent, TouchEvent as ReactTouchEvent } from "react";
+import type { PointerEvent as ReactPointerEvent } from "react";
 import { Hand, Pause, Play } from "lucide-react";
 import { Slider } from "./slider";
 import type { CustomControlsCopy } from "../lib/translations";
@@ -109,6 +109,7 @@ function InteractiveTimeline({ copy }: { copy: CustomControlsCopy }) {
   const [playbackAnchorData, setPlaybackAnchorData] = useState<ZoomFrame | null>(null);
   const activePreviewPointerRef = useRef<number | null>(null);
   const activePreviewTouchRef = useRef<number | null>(null);
+  const activeTimelineTouchRef = useRef<number | null>(null);
   const isPreviewDraggingRef = useRef(false);
   const lastPointerPos = useRef<{ x: number; y: number } | null>(null);
   const selectedAnchorRef = useRef<string | null>(selectedAnchor);
@@ -402,7 +403,7 @@ function InteractiveTimeline({ copy }: { copy: CustomControlsCopy }) {
     return false;
   };
 
-  const handlePreviewTouchStart = (e: ReactTouchEvent<HTMLDivElement>) => {
+  const handlePreviewTouchStart = (e: TouchEvent) => {
     const touch = e.touches.item(0);
     if (!touch || !selectedAnchorRef.current || !previewRef.current) return;
 
@@ -413,7 +414,7 @@ function InteractiveTimeline({ copy }: { copy: CustomControlsCopy }) {
     e.preventDefault();
   };
 
-  const handlePreviewTouchMove = (e: ReactTouchEvent<HTMLDivElement>) => {
+  const handlePreviewTouchMove = (e: TouchEvent) => {
     const touch = getActivePreviewTouch(e.touches);
     if (!touch || !isPreviewDraggingRef.current) return;
 
@@ -421,7 +422,7 @@ function InteractiveTimeline({ copy }: { copy: CustomControlsCopy }) {
     e.preventDefault();
   };
 
-  const handlePreviewTouchEnd = (e: ReactTouchEvent<HTMLDivElement>) => {
+  const handlePreviewTouchEnd = (e: TouchEvent) => {
     if (!isPreviewDraggingRef.current && activePreviewTouchRef.current === null) return;
     if (!changedTouchesIncludeActiveTouch(e.changedTouches)) return;
 
@@ -431,6 +432,79 @@ function InteractiveTimeline({ copy }: { copy: CustomControlsCopy }) {
     }
     e.preventDefault();
   };
+
+  const getActiveTimelineTouch = (touches: TouchList) => {
+    const activeTouchId = activeTimelineTouchRef.current;
+    if (activeTouchId === null) return touches.item(0);
+
+    for (let index = 0; index < touches.length; index += 1) {
+      const touch = touches.item(index);
+      if (touch?.identifier === activeTouchId) return touch;
+    }
+
+    return null;
+  };
+
+  const changedTouchesIncludeActiveTimelineTouch = (touches: TouchList) => {
+    const activeTouchId = activeTimelineTouchRef.current;
+    if (activeTouchId === null) return touches.length > 0;
+
+    for (let index = 0; index < touches.length; index += 1) {
+      if (touches.item(index)?.identifier === activeTouchId) return true;
+    }
+
+    return false;
+  };
+
+  const handleTimelineTouchStart = (e: TouchEvent) => {
+    const touch = e.touches.item(0);
+    if (!touch) return;
+
+    activeTimelineTouchRef.current = touch.identifier;
+    seekTimelineAtClientX(touch.clientX);
+    e.preventDefault();
+  };
+
+  const handleTimelineTouchMove = (e: TouchEvent) => {
+    const touch = getActiveTimelineTouch(e.touches);
+    if (!touch) return;
+
+    seekTimelineAtClientX(touch.clientX);
+    e.preventDefault();
+  };
+
+  const handleTimelineTouchEnd = (e: TouchEvent) => {
+    if (!changedTouchesIncludeActiveTimelineTouch(e.changedTouches)) return;
+
+    activeTimelineTouchRef.current = null;
+    e.preventDefault();
+  };
+
+  useEffect(() => {
+    const preview = previewRef.current;
+    const timeline = timelineRef.current;
+    const options = { passive: false };
+
+    preview?.addEventListener("touchstart", handlePreviewTouchStart, options);
+    preview?.addEventListener("touchmove", handlePreviewTouchMove, options);
+    preview?.addEventListener("touchend", handlePreviewTouchEnd, options);
+    preview?.addEventListener("touchcancel", handlePreviewTouchEnd, options);
+    timeline?.addEventListener("touchstart", handleTimelineTouchStart, options);
+    timeline?.addEventListener("touchmove", handleTimelineTouchMove, options);
+    timeline?.addEventListener("touchend", handleTimelineTouchEnd, options);
+    timeline?.addEventListener("touchcancel", handleTimelineTouchEnd, options);
+
+    return () => {
+      preview?.removeEventListener("touchstart", handlePreviewTouchStart);
+      preview?.removeEventListener("touchmove", handlePreviewTouchMove);
+      preview?.removeEventListener("touchend", handlePreviewTouchEnd);
+      preview?.removeEventListener("touchcancel", handlePreviewTouchEnd);
+      timeline?.removeEventListener("touchstart", handleTimelineTouchStart);
+      timeline?.removeEventListener("touchmove", handleTimelineTouchMove);
+      timeline?.removeEventListener("touchend", handleTimelineTouchEnd);
+      timeline?.removeEventListener("touchcancel", handleTimelineTouchEnd);
+    };
+  }, []);
 
   const selectedAnchorData = anchors.find(a => a.id === selectedAnchor);
   const controlsAnchorData = selectedAnchorData ?? BASELINE_PREVIEW_FRAME;
@@ -445,15 +519,12 @@ function InteractiveTimeline({ copy }: { copy: CustomControlsCopy }) {
       <div
         ref={previewRef}
         className="relative aspect-video rounded-xl bg-card border border-border/50 overflow-hidden select-none touch-none"
+        data-screen-cam-drag-surface
         onPointerDown={handlePreviewPointerDown}
         onPointerMove={handlePreviewPointerMove}
         onPointerUp={handlePreviewPointerUp}
         onPointerCancel={handlePreviewPointerCancel}
         onPointerLeave={handlePreviewPointerLeave}
-        onTouchStart={handlePreviewTouchStart}
-        onTouchMove={handlePreviewTouchMove}
-        onTouchEnd={handlePreviewTouchEnd}
-        onTouchCancel={handlePreviewTouchEnd}
         style={{
           cursor: selectedAnchor ? (isDraggingCenter ? 'grabbing' : 'grab') : 'default',
           touchAction: selectedAnchor ? "none" : "auto",
@@ -511,6 +582,7 @@ function InteractiveTimeline({ copy }: { copy: CustomControlsCopy }) {
         <div
           ref={timelineRef}
           className="absolute inset-y-0 left-12 right-0 cursor-pointer touch-none"
+          data-screen-cam-drag-surface
           onPointerDown={handleTimelinePointerDown}
         >
           {/* Time markers */}

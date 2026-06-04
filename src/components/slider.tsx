@@ -107,6 +107,7 @@ export function Slider({
   return (
     <div
       className={`trace-slider ${className}`}
+      data-screen-cam-drag-surface
       style={style}
       onPointerEnter={updateHoverTick}
       onPointerMove={updateHoverTick}

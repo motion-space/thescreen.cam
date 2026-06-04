@@ -67,7 +67,7 @@ export function Hero({
         </div>
 
         {/* Bottom section */}
-        <div className="absolute bottom-8 md:bottom-12 left-6 md:left-12 right-6 md:right-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
+        <div className="hero-ssr-visible absolute bottom-8 md:bottom-12 left-6 md:left-12 right-6 md:right-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
           {/* Left side info */}
           <div className="flex flex-col gap-6 max-w-4xl">
             <p className="max-w-[56rem] text-sm leading-relaxed text-muted-foreground">
