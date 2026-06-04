@@ -8,7 +8,13 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { appStoreUrl, localeLabels, localizedPath, supportedLocales } from "../lib/i18n";
+import {
+  appStoreUrl,
+  localeLabels,
+  localePreferenceCookieName,
+  localizedPath,
+  supportedLocales,
+} from "../lib/i18n";
 import type { Locale } from "../lib/i18n";
 import type { HeaderCopy } from "../lib/translations";
 import { MagneticButton } from "./magnetic-button";
@@ -129,6 +135,10 @@ export function SiteHeader({
     } catch {
       // Continue navigation when storage is unavailable.
     }
+
+    const maxAge = 60 * 60 * 24 * 365;
+    const secure = window.location.protocol === "https:" ? "; Secure" : "";
+    document.cookie = `${localePreferenceCookieName}=${encodeURIComponent(nextLocale)}; Max-Age=${maxAge}; Path=/; SameSite=Lax${secure}`;
   };
 
   return (
@@ -140,9 +150,6 @@ export function SiteHeader({
       </div>
 
       <motion.nav
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
         className="fixed left-0 right-0 top-0 z-[90]"
         aria-label={copy.primaryNavigationAria}
       >
@@ -163,14 +170,11 @@ export function SiteHeader({
           </motion.a>
 
           <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 text-sm text-muted-foreground md:flex">
-            {navLinks.map((item, i) => (
+            {navLinks.map((item) => (
               <motion.a
                 key={item.label}
                 href={item.href}
                 className="relative transition-colors duration-300 hover:text-foreground"
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 + i * 0.1 }}
                 whileHover="hover"
               >
                 {item.label}

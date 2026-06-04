@@ -2570,6 +2570,12 @@ const shortcutPressedInitialState: ShortcutPressedState = {
   shift: false,
 };
 
+const shortcutKeyAriaLabels: Record<keyof ShortcutPressedState, string> = {
+  cmd: "Command key",
+  digit3: "3 key",
+  shift: "Shift key",
+};
+
 const shortcutKeyColorSchemes: ShortcutKeyColorScheme[] = [
   {
     innerBackground: "rgba(255, 255, 255, 0.09)",
@@ -2737,6 +2743,7 @@ function KeyCap({
 
   return (
     <button
+      aria-label={shortcutKey ? shortcutKeyAriaLabels[shortcutKey] : undefined}
       aria-pressed={pressed}
       data-shortcut-key={shortcutKey}
       onPointerCancel={handlePointerEnd}

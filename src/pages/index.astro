@@ -1,6 +1,8 @@
 ---
 import HomePage from "../components/home-page.astro";
 import { defaultLocale } from "../lib/i18n";
+
+export const prerender = false;
 ---
 
-<HomePage locale={defaultLocale} autoLocaleRedirect />
+<HomePage locale={defaultLocale} />

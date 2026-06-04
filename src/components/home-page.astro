@@ -15,11 +15,10 @@ import { SmoothScroll } from "./smooth-scroll";
 import { ZoomFeatureSection } from "./zoom-feature-section";
 
 interface Props {
-  autoLocaleRedirect?: boolean;
   locale: Locale;
 }
 
-const { autoLocaleRedirect = false, locale } = Astro.props;
+const { locale } = Astro.props;
 const t = getTranslation(locale);
 const meta = t.meta.home;
 const structuredData = {
@@ -44,42 +43,6 @@ const structuredData = {
 <!doctype html>
 <html lang={locale} class="dark">
   <head>
-    {autoLocaleRedirect && (
-      <script is:inline>
-        (() => {
-          const defaultLocale = "en";
-          const supportedLocales = ["en", "zh-Hans", "de", "ja", "ko"];
-          const localizedLocales = supportedLocales.filter((locale) => locale !== defaultLocale);
-          const storedLocale = (() => {
-            try {
-              return window.localStorage.getItem("screenCamLocale");
-            } catch {
-              return null;
-            }
-          })();
-
-          const normalizeLocale = (language) => {
-            const locale = language.toLowerCase();
-
-            if (locale === "zh" || locale.startsWith("zh-")) {
-              return "zh-Hans";
-            }
-
-            const baseLocale = locale.split("-")[0];
-            return supportedLocales.find((supportedLocale) => supportedLocale.toLowerCase() === baseLocale) ?? defaultLocale;
-          };
-
-          const preferredLocale =
-            storedLocale && supportedLocales.includes(storedLocale)
-              ? storedLocale
-              : normalizeLocale(window.navigator.languages?.[0] ?? window.navigator.language ?? defaultLocale);
-
-          if (localizedLocales.includes(preferredLocale)) {
-            window.location.replace(`/${preferredLocale}/`);
-          }
-        })();
-      </script>
-    )}
     <PageHead
       locale={locale}
       path="/"
@@ -90,7 +53,7 @@ const structuredData = {
     />
   </head>
   <body class="font-sans antialiased bg-background">
-    <SmoothScroll client:load />
+    <SmoothScroll client:media="(hover: hover) and (pointer: fine)" />
     <main>
       <Hero
         copy={t.home.hero}
@@ -100,13 +63,13 @@ const structuredData = {
         locale={locale}
         client:load
       />
-      <ZoomFeatureSection copy={t.home.zoom} client:visible={{ rootMargin: "600px 0px" }} />
-      <DeviceMockupsSection copy={t.home.deviceMockups} client:visible={{ rootMargin: "600px 0px" }} />
-      <CustomControlsSection copy={t.home.controls} client:visible={{ rootMargin: "600px 0px" }} />
-      <PerformanceSection copy={t.home.performance} client:visible={{ rootMargin: "600px 0px" }} />
-      <FeatureCardsSection copy={t.home.featureCards} client:visible={{ rootMargin: "600px 0px" }} />
-      <FAQSection copy={t.home.faq} client:visible={{ rootMargin: "600px 0px" }} />
-      <Footer copy={t.footer} locale={locale} client:visible={{ rootMargin: "600px 0px" }} />
+      <ZoomFeatureSection copy={t.home.zoom} client:visible={{ rootMargin: "-25% 0px" }} />
+      <DeviceMockupsSection copy={t.home.deviceMockups} client:visible={{ rootMargin: "-25% 0px" }} />
+      <CustomControlsSection copy={t.home.controls} client:visible={{ rootMargin: "-25% 0px" }} />
+      <PerformanceSection copy={t.home.performance} client:visible={{ rootMargin: "-25% 0px" }} />
+      <FeatureCardsSection copy={t.home.featureCards} client:visible={{ rootMargin: "-25% 0px" }} />
+      <FAQSection copy={t.home.faq} client:visible={{ rootMargin: "-25% 0px" }} />
+      <Footer copy={t.footer} locale={locale} client:visible={{ rootMargin: "-25% 0px" }} />
     </main>
   </body>
 </html>

@@ -4,6 +4,7 @@ import { motion, useMotionValue, useSpring } from "framer-motion";
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 
 interface MotionBlurTextProps {
+  animateEntrance?: boolean;
   children: string;
   className?: string;
   delay?: number;
@@ -26,6 +27,7 @@ const ENTRY_BLUR_TRANSITION = {
 };
 
 export function MotionBlurText({
+  animateEntrance = true,
   children,
   className = "",
   delay = 0,
@@ -42,7 +44,7 @@ export function MotionBlurText({
   const [selectedCharIndexes, setSelectedCharIndexes] = useState<Set<number>>(
     () => new Set()
   );
-  const [isAnimationSettled, setIsAnimationSettled] = useState(false);
+  const [isAnimationSettled, setIsAnimationSettled] = useState(!animateEntrance);
 
   const [charStates, setCharStates] = useState<CharState[]>(
     letters.map(() => ({ blurX: 0, blurY: 0, offsetX: 0, offsetY: 0 }))
@@ -163,6 +165,11 @@ export function MotionBlurText({
   }, []);
 
   useEffect(() => {
+    if (!animateEntrance) {
+      setIsAnimationSettled(true);
+      return;
+    }
+
     setIsAnimationSettled(false);
 
     const finalCharDelay = delay + Math.max(letters.length - 1, 0) * CHAR_STAGGER_SECONDS;
@@ -173,7 +180,7 @@ export function MotionBlurText({
     return () => {
       window.clearTimeout(settleTimeoutId);
     };
-  }, [delay, letters.length]);
+  }, [animateEntrance, delay, letters.length]);
 
   useEffect(() => {
     const updateSelectedChars = () => {
@@ -252,13 +259,17 @@ export function MotionBlurText({
             ref={(el) => {
               charRefs.current[i] = el;
             }}
-            initial={{ y: 200, rotateX: -90, opacity: 0 }}
-            animate={{ y: 0, rotateX: 0, opacity: 1 }}
-            transition={{
-              duration: 1,
-              ease: ENTRY_EASE,
-              delay: charDelay,
-            }}
+            initial={animateEntrance ? { y: 200, rotateX: -90, opacity: 0 } : false}
+            animate={animateEntrance ? { y: 0, rotateX: 0, opacity: 1 } : undefined}
+            transition={
+              animateEntrance
+                ? {
+                    duration: 1,
+                    ease: ENTRY_EASE,
+                    delay: charDelay,
+                  }
+                : undefined
+            }
             className={`relative inline-block ${!isAnimationSettled || hasHoverBlur ? "will-change-transform" : ""}`}
             style={{
               transformOrigin: "bottom",
@@ -270,20 +281,32 @@ export function MotionBlurText({
           >
             <motion.span
               className={`motion-blur-text-glyph ${!isAnimationSettled || hasHoverBlur || isSelected ? "is-motion-active" : ""} ${isSelected ? "is-selection-active" : ""}`}
-              initial={{
-                filter: "blur(18px)",
-                y: "0.26em",
-                scaleY: 1.2,
-              }}
-              animate={{
-                filter: ["blur(18px)", "blur(9px)", "blur(0px)"],
-                y: ["0.26em", "0.11em", "0em"],
-                scaleY: [1.2, 1.1, 1],
-              }}
-              transition={{
-                ...ENTRY_BLUR_TRANSITION,
-                delay: charDelay,
-              }}
+              initial={
+                animateEntrance
+                  ? {
+                      filter: "blur(18px)",
+                      y: "0.26em",
+                      scaleY: 1.2,
+                    }
+                  : false
+              }
+              animate={
+                animateEntrance
+                  ? {
+                      filter: ["blur(18px)", "blur(9px)", "blur(0px)"],
+                      y: ["0.26em", "0.11em", "0em"],
+                      scaleY: [1.2, 1.1, 1],
+                    }
+                  : undefined
+              }
+              transition={
+                animateEntrance
+                  ? {
+                      ...ENTRY_BLUR_TRANSITION,
+                      delay: charDelay,
+                    }
+                  : undefined
+              }
             >
               {displayLetter}
             </motion.span>
