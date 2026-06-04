@@ -23,6 +23,7 @@ const MOCK_PLAYBACK_DURATION_MS = 4200;
 const PLAYBACK_FRAME_INTERVAL_MS = 1000 / 30;
 const TIMELINE_TRACK_INSET_PX = 16;
 const PLAYHEAD_LINE_WIDTH_PX = 2;
+const TIMELINE_ANCHOR_SELECTOR = "[data-screen-cam-timeline-anchor]";
 const BASELINE_PREVIEW_FRAME: ZoomFrame = {
   id: "playback",
   position: 0,
@@ -457,6 +458,13 @@ function InteractiveTimeline({ copy }: { copy: CustomControlsCopy }) {
   };
 
   const handleTimelineTouchStart = (e: TouchEvent) => {
+    if (
+      e.target instanceof Element &&
+      e.target.closest(TIMELINE_ANCHOR_SELECTOR)
+    ) {
+      return;
+    }
+
     const touch = e.touches.item(0);
     if (!touch) return;
 
@@ -466,6 +474,8 @@ function InteractiveTimeline({ copy }: { copy: CustomControlsCopy }) {
   };
 
   const handleTimelineTouchMove = (e: TouchEvent) => {
+    if (activeTimelineTouchRef.current === null) return;
+
     const touch = getActiveTimelineTouch(e.touches);
     if (!touch) return;
 
@@ -474,6 +484,7 @@ function InteractiveTimeline({ copy }: { copy: CustomControlsCopy }) {
   };
 
   const handleTimelineTouchEnd = (e: TouchEvent) => {
+    if (activeTimelineTouchRef.current === null) return;
     if (!changedTouchesIncludeActiveTimelineTouch(e.changedTouches)) return;
 
     activeTimelineTouchRef.current = null;
@@ -605,6 +616,7 @@ function InteractiveTimeline({ copy }: { copy: CustomControlsCopy }) {
                   className={`absolute top-0 bottom-0 w-1 cursor-ew-resize touch-none group ${
                     selectedAnchor === anchor.id ? "z-10" : "z-0"
                   }`}
+                  data-screen-cam-timeline-anchor
                   style={{ left: `${clampPercent(anchor.position)}%` }}
                   drag="x"
                   dragMomentum={false}
