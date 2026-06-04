@@ -1,0 +1,47 @@
+---
+import "../styles/global.css";
+import type { Locale } from "../lib/i18n";
+import { getTranslation } from "../lib/translations";
+import { Footer } from "./footer";
+import { MotionBlurMaskTool } from "./motion-blur-mask-tool";
+import PageHead from "./page-head.astro";
+import { SiteHeader } from "./site-header";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getTranslation(locale);
+const meta = t.meta.motionBlurMask;
+const path = "/motion-blur-mask";
+---
+
+<!doctype html>
+<html lang={locale} class="dark">
+  <head>
+    <PageHead
+      locale={locale}
+      path={path}
+      title={meta.title}
+      description={meta.description}
+      robots="index, follow, max-image-preview:large"
+    />
+  </head>
+  <body class="font-sans antialiased bg-background text-foreground">
+    <a class="skip-link" href="#main">{t.common.skipToContent}</a>
+    <SiteHeader
+      copy={t.header}
+      currentPath={path}
+      languageLabel={t.footer.language}
+      locale={locale}
+      client:load
+    />
+
+    <main id="main">
+      <MotionBlurMaskTool copy={t.motionBlurTool} client:load />
+    </main>
+
+    <Footer copy={t.footer} locale={locale} showProductLinks={false} client:load />
+  </body>
+</html>

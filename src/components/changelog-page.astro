@@ -1,83 +1,51 @@
 ---
+import "../styles/global.css";
+import type { Locale } from "../lib/i18n";
+import { defaultLocale } from "../lib/i18n";
+import { getTranslation } from "../lib/translations";
 import { Footer } from "./footer";
+import PageHead from "./page-head.astro";
 import { SiteHeader } from "./site-header";
 
-interface ChangelogLanguage {
-  code: string;
-  label: string;
-  href: string;
-}
-
 interface Props {
-  Content: any;
-  canonicalPath: string;
-  currentLang: string;
-  description: string;
-  languages: ChangelogLanguage[];
-  title: string;
+  locale: Locale;
 }
 
-const { Content, canonicalPath, currentLang, description, languages, title } = Astro.props;
-const siteUrl = "https://thescreen.cam";
+const { locale } = Astro.props;
+const t = getTranslation(locale);
+const meta = t.meta.changelog;
+const copy = t.changelog;
+const path = "/changelog";
+const changelogs = import.meta.glob("../../changelogs/*.md", { eager: true });
+const changelogModule = (
+  changelogs[`../../changelogs/${locale}.md`] ?? changelogs[`../../changelogs/${defaultLocale}.md`]
+) as { Content: any };
+const Content = changelogModule.Content;
 ---
 
 <!doctype html>
-<html lang={currentLang === "zh-Hans" ? "zh-Hans" : "en"}>
+<html lang={locale}>
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#050505" />
-    <meta name="color-scheme" content="dark" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="apple-mobile-web-app-title" content="ScreenCam" />
-    <meta name="robots" content="index, follow" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <link rel="canonical" href={`${siteUrl}${canonicalPath}`} />
-    {languages.map((language) => (
-      <link rel="alternate" hreflang={language.code} href={`${siteUrl}${language.href}`} />
-    ))}
-    <link rel="alternate" hreflang="x-default" href={`${siteUrl}/changelog`} />
-    <link rel="icon" href="/favicon.png" type="image/png" />
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="manifest" href="/site.webmanifest" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="ScreenCam" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={`${siteUrl}${canonicalPath}`} />
-    <meta property="og:image" content={`${siteUrl}/og.jpg`} />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={`${siteUrl}/og.jpg`} />
+    <PageHead locale={locale} path={path} title={meta.title} description={meta.description} />
   </head>
   <body class="font-sans antialiased bg-background text-foreground">
-    <a class="skip-link" href="#main">Skip to content</a>
-    <SiteHeader client:load />
+    <a class="skip-link" href="#main">{t.common.skipToContent}</a>
+    <SiteHeader
+      copy={t.header}
+      currentPath={path}
+      languageLabel={t.footer.language}
+      locale={locale}
+      client:load
+    />
 
     <main id="main" class="legal-page changelog-page">
       <article class="legal-document changelog-document">
         <div class="changelog-hero">
           <div>
-            <p class="eyebrow">Changelog</p>
-            <h1>ScreenCam Changelog</h1>
-            <p class="legal-updated">Product updates, fixes, and release notes.</p>
+            <p class="eyebrow">{copy.eyebrow}</p>
+            <h1>{copy.title}</h1>
+            <p class="legal-updated">{copy.intro}</p>
           </div>
-
-          {languages.length > 1 && (
-            <nav class="changelog-language-nav" aria-label="Changelog languages">
-              {languages.map((language) => (
-                <a
-                  class:list={{ active: language.code === currentLang }}
-                  href={language.href}
-                  aria-current={language.code === currentLang ? "page" : undefined}
-                >
-                  {language.label}
-                </a>
-              ))}
-            </nav>
-          )}
         </div>
 
         <div class="changelog-markdown">
@@ -86,20 +54,20 @@ const siteUrl = "https://thescreen.cam";
       </article>
     </main>
 
-    <script>
+    <script define:vars={{ linkVersionLabel: copy.linkVersionLabel }}>
       for (const heading of document.querySelectorAll(".changelog-markdown h1[id]")) {
         if (heading.querySelector("a")) continue;
 
         const link = document.createElement("a");
         link.href = `#${heading.id}`;
         link.textContent = heading.textContent;
-        link.setAttribute("aria-label", `Link to version ${heading.textContent}`);
+        link.setAttribute("aria-label", `${linkVersionLabel} ${heading.textContent}`);
 
         heading.textContent = "";
         heading.append(link);
       }
     </script>
 
-    <Footer showProductLinks={false} client:load />
+    <Footer copy={t.footer} locale={locale} showProductLinks={false} client:load />
   </body>
 </html>

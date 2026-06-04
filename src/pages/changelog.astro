@@ -1,31 +1,6 @@
 ---
-import "../styles/global.css";
 import ChangelogPage from "../components/changelog-page.astro";
-
-const changelogs = import.meta.glob("../../changelogs/*.md", { eager: true });
-const defaultLang = "en";
-
-const languages = Object.keys(changelogs)
-  .map((path) => {
-    const code = path.match(/\/([^/]+)\.md$/)?.[1] ?? defaultLang;
-
-    return {
-      code,
-      label: code === "zh-Hans" ? "简体中文" : "English",
-      href: code === defaultLang ? "/changelog" : `/changelog/${code}`,
-    };
-  })
-  .sort((a, b) => (a.code === defaultLang ? -1 : b.code === defaultLang ? 1 : a.label.localeCompare(b.label)));
-
-const defaultModule = changelogs[`../../changelogs/${defaultLang}.md`] as { Content: any };
-const description = "Follow ScreenCam release notes, product improvements, bug fixes, and update history.";
+import { defaultLocale } from "../lib/i18n";
 ---
 
-<ChangelogPage
-  Content={defaultModule.Content}
-  canonicalPath="/changelog"
-  currentLang={defaultLang}
-  description={description}
-  languages={languages}
-  title="Changelog - ScreenCam"
-/>
+<ChangelogPage locale={defaultLocale} />

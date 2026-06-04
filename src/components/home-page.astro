@@ -1,0 +1,110 @@
+---
+import "../styles/global.css";
+import { appStoreUrl, siteUrl } from "../lib/i18n";
+import type { Locale } from "../lib/i18n";
+import { getTranslation } from "../lib/translations";
+import { CustomControlsSection } from "./custom-controls-section";
+import { DeviceMockupsSection } from "./device-mockups-section";
+import { FAQSection } from "./faq-section";
+import { Footer } from "./footer";
+import { Hero } from "./hero";
+import PageHead from "./page-head.astro";
+import { PerformanceSection } from "./performance-section";
+import { SmoothScroll } from "./smooth-scroll";
+import { ZoomFeatureSection } from "./zoom-feature-section";
+
+interface Props {
+  autoLocaleRedirect?: boolean;
+  locale: Locale;
+}
+
+const { autoLocaleRedirect = false, locale } = Astro.props;
+const t = getTranslation(locale);
+const meta = t.meta.home;
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: "ScreenCam",
+  applicationCategory: "MultimediaApplication",
+  operatingSystem: "macOS 15+",
+  url: siteUrl,
+  image: `${siteUrl}/og.jpg`,
+  downloadUrl: appStoreUrl,
+  description: meta.description,
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "USD",
+  },
+  featureList: t.home.structuredDataFeatureList,
+};
+---
+
+<!doctype html>
+<html lang={locale} class="dark">
+  <head>
+    {autoLocaleRedirect && (
+      <script is:inline>
+        (() => {
+          const defaultLocale = "en";
+          const supportedLocales = ["en", "zh-Hans", "de", "ja", "ko"];
+          const localizedLocales = supportedLocales.filter((locale) => locale !== defaultLocale);
+          const storedLocale = (() => {
+            try {
+              return window.localStorage.getItem("screenCamLocale");
+            } catch {
+              return null;
+            }
+          })();
+
+          const normalizeLocale = (language) => {
+            const locale = language.toLowerCase();
+
+            if (locale === "zh" || locale.startsWith("zh-")) {
+              return "zh-Hans";
+            }
+
+            const baseLocale = locale.split("-")[0];
+            return supportedLocales.find((supportedLocale) => supportedLocale.toLowerCase() === baseLocale) ?? defaultLocale;
+          };
+
+          const preferredLocale =
+            storedLocale && supportedLocales.includes(storedLocale)
+              ? storedLocale
+              : normalizeLocale(window.navigator.languages?.[0] ?? window.navigator.language ?? defaultLocale);
+
+          if (localizedLocales.includes(preferredLocale)) {
+            window.location.replace(`/${preferredLocale}/`);
+          }
+        })();
+      </script>
+    )}
+    <PageHead
+      locale={locale}
+      path="/"
+      title={meta.title}
+      description={meta.description}
+      robots="index, follow, max-image-preview:large"
+      structuredData={structuredData}
+    />
+  </head>
+  <body class="font-sans antialiased bg-background">
+    <SmoothScroll client:load />
+    <main>
+      <Hero
+        copy={t.home.hero}
+        currentPath="/"
+        headerCopy={t.header}
+        languageLabel={t.footer.language}
+        locale={locale}
+        client:load
+      />
+      <ZoomFeatureSection copy={t.home.zoom} client:load />
+      <DeviceMockupsSection copy={t.home.deviceMockups} client:visible />
+      <CustomControlsSection copy={t.home.controls} client:visible />
+      <PerformanceSection copy={t.home.performance} client:visible />
+      <FAQSection copy={t.home.faq} client:visible />
+      <Footer copy={t.footer} locale={locale} client:visible />
+    </main>
+  </body>
+</html>

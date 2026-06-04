@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import type { PointerEvent as ReactPointerEvent, TouchEvent as ReactTouchEvent } from "react";
 import { Hand, Pause, Play } from "lucide-react";
 import { Slider } from "./slider";
+import type { CustomControlsCopy } from "../lib/translations";
 
 interface ZoomAnchor {
   id: string;
@@ -30,7 +31,7 @@ const BASELINE_PREVIEW_FRAME: ZoomFrame = {
   centerY: 50,
 };
 
-export function CustomControlsSection() {
+export function CustomControlsSection({ copy }: { copy: CustomControlsCopy }) {
   return (
     <section id="controls" className="relative min-h-screen bg-background py-32 overflow-hidden">
       {/* Background accent */}
@@ -47,25 +48,20 @@ export function CustomControlsSection() {
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
             <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
-              Advanced Controls
+              {copy.eyebrow}
             </p>
             <h2 className="text-[clamp(2rem,4vw,3.5rem)] font-bold leading-[1.1] tracking-tight text-foreground mb-6">
-              Total control over
+              {copy.titleStart}
               <br />
-              <span className="text-muted-foreground">every zoom point.</span>
+              <span className="text-muted-foreground">{copy.titleMuted}</span>
             </h2>
             <p className="text-muted-foreground text-base leading-relaxed mb-8 max-w-md">
-              Manual mode gives you complete creative freedom. Add multiple anchors to a single zoom clip, each with its own scale and center point.
+              {copy.body}
             </p>
 
             {/* Feature list */}
             <div className="space-y-4">
-              {[
-                "Drag anchors to reposition on timeline",
-                "Adjust scale from 1x to 5x per anchor",
-                "Set custom focus center for each zoom",
-                "Smooth transitions between anchors",
-              ].map((feature, i) => (
+              {copy.features.map((feature, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, x: -20 }}
@@ -88,7 +84,7 @@ export function CustomControlsSection() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
           >
-            <InteractiveTimeline />
+            <InteractiveTimeline copy={copy} />
           </motion.div>
         </div>
       </div>
@@ -96,7 +92,7 @@ export function CustomControlsSection() {
   );
 }
 
-function InteractiveTimeline() {
+function InteractiveTimeline({ copy }: { copy: CustomControlsCopy }) {
   const timelineRef = useRef<HTMLDivElement>(null);
   const previewRef = useRef<HTMLDivElement>(null);
   const [anchors, setAnchors] = useState<ZoomAnchor[]>([
@@ -425,7 +421,7 @@ function InteractiveTimeline() {
                 >
                   <Hand className="w-10 h-10 text-foreground/80" />
                 </motion.div>
-                <span className="text-sm text-foreground/70 font-medium">Drag to adjust center</span>
+                <span className="text-sm text-foreground/70 font-medium">{copy.dragCenter}</span>
               </motion.div>
             </motion.div>
           )}
@@ -436,8 +432,8 @@ function InteractiveTimeline() {
       <div className="relative h-28 rounded-xl bg-card/50 border border-border/50 overflow-hidden">
         <motion.button
           type="button"
-          aria-label={isPlaying ? "Pause mock timeline playback" : "Play mock timeline playback"}
-          title={isPlaying ? "Pause" : "Play"}
+          aria-label={isPlaying ? copy.pauseAria : copy.playAria}
+          title={isPlaying ? copy.pauseTitle : copy.playTitle}
           className="absolute left-3 top-10 z-30 flex h-10 w-8 items-center justify-center text-muted-foreground transition-colors hover:text-foreground touch-none"
           onClick={handlePlaybackToggle}
           whileHover={{ scale: 1.02 }}
@@ -542,9 +538,9 @@ function InteractiveTimeline() {
         className="flex items-center gap-6 p-4 rounded-xl bg-card/50 border border-border/50"
       >
         <div className="flex-1">
-          <label className="text-xs text-muted-foreground mb-2 block">Scale</label>
+          <label className="text-xs text-muted-foreground mb-2 block">{copy.scaleLabel}</label>
           <Slider
-            ariaLabel="Scale"
+            ariaLabel={copy.scaleAria}
             disabled={!hasSelectedAnchor}
             min={1}
             max={5}
@@ -565,7 +561,7 @@ function InteractiveTimeline() {
         <div className="text-right">
           <div className="text-2xl font-mono text-foreground">{controlsAnchorData.scale.toFixed(1)}x</div>
           <div className="text-xs text-muted-foreground">
-            Center: {Math.round(controlsAnchorData.centerX)}%, {Math.round(controlsAnchorData.centerY)}%
+            {copy.centerLabel}: {Math.round(controlsAnchorData.centerX)}%, {Math.round(controlsAnchorData.centerY)}%
           </div>
         </div>
       </motion.div>

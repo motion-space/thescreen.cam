@@ -2,34 +2,47 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, Mail } from "lucide-react";
+import { appStoreUrl, localizedPath } from "../lib/i18n";
+import type { Locale } from "../lib/i18n";
+import type { FooterCopy } from "../lib/translations";
 
-const appStoreUrl = "https://apps.apple.com/cn/app/screencam-screen-studio/id6770877568?l=en-GB&mt=12";
 const supportChannels = [
   { label: "X", href: "https://x.com/cats_juice", icon: "x" },
   { label: "Discord", href: "https://discord.gg/23hVAxmj53", icon: "discord" },
   { label: "Email", href: "mailto:cats_juice@outlook.com", icon: "email" },
 ];
 
-const footerLinks = {
-  product: [
-    { label: "Zoom", href: "#zoom" },
-    { label: "Export", href: "#export" },
-    { label: "Controls", href: "#controls" },
-    { label: "FAQ", href: "#faq" },
-  ],
-  resources: [
-    { label: "Motion Blur Mask", href: "/motion-blur-mask" },
-    { label: "App Store", href: appStoreUrl, external: true },
-    { label: "Changelog", href: "/changelog" },
-    { label: "Support", href: "/support" },
-  ],
-  legal: [
-    { label: "Privacy", href: "/privacy" },
-    { label: "Terms", href: "/terms" },
-  ],
+type FooterProps = {
+  copy: FooterCopy;
+  locale: Locale;
+  showProductLinks?: boolean;
 };
 
-export function Footer({ showProductLinks = true }: { showProductLinks?: boolean }) {
+export function Footer({
+  copy,
+  locale,
+  showProductLinks = true,
+}: FooterProps) {
+  const homePath = localizedPath(locale, "/");
+  const footerLinks = {
+    product: [
+      { label: copy.productLinks.zoom, href: `${homePath}#zoom` },
+      { label: copy.productLinks.export, href: `${homePath}#export` },
+      { label: copy.productLinks.controls, href: `${homePath}#controls` },
+      { label: copy.productLinks.faq, href: `${homePath}#faq` },
+    ],
+    resources: [
+      { label: copy.resourceLinks.motionBlurMask, href: localizedPath(locale, "/motion-blur-mask") },
+      { label: copy.resourceLinks.appStore, href: appStoreUrl, external: true },
+      { label: copy.resourceLinks.changelog, href: localizedPath(locale, "/changelog") },
+      { label: copy.resourceLinks.support, href: localizedPath(locale, "/support") },
+    ],
+    legal: [
+      { label: copy.legalLinks.privacy, href: localizedPath(locale, "/privacy") },
+      { label: copy.legalLinks.terms, href: localizedPath(locale, "/terms") },
+    ],
+  };
+
   return (
     <footer className="relative bg-background border-t border-border/50">
       {/* CTA Section */}
@@ -44,10 +57,10 @@ export function Footer({ showProductLinks = true }: { showProductLinks?: boolean
           >
             <div>
               <h2 className="text-[clamp(1.5rem,3vw,2.5rem)] font-bold leading-tight tracking-tight text-foreground mb-2">
-                Ready to capture better?
+                {copy.ctaTitle}
               </h2>
               <p className="text-muted-foreground">
-                Get ScreenCam from the Mac App Store.
+                {copy.ctaText}
               </p>
             </div>
             <motion.a
@@ -61,7 +74,7 @@ export function Footer({ showProductLinks = true }: { showProductLinks?: boolean
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
               </svg>
-              <span>View on App Store</span>
+              <span>{copy.appStoreButton}</span>
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
             </motion.a>
           </motion.div>
@@ -82,15 +95,15 @@ export function Footer({ showProductLinks = true }: { showProductLinks?: boolean
               <div className="flex items-center gap-3 mb-4">
                 <img
                   src="/icon-192.png"
-                  alt="ScreenCam Logo"
+                  alt=""
                   className="w-9 h-9 rounded-lg"
                 />
                 <span className="font-semibold text-foreground">ScreenCam</span>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                Native screen recording for Mac. Fast, lightweight, powerful.
+                {copy.description}
               </p>
-              <div className="mt-5 flex items-center gap-2" aria-label="Support channels">
+              <div className="mt-5 flex items-center gap-2" aria-label={copy.supportChannelsAria}>
                 {supportChannels.map((channel) => (
                   <a
                     key={channel.label}
@@ -109,14 +122,14 @@ export function Footer({ showProductLinks = true }: { showProductLinks?: boolean
           </div>
 
           {showProductLinks && (
-            <FooterLinkGroup title="Product" links={footerLinks.product} delay={0.1} />
+            <FooterLinkGroup title={copy.groups.product} links={footerLinks.product} delay={0.1} />
           )}
 
           {/* Resources Links */}
-          <FooterLinkGroup title="Resources" links={footerLinks.resources} delay={0.15} />
+          <FooterLinkGroup title={copy.groups.resources} links={footerLinks.resources} delay={0.15} />
 
           {/* Legal Links */}
-          <FooterLinkGroup title="Legal" links={footerLinks.legal} delay={0.2} />
+          <FooterLinkGroup title={copy.groups.legal} links={footerLinks.legal} delay={0.2} />
 
         </div>
       </div>
@@ -125,13 +138,11 @@ export function Footer({ showProductLinks = true }: { showProductLinks?: boolean
       <div className="border-t border-border/50">
         <div className="max-w-7xl mx-auto px-6 md:px-12 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-            <p>&copy; {new Date().getFullYear()} ScreenCam. All rights reserved.</p>
-            <div className="flex items-center gap-6">
-              <span className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                All systems operational
-              </span>
-            </div>
+            <p>&copy; {new Date().getFullYear()} ScreenCam. {copy.copyright}</p>
+            <span className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+              {copy.systemStatus}
+            </span>
           </div>
         </div>
       </div>

@@ -1,0 +1,10 @@
+---
+import ChangelogPage from "../../components/changelog-page.astro";
+import { getLocalizedStaticPaths } from "../../lib/i18n";
+
+export const getStaticPaths = getLocalizedStaticPaths;
+
+const { locale } = Astro.props;
+---
+
+<ChangelogPage locale={locale} />

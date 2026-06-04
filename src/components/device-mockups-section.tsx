@@ -2,8 +2,9 @@
 
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import { useRef } from "react";
+import type { DeviceMockupsCopy } from "../lib/translations";
 
-export function DeviceMockupsSection() {
+export function DeviceMockupsSection({ copy }: { copy: DeviceMockupsCopy }) {
   const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -47,13 +48,13 @@ export function DeviceMockupsSection() {
           className="text-center mb-16 md:mb-24"
         >
           <p className="text-accent text-sm tracking-widest uppercase mb-4">
-            Export Options
+            {copy.eyebrow}
           </p>
           <h2 className="text-[clamp(2rem,5vw,4rem)] font-bold leading-[1.1] tracking-tight text-foreground max-w-3xl mx-auto text-balance">
-            Beautiful on every screen.
+            {copy.title}
           </h2>
           <p className="text-muted-foreground text-lg mt-6 max-w-xl mx-auto">
-            Export with stunning device frames. iPhone, Mac, Studio Display — your content, perfectly presented.
+            {copy.description}
           </p>
         </motion.div>
 
@@ -73,7 +74,7 @@ export function DeviceMockupsSection() {
               <div className="relative">
                 <img
                   src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/iPhone%2017%20Pro%20Max-kj34LciT8o3bTr44ashNVpOXqE7MwD.webp"
-                  alt="iPhone 17 Pro Max"
+                  alt={copy.imageAlt.iPhone}
                   loading="lazy"
                   decoding="async"
                   className="w-[55px] md:w-[76px] lg:w-[92px] h-auto object-contain"
@@ -105,7 +106,7 @@ export function DeviceMockupsSection() {
               <div className="relative">
                 <img
                   src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Studio%20Display-6aWG7MxpqgCdzYGGF9nJRypUmyN1i4.webp"
-                  alt="ScreenCam running on Studio Display with MacBook"
+                  alt={copy.imageAlt.studioDisplay}
                   loading="lazy"
                   decoding="async"
                   className="w-[360px] md:w-[560px] lg:w-[720px] h-auto object-contain"
@@ -137,7 +138,7 @@ export function DeviceMockupsSection() {
               <div className="relative">
                 <img
                   src="/1447.webp"
-                  alt="ScreenCam app running on MacBook Pro"
+                  alt={copy.imageAlt.macBook}
                   loading="lazy"
                   decoding="async"
                   className="device-mockup-macbook h-auto object-contain"
@@ -168,11 +169,7 @@ export function DeviceMockupsSection() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
           className="mt-0 flex flex-wrap items-center justify-center gap-3 md:gap-4 text-sm"
         >
-          {[
-            "Original Resolution",
-            "Live Photo",
-            "MP4 / MOV",
-          ].map((format) => (
+          {copy.formats.map((format) => (
             <motion.span
               key={format}
               whileHover={{ scale: 1.05, y: -2 }}

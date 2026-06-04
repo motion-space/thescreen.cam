@@ -1,0 +1,10 @@
+---
+import MotionBlurMaskPage from "../../components/motion-blur-mask-page.astro";
+import { getLocalizedStaticPaths } from "../../lib/i18n";
+
+export const getStaticPaths = getLocalizedStaticPaths;
+
+const { locale } = Astro.props;
+---
+
+<MotionBlurMaskPage locale={locale} />

@@ -1,0 +1,63 @@
+---
+import { defaultLocale, localizedPath, siteUrl, supportedLocales } from "../lib/i18n";
+import type { Locale } from "../lib/i18n";
+
+interface Props {
+  description: string;
+  locale: Locale;
+  ogImageAlt?: string;
+  path: string;
+  robots?: string;
+  structuredData?: Record<string, unknown>;
+  title: string;
+}
+
+const {
+  description,
+  locale,
+  ogImageAlt = "ScreenCam dark landing page with native recorder controls",
+  path,
+  robots = "index, follow",
+  structuredData,
+  title,
+} = Astro.props;
+const canonicalPath = localizedPath(locale, path);
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#050505" />
+<meta name="color-scheme" content="dark" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="apple-mobile-web-app-title" content="ScreenCam" />
+<meta name="robots" content={robots} />
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={`${siteUrl}${canonicalPath}`} />
+{supportedLocales.map((alternateLocale) => (
+  <link
+    rel="alternate"
+    hreflang={alternateLocale}
+    href={`${siteUrl}${localizedPath(alternateLocale, path)}`}
+  />
+))}
+<link rel="alternate" hreflang="x-default" href={`${siteUrl}${localizedPath(defaultLocale, path)}`} />
+<link rel="icon" href="/favicon.png" type="image/png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="ScreenCam" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={`${siteUrl}${canonicalPath}`} />
+<meta property="og:image" content={`${siteUrl}/og.jpg`} />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={ogImageAlt} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={`${siteUrl}/og.jpg`} />
+<meta name="twitter:image:alt" content={ogImageAlt} />
+{structuredData && <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />}

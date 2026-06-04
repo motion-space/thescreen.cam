@@ -3,12 +3,17 @@
 import { motion } from "framer-motion";
 import { useCallback, useEffect, useRef } from "react";
 import type { PointerEvent as ReactPointerEvent, TouchEvent as ReactTouchEvent } from "react";
+import type { ZoomFeatureCopy } from "../lib/translations";
 
-export function ZoomFeatureSection() {
+type ZoomFeatureSectionProps = {
+  copy: ZoomFeatureCopy;
+};
+
+export function ZoomFeatureSection({ copy }: ZoomFeatureSectionProps) {
   return (
     <section id="zoom" className="relative min-h-screen bg-background py-32 overflow-hidden">
       <div className="relative max-w-7xl mx-auto px-6 md:px-12">
-        <CanvasZoomDemo />
+        <CanvasZoomDemo copy={copy} />
 
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -17,20 +22,7 @@ export function ZoomFeatureSection() {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
           className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8"
         >
-          {[
-            {
-              title: "Dynamic Zoom",
-              description: "Camera movement follows the same spring timing used by ScreenCam exports.",
-            },
-            {
-              title: "Timeline Preview",
-              description: "Hover the Recording or Zoom track to scrub the exact preview frame.",
-            },
-            {
-              title: "Motion Blur",
-              description: "Zoom, pan, and click states are sampled with shutter-style blur.",
-            },
-          ].map((feature, i) => (
+          {copy.features.map((feature, i) => (
             <div key={feature.title} className="group">
               <div className="flex items-start gap-4">
                 <span className="text-muted-foreground/40 text-sm font-mono">0{i + 1}</span>
@@ -186,6 +178,7 @@ let timelineStaticCache: {
   width: number;
   height: number;
   dpr: number;
+  labelsKey: string;
   canvas: HTMLCanvasElement;
 } | null = null;
 
@@ -199,7 +192,7 @@ function getCursorPath() {
   return cursorPathCache;
 }
 
-function CanvasZoomDemo() {
+function CanvasZoomDemo({ copy }: { copy: ZoomFeatureCopy }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const previewRef = useRef<HTMLDivElement>(null);
   const timelineCanvasRef = useRef<HTMLCanvasElement>(null);
@@ -452,13 +445,19 @@ function CanvasZoomDemo() {
 
     drawCursorWithBlur(ctx, width, height, frame);
     drawZoomBadge(ctx, width, frame.zoom);
-    drawStatusBadge(ctx, width, height, previewTimeRef.current === null ? "Auto-playing demo" : "Timeline preview", timestamp);
-    drawTimelineCanvas(timelineCanvasRef.current, timelineContainerRef.current, playTimeMs, previewTimeRef.current);
+    drawStatusBadge(
+      ctx,
+      width,
+      height,
+      previewTimeRef.current === null ? copy.canvasLabels.autoPlayingDemo : copy.canvasLabels.timelinePreview,
+      timestamp
+    );
+    drawTimelineCanvas(timelineCanvasRef.current, timelineContainerRef.current, playTimeMs, previewTimeRef.current, copy);
 
     if (isRenderLoopRunningRef.current) {
       animationRef.current = requestCanvasFrame(render);
     }
-  }, [drawCursorWithBlur, drawTransformedFrame, generateUIElements]);
+  }, [copy, drawCursorWithBlur, drawTransformedFrame, generateUIElements]);
 
   const previewTimelineAtClientX = useCallback((clientX: number) => {
     if (previewTimeRef.current === null && playStartRef.current !== null) {
@@ -648,7 +647,7 @@ function CanvasZoomDemo() {
           onTouchEnd={handleTimelineTouchEnd}
           onTouchCancel={handleTimelineTouchEnd}
           style={{ touchAction: "none" }}
-          aria-label="Timeline preview tracks"
+          aria-label={copy.timelineAria}
         >
           <canvas
             ref={timelineCanvasRef}
@@ -727,7 +726,8 @@ function drawTimelineCanvas(
   canvas: HTMLCanvasElement | null,
   container: HTMLDivElement | null,
   playTimeMs: number,
-  previewTimeMs: number | null
+  previewTimeMs: number | null,
+  copy: ZoomFeatureCopy
 ) {
   if (!canvas || !container) return;
 
@@ -750,29 +750,38 @@ function drawTimelineCanvas(
   if (!ctx) return;
 
   const layout = timelineLayout(width, height);
-  const staticCanvas = getTimelineStaticCanvas(layout, dpr, targetWidth, targetHeight);
+  const staticCanvas = getTimelineStaticCanvas(layout, dpr, targetWidth, targetHeight, copy);
 
   ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.clearRect(0, 0, targetWidth, targetHeight);
   ctx.drawImage(staticCanvas, 0, 0);
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-  const playLabelBox = timelineMarkerLabelBox(ctx, layout, playTimeMs, "play");
+  const playLabelBox = timelineMarkerLabelBox(ctx, layout, playTimeMs, "play", copy);
   if (previewTimeMs !== null) {
-    drawTimelineMarker(ctx, layout, previewTimeMs, "preview", {
+    drawTimelineMarker(ctx, layout, previewTimeMs, "preview", copy, {
       showLabel: true,
       avoidLabelBox: playLabelBox,
     });
   }
-  drawTimelineMarker(ctx, layout, playTimeMs, "play", { showLabel: true });
+  drawTimelineMarker(ctx, layout, playTimeMs, "play", copy, { showLabel: true });
 }
 
-function getTimelineStaticCanvas(layout: TimelineLayout, dpr: number, targetWidth: number, targetHeight: number): HTMLCanvasElement {
+function getTimelineStaticCanvas(
+  layout: TimelineLayout,
+  dpr: number,
+  targetWidth: number,
+  targetHeight: number,
+  copy: ZoomFeatureCopy
+): HTMLCanvasElement {
+  const labelsKey = JSON.stringify(copy.canvasLabels);
+
   if (
     timelineStaticCache &&
     timelineStaticCache.width === targetWidth &&
     timelineStaticCache.height === targetHeight &&
-    timelineStaticCache.dpr === dpr
+    timelineStaticCache.dpr === dpr &&
+    timelineStaticCache.labelsKey === labelsKey
   ) {
     return timelineStaticCache.canvas;
   }
@@ -787,13 +796,22 @@ function getTimelineStaticCanvas(layout: TimelineLayout, dpr: number, targetWidt
   staticCtx.fillStyle = "rgba(16, 16, 16, 0.96)";
   staticCtx.fillRect(0, 0, layout.width, layout.height);
   drawTimelineRuler(staticCtx, layout);
-  drawTimelineTrack(staticCtx, layout, layout.firstTrackY, "Recording", "Recording", 0, DEMO_DURATION_MS, TRACK_PALETTES.recording);
+  drawTimelineTrack(
+    staticCtx,
+    layout,
+    layout.firstTrackY,
+    copy.canvasLabels.recordingTrack,
+    copy.canvasLabels.recordingClip,
+    0,
+    DEMO_DURATION_MS,
+    TRACK_PALETTES.recording
+  );
   drawTimelineTrack(
     staticCtx,
     layout,
     layout.secondTrackY,
-    "Zoom",
-    "Auto Zoom",
+    copy.canvasLabels.zoomTrack,
+    copy.canvasLabels.zoomClip,
     ZOOM_CLIP_START_MS,
     ZOOM_CLIP_END_MS,
     TRACK_PALETTES.zoom,
@@ -804,6 +822,7 @@ function getTimelineStaticCanvas(layout: TimelineLayout, dpr: number, targetWidt
     width: targetWidth,
     height: targetHeight,
     dpr,
+    labelsKey,
     canvas: staticCanvas,
   };
   return staticCanvas;
@@ -925,6 +944,7 @@ function drawTimelineMarker(
   layout: TimelineLayout,
   timeMs: number,
   variant: "play" | "preview",
+  copy: ZoomFeatureCopy,
   options: {
     showLabel: boolean;
     avoidLabelBox?: TimelineMarkerLabelBox | null;
@@ -934,8 +954,8 @@ function drawTimelineMarker(
   const x = layout.contentX + (clamp(timeMs, 0, DEMO_DURATION_MS) / DEMO_DURATION_MS) * layout.contentWidth;
   const lineColor = isPlay ? "#FFA617" : "rgba(198, 198, 198, 0.72)";
   const labelColor = isPlay ? "rgba(255,210,130,0.95)" : "rgba(235,240,242,0.78)";
-  const labelText = timelineMarkerLabelText(timeMs, variant);
-  const labelBox = timelineMarkerLabelBox(ctx, layout, timeMs, variant);
+  const labelText = timelineMarkerLabelText(timeMs, variant, copy);
+  const labelBox = timelineMarkerLabelBox(ctx, layout, timeMs, variant, copy);
   if (!isPlay && options.avoidLabelBox) {
     labelBox.y = timelineMarkerAvoidLabelY(layout, labelBox, options.avoidLabelBox);
   }
@@ -1144,10 +1164,11 @@ function timelineMarkerLabelBox(
   ctx: CanvasRenderingContext2D,
   layout: TimelineLayout,
   timeMs: number,
-  variant: "play" | "preview"
+  variant: "play" | "preview",
+  copy: ZoomFeatureCopy
 ): TimelineMarkerLabelBox {
   const x = layout.contentX + (clamp(timeMs, 0, DEMO_DURATION_MS) / DEMO_DURATION_MS) * layout.contentWidth;
-  const labelText = timelineMarkerLabelText(timeMs, variant);
+  const labelText = timelineMarkerLabelText(timeMs, variant, copy);
   const height = 24;
   ctx.font = "500 10px ui-monospace, SFMono-Regular, Menlo, monospace";
   const width = Math.ceil(ctx.measureText(labelText).width + 24);
@@ -1160,8 +1181,8 @@ function timelineMarkerLabelBox(
   };
 }
 
-function timelineMarkerLabelText(timeMs: number, variant: "play" | "preview"): string {
-  return `${variant === "play" ? "Play" : "Preview"} ${formatSimpleTime(timeMs)}`;
+function timelineMarkerLabelText(timeMs: number, variant: "play" | "preview", copy: ZoomFeatureCopy): string {
+  return `${variant === "play" ? copy.canvasLabels.playMarker : copy.canvasLabels.previewMarker} ${formatSimpleTime(timeMs)}`;
 }
 
 function labelBoxesOverlap(

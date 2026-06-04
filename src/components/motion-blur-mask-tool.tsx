@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Slider } from "./slider";
+import type { MotionBlurMaskToolCopy } from "../lib/translations";
 
 type BlurMode = "uniform" | "linear";
 type ResizeHandle = "n" | "ne" | "e" | "se" | "s" | "sw" | "w" | "nw";
@@ -156,7 +157,7 @@ const resizeHandles: Array<{ className: string; cursor: string; mode: ResizeHand
 
 const shaderRendererCache = new WeakMap<HTMLImageElement, MotionBlurShaderRenderer | null>();
 
-export function MotionBlurMaskTool() {
+export function MotionBlurMaskTool({ copy }: { copy: MotionBlurMaskToolCopy }) {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const previewCanvasRef = useRef<HTMLCanvasElement | null>(null);
   const workspaceRef = useRef<HTMLDivElement | null>(null);
@@ -329,7 +330,7 @@ export function MotionBlurMaskTool() {
       height,
       id,
       mode: "uniform",
-      name: `Mask ${masks.length + 1}`,
+      name: `${copy.defaultMaskName} ${masks.length + 1}`,
       strength: DEFAULT_STRENGTH,
       width,
       x: (sourceImage.width - width) / 2,
@@ -338,7 +339,7 @@ export function MotionBlurMaskTool() {
 
     setMasks((currentMasks) => [...currentMasks, nextMask]);
     setSelectedMaskId(id);
-  }, [masks.length, sourceImage]);
+  }, [copy.defaultMaskName, masks.length, sourceImage]);
 
   const resetImage = useCallback(() => {
     setSourceImage(null);
@@ -437,14 +438,13 @@ export function MotionBlurMaskTool() {
       <div className="mx-auto flex w-full max-w-[96rem] flex-col gap-5">
         <div className="flex flex-col gap-4 border-b border-border/60 pb-5 md:flex-row md:items-end md:justify-between">
           <div className="space-y-3">
-            <p className="text-xs font-medium uppercase tracking-[0.28em] text-accent">Tool</p>
+            <p className="text-xs font-medium uppercase tracking-[0.28em] text-accent">{copy.toolEyebrow}</p>
             <div>
               <h1 className="text-3xl font-semibold tracking-tight text-foreground md:text-5xl">
-                Motion Blur Mask
+                {copy.title}
               </h1>
               <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">
-                Build rectangular blur regions, tune direction and intensity, then export the
-                composited image.
+                {copy.description}
               </p>
             </div>
           </div>
@@ -457,7 +457,7 @@ export function MotionBlurMaskTool() {
               onClick={addMask}
             >
               <Plus className="h-4 w-4" />
-              <span>Mask</span>
+              <span>{copy.maskButton}</span>
             </button>
             <button
               className="inline-flex h-10 items-center gap-2 bg-foreground px-4 text-sm font-medium text-background transition-colors hover:bg-foreground/90 disabled:cursor-not-allowed disabled:bg-foreground/20 disabled:text-background/50"
@@ -466,7 +466,7 @@ export function MotionBlurMaskTool() {
               onClick={exportComposite}
             >
               <Download className="h-4 w-4" />
-              <span>Export</span>
+              <span>{copy.exportButton}</span>
             </button>
           </div>
         </div>
@@ -488,7 +488,7 @@ export function MotionBlurMaskTool() {
               >
                 <canvas
                   ref={previewCanvasRef}
-                  aria-label="Motion blur preview"
+                  aria-label={copy.previewAria}
                   className="block h-full w-full"
                 />
 
@@ -564,9 +564,9 @@ export function MotionBlurMaskTool() {
                 <div className="mb-5 flex h-14 w-14 items-center justify-center border border-border/80 bg-background">
                   <ImagePlus className="h-7 w-7 text-accent" />
                 </div>
-                <h2 className="text-xl font-semibold text-foreground">Upload an image</h2>
+                <h2 className="text-xl font-semibold text-foreground">{copy.uploadTitle}</h2>
                 <p className="mt-2 max-w-md text-sm leading-6 text-muted-foreground">
-                  Drop a local image here or choose a file to start editing.
+                  {copy.uploadDescription}
                 </p>
                 <button
                   className="mt-6 inline-flex h-10 items-center gap-2 bg-foreground px-4 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
@@ -574,7 +574,7 @@ export function MotionBlurMaskTool() {
                   onClick={() => fileInputRef.current?.click()}
                 >
                   <Upload className="h-4 w-4" />
-                  <span>Choose Image</span>
+                  <span>{copy.chooseImage}</span>
                 </button>
               </div>
             )}
@@ -593,13 +593,13 @@ export function MotionBlurMaskTool() {
               <div className="mb-4 flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2">
                   <Upload className="h-4 w-4 text-accent" />
-                  <h2 className="text-sm font-medium text-foreground">Source</h2>
+                  <h2 className="text-sm font-medium text-foreground">{copy.sourceTitle}</h2>
                 </div>
                 {sourceImage ? (
                   <button
-                    aria-label="Replace image"
+                    aria-label={copy.replaceImageAria}
                     className="inline-flex h-8 w-8 items-center justify-center border border-border/70 text-muted-foreground transition-colors hover:border-foreground/40 hover:text-foreground"
-                    title="Replace image"
+                    title={copy.replaceImageAria}
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
                   >
@@ -613,11 +613,11 @@ export function MotionBlurMaskTool() {
                   <div className="truncate text-sm text-foreground">{sourceImage.name}</div>
                   <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground">
                     <div className="border border-border/60 bg-background/70 p-3">
-                      <div className="mb-1 uppercase tracking-[0.16em]">Width</div>
+                      <div className="mb-1 uppercase tracking-[0.16em]">{copy.widthLabel}</div>
                       <div className="font-mono text-sm text-foreground">{sourceImage.width}px</div>
                     </div>
                     <div className="border border-border/60 bg-background/70 p-3">
-                      <div className="mb-1 uppercase tracking-[0.16em]">Height</div>
+                      <div className="mb-1 uppercase tracking-[0.16em]">{copy.heightLabel}</div>
                       <div className="font-mono text-sm text-foreground">{sourceImage.height}px</div>
                     </div>
                   </div>
@@ -627,7 +627,7 @@ export function MotionBlurMaskTool() {
                     onClick={resetImage}
                   >
                     <Trash2 className="h-4 w-4" />
-                    <span>Clear Image</span>
+                    <span>{copy.clearImage}</span>
                   </button>
                 </div>
               ) : (
@@ -637,7 +637,7 @@ export function MotionBlurMaskTool() {
                   onClick={() => fileInputRef.current?.click()}
                 >
                   <Upload className="h-4 w-4" />
-                  <span>Choose Image</span>
+                  <span>{copy.chooseImage}</span>
                 </button>
               )}
             </div>
@@ -646,13 +646,13 @@ export function MotionBlurMaskTool() {
               <div className="mb-4 flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2">
                   <Layers className="h-4 w-4 text-accent" />
-                  <h2 className="text-sm font-medium text-foreground">Masks</h2>
+                  <h2 className="text-sm font-medium text-foreground">{copy.masksTitle}</h2>
                 </div>
                 <button
-                  aria-label="Add mask"
+                  aria-label={copy.addMaskAria}
                   className="inline-flex h-8 w-8 items-center justify-center border border-border/70 text-muted-foreground transition-colors hover:border-foreground/40 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-40"
                   disabled={!sourceImage}
-                  title="Add mask"
+                  title={copy.addMaskAria}
                   type="button"
                   onClick={addMask}
                 >
@@ -680,7 +680,7 @@ export function MotionBlurMaskTool() {
                 </div>
               ) : (
                 <p className="text-sm leading-6 text-muted-foreground">
-                  {sourceImage ? "Add a mask to blur part of the image." : "Upload an image first."}
+                  {sourceImage ? copy.emptyMasksWithImage : copy.emptyMasksWithoutImage}
                 </p>
               )}
             </div>
@@ -689,13 +689,13 @@ export function MotionBlurMaskTool() {
               <div className="mb-4 flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2">
                   <SlidersHorizontal className="h-4 w-4 text-accent" />
-                  <h2 className="text-sm font-medium text-foreground">Blur Settings</h2>
+                  <h2 className="text-sm font-medium text-foreground">{copy.blurSettingsTitle}</h2>
                 </div>
                 <button
-                  aria-label="Delete selected mask"
+                  aria-label={copy.deleteSelectedMaskAria}
                   className="inline-flex h-8 w-8 items-center justify-center border border-border/70 text-muted-foreground transition-colors hover:border-destructive/60 hover:text-destructive disabled:cursor-not-allowed disabled:opacity-35"
                   disabled={!selectedMask}
-                  title="Delete selected mask"
+                  title={copy.deleteSelectedMaskAria}
                   type="button"
                   onClick={deleteSelectedMask}
                 >
@@ -707,7 +707,7 @@ export function MotionBlurMaskTool() {
                 <div className="space-y-5">
                   <label className="block space-y-2">
                     <span className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                      Name
+                      {copy.nameLabel}
                     </span>
                     <input
                       className="h-10 w-full border border-border/70 bg-background px-3 text-sm text-foreground outline-none transition-colors focus:border-accent"
@@ -720,14 +720,14 @@ export function MotionBlurMaskTool() {
                   <div className="space-y-3">
                     <div className="flex items-center justify-between gap-3">
                       <span className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                        Strength
+                        {copy.strengthLabel}
                       </span>
                       <span className="font-mono text-xs text-foreground">
                         {Math.round(selectedMask.strength)}px
                       </span>
                     </div>
                     <Slider
-                      ariaLabel="Blur strength"
+                      ariaLabel={copy.strengthAria}
                       max={120}
                       min={0}
                       step={1}
@@ -739,7 +739,7 @@ export function MotionBlurMaskTool() {
 
                   <div className="space-y-2">
                     <span className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                      Mode
+                      {copy.modeLabel}
                     </span>
                     <div className="grid grid-cols-2 border border-border/70 bg-background">
                       {(["uniform", "linear"] as BlurMode[]).map((mode) => (
@@ -753,7 +753,7 @@ export function MotionBlurMaskTool() {
                           type="button"
                           onClick={() => updateSelectedMask({ mode })}
                         >
-                          {mode === "uniform" ? "Uniform" : "Linear"}
+                          {mode === "uniform" ? copy.uniformMode : copy.linearMode}
                         </button>
                       ))}
                     </div>
@@ -762,14 +762,14 @@ export function MotionBlurMaskTool() {
                   <div className="space-y-3">
                     <div className="flex items-center justify-between gap-3">
                       <span className="text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                        Angle
+                        {copy.angleLabel}
                       </span>
                       <span className="font-mono text-xs text-foreground">
                         {Math.round(selectedMask.angle)}deg
                       </span>
                     </div>
                     <Slider
-                      ariaLabel="Blur angle"
+                      ariaLabel={copy.angleAria}
                       formatter={(value) => `${Math.round(value)}deg`}
                       max={180}
                       min={-180}
@@ -781,22 +781,22 @@ export function MotionBlurMaskTool() {
 
                   <div className="grid grid-cols-2 gap-2">
                     <NumberField
-                      label="X"
+                      label={copy.xLabel}
                       value={selectedMask.x}
                       onChange={(x) => updateSelectedMask({ x })}
                     />
                     <NumberField
-                      label="Y"
+                      label={copy.yLabel}
                       value={selectedMask.y}
                       onChange={(y) => updateSelectedMask({ y })}
                     />
                     <NumberField
-                      label="W"
+                      label={copy.widthLabel}
                       value={selectedMask.width}
                       onChange={(width) => updateSelectedMask({ width })}
                     />
                     <NumberField
-                      label="H"
+                      label={copy.heightLabel}
                       value={selectedMask.height}
                       onChange={(height) => updateSelectedMask({ height })}
                     />
@@ -804,7 +804,7 @@ export function MotionBlurMaskTool() {
                 </div>
               ) : (
                 <p className="text-sm leading-6 text-muted-foreground">
-                  Select a mask to edit its blur direction, intensity, position, and size.
+                  {copy.selectedMaskEmpty}
                 </p>
               )}
             </div>

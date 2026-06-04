@@ -3,40 +3,14 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
+import type { FAQCopy } from "../lib/translations";
 
 interface FAQItem {
   question: string;
   answer: string;
 }
 
-const faqData: FAQItem[] = [
-  {
-    question: "How is ScreenCam different from browser-based recorders?",
-    answer: "ScreenCam is built for macOS as a native recording and editing app. The goal is a compact Mac-first workflow with local capture, smooth editing controls, and preview-accurate export.",
-  },
-  {
-    question: "What's the minimum macOS version required?",
-    answer: "ScreenCam requires macOS 15 or later.",
-  },
-  {
-    question: "Is there a Windows version?",
-    answer: "Not right now. ScreenCam is focused on macOS, and we do not plan to develop a Windows version in the short term.",
-  },
-  {
-    question: "Can I export to different formats?",
-    answer: "ScreenCam is designed for high-quality video export from the editor, with framing and motion controls reflected in the final output.",
-  },
-  {
-    question: "How does the zoom feature work?",
-    answer: "You can add zoom points anywhere on your timeline. In manual mode, you have complete control: set multiple anchors with different zoom levels and focus centers. Transitions include smooth motion blur effects.",
-  },
-  {
-    question: "Does it support multiple monitors?",
-    answer: "ScreenCam is built for Mac screen recording workflows, including connected displays, windows, and capture regions.",
-  },
-];
-
-export function FAQSection() {
+export function FAQSection({ copy }: { copy: FAQCopy }) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
@@ -51,16 +25,16 @@ export function FAQSection() {
           className="text-center mb-16"
         >
           <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
-            FAQ
+            {copy.eyebrow}
           </p>
           <h2 className="text-[clamp(2rem,4vw,3rem)] font-bold leading-[1.1] tracking-tight text-foreground">
-            Questions & Answers
+            {copy.title}
           </h2>
         </motion.div>
 
         {/* FAQ items */}
         <div className="space-y-4">
-          {faqData.map((item, index) => (
+          {copy.items.map((item, index) => (
             <FAQAccordionItem
               key={index}
               item={item}
