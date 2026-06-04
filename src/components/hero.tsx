@@ -77,7 +77,7 @@ export function Hero({
             <MagneticButton
               className="liquid-glass-cta group flex w-fit cursor-pointer items-center gap-3 px-6 py-3 text-sm font-medium"
               onClick={() => {
-                window.location.href = appStoreUrl;
+                window.open(appStoreUrl, "_blank", "noopener,noreferrer");
               }}
             >
               <LiquidGlassMaterial />

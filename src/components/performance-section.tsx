@@ -133,20 +133,21 @@ export function PerformanceSection({ copy }: { copy: PerformanceCopy }) {
             </div>
           </div>
 
-          {/* Export Speed */}
+          {/* Export Time */}
           <div className="space-y-4">
             <div className="flex items-center justify-between text-sm">
-              <span className="text-muted-foreground uppercase tracking-widest text-xs">{copy.metrics.exportSpeed}</span>
+              <span className="text-muted-foreground uppercase tracking-widest text-xs">{copy.metrics.exportTime}</span>
+              <span className="text-muted-foreground text-xs text-right">{copy.metrics.exportTimeNote}</span>
             </div>
             <div className="space-y-3">
-              {/* ScreenCam bar - longer = faster */}
+              {/* Export duration - shorter is faster */}
               <div className="flex items-center gap-4">
                 <span className="text-sm text-foreground w-24 shrink-0">{copy.metrics.screenCam}</span>
                 <div className="flex-1 h-2 bg-muted/30 rounded-full overflow-hidden">
                   <motion.div
                     className="h-full bg-gradient-to-r from-accent to-accent/70 rounded-full"
                     initial={{ width: 0 }}
-                    animate={isInView ? { width: "88%" } : {}}
+                    animate={isInView ? { width: "44%" } : {}}
                     transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.8 }}
                   />
                 </div>
@@ -158,7 +159,7 @@ export function PerformanceSection({ copy }: { copy: PerformanceCopy }) {
                   <motion.div
                     className="h-full bg-muted-foreground/40 rounded-full"
                     initial={{ width: 0 }}
-                    animate={isInView ? { width: "44%" } : {}}
+                    animate={isInView ? { width: "88%" } : {}}
                     transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.9 }}
                   />
                 </div>

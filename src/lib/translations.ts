@@ -75,7 +75,9 @@ export type ZoomFeatureCopy = {
     description: string;
     title: string;
   }>;
+  subtitle: string;
   timelineAria: string;
+  title: string;
 };
 
 export type DeviceMockupsCopy = {
@@ -112,11 +114,57 @@ export type PerformanceCopy = {
     appSize: string;
     appSizeNote: string;
     cpuUsage: string;
-    exportSpeed: string;
+    exportTime: string;
+    exportTimeNote: string;
     memory: string;
     others: string;
     screenCam: string;
   };
+  subtitle: string;
+  title: string;
+};
+
+export type FeatureCardsCopy = {
+  beautyThumb: {
+    afterLabel: string;
+    beforeLabel: string;
+    disclosure: string;
+    enterFloatingAria: string;
+    exitFloatingAria: string;
+    pauseAria: string;
+    playAria: string;
+    shapeCycleAria: string;
+    shapeLabels: {
+      circle: string;
+      square: string;
+      wide: string;
+    };
+  };
+  eyebrow: string;
+  glassThumb: {
+    modeLabels: {
+      clear: string;
+      regular: string;
+    };
+    toolbarItems: {
+      area: string;
+      camera: string;
+      close: string;
+      display: string;
+      iphone: string;
+      keyboard: string;
+      microphone: string;
+      settings: string;
+      systemAudio: string;
+      window: string;
+      workspace: string;
+    };
+    wallpaperButtonAria: string;
+  };
+  items: Array<{
+    caption: string;
+    title: string;
+  }>;
   subtitle: string;
   title: string;
 };
@@ -199,6 +247,7 @@ type LocaleTranslation = {
   home: {
     controls: CustomControlsCopy;
     deviceMockups: DeviceMockupsCopy;
+    featureCards: FeatureCardsCopy;
     faq: FAQCopy;
     hero: HeroCopy;
     performance: PerformanceCopy;
@@ -353,7 +402,9 @@ export const translations: Record<Locale, LocaleTranslation> = {
             description: "Zoom, pan, and click states are sampled with shutter-style blur.",
           },
         ],
+        subtitle: "Zoom with motion blur.",
         timelineAria: "Timeline preview tracks",
+        title: "Focus on what matters.",
       },
       deviceMockups: {
         description:
@@ -394,13 +445,69 @@ export const translations: Record<Locale, LocaleTranslation> = {
           appSize: "App Size",
           appSizeNote: "about 20MB vs 600MB",
           cpuUsage: "CPU Usage",
-          exportSpeed: "Export Speed",
+          exportTime: "Export Time",
+          exportTimeNote: "shorter is faster",
           memory: "Memory",
           others: "Others",
           screenCam: "ScreenCam",
         },
         subtitle: "No Electron. No web views. Pure native performance.",
         title: "Native means fast.",
+      },
+      featureCards: {
+        eyebrow: "More Features",
+        title: "Small details, ready for real workflows.",
+        subtitle: "Native touches that make recording feel fast, polished, and Mac-first.",
+        beautyThumb: {
+          beforeLabel: "Beauty Off",
+          afterLabel: "Beauty On",
+          disclosure:
+            "AI-generated portrait, used only to demonstrate the real beauty effect.",
+          enterFloatingAria: "Show as floating camera window",
+          exitFloatingAria: "Return camera window to full preview",
+          pauseAria: "Pause beauty comparison demo",
+          playAria: "Play beauty comparison demo",
+          shapeCycleAria: "Switch floating window shape",
+          shapeLabels: {
+            circle: "Circle",
+            square: "Rounded square",
+            wide: "16:9",
+          },
+        },
+        glassThumb: {
+          modeLabels: {
+            clear: "Clear",
+            regular: "regular",
+          },
+          toolbarItems: {
+            area: "Area",
+            camera: "Camera",
+            close: "Hide ScreenCam",
+            display: "Display",
+            iphone: "iPhone",
+            keyboard: "Keyboard event recording",
+            microphone: "Microphone",
+            settings: "Settings",
+            systemAudio: "System sound recording",
+            window: "Window",
+            workspace: "Open Workspace",
+          },
+          wallpaperButtonAria: "Change wallpaper",
+        },
+        items: [
+          {
+            title: "Liquid Glass",
+            caption: "Native glass materials keep controls crisp while matching modern macOS surfaces.",
+          },
+          {
+            title: "Shortcut Recording",
+            caption: "Start, pause, and finish captures from the keyboard without breaking flow.",
+          },
+          {
+            title: "Light Beauty",
+            caption: "Includes basic beauty effects such as skin smoothing, brightening, face slimming, and eye enlargement.",
+          },
+        ],
       },
       faq: {
         eyebrow: "FAQ",
@@ -763,7 +870,9 @@ export const translations: Record<Locale, LocaleTranslation> = {
             description: "变焦、平移和点击状态都会按快门感采样模糊。",
           },
         ],
+        subtitle: "带运动模糊的变焦。",
         timelineAria: "时间线预览轨道",
+        title: "聚焦真正重要的画面。",
       },
       deviceMockups: {
         description: "用精致设备框导出内容。iPhone、Mac、Studio Display，让画面呈现得刚刚好。",
@@ -797,13 +906,68 @@ export const translations: Record<Locale, LocaleTranslation> = {
           appSize: "App 体积",
           appSizeNote: "约 20MB vs 600MB",
           cpuUsage: "CPU 使用率",
-          exportSpeed: "导出速度",
+          exportTime: "导出时间",
+          exportTimeNote: "越短越快",
           memory: "内存",
           others: "其他",
           screenCam: "ScreenCam",
         },
         subtitle: "没有 Electron。没有 WebView。纯原生性能。",
-        title: "原生，所以快。",
+        title: "原生，所以快",
+      },
+      featureCards: {
+        eyebrow: "更多特色",
+        title: "每一处小细节，都认真打磨。",
+        subtitle: "从录制、编辑到导出，围绕 Mac 原生体验，把常用流程做得更顺手。",
+        beautyThumb: {
+          beforeLabel: "美颜关闭",
+          afterLabel: "美颜开启",
+          disclosure: "人像由 AI 生成，仅用于演示产品真实的美颜效果。",
+          enterFloatingAria: "切换为摄像头浮窗",
+          exitFloatingAria: "恢复完整摄像头预览",
+          pauseAria: "暂停美颜对比演示",
+          playAria: "播放美颜对比演示",
+          shapeCycleAria: "切换浮窗形状",
+          shapeLabels: {
+            circle: "圆形",
+            square: "圆角方形",
+            wide: "16:9",
+          },
+        },
+        glassThumb: {
+          modeLabels: {
+            clear: "通透",
+            regular: "常规",
+          },
+          toolbarItems: {
+            area: "区域",
+            camera: "摄像头",
+            close: "隐藏 ScreenCam",
+            display: "屏幕",
+            iphone: "iPhone",
+            keyboard: "键盘事件录制",
+            microphone: "麦克风",
+            settings: "设置",
+            systemAudio: "系统声音录制",
+            window: "窗口",
+            workspace: "打开工作区",
+          },
+          wallpaperButtonAria: "切换壁纸",
+        },
+        items: [
+          {
+            title: "Liquid Glass",
+            caption: "支持原生 glass 材质，让控制层通透、清晰，并贴合现代 macOS 视觉。",
+          },
+          {
+            title: "快捷键录制",
+            caption: "用键盘快速开始、暂停和结束录制，不打断当前操作。",
+          },
+          {
+            title: "轻度美颜",
+            caption: "提供基础美颜效果，例如磨皮、美白、瘦脸、大眼等。",
+          },
+        ],
       },
       faq: {
         eyebrow: "FAQ",
@@ -1144,7 +1308,9 @@ export const translations: Record<Locale, LocaleTranslation> = {
             description: "Zoom-, Schwenk- und Klickzustände werden mit shutter-artiger Unschärfe gesampelt.",
           },
         ],
+        subtitle: "Zoom mit Bewegungsunschärfe.",
         timelineAria: "Timeline-Vorschauspuren",
+        title: "Fokussiere, worauf es ankommt.",
       },
       deviceMockups: {
         description:
@@ -1185,13 +1351,69 @@ export const translations: Record<Locale, LocaleTranslation> = {
           appSize: "App-Größe",
           appSizeNote: "ca. 20MB vs. 600MB",
           cpuUsage: "CPU-Auslastung",
-          exportSpeed: "Exportgeschwindigkeit",
+          exportTime: "Exportzeit",
+          exportTimeNote: "kürzer ist schneller",
           memory: "Speicher",
           others: "Andere",
           screenCam: "ScreenCam",
         },
         subtitle: "Kein Electron. Keine Webviews. Reine native Performance.",
         title: "Nativ heißt schnell.",
+      },
+      featureCards: {
+        eyebrow: "Weitere Features",
+        title: "Kleine Details, bereit für echte Workflows.",
+        subtitle: "Native Feinheiten, damit Aufnahmen schnell, sauber und Mac-first wirken.",
+        beautyThumb: {
+          beforeLabel: "Beauty aus",
+          afterLabel: "Beauty an",
+          disclosure:
+            "KI-generiertes Porträt, nur zur Demonstration des echten Beauty-Effekts.",
+          enterFloatingAria: "Als schwebendes Kamerafenster anzeigen",
+          exitFloatingAria: "Kamerafenster zur Vollvorschau zurücksetzen",
+          pauseAria: "Beauty-Vergleich pausieren",
+          playAria: "Beauty-Vergleich abspielen",
+          shapeCycleAria: "Form des schwebenden Fensters wechseln",
+          shapeLabels: {
+            circle: "Kreis",
+            square: "Abgerundetes Quadrat",
+            wide: "16:9",
+          },
+        },
+        glassThumb: {
+          modeLabels: {
+            clear: "Klar",
+            regular: "Normal",
+          },
+          toolbarItems: {
+            area: "Bereich",
+            camera: "Kamera",
+            close: "ScreenCam ausblenden",
+            display: "Bildschirm",
+            iphone: "iPhone",
+            keyboard: "Tastaturereignisse aufzeichnen",
+            microphone: "Mikrofon",
+            settings: "Einstellungen",
+            systemAudio: "Systemton aufzeichnen",
+            window: "Fenster",
+            workspace: "Arbeitsbereich öffnen",
+          },
+          wallpaperButtonAria: "Hintergrund wechseln",
+        },
+        items: [
+          {
+            title: "Liquid Glass",
+            caption: "Native Glass-Materialien halten Bedienelemente klar und passen zu modernem macOS.",
+          },
+          {
+            title: "Shortcut-Aufnahme",
+            caption: "Aufnahmen per Tastatur starten, pausieren und beenden, ohne den Flow zu unterbrechen.",
+          },
+          {
+            title: "Leichte Beauty",
+            caption: "Bietet grundlegende Beauty-Effekte wie Hautglättung, Aufhellung, schmaleres Gesicht und größere Augen.",
+          },
+        ],
       },
       faq: {
         eyebrow: "FAQ",
@@ -1527,7 +1749,9 @@ export const translations: Record<Locale, LocaleTranslation> = {
             description: "ズーム、パン、クリック状態をシャッター風のブラーでサンプリングします。",
           },
         ],
+        subtitle: "モーションブラー付きズーム。",
         timelineAria: "タイムラインプレビュートラック",
+        title: "大事な部分にフォーカス。",
       },
       deviceMockups: {
         description: "美しいデバイスフレームで書き出し。iPhone、Mac、Studio Display に、あなたのコンテンツをきれいに表示します。",
@@ -1561,13 +1785,68 @@ export const translations: Record<Locale, LocaleTranslation> = {
           appSize: "アプリサイズ",
           appSizeNote: "約 20MB vs 600MB",
           cpuUsage: "CPU 使用率",
-          exportSpeed: "書き出し速度",
+          exportTime: "書き出し時間",
+          exportTimeNote: "短いほど高速",
           memory: "メモリ",
           others: "その他",
           screenCam: "ScreenCam",
         },
         subtitle: "Electron なし。WebView なし。純粋なネイティブ性能。",
         title: "ネイティブだから速い。",
+      },
+      featureCards: {
+        eyebrow: "その他の機能",
+        title: "録画の細部まで、実用向けに磨き込み。",
+        subtitle: "Mac らしいネイティブ体験で、日常の録画フローをもっと軽快にします。",
+        beautyThumb: {
+          beforeLabel: "美肌補正オフ",
+          afterLabel: "美肌補正オン",
+          disclosure: "AI 生成の人物画像を、実際の美肌補正効果のデモにのみ使用しています。",
+          enterFloatingAria: "カメラをフローティング表示に切り替え",
+          exitFloatingAria: "カメラを全体プレビューに戻す",
+          pauseAria: "美肌補正の比較デモを一時停止",
+          playAria: "美肌補正の比較デモを再生",
+          shapeCycleAria: "フローティング表示の形状を切り替え",
+          shapeLabels: {
+            circle: "円形",
+            square: "角丸正方形",
+            wide: "16:9",
+          },
+        },
+        glassThumb: {
+          modeLabels: {
+            clear: "クリア",
+            regular: "通常",
+          },
+          toolbarItems: {
+            area: "範囲",
+            camera: "カメラ",
+            close: "ScreenCam を隠す",
+            display: "画面",
+            iphone: "iPhone",
+            keyboard: "キーボード操作を録画",
+            microphone: "マイク",
+            settings: "設定",
+            systemAudio: "システム音声を録音",
+            window: "ウィンドウ",
+            workspace: "ワークスペースを開く",
+          },
+          wallpaperButtonAria: "壁紙を変更",
+        },
+        items: [
+          {
+            title: "Liquid Glass",
+            caption: "ネイティブの glass マテリアルに対応し、操作面をクリアで macOS らしく保ちます。",
+          },
+          {
+            title: "ショートカット録画",
+            caption: "キーボードから録画の開始、一時停止、終了まで素早く操作できます。",
+          },
+          {
+            title: "軽い美肌補正",
+            caption: "肌のなめらか補正、美白、小顔、大きな目などの基本的な補正に対応します。",
+          },
+        ],
       },
       faq: {
         eyebrow: "FAQ",
@@ -1900,7 +2179,9 @@ export const translations: Record<Locale, LocaleTranslation> = {
             description: "줌, 팬, 클릭 상태를 셔터 느낌의 블러로 샘플링합니다.",
           },
         ],
+        subtitle: "모션 블러가 있는 줌.",
         timelineAria: "타임라인 미리보기 트랙",
+        title: "중요한 부분에 집중하세요.",
       },
       deviceMockups: {
         description: "멋진 기기 프레임으로 내보내세요. iPhone, Mac, Studio Display에서 콘텐츠를 완성도 있게 보여줍니다.",
@@ -1934,13 +2215,68 @@ export const translations: Record<Locale, LocaleTranslation> = {
           appSize: "앱 크기",
           appSizeNote: "약 20MB vs 600MB",
           cpuUsage: "CPU 사용량",
-          exportSpeed: "내보내기 속도",
+          exportTime: "내보내기 시간",
+          exportTimeNote: "짧을수록 빠름",
           memory: "메모리",
           others: "기타",
           screenCam: "ScreenCam",
         },
         subtitle: "Electron 없음. WebView 없음. 순수 네이티브 성능.",
         title: "네이티브라서 빠릅니다.",
+      },
+      featureCards: {
+        eyebrow: "더 많은 기능",
+        title: "녹화의 작은 디테일까지 실전 흐름에 맞게.",
+        subtitle: "Mac다운 네이티브 경험으로 자주 쓰는 녹화 흐름을 더 매끄럽게 만듭니다.",
+        beautyThumb: {
+          beforeLabel: "보정 끔",
+          afterLabel: "보정 켬",
+          disclosure: "AI로 생성한 인물이며 실제 보정 효과를 보여주기 위한 데모입니다.",
+          enterFloatingAria: "카메라를 플로팅 창으로 표시",
+          exitFloatingAria: "카메라를 전체 미리보기로 되돌리기",
+          pauseAria: "보정 비교 데모 일시정지",
+          playAria: "보정 비교 데모 재생",
+          shapeCycleAria: "플로팅 창 모양 전환",
+          shapeLabels: {
+            circle: "원형",
+            square: "둥근 사각형",
+            wide: "16:9",
+          },
+        },
+        glassThumb: {
+          modeLabels: {
+            clear: "클리어",
+            regular: "일반",
+          },
+          toolbarItems: {
+            area: "영역",
+            camera: "카메라",
+            close: "ScreenCam 숨기기",
+            display: "디스플레이",
+            iphone: "iPhone",
+            keyboard: "키보드 이벤트 녹화",
+            microphone: "마이크",
+            settings: "설정",
+            systemAudio: "시스템 사운드 녹음",
+            window: "윈도우",
+            workspace: "작업 공간 열기",
+          },
+          wallpaperButtonAria: "배경화면 변경",
+        },
+        items: [
+          {
+            title: "Liquid Glass",
+            caption: "네이티브 glass 소재를 지원해 컨트롤을 선명하게 유지하고 최신 macOS 느낌에 맞춥니다.",
+          },
+          {
+            title: "단축키 녹화",
+            caption: "키보드로 녹화를 시작, 일시정지, 종료해 작업 흐름을 끊지 않습니다.",
+          },
+          {
+            title: "가벼운 보정",
+            caption: "피부 보정, 밝기 보정, 얼굴 슬림, 큰 눈 등 기본 보정 효과를 제공합니다.",
+          },
+        ],
       },
       faq: {
         eyebrow: "FAQ",

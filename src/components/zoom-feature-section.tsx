@@ -13,6 +13,20 @@ export function ZoomFeatureSection({ copy }: ZoomFeatureSectionProps) {
   return (
     <section id="zoom" className="relative min-h-screen bg-background py-32 overflow-hidden">
       <div className="relative max-w-7xl mx-auto px-6 md:px-12">
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-24"
+        >
+          <h2 className="text-[clamp(2rem,5vw,4rem)] font-bold leading-[1.1] tracking-tight text-foreground max-w-3xl text-balance">
+            {copy.title}
+            <br />
+            <span className="text-muted-foreground">{copy.subtitle}</span>
+          </h2>
+        </motion.div>
+
         <CanvasZoomDemo copy={copy} />
 
         <motion.div
