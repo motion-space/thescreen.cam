@@ -21,7 +21,6 @@ import {
 import { useEffect, useMemo, useRef, useState } from "react";
 import type {
   KeyboardEvent as ReactKeyboardEvent,
-  MouseEvent as ReactMouseEvent,
   MutableRefObject,
   PointerEvent as ReactPointerEvent,
   ReactNode,
@@ -483,6 +482,7 @@ function LiquidDomCanvasToolbarThumb({
     startY: 0,
     width: 1,
   });
+  const wallpaperFrameRequestRef = useRef(0);
   const activeIdRef = useRef<string | null>(null);
   const hitTargetsRef = useRef<CanvasToolbarHit[]>([]);
   const tooltipRef = useRef<CanvasTooltipState>({
@@ -674,9 +674,35 @@ function LiquidDomCanvasToolbarThumb({
     }
   };
 
-  const requestWallpaperFrame = () => {
+  const dispatchWallpaperChange = () => {
     thumbRef.current?.dispatchEvent(new Event("screen-cam-wallpaper-change"));
   };
+
+  const requestWallpaperFrame = (immediate = false) => {
+    if (immediate) {
+      if (wallpaperFrameRequestRef.current) {
+        cancelAnimationFrame(wallpaperFrameRequestRef.current);
+        wallpaperFrameRequestRef.current = 0;
+      }
+      dispatchWallpaperChange();
+      return;
+    }
+
+    if (wallpaperFrameRequestRef.current) return;
+
+    wallpaperFrameRequestRef.current = requestAnimationFrame(() => {
+      wallpaperFrameRequestRef.current = 0;
+      dispatchWallpaperChange();
+    });
+  };
+
+  useEffect(() => {
+    return () => {
+      if (wallpaperFrameRequestRef.current) {
+        cancelAnimationFrame(wallpaperFrameRequestRef.current);
+      }
+    };
+  }, []);
 
   const hideToolbarTooltip = () => {
     activeIdRef.current = null;
@@ -690,7 +716,7 @@ function LiquidDomCanvasToolbarThumb({
 
     startCanvasWallpaperTransition(state, 1, performance.now());
     setIsWallpaperSwitching(true);
-    requestWallpaperFrame();
+    requestWallpaperFrame(true);
   };
 
   const startWallpaperDrag = (event: ReactPointerEvent<HTMLDivElement>) => {
@@ -790,7 +816,7 @@ function LiquidDomCanvasToolbarThumb({
     );
 
     setIsWallpaperSwitching(shouldAnimate);
-    requestWallpaperFrame();
+    requestWallpaperFrame(true);
   };
 
   useEffect(() => {
@@ -2749,8 +2775,16 @@ function BeautyThumb({ copy }: { copy: FeatureCardsCopy["beautyThumb"] }) {
   const comparisonWindowRef = useRef<HTMLDivElement>(null);
   const beforeVideoRef = useRef<HTMLVideoElement>(null);
   const afterVideoRef = useRef<HTMLVideoElement>(null);
+  const canLoadMediaRef = useRef(false);
+  const dragFrameRef = useRef(0);
+  const dragPointRef = useRef<{ clientX: number; clientY: number } | null>(
+    null,
+  );
+  const dragRectRef = useRef<DOMRect | null>(null);
+  const isVisibleRef = useRef(false);
   const shouldPlayRef = useRef(true);
   const [handleY, setHandleY] = useState(beautyHandleRestY);
+  const [canLoadMedia, setCanLoadMedia] = useState(false);
   const [floatingShape, setFloatingShape] =
     useState<BeautyFloatingShape>("wide");
   const [isFloating, setIsFloating] = useState(false);
@@ -2764,56 +2798,75 @@ function BeautyThumb({ copy }: { copy: FeatureCardsCopy["beautyThumb"] }) {
   };
   const mediaFrame = beautyMediaFrames[isFloating ? floatingShape : "full"];
 
-  const setSplitFromClientX = (clientX: number) => {
-    const rect = comparisonWindowRef.current?.getBoundingClientRect();
+  const applyComparisonDragPosition = (
+    clientX: number,
+    clientY: number,
+    rect = dragRectRef.current,
+  ) => {
     if (!rect) return;
 
     setSplit(clamp(((clientX - rect.left) / rect.width) * 100, 0, 100));
+    setHandleY(clamp(((clientY - rect.top) / rect.height) * 100, 14, 86));
   };
 
-  const setHandleYFromClientY = (clientY: number) => {
-    const rect = comparisonWindowRef.current?.getBoundingClientRect();
-    if (!rect) return;
+  const flushComparisonDragPosition = () => {
+    dragFrameRef.current = 0;
+    const point = dragPointRef.current;
+    dragPointRef.current = null;
+    if (!point) return;
 
-    setHandleY(clamp(((clientY - rect.top) / rect.height) * 100, 14, 86));
+    applyComparisonDragPosition(point.clientX, point.clientY);
+  };
+
+  const scheduleComparisonDragPosition = (
+    clientX: number,
+    clientY: number,
+  ) => {
+    dragPointRef.current = { clientX, clientY };
+    if (!dragFrameRef.current) {
+      dragFrameRef.current = requestAnimationFrame(
+        flushComparisonDragPosition,
+      );
+    }
+  };
+
+  const cancelScheduledComparisonDrag = () => {
+    if (dragFrameRef.current) {
+      cancelAnimationFrame(dragFrameRef.current);
+      dragFrameRef.current = 0;
+    }
+    dragPointRef.current = null;
   };
 
   const handlePointerDown = (event: ReactPointerEvent<HTMLDivElement>) => {
     event.preventDefault();
     event.currentTarget.setPointerCapture(event.pointerId);
+    dragRectRef.current = event.currentTarget.getBoundingClientRect();
+    cancelScheduledComparisonDrag();
     setIsHandleDragging(true);
-    setSplitFromClientX(event.clientX);
-    setHandleYFromClientY(event.clientY);
+    applyComparisonDragPosition(
+      event.clientX,
+      event.clientY,
+      dragRectRef.current,
+    );
   };
 
   const handlePointerMove = (event: ReactPointerEvent<HTMLDivElement>) => {
     if (!event.currentTarget.hasPointerCapture(event.pointerId)) return;
-    setSplitFromClientX(event.clientX);
-    setHandleYFromClientY(event.clientY);
+    scheduleComparisonDragPosition(event.clientX, event.clientY);
   };
 
   const handlePointerEnd = (event: ReactPointerEvent<HTMLDivElement>) => {
     if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+      applyComparisonDragPosition(
+        event.clientX,
+        event.clientY,
+        dragRectRef.current,
+      );
       event.currentTarget.releasePointerCapture(event.pointerId);
     }
-    setIsHandleDragging(false);
-    setHandleY(beautyHandleRestY);
-  };
-
-  const handleMouseDown = (event: ReactMouseEvent<HTMLDivElement>) => {
-    if (event.button !== 0) return;
-    setIsHandleDragging(true);
-    setSplitFromClientX(event.clientX);
-    setHandleYFromClientY(event.clientY);
-  };
-
-  const handleMouseMove = (event: ReactMouseEvent<HTMLDivElement>) => {
-    if (event.buttons !== 1) return;
-    setSplitFromClientX(event.clientX);
-    setHandleYFromClientY(event.clientY);
-  };
-
-  const handleMouseUp = () => {
+    cancelScheduledComparisonDrag();
+    dragRectRef.current = null;
     setIsHandleDragging(false);
     setHandleY(beautyHandleRestY);
   };
@@ -2848,7 +2901,12 @@ function BeautyThumb({ copy }: { copy: FeatureCardsCopy["beautyThumb"] }) {
     const afterVideo = afterVideoRef.current;
     if (!beforeVideo || !afterVideo) return;
 
-    if (!shouldPlay || document.hidden) {
+    if (
+      !shouldPlay ||
+      document.hidden ||
+      !isVisibleRef.current ||
+      !canLoadMediaRef.current
+    ) {
       beforeVideo.pause();
       afterVideo.pause();
       return;
@@ -2871,6 +2929,7 @@ function BeautyThumb({ copy }: { copy: FeatureCardsCopy["beautyThumb"] }) {
     if (!beforeVideo || !afterVideo) return;
 
     let syncInterval = 0;
+    let visibilityObserver: IntersectionObserver | null = null;
 
     const syncAfterVideo = () => {
       if (afterVideo.readyState < HTMLMediaElement.HAVE_METADATA) return;
@@ -2882,7 +2941,12 @@ function BeautyThumb({ copy }: { copy: FeatureCardsCopy["beautyThumb"] }) {
     const applyDesiredPlayback = () => {
       syncAfterVideo();
 
-      if (!shouldPlayRef.current || document.hidden) {
+      if (
+        !shouldPlayRef.current ||
+        document.hidden ||
+        !isVisibleRef.current ||
+        !canLoadMediaRef.current
+      ) {
         beforeVideo.pause();
         afterVideo.pause();
         return;
@@ -2906,16 +2970,42 @@ function BeautyThumb({ copy }: { copy: FeatureCardsCopy["beautyThumb"] }) {
     beforeVideo.addEventListener("seeked", syncAfterVideo);
     beforeVideo.addEventListener("timeupdate", syncAfterVideo);
     document.addEventListener("visibilitychange", handleVisibilityChange);
+    const visibilityTarget = comparisonWindowRef.current;
+    if (visibilityTarget) {
+      visibilityObserver = new IntersectionObserver(
+        ([entry]) => {
+          isVisibleRef.current = entry.isIntersecting;
+          if (entry.isIntersecting && !canLoadMediaRef.current) {
+            canLoadMediaRef.current = true;
+            setCanLoadMedia(true);
+          }
+          applyDesiredPlayback();
+        },
+        { threshold: 0.15 },
+      );
+      visibilityObserver.observe(visibilityTarget);
+    } else {
+      isVisibleRef.current = true;
+      canLoadMediaRef.current = true;
+      setCanLoadMedia(true);
+    }
     applyDesiredPlayback();
     syncInterval = window.setInterval(syncAfterVideo, 350);
 
     return () => {
       window.clearInterval(syncInterval);
+      visibilityObserver?.disconnect();
       beforeVideo.removeEventListener("loadeddata", applyDesiredPlayback);
       afterVideo.removeEventListener("loadeddata", applyDesiredPlayback);
       beforeVideo.removeEventListener("seeked", syncAfterVideo);
       beforeVideo.removeEventListener("timeupdate", syncAfterVideo);
       document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      cancelScheduledComparisonDrag();
     };
   }, []);
 
@@ -2927,7 +3017,9 @@ function BeautyThumb({ copy }: { copy: FeatureCardsCopy["beautyThumb"] }) {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `url(${beautyThumbBackgroundSource})`,
+          backgroundImage: canLoadMedia
+            ? `url(${beautyThumbBackgroundSource})`
+            : undefined,
           opacity: isFloating ? 1 : 0,
           transition: "opacity 350ms ease-out",
         }}
@@ -2957,10 +3049,6 @@ function BeautyThumb({ copy }: { copy: FeatureCardsCopy["beautyThumb"] }) {
         aria-valuenow={Math.round(split)}
         className="absolute z-10 cursor-ew-resize touch-none overflow-hidden border border-white/10 bg-black shadow-[0_18px_48px_rgba(0,0,0,0.36)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/70"
         onKeyDown={handleKeyDown}
-        onMouseDown={handleMouseDown}
-        onMouseLeave={handleMouseUp}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
         onPointerCancel={handlePointerEnd}
         onPointerDown={handlePointerDown}
         onPointerMove={handlePointerMove}
@@ -2979,6 +3067,7 @@ function BeautyThumb({ copy }: { copy: FeatureCardsCopy["beautyThumb"] }) {
           style={{ clipPath: `inset(0 ${100 - split}% 0 0)` }}
         >
           <BeautyComparisonVideo
+            canLoad={canLoadMedia}
             frame={mediaFrame}
             side="before"
             videoRef={beforeVideoRef}
@@ -2993,6 +3082,7 @@ function BeautyThumb({ copy }: { copy: FeatureCardsCopy["beautyThumb"] }) {
           style={{ clipPath: `inset(0 0 0 ${split}%)` }}
         >
           <BeautyComparisonVideo
+            canLoad={canLoadMedia}
             frame={mediaFrame}
             side="after"
             videoRef={afterVideoRef}
@@ -3133,10 +3223,12 @@ function BeautyThumb({ copy }: { copy: FeatureCardsCopy["beautyThumb"] }) {
 }
 
 function BeautyComparisonVideo({
+  canLoad,
   frame,
   side,
   videoRef,
 }: {
+  canLoad: boolean;
   frame: BeautyMediaFrame;
   side: "before" | "after";
   videoRef: MutableRefObject<HTMLVideoElement | null>;
@@ -3153,14 +3245,14 @@ function BeautyComparisonVideo({
       <video
         ref={videoRef}
         aria-hidden="true"
-        autoPlay
+        autoPlay={canLoad}
         className="absolute top-0 h-full w-[200%] max-w-none object-fill"
         disablePictureInPicture
         loop
         muted
         playsInline
-        preload="auto"
-        src={beautyComparisonVideoSource}
+        preload={canLoad ? "auto" : "none"}
+        src={canLoad ? beautyComparisonVideoSource : undefined}
         style={{ left: side === "before" ? "0%" : "-100%" }}
       />
     </div>
