@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Mail } from "lucide-react";
 
 const appStoreUrl = "https://apps.apple.com/cn/app/screencam-screen-studio/id6770877568?l=en-GB&mt=12";
 const supportChannels = [
@@ -18,6 +18,7 @@ const footerLinks = {
     { label: "FAQ", href: "#faq" },
   ],
   resources: [
+    { label: "Motion Blur Mask", href: "/motion-blur-mask" },
     { label: "App Store", href: appStoreUrl, external: true },
     { label: "Changelog", href: "/changelog" },
     { label: "Support", href: "/support" },
@@ -141,21 +142,7 @@ export function Footer({ showProductLinks = true }: { showProductLinks?: boolean
 function SocialIcon({ icon }: { icon: string }) {
   if (icon === "email") {
     return (
-      <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-        <path
-          d="M4.75 6.75h14.5v10.5H4.75V6.75Z"
-          stroke="currentColor"
-          strokeWidth="1.7"
-          strokeLinejoin="round"
-        />
-        <path
-          d="m5.25 7.25 6.75 5.5 6.75-5.5"
-          stroke="currentColor"
-          strokeWidth="1.7"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-      </svg>
+      <Mail className="h-[17px] w-[17px]" strokeWidth={1.8} aria-hidden="true" />
     );
   }
 
