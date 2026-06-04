@@ -20,6 +20,7 @@ interface ZoomFrame extends ZoomAnchor {
 }
 
 const MOCK_PLAYBACK_DURATION_MS = 4200;
+const PLAYBACK_FRAME_INTERVAL_MS = 1000 / 30;
 const TIMELINE_TRACK_INSET_PX = 16;
 const PLAYHEAD_LINE_WIDTH_PX = 2;
 const BASELINE_PREVIEW_FRAME: ZoomFrame = {
@@ -114,8 +115,17 @@ function InteractiveTimeline({ copy }: { copy: CustomControlsCopy }) {
   const playbackAnimationRef = useRef<number>(0);
   const playbackStartTimeRef = useRef(0);
   const playbackStartPositionRef = useRef(0);
+  const lastPlaybackRenderTimeRef = useRef(0);
   const latestPlayheadPositionRef = useRef(playheadPosition);
   const isPlaybackPausedRef = useRef(false);
+  const pendingAnchorDeltaRef = useRef<Record<string, number>>({});
+  const anchorDragFrameRef = useRef<number>(0);
+  const pendingPreviewCenterDeltaRef = useRef<{
+    anchorId: string;
+    deltaX: number;
+    deltaY: number;
+  } | null>(null);
+  const previewCenterFrameRef = useRef<number>(0);
 
   useEffect(() => {
     selectedAnchorRef.current = selectedAnchor;
@@ -127,6 +137,8 @@ function InteractiveTimeline({ copy }: { copy: CustomControlsCopy }) {
 
   useEffect(() => () => {
     cancelAnimationFrame(playbackAnimationRef.current);
+    cancelAnimationFrame(anchorDragFrameRef.current);
+    cancelAnimationFrame(previewCenterFrameRef.current);
   }, []);
 
   const selectAnchor = (id: string) => {
@@ -178,7 +190,13 @@ function InteractiveTimeline({ copy }: { copy: CustomControlsCopy }) {
     const progress = clamp01((timestamp - playbackStartTimeRef.current) / duration);
     const nextPosition = startPosition + remainingDistance * progress;
 
-    updatePlaybackPosition(nextPosition);
+    if (
+      progress >= 1 ||
+      timestamp - lastPlaybackRenderTimeRef.current >= PLAYBACK_FRAME_INTERVAL_MS
+    ) {
+      lastPlaybackRenderTimeRef.current = timestamp;
+      updatePlaybackPosition(nextPosition);
+    }
 
     if (progress >= 1) {
       completePlayback();
@@ -198,6 +216,7 @@ function InteractiveTimeline({ copy }: { copy: CustomControlsCopy }) {
     clearSelectedAnchor();
     playbackStartPositionRef.current = startPosition;
     playbackStartTimeRef.current = performance.now();
+    lastPlaybackRenderTimeRef.current = 0;
     isPlaybackPausedRef.current = false;
     setIsPlaying(true);
     updatePlaybackPosition(startPosition);
@@ -213,18 +232,34 @@ function InteractiveTimeline({ copy }: { copy: CustomControlsCopy }) {
     startPlayback();
   };
 
+  const flushAnchorDragFrame = () => {
+    anchorDragFrameRef.current = 0;
+    const pendingDeltas = pendingAnchorDeltaRef.current;
+    pendingAnchorDeltaRef.current = {};
+
+    setAnchors(prev => prev.map(anchor => {
+      const deltaPercent = pendingDeltas[anchor.id] ?? 0;
+      if (deltaPercent === 0) return anchor;
+      return {
+        ...anchor,
+        position: clampPercent(anchor.position + deltaPercent),
+      };
+    }));
+  };
+
+  const scheduleAnchorPositionDelta = (id: string, deltaPercent: number) => {
+    pendingAnchorDeltaRef.current[id] = (pendingAnchorDeltaRef.current[id] ?? 0) + deltaPercent;
+
+    if (anchorDragFrameRef.current) return;
+    anchorDragFrameRef.current = requestAnimationFrame(flushAnchorDragFrame);
+  };
+
   const handleAnchorDrag = (id: string, info: PanInfo) => {
     if (!timelineRef.current) return;
     stopPlayback();
     const rect = timelineRef.current.getBoundingClientRect();
     const trackWidth = Math.max(1, rect.width - TIMELINE_TRACK_INSET_PX * 2);
-
-    setAnchors(prev => prev.map(anchor => {
-      if (anchor.id !== id) return anchor;
-      const deltaPercent = (info.delta.x / trackWidth) * 100;
-      const newPosition = clampPercent(anchor.position + deltaPercent);
-      return { ...anchor, position: newPosition };
-    }));
+    scheduleAnchorPositionDelta(id, (info.delta.x / trackWidth) * 100);
   };
 
   const seekTimelineAtClientX = (clientX: number) => {
@@ -251,6 +286,35 @@ function InteractiveTimeline({ copy }: { copy: CustomControlsCopy }) {
     lastPointerPos.current = { x: clientX, y: clientY };
   };
 
+  const flushPreviewCenterDragFrame = () => {
+    previewCenterFrameRef.current = 0;
+    const pendingDelta = pendingPreviewCenterDeltaRef.current;
+    pendingPreviewCenterDeltaRef.current = null;
+
+    if (!pendingDelta) return;
+
+    setAnchors(prev => prev.map(a => {
+      if (a.id !== pendingDelta.anchorId) return a;
+      return {
+        ...a,
+        centerX: clampPercent(a.centerX - pendingDelta.deltaX),
+        centerY: clampPercent(a.centerY - pendingDelta.deltaY),
+      };
+    }));
+  };
+
+  const schedulePreviewCenterDelta = (anchorId: string, deltaX: number, deltaY: number) => {
+    const current = pendingPreviewCenterDeltaRef.current;
+
+    pendingPreviewCenterDeltaRef.current =
+      current && current.anchorId === anchorId
+        ? { anchorId, deltaX: current.deltaX + deltaX, deltaY: current.deltaY + deltaY }
+        : { anchorId, deltaX, deltaY };
+
+    if (previewCenterFrameRef.current) return;
+    previewCenterFrameRef.current = requestAnimationFrame(flushPreviewCenterDragFrame);
+  };
+
   const updatePreviewCenterDrag = (clientX: number, clientY: number) => {
     const activeAnchorId = selectedAnchorRef.current;
 
@@ -268,14 +332,7 @@ function InteractiveTimeline({ copy }: { copy: CustomControlsCopy }) {
     const deltaY = (clientY - lastPointerPos.current.y) / rect.height * 100;
 
     lastPointerPos.current = { x: clientX, y: clientY };
-
-    setAnchors(prev => prev.map(a => {
-      if (a.id !== activeAnchorId) return a;
-      // Inverted: drag right -> content moves right -> center moves left
-      const newCenterX = Math.max(0, Math.min(100, a.centerX - deltaX));
-      const newCenterY = Math.max(0, Math.min(100, a.centerY - deltaY));
-      return { ...a, centerX: newCenterX, centerY: newCenterY };
-    }));
+    schedulePreviewCenterDelta(activeAnchorId, deltaX, deltaY);
   };
 
   const handlePreviewPointerDown = (e: ReactPointerEvent<HTMLDivElement>) => {
@@ -293,6 +350,10 @@ function InteractiveTimeline({ copy }: { copy: CustomControlsCopy }) {
   };
 
   const endPreviewDrag = () => {
+    if (previewCenterFrameRef.current) {
+      cancelAnimationFrame(previewCenterFrameRef.current);
+      flushPreviewCenterDragFrame();
+    }
     isPreviewDraggingRef.current = false;
     setIsDraggingCenter(false);
     activePreviewPointerRef.current = null;

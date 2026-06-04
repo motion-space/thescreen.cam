@@ -8,6 +8,9 @@ import cloudflare from "@astrojs/cloudflare";
 export default defineConfig({
   site: "https://thescreen.cam",
   output: "static",
+  devToolbar: {
+    enabled: false
+  },
   integrations: [sitemap(), react()],
 
   vite: {

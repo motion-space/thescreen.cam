@@ -15,6 +15,7 @@ export function SmoothScroll() {
   useEffect(() => {
     const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     let lenis: Lenis | null = null;
+    let startFrameId = 0;
 
     const setNativeSmoothScroll = (enabled: boolean) => {
       document.documentElement.style.scrollBehavior = enabled ? "smooth" : "";
@@ -39,7 +40,7 @@ export function SmoothScroll() {
       lenis = new Lenis({
         anchors: true,
         autoRaf: true,
-        duration: 0.72,
+        duration: 0.58,
         easing: (time) => 1 - Math.pow(1 - time, 4),
         smoothWheel: true,
         syncTouch: false,
@@ -57,10 +58,11 @@ export function SmoothScroll() {
       startLenis();
     };
 
-    startLenis();
+    startFrameId = window.requestAnimationFrame(startLenis);
     reducedMotionQuery.addEventListener("change", handleMotionPreferenceChange);
 
     return () => {
+      window.cancelAnimationFrame(startFrameId);
       reducedMotionQuery.removeEventListener("change", handleMotionPreferenceChange);
       setNativeSmoothScroll(false);
       destroyLenis();

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
 import type { FAQCopy } from "../lib/translations";
@@ -76,6 +76,8 @@ function FAQAccordionItem({
         }`}
       >
         <button
+          aria-controls={`faq-answer-${index}`}
+          aria-expanded={isOpen}
           onClick={onToggle}
           className="w-full flex items-center justify-between p-6 text-left"
         >
@@ -95,23 +97,20 @@ function FAQAccordionItem({
           </motion.div>
         </button>
 
-        <AnimatePresence initial={false}>
-          {isOpen && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="overflow-hidden"
-            >
-              <div className="px-6 pb-6 pt-0">
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  {item.answer}
-                </p>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        <motion.div
+          id={`faq-answer-${index}`}
+          aria-hidden={!isOpen}
+          initial={false}
+          animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
+          transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="overflow-hidden"
+        >
+          <div className="px-6 pb-6 pt-0">
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              {item.answer}
+            </p>
+          </div>
+        </motion.div>
       </div>
     </motion.div>
   );

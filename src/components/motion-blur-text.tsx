@@ -42,6 +42,7 @@ export function MotionBlurText({
   const [selectedCharIndexes, setSelectedCharIndexes] = useState<Set<number>>(
     () => new Set()
   );
+  const [isAnimationSettled, setIsAnimationSettled] = useState(false);
 
   const [charStates, setCharStates] = useState<CharState[]>(
     letters.map(() => ({ blurX: 0, blurY: 0, offsetX: 0, offsetY: 0 }))
@@ -162,6 +163,19 @@ export function MotionBlurText({
   }, []);
 
   useEffect(() => {
+    setIsAnimationSettled(false);
+
+    const finalCharDelay = delay + Math.max(letters.length - 1, 0) * CHAR_STAGGER_SECONDS;
+    const settleTimeoutId = window.setTimeout(() => {
+      setIsAnimationSettled(true);
+    }, (finalCharDelay + ENTRY_BLUR_TRANSITION.duration + 0.12) * 1000);
+
+    return () => {
+      window.clearTimeout(settleTimeoutId);
+    };
+  }, [delay, letters.length]);
+
+  useEffect(() => {
     const updateSelectedChars = () => {
       window.cancelAnimationFrame(selectionFrameRef.current);
       selectionFrameRef.current = window.requestAnimationFrame(() => {
@@ -245,7 +259,7 @@ export function MotionBlurText({
               ease: ENTRY_EASE,
               delay: charDelay,
             }}
-            className="relative inline-block will-change-transform"
+            className={`relative inline-block ${!isAnimationSettled || hasHoverBlur ? "will-change-transform" : ""}`}
             style={{
               transformOrigin: "bottom",
               filter: hasHoverBlur ? `url(#${filterId}-blur-${i})` : "none",
@@ -255,7 +269,7 @@ export function MotionBlurText({
             }}
           >
             <motion.span
-              className={`motion-blur-text-glyph ${isSelected ? "is-selection-active" : ""}`}
+              className={`motion-blur-text-glyph ${!isAnimationSettled || hasHoverBlur || isSelected ? "is-motion-active" : ""} ${isSelected ? "is-selection-active" : ""}`}
               initial={{
                 filter: "blur(18px)",
                 y: "0.26em",

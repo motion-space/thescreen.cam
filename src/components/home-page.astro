@@ -100,13 +100,13 @@ const structuredData = {
         locale={locale}
         client:load
       />
-      <ZoomFeatureSection copy={t.home.zoom} client:load />
-      <DeviceMockupsSection copy={t.home.deviceMockups} client:visible />
-      <CustomControlsSection copy={t.home.controls} client:visible />
-      <PerformanceSection copy={t.home.performance} client:visible />
+      <ZoomFeatureSection copy={t.home.zoom} client:visible={{ rootMargin: "600px 0px" }} />
+      <DeviceMockupsSection copy={t.home.deviceMockups} client:visible={{ rootMargin: "600px 0px" }} />
+      <CustomControlsSection copy={t.home.controls} client:visible={{ rootMargin: "600px 0px" }} />
+      <PerformanceSection copy={t.home.performance} client:visible={{ rootMargin: "600px 0px" }} />
       <FeatureCardsSection copy={t.home.featureCards} client:only="react" />
-      <FAQSection copy={t.home.faq} client:visible />
-      <Footer copy={t.footer} locale={locale} client:visible />
+      <FAQSection copy={t.home.faq} client:visible={{ rootMargin: "600px 0px" }} />
+      <Footer copy={t.footer} locale={locale} client:visible={{ rootMargin: "600px 0px" }} />
     </main>
   </body>
 </html>

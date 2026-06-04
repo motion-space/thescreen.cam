@@ -1,5 +1,5 @@
 import type { CSSProperties, PointerEvent } from "react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 type SliderProps = {
@@ -44,32 +44,17 @@ export function Slider({
   formatter,
   onChange,
 }: SliderProps) {
-  const sliderRef = useRef<HTMLDivElement | null>(null);
   const visualRef = useRef<HTMLDivElement | null>(null);
-  const [sliderWidth, setSliderWidth] = useState(0);
   const [hoverTick, setHoverTick] = useState<HoverTick | null>(null);
   const range = Math.max(0.000001, max - min);
   const progress = clamp01((value - min) / range) * 100;
   const style = {
     "--slider-progress": `${progress}%`,
   } as CSSProperties;
-  const tickCount = Math.max(1, Math.floor(sliderWidth / SLIDER_TICK_SPACING_PX) + 1);
-  const ticks = useMemo(() => Array.from({ length: tickCount }, (_, index) => index), [tickCount]);
 
-  useEffect(() => {
-    const element = sliderRef.current;
-    if (!element) return undefined;
-
-    const updateWidth = () => setSliderWidth(element.getBoundingClientRect().width);
-    updateWidth();
-
-    const observer = new ResizeObserver(updateWidth);
-    observer.observe(element);
-
-    return () => observer.disconnect();
-  }, []);
-
-  const clearHoverTick = () => setHoverTick(null);
+  const clearHoverTick = () => {
+    setHoverTick((current) => (current === null ? current : null));
+  };
 
   const updateHoverTick = (event: PointerEvent<HTMLDivElement>) => {
     if (!ticksHoverable || disabled) return;
@@ -121,7 +106,6 @@ export function Slider({
 
   return (
     <div
-      ref={sliderRef}
       className={`trace-slider ${className}`}
       style={style}
       onPointerEnter={updateHoverTick}
@@ -140,18 +124,14 @@ export function Slider({
         onChange={(event) => onChange(Number(event.target.value))}
       />
       <div ref={visualRef} className="trace-slider-visual">
-        <div className="trace-slider-bars">
-          {ticks.map((tick) => (
-            <div
-              className={`trace-slider-tick ${
-                ticksHoverable && hoverTick?.index === tick ? "trace-slider-tick-hovered" : ""
-              }`}
-              key={tick}
-              style={{ left: `${tick * SLIDER_TICK_SPACING_PX}px` }}
-            />
-          ))}
-        </div>
+        <div className="trace-slider-bars" />
         <div className="trace-slider-fill" />
+        {ticksHoverable && hoverTick ? (
+          <div
+            className="trace-slider-hover-tick"
+            style={{ left: `${hoverTick.left}px` }}
+          />
+        ) : null}
         <div className="trace-slider-thumb" />
       </div>
       {ticksHoverable && hoverTick

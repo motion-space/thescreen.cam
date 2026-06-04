@@ -127,13 +127,20 @@
 }
 
 .header-mask span:nth-child(2) {
-  --mask-blur: 4px;
+  --mask-blur: 3px;
   --mask-stop: 50%;
 }
 
 .header-mask span:nth-child(3) {
-  --mask-blur: 10px;
+  --mask-blur: 6px;
   --mask-stop: 30%;
+}
+
+@media (max-width: 767px), (prefers-reduced-motion: reduce) {
+  .header-mask span {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
 }
 
 @layer components {
@@ -438,6 +445,9 @@
   .motion-blur-text-glyph {
     display: inline-block;
     transform-origin: 50% 100%;
+  }
+
+  .motion-blur-text-glyph.is-motion-active {
     will-change: filter, transform;
   }
 
@@ -564,14 +574,16 @@
   .trace-slider-bars {
     @apply absolute inset-0 overflow-visible rounded-l;
     clip-path: inset(0 0 0 calc(var(--slider-progress) + 1px));
-  }
-
-  .trace-slider-tick {
-    @apply absolute top-1/2 h-4 w-0.5 -translate-y-1/2 rounded-sm bg-white/10 transition-[height,background-color] duration-150;
-  }
-
-  .trace-slider-tick-hovered {
-    @apply h-6 bg-white/20;
+    background-image: repeating-linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0.1) 0,
+      rgba(255, 255, 255, 0.1) 2px,
+      transparent 2px,
+      transparent 4px
+    );
+    background-position-y: center;
+    background-repeat: repeat-x;
+    background-size: 4px 16px;
   }
 
   .trace-slider-tooltip {
@@ -586,6 +598,10 @@
 
   .trace-slider-tooltip-bottom::after {
     @apply absolute bottom-full left-1/2 h-0 w-0 -translate-x-1/2 border-x-4 border-b-4 border-x-transparent border-b-accent content-[''];
+  }
+
+  .trace-slider-hover-tick {
+    @apply absolute top-1/2 z-20 h-6 w-0.5 -translate-y-1/2 rounded-sm bg-white/20;
   }
 
   .trace-slider-thumb {

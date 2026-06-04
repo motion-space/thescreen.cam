@@ -89,6 +89,35 @@ type CursorMotionBlurVector = {
   strength: number;
 };
 
+type CameraMotionBlurStats = {
+  sampleCount: number;
+  strength: number;
+  visibleMotionLength: number;
+};
+
+type ZoomProfileFrame = {
+  cameraMotionPx: number;
+  cameraSamples: number;
+  cameraStrength: number;
+  cursorSamples: number;
+  dpr: number;
+  rafDeltaMs: number;
+  renderMs: number;
+  timeMs: number;
+};
+
+type ZoomProfileState = {
+  done: boolean;
+  frames: ZoomProfileFrame[];
+  mode: "full" | "tail";
+};
+
+declare global {
+  interface Window {
+    __screenCamZoomProfile?: ZoomProfileState;
+  }
+}
+
 type UIElement = {
   type: "rect" | "circle";
   x: number;
@@ -124,10 +153,20 @@ const DEMO_DURATION_MS = 7000;
 const ZOOM_SCALE = 2;
 const ZOOM_CLIP_START_MS = 900;
 const ZOOM_CLIP_END_MS = 6680;
-const ZOOM_OUT_START_MS = ZOOM_CLIP_END_MS - AUTO_ZOOM_MS;
+const FINAL_ZOOM_OUT_MS = 560;
+const ZOOM_OUT_START_MS = ZOOM_CLIP_END_MS - FINAL_ZOOM_OUT_MS;
+const CAMERA_RETURN_START_MS = ZOOM_OUT_START_MS - CAMERA_SETTLE_MS;
 const CAMERA_MOTION_BLUR_STRENGTH = 50;
 const CAMERA_MOTION_BLUR_TRANSITION_MS = 260;
 const CURSOR_MOTION_BLUR_STRENGTH = 50;
+const MAX_DEMO_PLAYBACK_STEP_MS = 1000 / 60;
+const CAMERA_MOTION_BLUR_MIN_VISIBLE_PX = 1.6;
+const CAMERA_MOTION_BLUR_FULL_SAMPLE_PX = 28;
+const CAMERA_MOTION_BLUR_MIN_SAMPLE_COUNT = 3;
+const CAMERA_MOTION_BLUR_MAX_SAMPLE_COUNT = 7;
+const CURSOR_MOTION_BLUR_FULL_SAMPLE_PX = 34;
+const CURSOR_MOTION_BLUR_MIN_SAMPLE_COUNT = 5;
+const CURSOR_MOTION_BLUR_MAX_SAMPLE_COUNT = 13;
 
 const POINTS = {
   center: { x: 0.5, y: 0.5 },
@@ -150,8 +189,8 @@ const CURSOR_PATH = [
   { timeMs: 2850, position: POINTS.second },
   { timeMs: 3750, position: POINTS.second },
   { timeMs: 4300, position: POINTS.third },
-  { timeMs: 5900, position: POINTS.third },
-  { timeMs: 6550, position: POINTS.center },
+  { timeMs: CAMERA_RETURN_START_MS, position: POINTS.third },
+  { timeMs: ZOOM_OUT_START_MS, position: POINTS.center },
   { timeMs: DEMO_DURATION_MS, position: POINTS.center },
 ];
 
@@ -162,8 +201,9 @@ const CAMERA_SEGMENTS = [
   { startMs: 2400, endMs: 2400 + CAMERA_SETTLE_MS, fromFocus: POINTS.first, toFocus: POINTS.second, fromZoom: ZOOM_SCALE, toZoom: ZOOM_SCALE },
   { startMs: 2400 + CAMERA_SETTLE_MS, endMs: 3900, fromFocus: POINTS.second, toFocus: POINTS.second, fromZoom: ZOOM_SCALE, toZoom: ZOOM_SCALE },
   { startMs: 3900, endMs: 3900 + CAMERA_SETTLE_MS, fromFocus: POINTS.second, toFocus: POINTS.third, fromZoom: ZOOM_SCALE, toZoom: ZOOM_SCALE },
-  { startMs: 3900 + CAMERA_SETTLE_MS, endMs: ZOOM_OUT_START_MS, fromFocus: POINTS.third, toFocus: POINTS.third, fromZoom: ZOOM_SCALE, toZoom: ZOOM_SCALE },
-  { startMs: ZOOM_OUT_START_MS, endMs: ZOOM_CLIP_END_MS, fromFocus: POINTS.third, toFocus: POINTS.center, fromZoom: ZOOM_SCALE, toZoom: 1 },
+  { startMs: 3900 + CAMERA_SETTLE_MS, endMs: CAMERA_RETURN_START_MS, fromFocus: POINTS.third, toFocus: POINTS.third, fromZoom: ZOOM_SCALE, toZoom: ZOOM_SCALE },
+  { startMs: CAMERA_RETURN_START_MS, endMs: ZOOM_OUT_START_MS, fromFocus: POINTS.third, toFocus: POINTS.center, fromZoom: ZOOM_SCALE, toZoom: ZOOM_SCALE },
+  { startMs: ZOOM_OUT_START_MS, endMs: ZOOM_CLIP_END_MS, fromFocus: POINTS.center, toFocus: POINTS.center, fromZoom: ZOOM_SCALE, toZoom: 1 },
   { startMs: ZOOM_CLIP_END_MS, endMs: DEMO_DURATION_MS, fromFocus: POINTS.center, toFocus: POINTS.center, fromZoom: 1, toZoom: 1 },
 ];
 
@@ -216,12 +256,15 @@ function CanvasZoomDemo({ copy }: { copy: ZoomFeatureCopy }) {
   const animationRef = useRef<number>(0);
   const isDemoVisibleRef = useRef(false);
   const isRenderLoopRunningRef = useRef(false);
-  const playStartRef = useRef<number | null>(null);
+  const hasInitializedPlaybackRef = useRef(false);
+  const lastPlaybackTimestampRef = useRef<number | null>(null);
   const playTimeRef = useRef(0);
   const previewTimeRef = useRef<number | null>(null);
   const activeTimelinePointerRef = useRef<number | null>(null);
   const activeTimelineTouchRef = useRef<number | null>(null);
   const uiElementsRef = useRef<UIElement[]>([]);
+  const zoomProfileRef = useRef<ZoomProfileState | false | null>(null);
+  const zoomProfileLastTimestampRef = useRef<number | null>(null);
 
   const generateUIElements = useCallback((width: number, height: number) => {
     const elements: UIElement[] = [];
@@ -370,17 +413,17 @@ function CanvasZoomDemo({ copy }: { copy: ZoomFeatureCopy }) {
     width: number,
     height: number,
     frame: MotionFrame
-  ) => {
+  ): number => {
     const point = projectPoint(frame.cursor, frame, width, height);
     const scale = 1.5 * frame.pressScale;
     const vector = cursorMotionBlurVector(frame, width, height);
 
     if (vector) {
-      drawCursorDirectionalMotionBlur(ctx, drawCursor, point.x, point.y, scale, vector);
-      return;
+      return drawCursorDirectionalMotionBlur(ctx, drawCursor, point.x, point.y, scale, vector);
     }
 
     drawCursor(ctx, point.x, point.y, scale);
+    return 1;
   }, [drawCursor]);
 
   const render = useCallback((timestamp: number) => {
@@ -393,8 +436,24 @@ function CanvasZoomDemo({ copy }: { copy: ZoomFeatureCopy }) {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    if (playStartRef.current === null) {
-      playStartRef.current = timestamp;
+    if (zoomProfileRef.current === null) {
+      zoomProfileRef.current = createZoomProfileState();
+    }
+    const zoomProfile = zoomProfileRef.current || null;
+    const renderStartMs = zoomProfile ? performance.now() : 0;
+    const rafDeltaMs = zoomProfile && zoomProfileLastTimestampRef.current !== null
+      ? timestamp - zoomProfileLastTimestampRef.current
+      : 0;
+    if (zoomProfile) {
+      zoomProfileLastTimestampRef.current = timestamp;
+    }
+
+    if (!hasInitializedPlaybackRef.current) {
+      hasInitializedPlaybackRef.current = true;
+      lastPlaybackTimestampRef.current = timestamp;
+      if (zoomProfile?.mode === "tail") {
+        playTimeRef.current = CAMERA_RETURN_START_MS - 160;
+      }
     }
 
     const rect = preview.getBoundingClientRect();
@@ -421,9 +480,16 @@ function CanvasZoomDemo({ copy }: { copy: ZoomFeatureCopy }) {
 
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-    const playTimeMs = previewTimeRef.current === null
-      ? (timestamp - playStartRef.current) % DEMO_DURATION_MS
-      : playTimeRef.current;
+    if (previewTimeRef.current === null) {
+      const previousTimestamp = lastPlaybackTimestampRef.current ?? timestamp;
+      const elapsedMs = Math.max(0, timestamp - previousTimestamp);
+      playTimeRef.current = wrapTime(playTimeRef.current + Math.min(elapsedMs, MAX_DEMO_PLAYBACK_STEP_MS));
+      lastPlaybackTimestampRef.current = timestamp;
+    } else {
+      lastPlaybackTimestampRef.current = timestamp;
+    }
+
+    const playTimeMs = playTimeRef.current;
     if (previewTimeRef.current === null) {
       playTimeRef.current = playTimeMs;
     }
@@ -445,7 +511,7 @@ function CanvasZoomDemo({ copy }: { copy: ZoomFeatureCopy }) {
     frameCtx.fillRect(0, 0, width, height);
     drawTransformedFrame(frameCtx, width, height, frame, 1);
 
-    drawCameraShaderMotionBlur(
+    const cameraBlurStats = drawCameraShaderMotionBlur(
       ctx,
       frameCanvas,
       cameraBlurCanvasRef,
@@ -457,7 +523,7 @@ function CanvasZoomDemo({ copy }: { copy: ZoomFeatureCopy }) {
       cameraShaderMotionBlur(effectiveTimeMs, frame, width, height)
     );
 
-    drawCursorWithBlur(ctx, width, height, frame);
+    const cursorSampleCount = drawCursorWithBlur(ctx, width, height, frame);
     drawZoomBadge(ctx, width, frame.zoom);
     drawStatusBadge(
       ctx,
@@ -467,6 +533,18 @@ function CanvasZoomDemo({ copy }: { copy: ZoomFeatureCopy }) {
       timestamp
     );
     drawTimelineCanvas(timelineCanvasRef.current, timelineContainerRef.current, playTimeMs, previewTimeRef.current, copy);
+    if (zoomProfile) {
+      recordZoomProfileFrame(zoomProfile, {
+        cameraMotionPx: cameraBlurStats.visibleMotionLength,
+        cameraSamples: cameraBlurStats.sampleCount,
+        cameraStrength: cameraBlurStats.strength,
+        cursorSamples: cursorSampleCount,
+        dpr,
+        rafDeltaMs,
+        renderMs: performance.now() - renderStartMs,
+        timeMs: effectiveTimeMs,
+      });
+    }
 
     if (isRenderLoopRunningRef.current) {
       animationRef.current = requestCanvasFrame(render);
@@ -474,22 +552,19 @@ function CanvasZoomDemo({ copy }: { copy: ZoomFeatureCopy }) {
   }, [copy, drawCursorWithBlur, drawTransformedFrame, generateUIElements]);
 
   const previewTimelineAtClientX = useCallback((clientX: number) => {
-    if (previewTimeRef.current === null && playStartRef.current !== null) {
-      playTimeRef.current = wrapTime(performance.now() - playStartRef.current);
-    }
     previewTimeRef.current = timelineTimeFromClientX(timelineContainerRef.current, clientX);
   }, []);
 
   const resumeTimelinePlayback = useCallback(() => {
     previewTimeRef.current = null;
-    playStartRef.current = performance.now() - playTimeRef.current;
+    lastPlaybackTimestampRef.current = performance.now();
   }, []);
 
   const seekTimelineToClientX = useCallback((clientX: number) => {
     const timeMs = timelineTimeFromClientX(timelineContainerRef.current, clientX);
-    playStartRef.current = performance.now() - timeMs;
     playTimeRef.current = timeMs;
     previewTimeRef.current = timeMs;
+    lastPlaybackTimestampRef.current = performance.now();
   }, []);
 
   const handleTimelinePointerMove = useCallback((event: ReactPointerEvent<HTMLDivElement>) => {
@@ -607,7 +682,7 @@ function CanvasZoomDemo({ copy }: { copy: ZoomFeatureCopy }) {
           stop();
         }
       },
-      { rootMargin: "240px" }
+      { rootMargin: "80px 0px" }
     );
 
     if (previewRef.current) {
@@ -1297,6 +1372,38 @@ function cancelCanvasFrame(handle: number) {
   window.clearTimeout(handle);
 }
 
+function createZoomProfileState(): ZoomProfileState | false {
+  if (typeof window === "undefined") return false;
+
+  const profileMode = new URLSearchParams(window.location.search).get("zoomProfile");
+  if (!profileMode) return false;
+
+  const state: ZoomProfileState = {
+    done: false,
+    frames: [],
+    mode: profileMode === "tail" ? "tail" : "full",
+  };
+  window.__screenCamZoomProfile = state;
+
+  return state;
+}
+
+function recordZoomProfileFrame(profile: ZoomProfileState, frame: ZoomProfileFrame) {
+  if (profile.done) return;
+
+  const isTailFrame = frame.timeMs >= CAMERA_RETURN_START_MS - 180 && frame.timeMs <= ZOOM_CLIP_END_MS + 180;
+  if (profile.mode === "tail" && !isTailFrame) return;
+
+  profile.frames.push(frame);
+  if (profile.frames.length > 180) {
+    profile.frames.shift();
+  }
+
+  if (profile.mode === "tail" && frame.timeMs >= ZOOM_CLIP_END_MS + 120) {
+    profile.done = true;
+  }
+}
+
 function ensureScratchCanvas(
   ref: { current: HTMLCanvasElement | null },
   width: number,
@@ -1322,7 +1429,7 @@ function drawCameraShaderMotionBlur(
   targetHeight: number,
   dpr: number,
   blur: CameraShaderMotionBlur
-) {
+): CameraMotionBlurStats {
   const drawSharpFrame = () => {
     ctx.globalAlpha = 1;
     ctx.globalCompositeOperation = "source-over";
@@ -1337,20 +1444,22 @@ function drawCameraShaderMotionBlur(
   const panMotion = { x: blur.panMotion.x * strength, y: blur.panMotion.y * strength };
   let panLength = Math.hypot(panMotion.x, panMotion.y);
 
-  if (strength <= 0.001 || (!hasZoomMotion && panLength < 0.05)) {
+  if (strength <= 0.001 || (!hasZoomMotion && panLength < CAMERA_MOTION_BLUR_MIN_VISIBLE_PX)) {
     drawSharpFrame();
-    return;
+    return { sampleCount: 1, strength, visibleMotionLength: panLength };
   }
 
   const maxMotion = lerp(4, 46, strength);
   let zoomMotion = blur.zoomMotion;
+  let visibleMotionLength = panLength;
 
   if (hasZoomMotion) {
     const maxRadius = maxDistanceToCorners(blur.focusPoint, width, height);
     const zoomMotionLength = Math.abs(zoomMotion) * strength * maxRadius;
-    if (zoomMotionLength < 0.05) {
+    visibleMotionLength = Math.max(zoomMotionLength, panLength);
+    if (visibleMotionLength < CAMERA_MOTION_BLUR_MIN_VISIBLE_PX) {
       drawSharpFrame();
-      return;
+      return { sampleCount: 1, strength, visibleMotionLength };
     }
 
     if (zoomMotionLength > maxMotion) {
@@ -1361,16 +1470,22 @@ function drawCameraShaderMotionBlur(
     panMotion.x *= scale;
     panMotion.y *= scale;
     panLength = maxMotion;
+    visibleMotionLength = panLength;
   }
 
   const blurCanvas = ensureScratchCanvas(blurCanvasRef, targetWidth, targetHeight);
   const blurCtx = blurCanvas.getContext("2d");
   if (!blurCtx) {
     drawSharpFrame();
-    return;
+    return { sampleCount: 1, strength, visibleMotionLength };
   }
 
-  const sampleCount = 41;
+  const sampleCount = motionBlurSampleCount(
+    visibleMotionLength,
+    CAMERA_MOTION_BLUR_MIN_SAMPLE_COUNT,
+    CAMERA_MOTION_BLUR_MAX_SAMPLE_COUNT,
+    CAMERA_MOTION_BLUR_FULL_SAMPLE_PX
+  );
 
   blurCtx.setTransform(1, 0, 0, 1, 0, 0);
   blurCtx.clearRect(0, 0, targetWidth, targetHeight);
@@ -1415,6 +1530,7 @@ function drawCameraShaderMotionBlur(
   ctx.filter = "none";
   ctx.drawImage(blurCanvas, 0, 0, width, height);
   ctx.restore();
+  return { sampleCount, strength, visibleMotionLength };
 }
 
 function cameraShaderMotionBlur(
@@ -1459,6 +1575,10 @@ function cameraMotionBlurTransitionMultiplier(timeMs: number): number {
   const segment = CAMERA_SEGMENTS.find((entry) => wrappedTime >= entry.startMs && wrappedTime <= entry.endMs);
 
   if (!segment || !isCameraMotionSegment(segment)) {
+    return 0;
+  }
+
+  if (segment.toZoom < segment.fromZoom) {
     return 0;
   }
 
@@ -1518,15 +1638,20 @@ function drawCursorDirectionalMotionBlur(
   y: number,
   scale: number,
   vector: CursorMotionBlurVector
-) {
+): number {
   const strength = clamp(vector.strength, 0, 1);
   const motionLength = Math.hypot(vector.dx, vector.dy);
   if (strength <= 0.001 || motionLength < 0.5) {
     drawCursor(ctx, x, y, scale);
-    return;
+    return 1;
   }
 
-  const sampleCount = 33;
+  const sampleCount = motionBlurSampleCount(
+    motionLength,
+    CURSOR_MOTION_BLUR_MIN_SAMPLE_COUNT,
+    CURSOR_MOTION_BLUR_MAX_SAMPLE_COUNT,
+    CURSOR_MOTION_BLUR_FULL_SAMPLE_PX
+  );
   const weightSum = shaderWeightSum(sampleCount);
 
   for (let index = sampleCount - 1; index >= 1; index -= 1) {
@@ -1536,6 +1661,7 @@ function drawCursorDirectionalMotionBlur(
   }
 
   drawCursor(ctx, x, y, scale);
+  return sampleCount;
 }
 
 function cursorMotionBlurStrengthMultiplier(timeMs: number): number {
@@ -1589,6 +1715,19 @@ function upperBoundCursorPath(timeMs: number): number {
   }
 
   return lower;
+}
+
+function motionBlurSampleCount(
+  motionLengthPx: number,
+  minSampleCount: number,
+  maxSampleCount: number,
+  fullSampleMotionPx: number
+): number {
+  const progress = smoothstep(motionLengthPx / Math.max(1, fullSampleMotionPx));
+  const sampleCount = Math.round(lerp(minSampleCount, maxSampleCount, progress));
+  const oddSampleCount = sampleCount % 2 === 0 ? sampleCount + 1 : sampleCount;
+
+  return Math.min(maxSampleCount, Math.max(minSampleCount, oddSampleCount));
 }
 
 function shaderWeightSum(sampleCount: number): number {
