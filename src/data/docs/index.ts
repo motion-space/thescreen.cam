@@ -16,7 +16,9 @@ export type DocsTimeline = {
   video: string | null;
 };
 
+export const basicsDocsTimeline = basicsTimeline as DocsTimeline;
+
 export const docsTimelines = [
-  basicsTimeline,
+  basicsDocsTimeline,
   zoomTimeline,
 ] as DocsTimeline[];

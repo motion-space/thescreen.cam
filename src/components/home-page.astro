@@ -1,10 +1,11 @@
 ---
 import "../styles/global.css";
-import { appStoreUrl, siteUrl } from "../lib/i18n";
+import { appStoreUrl, localizedPath, siteUrl } from "../lib/i18n";
 import type { Locale } from "../lib/i18n";
 import { getTranslation } from "../lib/translations";
 import { CustomControlsSection } from "./custom-controls-section";
 import { DeviceMockupsSection } from "./device-mockups-section";
+import { DocsBasicsSection } from "./docs-basics-section";
 import { FAQSection } from "./faq-section";
 import { FeatureCardsSection } from "./feature-cards-section";
 import { Footer } from "./footer";
@@ -21,6 +22,16 @@ interface Props {
 const { locale } = Astro.props;
 const t = getTranslation(locale);
 const meta = t.meta.home;
+const docsBasicsCopy = {
+  emptyVideoDescription: t.docs.emptyVideoDescription,
+  emptyVideoTitle: t.docs.emptyVideoTitle,
+  eyebrow: t.docs.eyebrow,
+  feature: t.docs.features.basics,
+  playback: t.docs.playback,
+  progressLabel: t.docs.progressLabel,
+  title: t.docs.title,
+  videoAriaLabel: t.docs.videoAriaLabel,
+};
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
@@ -68,6 +79,7 @@ const structuredData = {
       <CustomControlsSection copy={t.home.controls} client:visible={{ rootMargin: "-25% 0px" }} />
       <PerformanceSection copy={t.home.performance} client:visible={{ rootMargin: "-25% 0px" }} />
       <FeatureCardsSection copy={t.home.featureCards} client:visible={{ rootMargin: "-25% 0px" }} />
+      <DocsBasicsSection copy={docsBasicsCopy} docsHref={localizedPath(locale, "/docs")} client:visible />
       <FAQSection copy={t.home.faq} client:visible={{ rootMargin: "-25% 0px" }} />
       <Footer copy={t.footer} locale={locale} client:visible={{ rootMargin: "-25% 0px" }} />
     </main>

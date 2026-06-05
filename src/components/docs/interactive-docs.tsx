@@ -19,6 +19,19 @@ type InteractiveDocsProps = {
   timelines: DocsTimeline[];
 };
 
+type VideoDocPlayerCopy = Pick<
+  DocsCopy,
+  | "emptyVideoDescription"
+  | "emptyVideoTitle"
+  | "playback"
+  | "progressLabel"
+  | "videoAriaLabel"
+>;
+
+export type DocsFeatureDemoCopy = VideoDocPlayerCopy;
+
+type DocsFeatureCopy = DocsCopy["features"][DocsFeatureId];
+
 type ChapterView = DocsTimelineChapter & {
   description: string;
   index: number;
@@ -248,6 +261,8 @@ export function InteractiveDocs({ copy, timelines }: InteractiveDocsProps) {
                 >
                   <VideoDocPlayer
                     copy={copy}
+                    deferMediaUntilVisible={false}
+                    feature={copy.features[activeTimeline.featureId]}
                     requestedChapterId={requestedChapterId}
                     timeline={activeTimeline}
                     onChapterSelect={selectChapter}
@@ -262,23 +277,51 @@ export function InteractiveDocs({ copy, timelines }: InteractiveDocsProps) {
   );
 }
 
+export function DocsFeatureDemo({
+  copy,
+  deferMediaUntilVisible = false,
+  feature,
+  timeline,
+}: {
+  copy: DocsFeatureDemoCopy;
+  deferMediaUntilVisible?: boolean;
+  feature: DocsFeatureCopy;
+  timeline: DocsTimeline;
+}) {
+  return (
+    <VideoDocPlayer
+      copy={copy}
+      deferMediaUntilVisible={deferMediaUntilVisible}
+      feature={feature}
+      requestedChapterId={null}
+      timeline={timeline}
+      onChapterSelect={() => {}}
+    />
+  );
+}
+
 function VideoDocPlayer({
   copy,
+  deferMediaUntilVisible = false,
+  feature,
   requestedChapterId,
   timeline,
   onChapterSelect,
 }: {
-  copy: DocsCopy;
+  copy: VideoDocPlayerCopy;
+  deferMediaUntilVisible?: boolean;
+  feature: DocsFeatureCopy;
   requestedChapterId: string | null;
   timeline: DocsTimeline;
   onChapterSelect: (featureId: DocsFeatureId, chapterId: string) => void;
 }) {
+  const playerRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [canLoadMedia, setCanLoadMedia] = useState(!deferMediaUntilVisible);
   const [currentTime, setCurrentTime] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [videoError, setVideoError] = useState(false);
   const shouldReduceMotion = useReducedMotion();
-  const feature = copy.features[timeline.featureId];
   const duration = timeline.duration;
   const chapters = useMemo<ChapterView[]>(
     () =>
@@ -297,9 +340,39 @@ function VideoDocPlayer({
   const activeChapter = findChapterAtTime(chapters, currentTime);
   const activeChapterIndex = activeChapter?.index ?? 0;
   const currentChapter = activeChapter ?? chapters[0] ?? null;
-  const hasVideo = Boolean(timeline.video) && !videoError;
+  const hasConfiguredVideo = Boolean(timeline.video);
+  const hasVideo = hasConfiguredVideo && !videoError;
+  const canControlVideo = hasVideo && canLoadMedia;
   const progress =
     duration > 0 ? Math.min(1, Math.max(0, currentTime / duration)) : 0;
+
+  useEffect(() => {
+    setCanLoadMedia(!deferMediaUntilVisible);
+
+    if (!deferMediaUntilVisible) return;
+
+    const player = playerRef.current;
+    if (!player || typeof IntersectionObserver === "undefined") {
+      setCanLoadMedia(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+
+        setCanLoadMedia(true);
+        observer.disconnect();
+      },
+      { threshold: 0.01 },
+    );
+
+    observer.observe(player);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [deferMediaUntilVisible, timeline.featureId]);
 
   useEffect(() => {
     setCurrentTime(0);
@@ -322,7 +395,7 @@ function VideoDocPlayer({
     onChapterSelect(timeline.featureId, chapter.id);
 
     const video = videoRef.current;
-    if (!video || !hasVideo) return;
+    if (!video || !canControlVideo) return;
 
     video.currentTime = chapter.start;
 
@@ -336,7 +409,7 @@ function VideoDocPlayer({
 
   const togglePlayback = () => {
     const video = videoRef.current;
-    if (!video || !hasVideo) return;
+    if (!video || !canControlVideo) return;
 
     if (video.paused) {
       void video
@@ -353,7 +426,7 @@ function VideoDocPlayer({
     const firstChapter = chapters[0];
     if (!firstChapter) return;
 
-    seekToChapter(firstChapter, hasVideo);
+    seekToChapter(firstChapter, canControlVideo);
   };
 
   const seekRelativeChapter = (direction: -1 | 1) => {
@@ -362,7 +435,7 @@ function VideoDocPlayer({
       Math.max(0, activeChapterIndex + direction),
     );
     const nextChapter = chapters[nextIndex];
-    if (nextChapter) seekToChapter(nextChapter, hasVideo);
+    if (nextChapter) seekToChapter(nextChapter, canControlVideo);
   };
 
   const getMarkerX = (chapter: ChapterView, isExpanded: boolean) => {
@@ -375,7 +448,7 @@ function VideoDocPlayer({
   };
 
   return (
-    <article className="grid gap-5">
+    <article ref={playerRef} className="grid gap-5">
       <div className="overflow-visible border border-border/70 bg-card">
         <div className="relative aspect-video w-full bg-black">
           {hasVideo ? (
@@ -383,11 +456,11 @@ function VideoDocPlayer({
               ref={videoRef}
               aria-label={copy.videoAriaLabel}
               className="h-full w-full object-contain"
-              poster={timeline.poster ?? undefined}
-              preload="metadata"
+              poster={canLoadMedia ? timeline.poster ?? undefined : undefined}
+              preload={canLoadMedia ? "metadata" : "none"}
               playsInline
               muted
-              src={timeline.video ?? undefined}
+              src={canLoadMedia ? timeline.video ?? undefined : undefined}
               onEnded={() => setIsPlaying(false)}
               onError={() => {
                 setVideoError(true);
@@ -437,7 +510,7 @@ function VideoDocPlayer({
               <IconButton
                 label={isPlaying ? copy.playback.pause : copy.playback.play}
                 onClick={togglePlayback}
-                disabled={!hasVideo}
+                disabled={!canControlVideo}
               >
                 {isPlaying ? (
                   <Pause className="h-4 w-4" aria-hidden="true" />
@@ -492,7 +565,7 @@ function VideoDocPlayer({
                   type="button"
                   key={chapter.id}
                   aria-label={`${String(chapter.index + 1).padStart(2, "0")} ${chapter.title}`}
-                  onClick={() => seekToChapter(chapter, hasVideo)}
+                  onClick={() => seekToChapter(chapter, canControlVideo)}
                   className="docs-marker absolute top-[calc(50%-5.25px)] z-20"
                   style={
                     {
