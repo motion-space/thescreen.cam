@@ -1,5 +1,6 @@
 "use client";
 
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { appStoreUrl } from "../lib/i18n";
 import type { Locale } from "../lib/i18n";
@@ -26,6 +27,8 @@ export function Hero({
   locale,
 }: HeroProps) {
   const isChineseHero = locale === "zh-Hans";
+  const shouldReduceMotion = useReducedMotion();
+  const shouldAnimateHero = shouldReduceMotion !== true;
 
   return (
     <section className="relative min-h-screen bg-background overflow-hidden">
@@ -45,21 +48,11 @@ export function Hero({
             {copy.titleLines.map((line, lineIndex) => (
               <span className="hero-title-line" key={`${line[0]}-${line[1]}`}>
                 <span className="hero-title-part">
-                  <MotionBlurText
-                    animateEntrance={false}
-                    delay={0.2 + lineIndex * 0.32}
-                  >
-                    {line[0]}
-                  </MotionBlurText>
+                  <MotionBlurText delay={0.2 + lineIndex * 0.32}>{line[0]}</MotionBlurText>
                 </span>
                 <span className="hero-title-space" aria-hidden="true"> </span>
                 <span className="hero-title-part">
-                  <MotionBlurText
-                    animateEntrance={false}
-                    delay={0.36 + lineIndex * 0.3}
-                  >
-                    {line[1]}
-                  </MotionBlurText>
+                  <MotionBlurText delay={0.36 + lineIndex * 0.3}>{line[1]}</MotionBlurText>
                 </span>
               </span>
             ))}
@@ -67,12 +60,22 @@ export function Hero({
         </div>
 
         {/* Bottom section */}
-        <div className="hero-ssr-visible absolute bottom-8 md:bottom-12 left-6 md:left-12 right-6 md:right-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
+        <motion.div
+          initial={shouldAnimateHero ? { opacity: 0, y: 40 } : false}
+          animate={shouldAnimateHero ? { opacity: 1, y: 0 } : undefined}
+          transition={shouldAnimateHero ? { duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.8 } : undefined}
+          className="hero-ssr-visible absolute bottom-8 md:bottom-12 left-6 md:left-12 right-6 md:right-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-8"
+        >
           {/* Left side info */}
           <div className="flex flex-col gap-6 max-w-4xl">
-            <p className="max-w-[56rem] text-sm leading-relaxed text-muted-foreground">
+            <motion.p
+              className="max-w-[56rem] text-sm leading-relaxed text-muted-foreground"
+              initial={shouldAnimateHero ? { opacity: 0 } : false}
+              animate={shouldAnimateHero ? { opacity: 1 } : undefined}
+              transition={shouldAnimateHero ? { duration: 1, delay: 1 } : undefined}
+            >
               {copy.tagline}
-            </p>
+            </motion.p>
             <MagneticButton
               className="liquid-glass-cta group flex w-fit cursor-pointer items-center gap-3 px-6 py-3 text-sm font-medium"
               onClick={() => {
@@ -89,7 +92,12 @@ export function Hero({
           </div>
 
           {/* Right side features */}
-          <div className="flex gap-8 md:gap-12">
+          <motion.div
+            className="flex gap-8 md:gap-12"
+            initial={shouldAnimateHero ? { opacity: 0 } : false}
+            animate={shouldAnimateHero ? { opacity: 1 } : undefined}
+            transition={shouldAnimateHero ? { duration: 1, delay: 1.2 } : undefined}
+          >
             <div className="flex flex-col gap-1">
               <span className="text-xs text-muted-foreground tracking-widest uppercase">{copy.builtWithLabel}</span>
               <span className="text-sm text-foreground font-medium">{copy.builtWithValue}</span>
@@ -98,12 +106,12 @@ export function Hero({
               <span className="text-xs text-muted-foreground tracking-widest uppercase">{copy.systemLabel}</span>
               <span className="text-sm text-foreground font-medium">{copy.systemValue}</span>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
 
       {/* Scan line effect */}
-      <div
+      <motion.div
         className="absolute inset-0 pointer-events-none z-20"
         style={{
           background: "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.01) 2px, rgba(255,255,255,0.01) 4px)",

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 
 interface MotionBlurTextProps {
@@ -34,6 +34,8 @@ export function MotionBlurText({
 }: MotionBlurTextProps) {
   const filterId = useId();
   const letters = useMemo(() => children.split(""), [children]);
+  const shouldReduceMotion = useReducedMotion();
+  const shouldAnimateEntrance = animateEntrance && shouldReduceMotion !== true;
   const containerRef = useRef<HTMLDivElement>(null);
   const charRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const lastMousePos = useRef({ x: 0, y: 0 });
@@ -44,7 +46,7 @@ export function MotionBlurText({
   const [selectedCharIndexes, setSelectedCharIndexes] = useState<Set<number>>(
     () => new Set()
   );
-  const [isAnimationSettled, setIsAnimationSettled] = useState(!animateEntrance);
+  const [isAnimationSettled, setIsAnimationSettled] = useState(!shouldAnimateEntrance);
 
   const [charStates, setCharStates] = useState<CharState[]>(
     letters.map(() => ({ blurX: 0, blurY: 0, offsetX: 0, offsetY: 0 }))
@@ -165,7 +167,7 @@ export function MotionBlurText({
   }, []);
 
   useEffect(() => {
-    if (!animateEntrance) {
+    if (!shouldAnimateEntrance) {
       setIsAnimationSettled(true);
       return;
     }
@@ -180,7 +182,7 @@ export function MotionBlurText({
     return () => {
       window.clearTimeout(settleTimeoutId);
     };
-  }, [animateEntrance, delay, letters.length]);
+  }, [delay, letters.length, shouldAnimateEntrance]);
 
   useEffect(() => {
     const updateSelectedChars = () => {
@@ -217,6 +219,14 @@ export function MotionBlurText({
     };
   }, []);
 
+  const activeFilterIndexes = charStates.reduce<number[]>((indexes, state, i) => {
+    if (Math.abs(state.blurX) > 0.5 || Math.abs(state.blurY) > 0.5) {
+      indexes.push(i);
+    }
+
+    return indexes;
+  }, []);
+
   return (
     <div
       ref={containerRef}
@@ -224,26 +234,27 @@ export function MotionBlurText({
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      {/* SVG Filters - one for each character */}
-      <svg className="absolute w-0 h-0" aria-hidden="true">
-        <defs>
-          {letters.map((_, i) => (
-            <filter
-              key={`${filterId}-${i}`}
-              id={`${filterId}-blur-${i}`}
-              x="-80%"
-              y="-160%"
-              width="260%"
-              height="420%"
-            >
-              <feGaussianBlur
-                in="SourceGraphic"
-                stdDeviation={`${Math.abs(charStates[i]?.blurX || 0)} ${Math.abs(charStates[i]?.blurY || 0)}`}
-              />
-            </filter>
-          ))}
-        </defs>
-      </svg>
+      {activeFilterIndexes.length > 0 && (
+        <svg className="absolute w-0 h-0" aria-hidden="true">
+          <defs>
+            {activeFilterIndexes.map((i) => (
+              <filter
+                key={`${filterId}-${i}`}
+                id={`${filterId}-blur-${i}`}
+                x="-80%"
+                y="-160%"
+                width="260%"
+                height="420%"
+              >
+                <feGaussianBlur
+                  in="SourceGraphic"
+                  stdDeviation={`${Math.abs(charStates[i]?.blurX || 0)} ${Math.abs(charStates[i]?.blurY || 0)}`}
+                />
+              </filter>
+            ))}
+          </defs>
+        </svg>
+      )}
 
       {/* Characters */}
       {letters.map((letter, i) => {
@@ -259,10 +270,10 @@ export function MotionBlurText({
             ref={(el) => {
               charRefs.current[i] = el;
             }}
-            initial={animateEntrance ? { y: 200, rotateX: -90, opacity: 0 } : false}
-            animate={animateEntrance ? { y: 0, rotateX: 0, opacity: 1 } : undefined}
+            initial={shouldAnimateEntrance ? { y: 200, rotateX: -90, opacity: 0 } : false}
+            animate={shouldAnimateEntrance ? { y: 0, rotateX: 0, opacity: 1 } : undefined}
             transition={
-              animateEntrance
+              shouldAnimateEntrance
                 ? {
                     duration: 1,
                     ease: ENTRY_EASE,
@@ -282,7 +293,7 @@ export function MotionBlurText({
             <motion.span
               className={`motion-blur-text-glyph ${!isAnimationSettled || hasHoverBlur || isSelected ? "is-motion-active" : ""} ${isSelected ? "is-selection-active" : ""}`}
               initial={
-                animateEntrance
+                shouldAnimateEntrance
                   ? {
                       filter: "blur(18px)",
                       y: "0.26em",
@@ -291,7 +302,7 @@ export function MotionBlurText({
                   : false
               }
               animate={
-                animateEntrance
+                shouldAnimateEntrance
                   ? {
                       filter: ["blur(18px)", "blur(9px)", "blur(0px)"],
                       y: ["0.26em", "0.11em", "0em"],
@@ -300,7 +311,7 @@ export function MotionBlurText({
                   : undefined
               }
               transition={
-                animateEntrance
+                shouldAnimateEntrance
                   ? {
                       ...ENTRY_BLUR_TRANSITION,
                       delay: charDelay,
