@@ -1,0 +1,64 @@
+---
+import "../styles/global.css";
+import { docsTimelines } from "../data/docs";
+import { localizedPath, siteUrl } from "../lib/i18n";
+import type { Locale } from "../lib/i18n";
+import { getTranslation } from "../lib/translations";
+import { Footer } from "./footer";
+import PageHead from "./page-head.astro";
+import { SiteHeader } from "./site-header";
+import { SmoothScroll } from "./smooth-scroll";
+import { InteractiveDocs } from "./docs/interactive-docs";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getTranslation(locale);
+const meta = t.meta.docs;
+const path = "/docs";
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: t.docs.title,
+  url: `${siteUrl}${localizedPath(locale, path)}`,
+  itemListElement: docsTimelines.map((timeline, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: t.docs.features[timeline.featureId].title,
+    description: t.docs.features[timeline.featureId].summary,
+  })),
+};
+---
+
+<!doctype html>
+<html lang={locale} class="dark">
+  <head>
+    <PageHead
+      locale={locale}
+      path={path}
+      title={meta.title}
+      description={meta.description}
+      robots="index, follow, max-image-preview:large"
+      structuredData={structuredData}
+    />
+  </head>
+  <body class="font-sans antialiased bg-background text-foreground">
+    <SmoothScroll client:media="(hover: hover) and (pointer: fine)" />
+    <a class="skip-link" href="#main">{t.common.skipToContent}</a>
+    <SiteHeader
+      copy={t.header}
+      currentPath={path}
+      languageLabel={t.footer.language}
+      locale={locale}
+      client:load
+    />
+
+    <main id="main">
+      <InteractiveDocs copy={t.docs} timelines={docsTimelines} client:load />
+    </main>
+
+    <Footer copy={t.footer} locale={locale} client:visible={{ rootMargin: "-25% 0px" }} />
+  </body>
+</html>

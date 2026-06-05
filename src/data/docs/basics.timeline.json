@@ -1,0 +1,53 @@
+{
+  "featureId": "basics",
+  "video": "/docs/basics/demo.mp4",
+  "poster": "/docs/basics/poster.jpg",
+  "duration": 51.58,
+  "chapters": [
+    {
+      "id": "preview",
+      "start": 0,
+      "end": 5
+    },
+    {
+      "id": "sidebar",
+      "start": 5,
+      "end": 6
+    },
+    {
+      "id": "screen-settings",
+      "start": 6,
+      "end": 10
+    },
+    {
+      "id": "device-settings",
+      "start": 10,
+      "end": 17
+    },
+    {
+      "id": "keyboard-settings",
+      "start": 17,
+      "end": 21
+    },
+    {
+      "id": "beauty-settings",
+      "start": 21,
+      "end": 26
+    },
+    {
+      "id": "mouse-settings",
+      "start": 26,
+      "end": 29
+    },
+    {
+      "id": "animation-settings",
+      "start": 29,
+      "end": 35
+    },
+    {
+      "id": "tracks",
+      "start": 35,
+      "end": 51.58
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "featureId": "zoom",
+  "video": "/docs/zoom/demo.mp4",
+  "poster": "/docs/zoom/poster.jpg",
+  "duration": 60,
+  "chapters": [
+    {
+      "id": "zoom-track",
+      "start": 0,
+      "end": 8
+    },
+    {
+      "id": "delete-clip",
+      "start": 8,
+      "end": 12
+    },
+    {
+      "id": "create-clip",
+      "start": 12,
+      "end": 18
+    },
+    {
+      "id": "merge-clips",
+      "start": 18,
+      "end": 26
+    },
+    {
+      "id": "manual-mode",
+      "start": 26,
+      "end": 33
+    },
+    {
+      "id": "select-anchor",
+      "start": 33,
+      "end": 36
+    },
+    {
+      "id": "adjust-center",
+      "start": 36,
+      "end": 45
+    },
+    {
+      "id": "adjust-scale-wheel",
+      "start": 45,
+      "end": 54
+    },
+    {
+      "id": "adjust-scale-panel",
+      "start": 54,
+      "end": 60
+    }
+  ]
+}

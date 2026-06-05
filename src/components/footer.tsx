@@ -32,6 +32,7 @@ export function Footer({
       { label: copy.productLinks.faq, href: `${homePath}#faq` },
     ],
     resources: [
+      { label: copy.resourceLinks.docs, href: localizedPath(locale, "/docs") },
       { label: copy.resourceLinks.motionBlurMask, href: localizedPath(locale, "/motion-blur-mask") },
       { label: copy.resourceLinks.appStore, href: appStoreUrl, external: true },
       { label: copy.resourceLinks.changelog, href: localizedPath(locale, "/changelog") },

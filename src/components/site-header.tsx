@@ -77,10 +77,9 @@ export function SiteHeader({
   const [mobilePanel, setMobilePanel] = useState<MobilePanel>("main");
   const [panelDirection, setPanelDirection] = useState(1);
   const navLinks = [
-    { label: copy.nav.changelog, href: localizedPath(locale, "/changelog") },
-    { label: copy.nav.support, href: localizedPath(locale, "/support") },
-    { label: copy.nav.privacy, href: localizedPath(locale, "/privacy") },
-    { label: copy.nav.terms, href: localizedPath(locale, "/terms") },
+    { label: copy.nav.docs, href: localizedPath(locale, "/docs"), path: "/docs" },
+    { label: copy.nav.changelog, href: localizedPath(locale, "/changelog"), path: "/changelog" },
+    { label: copy.nav.support, href: localizedPath(locale, "/support"), path: "/support" },
   ];
 
   useEffect(() => {
@@ -170,22 +169,29 @@ export function SiteHeader({
           </motion.a>
 
           <div className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 text-sm text-muted-foreground md:flex">
-            {navLinks.map((item) => (
-              <motion.a
-                key={item.label}
-                href={item.href}
-                className="relative transition-colors duration-300 hover:text-foreground"
-                whileHover="hover"
-              >
-                {item.label}
-                <motion.span
-                  className="absolute -bottom-1 left-0 h-px w-full origin-left bg-foreground"
-                  initial={{ scaleX: 0 }}
-                  variants={{ hover: { scaleX: 1 } }}
-                  transition={{ duration: 0.3 }}
-                />
-              </motion.a>
-            ))}
+            {navLinks.map((item) => {
+              const isActive = currentPath === item.path;
+
+              return (
+                <motion.a
+                  key={item.label}
+                  href={item.href}
+                  className={`relative transition-colors duration-300 hover:text-foreground ${
+                    isActive ? "text-foreground" : ""
+                  }`}
+                  aria-current={isActive ? "page" : undefined}
+                  whileHover="hover"
+                >
+                  {item.label}
+                  <motion.span
+                    className="absolute -bottom-1 left-0 h-px w-full origin-left bg-foreground"
+                    initial={{ scaleX: 0 }}
+                    variants={{ hover: { scaleX: 1 } }}
+                    transition={{ duration: 0.3 }}
+                  />
+                </motion.a>
+              );
+            })}
 
             <label className="sr-only" htmlFor="site-language">
               {languageLabel}

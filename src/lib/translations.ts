@@ -11,6 +11,7 @@ export type HeaderCopy = {
   menuAria: string;
   nav: {
     changelog: string;
+    docs: string;
     privacy: string;
     support: string;
     terms: string;
@@ -43,6 +44,7 @@ export type FooterCopy = {
   resourceLinks: {
     appStore: string;
     changelog: string;
+    docs: string;
     motionBlurMask: string;
     support: string;
   };
@@ -214,6 +216,41 @@ export type MotionBlurMaskToolCopy = {
   yLabel: string;
 };
 
+export type DocsFeatureId = "basics" | "record" | "zoom" | "camera" | "shortcuts" | "export";
+
+export type DocsCopy = {
+  chaptersTitle: string;
+  description: string;
+  emptyVideoDescription: string;
+  emptyVideoTitle: string;
+  eyebrow: string;
+  featureListAria: string;
+  playback: {
+    next: string;
+    pause: string;
+    play: string;
+    previous: string;
+    restart: string;
+  };
+  progressLabel: string;
+  title: string;
+  videoAriaLabel: string;
+  features: Record<
+    DocsFeatureId,
+    {
+      chapters: Record<
+        string,
+        {
+          description: string;
+          title: string;
+        }
+      >;
+      summary: string;
+      title: string;
+    }
+  >;
+};
+
 export type LegalPageCopy = {
   eyebrow: string;
   supportChannelsAria?: string;
@@ -244,6 +281,7 @@ type LocaleTranslation = {
   };
   footer: FooterCopy;
   header: HeaderCopy;
+  docs: DocsCopy;
   home: {
     controls: CustomControlsCopy;
     deviceMockups: DeviceMockupsCopy;
@@ -261,6 +299,7 @@ type LocaleTranslation = {
   };
   meta: {
     changelog: PageMeta;
+    docs: PageMeta;
     home: PageMeta;
     motionBlurMask: PageMeta;
     privacy: PageMeta;
@@ -290,6 +329,7 @@ export const translations: Record<Locale, LocaleTranslation> = {
       menuAria: "Open menu",
       nav: {
         changelog: "Changelog",
+        docs: "Docs",
         privacy: "Privacy",
         support: "Support",
         terms: "Terms",
@@ -321,6 +361,7 @@ export const translations: Record<Locale, LocaleTranslation> = {
       resourceLinks: {
         appStore: "App Store",
         changelog: "Changelog",
+        docs: "Docs",
         motionBlurMask: "Motion Blur Mask",
         support: "Support",
       },
@@ -331,6 +372,11 @@ export const translations: Record<Locale, LocaleTranslation> = {
       changelog: {
         title: "Changelog - ScreenCam",
         description: "Follow ScreenCam release notes, product improvements, bug fixes, and update history.",
+      },
+      docs: {
+        title: "Docs - ScreenCam",
+        description:
+          "Learn ScreenCam with guided video walkthroughs, chaptered steps, and interactive playback.",
       },
       home: {
         title: "ScreenCam - Native macOS screen recording with directed zoom",
@@ -356,6 +402,184 @@ export const translations: Record<Locale, LocaleTranslation> = {
         title: "Terms of Use - ScreenCam",
         description:
           "ScreenCam's terms of use explain the app license, subscriptions, purchases, and support contact information.",
+      },
+    },
+    docs: {
+      chaptersTitle: "Steps",
+      description:
+        "Watch the workflow, then jump straight to the step you need.",
+      emptyVideoDescription:
+        "Drop the demo file into public/docs for this feature, then add the video path and calibrated timestamps to the timeline JSON.",
+      emptyVideoTitle: "Video coming soon",
+      eyebrow: "Docs",
+      featureListAria: "Documentation topics",
+      playback: {
+        next: "Next step",
+        pause: "Pause",
+        play: "Play",
+        previous: "Previous step",
+        restart: "Restart",
+      },
+      progressLabel: "Progress",
+      title: "ScreenCam Guides.",
+      videoAriaLabel: "Documentation demo video",
+      features: {
+        basics: {
+          title: "Basics",
+          summary: "Get familiar with the preview, sidebar, settings panels, and timeline tracks.",
+          chapters: {
+            preview: {
+              title: "Preview",
+              description: "Use the preview area to watch the current final export result in real time.",
+            },
+            sidebar: {
+              title: "Sidebar",
+              description: "The main configuration panels live in the sidebar.",
+            },
+            "screen-settings": {
+              title: "Screen settings",
+              description: "Configure the screen content, including wallpaper, margins, size, and related layout options.",
+            },
+            "device-settings": {
+              title: "Device settings",
+              description: "Wrap the screen in a device frame, choose the device, and tune frame styling such as the background.",
+            },
+            "keyboard-settings": {
+              title: "Keyboard settings",
+              description: "Set how recorded shortcuts appear, including their default size and position.",
+            },
+            "beauty-settings": {
+              title: "Beauty settings",
+              description: "After camera recording is enabled, apply subtle portrait enhancements to the camera image.",
+            },
+            "mouse-settings": {
+              title: "Mouse settings",
+              description: "Adjust the basic visual style for the mouse pointer.",
+            },
+            "animation-settings": {
+              title: "Animation settings",
+              description: "Customize camera motion, including motion blur strength and custom curves.",
+            },
+            tracks: {
+              title: "Tracks",
+              description: "Recording, camera, system audio, microphone, zoom, and keyboard events appear here as timeline clips.",
+            },
+          },
+        },
+        record: {
+          title: "Record",
+          summary: "Set up a capture, choose the source, and start recording.",
+          chapters: {
+            "prepare-capture": {
+              title: "Prepare the capture",
+              description: "Open ScreenCam and confirm the recording controls are ready before selecting a source.",
+            },
+            "choose-source": {
+              title: "Choose a source",
+              description: "Pick the display, window, area, camera, microphone, and system audio options for the recording.",
+            },
+            "start-recording": {
+              title: "Start recording",
+              description: "Start the capture and verify the recording state before moving into the workflow.",
+            },
+          },
+        },
+        zoom: {
+          title: "Zoom",
+          summary: "Add timeline anchors and tune how the camera moves through the recording.",
+          chapters: {
+            "zoom-track": {
+              title: "Zoom track",
+              description: "Create and delete zoom clips freely on the zoom track.",
+            },
+            "delete-clip": {
+              title: "Delete",
+              description: "Select a clip, then press Backspace or Delete to remove it.",
+            },
+            "create-clip": {
+              title: "Create",
+              description: "Click or drag on an empty area to create a new zoom clip.",
+            },
+            "merge-clips": {
+              title: "Merge",
+              description: "Resize or drag a clip until it intersects another clip, then release to confirm the merge.",
+            },
+            "manual-mode": {
+              title: "Manual mode",
+              description: "Switch from automatic motion to manual mode and customize each anchor's count, center, and scale.",
+            },
+            "select-anchor": {
+              title: "Select an anchor",
+              description: "Select an anchor to edit its individual zoom settings.",
+            },
+            "adjust-center": {
+              title: "Adjust center",
+              description: "Drag directly in the preview to set the visual center of the zoom.",
+            },
+            "adjust-scale-wheel": {
+              title: "Adjust scale",
+              description: "Use the mouse wheel in the preview to control the zoom scale.",
+            },
+            "adjust-scale-panel": {
+              title: "Adjust scale in settings",
+              description: "Select an anchor, then tune the scale slider in the right settings panel.",
+            },
+          },
+        },
+        camera: {
+          title: "Camera",
+          summary: "Shape the camera overlay and apply lightweight appearance adjustments.",
+          chapters: {
+            "enable-camera": {
+              title: "Enable the camera",
+              description: "Turn on the camera layer and position it where it supports the recording.",
+            },
+            "shape-frame": {
+              title: "Shape the frame",
+              description: "Switch between frame shapes and size the camera overlay for the scene.",
+            },
+            "apply-beauty": {
+              title: "Apply beauty effects",
+              description: "Tune subtle appearance settings while keeping the preview aligned with the final export.",
+            },
+          },
+        },
+        shortcuts: {
+          title: "Shortcuts",
+          summary: "Use keyboard actions to control capture without breaking flow.",
+          chapters: {
+            "capture-shortcut": {
+              title: "Start with a shortcut",
+              description: "Trigger recording controls from the keyboard instead of reaching for the toolbar.",
+            },
+            "pause-resume": {
+              title: "Pause or resume",
+              description: "Use shortcut actions to pause and continue capture during longer recordings.",
+            },
+            "finish-recording": {
+              title: "Finish the take",
+              description: "Stop the recording and move to the editor without losing context.",
+            },
+          },
+        },
+        export: {
+          title: "Export",
+          summary: "Review the result, choose output settings, and export the recording.",
+          chapters: {
+            "choose-format": {
+              title: "Choose the format",
+              description: "Select the export format and output settings for the destination.",
+            },
+            "review-preview": {
+              title: "Review the preview",
+              description: "Check the final preview before rendering the file.",
+            },
+            "export-file": {
+              title: "Export the file",
+              description: "Render the recording and save the exported result.",
+            },
+          },
+        },
       },
     },
     home: {
@@ -766,6 +990,7 @@ export const translations: Record<Locale, LocaleTranslation> = {
       menuAria: "打开菜单",
       nav: {
         changelog: "更新日志",
+        docs: "文档",
         privacy: "隐私",
         support: "支持",
         terms: "条款",
@@ -797,6 +1022,7 @@ export const translations: Record<Locale, LocaleTranslation> = {
       resourceLinks: {
         appStore: "App Store",
         changelog: "更新日志",
+        docs: "文档",
         motionBlurMask: "运动模糊遮罩",
         support: "支持",
       },
@@ -807,6 +1033,10 @@ export const translations: Record<Locale, LocaleTranslation> = {
       changelog: {
         title: "更新日志 - ScreenCam",
         description: "查看 ScreenCam 的版本说明、产品改进、问题修复和更新历史。",
+      },
+      docs: {
+        title: "文档 - ScreenCam",
+        description: "通过带章节的视频演示和互动播放，快速上手 ScreenCam 的核心功能。",
       },
       home: {
         title: "ScreenCam - 带定向变焦的原生 macOS 屏幕录制",
@@ -829,6 +1059,184 @@ export const translations: Record<Locale, LocaleTranslation> = {
       terms: {
         title: "使用条款 - ScreenCam",
         description: "ScreenCam 使用条款说明 app 授权、订阅、购买和支持联系方式。",
+      },
+    },
+    docs: {
+      chaptersTitle: "步骤",
+      description:
+        "看一遍流程，直接跳到需要的步骤。",
+      emptyVideoDescription:
+        "把这个功能的演示视频放到 public/docs，然后在 timeline JSON 里填入视频路径和校准后的时间点。",
+      emptyVideoTitle: "视频稍后添加",
+      eyebrow: "文档",
+      featureListAria: "文档主题",
+      playback: {
+        next: "下一步",
+        pause: "暂停",
+        play: "播放",
+        previous: "上一步",
+        restart: "重新开始",
+      },
+      progressLabel: "进度",
+      title: "ScreenCam 指南。",
+      videoAriaLabel: "文档演示视频",
+      features: {
+        basics: {
+          title: "基础布局",
+          summary: "了解预览画面、侧边栏、各类设置面板和时间线轨道。",
+          chapters: {
+            preview: {
+              title: "预览画面",
+              description: "用来实时预览当前最终导出的效果。",
+            },
+            sidebar: {
+              title: "侧边栏",
+              description: "所有的主要配置都在这里。",
+            },
+            "screen-settings": {
+              title: "Screen 设置",
+              description: "用来设置屏幕内容，包括壁纸、边距、尺寸等。",
+            },
+            "device-settings": {
+              title: "设备设置",
+              description: "给屏幕套上设备外壳，在这里选择设备，并配置设备的样式，例如背景。",
+            },
+            "keyboard-settings": {
+              title: "按键设置",
+              description: "设置录制的快捷键显示样式、默认尺寸和位置。",
+            },
+            "beauty-settings": {
+              title: "美颜设置",
+              description: "开启相机录制后，在这里对相机画面做一些轻微的人像美颜。",
+            },
+            "mouse-settings": {
+              title: "鼠标设置",
+              description: "设置鼠标的基础样式。",
+            },
+            "animation-settings": {
+              title: "动画设置",
+              description: "自定义镜头动画，包括运动模糊强度和自定义曲线。",
+            },
+            tracks: {
+              title: "轨道",
+              description: "录制、摄像头、系统音频、麦克风、缩放、键盘都会以时间轴片段的形式在这里展示。",
+            },
+          },
+        },
+        record: {
+          title: "录制",
+          summary: "设置录制内容、选择来源，然后开始录制。",
+          chapters: {
+            "prepare-capture": {
+              title: "准备录制",
+              description: "打开 ScreenCam，并确认录制控制区已经准备好，再选择录制来源。",
+            },
+            "choose-source": {
+              title: "选择来源",
+              description: "选择显示器、窗口、区域、摄像头、麦克风和系统声音等录制选项。",
+            },
+            "start-recording": {
+              title: "开始录制",
+              description: "启动录制，并确认当前录制状态后再继续后续流程。",
+            },
+          },
+        },
+        zoom: {
+          title: "变焦",
+          summary: "添加时间线锚点，调整画面在录制中的移动方式。",
+          chapters: {
+            "zoom-track": {
+              title: "Zoom 轴",
+              description: "在 zoom 轴上自由创建或删除 zoom 片段。",
+            },
+            "delete-clip": {
+              title: "删除",
+              description: "选中一个 clip 后，按 Backspace 或 Delete 删除。",
+            },
+            "create-clip": {
+              title: "新建",
+              description: "在空白处点击或拖拽，直接新建 zoom clip。",
+            },
+            "merge-clips": {
+              title: "合并",
+              description: "resize 一个 clip，或拖拽它与另一个 clip 相交，松开后确认合并。",
+            },
+            "manual-mode": {
+              title: "手动模式",
+              description: "默认会根据点击事件自动运镜，也可以切到手动模式，自定义锚点数量、缩放中心和放大比例。",
+            },
+            "select-anchor": {
+              title: "选择锚点",
+              description: "选中一个锚点，编辑它自己的 zoom 设置。",
+            },
+            "adjust-center": {
+              title: "调整中心",
+              description: "直接拖拽预览画面，调整缩放的视觉中心。",
+            },
+            "adjust-scale-wheel": {
+              title: "调整缩放",
+              description: "在预览画面里使用鼠标滚轮，直接控制放大比例。",
+            },
+            "adjust-scale-panel": {
+              title: "设置面板调整",
+              description: "选中锚点后，也可以在右侧设置面板里拖动滑块调整缩放。",
+            },
+          },
+        },
+        camera: {
+          title: "摄像头",
+          summary: "调整摄像头浮窗形状，并应用轻量的外观效果。",
+          chapters: {
+            "enable-camera": {
+              title: "启用摄像头",
+              description: "打开摄像头图层，并把它放到适合当前录制的位置。",
+            },
+            "shape-frame": {
+              title: "调整画框",
+              description: "切换画框形状，并调整摄像头浮窗尺寸来适配画面。",
+            },
+            "apply-beauty": {
+              title: "应用美颜效果",
+              description: "调整轻量外观设置，并保持预览效果和最终导出一致。",
+            },
+          },
+        },
+        shortcuts: {
+          title: "快捷键",
+          summary: "用键盘动作控制录制，不打断当前操作节奏。",
+          chapters: {
+            "capture-shortcut": {
+              title: "用快捷键开始",
+              description: "通过键盘触发录制控制，不需要频繁回到工具栏。",
+            },
+            "pause-resume": {
+              title: "暂停或继续",
+              description: "在较长录制中，用快捷键暂停和继续录制。",
+            },
+            "finish-recording": {
+              title: "结束录制",
+              description: "停止录制并进入编辑流程，同时保持当前上下文。",
+            },
+          },
+        },
+        export: {
+          title: "导出",
+          summary: "检查结果、选择输出设置，并导出录制文件。",
+          chapters: {
+            "choose-format": {
+              title: "选择格式",
+              description: "根据目标用途选择导出格式和输出设置。",
+            },
+            "review-preview": {
+              title: "检查预览",
+              description: "在渲染文件前确认最终预览效果。",
+            },
+            "export-file": {
+              title: "导出文件",
+              description: "渲染录制内容，并保存导出的结果文件。",
+            },
+          },
+        },
       },
     },
     home: {
@@ -1196,6 +1604,7 @@ export const translations: Record<Locale, LocaleTranslation> = {
       menuAria: "Menü öffnen",
       nav: {
         changelog: "Changelog",
+        docs: "Docs",
         privacy: "Datenschutz",
         support: "Support",
         terms: "Bedingungen",
@@ -1227,6 +1636,7 @@ export const translations: Record<Locale, LocaleTranslation> = {
       resourceLinks: {
         appStore: "App Store",
         changelog: "Changelog",
+        docs: "Docs",
         motionBlurMask: "Motion Blur Mask",
         support: "Support",
       },
@@ -1237,6 +1647,11 @@ export const translations: Record<Locale, LocaleTranslation> = {
       changelog: {
         title: "Changelog - ScreenCam",
         description: "Lies ScreenCam Versionshinweise, Produktverbesserungen, Fehlerbehebungen und Update-Historie.",
+      },
+      docs: {
+        title: "Docs - ScreenCam",
+        description:
+          "Lerne ScreenCam mit geführten Video-Walkthroughs, Kapitelschritten und interaktiver Wiedergabe.",
       },
       home: {
         title: "ScreenCam - Native macOS-Bildschirmaufnahme mit gerichtetem Zoom",
@@ -1262,6 +1677,184 @@ export const translations: Record<Locale, LocaleTranslation> = {
         title: "Nutzungsbedingungen - ScreenCam",
         description:
           "Die Nutzungsbedingungen von ScreenCam erklären App-Lizenz, Abonnements, Käufe und Support-Kontakt.",
+      },
+    },
+    docs: {
+      chaptersTitle: "Schritte",
+      description:
+        "Workflow ansehen, direkt zum gewünschten Schritt springen.",
+      emptyVideoDescription:
+        "Lege die Demo-Datei für diese Funktion in public/docs ab und trage anschließend Videopfad und kalibrierte Zeitpunkte in die Timeline-JSON ein.",
+      emptyVideoTitle: "Video folgt",
+      eyebrow: "Docs",
+      featureListAria: "Dokumentationsthemen",
+      playback: {
+        next: "Nächster Schritt",
+        pause: "Pausieren",
+        play: "Abspielen",
+        previous: "Vorheriger Schritt",
+        restart: "Neu starten",
+      },
+      progressLabel: "Fortschritt",
+      title: "ScreenCam Guides.",
+      videoAriaLabel: "Dokumentations-Demo-Video",
+      features: {
+        basics: {
+          title: "Grundlagen",
+          summary: "Lerne Vorschau, Seitenleiste, Einstellbereiche und Timeline-Spuren kennen.",
+          chapters: {
+            preview: {
+              title: "Vorschau",
+              description: "Nutze die Vorschau, um das aktuelle finale Exportergebnis in Echtzeit zu sehen.",
+            },
+            sidebar: {
+              title: "Seitenleiste",
+              description: "Alle wichtigen Konfigurationsbereiche befinden sich in der Seitenleiste.",
+            },
+            "screen-settings": {
+              title: "Screen-Einstellungen",
+              description: "Konfiguriere den Bildschirminhalt, einschließlich Wallpaper, Rändern, Größe und Layoutoptionen.",
+            },
+            "device-settings": {
+              title: "Geräte-Einstellungen",
+              description: "Lege einen Geräte-Rahmen um den Bildschirm, wähle das Gerät und passe Stile wie den Hintergrund an.",
+            },
+            "keyboard-settings": {
+              title: "Tasten-Einstellungen",
+              description: "Lege fest, wie aufgezeichnete Shortcuts erscheinen, einschließlich Standardgröße und Position.",
+            },
+            "beauty-settings": {
+              title: "Beauty-Einstellungen",
+              description: "Nach Aktivierung der Kamera kannst du dezente Portrait-Optimierungen auf das Kamerabild anwenden.",
+            },
+            "mouse-settings": {
+              title: "Maus-Einstellungen",
+              description: "Passe den grundlegenden visuellen Stil des Mauszeigers an.",
+            },
+            "animation-settings": {
+              title: "Animations-Einstellungen",
+              description: "Passe Kamerabewegungen an, einschließlich Motion-Blur-Stärke und eigener Kurven.",
+            },
+            tracks: {
+              title: "Spuren",
+              description: "Aufnahme, Kamera, Systemaudio, Mikrofon, Zoom und Tastaturereignisse erscheinen hier als Timeline-Clips.",
+            },
+          },
+        },
+        record: {
+          title: "Aufnehmen",
+          summary: "Richte die Aufnahme ein, wähle die Quelle und starte die Aufzeichnung.",
+          chapters: {
+            "prepare-capture": {
+              title: "Aufnahme vorbereiten",
+              description: "Öffne ScreenCam und prüfe, ob die Aufnahmesteuerung bereit ist, bevor du eine Quelle auswählst.",
+            },
+            "choose-source": {
+              title: "Quelle wählen",
+              description: "Wähle Display, Fenster, Bereich, Kamera, Mikrofon und Systemaudio für die Aufnahme aus.",
+            },
+            "start-recording": {
+              title: "Aufnahme starten",
+              description: "Starte die Aufnahme und prüfe den Aufnahmestatus, bevor du im Workflow fortfährst.",
+            },
+          },
+        },
+        zoom: {
+          title: "Zoom",
+          summary: "Füge Timeline-Anker hinzu und steuere, wie sich die Kamera durch die Aufnahme bewegt.",
+          chapters: {
+            "zoom-track": {
+              title: "Zoom-Spur",
+              description: "Erstelle und lösche Zoom-Clips frei auf der Zoom-Spur.",
+            },
+            "delete-clip": {
+              title: "Löschen",
+              description: "Wähle einen Clip aus und drücke Backspace oder Delete, um ihn zu entfernen.",
+            },
+            "create-clip": {
+              title: "Erstellen",
+              description: "Klicke oder ziehe in einem leeren Bereich, um einen neuen Zoom-Clip zu erstellen.",
+            },
+            "merge-clips": {
+              title: "Zusammenführen",
+              description: "Vergrößere oder ziehe einen Clip, bis er einen anderen überlappt, und lasse los, um das Zusammenführen zu bestätigen.",
+            },
+            "manual-mode": {
+              title: "Manueller Modus",
+              description: "Wechsle vom automatischen Kameramove in den manuellen Modus und passe Anzahl, Zentrum und Skalierung der Anker frei an.",
+            },
+            "select-anchor": {
+              title: "Anker auswählen",
+              description: "Wähle einen Anker aus, um seine individuellen Zoom-Einstellungen zu bearbeiten.",
+            },
+            "adjust-center": {
+              title: "Zentrum anpassen",
+              description: "Ziehe direkt in der Vorschau, um das visuelle Zentrum des Zooms festzulegen.",
+            },
+            "adjust-scale-wheel": {
+              title: "Skalierung anpassen",
+              description: "Nutze das Mausrad in der Vorschau, um die Zoom-Skalierung zu steuern.",
+            },
+            "adjust-scale-panel": {
+              title: "Skalierung im Panel",
+              description: "Wähle einen Anker aus und stelle die Skalierung im rechten Einstellungsbereich per Slider ein.",
+            },
+          },
+        },
+        camera: {
+          title: "Kamera",
+          summary: "Forme das Kamera-Overlay und wende leichte Darstellungsanpassungen an.",
+          chapters: {
+            "enable-camera": {
+              title: "Kamera aktivieren",
+              description: "Schalte die Kameraebene ein und positioniere sie passend zur Aufnahme.",
+            },
+            "shape-frame": {
+              title: "Rahmen formen",
+              description: "Wechsle zwischen Rahmenformen und passe die Größe des Kamera-Overlays an.",
+            },
+            "apply-beauty": {
+              title: "Beauty-Effekte anwenden",
+              description: "Passe subtile Darstellungseinstellungen an, während die Vorschau dem Export entspricht.",
+            },
+          },
+        },
+        shortcuts: {
+          title: "Shortcuts",
+          summary: "Steuere die Aufnahme per Tastatur, ohne den Arbeitsfluss zu unterbrechen.",
+          chapters: {
+            "capture-shortcut": {
+              title: "Mit Shortcut starten",
+              description: "Löse die Aufnahme per Tastatur aus, statt zur Toolbar zu wechseln.",
+            },
+            "pause-resume": {
+              title: "Pausieren oder fortsetzen",
+              description: "Nutze Shortcut-Aktionen, um längere Aufnahmen zu pausieren und fortzusetzen.",
+            },
+            "finish-recording": {
+              title: "Take beenden",
+              description: "Stoppe die Aufnahme und wechsle in den Editor, ohne den Kontext zu verlieren.",
+            },
+          },
+        },
+        export: {
+          title: "Export",
+          summary: "Prüfe das Ergebnis, wähle Ausgabeeinstellungen und exportiere die Aufnahme.",
+          chapters: {
+            "choose-format": {
+              title: "Format wählen",
+              description: "Wähle Exportformat und Ausgabeeinstellungen für das Ziel aus.",
+            },
+            "review-preview": {
+              title: "Vorschau prüfen",
+              description: "Kontrolliere die finale Vorschau, bevor die Datei gerendert wird.",
+            },
+            "export-file": {
+              title: "Datei exportieren",
+              description: "Rendere die Aufnahme und speichere das exportierte Ergebnis.",
+            },
+          },
+        },
       },
     },
     home: {
@@ -1645,6 +2238,7 @@ export const translations: Record<Locale, LocaleTranslation> = {
       menuAria: "メニューを開く",
       nav: {
         changelog: "変更履歴",
+        docs: "ドキュメント",
         privacy: "プライバシー",
         support: "サポート",
         terms: "規約",
@@ -1676,6 +2270,7 @@ export const translations: Record<Locale, LocaleTranslation> = {
       resourceLinks: {
         appStore: "App Store",
         changelog: "変更履歴",
+        docs: "ドキュメント",
         motionBlurMask: "モーションブラー マスク",
         support: "サポート",
       },
@@ -1686,6 +2281,10 @@ export const translations: Record<Locale, LocaleTranslation> = {
       changelog: {
         title: "変更履歴 - ScreenCam",
         description: "ScreenCam のリリースノート、製品改善、バグ修正、更新履歴を確認できます。",
+      },
+      docs: {
+        title: "ドキュメント - ScreenCam",
+        description: "チャプター付き動画とインタラクティブ再生で、ScreenCam の主要機能を学べます。",
       },
       home: {
         title: "ScreenCam - 指向性ズーム付きのネイティブ macOS 画面録画",
@@ -1708,6 +2307,184 @@ export const translations: Record<Locale, LocaleTranslation> = {
       terms: {
         title: "利用規約 - ScreenCam",
         description: "ScreenCam の利用規約では、アプリのライセンス、サブスクリプション、購入、サポート連絡先について説明します。",
+      },
+    },
+    docs: {
+      chaptersTitle: "手順",
+      description:
+        "流れを見て、必要な手順へすぐ移動。",
+      emptyVideoDescription:
+        "この機能のデモファイルを public/docs に置き、timeline JSON に動画パスと調整済みの時間を追加してください。",
+      emptyVideoTitle: "動画は準備中です",
+      eyebrow: "ドキュメント",
+      featureListAria: "ドキュメントのトピック",
+      playback: {
+        next: "次の手順",
+        pause: "一時停止",
+        play: "再生",
+        previous: "前の手順",
+        restart: "最初から",
+      },
+      progressLabel: "進行状況",
+      title: "ScreenCam ガイド。",
+      videoAriaLabel: "ドキュメントのデモ動画",
+      features: {
+        basics: {
+          title: "基本レイアウト",
+          summary: "プレビュー、サイドバー、設定パネル、タイムライントラックの位置を確認します。",
+          chapters: {
+            preview: {
+              title: "プレビュー",
+              description: "現在の最終書き出し結果をリアルタイムで確認するための領域です。",
+            },
+            sidebar: {
+              title: "サイドバー",
+              description: "主要な設定はすべてここにあります。",
+            },
+            "screen-settings": {
+              title: "Screen 設定",
+              description: "壁紙、余白、サイズなど、画面内容に関する設定を行います。",
+            },
+            "device-settings": {
+              title: "デバイス設定",
+              description: "画面にデバイスフレームを付け、デバイスの選択や背景などのスタイルを調整します。",
+            },
+            "keyboard-settings": {
+              title: "キー設定",
+              description: "録画されたショートカットの表示スタイル、標準サイズ、位置を設定します。",
+            },
+            "beauty-settings": {
+              title: "ビューティー設定",
+              description: "カメラ録画を有効にした後、カメラ映像に控えめな人物補正を適用します。",
+            },
+            "mouse-settings": {
+              title: "マウス設定",
+              description: "マウスポインターの基本的な見た目を設定します。",
+            },
+            "animation-settings": {
+              title: "アニメーション設定",
+              description: "モーションブラーの強さやカスタムカーブを含む、カメラアニメーションを調整します。",
+            },
+            tracks: {
+              title: "トラック",
+              description: "録画、カメラ、システム音声、マイク、ズーム、キーボードがタイムラインクリップとして表示されます。",
+            },
+          },
+        },
+        record: {
+          title: "録画",
+          summary: "キャプチャを設定し、ソースを選び、録画を開始します。",
+          chapters: {
+            "prepare-capture": {
+              title: "キャプチャを準備",
+              description: "ScreenCam を開き、録画コントロールが準備できていることを確認してからソースを選びます。",
+            },
+            "choose-source": {
+              title: "ソースを選択",
+              description: "ディスプレイ、ウィンドウ、範囲、カメラ、マイク、システム音声の録画オプションを選びます。",
+            },
+            "start-recording": {
+              title: "録画を開始",
+              description: "録画を開始し、録画状態を確認してからワークフローを進めます。",
+            },
+          },
+        },
+        zoom: {
+          title: "ズーム",
+          summary: "タイムラインアンカーを追加し、録画内でカメラがどう動くかを調整します。",
+          chapters: {
+            "zoom-track": {
+              title: "Zoom トラック",
+              description: "Zoom トラック上で、Zoom クリップを自由に作成・削除できます。",
+            },
+            "delete-clip": {
+              title: "削除",
+              description: "クリップを選択して Backspace または Delete を押すと削除できます。",
+            },
+            "create-clip": {
+              title: "新規作成",
+              description: "空白部分をクリックまたはドラッグして、新しい Zoom クリップを作成します。",
+            },
+            "merge-clips": {
+              title: "結合",
+              description: "クリップをリサイズするかドラッグして別のクリップと重ね、離すと結合を確認できます。",
+            },
+            "manual-mode": {
+              title: "手動モード",
+              description: "クリックイベントに基づく自動モーションから手動モードに切り替え、アンカー数、中心、倍率を自由に調整できます。",
+            },
+            "select-anchor": {
+              title: "アンカーを選択",
+              description: "アンカーを選択して、そのアンカーの Zoom 設定を編集します。",
+            },
+            "adjust-center": {
+              title: "中心を調整",
+              description: "プレビュー画面を直接ドラッグして、Zoom の視覚的な中心を調整します。",
+            },
+            "adjust-scale-wheel": {
+              title: "倍率を調整",
+              description: "プレビュー画面でマウスホイールを使い、拡大率を直接調整します。",
+            },
+            "adjust-scale-panel": {
+              title: "パネルで倍率調整",
+              description: "アンカーを選択したあと、右側の設定パネルにあるスライダーでも倍率を調整できます。",
+            },
+          },
+        },
+        camera: {
+          title: "カメラ",
+          summary: "カメラオーバーレイの形を整え、軽い見た目の調整を適用します。",
+          chapters: {
+            "enable-camera": {
+              title: "カメラを有効化",
+              description: "カメラレイヤーをオンにし、録画に合う位置へ配置します。",
+            },
+            "shape-frame": {
+              title: "フレームを調整",
+              description: "フレーム形状を切り替え、シーンに合わせてカメラオーバーレイのサイズを調整します。",
+            },
+            "apply-beauty": {
+              title: "ビューティー効果を適用",
+              description: "プレビューと最終書き出しが一致する状態で、控えめな外観設定を調整します。",
+            },
+          },
+        },
+        shortcuts: {
+          title: "ショートカット",
+          summary: "作業の流れを止めずに、キーボード操作で録画を制御します。",
+          chapters: {
+            "capture-shortcut": {
+              title: "ショートカットで開始",
+              description: "ツールバーに戻らず、キーボードから録画コントロールを実行します。",
+            },
+            "pause-resume": {
+              title: "一時停止または再開",
+              description: "長めの録画では、ショートカットで一時停止と再開を操作します。",
+            },
+            "finish-recording": {
+              title: "録画を終了",
+              description: "録画を停止し、文脈を保ったままエディタへ移動します。",
+            },
+          },
+        },
+        export: {
+          title: "書き出し",
+          summary: "結果を確認し、出力設定を選んで録画を書き出します。",
+          chapters: {
+            "choose-format": {
+              title: "形式を選択",
+              description: "出力先に合わせて書き出し形式と設定を選びます。",
+            },
+            "review-preview": {
+              title: "プレビューを確認",
+              description: "ファイルを書き出す前に、最終プレビューを確認します。",
+            },
+            "export-file": {
+              title: "ファイルを書き出し",
+              description: "録画をレンダリングし、書き出した結果を保存します。",
+            },
+          },
+        },
       },
     },
     home: {
@@ -2075,6 +2852,7 @@ export const translations: Record<Locale, LocaleTranslation> = {
       menuAria: "메뉴 열기",
       nav: {
         changelog: "변경 내역",
+        docs: "문서",
         privacy: "개인정보",
         support: "지원",
         terms: "약관",
@@ -2106,6 +2884,7 @@ export const translations: Record<Locale, LocaleTranslation> = {
       resourceLinks: {
         appStore: "App Store",
         changelog: "변경 내역",
+        docs: "문서",
         motionBlurMask: "모션 블러 마스크",
         support: "지원",
       },
@@ -2116,6 +2895,10 @@ export const translations: Record<Locale, LocaleTranslation> = {
       changelog: {
         title: "변경 내역 - ScreenCam",
         description: "ScreenCam 릴리스 노트, 제품 개선, 버그 수정, 업데이트 기록을 확인하세요.",
+      },
+      docs: {
+        title: "문서 - ScreenCam",
+        description: "챕터가 있는 동영상 안내와 인터랙티브 재생으로 ScreenCam의 핵심 기능을 익히세요.",
       },
       home: {
         title: "ScreenCam - 방향성 줌을 갖춘 네이티브 macOS 화면 녹화",
@@ -2138,6 +2921,184 @@ export const translations: Record<Locale, LocaleTranslation> = {
       terms: {
         title: "이용 약관 - ScreenCam",
         description: "ScreenCam 이용 약관은 앱 라이선스, 구독, 구매, 지원 연락처 정보를 설명합니다.",
+      },
+    },
+    docs: {
+      chaptersTitle: "단계",
+      description:
+        "흐름을 보고, 필요한 단계로 바로 이동하세요.",
+      emptyVideoDescription:
+        "이 기능의 데모 파일을 public/docs에 넣은 뒤 timeline JSON에 영상 경로와 보정된 타임스탬프를 추가하세요.",
+      emptyVideoTitle: "동영상 준비 중",
+      eyebrow: "문서",
+      featureListAria: "문서 주제",
+      playback: {
+        next: "다음 단계",
+        pause: "일시 정지",
+        play: "재생",
+        previous: "이전 단계",
+        restart: "처음부터",
+      },
+      progressLabel: "진행률",
+      title: "ScreenCam 가이드.",
+      videoAriaLabel: "문서 데모 동영상",
+      features: {
+        basics: {
+          title: "기본 레이아웃",
+          summary: "미리보기, 사이드바, 설정 패널, 타임라인 트랙의 위치를 익힙니다.",
+          chapters: {
+            preview: {
+              title: "미리보기",
+              description: "현재 최종 내보내기 결과를 실시간으로 확인하는 영역입니다.",
+            },
+            sidebar: {
+              title: "사이드바",
+              description: "주요 설정은 모두 이곳에 있습니다.",
+            },
+            "screen-settings": {
+              title: "Screen 설정",
+              description: "배경화면, 여백, 크기 등 화면 콘텐츠 관련 설정을 조정합니다.",
+            },
+            "device-settings": {
+              title: "기기 설정",
+              description: "화면에 기기 프레임을 씌우고 기기 선택과 배경 같은 스타일을 설정합니다.",
+            },
+            "keyboard-settings": {
+              title: "키 설정",
+              description: "녹화된 단축키의 표시 스타일, 기본 크기와 위치를 설정합니다.",
+            },
+            "beauty-settings": {
+              title: "뷰티 설정",
+              description: "카메라 녹화를 켠 뒤 카메라 화면에 가벼운 인물 보정을 적용합니다.",
+            },
+            "mouse-settings": {
+              title: "마우스 설정",
+              description: "마우스 포인터의 기본 시각 스타일을 설정합니다.",
+            },
+            "animation-settings": {
+              title: "애니메이션 설정",
+              description: "모션 블러 강도와 사용자 지정 곡선을 포함해 카메라 애니메이션을 조정합니다.",
+            },
+            tracks: {
+              title: "트랙",
+              description: "녹화, 카메라, 시스템 오디오, 마이크, 줌, 키보드가 타임라인 클립 형태로 표시됩니다.",
+            },
+          },
+        },
+        record: {
+          title: "녹화",
+          summary: "캡처를 설정하고 소스를 선택한 뒤 녹화를 시작합니다.",
+          chapters: {
+            "prepare-capture": {
+              title: "캡처 준비",
+              description: "ScreenCam을 열고 녹화 컨트롤이 준비되었는지 확인한 뒤 소스를 선택합니다.",
+            },
+            "choose-source": {
+              title: "소스 선택",
+              description: "디스플레이, 창, 영역, 카메라, 마이크, 시스템 오디오 옵션을 선택합니다.",
+            },
+            "start-recording": {
+              title: "녹화 시작",
+              description: "녹화를 시작하고 녹화 상태를 확인한 뒤 다음 흐름으로 이동합니다.",
+            },
+          },
+        },
+        zoom: {
+          title: "줌",
+          summary: "타임라인 앵커를 추가하고 녹화 안에서 카메라 움직임을 조정합니다.",
+          chapters: {
+            "zoom-track": {
+              title: "Zoom 트랙",
+              description: "Zoom 트랙에서 zoom 클립을 자유롭게 만들고 삭제할 수 있습니다.",
+            },
+            "delete-clip": {
+              title: "삭제",
+              description: "클립을 선택한 뒤 Backspace 또는 Delete를 눌러 삭제합니다.",
+            },
+            "create-clip": {
+              title: "새로 만들기",
+              description: "빈 영역을 클릭하거나 드래그해서 새 zoom 클립을 만듭니다.",
+            },
+            "merge-clips": {
+              title: "병합",
+              description: "클립을 리사이즈하거나 다른 클립과 겹치도록 드래그한 뒤 놓으면 병합을 확인할 수 있습니다.",
+            },
+            "manual-mode": {
+              title: "수동 모드",
+              description: "클릭 이벤트 기반 자동 모션에서 수동 모드로 전환하고 앵커 수, 중심, 확대 비율을 자유롭게 조정합니다.",
+            },
+            "select-anchor": {
+              title: "앵커 선택",
+              description: "앵커를 선택해 해당 앵커의 zoom 설정을 편집합니다.",
+            },
+            "adjust-center": {
+              title: "중심 조정",
+              description: "미리보기 화면을 직접 드래그해서 zoom의 시각적 중심을 조정합니다.",
+            },
+            "adjust-scale-wheel": {
+              title: "배율 조정",
+              description: "미리보기 화면에서 마우스 휠로 확대 비율을 직접 조정합니다.",
+            },
+            "adjust-scale-panel": {
+              title: "패널에서 배율 조정",
+              description: "앵커를 선택한 뒤 오른쪽 설정 패널의 슬라이더로도 배율을 조정할 수 있습니다.",
+            },
+          },
+        },
+        camera: {
+          title: "카메라",
+          summary: "카메라 오버레이 모양을 조정하고 가벼운 외형 효과를 적용합니다.",
+          chapters: {
+            "enable-camera": {
+              title: "카메라 켜기",
+              description: "카메라 레이어를 켜고 녹화에 어울리는 위치에 배치합니다.",
+            },
+            "shape-frame": {
+              title: "프레임 조정",
+              description: "프레임 모양을 전환하고 장면에 맞게 카메라 오버레이 크기를 조정합니다.",
+            },
+            "apply-beauty": {
+              title: "뷰티 효과 적용",
+              description: "미리보기와 최종 내보내기가 일치하는 상태에서 섬세한 외형 설정을 조정합니다.",
+            },
+          },
+        },
+        shortcuts: {
+          title: "단축키",
+          summary: "작업 흐름을 끊지 않고 키보드 동작으로 캡처를 제어합니다.",
+          chapters: {
+            "capture-shortcut": {
+              title: "단축키로 시작",
+              description: "도구 막대로 이동하지 않고 키보드로 녹화 컨트롤을 실행합니다.",
+            },
+            "pause-resume": {
+              title: "일시 정지 또는 재개",
+              description: "긴 녹화 중에는 단축키로 캡처를 멈추고 다시 이어갑니다.",
+            },
+            "finish-recording": {
+              title: "녹화 마무리",
+              description: "녹화를 중지하고 흐름을 유지한 채 편집기로 이동합니다.",
+            },
+          },
+        },
+        export: {
+          title: "내보내기",
+          summary: "결과를 확인하고 출력 설정을 선택한 뒤 녹화를 내보냅니다.",
+          chapters: {
+            "choose-format": {
+              title: "형식 선택",
+              description: "대상에 맞는 내보내기 형식과 출력 설정을 선택합니다.",
+            },
+            "review-preview": {
+              title: "미리보기 확인",
+              description: "파일을 렌더링하기 전에 최종 미리보기를 확인합니다.",
+            },
+            "export-file": {
+              title: "파일 내보내기",
+              description: "녹화를 렌더링하고 내보낸 결과를 저장합니다.",
+            },
+          },
+        },
       },
     },
     home: {
