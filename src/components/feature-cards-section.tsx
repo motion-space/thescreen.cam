@@ -3468,7 +3468,7 @@ function BeautyThumb({ copy }: { copy: FeatureCardsCopy["beautyThumb"] }) {
 
         <div
           aria-hidden="true"
-          className={`pointer-events-none absolute bottom-0 top-0 z-30 w-px bg-white/80 shadow-[0_0_18px_rgba(255,255,255,0.45)] ${
+          className={`pointer-events-none absolute bottom-0 top-0 z-30 w-px bg-white/20 shadow-[0_0_18px_rgba(255,255,255,0.2)] ${
             isHandleDragging
               ? "transition-none"
               : "transition-[left] duration-150 ease-out"
