@@ -12,7 +12,7 @@ export function MagneticButton({
   className?: string;
   onClick?: () => void;
 }) {
-  const ref = useRef<HTMLButtonElement>(null);
+  const ref = useRef<HTMLSpanElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
@@ -35,16 +35,21 @@ export function MagneticButton({
   };
 
   return (
-    <motion.button
+    <span
       ref={ref}
-      style={{ x: springX, y: springY }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      onClick={onClick}
-      className={className}
-      whileTap={{ scale: 0.95 }}
+      className="group inline-flex w-fit cursor-pointer align-middle"
     >
-      {children}
-    </motion.button>
+      <motion.button
+        type="button"
+        style={{ x: springX, y: springY }}
+        onClick={onClick}
+        className={`cursor-pointer ${className}`}
+        whileTap={{ scale: 0.95 }}
+      >
+        {children}
+      </motion.button>
+    </span>
   );
 }

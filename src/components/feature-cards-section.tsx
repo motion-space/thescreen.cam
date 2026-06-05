@@ -484,8 +484,10 @@ function LiquidDomCanvasToolbarThumb({
   });
   const wallpaperFrameRequestRef = useRef(0);
   const activeWallpaperTouchRef = useRef<number | null>(null);
+  const activeToolbarTouchRef = useRef<number | null>(null);
   const activeIdRef = useRef<string | null>(null);
   const hitTargetsRef = useRef<CanvasToolbarHit[]>([]);
+  const tooltipHideTimeoutRef = useRef<number | null>(null);
   const tooltipRef = useRef<CanvasTooltipState>({
     bubbleCenterX: 220,
     opacity: 0,
@@ -656,23 +658,83 @@ function LiquidDomCanvasToolbarThumb({
     };
   }, [toolbarGroups]);
 
+  const dispatchToolbarTooltipChange = () => {
+    canvasRef.current?.dispatchEvent(new Event("screen-cam-tooltip-change"));
+  };
+
+  const clearToolbarTooltipHideTimeout = () => {
+    if (tooltipHideTimeoutRef.current === null) return;
+    window.clearTimeout(tooltipHideTimeoutRef.current);
+    tooltipHideTimeoutRef.current = null;
+  };
+
+  const getToolbarHitTarget = (
+    clientX: number,
+    clientY: number,
+    rect: DOMRect,
+  ) => {
+    const x = clientX - rect.left;
+    const y = clientY - rect.top;
+    return (
+      hitTargetsRef.current.find((item) => pointInRect(x, y, item.rect)) ?? null
+    );
+  };
+
+  const getToolbarTouchTarget = (touch: Touch) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return null;
+
+    const rect = canvas.getBoundingClientRect();
+    const item = getToolbarHitTarget(touch.clientX, touch.clientY, rect);
+    return item ? { item, width: rect.width } : null;
+  };
+
+  const setToolbarTooltipTarget = (
+    target: CanvasToolbarHit | null,
+    canvasWidth: number,
+    force = false,
+  ) => {
+    if (target) {
+      clearToolbarTooltipHideTimeout();
+    }
+
+    const nextId = target?.id ?? null;
+    if (!force && activeIdRef.current === nextId) return false;
+
+    activeIdRef.current = nextId;
+    if (target) {
+      setTooltipTarget(getCanvasTooltipTarget(target, canvasWidth));
+      setTooltipVisible(true);
+    } else {
+      setTooltipVisible(false);
+    }
+
+    return true;
+  };
+
   const updatePointerTarget = (event: ReactPointerEvent<HTMLCanvasElement>) => {
     const rect = event.currentTarget.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-    const hovered = hitTargetsRef.current.find((item) =>
-      pointInRect(x, y, item.rect),
-    );
-    const nextId = hovered?.id ?? null;
-    if (activeIdRef.current !== nextId) {
-      activeIdRef.current = nextId;
-      if (hovered) {
-        setTooltipTarget(getCanvasTooltipTarget(hovered, rect.width));
-        setTooltipVisible(true);
-      } else {
-        setTooltipVisible(false);
-      }
-    }
+    const hovered = getToolbarHitTarget(event.clientX, event.clientY, rect);
+    return setToolbarTooltipTarget(hovered, rect.width);
+  };
+
+  const hideToolbarTooltip = () => {
+    clearToolbarTooltipHideTimeout();
+    activeToolbarTouchRef.current = null;
+    activeIdRef.current = null;
+    setTooltipVisible(false);
+    dispatchToolbarTooltipChange();
+  };
+
+  const scheduleToolbarTooltipHide = () => {
+    clearToolbarTooltipHideTimeout();
+    tooltipHideTimeoutRef.current = window.setTimeout(() => {
+      tooltipHideTimeoutRef.current = null;
+      activeToolbarTouchRef.current = null;
+      activeIdRef.current = null;
+      setTooltipVisible(false);
+      dispatchToolbarTooltipChange();
+    }, 1800);
   };
 
   const dispatchWallpaperChange = () => {
@@ -699,17 +761,12 @@ function LiquidDomCanvasToolbarThumb({
 
   useEffect(() => {
     return () => {
+      clearToolbarTooltipHideTimeout();
       if (wallpaperFrameRequestRef.current) {
         cancelAnimationFrame(wallpaperFrameRequestRef.current);
       }
     };
   }, []);
-
-  const hideToolbarTooltip = () => {
-    activeIdRef.current = null;
-    setTooltipVisible(false);
-    canvasRef.current?.dispatchEvent(new Event("screen-cam-tooltip-change"));
-  };
 
   const switchWallpaper = () => {
     const state = wallpaperTransitionRef.current;
@@ -832,15 +889,19 @@ function LiquidDomCanvasToolbarThumb({
     return null;
   };
 
+  const touchListIncludesId = (touches: TouchList, touchId: number) => {
+    for (let index = 0; index < touches.length; index += 1) {
+      if (touches.item(index)?.identifier === touchId) return true;
+    }
+
+    return false;
+  };
+
   const changedTouchesIncludeActiveWallpaperTouch = (touches: TouchList) => {
     const activeTouchId = activeWallpaperTouchRef.current;
     if (activeTouchId === null) return touches.length > 0;
 
-    for (let index = 0; index < touches.length; index += 1) {
-      if (touches.item(index)?.identifier === activeTouchId) return true;
-    }
-
-    return false;
+    return touchListIncludesId(touches, activeTouchId);
   };
 
   const startWallpaperTouchDrag = (event: TouchEvent) => {
@@ -854,6 +915,14 @@ function LiquidDomCanvasToolbarThumb({
     const touch = event.touches.item(0);
     const target = thumbRef.current;
     if (!touch || !target) return;
+
+    const toolbarTarget = getToolbarTouchTarget(touch);
+    if (toolbarTarget) {
+      activeToolbarTouchRef.current = touch.identifier;
+      setToolbarTooltipTarget(toolbarTarget.item, toolbarTarget.width, true);
+      dispatchToolbarTooltipChange();
+      return;
+    }
 
     const state = wallpaperTransitionRef.current;
     if (state.isTransitioning && !state.isDragging) return;
@@ -871,6 +940,8 @@ function LiquidDomCanvasToolbarThumb({
   };
 
   const updateWallpaperTouchDrag = (event: TouchEvent) => {
+    if (activeToolbarTouchRef.current !== null) return;
+
     const drag = wallpaperDragRef.current;
     const touch = getActiveWallpaperTouch(event.touches);
     if (!touch || drag.pointerId !== touch.identifier) return;
@@ -916,6 +987,19 @@ function LiquidDomCanvasToolbarThumb({
     event: TouchEvent,
     shouldCancel = false,
   ) => {
+    const activeToolbarTouchId = activeToolbarTouchRef.current;
+    if (activeToolbarTouchId !== null) {
+      if (!touchListIncludesId(event.changedTouches, activeToolbarTouchId)) return;
+
+      activeToolbarTouchRef.current = null;
+      if (shouldCancel) {
+        hideToolbarTooltip();
+      } else {
+        scheduleToolbarTooltipHide();
+      }
+      return;
+    }
+
     const drag = wallpaperDragRef.current;
     if (
       drag.pointerId === null ||
@@ -1092,21 +1176,49 @@ function LiquidDomCanvasToolbarThumb({
         className="absolute inset-0 z-10 h-full w-full"
         data-liquid-dom-toolbar-thumb
         style={{ touchAction: "pan-y" }}
-        onPointerLeave={() => {
-          activeIdRef.current = null;
-          setTooltipVisible(false);
-          canvasRef.current?.dispatchEvent(
-            new Event("screen-cam-tooltip-change"),
+        onPointerCancel={(event) => {
+          if (event.pointerType !== "mouse") {
+            hideToolbarTooltip();
+          }
+        }}
+        onPointerDown={(event) => {
+          if (wallpaperDragRef.current.isDragging) return;
+
+          const rect = event.currentTarget.getBoundingClientRect();
+          const target = getToolbarHitTarget(
+            event.clientX,
+            event.clientY,
+            rect,
           );
+
+          if (!target) {
+            if (event.pointerType !== "mouse") {
+              hideToolbarTooltip();
+            }
+            return;
+          }
+
+          event.stopPropagation();
+          if (event.pointerType !== "mouse") {
+            event.preventDefault();
+          }
+
+          setToolbarTooltipTarget(target, rect.width, true);
+          dispatchToolbarTooltipChange();
+        }}
+        onPointerLeave={() => {
+          hideToolbarTooltip();
         }}
         onPointerMove={(event) => {
           if (wallpaperDragRef.current.isDragging) return;
 
-          const previousId = activeIdRef.current;
-          updatePointerTarget(event);
-          if (previousId !== activeIdRef.current) {
-            const canvas = canvasRef.current;
-            canvas?.dispatchEvent(new Event("screen-cam-tooltip-change"));
+          if (updatePointerTarget(event)) {
+            dispatchToolbarTooltipChange();
+          }
+        }}
+        onPointerUp={(event) => {
+          if (event.pointerType !== "mouse" && activeIdRef.current) {
+            scheduleToolbarTooltipHide();
           }
         }}
       />
@@ -2837,13 +2949,14 @@ function ShortcutsThumb() {
           <Command className="h-[18px] w-[18px]" />
         </KeyCap>
         <KeyCap
+          align="left"
           colorScheme={colorScheme}
           onPressChange={setPointerPressedKey}
           pressed={pressedKeys.shift || pointerPressedKey === "shift"}
           shortcutKey="shift"
           wide
         >
-          <span className="text-sm leading-none">⇧</span>
+          <span className="text-[18px] leading-none">⇧</span>
           Shift
         </KeyCap>
         <KeyCap
@@ -2852,7 +2965,7 @@ function ShortcutsThumb() {
           pressed={pressedKeys.digit3 || pointerPressedKey === "digit3"}
           shortcutKey="digit3"
         >
-          3
+          <span className="text-[16px] leading-none">3</span>
         </KeyCap>
       </div>
 
@@ -2873,6 +2986,7 @@ function ShortcutsThumb() {
 }
 
 function KeyCap({
+  align = "center",
   children,
   colorScheme,
   onPressChange,
@@ -2880,6 +2994,7 @@ function KeyCap({
   shortcutKey,
   wide = false,
 }: {
+  align?: "center" | "left";
   children: ReactNode;
   colorScheme: ShortcutKeyColorScheme;
   onPressChange?: (key: keyof ShortcutPressedState | null) => void;
@@ -2913,13 +3028,15 @@ function KeyCap({
         pressed
           ? "h-11 p-0.5 shadow-[0_7px_12px_rgba(0,0,0,0.56)]"
           : "h-12 px-0.5 pb-1.5 pt-0.5 shadow-[0_16px_36px_rgba(0,0,0,0.36)]"
-      } ${wide ? "w-[4.5rem]" : "w-12"}`}
+      } ${wide ? "w-[5.25rem]" : "w-12"}`}
       style={{
         backgroundColor: colorScheme.outerBackground,
       }}
     >
       <div
-        className={`flex h-full w-full items-center justify-center gap-1 rounded-[6px] text-xs font-semibold tracking-normal backdrop-blur-md transition-[background-color,box-shadow] duration-100 ${
+        className={`flex h-full w-full items-center ${
+          align === "left" ? "justify-start pl-3.5 pr-2" : "justify-center"
+        } gap-1 rounded-[6px] text-xs font-semibold tracking-normal backdrop-blur-md transition-[background-color,box-shadow] duration-100 ${
           pressed
             ? "shadow-[inset_0_1px_0_rgba(255,255,255,0.18),inset_0_-2px_8px_rgba(0,0,0,0.22)]"
             : "shadow-[inset_0_1px_0_rgba(255,255,255,0.2),inset_0_-8px_18px_rgba(0,0,0,0.32)]"

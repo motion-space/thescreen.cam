@@ -277,7 +277,8 @@
   }
 
   .device-mockup-macbook {
-    width: 247px;
+    --device-mockup-macbook-width: 250.5px;
+    width: var(--device-mockup-macbook-width);
   }
 
   .hero-title-wrap {
@@ -331,7 +332,7 @@
 
   @media (min-width: 768px) {
     .device-mockup-macbook {
-      width: 416px;
+      --device-mockup-macbook-width: 501px;
     }
 
     .hero-title-wrap {
@@ -351,7 +352,7 @@
 
   @media (min-width: 1024px) {
     .device-mockup-macbook {
-      width: 559px;
+      --device-mockup-macbook-width: 501px;
     }
   }
 

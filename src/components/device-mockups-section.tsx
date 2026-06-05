@@ -132,7 +132,7 @@ export function DeviceMockupsSection({ copy }: { copy: DeviceMockupsCopy }) {
               opacity: macBookOpacity,
               rotate: macBookRotate,
             }}
-            className="absolute z-20 left-[70%] bottom-[-2px] -translate-x-1/2 md:left-[73%] md:bottom-[-14px] lg:left-[75%] lg:bottom-[-22px]"
+            className="absolute z-20 left-[82%] bottom-[-2px] -translate-x-1/2 md:left-[73%] md:bottom-[-14px] lg:left-[75%] lg:bottom-[-22px]"
           >
             <DeviceCard>
               <div className="relative">
@@ -143,7 +143,6 @@ export function DeviceMockupsSection({ copy }: { copy: DeviceMockupsCopy }) {
                   decoding="async"
                   className="device-mockup-macbook h-auto object-contain"
                   style={{
-                    width: '501px',
                     maxWidth: 'none',
                     filter: 'drop-shadow(0 32px 64px rgba(0,0,0,0.42))',
                   }}
