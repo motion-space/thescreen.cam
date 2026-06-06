@@ -1,0 +1,23 @@
+{
+  "featureId": "preview-control",
+  "video": "/docs/preview-control/demo.mp4",
+  "poster": "/docs/preview-control/poster.jpg",
+  "duration": 24.178333,
+  "chapters": [
+    {
+      "id": "playback-rate",
+      "start": 0,
+      "end": 13
+    },
+    {
+      "id": "volume",
+      "start": 13,
+      "end": 19
+    },
+    {
+      "id": "track-zoom",
+      "start": 19,
+      "end": 24.178333
+    }
+  ]
+}

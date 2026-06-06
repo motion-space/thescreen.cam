@@ -1,0 +1,33 @@
+{
+  "featureId": "track-management",
+  "video": "/docs/track-management/demo.mp4",
+  "poster": "/docs/track-management/poster.jpg",
+  "duration": 27.173333,
+  "chapters": [
+    {
+      "id": "entry",
+      "start": 0,
+      "end": 7
+    },
+    {
+      "id": "sort",
+      "start": 7,
+      "end": 15
+    },
+    {
+      "id": "hide",
+      "start": 15,
+      "end": 20
+    },
+    {
+      "id": "delete",
+      "start": 20,
+      "end": 24
+    },
+    {
+      "id": "restore",
+      "start": 24,
+      "end": 27.173333
+    }
+  ]
+}

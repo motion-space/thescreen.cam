@@ -1,0 +1,48 @@
+{
+  "featureId": "screen-settings",
+  "video": "/docs/screen-settings/demo.mp4",
+  "poster": "/docs/screen-settings/poster.jpg",
+  "duration": 53.971667,
+  "chapters": [
+    {
+      "id": "wallpaper",
+      "start": 0,
+      "end": 7
+    },
+    {
+      "id": "no-background",
+      "start": 7,
+      "end": 9
+    },
+    {
+      "id": "gradient",
+      "start": 9,
+      "end": 19
+    },
+    {
+      "id": "solid-color",
+      "start": 19,
+      "end": 22
+    },
+    {
+      "id": "custom-background",
+      "start": 22,
+      "end": 26
+    },
+    {
+      "id": "adaptive-size",
+      "start": 26,
+      "end": 29
+    },
+    {
+      "id": "sync-margins",
+      "start": 29,
+      "end": 50
+    },
+    {
+      "id": "fixed-size",
+      "start": 50,
+      "end": 53.971667
+    }
+  ]
+}

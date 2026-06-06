@@ -634,6 +634,40 @@
     @apply opacity-40;
   }
 
+  .docs-inline-icon {
+    display: inline-block;
+    width: 1.08em;
+    height: 1.08em;
+    margin: 0 0.12em;
+    vertical-align: -0.18em;
+    color: currentColor;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2;
+  }
+
+  .docs-key {
+    display: inline-flex;
+    min-height: 1.58em;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0.08em;
+    padding: 0.08em 0.44em 0.12em;
+    border: 1px solid color-mix(in oklch, currentColor 32%, transparent);
+    border-radius: 4px;
+    background: color-mix(in oklch, currentColor 10%, transparent);
+    box-shadow: inset 0 -1px 0 color-mix(in oklch, currentColor 24%, transparent);
+    color: currentColor;
+    font-family: var(--font-mono);
+    font-size: 0.84em;
+    font-weight: 600;
+    line-height: 1;
+    vertical-align: 0.08em;
+    white-space: nowrap;
+  }
+
   .docs-marker {
     width: 10.5px;
     height: 10.5px;
@@ -641,8 +675,8 @@
   }
 
   .docs-marker-visual {
-    width: min(280px, calc(100vw - 3rem));
-    height: auto;
+    width: 10.5px;
+    height: 10.5px;
     pointer-events: none;
     background: var(--docs-marker-color);
     clip-path: polygon(5.25px 0, 10.5px 5.25px, 5.25px 10.5px, 0 5.25px);
@@ -657,6 +691,8 @@
   .docs-marker:hover .docs-marker-visual,
   .docs-marker:focus-visible .docs-marker-visual {
     z-index: 35;
+    width: min(280px, calc(100vw - 3rem));
+    height: auto;
     color: #000;
     background: #fff;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);

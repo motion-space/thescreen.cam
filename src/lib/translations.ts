@@ -216,7 +216,32 @@ export type MotionBlurMaskToolCopy = {
   yLabel: string;
 };
 
-export type DocsFeatureId = "basics" | "record" | "zoom" | "camera" | "shortcuts" | "export";
+export type DocsFeatureId =
+  | "basics"
+  | "preview-control"
+  | "track-management"
+  | "screen-settings"
+  | "workspace-file"
+  | "record"
+  | "zoom"
+  | "camera"
+  | "shortcuts"
+  | "export";
+
+type DocsChapterCopy = {
+  description: string;
+  descriptionHtml: string;
+  title: string;
+};
+
+type RawDocsChapterCopy = Omit<DocsChapterCopy, "descriptionHtml"> &
+  Partial<Pick<DocsChapterCopy, "descriptionHtml">>;
+
+type DocsFeatureCopy<TChapterCopy extends RawDocsChapterCopy = DocsChapterCopy> = {
+  chapters: Record<string, TChapterCopy>;
+  summary: string;
+  title: string;
+};
 
 export type DocsCopy = {
   chaptersTitle: string;
@@ -237,17 +262,7 @@ export type DocsCopy = {
   videoAriaLabel: string;
   features: Record<
     DocsFeatureId,
-    {
-      chapters: Record<
-        string,
-        {
-          description: string;
-          title: string;
-        }
-      >;
-      summary: string;
-      title: string;
-    }
+    DocsFeatureCopy
   >;
 };
 
@@ -309,13 +324,205 @@ type LocaleTranslation = {
   motionBlurTool: MotionBlurMaskToolCopy;
 };
 
+type RawDocsCopy = Omit<DocsCopy, "features"> & {
+  features: Record<DocsFeatureId, DocsFeatureCopy<RawDocsChapterCopy>>;
+};
+
+type RawLocaleTranslation = Omit<LocaleTranslation, "docs"> & {
+  docs: RawDocsCopy;
+};
+
 const emailLink = { href: "mailto:cats_juice@outlook.com", text: "cats_juice@outlook.com" };
 const appleEulaLink = {
   href: "https://www.apple.com/legal/internet-services/itunes/dev/stdeula/",
   text: "apple.com/legal/internet-services/itunes/dev/stdeula",
 };
 
-export const translations: Record<Locale, LocaleTranslation> = {
+const docsMarkdownIcons = {
+  eye: [
+    '<path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/>',
+    '<circle cx="12" cy="12" r="3"/>',
+  ],
+  grip: [
+    '<circle cx="9" cy="5" r="1"/>',
+    '<circle cx="9" cy="12" r="1"/>',
+    '<circle cx="9" cy="19" r="1"/>',
+    '<circle cx="15" cy="5" r="1"/>',
+    '<circle cx="15" cy="12" r="1"/>',
+    '<circle cx="15" cy="19" r="1"/>',
+  ],
+  trash: [
+    '<path d="M10 11v6"/>',
+    '<path d="M14 11v6"/>',
+    '<path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>',
+    '<path d="M3 6h18"/>',
+    '<path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>',
+  ],
+} as const;
+
+type DocsMarkdownIconId = keyof typeof docsMarkdownIcons;
+
+function escapeHtml(value: string) {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
+function isSafeMarkdownUrl(value: string) {
+  const url = value.trim();
+
+  if (
+    url.startsWith("/") ||
+    url.startsWith("#") ||
+    url.startsWith("./") ||
+    url.startsWith("../")
+  ) {
+    return true;
+  }
+
+  try {
+    const parsedUrl = new URL(url);
+    return ["http:", "https:", "mailto:"].includes(parsedUrl.protocol);
+  } catch {
+    return false;
+  }
+}
+
+function renderDocsMarkdownIcon(iconId: DocsMarkdownIconId) {
+  return `<svg class="docs-inline-icon docs-inline-icon-${iconId}" aria-hidden="true" focusable="false" viewBox="0 0 24 24">${docsMarkdownIcons[iconId].join("")}</svg>`;
+}
+
+function renderDocsKey(value: string) {
+  return `<kbd class="docs-key">${renderBasicMarkdownInline(value)}</kbd>`;
+}
+
+function renderBasicMarkdownInline(markdown: string): string {
+  let html = "";
+  let index = 0;
+
+  while (index < markdown.length) {
+    if (markdown.startsWith("{{icon:", index)) {
+      const end = markdown.indexOf("}}", index + 7);
+
+      if (end !== -1) {
+        const iconId = markdown.slice(index + 7, end).trim();
+
+        if (iconId in docsMarkdownIcons) {
+          html += renderDocsMarkdownIcon(iconId as DocsMarkdownIconId);
+          index = end + 2;
+          continue;
+        }
+      }
+    }
+
+    if (markdown.startsWith("<kbd>", index)) {
+      const end = markdown.indexOf("</kbd>", index + 5);
+
+      if (end !== -1) {
+        html += renderDocsKey(markdown.slice(index + 5, end));
+        index = end + 6;
+        continue;
+      }
+    }
+
+    if (markdown.startsWith("**", index)) {
+      const end = markdown.indexOf("**", index + 2);
+
+      if (end !== -1) {
+        html += `<strong>${renderBasicMarkdownInline(markdown.slice(index + 2, end))}</strong>`;
+        index = end + 2;
+        continue;
+      }
+    }
+
+    if (markdown[index] === "`") {
+      const end = markdown.indexOf("`", index + 1);
+
+      if (end !== -1) {
+        html += `<code>${escapeHtml(markdown.slice(index + 1, end))}</code>`;
+        index = end + 1;
+        continue;
+      }
+    }
+
+    if (markdown[index] === "[") {
+      const labelEnd = markdown.indexOf("](", index + 1);
+      const urlEnd = labelEnd === -1 ? -1 : markdown.indexOf(")", labelEnd + 2);
+
+      if (labelEnd !== -1 && urlEnd !== -1) {
+        const label = markdown.slice(index + 1, labelEnd);
+        const url = markdown.slice(labelEnd + 2, urlEnd).trim();
+
+        if (isSafeMarkdownUrl(url)) {
+          html += `<a href="${escapeHtml(url)}">${renderBasicMarkdownInline(label)}</a>`;
+          index = urlEnd + 1;
+          continue;
+        }
+      }
+    }
+
+    if (markdown[index] === "*") {
+      const end = markdown.indexOf("*", index + 1);
+
+      if (end !== -1) {
+        html += `<em>${renderBasicMarkdownInline(markdown.slice(index + 1, end))}</em>`;
+        index = end + 1;
+        continue;
+      }
+    }
+
+    html += escapeHtml(markdown[index] ?? "");
+    index += 1;
+  }
+
+  return html.replace(/\r?\n/g, "<br>");
+}
+
+function compileDocsCopy(docs: RawDocsCopy): DocsCopy {
+  const features = Object.fromEntries(
+    Object.entries(docs.features).map(([featureId, feature]) => [
+      featureId,
+      {
+        ...feature,
+        chapters: Object.fromEntries(
+          Object.entries(feature.chapters).map(([chapterId, chapter]) => [
+            chapterId,
+            {
+              ...chapter,
+              descriptionHtml:
+                chapter.descriptionHtml ??
+                renderBasicMarkdownInline(chapter.description),
+            },
+          ]),
+        ),
+      },
+    ]),
+  ) as DocsCopy["features"];
+
+  return {
+    ...docs,
+    features,
+  };
+}
+
+function compileTranslations(
+  rawTranslations: Record<Locale, RawLocaleTranslation>,
+): Record<Locale, LocaleTranslation> {
+  return Object.fromEntries(
+    Object.entries(rawTranslations).map(([locale, translation]) => [
+      locale,
+      {
+        ...translation,
+        docs: compileDocsCopy(translation.docs),
+      },
+    ]),
+  ) as Record<Locale, LocaleTranslation>;
+}
+
+const rawTranslations: Record<Locale, RawLocaleTranslation> = {
   en: {
     common: {
       skipToContent: "Skip to content",
@@ -466,6 +673,136 @@ export const translations: Record<Locale, LocaleTranslation> = {
             },
           },
         },
+        "preview-control": {
+          title: "Preview Controls",
+          summary: "Adjust preview playback speed, preview volume, and timeline track zoom while editing.",
+          chapters: {
+            "playback-rate": {
+              title: "Playback speed",
+              description:
+                "Adjust the preview playback speed here. **This only affects the preview stage and does not affect export.**",
+            },
+            volume: {
+              title: "Volume",
+              description:
+                "Adjust the sound you hear during preview. **This only affects the preview stage and does not affect export.**",
+            },
+            "track-zoom": {
+              title: "Track zoom",
+              description: "Change the zoom level of the timeline tracks.",
+            },
+          },
+        },
+        "track-management": {
+          title: "Track Management",
+          summary: "Open track settings, reorder tracks, hide them, delete them, and restore deleted tracks.",
+          chapters: {
+            entry: {
+              title: "Entry",
+              description: "Open the track settings panel from the left side of the tracks.",
+            },
+            sort: {
+              title: "Sort",
+              description:
+                "Drag the leading {{icon:grip}} sort handle to reorder tracks. This order is saved as a preference and reused next time.",
+            },
+            hide: {
+              title: "Hide",
+              description:
+                "Click {{icon:eye}} to hide tracks you do not need. **This does not affect export.**",
+            },
+            delete: {
+              title: "Delete",
+              description:
+                "Click {{icon:trash}} to delete tracks you do not need. **This affects the final export.**",
+            },
+            restore: {
+              title: "Restore",
+              description:
+                "Deleted tracks appear separately below, where you can restore them at any time.",
+            },
+          },
+        },
+        "screen-settings": {
+          title: "Screen Settings",
+          summary: "Tune the recorded screen, its background, margins, and output size behavior.",
+          chapters: {
+            wallpaper: {
+              title: "Wallpaper",
+              description:
+                "Choose wallpapers read from the system, including dynamic wallpapers. They are not bundled with the app, do not take app space, and keep the highest wallpaper quality. Click Custom to configure more wallpaper folders in Settings.",
+            },
+            "no-background": {
+              title: "No background",
+              description:
+                "Choose no background, which is especially important for full-screen recording or custom area recording. **Currently, switching to no wallpaper keeps the previous margin or size settings by default, so set them to 0 manually to remove black borders.**",
+            },
+            gradient: {
+              title: "Gradient",
+              description:
+                "Choose a preset linear gradient, or freely edit gradient anchors and colors, adding or removing anchors as needed.",
+            },
+            "solid-color": {
+              title: "Solid color",
+              description: "Choose a single color as the background.",
+            },
+            "custom-background": {
+              title: "Custom",
+              description: "Upload your own photo or video as the background.",
+            },
+            "adaptive-size": {
+              title: "Adaptive screen size",
+              description:
+                "In this mode, the screen size is controlled by adjusting vertical and horizontal margins.",
+            },
+            "sync-margins": {
+              title: "Sync margins",
+              description:
+                "Enable sync margins to keep all four sides consistent. Disable it to control vertical and horizontal margins separately. **If aspect ratio is enabled, the final image visually conforms to that ratio, so margins may look different from the entered values.**",
+            },
+            "fixed-size": {
+              title: "Fixed screen size",
+              description:
+                "In this mode, manually enter the screen size. **If aspect ratio is enabled, the canvas expands outward to the target ratio.**",
+            },
+          },
+        },
+        "workspace-file": {
+          title: "Project File",
+          summary:
+            "A project file contains all raw files generated for a completed recording, including every asset and configuration. You can share it, and **it is automatically created and saved to a default location when recording finishes.**",
+          chapters: {
+            "default-directory": {
+              title: "Change the default directory",
+              description:
+                "Open <kbd>ScreenCam</kbd> > <kbd>Settings</kbd> > <kbd>Recording</kbd> > <kbd>Default workspace directory</kbd>, then choose the default folder.",
+            },
+            "recent-projects": {
+              title: "Open recent projects",
+              description: "Use <kbd>File</kbd> > <kbd>Recent</kbd>.",
+            },
+            "default-directory-projects": {
+              title: "Open projects in the default location",
+              description:
+                "Use <kbd>File</kbd> > <kbd>Default Directory</kbd>.",
+            },
+            "show-in-finder": {
+              title: "Show the current file in Finder",
+              description:
+                "Click the project file name at the top of the editor, or use <kbd>File</kbd> > <kbd>Show in Finder</kbd>.",
+            },
+            "manual-save": {
+              title: "Save manually",
+              description:
+                "Use <kbd>File</kbd> > <kbd>Save</kbd>, or press <kbd>⌘</kbd><kbd>S</kbd> to save manually. In most cases, the project is saved automatically.",
+            },
+            "save-as": {
+              title: "Save As",
+              description:
+                "Use <kbd>File</kbd> > <kbd>Save As</kbd>, or press <kbd>⌘</kbd><kbd>⇧</kbd><kbd>S</kbd> to save a copy to a custom folder.",
+            },
+          },
+        },
         record: {
           title: "Record",
           summary: "Set up a capture, choose the source, and start recording.",
@@ -495,6 +832,8 @@ export const translations: Record<Locale, LocaleTranslation> = {
             "delete-clip": {
               title: "Delete",
               description: "Select a clip, then press Backspace or Delete to remove it.",
+              descriptionHtml:
+                'Select a clip, then press <kbd class="docs-key">Backspace</kbd> or <kbd class="docs-key">Delete</kbd> to remove it.',
             },
             "create-clip": {
               title: "Create",
@@ -1094,7 +1433,7 @@ export const translations: Record<Locale, LocaleTranslation> = {
               description: "所有的主要配置都在这里。",
             },
             "screen-settings": {
-              title: "Screen 设置",
+              title: "屏幕设置",
               description: "用来设置屏幕内容，包括壁纸、边距、尺寸等。",
             },
             "device-settings": {
@@ -1120,6 +1459,133 @@ export const translations: Record<Locale, LocaleTranslation> = {
             tracks: {
               title: "轨道",
               description: "录制、摄像头、系统音频、麦克风、缩放、键盘都会以时间轴片段的形式在这里展示。",
+            },
+          },
+        },
+        "preview-control": {
+          title: "预览控制",
+          summary: "调整预览播放速度、预览音量和时间线轨道缩放。",
+          chapters: {
+            "playback-rate": {
+              title: "倍数播放",
+              description:
+                "这里调整预览的播放速度，**只影响预览阶段，不会影响导出**。",
+            },
+            volume: {
+              title: "音量调节",
+              description:
+                "调整预览的声音，**只影响预览阶段，不会影响导出**。",
+            },
+            "track-zoom": {
+              title: "轨道缩放",
+              description: "调整轨道的缩放比例。",
+            },
+          },
+        },
+        "track-management": {
+          title: "轨道管理",
+          summary: "打开轨道设置、调整排序、隐藏轨道、删除轨道，并恢复已删除轨道。",
+          chapters: {
+            entry: {
+              title: "入口",
+              description: "在轨道左侧打开轨道设置面板。",
+            },
+            sort: {
+              title: "排序",
+              description:
+                "拖拽前面的 {{icon:grip}} 排序图标来进行排序，这个排序将会作为偏好保存，下次也会使用这个排序。",
+            },
+            hide: {
+              title: "隐藏",
+              description:
+                "点击 {{icon:eye}} 图标，隐藏不需要的轨道，这 **不会影响导出**。",
+            },
+            delete: {
+              title: "删除",
+              description:
+                "点击 {{icon:trash}} 图标，删除不需要的轨道，这**会影响最终的导出**。",
+            },
+            restore: {
+              title: "恢复",
+              description: "已删除的轨道会单独显示在下方，可以随时点击恢复。",
+            },
+          },
+        },
+        "screen-settings": {
+          title: "屏幕设置",
+          summary: "这里的屏幕指录制画面以及画面可能带有的背景部分，用来调整这些样式。",
+          chapters: {
+            wallpaper: {
+              title: "壁纸",
+              description:
+                "选择从系统读取的壁纸，包括动态壁纸。这部分不包含在应用安装包内，不占据空间，并且确保了最高的壁纸质量。可以点击自定义在设置中配置更多的壁纸目录。",
+            },
+            "no-background": {
+              title: "无背景",
+              description:
+                "可以选择不要背景，这在全屏录制，或自己选择区域录制中尤其重要。但是要注意，**目前默认切换到无壁纸时，会保留之前的边距或尺寸设置，需要手动调成 0 来去掉黑边**。",
+            },
+            gradient: {
+              title: "渐变",
+              description:
+                "选择预设的线性渐变，你也可以自己任意地编辑渐变锚点和颜色，随意加减锚点。",
+            },
+            "solid-color": {
+              title: "纯色",
+              description: "选择一个单一的颜色作为背景。",
+            },
+            "custom-background": {
+              title: "自定义",
+              description: "上传自己的照片或视频作为背景。",
+            },
+            "adaptive-size": {
+              title: "屏幕尺寸自适应模式",
+              description: "在这个模式下画面的大小通过调整上下或左右的边距来控制。",
+            },
+            "sync-margins": {
+              title: "同步边距",
+              description:
+                "开启同步边距后确保 4 边的边距是一致的，关闭后可以单独控制上下或左右。注意，**如果选择了画面比例的功能，视觉上会确保最终的画面符合比例，边距看起来会和调的参数不一致**。",
+            },
+            "fixed-size": {
+              title: "屏幕尺寸固定模式",
+              description:
+                "这个模式下你可以手动输入屏幕的尺寸。同样，**如果选择了画面比例，会向外补充至目标的比例**。",
+            },
+          },
+        },
+        "workspace-file": {
+          title: "工程文件",
+          summary:
+            "工程文件是一次录制完成时生成的所有录制相关的原始文件，包括全部素材与配置，可以用于分享，**在录制完成时自动创建并保存到一个默认位置**。",
+          chapters: {
+            "default-directory": {
+              title: "修改默认目录",
+              description:
+                "打开 <kbd>ScreenCam</kbd> > <kbd>设置</kbd> > <kbd>录制</kbd> > <kbd>默认工作区目录</kbd>，选择默认目录。",
+            },
+            "recent-projects": {
+              title: "快速访问最近项目",
+              description: "在 <kbd>文件</kbd> > <kbd>最近</kbd>。",
+            },
+            "default-directory-projects": {
+              title: "快速访问默认位置的项目",
+              description: "在 <kbd>文件</kbd> > <kbd>默认目录</kbd>。",
+            },
+            "show-in-finder": {
+              title: "在 Finder 查看当前文件",
+              description:
+                "可以直接点击编辑器顶部的工程文件名，或者在 <kbd>文件</kbd> > <kbd>在访达打开</kbd>。",
+            },
+            "manual-save": {
+              title: "手动保存",
+              description:
+                "可以点击 <kbd>文件</kbd> > <kbd>保存</kbd>，或使用快捷键 <kbd>⌘</kbd><kbd>S</kbd> 手动保存。大部分情况下会自动保存。",
+            },
+            "save-as": {
+              title: "另存为",
+              description:
+                "点击 <kbd>文件</kbd> > <kbd>另存为</kbd>，或使用快捷键 <kbd>⌘</kbd><kbd>⇧</kbd><kbd>S</kbd>，将副本保存到自定义目录。",
             },
           },
         },
@@ -1152,6 +1618,8 @@ export const translations: Record<Locale, LocaleTranslation> = {
             "delete-clip": {
               title: "删除",
               description: "选中一个 clip 后，按 Backspace 或 Delete 删除。",
+              descriptionHtml:
+                '选中一个 clip 后，按 <kbd class="docs-key">Backspace</kbd> 或 <kbd class="docs-key">Delete</kbd> 删除。',
             },
             "create-clip": {
               title: "新建",
@@ -1712,8 +2180,9 @@ export const translations: Record<Locale, LocaleTranslation> = {
               description: "Alle wichtigen Konfigurationsbereiche befinden sich in der Seitenleiste.",
             },
             "screen-settings": {
-              title: "Screen-Einstellungen",
-              description: "Konfiguriere den Bildschirminhalt, einschließlich Wallpaper, Rändern, Größe und Layoutoptionen.",
+              title: "Bildschirmeinstellungen",
+              description:
+                "Konfiguriere den Bildschirminhalt, einschließlich Hintergrundbildern, Rändern, Größe und Layoutoptionen.",
             },
             "device-settings": {
               title: "Geräte-Einstellungen",
@@ -1738,6 +2207,135 @@ export const translations: Record<Locale, LocaleTranslation> = {
             tracks: {
               title: "Spuren",
               description: "Aufnahme, Kamera, Systemaudio, Mikrofon, Zoom und Tastaturereignisse erscheinen hier als Timeline-Clips.",
+            },
+          },
+        },
+        "preview-control": {
+          title: "Vorschau-Steuerung",
+          summary: "Passe Wiedergabegeschwindigkeit, Vorschau-Lautstärke und Timeline-Spur-Zoom beim Bearbeiten an.",
+          chapters: {
+            "playback-rate": {
+              title: "Wiedergabegeschwindigkeit",
+              description:
+                "Passe hier die Wiedergabegeschwindigkeit der Vorschau an. **Das wirkt sich nur auf die Vorschauphase aus und nicht auf den Export.**",
+            },
+            volume: {
+              title: "Lautstärke",
+              description:
+                "Passe den Ton an, den du in der Vorschau hörst. **Das wirkt sich nur auf die Vorschauphase aus und nicht auf den Export.**",
+            },
+            "track-zoom": {
+              title: "Spur-Zoom",
+              description: "Ändert die Zoomstufe der Timeline-Spuren.",
+            },
+          },
+        },
+        "track-management": {
+          title: "Spurverwaltung",
+          summary: "Öffne Spureinstellungen, sortiere Spuren, blende sie aus, lösche sie und stelle gelöschte Spuren wieder her.",
+          chapters: {
+            entry: {
+              title: "Einstieg",
+              description: "Öffne links neben den Spuren das Panel für die Spureinstellungen.",
+            },
+            sort: {
+              title: "Sortieren",
+              description:
+                "Ziehe den vorderen {{icon:grip}} Sortiergriff, um Spuren neu anzuordnen. Diese Reihenfolge wird als Präferenz gespeichert und beim nächsten Mal wiederverwendet.",
+            },
+            hide: {
+              title: "Ausblenden",
+              description:
+                "Klicke auf das {{icon:eye}} Symbol, um nicht benötigte Spuren auszublenden. **Dies wirkt sich nicht auf den Export aus.**",
+            },
+            delete: {
+              title: "Löschen",
+              description:
+                "Klicke auf das {{icon:trash}} Symbol, um nicht benötigte Spuren zu löschen. **Dies wirkt sich auf den finalen Export aus.**",
+            },
+            restore: {
+              title: "Wiederherstellen",
+              description:
+                "Gelöschte Spuren erscheinen separat darunter und können jederzeit wiederhergestellt werden.",
+            },
+          },
+        },
+        "screen-settings": {
+          title: "Bildschirmeinstellungen",
+          summary: "Passe den aufgenommenen Bildschirminhalt, den möglichen Hintergrund, Ränder und Größenverhalten an.",
+          chapters: {
+            wallpaper: {
+              title: "Hintergrundbild",
+              description:
+                "Wähle Hintergrundbilder, die aus dem System gelesen werden, einschließlich dynamischer Hintergrundbilder. Sie sind nicht im App-Paket enthalten, belegen keinen App-Speicher und behalten die höchste Hintergrundbild-Qualität. Klicke auf Benutzerdefiniert, um in den Einstellungen weitere Hintergrundbild-Ordner zu konfigurieren.",
+            },
+            "no-background": {
+              title: "Kein Hintergrund",
+              description:
+                "Wähle keinen Hintergrund, besonders wichtig bei Vollbildaufnahmen oder selbst gewählten Aufnahmebereichen. **Aktuell bleiben beim Wechsel zu keinem Hintergrundbild standardmäßig vorherige Rand- oder Größeneinstellungen erhalten. Stelle sie manuell auf 0, um schwarze Ränder zu entfernen.**",
+            },
+            gradient: {
+              title: "Verlauf",
+              description:
+                "Wähle einen vorgegebenen linearen Verlauf oder bearbeite Ankerpunkte und Farben frei, inklusive Hinzufügen und Entfernen von Ankern.",
+            },
+            "solid-color": {
+              title: "Einfarbig",
+              description: "Wähle eine einzelne Farbe als Hintergrund.",
+            },
+            "custom-background": {
+              title: "Benutzerdefiniert",
+              description: "Lade ein eigenes Foto oder Video als Hintergrund hoch.",
+            },
+            "adaptive-size": {
+              title: "Adaptive Bildschirmgröße",
+              description:
+                "In diesem Modus wird die Bildgröße über obere/untere oder linke/rechte Ränder gesteuert.",
+            },
+            "sync-margins": {
+              title: "Ränder synchronisieren",
+              description:
+                "Aktiviere synchronisierte Ränder, damit alle vier Seiten gleich bleiben. Deaktiviere es, um vertikale oder horizontale Ränder separat zu steuern. **Wenn das Seitenverhältnis aktiviert ist, wird das finale Bild visuell an dieses Verhältnis angepasst, sodass die Ränder anders aussehen können als die eingestellten Werte.**",
+            },
+            "fixed-size": {
+              title: "Feste Bildschirmgröße",
+              description:
+                "In diesem Modus gibst du die Bildschirmgröße manuell ein. **Wenn das Seitenverhältnis aktiviert ist, wird nach außen bis zum Zielverhältnis ergänzt.**",
+            },
+          },
+        },
+        "workspace-file": {
+          title: "Projektdatei",
+          summary:
+            "Eine Projektdatei enthält alle Rohdateien, die nach einer abgeschlossenen Aufnahme erzeugt werden, einschließlich aller Medien und Konfigurationen. Du kannst sie teilen, und **sie wird nach Abschluss der Aufnahme automatisch erstellt und an einem Standardort gespeichert.**",
+          chapters: {
+            "default-directory": {
+              title: "Standardordner ändern",
+              description:
+                "Öffne <kbd>ScreenCam</kbd> > <kbd>Einstellungen</kbd> > <kbd>Aufnahme</kbd> > <kbd>Standard-Arbeitsbereichsordner</kbd> und wähle den Standardordner.",
+            },
+            "recent-projects": {
+              title: "Zuletzt verwendete Projekte öffnen",
+              description: "Nutze <kbd>Datei</kbd> > <kbd>Zuletzt</kbd>.",
+            },
+            "default-directory-projects": {
+              title: "Projekte am Standardort öffnen",
+              description: "Nutze <kbd>Datei</kbd> > <kbd>Standardordner</kbd>.",
+            },
+            "show-in-finder": {
+              title: "Aktuelle Datei im Finder anzeigen",
+              description:
+                "Klicke direkt auf den Projektdateinamen oben im Editor, oder nutze <kbd>Datei</kbd> > <kbd>Im Finder anzeigen</kbd>.",
+            },
+            "manual-save": {
+              title: "Manuell speichern",
+              description:
+                "Nutze <kbd>Datei</kbd> > <kbd>Speichern</kbd>, oder drücke <kbd>⌘</kbd><kbd>S</kbd>, um manuell zu speichern. In den meisten Fällen wird automatisch gespeichert.",
+            },
+            "save-as": {
+              title: "Speichern unter",
+              description:
+                "Nutze <kbd>Datei</kbd> > <kbd>Speichern unter</kbd>, oder drücke <kbd>⌘</kbd><kbd>⇧</kbd><kbd>S</kbd>, um eine Kopie in einem eigenen Ordner zu speichern.",
             },
           },
         },
@@ -1770,6 +2368,8 @@ export const translations: Record<Locale, LocaleTranslation> = {
             "delete-clip": {
               title: "Löschen",
               description: "Wähle einen Clip aus und drücke Backspace oder Delete, um ihn zu entfernen.",
+              descriptionHtml:
+                'Wähle einen Clip aus und drücke <kbd class="docs-key">Backspace</kbd> oder <kbd class="docs-key">Delete</kbd>, um ihn zu entfernen.',
             },
             "create-clip": {
               title: "Erstellen",
@@ -2342,7 +2942,7 @@ export const translations: Record<Locale, LocaleTranslation> = {
               description: "主要な設定はすべてここにあります。",
             },
             "screen-settings": {
-              title: "Screen 設定",
+              title: "画面設定",
               description: "壁紙、余白、サイズなど、画面内容に関する設定を行います。",
             },
             "device-settings": {
@@ -2368,6 +2968,134 @@ export const translations: Record<Locale, LocaleTranslation> = {
             tracks: {
               title: "トラック",
               description: "録画、カメラ、システム音声、マイク、ズーム、キーボードがタイムラインクリップとして表示されます。",
+            },
+          },
+        },
+        "preview-control": {
+          title: "プレビュー制御",
+          summary: "編集中に、プレビューの再生速度、音量、タイムライントラックのズームを調整します。",
+          chapters: {
+            "playback-rate": {
+              title: "再生速度",
+              description:
+                "ここでプレビューの再生速度を調整します。**プレビュー段階にのみ影響し、書き出しには影響しません。**",
+            },
+            volume: {
+              title: "音量調整",
+              description:
+                "プレビュー中に聞こえる音量を調整します。**プレビュー段階にのみ影響し、書き出しには影響しません。**",
+            },
+            "track-zoom": {
+              title: "トラックズーム",
+              description: "タイムライントラックのズーム倍率を調整します。",
+            },
+          },
+        },
+        "track-management": {
+          title: "トラック管理",
+          summary: "トラック設定を開き、並べ替え、非表示、削除、削除済みトラックの復元を行います。",
+          chapters: {
+            entry: {
+              title: "入口",
+              description: "トラック左側からトラック設定パネルを開きます。",
+            },
+            sort: {
+              title: "並べ替え",
+              description:
+                "先頭の {{icon:grip}} 並べ替えアイコンをドラッグして順序を変更します。この順序は設定として保存され、次回も使用されます。",
+            },
+            hide: {
+              title: "非表示",
+              description:
+                "{{icon:eye}} アイコンをクリックして不要なトラックを非表示にします。**書き出しには影響しません。**",
+            },
+            delete: {
+              title: "削除",
+              description:
+                "{{icon:trash}} アイコンをクリックして不要なトラックを削除します。**最終書き出しに影響します。**",
+            },
+            restore: {
+              title: "復元",
+              description: "削除済みトラックは下に別表示され、いつでもクリックして復元できます。",
+            },
+          },
+        },
+        "screen-settings": {
+          title: "画面設定",
+          summary: "録画された画面と、その周囲に表示される背景、余白、サイズの挙動を調整します。",
+          chapters: {
+            wallpaper: {
+              title: "壁紙",
+              description:
+                "システムから読み込んだ壁紙を選択します。動的壁紙も含まれます。これらはアプリ本体には含まれないため容量を占有せず、最高品質の壁紙を使用できます。カスタムをクリックすると、設定で追加の壁紙フォルダを指定できます。",
+            },
+            "no-background": {
+              title: "背景なし",
+              description:
+                "背景なしを選択できます。全画面録画や自分で範囲を選ぶ録画では特に重要です。**現在、壁紙なしへ切り替えた場合も以前の余白やサイズ設定が既定で残るため、黒い縁を消すには手動で 0 に調整する必要があります。**",
+            },
+            gradient: {
+              title: "グラデーション",
+              description:
+                "プリセットの線形グラデーションを選択できます。アンカーや色は自由に編集でき、アンカーの追加や削除もできます。",
+            },
+            "solid-color": {
+              title: "単色",
+              description: "背景として単一の色を選択します。",
+            },
+            "custom-background": {
+              title: "カスタム",
+              description: "自分の写真や動画を背景としてアップロードします。",
+            },
+            "adaptive-size": {
+              title: "画面サイズ自動調整",
+              description:
+                "このモードでは、上下または左右の余白を調整して画面サイズを制御します。",
+            },
+            "sync-margins": {
+              title: "余白を同期",
+              description:
+                "余白同期をオンにすると 4 辺の余白を一致させます。オフにすると上下または左右を個別に制御できます。**画面比率機能を選んでいる場合、最終画面は視覚的にその比率へ合わせられるため、余白が設定値と違って見えることがあります。**",
+            },
+            "fixed-size": {
+              title: "固定画面サイズ",
+              description:
+                "このモードでは画面サイズを手動で入力できます。**画面比率を選んでいる場合は、目標比率になるよう外側へ補われます。**",
+            },
+          },
+        },
+        "workspace-file": {
+          title: "プロジェクトファイル",
+          summary:
+            "プロジェクトファイルには、録画完了時に生成される録画関連のすべての元ファイル、素材、設定が含まれます。共有にも使用でき、**録画完了時に自動作成されて既定の場所へ保存されます。**",
+          chapters: {
+            "default-directory": {
+              title: "既定フォルダを変更",
+              description:
+                "<kbd>ScreenCam</kbd> > <kbd>設定</kbd> > <kbd>録画</kbd> > <kbd>デフォルトのワークスペースフォルダ</kbd> を開き、既定フォルダを選択します。",
+            },
+            "recent-projects": {
+              title: "最近のプロジェクトをすばやく開く",
+              description: "<kbd>ファイル</kbd> > <kbd>最近使った項目</kbd> から開きます。",
+            },
+            "default-directory-projects": {
+              title: "既定場所のプロジェクトを開く",
+              description: "<kbd>ファイル</kbd> > <kbd>デフォルトディレクトリ</kbd> から開きます。",
+            },
+            "show-in-finder": {
+              title: "現在のファイルを Finder で表示",
+              description:
+                "エディタ上部のプロジェクトファイル名を直接クリックするか、<kbd>ファイル</kbd> > <kbd>Finder で表示</kbd> を使います。",
+            },
+            "manual-save": {
+              title: "手動保存",
+              description:
+                "<kbd>ファイル</kbd> > <kbd>保存</kbd> をクリックするか、<kbd>⌘</kbd><kbd>S</kbd> を押して手動保存します。ほとんどの場合は自動保存されます。",
+            },
+            "save-as": {
+              title: "別名で保存",
+              description:
+                "<kbd>ファイル</kbd> > <kbd>別名で保存</kbd> をクリックするか、<kbd>⌘</kbd><kbd>⇧</kbd><kbd>S</kbd> を押して、コピーを任意のフォルダに保存します。",
             },
           },
         },
@@ -2400,6 +3128,8 @@ export const translations: Record<Locale, LocaleTranslation> = {
             "delete-clip": {
               title: "削除",
               description: "クリップを選択して Backspace または Delete を押すと削除できます。",
+              descriptionHtml:
+                'クリップを選択して <kbd class="docs-key">Backspace</kbd> または <kbd class="docs-key">Delete</kbd> を押すと削除できます。',
             },
             "create-clip": {
               title: "新規作成",
@@ -2956,7 +3686,7 @@ export const translations: Record<Locale, LocaleTranslation> = {
               description: "주요 설정은 모두 이곳에 있습니다.",
             },
             "screen-settings": {
-              title: "Screen 설정",
+              title: "화면 설정",
               description: "배경화면, 여백, 크기 등 화면 콘텐츠 관련 설정을 조정합니다.",
             },
             "device-settings": {
@@ -2982,6 +3712,134 @@ export const translations: Record<Locale, LocaleTranslation> = {
             tracks: {
               title: "트랙",
               description: "녹화, 카메라, 시스템 오디오, 마이크, 줌, 키보드가 타임라인 클립 형태로 표시됩니다.",
+            },
+          },
+        },
+        "preview-control": {
+          title: "미리보기 컨트롤",
+          summary: "편집 중 미리보기 재생 속도, 미리보기 음량, 타임라인 트랙 줌을 조정합니다.",
+          chapters: {
+            "playback-rate": {
+              title: "재생 속도",
+              description:
+                "여기에서 미리보기 재생 속도를 조정합니다. **미리보기 단계에만 영향을 주며 내보내기에는 영향을 주지 않습니다.**",
+            },
+            volume: {
+              title: "음량 조정",
+              description:
+                "미리보기 중 들리는 소리를 조정합니다. **미리보기 단계에만 영향을 주며 내보내기에는 영향을 주지 않습니다.**",
+            },
+            "track-zoom": {
+              title: "트랙 줌",
+              description: "타임라인 트랙의 줌 비율을 조정합니다.",
+            },
+          },
+        },
+        "track-management": {
+          title: "트랙 관리",
+          summary: "트랙 설정을 열고, 순서를 바꾸고, 숨기고, 삭제하고, 삭제한 트랙을 복원합니다.",
+          chapters: {
+            entry: {
+              title: "입구",
+              description: "트랙 왼쪽에서 트랙 설정 패널을 엽니다.",
+            },
+            sort: {
+              title: "정렬",
+              description:
+                "앞쪽의 {{icon:grip}} 정렬 아이콘을 드래그해 순서를 바꿉니다. 이 순서는 환경설정으로 저장되어 다음에도 사용됩니다.",
+            },
+            hide: {
+              title: "숨기기",
+              description:
+                "{{icon:eye}} 아이콘을 클릭해 필요 없는 트랙을 숨깁니다. **내보내기에는 영향을 주지 않습니다.**",
+            },
+            delete: {
+              title: "삭제",
+              description:
+                "{{icon:trash}} 아이콘을 클릭해 필요 없는 트랙을 삭제합니다. **최종 내보내기에 영향을 줍니다.**",
+            },
+            restore: {
+              title: "복원",
+              description: "삭제된 트랙은 아래에 따로 표시되며 언제든 클릭해 복원할 수 있습니다.",
+            },
+          },
+        },
+        "screen-settings": {
+          title: "화면 설정",
+          summary: "녹화된 화면과 화면 주변의 배경, 여백, 크기 동작을 조정합니다.",
+          chapters: {
+            wallpaper: {
+              title: "배경화면",
+              description:
+                "시스템에서 읽어 온 배경화면을 선택합니다. 동적 배경화면도 포함됩니다. 이 파일들은 앱 설치 패키지에 포함되지 않아 용량을 차지하지 않고, 가장 높은 배경화면 품질을 유지합니다. 사용자 지정을 클릭하면 설정에서 더 많은 배경화면 폴더를 구성할 수 있습니다.",
+            },
+            "no-background": {
+              title: "배경 없음",
+              description:
+                "배경을 없앨 수 있습니다. 전체 화면 녹화나 직접 선택한 영역 녹화에서 특히 중요합니다. **현재 기본적으로 배경화면 없음으로 전환해도 이전 여백 또는 크기 설정이 유지되므로, 검은 테두리를 없애려면 수동으로 0으로 조정해야 합니다.**",
+            },
+            gradient: {
+              title: "그라데이션",
+              description:
+                "미리 준비된 선형 그라데이션을 선택하거나, 그라데이션 앵커와 색상을 자유롭게 편집하고 앵커를 추가하거나 삭제할 수 있습니다.",
+            },
+            "solid-color": {
+              title: "단색",
+              description: "단일 색상을 배경으로 선택합니다.",
+            },
+            "custom-background": {
+              title: "사용자 지정",
+              description: "직접 준비한 사진이나 동영상을 배경으로 업로드합니다.",
+            },
+            "adaptive-size": {
+              title: "화면 크기 자동 맞춤",
+              description:
+                "이 모드에서는 위/아래 또는 좌/우 여백을 조정해 화면 크기를 제어합니다.",
+            },
+            "sync-margins": {
+              title: "여백 동기화",
+              description:
+                "여백 동기화를 켜면 네 방향 여백이 같게 유지됩니다. 끄면 위/아래 또는 좌/우를 따로 제어할 수 있습니다. **화면 비율 기능을 선택한 경우 최종 화면이 시각적으로 그 비율에 맞춰지므로 여백이 입력한 값과 다르게 보일 수 있습니다.**",
+            },
+            "fixed-size": {
+              title: "고정 화면 크기",
+              description:
+                "이 모드에서는 화면 크기를 직접 입력할 수 있습니다. **화면 비율을 선택한 경우 목표 비율에 맞도록 바깥쪽으로 보충됩니다.**",
+            },
+          },
+        },
+        "workspace-file": {
+          title: "프로젝트 파일",
+          summary:
+            "프로젝트 파일은 녹화가 완료될 때 생성되는 모든 녹화 관련 원본 파일이며, 모든 소재와 설정을 포함합니다. 공유에도 사용할 수 있고, **녹화가 완료되면 자동으로 생성되어 기본 위치에 저장됩니다.**",
+          chapters: {
+            "default-directory": {
+              title: "기본 디렉터리 변경",
+              description:
+                "<kbd>ScreenCam</kbd> > <kbd>설정</kbd> > <kbd>녹화</kbd> > <kbd>기본 작업 공간 디렉터리</kbd>를 열고 기본 폴더를 선택합니다.",
+            },
+            "recent-projects": {
+              title: "최근 프로젝트 빠르게 열기",
+              description: "<kbd>파일</kbd> > <kbd>최근 항목</kbd>에서 엽니다.",
+            },
+            "default-directory-projects": {
+              title: "기본 위치의 프로젝트 열기",
+              description: "<kbd>파일</kbd> > <kbd>기본 디렉터리</kbd>에서 엽니다.",
+            },
+            "show-in-finder": {
+              title: "현재 파일을 Finder에서 보기",
+              description:
+                "에디터 상단의 프로젝트 파일 이름을 직접 클릭하거나 <kbd>파일</kbd> > <kbd>Finder에서 보기</kbd>를 사용합니다.",
+            },
+            "manual-save": {
+              title: "수동 저장",
+              description:
+                "<kbd>파일</kbd> > <kbd>저장</kbd>을 클릭하거나 <kbd>⌘</kbd><kbd>S</kbd> 단축키로 수동 저장할 수 있습니다. 대부분의 경우 자동 저장됩니다.",
+            },
+            "save-as": {
+              title: "다른 이름으로 저장",
+              description:
+                "<kbd>파일</kbd> > <kbd>다른 이름으로 저장</kbd>을 클릭하거나 <kbd>⌘</kbd><kbd>⇧</kbd><kbd>S</kbd> 단축키로 복사본을 원하는 폴더에 저장합니다.",
             },
           },
         },
@@ -3014,6 +3872,8 @@ export const translations: Record<Locale, LocaleTranslation> = {
             "delete-clip": {
               title: "삭제",
               description: "클립을 선택한 뒤 Backspace 또는 Delete를 눌러 삭제합니다.",
+              descriptionHtml:
+                '클립을 선택한 뒤 <kbd class="docs-key">Backspace</kbd> 또는 <kbd class="docs-key">Delete</kbd>를 눌러 삭제합니다.',
             },
             "create-clip": {
               title: "새로 만들기",
@@ -3454,6 +4314,9 @@ export const translations: Record<Locale, LocaleTranslation> = {
     },
   },
 };
+
+export const translations: Record<Locale, LocaleTranslation> =
+  compileTranslations(rawTranslations);
 
 export function getTranslation(locale: Locale): LocaleTranslation {
   return translations[locale];

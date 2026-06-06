@@ -9,13 +9,18 @@ import {
   SkipForward,
   Video,
 } from "lucide-react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { CSSProperties, ReactNode } from "react";
-import type { DocsTimeline, DocsTimelineChapter } from "../../data/docs";
+import type {
+  DocsSidebarSizer,
+  DocsTimeline,
+  DocsTimelineChapter,
+} from "../../data/docs";
 import type { DocsCopy, DocsFeatureId } from "../../lib/translations";
 
 type InteractiveDocsProps = {
   copy: DocsCopy;
+  sidebarSizer: DocsSidebarSizer;
   timelines: DocsTimeline[];
 };
 
@@ -33,10 +38,62 @@ export type DocsFeatureDemoCopy = VideoDocPlayerCopy;
 type DocsFeatureCopy = DocsCopy["features"][DocsFeatureId];
 
 type ChapterView = DocsTimelineChapter & {
-  description: string;
+  descriptionHtml: string;
   index: number;
   title: string;
 };
+
+type ChapterRequest = {
+  chapterId: string;
+  requestId: number;
+};
+
+function getChapterViews(
+  timeline: DocsTimeline,
+  feature: DocsFeatureCopy,
+): ChapterView[] {
+  return timeline.chapters.map((chapter, index) => {
+    const chapterCopy = feature.chapters[chapter.id];
+
+    return {
+      ...chapter,
+      descriptionHtml:
+        chapterCopy?.descriptionHtml ?? chapterCopy?.description ?? "",
+      index,
+      title: chapterCopy?.title ?? chapter.id,
+    };
+  });
+}
+
+function getChapterListProgress(
+  chapters: ChapterView[],
+  selectedChapterId: string | null,
+  selectedChapterProgress: number,
+) {
+  if (!chapters.length || !selectedChapterId) return 0;
+
+  const selectedIndex = chapters.findIndex(
+    (chapter) => chapter.id === selectedChapterId,
+  );
+  if (selectedIndex === -1) return 0;
+  if (chapters.length === 1) return 1;
+
+  const clampedChapterProgress = Math.min(
+    1,
+    Math.max(0, selectedChapterProgress),
+  );
+  const itemHeight = 20;
+  const itemGap = 10;
+  const totalHeight =
+    chapters.length * itemHeight + (chapters.length - 1) * itemGap;
+  const selectedItemStart = selectedIndex * (itemHeight + itemGap);
+  const selectedItemRange =
+    selectedIndex === chapters.length - 1 ? itemHeight : itemHeight + itemGap;
+  const selectedItemProgress =
+    selectedItemStart + selectedItemRange * clampedChapterProgress;
+
+  return Math.min(1, Math.max(0, selectedItemProgress / totalHeight));
+}
 
 function formatTime(value: number) {
   const safeValue = Math.max(0, Math.floor(value));
@@ -67,7 +124,29 @@ function writeDocsHash(featureId: DocsFeatureId, chapterId?: string) {
   );
 }
 
-export function InteractiveDocs({ copy, timelines }: InteractiveDocsProps) {
+function isSpaceKey(event: KeyboardEvent) {
+  return (
+    event.code === "Space" || event.key === " " || event.key === "Spacebar"
+  );
+}
+
+function isInteractiveShortcutTarget(target: EventTarget | null) {
+  if (!(target instanceof Element)) return false;
+
+  if (target instanceof HTMLElement && target.isContentEditable) return true;
+
+  return Boolean(
+    target.closest(
+      "a, button, input, textarea, select, [contenteditable='true'], [role='button'], [role='link']",
+    ),
+  );
+}
+
+export function InteractiveDocs({
+  copy,
+  sidebarSizer,
+  timelines,
+}: InteractiveDocsProps) {
   const firstFeatureId = timelines[0]?.featureId ?? "record";
   const shouldReduceMotion = useReducedMotion();
   const sidebarRef = useRef<HTMLDivElement>(null);
@@ -76,7 +155,11 @@ export function InteractiveDocs({ copy, timelines }: InteractiveDocsProps) {
   const [hoveredFeatureId, setHoveredFeatureId] =
     useState<DocsFeatureId | null>(null);
   const [featurePopoverY, setFeaturePopoverY] = useState(0);
-  const [requestedChapterId, setRequestedChapterId] = useState<string | null>(
+  const [selectedChapterId, setSelectedChapterId] = useState<string | null>(
+    null,
+  );
+  const [selectedChapterProgress, setSelectedChapterProgress] = useState(0);
+  const [chapterRequest, setChapterRequest] = useState<ChapterRequest | null>(
     null,
   );
   const activeTimeline =
@@ -84,6 +167,23 @@ export function InteractiveDocs({ copy, timelines }: InteractiveDocsProps) {
     timelines[0];
   const hoveredTimeline = timelines.find(
     (timeline) => timeline.featureId === hoveredFeatureId,
+  );
+  const activeChapters = useMemo(
+    () =>
+      activeTimeline
+        ? getChapterViews(
+            activeTimeline,
+            copy.features[activeTimeline.featureId],
+          )
+        : [],
+    [activeTimeline, copy.features],
+  );
+  const visibleHoveredTimeline =
+    hoveredTimeline?.featureId === activeFeatureId ? null : hoveredTimeline;
+  const activeSidebarProgress = getChapterListProgress(
+    activeChapters,
+    selectedChapterId,
+    selectedChapterProgress,
   );
 
   useEffect(() => {
@@ -98,7 +198,17 @@ export function InteractiveDocs({ copy, timelines }: InteractiveDocsProps) {
       if (!matchingTimeline) return;
 
       setActiveFeatureId(matchingTimeline.featureId);
-      setRequestedChapterId(chapterId ?? null);
+      setSelectedChapterId(chapterId ?? null);
+      setSelectedChapterProgress(0);
+      if (!chapterId) {
+        setChapterRequest(null);
+        return;
+      }
+
+      setChapterRequest((current) => ({
+        chapterId,
+        requestId: (current?.requestId ?? 0) + 1,
+      }));
     };
 
     readHash();
@@ -111,7 +221,9 @@ export function InteractiveDocs({ copy, timelines }: InteractiveDocsProps) {
 
   const selectFeature = (featureId: DocsFeatureId) => {
     setActiveFeatureId(featureId);
-    setRequestedChapterId(null);
+    setSelectedChapterId(null);
+    setSelectedChapterProgress(0);
+    setChapterRequest(null);
     writeDocsHash(featureId);
   };
 
@@ -132,9 +244,40 @@ export function InteractiveDocs({ copy, timelines }: InteractiveDocsProps) {
 
   const selectChapter = (featureId: DocsFeatureId, chapterId: string) => {
     setActiveFeatureId(featureId);
-    setRequestedChapterId(chapterId);
+    setSelectedChapterId(chapterId);
+    setSelectedChapterProgress(0);
+    setChapterRequest((current) => ({
+      chapterId,
+      requestId: (current?.requestId ?? 0) + 1,
+    }));
     writeDocsHash(featureId, chapterId);
   };
+
+  const updateSelectedChapter = (
+    featureId: DocsFeatureId,
+    chapterId: string,
+  ) => {
+    setActiveFeatureId(featureId);
+    setSelectedChapterId(chapterId);
+    setSelectedChapterProgress(0);
+    writeDocsHash(featureId, chapterId);
+  };
+
+  const updatePlaybackState = useCallback(
+    (
+      featureId: DocsFeatureId,
+      chapterId: string | null,
+      chapterProgress: number,
+    ) => {
+      if (featureId !== activeFeatureId) return;
+
+      if (chapterId) {
+        setSelectedChapterId(chapterId);
+        setSelectedChapterProgress(chapterProgress);
+      }
+    },
+    [activeFeatureId],
+  );
 
   return (
     <section className="min-h-screen pb-24 pt-32">
@@ -159,6 +302,23 @@ export function InteractiveDocs({ copy, timelines }: InteractiveDocsProps) {
         <div className="mt-14 grid gap-8 lg:grid-cols-[max-content_minmax(0,1fr)] lg:gap-16 xl:gap-20">
           <nav aria-label={copy.featureListAria} className="relative min-w-0">
             <div
+              aria-hidden="true"
+              className="pointer-events-none invisible hidden h-0 w-max overflow-hidden lg:block"
+            >
+              <div className="w-max">
+                <div className="py-1.5 text-base font-semibold">
+                  {sidebarSizer.featureTitle}
+                </div>
+                {sidebarSizer.chapterTitle && (
+                  <div className="pl-4 pt-4">
+                    <div className="text-xs font-medium leading-5">
+                      {sidebarSizer.chapterTitle}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+            <div
               ref={sidebarRef}
               onMouseLeave={() => setHoveredFeatureId(null)}
               className="relative flex gap-6 overflow-x-auto pb-3 lg:block lg:space-y-2.5 lg:overflow-visible lg:pb-0"
@@ -167,54 +327,143 @@ export function InteractiveDocs({ copy, timelines }: InteractiveDocsProps) {
                 const feature = copy.features[timeline.featureId];
                 const isActive = timeline.featureId === activeFeatureId;
 
+                const chapters =
+                  isActive && timeline.featureId === activeTimeline?.featureId
+                    ? activeChapters
+                    : [];
+
                 return (
-                  <motion.button
-                    type="button"
+                  <motion.div
                     key={timeline.featureId}
-                    aria-current={isActive ? "page" : undefined}
-                    onClick={() => selectFeature(timeline.featureId)}
-                    onFocus={(event) =>
-                      updateHoveredFeature(
-                        timeline.featureId,
-                        event.currentTarget,
-                      )
-                    }
-                    onPointerEnter={(event) =>
-                      updateHoveredFeature(
-                        timeline.featureId,
-                        event.currentTarget,
-                      )
-                    }
-                    onMouseEnter={(event) =>
-                      updateHoveredFeature(
-                        timeline.featureId,
-                        event.currentTarget,
-                      )
-                    }
-                    className={`group block w-fit shrink-0 py-1.5 text-left text-base font-semibold transition-colors ${
-                      isActive
-                        ? "text-red-400"
-                        : "text-foreground hover:text-white"
-                    }`}
-                    whileTap={{ scale: 0.98 }}
+                    layout
+                    className="w-max max-w-[calc(100vw-3rem)] shrink-0 lg:max-w-none"
+                    transition={{
+                      layout: {
+                        duration: shouldReduceMotion ? 0 : 0.26,
+                        ease: [0.16, 1, 0.3, 1],
+                      },
+                    }}
                   >
-                    <span className="relative inline-block">
-                      {feature.title}
-                      <span
-                        className={`absolute -bottom-1 left-0 h-px w-full origin-left transition-transform duration-300 ${
-                          isActive
-                            ? "scale-x-100 bg-red-400"
-                            : "scale-x-0 bg-white group-hover:scale-x-100"
-                        }`}
-                        aria-hidden="true"
-                      />
-                    </span>
-                  </motion.button>
+                    <motion.button
+                      type="button"
+                      aria-current={isActive ? "page" : undefined}
+                      onClick={() => selectFeature(timeline.featureId)}
+                      onFocus={(event) =>
+                        updateHoveredFeature(
+                          timeline.featureId,
+                          event.currentTarget,
+                        )
+                      }
+                      onPointerEnter={(event) =>
+                        updateHoveredFeature(
+                          timeline.featureId,
+                          event.currentTarget,
+                        )
+                      }
+                      onMouseEnter={(event) =>
+                        updateHoveredFeature(
+                          timeline.featureId,
+                          event.currentTarget,
+                        )
+                      }
+                      className={`group block w-fit py-1.5 text-left text-base font-semibold transition-colors ${
+                        isActive
+                          ? "text-red-400"
+                          : "text-foreground hover:text-white"
+                      }`}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      <span className="relative inline-block">
+                        {feature.title}
+                        <span
+                          className={`absolute -bottom-1 left-0 h-px w-full origin-left transition-transform duration-300 ${
+                            isActive
+                              ? "scale-x-100 bg-red-400"
+                              : "scale-x-0 bg-white group-hover:scale-x-100"
+                          }`}
+                          aria-hidden="true"
+                        />
+                      </span>
+                    </motion.button>
+
+                    <AnimatePresence initial={false}>
+                      {chapters.length > 0 && (
+                        <motion.div
+                          key={`${timeline.featureId}-chapters`}
+                          className="overflow-hidden"
+                          initial={
+                            shouldReduceMotion
+                              ? { opacity: 0 }
+                              : { height: 0, opacity: 0 }
+                          }
+                          animate={
+                            shouldReduceMotion
+                              ? { opacity: 1 }
+                              : { height: "auto", opacity: 1 }
+                          }
+                          exit={
+                            shouldReduceMotion
+                              ? { opacity: 0 }
+                              : { height: 0, opacity: 0 }
+                          }
+                          transition={{
+                            duration: shouldReduceMotion ? 0.16 : 0.28,
+                            ease: [0.16, 1, 0.3, 1],
+                          }}
+                        >
+                          <div className="relative pl-4 pt-4">
+                            <span
+                              className="absolute bottom-0 left-0 top-4 w-px bg-white/15"
+                              aria-hidden="true"
+                            />
+                            <motion.span
+                              className="absolute bottom-0 left-0 top-4 w-px origin-top bg-white/50"
+                              aria-hidden="true"
+                              animate={{ scaleY: activeSidebarProgress }}
+                              transition={{
+                                duration: shouldReduceMotion ? 0 : 0.18,
+                                ease: [0.16, 1, 0.3, 1],
+                              }}
+                            />
+                            <div className="grid gap-2.5">
+                              {chapters.map((chapter) => {
+                                const isSelected =
+                                  selectedChapterId === chapter.id;
+
+                                return (
+                                  <button
+                                    type="button"
+                                    key={chapter.id}
+                                    aria-current={
+                                      isSelected ? "location" : undefined
+                                    }
+                                    onClick={() =>
+                                      selectChapter(
+                                        timeline.featureId,
+                                        chapter.id,
+                                      )
+                                    }
+                                    className={`block w-full text-left text-xs font-medium leading-5 transition-colors focus:outline-none focus-visible:underline focus-visible:underline-offset-4 ${
+                                      isSelected
+                                        ? "text-red-300"
+                                        : "text-white/50 hover:text-white/80"
+                                    } break-words`}
+                                  >
+                                    {chapter.title}
+                                  </button>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
                 );
               })}
 
               <AnimatePresence>
-                {hoveredTimeline && (
+                {visibleHoveredTimeline && (
                   <motion.div
                     key="feature-popover"
                     className="pointer-events-none absolute left-[calc(100%+1.25rem)] top-0 z-30 hidden w-72 border border-white/10 bg-black p-5 shadow-[0_24px_70px_rgba(0,0,0,0.48)] lg:block"
@@ -236,10 +485,10 @@ export function InteractiveDocs({ copy, timelines }: InteractiveDocsProps) {
                     transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
                   >
                     <p className="text-sm font-semibold text-white">
-                      {copy.features[hoveredTimeline.featureId].title}
+                      {copy.features[visibleHoveredTimeline.featureId].title}
                     </p>
                     <p className="mt-3 text-sm leading-6 text-white/65">
-                      {copy.features[hoveredTimeline.featureId].summary}
+                      {copy.features[visibleHoveredTimeline.featureId].summary}
                     </p>
                   </motion.div>
                 )}
@@ -248,28 +497,25 @@ export function InteractiveDocs({ copy, timelines }: InteractiveDocsProps) {
           </nav>
 
           <div className="min-w-0">
-            <AnimatePresence mode="wait">
-              {activeTimeline && (
-                <motion.div
-                  key={activeTimeline.featureId}
-                  initial={shouldReduceMotion ? false : { opacity: 0, x: 18 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={
-                    shouldReduceMotion ? { opacity: 0 } : { opacity: 0, x: -18 }
-                  }
-                  transition={{ duration: 0.34, ease: [0.16, 1, 0.3, 1] }}
-                >
-                  <VideoDocPlayer
-                    copy={copy}
-                    deferMediaUntilVisible={false}
-                    feature={copy.features[activeTimeline.featureId]}
-                    requestedChapterId={requestedChapterId}
-                    timeline={activeTimeline}
-                    onChapterSelect={selectChapter}
-                  />
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {activeTimeline && (
+              <motion.div
+                key={activeTimeline.featureId}
+                initial={shouldReduceMotion ? false : { opacity: 0, x: 18 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.34, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <VideoDocPlayer
+                  copy={copy}
+                  deferMediaUntilVisible={false}
+                  enableKeyboardPlayback
+                  feature={copy.features[activeTimeline.featureId]}
+                  requestedChapter={chapterRequest}
+                  timeline={activeTimeline}
+                  onChapterSelect={updateSelectedChapter}
+                  onPlaybackStateChange={updatePlaybackState}
+                />
+              </motion.div>
+            )}
           </div>
         </div>
       </div>
@@ -293,9 +539,10 @@ export function DocsFeatureDemo({
       copy={copy}
       deferMediaUntilVisible={deferMediaUntilVisible}
       feature={feature}
-      requestedChapterId={null}
+      requestedChapter={null}
       timeline={timeline}
       onChapterSelect={() => {}}
+      onPlaybackStateChange={() => {}}
     />
   );
 }
@@ -303,17 +550,25 @@ export function DocsFeatureDemo({
 function VideoDocPlayer({
   copy,
   deferMediaUntilVisible = false,
+  enableKeyboardPlayback = false,
   feature,
-  requestedChapterId,
+  requestedChapter,
   timeline,
   onChapterSelect,
+  onPlaybackStateChange,
 }: {
   copy: VideoDocPlayerCopy;
   deferMediaUntilVisible?: boolean;
+  enableKeyboardPlayback?: boolean;
   feature: DocsFeatureCopy;
-  requestedChapterId: string | null;
+  requestedChapter: ChapterRequest | null;
   timeline: DocsTimeline;
   onChapterSelect: (featureId: DocsFeatureId, chapterId: string) => void;
+  onPlaybackStateChange: (
+    featureId: DocsFeatureId,
+    chapterId: string | null,
+    chapterProgress: number,
+  ) => void;
 }) {
   const playerRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -324,18 +579,8 @@ function VideoDocPlayer({
   const shouldReduceMotion = useReducedMotion();
   const duration = timeline.duration;
   const chapters = useMemo<ChapterView[]>(
-    () =>
-      timeline.chapters.map((chapter, index) => {
-        const chapterCopy = feature.chapters[chapter.id];
-
-        return {
-          ...chapter,
-          description: chapterCopy?.description ?? "",
-          index,
-          title: chapterCopy?.title ?? chapter.id,
-        };
-      }),
-    [feature.chapters, timeline.chapters],
+    () => getChapterViews(timeline, feature),
+    [feature, timeline],
   );
   const activeChapter = findChapterAtTime(chapters, currentTime);
   const activeChapterIndex = activeChapter?.index ?? 0;
@@ -382,17 +627,46 @@ function VideoDocPlayer({
   }, [timeline.featureId]);
 
   useEffect(() => {
-    if (!requestedChapterId) return;
+    if (!requestedChapter) return;
 
-    const chapter = chapters.find((item) => item.id === requestedChapterId);
+    const chapter = chapters.find(
+      (item) => item.id === requestedChapter.chapterId,
+    );
     if (!chapter) return;
 
-    seekToChapter(chapter, false);
-  }, [chapters, requestedChapterId]);
+    seekToChapter(chapter, false, false);
+  }, [chapters, requestedChapter]);
 
-  const seekToChapter = (chapter: ChapterView, shouldPlay = true) => {
+  useEffect(() => {
+    const chapterProgress =
+      activeChapter && activeChapter.end > activeChapter.start
+        ? (currentTime - activeChapter.start) /
+          (activeChapter.end - activeChapter.start)
+        : 0;
+
+    onPlaybackStateChange(
+      timeline.featureId,
+      activeChapter?.id ?? null,
+      chapterProgress,
+    );
+  }, [
+    activeChapter?.id,
+    activeChapter?.end,
+    activeChapter?.start,
+    currentTime,
+    onPlaybackStateChange,
+    timeline.featureId,
+  ]);
+
+  const seekToChapter = (
+    chapter: ChapterView,
+    shouldPlay = true,
+    shouldNotify = true,
+  ) => {
     setCurrentTime(chapter.start);
-    onChapterSelect(timeline.featureId, chapter.id);
+    if (shouldNotify) {
+      onChapterSelect(timeline.featureId, chapter.id);
+    }
 
     const video = videoRef.current;
     if (!video || !canControlVideo) return;
@@ -407,7 +681,7 @@ function VideoDocPlayer({
     }
   };
 
-  const togglePlayback = () => {
+  const togglePlayback = useCallback(() => {
     const video = videoRef.current;
     if (!video || !canControlVideo) return;
 
@@ -420,7 +694,32 @@ function VideoDocPlayer({
       video.pause();
       setIsPlaying(false);
     }
-  };
+  }, [canControlVideo]);
+
+  useEffect(() => {
+    if (!enableKeyboardPlayback) return undefined;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (
+        event.defaultPrevented ||
+        event.repeat ||
+        !isSpaceKey(event) ||
+        event.altKey ||
+        event.ctrlKey ||
+        event.metaKey ||
+        !canControlVideo ||
+        isInteractiveShortcutTarget(event.target)
+      ) {
+        return;
+      }
+
+      event.preventDefault();
+      togglePlayback();
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [canControlVideo, enableKeyboardPlayback, togglePlayback]);
 
   const restart = () => {
     const firstChapter = chapters[0];
@@ -594,9 +893,12 @@ function VideoDocPlayer({
                       <span className="mt-3 block text-sm font-semibold text-black">
                         {chapter.title}
                       </span>
-                      <span className="mt-2 block text-xs leading-5 text-black/70">
-                        {chapter.description}
-                      </span>
+                      <span
+                        className="mt-2 block text-xs leading-5 text-black/70 [&_strong]:font-semibold [&_strong]:text-black"
+                        dangerouslySetInnerHTML={{
+                          __html: chapter.descriptionHtml,
+                        }}
+                      />
                     </span>
                   </span>
                 </button>
@@ -625,9 +927,12 @@ function VideoDocPlayer({
                       {currentChapter.title}
                     </h2>
                   </div>
-                  <p className="mt-3 max-w-3xl text-base leading-7 text-muted-foreground">
-                    {currentChapter.description}
-                  </p>
+                  <div
+                    className="mt-3 max-w-3xl text-base leading-7 text-muted-foreground [&_a]:text-foreground [&_a]:underline [&_a]:underline-offset-4 [&_code]:bg-muted [&_code]:px-1 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-sm [&_code]:text-foreground [&_em]:text-foreground [&_strong]:font-semibold [&_strong]:text-foreground"
+                    dangerouslySetInnerHTML={{
+                      __html: currentChapter.descriptionHtml,
+                    }}
+                  />
                 </motion.section>
               </AnimatePresence>
             </div>
