@@ -1,0 +1,32 @@
+{
+  "tracks": [
+    {
+      "id": "lofi-hiphop-80s-1",
+      "source": "audio/lofi-hiphop-80s-1.mp3",
+      "title": "Lofi Hiphop 80s - 1",
+      "tags": ["Lofi"],
+      "keywords": ["lofi", "hiphop", "80s"]
+    },
+    {
+      "id": "lofi-hiphop-80s-2",
+      "source": "audio/lofi-hiphop-80s-2.mp3",
+      "title": "Lofi Hiphop 80s - 2",
+      "tags": ["Lofi"],
+      "keywords": ["lofi", "hiphop", "80s"]
+    },
+    {
+      "id": "lofi-hiphop-80s-3",
+      "source": "audio/lofi-hiphop-80s-3.mp3",
+      "title": "Lofi Hiphop 80s - 3",
+      "tags": ["Lofi"],
+      "keywords": ["lofi", "hiphop", "80s"]
+    },
+    {
+      "id": "lofi-hiphop-80s-4",
+      "source": "audio/lofi-hiphop-80s-4.mp3",
+      "title": "Lofi Hiphop 80s - 4",
+      "tags": ["Lofi"],
+      "keywords": ["lofi", "hiphop", "80s"]
+    }
+  ]
+}

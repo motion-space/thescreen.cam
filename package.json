@@ -4,8 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "bgm:build": "node scripts/build-bgm.mjs",
+    "bgm:build:force": "node scripts/build-bgm.mjs --force",
     "dev": "NODE_ENV=development astro dev --mode development",
     "build": "astro build",
+    "build:with-bgm": "npm run bgm:build && astro build",
     "preview": "npm run build && wrangler dev",
     "deploy": "npm run build && wrangler deploy"
   },
