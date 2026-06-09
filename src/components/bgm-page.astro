@@ -1,0 +1,173 @@
+---
+import "../styles/global.css";
+import bgmManifest from "../data/generated/bgm.json";
+import type { Locale } from "../lib/i18n";
+import { localizedPath, siteUrl } from "../lib/i18n";
+import { getTranslation } from "../lib/translations";
+import { Download, Pause, Play } from "lucide-react";
+import { Footer } from "./footer";
+import PageHead from "./page-head.astro";
+import { SiteHeader } from "./site-header";
+import { SmoothScroll } from "./smooth-scroll";
+
+interface Props {
+  locale: Locale;
+}
+
+type BgmTrack = (typeof bgmManifest.tracks)[number];
+
+const { locale } = Astro.props;
+const t = getTranslation(locale);
+const path = "/bgm";
+const tracks = bgmManifest.tracks as BgmTrack[];
+const copy = {
+  eyebrow: "BGM Library",
+  title: "Background Music",
+  description: "Preview short clips and download the full music tracks used by ScreenCam.",
+  tracksLabel: "Tracks",
+  previewLabel: "Preview",
+  download: "Download",
+  duration: "Duration",
+};
+const meta = {
+  title: "BGM Library | ScreenCam",
+  description: "Preview and download ScreenCam background music tracks.",
+};
+const formatBytes = (value: number) =>
+  new Intl.NumberFormat("en", {
+    maximumFractionDigits: value >= 1024 * 1024 ? 1 : 0,
+    minimumFractionDigits: value >= 1024 * 1024 ? 1 : 0,
+  }).format(value / (value >= 1024 * 1024 ? 1024 * 1024 : 1024)) + (value >= 1024 * 1024 ? " MB" : " KB");
+const formatDuration = (seconds: number) => {
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = Math.round(seconds % 60);
+  return `${minutes}:${String(remainingSeconds).padStart(2, "0")}`;
+};
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: copy.title,
+  url: `${siteUrl}${localizedPath(locale, path)}`,
+  itemListElement: tracks.map((track, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: track.title,
+    url: `${siteUrl}${track.downloadUrl}`,
+  })),
+};
+---
+
+<!doctype html>
+<html lang={locale} class="dark">
+  <head>
+    <PageHead
+      locale={locale}
+      path={path}
+      title={meta.title}
+      description={meta.description}
+      robots="index, follow, max-image-preview:large"
+      structuredData={structuredData}
+    />
+  </head>
+  <body class="bg-background font-sans text-foreground antialiased">
+    <SmoothScroll client:media="(hover: hover) and (pointer: fine)" />
+    <a class="skip-link" href="#main">{t.common.skipToContent}</a>
+    <SiteHeader copy={t.header} currentPath={path} languageLabel={t.footer.language} locale={locale} client:load />
+
+    <main id="main" class="bgm-page">
+      <section class="bgm-hero">
+        <div class="bgm-hero-copy">
+          <p class="bgm-eyebrow">{copy.eyebrow}</p>
+          <h1>{copy.title}</h1>
+          <p>{copy.description}</p>
+        </div>
+      </section>
+
+      <section class="bgm-library" aria-labelledby="bgm-library-title">
+        <div class="bgm-toolbar">
+          <div>
+            <h2 id="bgm-library-title">{copy.tracksLabel}</h2>
+            <p>{tracks.length} / {tracks.length}</p>
+          </div>
+        </div>
+
+        <div class="bgm-list">
+          {
+            tracks.map((track) => (
+              <article
+                class="bgm-track"
+                data-bgm-track
+              >
+                <div>
+                  <h3>{track.title}</h3>
+                  <p>{formatBytes(track.size)} · {formatDuration(track.duration)}</p>
+                </div>
+                <div class="bgm-track-actions">
+                  <button
+                    type="button"
+                    class="bgm-action-button"
+                    aria-label={`${copy.previewLabel}: ${track.title}`}
+                    title={copy.previewLabel}
+                    data-bgm-preview={track.previewUrl}
+                  >
+                    <Play className="bgm-action-icon bgm-play-icon" aria-hidden="true" />
+                    <Pause className="bgm-action-icon bgm-pause-icon" aria-hidden="true" />
+                  </button>
+                  <a
+                    class="bgm-action-button"
+                    href={track.downloadUrl}
+                    download
+                    aria-label={`${copy.download}: ${track.title}`}
+                    title={copy.download}
+                  >
+                    <Download className="bgm-action-icon" aria-hidden="true" />
+                  </a>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+    </main>
+
+    <Footer copy={t.footer} locale={locale} client:visible={{ rootMargin: "-25% 0px" }} />
+
+    <script>
+      const previewButtons = Array.from(document.querySelectorAll("[data-bgm-preview]"));
+      const previewAudio = new Audio();
+      let activePreviewButton = null;
+
+      const stopPreview = () => {
+        previewAudio.pause();
+        previewAudio.currentTime = 0;
+        activePreviewButton?.classList.remove("is-playing");
+        activePreviewButton = null;
+      };
+
+      previewButtons.forEach((button) => {
+        button.addEventListener("click", async () => {
+          if (!(button instanceof HTMLButtonElement)) return;
+          const previewUrl = button.dataset.bgmPreview;
+          if (!previewUrl) return;
+
+          if (activePreviewButton === button) {
+            stopPreview();
+            return;
+          }
+
+          stopPreview();
+          activePreviewButton = button;
+          button.classList.add("is-playing");
+          previewAudio.src = previewUrl;
+
+          try {
+            await previewAudio.play();
+          } catch {
+            stopPreview();
+          }
+        });
+      });
+      previewAudio.addEventListener("ended", stopPreview);
+    </script>
+  </body>
+</html>

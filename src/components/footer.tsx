@@ -33,8 +33,8 @@ export function Footer({
     ],
     resources: [
       { label: copy.resourceLinks.docs, href: localizedPath(locale, "/docs") },
+      { label: copy.resourceLinks.bgm, href: localizedPath(locale, "/bgm") },
       { label: copy.resourceLinks.motionBlurMask, href: localizedPath(locale, "/motion-blur-mask") },
-      { label: copy.resourceLinks.appStore, href: appStoreUrl, external: true },
       { label: copy.resourceLinks.changelog, href: localizedPath(locale, "/changelog") },
       { label: copy.resourceLinks.support, href: localizedPath(locale, "/support") },
     ],

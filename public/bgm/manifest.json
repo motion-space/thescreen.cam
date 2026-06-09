@@ -1,0 +1,111 @@
+{
+  "version": 1,
+  "generatedAt": "2026-06-08T16:12:18.533Z",
+  "previewSeconds": 5,
+  "tracks": [
+    {
+      "id": "lofi-hiphop-80s-1",
+      "title": "Lofi Hiphop 80s - 1",
+      "tags": [
+        "Lofi"
+      ],
+      "keywords": [
+        "lofi",
+        "hiphop",
+        "80s"
+      ],
+      "duration": 80.065,
+      "durationMs": 80065,
+      "size": 1281089,
+      "sourceSha256": "932b998724638ba6fec3d40f5c9d80cc6e65baa917a700f80c5d480dfab371d4",
+      "audioUrl": "/bgm/audio/lofi-hiphop-80s-1.mp3",
+      "previewUrl": "/bgm/previews/lofi-hiphop-80s-1-preview.mp3",
+      "downloadUrl": "/bgm/audio/lofi-hiphop-80s-1.mp3",
+      "preview": {
+        "start": 37.533,
+        "seconds": 5,
+        "size": 81128
+      }
+    },
+    {
+      "id": "lofi-hiphop-80s-2",
+      "title": "Lofi Hiphop 80s - 2",
+      "tags": [
+        "Lofi"
+      ],
+      "keywords": [
+        "lofi",
+        "hiphop",
+        "80s"
+      ],
+      "duration": 80.065,
+      "durationMs": 80065,
+      "size": 1281089,
+      "sourceSha256": "41b76665cf32560ba54dbb26f205874da9b1c77a747ac6fa29264575602e893d",
+      "audioUrl": "/bgm/audio/lofi-hiphop-80s-2.mp3",
+      "previewUrl": "/bgm/previews/lofi-hiphop-80s-2-preview.mp3",
+      "downloadUrl": "/bgm/audio/lofi-hiphop-80s-2.mp3",
+      "preview": {
+        "start": 37.533,
+        "seconds": 5,
+        "size": 81128
+      }
+    },
+    {
+      "id": "lofi-hiphop-80s-3",
+      "title": "Lofi Hiphop 80s - 3",
+      "tags": [
+        "Lofi"
+      ],
+      "keywords": [
+        "lofi",
+        "hiphop",
+        "80s"
+      ],
+      "duration": 80.091,
+      "durationMs": 80091,
+      "size": 1281507,
+      "sourceSha256": "cc6ede055c6ea0cc536159e63fb0df0c74cd3c56a1739038fa69297863255307",
+      "audioUrl": "/bgm/audio/lofi-hiphop-80s-3.mp3",
+      "previewUrl": "/bgm/previews/lofi-hiphop-80s-3-preview.mp3",
+      "downloadUrl": "/bgm/audio/lofi-hiphop-80s-3.mp3",
+      "preview": {
+        "start": 37.546,
+        "seconds": 5,
+        "size": 81128
+      }
+    },
+    {
+      "id": "lofi-hiphop-80s-4",
+      "title": "Lofi Hiphop 80s - 4",
+      "tags": [
+        "Lofi"
+      ],
+      "keywords": [
+        "lofi",
+        "hiphop",
+        "80s"
+      ],
+      "duration": 80.091,
+      "durationMs": 80091,
+      "size": 1281507,
+      "sourceSha256": "e9a369bcbb03c796676ba062a8d891198673d83aeb38b987eee783ceb11cd83b",
+      "audioUrl": "/bgm/audio/lofi-hiphop-80s-4.mp3",
+      "previewUrl": "/bgm/previews/lofi-hiphop-80s-4-preview.mp3",
+      "downloadUrl": "/bgm/audio/lofi-hiphop-80s-4.mp3",
+      "preview": {
+        "start": 37.546,
+        "seconds": 5,
+        "size": 81128
+      }
+    }
+  ],
+  "tags": [
+    "Lofi"
+  ],
+  "keywords": [
+    "80s",
+    "hiphop",
+    "lofi"
+  ]
+}

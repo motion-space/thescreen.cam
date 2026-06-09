@@ -42,7 +42,7 @@ export type FooterCopy = {
     zoom: string;
   };
   resourceLinks: {
-    appStore: string;
+    bgm: string;
     changelog: string;
     docs: string;
     motionBlurMask: string;
@@ -566,7 +566,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         zoom: "Zoom",
       },
       resourceLinks: {
-        appStore: "App Store",
+        bgm: "BGM",
         changelog: "Changelog",
         docs: "Docs",
         motionBlurMask: "Motion Blur Mask",
@@ -1359,7 +1359,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         zoom: "变焦",
       },
       resourceLinks: {
-        appStore: "App Store",
+        bgm: "BGM",
         changelog: "更新日志",
         docs: "文档",
         motionBlurMask: "运动模糊遮罩",
@@ -2102,7 +2102,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         zoom: "Zoom",
       },
       resourceLinks: {
-        appStore: "App Store",
+        bgm: "BGM",
         changelog: "Changelog",
         docs: "Docs",
         motionBlurMask: "Motion Blur Mask",
@@ -2868,7 +2868,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         zoom: "ズーム",
       },
       resourceLinks: {
-        appStore: "App Store",
+        bgm: "BGM",
         changelog: "変更履歴",
         docs: "ドキュメント",
         motionBlurMask: "モーションブラー マスク",
@@ -3612,7 +3612,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         zoom: "줌",
       },
       resourceLinks: {
-        appStore: "App Store",
+        bgm: "BGM",
         changelog: "변경 내역",
         docs: "문서",
         motionBlurMask: "모션 블러 마스크",
