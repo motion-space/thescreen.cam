@@ -1,11 +1,32 @@
+# 1.0.3 (Coming soon)
+
+- Camera beauty starts from a stronger, more natural default look.
+- Background music can be browsed, previewed, imported from the catalog or files, adjusted, and exported with recording audio.
+- Newly finished recordings recover the editor video preview more reliably.
+- Mockup exports no longer show thin white edge artifacts.
+- Editor preview, export, and large workspace editing are faster on dense timelines.
+
 # 1.0.2
 
+- Support and Docs links are available from Settings, About, and the Help menu.
+- Animation settings show Motion first and support collapsible groups.
+- Editor number inputs use icon drag handles and commit typed values when clicking outside the field.
+- Screen Size warns about export black bars when the background is None and can remove them.
+- Fixed screen dimensions shrink correctly with locked ratios, with natural height dragging.
+- Zoom clips support scale levels up to 5x, with steadier manual zoom transitions.
+- Recording camera previews explain that they are preview-only and can be hidden from future recordings.
+- Manual zoom, custom wallpaper selection, keyboard-event alignment, and source-crop editing are more reliable.
+- Camera beauty uses less CPU in recording previews and editor preview playback.
 - Preview playback no longer blocks editor close or native file panels during heavy composited rendering.
 - Camera beauty adjustments avoid runaway preview CPU usage.
+- Camera beauty adds natural localized lip tint, smoother lighting, and better blemish handling.
+- Autosaved .cam workspaces keep folder access so editor saves and closes are more reliable in protected locations.
+- Camera beauty exports finish faster, especially with smaller camera overlays and lower-resolution output.
 - Aspect ratio menus show shape previews for each preset.
 - Editor presets save without crashing the preset menu.
 - Device mockups shrink their screen opening when needed so recordings cover the screen without letterboxing.
 - Paywall purchases avoid binding Apple's confirmation dialog to a specific app window.
+- Apple subscription confirmation is more reliable on multi-display setups, with focused diagnostics for suspicious confirmation failures.
 
 # 1.0.1
 
