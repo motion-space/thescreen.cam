@@ -145,7 +145,7 @@ export function FeatureCardsSection({ copy }: { copy: FeatureCardsCopy }) {
 
       <div className="relative max-w-7xl mx-auto px-6 md:px-12">
         <motion.div
-          initial={{ opacity: 0, y: 48 }}
+          initial={false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
@@ -189,7 +189,7 @@ function FeatureCard({
 }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 36 }}
+      initial={false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
       transition={{

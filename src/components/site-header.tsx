@@ -22,6 +22,7 @@ import { MagneticButton } from "./magnetic-button";
 type SiteHeaderProps = {
   copy: HeaderCopy;
   currentPath?: string;
+  languagePath?: string;
   languageLabel: string;
   locale: Locale;
 };
@@ -70,6 +71,7 @@ const mobileItemVariants = {
 export function SiteHeader({
   copy,
   currentPath = "/",
+  languagePath = currentPath,
   languageLabel,
   locale,
 }: SiteHeaderProps) {
@@ -200,7 +202,7 @@ export function SiteHeader({
               <select
                 id="site-language"
                 aria-label={languageLabel}
-                value={localizedPath(locale, currentPath)}
+                value={localizedPath(locale, languagePath)}
                 onChange={(event) => {
                   const nextLocale = event.currentTarget.selectedOptions[0]?.dataset.locale;
                   if (nextLocale && supportedLocales.includes(nextLocale as Locale)) {
@@ -211,7 +213,7 @@ export function SiteHeader({
                 className="h-5 w-auto appearance-none rounded-none border-0 bg-transparent py-0 pl-0 pr-4 text-sm text-current outline-none"
               >
                 {supportedLocales.map((language) => (
-                  <option key={language} value={localizedPath(language, currentPath)} data-locale={language}>
+                  <option key={language} value={localizedPath(language, languagePath)} data-locale={language}>
                     {localeLabels[language]}
                   </option>
                 ))}

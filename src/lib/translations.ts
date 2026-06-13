@@ -42,6 +42,7 @@ export type FooterCopy = {
     zoom: string;
   };
   resourceLinks: {
+    alternatives?: string;
     bgm: string;
     changelog: string;
     docs: string;
@@ -566,6 +567,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         zoom: "Zoom",
       },
       resourceLinks: {
+        alternatives: "Alternatives",
         bgm: "BGM",
         changelog: "Changelog",
         docs: "Docs",
@@ -925,7 +927,13 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       structuredDataFeatureList: [
         "Native macOS screen recording",
         "Manual zoom anchors",
+        "Custom animation curves",
+        "Device mockups",
+        "Mosaic, text, focus, and custom image layers",
         "Motion blur transitions",
+        "GIF export",
+        "Live Photo export",
+        "Camera beauty effects",
         "Preview-accurate export",
       ],
       hero: {
@@ -1076,6 +1084,11 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         eyebrow: "FAQ",
         title: "Questions & Answers",
         items: [
+          {
+            question: "Is ScreenCam a Screen Studio alternative?",
+            answer:
+              "Yes. ScreenCam is a native macOS Screen Studio alternative for creators who want a smaller app footprint, lower resource use, faster exports, manual zoom anchors, device mockups, richer layers, GIF export, Live Photo export, and a Mac-first editing experience.",
+          },
           {
             question: "How is ScreenCam different from browser-based recorders?",
             answer:

@@ -3,6 +3,7 @@ import { defaultLocale, localizedPath, siteUrl, supportedLocales } from "../lib/
 import type { Locale } from "../lib/i18n";
 
 interface Props {
+  alternateLocales?: Locale[];
   description: string;
   locale: Locale;
   ogImageAlt?: string;
@@ -13,6 +14,7 @@ interface Props {
 }
 
 const {
+  alternateLocales = supportedLocales,
   description,
   locale,
   ogImageAlt = "ScreenCam dark landing page with native recorder controls",
@@ -34,7 +36,7 @@ const canonicalPath = localizedPath(locale, path);
 <title>{title}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={`${siteUrl}${canonicalPath}`} />
-{supportedLocales.map((alternateLocale) => (
+{alternateLocales.map((alternateLocale) => (
   <link
     rel="alternate"
     hreflang={alternateLocale}

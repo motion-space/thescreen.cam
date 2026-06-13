@@ -32,6 +32,14 @@ export function Footer({
       { label: copy.productLinks.faq, href: `${homePath}#faq` },
     ],
     resources: [
+      ...(locale === "en"
+        ? [
+            {
+              label: copy.resourceLinks.alternatives ?? "Alternatives",
+              href: "/screen-studio-alternative",
+            },
+          ]
+        : []),
       { label: copy.resourceLinks.docs, href: localizedPath(locale, "/docs") },
       { label: copy.resourceLinks.bgm, href: localizedPath(locale, "/bgm") },
       { label: copy.resourceLinks.motionBlurMask, href: localizedPath(locale, "/motion-blur-mask") },

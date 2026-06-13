@@ -1,0 +1,424 @@
+---
+import "../styles/global.css";
+import { appStoreUrl, defaultLocale, siteUrl } from "../lib/i18n";
+import { getTranslation } from "../lib/translations";
+import { FAQSection } from "./faq-section";
+import { Footer } from "./footer";
+import PageHead from "./page-head.astro";
+import { SiteHeader } from "./site-header";
+import { SmoothScroll } from "./smooth-scroll";
+
+const locale = defaultLocale;
+const t = getTranslation(locale);
+const path = "/screen-studio-alternative";
+const pageUrl = `${siteUrl}${path}`;
+const pageTitle = "Screen Studio Alternative for Mac | ScreenCam";
+const pageDescription =
+  "Looking for a Screen Studio alternative? ScreenCam is a native macOS screen recorder with a smaller app size, lower resource use, faster exports, manual zoom anchors, layers, device mockups, GIF, and Live Photo export.";
+const lastUpdated = "June 13, 2026";
+const screenStudioUrl = "https://screen.studio/";
+const benchmarkUrl = "https://benchmark.thescreen.cam";
+
+const performanceHighlights = [
+  {
+    value: "30x",
+    label: "smaller app footprint",
+    detail: "About 20MB vs the roughly 600MB benchmark baseline.",
+  },
+  {
+    value: "Lower",
+    label: "CPU + memory use",
+    detail: "Side-by-side benchmark data keeps the claim measurable.",
+  },
+  {
+    value: "Faster",
+    label: "native export path",
+    detail: "Shorter export timing in the benchmark comparison.",
+  },
+  {
+    value: "< 1/3",
+    label: "subscription price",
+    detail: "Current App Store pricing varies by region.",
+  },
+];
+
+const featureHighlights = [
+  {
+    title: "Manual zoom anchors",
+    body: "Multiple centers, per-anchor scale, and custom curves in one zoom clip.",
+  },
+  {
+    title: "Unlimited layers",
+    body: "Mosaic, text, focus effects, and custom images can overlap in the same time range.",
+  },
+  {
+    title: "Device mockups",
+    body: "Mac, iPhone, and Studio Display-style framing for polished product demos.",
+  },
+  {
+    title: "GIF + Live Photo",
+    body: "Ship recordings as quick visual assets, not only full video files.",
+  },
+  {
+    title: "Camera beauty",
+    body: "Light presenter polish for camera-led walkthroughs.",
+  },
+  {
+    title: "Native Mac feel",
+    body: "Liquid Glass-style surfaces, keyboard-first capture, and Mac App Store distribution.",
+  },
+];
+
+const comparisonRows = [
+  {
+    feature: "Performance footprint",
+    screenCam: "About 30x smaller, lower CPU and memory use, faster exports.",
+    screenStudio: "Polished recorder with a heavier installed footprint.",
+  },
+  {
+    feature: "Zoom control",
+    screenCam: "Manual anchors, multiple centers, per-anchor scale, tunable curves.",
+    screenStudio: "Strong auto zoom and smooth cursor-driven motion.",
+  },
+  {
+    feature: "Layers",
+    screenCam: "Mosaic, text, focus, image layers, unlimited overlap.",
+    screenStudio: "Focused editor for cursor motion, backgrounds, and masking.",
+  },
+  {
+    feature: "Device presentation",
+    screenCam: "Built-in Mac, iPhone, and Studio Display mockups.",
+    screenStudio: "Strong iOS and device capture workflow.",
+  },
+  {
+    feature: "Export formats",
+    screenCam: "Video, GIF, and Live Photo.",
+    screenStudio: "Video and GIF with strong defaults.",
+  },
+  {
+    feature: "Camera polish",
+    screenCam: "Camera overlay controls plus lightweight beauty effects.",
+    screenStudio: "Dynamic camera layouts and webcam presentation.",
+  },
+  {
+    feature: "Pricing",
+    screenCam: "Free download; subscription is below one-third in supported App Store regions.",
+    screenStudio: "Subscription pricing is shown on Screen Studio's official purchase flow.",
+  },
+  {
+    feature: "Captions and transcripts",
+    screenCam: "Not yet. Apple-native and third-party BYOK transcription are planned.",
+    screenStudio: "Transcript and subtitle workflows are available today.",
+  },
+];
+
+const chooseScreenCam = [
+  "Product demos that need multiple directed zoom centers",
+  "Mac app walkthroughs with device mockups and custom framing",
+  "Clips that need redaction, focus highlights, text, and images",
+  "Exports that need GIF or Live Photo output",
+];
+
+const faqItems = [
+  {
+    question: "Is ScreenCam a Screen Studio alternative?",
+    answer:
+      "Yes. ScreenCam is a native macOS screen recorder and editor for polished product demos, tutorials, app walkthroughs, and social clips. It is especially strong if you want a smaller app, lower resource use, faster exports, and deeper manual zoom control.",
+  },
+  {
+    question: "What makes ScreenCam different from Screen Studio?",
+    answer:
+      "ScreenCam focuses on native Mac performance, manual zoom anchors, richer time-based layers, device mockups, Liquid Glass-style UI, configurable animation curves, GIF export, and Live Photo export.",
+  },
+  {
+    question: "Is ScreenCam cheaper than Screen Studio?",
+    answer:
+      "ScreenCam is a free download with in-app purchases on the Mac App Store. Current pricing varies by region, but ScreenCam's subscription is positioned below one-third of Screen Studio's subscription price in supported regions.",
+  },
+  {
+    question: "Does ScreenCam support subtitles?",
+    answer:
+      "Not yet. Subtitle support is planned. The current direction is to offer Apple-native transcription and third-party transcription through BYOK, without ScreenCam running its own transcription service.",
+  },
+  {
+    question: "Does ScreenCam support custom zoom animations?",
+    answer:
+      "Yes. Manual zoom mode supports custom anchors, multiple zoom centers, per-anchor scale, and configurable animation curves, so you can direct the viewer's attention after recording.",
+  },
+  {
+    question: "Can ScreenCam export GIF or Live Photo files?",
+    answer:
+      "Yes. ScreenCam supports richer export workflows, including GIF and Live Photo, alongside video-focused exports.",
+  },
+];
+const faqCopy = {
+  eyebrow: "FAQ",
+  title: "Questions about switching from Screen Studio",
+  items: faqItems,
+};
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": `${pageUrl}#webpage`,
+      url: pageUrl,
+      name: pageTitle,
+      description: pageDescription,
+      dateModified: "2026-06-13",
+      inLanguage: "en",
+      about: [
+        { "@type": "Thing", name: "Screen Studio alternative" },
+        { "@type": "Thing", name: "Mac screen recorder with zoom" },
+      ],
+      mentions: [
+        { "@type": "SoftwareApplication", name: "Screen Studio", url: screenStudioUrl },
+        { "@id": `${siteUrl}/#software` },
+      ],
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${pageUrl}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "ScreenCam",
+          item: siteUrl,
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "Screen Studio Alternative",
+          item: pageUrl,
+        },
+      ],
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": `${siteUrl}/#software`,
+      name: "ScreenCam",
+      applicationCategory: "MultimediaApplication",
+      operatingSystem: "macOS 15+",
+      url: siteUrl,
+      image: `${siteUrl}/og.jpg`,
+      downloadUrl: appStoreUrl,
+      description:
+        "ScreenCam is a native macOS screen recorder for sharp capture, manual zoom anchors, layers, device mockups, motion blur, and preview-accurate export.",
+      offers: {
+        "@type": "Offer",
+        price: "0",
+        priceCurrency: "USD",
+        url: appStoreUrl,
+      },
+      featureList: [
+        "Native macOS screen recording",
+        "Manual zoom anchors",
+        "Custom animation curves",
+        "Device mockups",
+        "Mosaic, text, focus, and custom image layers",
+        "GIF export",
+        "Live Photo export",
+        "Camera beauty effects",
+        "Preview-accurate export",
+      ],
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${pageUrl}#faq`,
+      mainEntity: faqItems.map((item) => ({
+        "@type": "Question",
+        name: item.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.answer,
+        },
+      })),
+    },
+  ],
+};
+---
+
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <PageHead
+      alternateLocales={[defaultLocale]}
+      locale={locale}
+      path={path}
+      title={pageTitle}
+      description={pageDescription}
+      robots="index, follow, max-image-preview:large"
+      structuredData={structuredData}
+    />
+  </head>
+  <body class="bg-background font-sans text-foreground antialiased">
+    <SmoothScroll client:media="(hover: hover) and (pointer: fine)" />
+    <a class="skip-link" href="#main">Skip to content</a>
+    <SiteHeader
+      copy={t.header}
+      currentPath={path}
+      languagePath="/"
+      languageLabel={t.footer.language}
+      locale={locale}
+      client:load
+    />
+
+    <main id="main">
+      <section class="relative min-h-[82vh] overflow-hidden bg-background">
+        <img
+          src="/og.jpg"
+          alt="ScreenCam screen recorder interface with native macOS controls"
+          class="absolute inset-0 h-full w-full object-cover opacity-28"
+          loading="eager"
+        />
+        <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,5,5,0.97)_0%,rgba(5,5,5,0.82)_46%,rgba(5,5,5,0.58)_100%)]"></div>
+        <div class="relative z-10 mx-auto flex min-h-[82vh] max-w-7xl flex-col justify-end px-6 pb-12 pt-32 md:px-12 md:pb-16">
+          <p class="mb-5 text-xs font-medium uppercase tracking-[0.2em] text-foreground/70">
+            Screen Studio Alternative for Mac
+          </p>
+          <h1 class="max-w-4xl text-[clamp(3rem,7.2vw,6.25rem)] font-bold leading-[0.92] tracking-tight text-foreground text-balance">
+            A lighter Screen Studio alternative.
+          </h1>
+          <p class="mt-7 max-w-2xl text-base leading-7 text-foreground/76 md:text-lg">
+            ScreenCam keeps the polished Mac screen-recording workflow, then adds deeper manual zoom, richer layers, smaller footprint, and more export shapes.
+          </p>
+          <div class="mt-8 grid max-w-4xl grid-cols-2 gap-x-6 gap-y-5 border-y border-foreground/14 py-5 md:grid-cols-4">
+            {performanceHighlights.map((item) => (
+              <div>
+                <p class="text-2xl font-semibold tracking-tight text-foreground md:text-3xl">{item.value}</p>
+                <p class="mt-1 text-xs uppercase tracking-[0.14em] text-foreground/55">{item.label}</p>
+              </div>
+            ))}
+          </div>
+          <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+            <a class="inline-flex w-fit items-center justify-center bg-foreground px-5 py-3 text-sm font-medium text-background transition-colors hover:bg-foreground/90" href={appStoreUrl} target="_blank" rel="noopener noreferrer">
+              View ScreenCam on the Mac App Store
+            </a>
+            <a class="inline-flex w-fit items-center justify-center border border-foreground/30 px-5 py-3 text-sm font-medium text-foreground transition-colors hover:border-foreground/70" href={benchmarkUrl} target="_blank" rel="noopener noreferrer">
+              View benchmark data
+            </a>
+          </div>
+          <p class="mt-8 text-xs text-foreground/50">Last updated: {lastUpdated}</p>
+        </div>
+      </section>
+
+      <section class="bg-background px-6 py-20 md:px-12" aria-labelledby="why-switch-title">
+        <div class="mx-auto max-w-7xl">
+          <div class="grid gap-10 md:grid-cols-[0.82fr_1.18fr] md:items-start">
+            <div>
+              <p class="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">Why switch</p>
+              <h2 id="why-switch-title" class="text-3xl font-semibold leading-tight tracking-tight text-foreground md:text-5xl">
+                Speed and control, without the heavy footprint.
+              </h2>
+              <p class="mt-5 text-base leading-7 text-muted-foreground">
+                Screen Studio is great when you want automatic polish. ScreenCam is for Mac creators who want a lighter app, measured performance wins, and more direct control after recording.
+              </p>
+            </div>
+            <div class="grid gap-3 sm:grid-cols-2">
+              {performanceHighlights.map((item) => (
+                <article class="border border-border/70 bg-card/25 p-5">
+                  <div class="flex items-baseline justify-between gap-4">
+                    <h3 class="text-lg font-semibold tracking-tight text-foreground">{item.value}</h3>
+                    <p class="text-right text-xs uppercase tracking-[0.14em] text-muted-foreground">{item.label}</p>
+                  </div>
+                  <p class="mt-4 text-sm leading-6 text-muted-foreground">{item.detail}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-secondary/25 px-6 py-20 md:px-12" aria-labelledby="feature-title">
+        <div class="mx-auto max-w-7xl">
+          <div class="mb-12 max-w-4xl">
+            <p class="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">Creative control</p>
+            <h2 id="feature-title" class="text-3xl font-semibold leading-tight tracking-tight text-foreground md:text-5xl">
+              The parts ScreenCam makes easier to direct.
+            </h2>
+          </div>
+          <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
+            {featureHighlights.map((feature) => (
+              <article class="border border-border/70 bg-background/50 p-5">
+                <h3 class="text-lg font-semibold tracking-tight text-foreground">{feature.title}</h3>
+                <p class="mt-3 text-sm leading-6 text-muted-foreground">{feature.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-background px-6 py-20 md:px-12" aria-labelledby="comparison-title">
+        <div class="mx-auto max-w-7xl">
+          <div class="mb-12 max-w-4xl">
+            <p class="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">Comparison</p>
+            <h2 id="comparison-title" class="text-3xl font-semibold leading-tight tracking-tight text-foreground md:text-5xl">
+              ScreenCam vs Screen Studio
+            </h2>
+            <p class="mt-5 text-base leading-7 text-muted-foreground">
+              Both tools can create polished videos. The difference is where they put their weight: Screen Studio leans automatic, while ScreenCam leans native, compact, and manual.
+            </p>
+          </div>
+
+          <div class="overflow-x-auto border border-border/70">
+            <table class="w-full min-w-[780px] border-collapse text-left text-sm">
+              <thead class="bg-secondary/40 text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                <tr>
+                  <th class="w-[20%] border-b border-border/70 px-5 py-4 font-medium">Feature</th>
+                  <th class="w-[40%] border-b border-border/70 px-5 py-4 font-medium">ScreenCam</th>
+                  <th class="w-[40%] border-b border-border/70 px-5 py-4 font-medium">Screen Studio</th>
+                </tr>
+              </thead>
+              <tbody>
+                {comparisonRows.map((row) => (
+                  <tr class="border-b border-border/60 last:border-b-0">
+                    <th class="align-top px-5 py-4 text-sm font-semibold text-foreground">{row.feature}</th>
+                    <td class="align-top px-5 py-4 leading-6 text-muted-foreground">{row.screenCam}</td>
+                    <td class="align-top px-5 py-4 leading-6 text-muted-foreground">{row.screenStudio}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-secondary/25 px-6 py-20 md:px-12" aria-labelledby="use-cases-title">
+        <div class="mx-auto grid max-w-7xl gap-4 md:grid-cols-2">
+          <div>
+            <p class="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">Best fit</p>
+            <h2 id="use-cases-title" class="text-3xl font-semibold leading-tight tracking-tight text-foreground md:text-5xl">
+              Choose ScreenCam if...
+            </h2>
+            <ul class="mt-8 grid gap-3">
+              {chooseScreenCam.map((item) => (
+                <li class="border border-border/70 bg-background/70 p-4 text-sm leading-6 text-foreground">{item}</li>
+              ))}
+            </ul>
+          </div>
+          <div class="border border-border/70 bg-background/70 p-6 md:p-8">
+            <p class="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">Current gap</p>
+            <h3 class="text-2xl font-semibold tracking-tight text-foreground">Subtitles are not here yet.</h3>
+            <p class="mt-5 text-sm leading-6 text-muted-foreground">
+              ScreenCam does not support subtitles today. Planned support is expected to offer Apple-native transcription and third-party BYOK transcription, without ScreenCam operating its own transcription service.
+            </p>
+            <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a class="inline-flex justify-center bg-foreground px-5 py-3 text-sm font-medium text-background transition-colors hover:bg-foreground/90" href={appStoreUrl} target="_blank" rel="noopener noreferrer">
+                Check App Store pricing
+              </a>
+              <a class="inline-flex justify-center border border-border/80 px-5 py-3 text-sm font-medium text-foreground transition-colors hover:border-foreground/60" href={screenStudioUrl} target="_blank" rel="noopener noreferrer">
+                View Screen Studio
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <FAQSection copy={faqCopy} client:visible={{ rootMargin: "-25% 0px" }} />
+    </main>
+
+    <Footer copy={t.footer} locale={locale} client:visible={{ rootMargin: "-25% 0px" }} />
+  </body>
+</html>
