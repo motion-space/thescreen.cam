@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-08T16:12:18.533Z",
+  "generatedAt": "2026-06-13T03:09:15.520Z",
   "previewSeconds": 5,
   "tracks": [
     {
@@ -98,14 +98,172 @@
         "seconds": 5,
         "size": 81128
       }
+    },
+    {
+      "id": "clear-momentum",
+      "title": "Clear Momentum",
+      "tags": [
+        "纯音乐"
+      ],
+      "keywords": [
+        "clear",
+        "momentum",
+        "instrumental"
+      ],
+      "duration": 240.039,
+      "durationMs": 240039,
+      "size": 3840671,
+      "sourceSha256": "7e19422bd94afc79c83e3315042f1714cf483c80239574a6808bc3eabd8cb132",
+      "audioUrl": "/bgm/audio/clear-momentum.mp3",
+      "previewUrl": "/bgm/previews/clear-momentum-preview.mp3",
+      "downloadUrl": "/bgm/audio/clear-momentum.mp3",
+      "preview": {
+        "start": 117.52,
+        "seconds": 5,
+        "size": 81128
+      }
+    },
+    {
+      "id": "quiet-launch",
+      "title": "Quiet Launch",
+      "tags": [
+        "纯音乐"
+      ],
+      "keywords": [
+        "quiet",
+        "launch",
+        "instrumental"
+      ],
+      "duration": 240.039,
+      "durationMs": 240039,
+      "size": 3840671,
+      "sourceSha256": "b4790396a1c057ce0b5f48d053f7582d74c794cc9c50e1bf9be8bca28b1c0792",
+      "audioUrl": "/bgm/audio/quiet-launch.mp3",
+      "previewUrl": "/bgm/previews/quiet-launch-preview.mp3",
+      "downloadUrl": "/bgm/audio/quiet-launch.mp3",
+      "preview": {
+        "start": 117.52,
+        "seconds": 5,
+        "size": 81128
+      }
+    },
+    {
+      "id": "flowing-interface",
+      "title": "Flowing Interface",
+      "tags": [
+        "纯音乐"
+      ],
+      "keywords": [
+        "flowing",
+        "interface",
+        "instrumental"
+      ],
+      "duration": 240.039,
+      "durationMs": 240039,
+      "size": 3840671,
+      "sourceSha256": "00b40f56cea398b4f2bbc22610d628781243a8ea091cfea3ddbc0514161b0275",
+      "audioUrl": "/bgm/audio/flowing-interface.mp3",
+      "previewUrl": "/bgm/previews/flowing-interface-preview.mp3",
+      "downloadUrl": "/bgm/audio/flowing-interface.mp3",
+      "preview": {
+        "start": 117.52,
+        "seconds": 5,
+        "size": 81128
+      }
+    },
+    {
+      "id": "momentum-canvas",
+      "title": "Momentum Canvas",
+      "tags": [
+        "纯音乐"
+      ],
+      "keywords": [
+        "momentum",
+        "canvas",
+        "instrumental"
+      ],
+      "duration": 240.039,
+      "durationMs": 240039,
+      "size": 3840671,
+      "sourceSha256": "67d01f32459077ad975e0c76325717ff328804c7dcd894a91a91e1d1178ef173",
+      "audioUrl": "/bgm/audio/momentum-canvas.mp3",
+      "previewUrl": "/bgm/previews/momentum-canvas-preview.mp3",
+      "downloadUrl": "/bgm/audio/momentum-canvas.mp3",
+      "preview": {
+        "start": 117.52,
+        "seconds": 5,
+        "size": 81128
+      }
+    },
+    {
+      "id": "clear-path-forward",
+      "title": "Clear Path Forward",
+      "tags": [
+        "纯音乐"
+      ],
+      "keywords": [
+        "clear",
+        "path",
+        "forward",
+        "instrumental"
+      ],
+      "duration": 240.091,
+      "durationMs": 240091,
+      "size": 3841507,
+      "sourceSha256": "9cacc0c083d20e07528f65c0fb20a32eaa76034e97ca07a6c34fabe67e542090",
+      "audioUrl": "/bgm/audio/clear-path-forward.mp3",
+      "previewUrl": "/bgm/previews/clear-path-forward-preview.mp3",
+      "downloadUrl": "/bgm/audio/clear-path-forward.mp3",
+      "preview": {
+        "start": 117.546,
+        "seconds": 5,
+        "size": 81128
+      }
+    },
+    {
+      "id": "signal-flow",
+      "title": "Signal Flow",
+      "tags": [
+        "纯音乐"
+      ],
+      "keywords": [
+        "signal",
+        "flow",
+        "instrumental"
+      ],
+      "duration": 240.039,
+      "durationMs": 240039,
+      "size": 3840671,
+      "sourceSha256": "7829b8b62ee07f22923ac80366e2b1e68468f7f18fd1b3a22256260c29b8775a",
+      "audioUrl": "/bgm/audio/signal-flow.mp3",
+      "previewUrl": "/bgm/previews/signal-flow-preview.mp3",
+      "downloadUrl": "/bgm/audio/signal-flow.mp3",
+      "preview": {
+        "start": 117.52,
+        "seconds": 5,
+        "size": 81128
+      }
     }
   ],
   "tags": [
-    "Lofi"
+    "Lofi",
+    "纯音乐"
   ],
   "keywords": [
     "80s",
+    "canvas",
+    "clear",
+    "flow",
+    "flowing",
+    "forward",
     "hiphop",
-    "lofi"
+    "instrumental",
+    "interface",
+    "launch",
+    "lofi",
+    "momentum",
+    "path",
+    "quiet",
+    "signal"
   ]
 }

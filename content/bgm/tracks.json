@@ -27,6 +27,48 @@
       "title": "Lofi Hiphop 80s - 4",
       "tags": ["Lofi"],
       "keywords": ["lofi", "hiphop", "80s"]
+    },
+    {
+      "id": "clear-momentum",
+      "source": "audio/clear-momentum.mp3",
+      "title": "Clear Momentum",
+      "tags": ["纯音乐"],
+      "keywords": ["clear", "momentum", "instrumental"]
+    },
+    {
+      "id": "quiet-launch",
+      "source": "audio/quiet-launch.mp3",
+      "title": "Quiet Launch",
+      "tags": ["纯音乐"],
+      "keywords": ["quiet", "launch", "instrumental"]
+    },
+    {
+      "id": "flowing-interface",
+      "source": "audio/flowing-interface.mp3",
+      "title": "Flowing Interface",
+      "tags": ["纯音乐"],
+      "keywords": ["flowing", "interface", "instrumental"]
+    },
+    {
+      "id": "momentum-canvas",
+      "source": "audio/momentum-canvas.mp3",
+      "title": "Momentum Canvas",
+      "tags": ["纯音乐"],
+      "keywords": ["momentum", "canvas", "instrumental"]
+    },
+    {
+      "id": "clear-path-forward",
+      "source": "audio/clear-path-forward.mp3",
+      "title": "Clear Path Forward",
+      "tags": ["纯音乐"],
+      "keywords": ["clear", "path", "forward", "instrumental"]
+    },
+    {
+      "id": "signal-flow",
+      "source": "audio/signal-flow.mp3",
+      "title": "Signal Flow",
+      "tags": ["纯音乐"],
+      "keywords": ["signal", "flow", "instrumental"]
     }
   ]
 }
