@@ -127,6 +127,13 @@ export type PerformanceCopy = {
   title: string;
 };
 
+export type AlternativeLinkCopy = {
+  cta: string;
+  description: string;
+  eyebrow: string;
+  title: string;
+};
+
 export type FeatureCardsCopy = {
   beautyThumb: {
     afterLabel: string;
@@ -305,6 +312,7 @@ type LocaleTranslation = {
     faq: FAQCopy;
     hero: HeroCopy;
     performance: PerformanceCopy;
+    screenStudioAlternative: AlternativeLinkCopy;
     structuredDataFeatureList: string[];
     zoom: ZoomFeatureCopy;
   };
@@ -924,6 +932,13 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       },
     },
     home: {
+      screenStudioAlternative: {
+        eyebrow: "Screen Studio Alternative",
+        title: "Need a lighter Mac screen recorder with deeper manual control?",
+        description:
+          "Compare ScreenCam with Screen Studio across app size, CPU and memory use, export speed, manual zoom anchors, layers, device mockups, and export formats.",
+        cta: "Screen Studio alternative for Mac",
+      },
       structuredDataFeatureList: [
         "Native macOS screen recording",
         "Manual zoom anchors",
@@ -1372,6 +1387,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         zoom: "变焦",
       },
       resourceLinks: {
+        alternatives: "替代方案",
         bgm: "BGM",
         changelog: "更新日志",
         docs: "文档",
@@ -1721,6 +1737,13 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       },
     },
     home: {
+      screenStudioAlternative: {
+        eyebrow: "Screen Studio 替代方案",
+        title: "想要更轻巧、手动控制更深入的 Mac 录屏工具吗？",
+        description:
+          "从应用体积、CPU 与内存占用、导出速度、手动变焦锚点、图层、设备样机和导出格式等方面对比 ScreenCam 与 Screen Studio。",
+        cta: "查看 Mac 版 Screen Studio 替代方案",
+      },
       structuredDataFeatureList: ["原生 macOS 屏幕录制", "手动变焦锚点", "运动模糊转场", "精确预览导出"],
       hero: {
         appStoreButton: "在 App Store 查看",
@@ -2115,6 +2138,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         zoom: "Zoom",
       },
       resourceLinks: {
+        alternatives: "Alternativen",
         bgm: "BGM",
         changelog: "Changelog",
         docs: "Docs",
@@ -2471,6 +2495,13 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       },
     },
     home: {
+      screenStudioAlternative: {
+        eyebrow: "Screen-Studio-Alternative",
+        title: "Brauchst du einen leichteren Mac-Screenrecorder mit mehr manueller Kontrolle?",
+        description:
+          "Vergleiche ScreenCam mit Screen Studio bei App-Größe, CPU- und Speichernutzung, Exportgeschwindigkeit, manuellen Zoom-Ankern, Ebenen, Geräte-Mockups und Exportformaten.",
+        cta: "Screen-Studio-Alternative für Mac",
+      },
       structuredDataFeatureList: [
         "Native macOS-Bildschirmaufnahme",
         "Manuelle Zoom-Anker",
@@ -2881,6 +2912,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         zoom: "ズーム",
       },
       resourceLinks: {
+        alternatives: "代替ツール",
         bgm: "BGM",
         changelog: "変更履歴",
         docs: "ドキュメント",
@@ -3231,6 +3263,13 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       },
     },
     home: {
+      screenStudioAlternative: {
+        eyebrow: "Screen Studio の代替",
+        title: "より軽く、手動調整もしやすい Mac 画面録画ツールが必要ですか？",
+        description:
+          "アプリサイズ、CPU とメモリ使用量、書き出し速度、手動ズームアンカー、レイヤー、デバイスモックアップ、書き出し形式で ScreenCam と Screen Studio を比較できます。",
+        cta: "Mac 向け Screen Studio 代替を見る",
+      },
       structuredDataFeatureList: ["ネイティブ macOS 画面録画", "手動ズームアンカー", "モーションブラー遷移", "プレビュー通りの書き出し"],
       hero: {
         appStoreButton: "App Store で見る",
@@ -3625,6 +3664,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         zoom: "줌",
       },
       resourceLinks: {
+        alternatives: "대안",
         bgm: "BGM",
         changelog: "변경 내역",
         docs: "문서",
@@ -3975,6 +4015,13 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       },
     },
     home: {
+      screenStudioAlternative: {
+        eyebrow: "Screen Studio 대안",
+        title: "더 가볍고 수동 제어가 깊은 Mac 화면 녹화 도구가 필요하신가요?",
+        description:
+          "앱 크기, CPU 및 메모리 사용량, 내보내기 속도, 수동 줌 앵커, 레이어, 기기 목업, 내보내기 형식으로 ScreenCam과 Screen Studio를 비교하세요.",
+        cta: "Mac용 Screen Studio 대안 보기",
+      },
       structuredDataFeatureList: ["네이티브 macOS 화면 녹화", "수동 줌 앵커", "모션 블러 전환", "미리보기와 일치하는 내보내기"],
       hero: {
         appStoreButton: "App Store에서 보기",

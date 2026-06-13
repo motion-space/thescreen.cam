@@ -1,0 +1,10 @@
+---
+import ScreenStudioAlternativePage from "../../components/screen-studio-alternative-page.astro";
+import { getLocalizedStaticPaths } from "../../lib/i18n";
+
+export const getStaticPaths = getLocalizedStaticPaths;
+
+const { locale } = Astro.props;
+---
+
+<ScreenStudioAlternativePage locale={locale} />

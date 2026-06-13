@@ -22,7 +22,7 @@ interface Props {
 const { locale } = Astro.props;
 const t = getTranslation(locale);
 const meta = t.meta.home;
-const isEnglish = locale === "en";
+const screenStudioAlternative = t.home.screenStudioAlternative;
 const docsBasicsCopy = {
   emptyVideoDescription: t.docs.emptyVideoDescription,
   emptyVideoTitle: t.docs.emptyVideoTitle,
@@ -97,40 +97,44 @@ const structuredData = {
       <CustomControlsSection copy={t.home.controls} client:visible={{ rootMargin: "-25% 0px" }} />
       <PerformanceSection copy={t.home.performance} client:visible={{ rootMargin: "-25% 0px" }} />
       <FeatureCardsSection copy={t.home.featureCards} client:visible={{ rootMargin: "-25% 0px" }} />
-      {isEnglish && (
-        <section class="bg-background px-6 py-24 md:px-12" aria-labelledby="screen-studio-alternative-link">
-          <div class="mx-auto grid max-w-6xl gap-8 border-y border-border/60 py-12 md:grid-cols-[1fr_auto] md:items-center">
-            <div>
-              <p class="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">Screen Studio Alternative</p>
-              <h2 id="screen-studio-alternative-link" class="max-w-3xl text-3xl font-semibold leading-tight tracking-tight text-foreground md:text-5xl">
-                Need a lighter Mac screen recorder with deeper manual control?
-              </h2>
-              <p class="mt-5 max-w-2xl text-base leading-7 text-muted-foreground">
-                Compare ScreenCam with Screen Studio across app size, CPU and memory use, export speed, manual zoom anchors, layers, device mockups, and export formats.
-              </p>
-            </div>
-            <a
-              class="group inline-flex w-fit items-center gap-2 bg-foreground px-5 py-3 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
-              href="/screen-studio-alternative"
-            >
-              Screen Studio alternative for Mac
-              <svg
-                aria-hidden="true"
-                class="h-4 w-4 transition-transform group-hover:translate-x-1"
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-              >
-                <path d="M5 12h14"></path>
-                <path d="m12 5 7 7-7 7"></path>
-              </svg>
-            </a>
+      <section
+        class="relative flex min-h-[36rem] items-center bg-background px-6 py-20 md:min-h-[44rem] md:px-12"
+        aria-labelledby="screen-studio-alternative-link"
+      >
+        <div class="pointer-events-none absolute inset-x-6 top-0 mx-auto max-w-6xl border-t border-border/60 md:inset-x-12" aria-hidden="true"></div>
+        <div class="mx-auto grid w-full max-w-6xl gap-8 md:grid-cols-[1fr_auto] md:items-center">
+          <div>
+            <p class="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">
+              {screenStudioAlternative.eyebrow}
+            </p>
+            <h2 id="screen-studio-alternative-link" class="max-w-3xl text-3xl font-semibold leading-tight tracking-tight text-foreground md:text-5xl">
+              {screenStudioAlternative.title}
+            </h2>
+            <p class="mt-5 max-w-2xl text-base leading-7 text-muted-foreground">
+              {screenStudioAlternative.description}
+            </p>
           </div>
-        </section>
-      )}
+          <a
+            class="group inline-flex w-fit items-center gap-2 bg-foreground px-5 py-3 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
+            href={localizedPath(locale, "/screen-studio-alternative")}
+          >
+            {screenStudioAlternative.cta}
+            <svg
+              aria-hidden="true"
+              class="h-4 w-4 transition-transform group-hover:translate-x-1"
+              fill="none"
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+            >
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+      </section>
       <DocsBasicsSection copy={docsBasicsCopy} docsHref={localizedPath(locale, "/docs")} client:visible />
       <FAQSection copy={t.home.faq} client:visible={{ rootMargin: "-25% 0px" }} />
       <Footer copy={t.footer} locale={locale} client:visible={{ rootMargin: "-25% 0px" }} />
