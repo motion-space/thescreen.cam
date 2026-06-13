@@ -385,14 +385,21 @@
   }
 
   astro-island[ssr] nav[style],
-  astro-island[ssr] nav a[style],
-  astro-island[ssr] .hero-ssr-visible,
-  astro-island[ssr] .hero-ssr-visible [style],
-  astro-island[ssr] .hero-motion-title [style],
-  astro-island[ssr] .hero-motion-title .motion-blur-text-glyph {
+  astro-island[ssr] nav a[style] {
     opacity: 1 !important;
     transform: none !important;
     filter: none !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    astro-island[ssr] .hero-ssr-visible,
+    astro-island[ssr] .hero-ssr-visible [style],
+    astro-island[ssr] .hero-motion-title [style],
+    astro-island[ssr] .hero-motion-title .motion-blur-text-glyph {
+      opacity: 1 !important;
+      transform: none !important;
+      filter: none !important;
+    }
   }
 
   .hero-title-line,
