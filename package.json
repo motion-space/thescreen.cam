@@ -2,6 +2,7 @@
   "name": "thescreen.cam",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "bgm:build": "node scripts/build-bgm.mjs",
