@@ -1,0 +1,210 @@
+{
+  "id": "iphone-17-series",
+  "name": "iPhone 17 Series",
+  "kind": "phone",
+  "version": 1,
+  "defaultModelID": "iphone-17-pro-max",
+  "models": [
+    {
+      "id": "iphone-17",
+      "name": "iPhone 17",
+      "screenResolution": { "width": 1206, "height": 2622 },
+      "renderGeometry": {
+        "canvasSize": { "width": 1317, "height": 2706 },
+        "screenRect": { "x": 54, "y": 42, "width": 1206, "height": 2622 },
+        "screenCornerRadius": 125,
+        "screenBottomCornerRadius": 125,
+        "clipShape": "roundedRect"
+      },
+      "defaultVariantID": "mist-blue",
+      "variants": [
+        {
+          "id": "silver",
+          "name": "Silver",
+          "swatchHex": "#D7D2C9",
+          "assets": [
+            {
+              "role": "chrome",
+              "source": "iphone-17-series/iphone-17/silver.webp",
+              "pixelWidth": 1317,
+              "pixelHeight": 2706
+            }
+          ]
+        },
+        {
+          "id": "mist-blue",
+          "name": "Mist Blue",
+          "swatchHex": "#B6C9DA",
+          "assets": [
+            {
+              "role": "chrome",
+              "source": "iphone-17-series/iphone-17/mist-blue.webp",
+              "pixelWidth": 1317,
+              "pixelHeight": 2706
+            }
+          ]
+        },
+        {
+          "id": "sage",
+          "name": "Sage",
+          "swatchHex": "#B8C7A7",
+          "assets": [
+            {
+              "role": "chrome",
+              "source": "iphone-17-series/iphone-17/sage.webp",
+              "pixelWidth": 1317,
+              "pixelHeight": 2706
+            }
+          ]
+        },
+        {
+          "id": "white",
+          "name": "White",
+          "swatchHex": "#F2F2F2",
+          "assets": [
+            {
+              "role": "chrome",
+              "source": "iphone-17-series/iphone-17/white.webp",
+              "pixelWidth": 1317,
+              "pixelHeight": 2706
+            }
+          ]
+        },
+        {
+          "id": "lavender",
+          "name": "Lavender",
+          "swatchHex": "#C8BEDA",
+          "assets": [
+            {
+              "role": "chrome",
+              "source": "iphone-17-series/iphone-17/lavender.webp",
+              "pixelWidth": 1317,
+              "pixelHeight": 2706
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "iphone-17-pro",
+      "name": "iPhone 17 Pro",
+      "screenResolution": { "width": 1206, "height": 2622 },
+      "renderGeometry": {
+        "canvasSize": { "width": 1320, "height": 2718 },
+        "screenRect": { "x": 54, "y": 42, "width": 1206, "height": 2622 },
+        "screenCornerRadius": 125,
+        "screenBottomCornerRadius": 125,
+        "clipShape": "roundedRect"
+      },
+      "defaultVariantID": "silver",
+      "variants": [
+        {
+          "id": "silver",
+          "name": "Silver",
+          "swatchHex": "#D7D2C9",
+          "assets": [
+            {
+              "role": "chrome",
+              "source": "iphone-17-series/iphone-17-pro/silver.webp",
+              "pixelWidth": 1320,
+              "pixelHeight": 2718
+            }
+          ]
+        },
+        {
+          "id": "cosmic-orange",
+          "name": "Cosmic Orange",
+          "swatchHex": "#E77222",
+          "assets": [
+            {
+              "role": "chrome",
+              "source": "iphone-17-series/iphone-17-pro/cosmic-orange.webp",
+              "pixelWidth": 1320,
+              "pixelHeight": 2718
+            }
+          ]
+        },
+        {
+          "id": "deep-blue",
+          "name": "Deep Blue",
+          "swatchHex": "#253E58",
+          "assets": [
+            {
+              "role": "chrome",
+              "source": "iphone-17-series/iphone-17-pro/deep-blue.webp",
+              "pixelWidth": 1320,
+              "pixelHeight": 2718
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "iphone-17-pro-max",
+      "name": "iPhone 17 Pro Max",
+      "screenResolution": { "width": 1320, "height": 2868 },
+      "renderGeometry": {
+        "canvasSize": { "width": 1428, "height": 2958 },
+        "screenRect": { "x": 54, "y": 45, "width": 1320, "height": 2868 },
+        "screenCornerRadius": 140,
+        "screenBottomCornerRadius": 140,
+        "clipShape": "roundedRect"
+      },
+      "defaultVariantID": "silver",
+      "variants": [
+        {
+          "id": "silver",
+          "name": "Silver",
+          "swatchHex": "#D7D2C9",
+          "assets": [
+            {
+              "role": "chrome",
+              "source": "iphone-17-series/iphone-17-pro-max/silver.webp",
+              "pixelWidth": 1428,
+              "pixelHeight": 2958
+            }
+          ]
+        },
+        {
+          "id": "cosmic-orange",
+          "name": "Cosmic Orange",
+          "swatchHex": "#E77222",
+          "assets": [
+            {
+              "role": "chrome",
+              "source": "iphone-17-series/iphone-17-pro-max/cosmic-orange.webp",
+              "pixelWidth": 1428,
+              "pixelHeight": 2958
+            }
+          ]
+        },
+        {
+          "id": "deep-blue",
+          "name": "Deep Blue",
+          "swatchHex": "#253E58",
+          "assets": [
+            {
+              "role": "chrome",
+              "source": "iphone-17-series/iphone-17-pro-max/deep-blue.webp",
+              "pixelWidth": 1428,
+              "pixelHeight": 2958
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "legacyAliases": [
+    { "mockupDevice": "iPhone17", "mockupIPhoneColor": "silver", "modelID": "iphone-17", "variantID": "silver" },
+    { "mockupDevice": "iPhone17", "mockupIPhoneColor": "mistBlue", "modelID": "iphone-17", "variantID": "mist-blue" },
+    { "mockupDevice": "iPhone17", "mockupIPhoneColor": "sage", "modelID": "iphone-17", "variantID": "sage" },
+    { "mockupDevice": "iPhone17", "mockupIPhoneColor": "white", "modelID": "iphone-17", "variantID": "white" },
+    { "mockupDevice": "iPhone17", "mockupIPhoneColor": "lavender", "modelID": "iphone-17", "variantID": "lavender" },
+    { "mockupDevice": "iPhone17Pro", "mockupIPhoneColor": "silver", "modelID": "iphone-17-pro", "variantID": "silver" },
+    { "mockupDevice": "iPhone17Pro", "mockupIPhoneColor": "cosmicOrange", "modelID": "iphone-17-pro", "variantID": "cosmic-orange" },
+    { "mockupDevice": "iPhone17Pro", "mockupIPhoneColor": "deepBlue", "modelID": "iphone-17-pro", "variantID": "deep-blue" },
+    { "mockupDevice": "iPhone17ProMax", "mockupIPhoneColor": "silver", "modelID": "iphone-17-pro-max", "variantID": "silver" },
+    { "mockupDevice": "iPhone17ProMax", "mockupIPhoneColor": "cosmicOrange", "modelID": "iphone-17-pro-max", "variantID": "cosmic-orange" },
+    { "mockupDevice": "iPhone17ProMax", "mockupIPhoneColor": "deepBlue", "modelID": "iphone-17-pro-max", "variantID": "deep-blue" }
+  ]
+}

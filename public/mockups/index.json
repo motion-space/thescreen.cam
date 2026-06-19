@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-19T09:53:23.578Z",
+  "series": [
+    {
+      "id": "apple-watch-series-11",
+      "name": "Apple Watch Series 11",
+      "kind": "watch",
+      "version": 1,
+      "manifestUrl": "/mockups/series/apple-watch-series-11.json",
+      "assetCount": 39,
+      "totalSize": 1767746
+    },
+    {
+      "id": "iphone-17-series",
+      "name": "iPhone 17 Series",
+      "kind": "phone",
+      "version": 1,
+      "manifestUrl": "/mockups/series/iphone-17-series.json",
+      "assetCount": 11,
+      "totalSize": 340448
+    },
+    {
+      "id": "iphone-air",
+      "name": "iPhone Air",
+      "kind": "phone",
+      "version": 1,
+      "manifestUrl": "/mockups/series/iphone-air.json",
+      "assetCount": 4,
+      "totalSize": 156750
+    },
+    {
+      "id": "macbook-pro",
+      "name": "MacBook Pro",
+      "kind": "laptop",
+      "version": 1,
+      "manifestUrl": "/mockups/series/macbook-pro.json",
+      "assetCount": 5,
+      "totalSize": 203652
+    },
+    {
+      "id": "studio-display",
+      "name": "Studio Display",
+      "kind": "display",
+      "version": 1,
+      "manifestUrl": "/mockups/series/studio-display.json",
+      "assetCount": 1,
+      "totalSize": 8714
+    }
+  ]
+}

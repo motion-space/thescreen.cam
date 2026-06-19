@@ -1,0 +1,43 @@
+---
+import "../styles/global.css";
+import type { Locale } from "../lib/i18n";
+import { getTranslation } from "../lib/translations";
+import { MockupMakerTool } from "./mockup-maker-tool";
+import PageHead from "./page-head.astro";
+import { SiteHeader } from "./site-header";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getTranslation(locale);
+const path = "/mockup-maker";
+---
+
+<!doctype html>
+<html lang={locale} class="dark">
+  <head>
+    <PageHead
+      locale={locale}
+      path={path}
+      title="Mockup Maker - ScreenCam"
+      description="Upload a mockup asset and measure the screen rectangle for ScreenCam mockup schema JSON."
+      robots="noindex, nofollow"
+    />
+  </head>
+  <body class="font-sans antialiased bg-background text-foreground">
+    <a class="skip-link" href="#main">{t.common.skipToContent}</a>
+    <SiteHeader
+      copy={t.header}
+      currentPath={path}
+      languageLabel={t.footer.language}
+      locale={locale}
+      client:load
+    />
+
+    <main id="main">
+      <MockupMakerTool client:load />
+    </main>
+  </body>
+</html>

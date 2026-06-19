@@ -1,0 +1,344 @@
+{
+  "id": "iphone-17-series",
+  "name": "iPhone 17 Series",
+  "kind": "phone",
+  "version": 1,
+  "defaultModelID": "iphone-17-pro-max",
+  "models": [
+    {
+      "id": "iphone-17",
+      "name": "iPhone 17",
+      "screenResolution": {
+        "width": 1206,
+        "height": 2622
+      },
+      "renderGeometry": {
+        "canvasSize": {
+          "width": 1317,
+          "height": 2706
+        },
+        "screenRect": {
+          "x": 54,
+          "y": 42,
+          "width": 1206,
+          "height": 2622
+        },
+        "screenCornerRadius": 125,
+        "screenBottomCornerRadius": 125,
+        "clipShape": "roundedRect"
+      },
+      "defaultVariantID": "mist-blue",
+      "variants": [
+        {
+          "id": "silver",
+          "name": "Silver",
+          "swatchHex": "#D7D2C9",
+          "assets": [
+            {
+              "role": "chrome",
+              "pixelWidth": 1317,
+              "pixelHeight": 2706,
+              "url": "/mockups/assets/iphone-17-series/iphone-17/silver.webp",
+              "downloadUrl": "/mockups/assets/iphone-17-series/iphone-17/silver.webp",
+              "contentType": "image/webp",
+              "size": 33200,
+              "sha256": "d8d376ca2f463d0ad3460b29388efd65a58b6e4ee5a92cf25337bdc638100c50"
+            }
+          ]
+        },
+        {
+          "id": "mist-blue",
+          "name": "Mist Blue",
+          "swatchHex": "#B6C9DA",
+          "assets": [
+            {
+              "role": "chrome",
+              "pixelWidth": 1317,
+              "pixelHeight": 2706,
+              "url": "/mockups/assets/iphone-17-series/iphone-17/mist-blue.webp",
+              "downloadUrl": "/mockups/assets/iphone-17-series/iphone-17/mist-blue.webp",
+              "contentType": "image/webp",
+              "size": 25802,
+              "sha256": "63698ecca632c075d8a533226ff16422846208e2a2d3e9540beb39a81dfacb29"
+            }
+          ]
+        },
+        {
+          "id": "sage",
+          "name": "Sage",
+          "swatchHex": "#B8C7A7",
+          "assets": [
+            {
+              "role": "chrome",
+              "pixelWidth": 1317,
+              "pixelHeight": 2706,
+              "url": "/mockups/assets/iphone-17-series/iphone-17/sage.webp",
+              "downloadUrl": "/mockups/assets/iphone-17-series/iphone-17/sage.webp",
+              "contentType": "image/webp",
+              "size": 30752,
+              "sha256": "248fcbb87e12d3a2efadb451a6b116eed719821b203c22c28194c42312ac1ddd"
+            }
+          ]
+        },
+        {
+          "id": "white",
+          "name": "White",
+          "swatchHex": "#F2F2F2",
+          "assets": [
+            {
+              "role": "chrome",
+              "pixelWidth": 1317,
+              "pixelHeight": 2706,
+              "url": "/mockups/assets/iphone-17-series/iphone-17/white.webp",
+              "downloadUrl": "/mockups/assets/iphone-17-series/iphone-17/white.webp",
+              "contentType": "image/webp",
+              "size": 27254,
+              "sha256": "67075d1b9bbc21697edcf836649483173c0cfb8223c2f26b06ded42d5b662092"
+            }
+          ]
+        },
+        {
+          "id": "lavender",
+          "name": "Lavender",
+          "swatchHex": "#C8BEDA",
+          "assets": [
+            {
+              "role": "chrome",
+              "pixelWidth": 1317,
+              "pixelHeight": 2706,
+              "url": "/mockups/assets/iphone-17-series/iphone-17/lavender.webp",
+              "downloadUrl": "/mockups/assets/iphone-17-series/iphone-17/lavender.webp",
+              "contentType": "image/webp",
+              "size": 27328,
+              "sha256": "d9517520c6ce5f74daf62d8bf610fbfdfce272aa3a8546911445fc7244660086"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "iphone-17-pro",
+      "name": "iPhone 17 Pro",
+      "screenResolution": {
+        "width": 1206,
+        "height": 2622
+      },
+      "renderGeometry": {
+        "canvasSize": {
+          "width": 1320,
+          "height": 2718
+        },
+        "screenRect": {
+          "x": 54,
+          "y": 42,
+          "width": 1206,
+          "height": 2622
+        },
+        "screenCornerRadius": 125,
+        "screenBottomCornerRadius": 125,
+        "clipShape": "roundedRect"
+      },
+      "defaultVariantID": "silver",
+      "variants": [
+        {
+          "id": "silver",
+          "name": "Silver",
+          "swatchHex": "#D7D2C9",
+          "assets": [
+            {
+              "role": "chrome",
+              "pixelWidth": 1320,
+              "pixelHeight": 2718,
+              "url": "/mockups/assets/iphone-17-series/iphone-17-pro/silver.webp",
+              "downloadUrl": "/mockups/assets/iphone-17-series/iphone-17-pro/silver.webp",
+              "contentType": "image/webp",
+              "size": 27472,
+              "sha256": "308ef17c57870384d93e0d08e0fd9ec5712373965d822f955a60fd3c83df3dba"
+            }
+          ]
+        },
+        {
+          "id": "cosmic-orange",
+          "name": "Cosmic Orange",
+          "swatchHex": "#E77222",
+          "assets": [
+            {
+              "role": "chrome",
+              "pixelWidth": 1320,
+              "pixelHeight": 2718,
+              "url": "/mockups/assets/iphone-17-series/iphone-17-pro/cosmic-orange.webp",
+              "downloadUrl": "/mockups/assets/iphone-17-series/iphone-17-pro/cosmic-orange.webp",
+              "contentType": "image/webp",
+              "size": 33826,
+              "sha256": "0894e89655870f8677d28fb9a37c06cdaad38e48f7a7bd4b420f24b1ec540058"
+            }
+          ]
+        },
+        {
+          "id": "deep-blue",
+          "name": "Deep Blue",
+          "swatchHex": "#253E58",
+          "assets": [
+            {
+              "role": "chrome",
+              "pixelWidth": 1320,
+              "pixelHeight": 2718,
+              "url": "/mockups/assets/iphone-17-series/iphone-17-pro/deep-blue.webp",
+              "downloadUrl": "/mockups/assets/iphone-17-series/iphone-17-pro/deep-blue.webp",
+              "contentType": "image/webp",
+              "size": 32354,
+              "sha256": "288d4d7ec79b22127b9f1e3f26242ed9839251f54afa276f14a997e24c59f6aa"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "iphone-17-pro-max",
+      "name": "iPhone 17 Pro Max",
+      "screenResolution": {
+        "width": 1320,
+        "height": 2868
+      },
+      "renderGeometry": {
+        "canvasSize": {
+          "width": 1428,
+          "height": 2958
+        },
+        "screenRect": {
+          "x": 54,
+          "y": 45,
+          "width": 1320,
+          "height": 2868
+        },
+        "screenCornerRadius": 140,
+        "screenBottomCornerRadius": 140,
+        "clipShape": "roundedRect"
+      },
+      "defaultVariantID": "silver",
+      "variants": [
+        {
+          "id": "silver",
+          "name": "Silver",
+          "swatchHex": "#D7D2C9",
+          "assets": [
+            {
+              "role": "chrome",
+              "pixelWidth": 1428,
+              "pixelHeight": 2958,
+              "url": "/mockups/assets/iphone-17-series/iphone-17-pro-max/silver.webp",
+              "downloadUrl": "/mockups/assets/iphone-17-series/iphone-17-pro-max/silver.webp",
+              "contentType": "image/webp",
+              "size": 29794,
+              "sha256": "6ba4872470a834bc30d90472079080a6bb559e559985a58898f97b507d9fed4f"
+            }
+          ]
+        },
+        {
+          "id": "cosmic-orange",
+          "name": "Cosmic Orange",
+          "swatchHex": "#E77222",
+          "assets": [
+            {
+              "role": "chrome",
+              "pixelWidth": 1428,
+              "pixelHeight": 2958,
+              "url": "/mockups/assets/iphone-17-series/iphone-17-pro-max/cosmic-orange.webp",
+              "downloadUrl": "/mockups/assets/iphone-17-series/iphone-17-pro-max/cosmic-orange.webp",
+              "contentType": "image/webp",
+              "size": 35254,
+              "sha256": "9d2916e5e7cb2a19d6661e7dfda8b0b016f7eb436c8e826d0290b17a9fc51ba9"
+            }
+          ]
+        },
+        {
+          "id": "deep-blue",
+          "name": "Deep Blue",
+          "swatchHex": "#253E58",
+          "assets": [
+            {
+              "role": "chrome",
+              "pixelWidth": 1428,
+              "pixelHeight": 2958,
+              "url": "/mockups/assets/iphone-17-series/iphone-17-pro-max/deep-blue.webp",
+              "downloadUrl": "/mockups/assets/iphone-17-series/iphone-17-pro-max/deep-blue.webp",
+              "contentType": "image/webp",
+              "size": 37412,
+              "sha256": "fb14ceef9d9747fe7cfa74ef0746eeae792925d789f0a4be1675e309ab8df4ff"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "legacyAliases": [
+    {
+      "mockupDevice": "iPhone17",
+      "mockupIPhoneColor": "silver",
+      "modelID": "iphone-17",
+      "variantID": "silver"
+    },
+    {
+      "mockupDevice": "iPhone17",
+      "mockupIPhoneColor": "mistBlue",
+      "modelID": "iphone-17",
+      "variantID": "mist-blue"
+    },
+    {
+      "mockupDevice": "iPhone17",
+      "mockupIPhoneColor": "sage",
+      "modelID": "iphone-17",
+      "variantID": "sage"
+    },
+    {
+      "mockupDevice": "iPhone17",
+      "mockupIPhoneColor": "white",
+      "modelID": "iphone-17",
+      "variantID": "white"
+    },
+    {
+      "mockupDevice": "iPhone17",
+      "mockupIPhoneColor": "lavender",
+      "modelID": "iphone-17",
+      "variantID": "lavender"
+    },
+    {
+      "mockupDevice": "iPhone17Pro",
+      "mockupIPhoneColor": "silver",
+      "modelID": "iphone-17-pro",
+      "variantID": "silver"
+    },
+    {
+      "mockupDevice": "iPhone17Pro",
+      "mockupIPhoneColor": "cosmicOrange",
+      "modelID": "iphone-17-pro",
+      "variantID": "cosmic-orange"
+    },
+    {
+      "mockupDevice": "iPhone17Pro",
+      "mockupIPhoneColor": "deepBlue",
+      "modelID": "iphone-17-pro",
+      "variantID": "deep-blue"
+    },
+    {
+      "mockupDevice": "iPhone17ProMax",
+      "mockupIPhoneColor": "silver",
+      "modelID": "iphone-17-pro-max",
+      "variantID": "silver"
+    },
+    {
+      "mockupDevice": "iPhone17ProMax",
+      "mockupIPhoneColor": "cosmicOrange",
+      "modelID": "iphone-17-pro-max",
+      "variantID": "cosmic-orange"
+    },
+    {
+      "mockupDevice": "iPhone17ProMax",
+      "mockupIPhoneColor": "deepBlue",
+      "modelID": "iphone-17-pro-max",
+      "variantID": "deep-blue"
+    }
+  ],
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-19T02:10:51.561Z"
+}

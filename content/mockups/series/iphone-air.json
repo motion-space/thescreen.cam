@@ -1,0 +1,75 @@
+{
+  "id": "iphone-air",
+  "name": "iPhone Air",
+  "kind": "phone",
+  "version": 1,
+  "screenResolution": { "width": 1260, "height": 2736 },
+  "renderGeometry": {
+    "canvasSize": { "width": 1386, "height": 2832 },
+    "screenRect": { "x": 63, "y": 48, "width": 1260, "height": 2736 },
+    "screenCornerRadius": 140,
+    "screenBottomCornerRadius": 140,
+    "clipShape": "roundedRect"
+  },
+  "defaultVariantID": "sky-blue",
+  "variants": [
+    {
+      "id": "space-black",
+      "name": "Space Black",
+      "swatchHex": "#202225",
+      "assets": [
+        {
+          "role": "chrome",
+          "source": "iphone-air/space-black.webp",
+          "pixelWidth": 1386,
+          "pixelHeight": 2832
+        }
+      ]
+    },
+    {
+      "id": "cloud-white",
+      "name": "Cloud White",
+      "swatchHex": "#F1EFE8",
+      "assets": [
+        {
+          "role": "chrome",
+          "source": "iphone-air/cloud-white.webp",
+          "pixelWidth": 1386,
+          "pixelHeight": 2832
+        }
+      ]
+    },
+    {
+      "id": "light-gold",
+      "name": "Light Gold",
+      "swatchHex": "#E8D4A8",
+      "assets": [
+        {
+          "role": "chrome",
+          "source": "iphone-air/light-gold.webp",
+          "pixelWidth": 1386,
+          "pixelHeight": 2832
+        }
+      ]
+    },
+    {
+      "id": "sky-blue",
+      "name": "Sky Blue",
+      "swatchHex": "#A9C7D6",
+      "assets": [
+        {
+          "role": "chrome",
+          "source": "iphone-air/sky-blue.webp",
+          "pixelWidth": 1386,
+          "pixelHeight": 2832
+        }
+      ]
+    }
+  ],
+  "legacyAliases": [
+    { "mockupDevice": "iPhoneAir", "mockupIPhoneColor": "spaceBlack", "variantID": "space-black" },
+    { "mockupDevice": "iPhoneAir", "mockupIPhoneColor": "cloudWhite", "variantID": "cloud-white" },
+    { "mockupDevice": "iPhoneAir", "mockupIPhoneColor": "lightGold", "variantID": "light-gold" },
+    { "mockupDevice": "iPhoneAir", "mockupIPhoneColor": "skyBlue", "variantID": "sky-blue" }
+  ]
+}

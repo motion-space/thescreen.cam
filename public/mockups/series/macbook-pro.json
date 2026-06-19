@@ -1,0 +1,163 @@
+{
+  "id": "macbook-pro",
+  "name": "MacBook Pro",
+  "kind": "laptop",
+  "version": 1,
+  "defaultModelID": "macbook-pro-16-inch",
+  "models": [
+    {
+      "id": "macbook-pro-16-inch",
+      "name": "16 inch",
+      "screenResolution": {
+        "width": 3456,
+        "height": 2234
+      },
+      "renderGeometry": {
+        "canvasSize": {
+          "width": 4203.049723756906,
+          "height": 2576.7703862660946
+        },
+        "screenRect": {
+          "x": 369.9447513812155,
+          "y": 47.93991416309013,
+          "width": 3456,
+          "height": 2234
+        },
+        "screenCornerRadius": 57.28176795580111,
+        "screenBottomCornerRadius": 0,
+        "clipShape": "roundedRect"
+      },
+      "chromeMetrics": {
+        "baseCanvasSize": {
+          "width": 1761,
+          "height": 1075
+        },
+        "bottomRect": {
+          "x": -10.566,
+          "y": 1005.586,
+          "width": 1782.132,
+          "height": 69.828
+        },
+        "notchRect": {
+          "x": 797,
+          "y": 8,
+          "width": 167,
+          "height": 40
+        },
+        "notchViewBox": {
+          "x": 797,
+          "y": 14,
+          "width": 167,
+          "height": 34
+        },
+        "cameraIndicator": {
+          "center": {
+            "x": 899.683,
+            "y": 25.4626
+          },
+          "radius": 2.1985,
+          "blurRadius": 0.732834,
+          "colorHex": "#6FF857"
+        }
+      },
+      "assets": [
+        {
+          "role": "base",
+          "pixelWidth": 1761,
+          "pixelHeight": 1075,
+          "url": "/mockups/assets/macbook-pro/macbook-pro-16-inch/base.svg",
+          "downloadUrl": "/mockups/assets/macbook-pro/macbook-pro-16-inch/base.svg",
+          "contentType": "image/svg+xml",
+          "size": 22557,
+          "sha256": "fc35a8432cb2aafdfc38bd3d11e8ef88126d9ad6b4c3163ae55b1394a9b7def4"
+        },
+        {
+          "role": "notch",
+          "pixelWidth": 167,
+          "pixelHeight": 34,
+          "url": "/mockups/assets/macbook-pro/macbook-pro-16-inch/notch.svg",
+          "downloadUrl": "/mockups/assets/macbook-pro/macbook-pro-16-inch/notch.svg",
+          "contentType": "image/svg+xml",
+          "size": 1477,
+          "sha256": "16954e3028c89eb685f99305de1503113148d57990746930f5a51ed0fa1d5f39"
+        }
+      ],
+      "defaultVariantID": "space-black",
+      "variants": [
+        {
+          "id": "space-black",
+          "name": "Space Black",
+          "swatchHex": "#202225",
+          "assets": [
+            {
+              "role": "bottom",
+              "pixelWidth": 1761,
+              "pixelHeight": 69,
+              "url": "/mockups/assets/macbook-pro/macbook-pro-16-inch/bottom-space-black.png",
+              "downloadUrl": "/mockups/assets/macbook-pro/macbook-pro-16-inch/bottom-space-black.png",
+              "contentType": "image/png",
+              "size": 78354,
+              "sha256": "352e1dc805f3aef1895b403ecd988a97bc7d03e50475ed053a0ecfc7c3210abf"
+            }
+          ]
+        },
+        {
+          "id": "gray",
+          "name": "Gray",
+          "swatchHex": "#7B7D7F",
+          "assets": [
+            {
+              "role": "bottom",
+              "pixelWidth": 1761,
+              "pixelHeight": 69,
+              "url": "/mockups/assets/macbook-pro/macbook-pro-16-inch/bottom-gray.png",
+              "downloadUrl": "/mockups/assets/macbook-pro/macbook-pro-16-inch/bottom-gray.png",
+              "contentType": "image/png",
+              "size": 74581,
+              "sha256": "b6912913be0f0d57cb3e48528cc3b54ddd588f6e6bf25f2d309d91e9c6093c2f"
+            }
+          ]
+        },
+        {
+          "id": "silver",
+          "name": "Silver",
+          "swatchHex": "#D6D3CC",
+          "assets": [
+            {
+              "role": "bottom",
+              "pixelWidth": 1761,
+              "pixelHeight": 69,
+              "url": "/mockups/assets/macbook-pro/macbook-pro-16-inch/bottom-silver.png",
+              "downloadUrl": "/mockups/assets/macbook-pro/macbook-pro-16-inch/bottom-silver.png",
+              "contentType": "image/png",
+              "size": 26683,
+              "sha256": "b15932ad32c0427555e54655d2bbbb4cb4957d9fbabe257fa5824aa90d33f84b"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "legacyAliases": [
+    {
+      "mockupDevice": "laptop",
+      "mockupLaptopColor": "black",
+      "modelID": "macbook-pro-16-inch",
+      "variantID": "space-black"
+    },
+    {
+      "mockupDevice": "laptop",
+      "mockupLaptopColor": "gray",
+      "modelID": "macbook-pro-16-inch",
+      "variantID": "gray"
+    },
+    {
+      "mockupDevice": "laptop",
+      "mockupLaptopColor": "silver",
+      "modelID": "macbook-pro-16-inch",
+      "variantID": "silver"
+    }
+  ],
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-19T02:11:33.010Z"
+}

@@ -1,0 +1,54 @@
+{
+  "id": "studio-display",
+  "name": "Studio Display",
+  "kind": "display",
+  "version": 1,
+  "screenResolution": {
+    "width": 5120,
+    "height": 2880
+  },
+  "renderGeometry": {
+    "canvasSize": {
+      "width": 5361.574239713774,
+      "height": 4123.363148479428
+    },
+    "screenRect": {
+      "x": 120.78711985688737,
+      "y": 120.7871198568874,
+      "width": 5120,
+      "height": 2880
+    },
+    "screenCornerRadius": 20.035778175313055,
+    "screenBottomCornerRadius": 20.035778175313055,
+    "clipShape": "roundedRect"
+  },
+  "assets": [
+    {
+      "role": "base",
+      "pixelWidth": 2676,
+      "pixelHeight": 2058,
+      "url": "/mockups/assets/studio-display/base.svg",
+      "downloadUrl": "/mockups/assets/studio-display/base.svg",
+      "contentType": "image/svg+xml",
+      "size": 8714,
+      "sha256": "f83ad7d4d464b7de9bedb3c37465a62e5803779a81d44387f1f33c9c172cd627"
+    }
+  ],
+  "defaultVariantID": "default",
+  "variants": [
+    {
+      "id": "default",
+      "name": "Default",
+      "swatchHex": "#D7D2C9",
+      "assets": []
+    }
+  ],
+  "legacyAliases": [
+    {
+      "mockupDevice": "display",
+      "variantID": "default"
+    }
+  ],
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-19T02:11:29.348Z"
+}

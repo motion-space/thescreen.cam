@@ -16,7 +16,15 @@ export default defineConfig({
   server: {
     host: true
   },
-  integrations: [sitemap(), react()],
+  integrations: [
+    sitemap({
+      filter: (page) => {
+        const pathname = new URL(page).pathname.replace(/\/$/, "");
+        return !pathname.endsWith("/mockup-maker");
+      },
+    }),
+    react(),
+  ],
 
   vite: {
     ...(isDevServer ? { optimizeDeps: { force: true } } : {}),

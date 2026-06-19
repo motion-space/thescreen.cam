@@ -1,0 +1,34 @@
+{
+  "id": "studio-display",
+  "name": "Studio Display",
+  "kind": "display",
+  "version": 1,
+  "screenResolution": { "width": 5120, "height": 2880 },
+  "renderGeometry": {
+    "canvasSize": { "width": 5361.574239713774, "height": 4123.363148479428 },
+    "screenRect": { "x": 120.78711985688737, "y": 120.7871198568874, "width": 5120, "height": 2880 },
+    "screenCornerRadius": 20.035778175313055,
+    "screenBottomCornerRadius": 20.035778175313055,
+    "clipShape": "roundedRect"
+  },
+  "assets": [
+    {
+      "role": "base",
+      "source": "studio-display/base.svg",
+      "pixelWidth": 2676,
+      "pixelHeight": 2058
+    }
+  ],
+  "defaultVariantID": "default",
+  "variants": [
+    {
+      "id": "default",
+      "name": "Default",
+      "swatchHex": "#D7D2C9",
+      "assets": []
+    }
+  ],
+  "legacyAliases": [
+    { "mockupDevice": "display", "variantID": "default" }
+  ]
+}

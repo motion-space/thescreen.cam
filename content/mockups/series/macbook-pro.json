@@ -1,0 +1,94 @@
+{
+  "id": "macbook-pro",
+  "name": "MacBook Pro",
+  "kind": "laptop",
+  "version": 1,
+  "defaultModelID": "macbook-pro-16-inch",
+  "models": [
+    {
+      "id": "macbook-pro-16-inch",
+      "name": "16 inch",
+      "screenResolution": { "width": 3456, "height": 2234 },
+      "renderGeometry": {
+        "canvasSize": { "width": 4203.049723756906, "height": 2576.7703862660946 },
+        "screenRect": { "x": 369.9447513812155, "y": 47.93991416309013, "width": 3456, "height": 2234 },
+        "screenCornerRadius": 57.28176795580111,
+        "screenBottomCornerRadius": 0,
+        "clipShape": "roundedRect"
+      },
+      "chromeMetrics": {
+        "baseCanvasSize": { "width": 1761, "height": 1075 },
+        "bottomRect": { "x": -10.566, "y": 1005.586, "width": 1782.132, "height": 69.828 },
+        "notchRect": { "x": 797, "y": 8, "width": 167, "height": 40 },
+        "notchViewBox": { "x": 797, "y": 14, "width": 167, "height": 34 },
+        "cameraIndicator": {
+          "center": { "x": 899.683, "y": 25.4626 },
+          "radius": 2.1985,
+          "blurRadius": 0.732834,
+          "colorHex": "#6FF857"
+        }
+      },
+      "assets": [
+        {
+          "role": "base",
+          "source": "macbook-pro/macbook-pro-16-inch/base.svg",
+          "pixelWidth": 1761,
+          "pixelHeight": 1075
+        },
+        {
+          "role": "notch",
+          "source": "macbook-pro/macbook-pro-16-inch/notch.svg",
+          "pixelWidth": 167,
+          "pixelHeight": 34
+        }
+      ],
+      "defaultVariantID": "space-black",
+      "variants": [
+        {
+          "id": "space-black",
+          "name": "Space Black",
+          "swatchHex": "#202225",
+          "assets": [
+            {
+              "role": "bottom",
+              "source": "macbook-pro/macbook-pro-16-inch/bottom-space-black.png",
+              "pixelWidth": 1761,
+              "pixelHeight": 69
+            }
+          ]
+        },
+        {
+          "id": "gray",
+          "name": "Gray",
+          "swatchHex": "#7B7D7F",
+          "assets": [
+            {
+              "role": "bottom",
+              "source": "macbook-pro/macbook-pro-16-inch/bottom-gray.png",
+              "pixelWidth": 1761,
+              "pixelHeight": 69
+            }
+          ]
+        },
+        {
+          "id": "silver",
+          "name": "Silver",
+          "swatchHex": "#D6D3CC",
+          "assets": [
+            {
+              "role": "bottom",
+              "source": "macbook-pro/macbook-pro-16-inch/bottom-silver.png",
+              "pixelWidth": 1761,
+              "pixelHeight": 69
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "legacyAliases": [
+    { "mockupDevice": "laptop", "mockupLaptopColor": "black", "modelID": "macbook-pro-16-inch", "variantID": "space-black" },
+    { "mockupDevice": "laptop", "mockupLaptopColor": "gray", "modelID": "macbook-pro-16-inch", "variantID": "gray" },
+    { "mockupDevice": "laptop", "mockupLaptopColor": "silver", "modelID": "macbook-pro-16-inch", "variantID": "silver" }
+  ]
+}

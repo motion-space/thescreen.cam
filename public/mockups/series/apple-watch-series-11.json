@@ -1,0 +1,819 @@
+{
+  "id": "apple-watch-series-11",
+  "name": "Apple Watch Series 11",
+  "kind": "watch",
+  "version": 1,
+  "defaultModelID": "46mm",
+  "models": [
+    {
+      "id": "46mm",
+      "name": "46mm",
+      "screenResolution": {
+        "width": 463,
+        "height": 553
+      },
+      "renderGeometry": {
+        "canvasSize": {
+          "width": 640,
+          "height": 920
+        },
+        "screenRect": {
+          "x": 89,
+          "y": 185,
+          "width": 463,
+          "height": 553
+        },
+        "screenCornerRadius": 112,
+        "screenBottomCornerRadius": 112,
+        "clipShape": "roundedRect"
+      },
+      "defaultOptionIDs": {
+        "case": "titanium-natural",
+        "band": "sport-band-black"
+      },
+      "optionGroups": [
+        {
+          "id": "case",
+          "kind": "case",
+          "name": "Case",
+          "defaultOptionID": "titanium-natural",
+          "sections": [
+            {
+              "id": "titanium",
+              "name": "Titanium"
+            },
+            {
+              "id": "aluminum",
+              "name": "Aluminum"
+            }
+          ],
+          "options": [
+            {
+              "id": "titanium-natural",
+              "name": "Natural Titanium",
+              "sectionID": "titanium",
+              "swatchHex": "#C8C1B7",
+              "assets": [
+                {
+                  "role": "case",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/case/titanium-natural.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/case/titanium-natural.webp",
+                  "contentType": "image/webp",
+                  "size": 21936,
+                  "sha256": "feba7232ddf4345436cfc27b9f26a9ce0e3f4395c217f8048dd816b53c94965c"
+                }
+              ]
+            },
+            {
+              "id": "titanium-slate",
+              "name": "Slate Titanium",
+              "sectionID": "titanium",
+              "swatchHex": "#4E4A47",
+              "assets": [
+                {
+                  "role": "case",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/case/titanium-slate.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/case/titanium-slate.webp",
+                  "contentType": "image/webp",
+                  "size": 20476,
+                  "sha256": "d6268ce27e2f0291316bcfe579e11ccc4ed1a4222d245a7dcca3a47894b11c0e"
+                }
+              ]
+            },
+            {
+              "id": "titanium-gold",
+              "name": "Gold Titanium",
+              "sectionID": "titanium",
+              "swatchHex": "#D3B285",
+              "assets": [
+                {
+                  "role": "case",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/case/titanium-gold.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/case/titanium-gold.webp",
+                  "contentType": "image/webp",
+                  "size": 24426,
+                  "sha256": "ac96f381980c9a8e924b201519c9872ca713ee21718140b16961806c6ed5a2f0"
+                }
+              ]
+            },
+            {
+              "id": "aluminum-rose-gold",
+              "name": "Rose Gold Aluminum",
+              "sectionID": "aluminum",
+              "swatchHex": "#D7A399",
+              "assets": [
+                {
+                  "role": "case",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/case/aluminum-rose-gold.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/case/aluminum-rose-gold.webp",
+                  "contentType": "image/webp",
+                  "size": 28510,
+                  "sha256": "318091bc7b29ea2d12670be676f18cd627bdbecbe41a9df7ea0650a62d21d3bc"
+                }
+              ]
+            },
+            {
+              "id": "aluminum-jet-black",
+              "name": "Jet Black Aluminum",
+              "sectionID": "aluminum",
+              "swatchHex": "#141416",
+              "assets": [
+                {
+                  "role": "case",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/case/aluminum-jet-black.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/case/aluminum-jet-black.webp",
+                  "contentType": "image/webp",
+                  "size": 22532,
+                  "sha256": "2780a9c5ff4d1181fd193ac40794d0cb53014ae3181fb1e4589dd217ac59613e"
+                }
+              ]
+            },
+            {
+              "id": "aluminum-space-gray",
+              "name": "Space Gray Aluminum",
+              "sectionID": "aluminum",
+              "swatchHex": "#6D7072",
+              "assets": [
+                {
+                  "role": "case",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/case/aluminum-space-gray.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/case/aluminum-space-gray.webp",
+                  "contentType": "image/webp",
+                  "size": 25194,
+                  "sha256": "5243f96b7796f4d75cb63f180da342462c565a3733b5b2da04e63688da79b4da"
+                }
+              ]
+            },
+            {
+              "id": "aluminum-silver",
+              "name": "Silver Aluminum",
+              "sectionID": "aluminum",
+              "swatchHex": "#D8D9D6",
+              "assets": [
+                {
+                  "role": "case",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/case/aluminum-silver.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/case/aluminum-silver.webp",
+                  "contentType": "image/webp",
+                  "size": 24840,
+                  "sha256": "7cf17ae5a9ddaf257a49fbe83be927b72a56dd66f70515de8c77b4dc8c97a046"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "band",
+          "kind": "band",
+          "name": "Band",
+          "defaultOptionID": "sport-band-black",
+          "sections": [
+            {
+              "id": "sport-band",
+              "name": "Sport Band"
+            },
+            {
+              "id": "sport-loop",
+              "name": "Sport Loop"
+            },
+            {
+              "id": "nike-sport-loop",
+              "name": "Nike Sport Loop"
+            },
+            {
+              "id": "magnetic-link",
+              "name": "Magnetic Link"
+            },
+            {
+              "id": "milanese-loop",
+              "name": "Milanese Loop"
+            },
+            {
+              "id": "braided-solo-loop",
+              "name": "Braided Solo Loop"
+            },
+            {
+              "id": "link-bracelet",
+              "name": "Link Bracelet"
+            }
+          ],
+          "options": [
+            {
+              "id": "nike-sport-loop-midnight-black",
+              "name": "Midnight Black Nike Sport Loop",
+              "sectionID": "nike-sport-loop",
+              "swatchHex": "#4E4140",
+              "assets": [
+                {
+                  "role": "band",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/bands/nike-sport-loop-midnight-black.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/bands/nike-sport-loop-midnight-black.webp",
+                  "contentType": "image/webp",
+                  "size": 60146,
+                  "sha256": "ad0d226898025578908b0648d09fddf9b0a0b6843299863657a7c88874378a15"
+                }
+              ]
+            },
+            {
+              "id": "nike-sport-loop-alpenglow-pink",
+              "name": "Alpenglow Pink Nike Sport Loop",
+              "sectionID": "nike-sport-loop",
+              "swatchHex": "#E8A897",
+              "assets": [
+                {
+                  "role": "band",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/bands/nike-sport-loop-alpenglow-pink.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/bands/nike-sport-loop-alpenglow-pink.webp",
+                  "contentType": "image/webp",
+                  "size": 65220,
+                  "sha256": "d9dae89f888b2a0b34653fc76758dd766fda32dc0b1f8d4f589d5ab1c24c9e31"
+                }
+              ]
+            },
+            {
+              "id": "nike-sport-loop-fog-gray",
+              "name": "Fog Gray Nike Sport Loop",
+              "sectionID": "nike-sport-loop",
+              "swatchHex": "#C0BDBA",
+              "assets": [
+                {
+                  "role": "band",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/bands/nike-sport-loop-fog-gray.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/bands/nike-sport-loop-fog-gray.webp",
+                  "contentType": "image/webp",
+                  "size": 52290,
+                  "sha256": "cba9262b8eac92e4ea29399b68a7d46174e04d01e94cb30b742431b3bdd2da81"
+                }
+              ]
+            },
+            {
+              "id": "nike-sport-loop-blue-ribbon",
+              "name": "Blue Ribbon Nike Sport Loop",
+              "sectionID": "nike-sport-loop",
+              "swatchHex": "#4F6291",
+              "assets": [
+                {
+                  "role": "band",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/bands/nike-sport-loop-blue-ribbon.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/bands/nike-sport-loop-blue-ribbon.webp",
+                  "contentType": "image/webp",
+                  "size": 70086,
+                  "sha256": "c9a8d2f830b89adbd86adcebba3d8c8fd4f109cedda8e792461b64bfd9489fbc"
+                }
+              ]
+            },
+            {
+              "id": "nike-sport-loop-neon-yellow-green",
+              "name": "Neon Yellow Green Nike Sport Loop",
+              "sectionID": "nike-sport-loop",
+              "swatchHex": "#C5DB7E",
+              "assets": [
+                {
+                  "role": "band",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/bands/nike-sport-loop-neon-yellow-green.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/bands/nike-sport-loop-neon-yellow-green.webp",
+                  "contentType": "image/webp",
+                  "size": 59034,
+                  "sha256": "5a70ca788d34b21391528ec0b5a88216a2a345ef77426dbdc505f25d35d94a5b"
+                }
+              ]
+            },
+            {
+              "id": "sport-loop-bright-guava-pink",
+              "name": "Bright Guava Pink Sport Loop",
+              "sectionID": "sport-loop",
+              "swatchHex": "#E68795",
+              "assets": [
+                {
+                  "role": "band",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/bands/sport-loop-bright-guava-pink.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/bands/sport-loop-bright-guava-pink.webp",
+                  "contentType": "image/webp",
+                  "size": 71308,
+                  "sha256": "e7b9acd1ceb7a5d19344253eebe9a466773231c2fe41518267c7eee349f1314f"
+                }
+              ]
+            },
+            {
+              "id": "sport-loop-pride",
+              "name": "Pride Sport Loop",
+              "sectionID": "sport-loop",
+              "swatchHex": "#CAB5A9",
+              "assets": [
+                {
+                  "role": "band",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/bands/sport-loop-pride.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/bands/sport-loop-pride.webp",
+                  "contentType": "image/webp",
+                  "size": 62304,
+                  "sha256": "baf3147faa8a98a4a383805097b1f0f0a0c806c30dbb68282e1a96b05f232eb8"
+                }
+              ]
+            },
+            {
+              "id": "sport-loop-space-gray",
+              "name": "Space Gray Sport Loop",
+              "sectionID": "sport-loop",
+              "swatchHex": "#5A575A",
+              "assets": [
+                {
+                  "role": "band",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/bands/sport-loop-space-gray.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/bands/sport-loop-space-gray.webp",
+                  "contentType": "image/webp",
+                  "size": 61010,
+                  "sha256": "6ee6e5fc8370321dd3010672e694bd11b6c1a89c5e9c7b1f0dab450379a2aa4f"
+                }
+              ]
+            },
+            {
+              "id": "sport-loop-mist-blue",
+              "name": "Mist Blue Sport Loop",
+              "sectionID": "sport-loop",
+              "swatchHex": "#BAB9B9",
+              "assets": [
+                {
+                  "role": "band",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/bands/sport-loop-mist-blue.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/bands/sport-loop-mist-blue.webp",
+                  "contentType": "image/webp",
+                  "size": 61080,
+                  "sha256": "12a0151f1c97b0e8e2a9782c49a19a93a199614ecc993fb123e4c416cc90964f"
+                }
+              ]
+            },
+            {
+              "id": "sport-band-fog-gray",
+              "name": "Fog Gray Sport Band",
+              "sectionID": "sport-band",
+              "swatchHex": "#CFCBCC",
+              "assets": [
+                {
+                  "role": "band",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/bands/sport-band-fog-gray.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/bands/sport-band-fog-gray.webp",
+                  "contentType": "image/webp",
+                  "size": 35064,
+                  "sha256": "8dc5fa373eae888fd3df8ff9af862a159bcef3c19ab9042444bdf8c541d5b2af"
+                }
+              ]
+            },
+            {
+              "id": "sport-band-citrus",
+              "name": "Citrus Sport Band",
+              "sectionID": "sport-band",
+              "swatchHex": "#FD9562",
+              "assets": [
+                {
+                  "role": "band",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/bands/sport-band-citrus.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/bands/sport-band-citrus.webp",
+                  "contentType": "image/webp",
+                  "size": 16464,
+                  "sha256": "34e44208e7346aef8ae439ae3c7485cd663841100201a51f6367bf9964a7a10f"
+                }
+              ]
+            },
+            {
+              "id": "sport-band-light-pink",
+              "name": "Light Pink Sport Band",
+              "sectionID": "sport-band",
+              "swatchHex": "#F2DFDD",
+              "assets": [
+                {
+                  "role": "band",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/bands/sport-band-light-pink.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/bands/sport-band-light-pink.webp",
+                  "contentType": "image/webp",
+                  "size": 11352,
+                  "sha256": "9d90d9b9ba9eba2b2ee9310340d4d79a8db678f606564fb9df3a0426f6c97c6e"
+                }
+              ]
+            },
+            {
+              "id": "sport-band-gray-green",
+              "name": "Gray Green Sport Band",
+              "sectionID": "sport-band",
+              "swatchHex": "#878F85",
+              "assets": [
+                {
+                  "role": "band",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/bands/sport-band-gray-green.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/bands/sport-band-gray-green.webp",
+                  "contentType": "image/webp",
+                  "size": 16936,
+                  "sha256": "225a1818e9c2628ad0a8eec2d46ca473c4879739d75174f571be15cfd8c62d47"
+                }
+              ]
+            },
+            {
+              "id": "sport-band-neon-yellow-green",
+              "name": "Neon Yellow Green Sport Band",
+              "sectionID": "sport-band",
+              "swatchHex": "#DCDB93",
+              "assets": [
+                {
+                  "role": "band",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/bands/sport-band-neon-yellow-green.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/bands/sport-band-neon-yellow-green.webp",
+                  "contentType": "image/webp",
+                  "size": 45580,
+                  "sha256": "c9863dfe7b5e271855a71caa0873c37588781e32707efc89590b2b10f52d8135"
+                }
+              ]
+            },
+            {
+              "id": "sport-band-anchor-blue",
+              "name": "Anchor Blue Sport Band",
+              "sectionID": "sport-band",
+              "swatchHex": "#677482",
+              "assets": [
+                {
+                  "role": "band",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/bands/sport-band-anchor-blue.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/bands/sport-band-anchor-blue.webp",
+                  "contentType": "image/webp",
+                  "size": 16202,
+                  "sha256": "cd2eedd64357d116d1a80e9fc06108a61b2c18fcf2365d8ceb064c540dcd10ad"
+                }
+              ]
+            },
+            {
+              "id": "sport-band-neon-yellow",
+              "name": "Neon Yellow Sport Band",
+              "sectionID": "sport-band",
+              "swatchHex": "#E8F09B",
+              "assets": [
+                {
+                  "role": "band",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/bands/sport-band-neon-yellow.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/bands/sport-band-neon-yellow.webp",
+                  "contentType": "image/webp",
+                  "size": 16766,
+                  "sha256": "4c5aed42a87cd42f4bd137643216858ab78d85a99ce753c1986a5a858326197b"
+                }
+              ]
+            },
+            {
+              "id": "sport-band-black",
+              "name": "Black Sport Band",
+              "sectionID": "sport-band",
+              "swatchHex": "#414244",
+              "assets": [
+                {
+                  "role": "band",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/bands/sport-band-black.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/bands/sport-band-black.webp",
+                  "contentType": "image/webp",
+                  "size": 14754,
+                  "sha256": "3f8ccbe48d88c3ea1ae9f6138231b22fe6e0d413e0e00a490abca564dc00d2c7"
+                }
+              ]
+            },
+            {
+              "id": "magnetic-link-navy",
+              "name": "Navy Magnetic Link",
+              "sectionID": "magnetic-link",
+              "swatchHex": "#525663",
+              "assets": [
+                {
+                  "role": "band",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/bands/magnetic-link-navy.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/bands/magnetic-link-navy.webp",
+                  "contentType": "image/webp",
+                  "size": 49974,
+                  "sha256": "84b11cc2b49cf0896969976651074fdf67b6d0cba641bc9d6499308df57b427e"
+                }
+              ]
+            },
+            {
+              "id": "magnetic-link-caramel",
+              "name": "Caramel Magnetic Link",
+              "sectionID": "magnetic-link",
+              "swatchHex": "#815438",
+              "assets": [
+                {
+                  "role": "band",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/bands/magnetic-link-caramel.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/bands/magnetic-link-caramel.webp",
+                  "contentType": "image/webp",
+                  "size": 53882,
+                  "sha256": "9d93206655af3cdd134bc5faa4bae359817db8b98f0db5aea96660ab472ee4b9"
+                }
+              ]
+            },
+            {
+              "id": "magnetic-link-sage-gray",
+              "name": "Sage Gray Magnetic Link",
+              "sectionID": "magnetic-link",
+              "swatchHex": "#6C6E60",
+              "assets": [
+                {
+                  "role": "band",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/bands/magnetic-link-sage-gray.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/bands/magnetic-link-sage-gray.webp",
+                  "contentType": "image/webp",
+                  "size": 52644,
+                  "sha256": "4c1558a5568454612cdbd5fb07e8480df99d4254f461aa5dfb188e255825d94d"
+                }
+              ]
+            },
+            {
+              "id": "milanese-loop-natural",
+              "name": "Natural Milanese Loop",
+              "sectionID": "milanese-loop",
+              "swatchHex": "#80776D",
+              "assets": [
+                {
+                  "role": "band",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/bands/milanese-loop-natural.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/bands/milanese-loop-natural.webp",
+                  "contentType": "image/webp",
+                  "size": 68958,
+                  "sha256": "1ddb5bd112ca2de36d54ca3730c03f084a0a51ea6a26d3f9b3fbdab39934e85a"
+                }
+              ]
+            },
+            {
+              "id": "milanese-loop-slate",
+              "name": "Slate Milanese Loop",
+              "sectionID": "milanese-loop",
+              "swatchHex": "#4D4844",
+              "assets": [
+                {
+                  "role": "band",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/bands/milanese-loop-slate.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/bands/milanese-loop-slate.webp",
+                  "contentType": "image/webp",
+                  "size": 63182,
+                  "sha256": "57c3ca9550e62b22f592982a8a5c6b53f45c8a1fd61d63e2376862e0c24d893a"
+                }
+              ]
+            },
+            {
+              "id": "milanese-loop-gold",
+              "name": "Gold Milanese Loop",
+              "sectionID": "milanese-loop",
+              "swatchHex": "#957D67",
+              "assets": [
+                {
+                  "role": "band",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/bands/milanese-loop-gold.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/bands/milanese-loop-gold.webp",
+                  "contentType": "image/webp",
+                  "size": 76530,
+                  "sha256": "8b670a3c5a377962a91896df26557a06f8fad5f14e7afd43786fa47c4ebc77ed"
+                }
+              ]
+            },
+            {
+              "id": "braided-solo-loop-black-unity",
+              "name": "Black Unity Braided Solo Loop",
+              "sectionID": "braided-solo-loop",
+              "swatchHex": "#6B5C4C",
+              "assets": [
+                {
+                  "role": "band",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/bands/braided-solo-loop-black-unity.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/bands/braided-solo-loop-black-unity.webp",
+                  "contentType": "image/webp",
+                  "size": 77524,
+                  "sha256": "2e86f4615ac5f1689c0a4c18a798c9b13637ed8abdf0554926a79e061b799956"
+                }
+              ]
+            },
+            {
+              "id": "braided-solo-loop-midnight",
+              "name": "Midnight Braided Solo Loop",
+              "sectionID": "braided-solo-loop",
+              "swatchHex": "#3F4149",
+              "assets": [
+                {
+                  "role": "band",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/bands/braided-solo-loop-midnight.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/bands/braided-solo-loop-midnight.webp",
+                  "contentType": "image/webp",
+                  "size": 62726,
+                  "sha256": "e2f010588eae3bdbe8facb339293ccf25fa9f8fa95e7609bf992062b1f1fd188"
+                }
+              ]
+            },
+            {
+              "id": "braided-solo-loop-turmeric",
+              "name": "Turmeric Braided Solo Loop",
+              "sectionID": "braided-solo-loop",
+              "swatchHex": "#DF855F",
+              "assets": [
+                {
+                  "role": "band",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/bands/braided-solo-loop-turmeric.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/bands/braided-solo-loop-turmeric.webp",
+                  "contentType": "image/webp",
+                  "size": 75046,
+                  "sha256": "7db51464897e3deede4a662c163fe9857643279f3cffa8d29a3a0af947b0542f"
+                }
+              ]
+            },
+            {
+              "id": "braided-solo-loop-pride",
+              "name": "Pride Braided Solo Loop",
+              "sectionID": "braided-solo-loop",
+              "swatchHex": "#A3918D",
+              "assets": [
+                {
+                  "role": "band",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/bands/braided-solo-loop-pride.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/bands/braided-solo-loop-pride.webp",
+                  "contentType": "image/webp",
+                  "size": 76120,
+                  "sha256": "8ede06e287215342add97485b907fb56b5fd1e1ee8d8a5d163b82d8bd5cc79e7"
+                }
+              ]
+            },
+            {
+              "id": "braided-solo-loop-gray-green",
+              "name": "Gray Green Braided Solo Loop",
+              "sectionID": "braided-solo-loop",
+              "swatchHex": "#888E87",
+              "assets": [
+                {
+                  "role": "band",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/bands/braided-solo-loop-gray-green.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/bands/braided-solo-loop-gray-green.webp",
+                  "contentType": "image/webp",
+                  "size": 61946,
+                  "sha256": "7a6b0c2f5a243fc66d18f2b12d4bee4635a2350c5d3b2eb0f9b3c46e1ae29155"
+                }
+              ]
+            },
+            {
+              "id": "braided-solo-loop-anchor-blue",
+              "name": "Anchor Blue Braided Solo Loop",
+              "sectionID": "braided-solo-loop",
+              "swatchHex": "#69707C",
+              "assets": [
+                {
+                  "role": "band",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/bands/braided-solo-loop-anchor-blue.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/bands/braided-solo-loop-anchor-blue.webp",
+                  "contentType": "image/webp",
+                  "size": 63378,
+                  "sha256": "afdb996df4f50f97b4e5b02d1b7a8abfc39cdf1a9b0e75ca116d864a66c2dfd5"
+                }
+              ]
+            },
+            {
+              "id": "link-bracelet-natural",
+              "name": "Natural Link Bracelet",
+              "sectionID": "link-bracelet",
+              "swatchHex": "#BBB3A8",
+              "assets": [
+                {
+                  "role": "band",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/bands/link-bracelet-natural.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/bands/link-bracelet-natural.webp",
+                  "contentType": "image/webp",
+                  "size": 27290,
+                  "sha256": "ffc38400fbce12bf14d5fd68c3666bf03eaca9300f0cf26485eb94ee4987ed65"
+                }
+              ]
+            },
+            {
+              "id": "link-bracelet-slate",
+              "name": "Slate Link Bracelet",
+              "sectionID": "link-bracelet",
+              "swatchHex": "#BBB3A8",
+              "assets": [
+                {
+                  "role": "band",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/bands/link-bracelet-slate.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/bands/link-bracelet-slate.webp",
+                  "contentType": "image/webp",
+                  "size": 27290,
+                  "sha256": "ffc38400fbce12bf14d5fd68c3666bf03eaca9300f0cf26485eb94ee4987ed65"
+                }
+              ]
+            },
+            {
+              "id": "link-bracelet-gold",
+              "name": "Gold Link Bracelet",
+              "sectionID": "link-bracelet",
+              "swatchHex": "#D0B69F",
+              "assets": [
+                {
+                  "role": "band",
+                  "pixelWidth": 640,
+                  "pixelHeight": 920,
+                  "url": "/mockups/assets/apple-watch-series-11/46mm/bands/link-bracelet-gold.webp",
+                  "downloadUrl": "/mockups/assets/apple-watch-series-11/46mm/bands/link-bracelet-gold.webp",
+                  "contentType": "image/webp",
+                  "size": 27746,
+                  "sha256": "a3cfa12ab9d9f649d3ccb49612f18cb6dbac323b0448a5c8fe4a03211b687043"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "composition": {
+        "layers": [
+          {
+            "type": "optionAsset",
+            "groupID": "band",
+            "role": "band",
+            "zIndex": 10
+          },
+          {
+            "type": "screen",
+            "zIndex": 20
+          },
+          {
+            "type": "optionAsset",
+            "groupID": "case",
+            "role": "case",
+            "zIndex": 30
+          }
+        ]
+      }
+    }
+  ],
+  "legacyAliases": [],
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-19T09:53:23.578Z"
+}
