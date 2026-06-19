@@ -1,10 +1,37 @@
-# 1.0.3 (Coming soon)
+# 1.0.4
 
+- Preview overlays share square resize handles, edge resizing, modifier-key resizing, and direct corner-radius dragging.
+- Focus effects can cover the full frame while editing mockup recordings.
+- Effect clips show type icons, can be renamed, and use text content as labels when unnamed.
+- ScreenCam can select and record its own app windows.
+- The purchase screen offers a one-time ScreenCam Pro Lifetime purchase alongside subscriptions.
+- Preview overlay dragging and resizing stays accurate during camera zoom and camera auto-scale.
+- Text effects keep their configured font size when text boxes are resized smaller.
+- Focus effect masks better match mockup screen corners and selection outlines.
+- Renamed workspace packages keep autosaving without missing-media alerts.
+- Recording device menus refresh when microphones or cameras are connected or removed.
+- Trimmed master recordings can be dragged back to their original length, and dense timelines scroll vertically in short editor windows.
+- Toolbar Open Workspace starts in the default recordings workspace folder.
+
+# 1.0.3
+
+- Effect layers can add mosaic, focus, text, and image clips from a compact preview grid, with multi-lane timeline placement and export rendering.
+- Effect editing is more precise with focused text editing, stable zoomed text layout, off-screen placement, preview resizing, zoom-aware editing, and live image-corner previews.
+- The timeline track area can be resized while keeping the preview visible and avoiding empty track space.
+- CLI workspace commands can create and update effect clips.
+- About settings can open the website changelog.
+- Keyboard event settings include an Enable All switch for selected keys.
+- Recorded system audio and microphone tracks can be boosted above 100%.
+- Recorded system audio and microphone clips stay aligned with recording splits, trims, and speed changes, with stable preview and export volume.
+- Microphone meters animate correctly while recording from 24-bit input devices.
+- Camera animation defaults start from a softer spring profile.
 - Camera beauty starts from a stronger, more natural default look.
-- Background music can be browsed, previewed, imported from the catalog or files, adjusted, and exported with recording audio.
-- Newly finished recordings recover the editor video preview more reliably.
-- Mockup exports no longer show thin white edge artifacts.
-- Editor preview, export, and large workspace editing are faster on dense timelines.
+- Background music can be browsed, previewed, imported from the catalog or files, adjusted per clip, and exported with recording audio.
+- Newly finished recordings recover the editor preview more reliably, including wallpaper loading and video wallpaper selection changes.
+- Editor preview and mockup exports better match final output, including edges, text layout, and zoom animation timing.
+- Zoomed timeline tracks keep rulers, playheads, hover previews, and clip cursors aligned while horizontally scrolling, and restore the left edge to 00:00 when zooming back out.
+- Editor preview fully mutes system audio when its clip or track is disabled or deleted.
+- Effect preview, zoom playback, export, and large workspace editing are faster on dense timelines.
 
 # 1.0.2
 
