@@ -1,0 +1,129 @@
+{
+  "version": 1,
+  "generatedAt": "2026-06-21T13:09:59.341Z",
+  "sounds": [
+    {
+      "id": "magic-mouse",
+      "title": "Magic Mouse",
+      "tags": [
+        "Mouse"
+      ],
+      "keywords": [
+        "magic",
+        "mouse"
+      ],
+      "duration": 0.245,
+      "durationMs": 245,
+      "size": 47118,
+      "sourceSha256": "da6b9303429a0667f2c4be768896fe459ebae4d310c8a674c6a2eeef51f64739",
+      "audioUrl": "/click-sounds/audio/magic-mouse.wav",
+      "downloadUrl": "/click-sounds/audio/magic-mouse.wav"
+    },
+    {
+      "id": "magic-trackpad",
+      "title": "Magic Trackpad",
+      "tags": [
+        "Trackpad"
+      ],
+      "keywords": [
+        "magic",
+        "trackpad"
+      ],
+      "duration": 0.308,
+      "durationMs": 308,
+      "size": 59214,
+      "sourceSha256": "7c3e4ae8d37c32ae10f4d5535cd267dead4b87cc86a3521123e43049e0162c8e",
+      "audioUrl": "/click-sounds/audio/magic-trackpad.wav",
+      "downloadUrl": "/click-sounds/audio/magic-trackpad.wav"
+    },
+    {
+      "id": "mx-master",
+      "title": "MX Master",
+      "tags": [
+        "Mouse"
+      ],
+      "keywords": [
+        "mx",
+        "master",
+        "mouse"
+      ],
+      "duration": 0.289,
+      "durationMs": 289,
+      "size": 55566,
+      "sourceSha256": "1ac7fdc1a759c2952a348d1f2be59c74461044688b22728881a5659a355879c3",
+      "audioUrl": "/click-sounds/audio/mx-master.wav",
+      "downloadUrl": "/click-sounds/audio/mx-master.wav"
+    },
+    {
+      "id": "game-mouse-1",
+      "title": "Game Mouse 1",
+      "tags": [
+        "Mouse",
+        "Game"
+      ],
+      "keywords": [
+        "game",
+        "mouse",
+        "click"
+      ],
+      "duration": 0.141,
+      "durationMs": 141,
+      "size": 24912,
+      "sourceSha256": "49b2bfa13f204bcf99b67c6945deef5f96d5266e5623e1592234877717a55755",
+      "audioUrl": "/click-sounds/audio/game-mouse-1.wav",
+      "downloadUrl": "/click-sounds/audio/game-mouse-1.wav"
+    },
+    {
+      "id": "game-mouse-2",
+      "title": "Game Mouse 2",
+      "tags": [
+        "Mouse",
+        "Game"
+      ],
+      "keywords": [
+        "game",
+        "mouse",
+        "click"
+      ],
+      "duration": 0.141,
+      "durationMs": 141,
+      "size": 24912,
+      "sourceSha256": "b7d3428f469b4957a1f2fdc94603a9895b3024ec14ec7b2e62a0c521d781b6e3",
+      "audioUrl": "/click-sounds/audio/game-mouse-2.wav",
+      "downloadUrl": "/click-sounds/audio/game-mouse-2.wav"
+    },
+    {
+      "id": "angrymiao",
+      "title": "Angry Miao",
+      "tags": [
+        "Mouse"
+      ],
+      "keywords": [
+        "angrymiao",
+        "mouse",
+        "click"
+      ],
+      "duration": 0.21,
+      "durationMs": 210,
+      "size": 40398,
+      "sourceSha256": "c146a3c451918165675f65f1590bd68a0f7c1d81e39027aa89ff41c397a99479",
+      "audioUrl": "/click-sounds/audio/angrymiao.wav",
+      "downloadUrl": "/click-sounds/audio/angrymiao.wav"
+    }
+  ],
+  "tags": [
+    "Game",
+    "Mouse",
+    "Trackpad"
+  ],
+  "keywords": [
+    "angrymiao",
+    "click",
+    "game",
+    "magic",
+    "master",
+    "mouse",
+    "mx",
+    "trackpad"
+  ]
+}

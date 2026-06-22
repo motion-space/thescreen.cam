@@ -150,6 +150,33 @@ export type FeatureCardsCopy = {
       wide: string;
     };
   };
+  dynamicIslandThumb: {
+    ariaLabel: string;
+    materialLabel: string;
+    modeLabels: {
+      black: string;
+      glass: string;
+    };
+    tasks: Array<{
+      detail: string;
+      primaryAction: string;
+      secondary: string;
+      secondaryAction: string;
+      size: string;
+      title: string;
+    }>;
+    wallpaperButtonAria: string;
+  };
+  effectLayersThumb: {
+    ariaLabel: string;
+    dragHint: string;
+    effects: Array<{
+      clipLabel: string;
+      description: string;
+      id: "mosaic" | "focus" | "text" | "image";
+      title: string;
+    }>;
+  };
   eyebrow: string;
   glassThumb: {
     modeLabels: {
@@ -1060,6 +1087,71 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             wide: "16:9",
           },
         },
+        dynamicIslandThumb: {
+          ariaLabel: "Dynamic Island background task preview",
+          materialLabel: "Notch material",
+          modeLabels: {
+            black: "Black",
+            glass: "Glass",
+          },
+          tasks: [
+            {
+              title: "ScreenCam launch film",
+              detail: "Ready to reveal in Finder.",
+              primaryAction: "Open Finder",
+              secondary: "Complete",
+              secondaryAction: "Done",
+              size: "384 MB",
+            },
+            {
+              title: "4K tutorial export",
+              detail: "Encoding H.265 with camera and cursor layers.",
+              primaryAction: "Open Finder",
+              secondary: "2m left",
+              secondaryAction: "Done",
+              size: "1.2 GB",
+            },
+            {
+              title: "GIF preview compression",
+              detail: "Optimizing frames for a smaller shareable clip.",
+              primaryAction: "Open Finder",
+              secondary: "42s left",
+              secondaryAction: "Done",
+              size: "18 MB",
+            },
+          ],
+          wallpaperButtonAria: "Change wallpaper",
+        },
+        effectLayersThumb: {
+          ariaLabel: "Effect layers timeline preview",
+          dragHint: "Drag to the track to add",
+          effects: [
+            {
+              id: "mosaic",
+              title: "Mosaic",
+              description: "Pixelate sensitive areas on top of the recording.",
+              clipLabel: "Mosaic",
+            },
+            {
+              id: "focus",
+              title: "Focus",
+              description: "Highlight one region while keeping context visible.",
+              clipLabel: "Focus",
+            },
+            {
+              id: "text",
+              title: "Text",
+              description: "Add a text layer anywhere in the edit.",
+              clipLabel: "Text",
+            },
+            {
+              id: "image",
+              title: "Image",
+              description: "Place an image overlay as a timed layer.",
+              clipLabel: "Image",
+            },
+          ],
+        },
         glassThumb: {
           modeLabels: {
             clear: "Clear",
@@ -1086,12 +1178,20 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             caption: "Native glass materials keep controls crisp while matching modern macOS surfaces.",
           },
           {
-            title: "Shortcut Recording",
-            caption: "Start, pause, and finish captures from the keyboard without breaking flow.",
+            title: "Shortcut Capture",
+            caption: "Record keyboard shortcuts during capture and display them clearly in the final video.",
           },
           {
             title: "Light Beauty",
-            caption: "Includes basic beauty effects such as skin smoothing, brightening, face slimming, and eye enlargement.",
+            caption: "Apply subtle beauty effects for a cleaner camera look.",
+          },
+          {
+            title: "Dynamic Island",
+            caption: "Put long exports in the background and keep progress visible from the notch.",
+          },
+          {
+            title: "Effect Layers",
+            caption: "Add as many effect layers as you need, then move, resize, and stack every clip on the timeline.",
           },
         ],
       },
@@ -1846,6 +1946,71 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             wide: "16:9",
           },
         },
+        dynamicIslandThumb: {
+          ariaLabel: "Dynamic Island 后台任务预览",
+          materialLabel: "刘海材质",
+          modeLabels: {
+            black: "黑色",
+            glass: "Glass",
+          },
+          tasks: [
+            {
+              title: "ScreenCam 发布视频",
+              detail: "已完成，可在 Finder 中查看。",
+              primaryAction: "打开 Finder",
+              secondary: "已完成",
+              secondaryAction: "完成",
+              size: "384 MB",
+            },
+            {
+              title: "4K 教程导出",
+              detail: "正在编码 H.265，包含摄像头和光标图层。",
+              primaryAction: "打开 Finder",
+              secondary: "剩 2 分钟",
+              secondaryAction: "完成",
+              size: "1.2 GB",
+            },
+            {
+              title: "GIF 预览压缩",
+              detail: "正在优化帧，生成更小的分享片段。",
+              primaryAction: "打开 Finder",
+              secondary: "剩 42 秒",
+              secondaryAction: "完成",
+              size: "18 MB",
+            },
+          ],
+          wallpaperButtonAria: "切换壁纸",
+        },
+        effectLayersThumb: {
+          ariaLabel: "特效图层时间线预览",
+          dragHint: "拖拽到轨道添加",
+          effects: [
+            {
+              id: "mosaic",
+              title: "马赛克",
+              description: "给画面中的敏感区域叠加马赛克。",
+              clipLabel: "马赛克",
+            },
+            {
+              id: "focus",
+              title: "聚焦",
+              description: "突出重点区域，同时保留上下文。",
+              clipLabel: "聚焦",
+            },
+            {
+              id: "text",
+              title: "文字",
+              description: "在剪辑中任意位置添加文字图层。",
+              clipLabel: "文字",
+            },
+            {
+              id: "image",
+              title: "图片",
+              description: "把图片作为可计时的叠加图层放入时间线。",
+              clipLabel: "图片",
+            },
+          ],
+        },
         glassThumb: {
           modeLabels: {
             clear: "通透",
@@ -1872,12 +2037,20 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             caption: "支持原生 glass 材质，让控制层通透、清晰，并贴合现代 macOS 视觉。",
           },
           {
-            title: "快捷键录制",
-            caption: "用键盘快速开始、暂停和结束录制，不打断当前操作。",
+            title: "快捷键展示",
+            caption: "录制键盘快捷键操作，并在视频中清晰展示出来。",
           },
           {
             title: "轻度美颜",
-            caption: "提供基础美颜效果，例如磨皮、美白、瘦脸、大眼等。",
+            caption: "轻微优化相机画面，让人像更清爽自然。",
+          },
+          {
+            title: "Dynamic Island",
+            caption: "将长任务放到后台，在 notch 中随时关注进度。",
+          },
+          {
+            title: "特效图层",
+            caption: "可以添加任意数量的特效图层，在时间线上移动、缩放并堆叠每个 clip。",
           },
         ],
       },
@@ -2617,6 +2790,71 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             wide: "16:9",
           },
         },
+        dynamicIslandThumb: {
+          ariaLabel: "Dynamic-Island-Vorschau für Hintergrundaufgaben",
+          materialLabel: "Notch-Material",
+          modeLabels: {
+            black: "Schwarz",
+            glass: "Glass",
+          },
+          tasks: [
+            {
+              title: "ScreenCam Launch-Film",
+              detail: "Fertig und im Finder bereit.",
+              primaryAction: "Finder öffnen",
+              secondary: "Fertig",
+              secondaryAction: "Erledigt",
+              size: "384 MB",
+            },
+            {
+              title: "4K-Tutorial-Export",
+              detail: "Codiert H.265 mit Kamera- und Cursor-Ebenen.",
+              primaryAction: "Finder öffnen",
+              secondary: "2 Min. übrig",
+              secondaryAction: "Erledigt",
+              size: "1,2 GB",
+            },
+            {
+              title: "GIF-Vorschau komprimieren",
+              detail: "Optimiert Frames für einen kleineren Clip.",
+              primaryAction: "Finder öffnen",
+              secondary: "42 s übrig",
+              secondaryAction: "Erledigt",
+              size: "18 MB",
+            },
+          ],
+          wallpaperButtonAria: "Hintergrund wechseln",
+        },
+        effectLayersThumb: {
+          ariaLabel: "Timeline-Vorschau für Effekt-Ebenen",
+          dragHint: "Auf die Spur ziehen",
+          effects: [
+            {
+              id: "mosaic",
+              title: "Mosaik",
+              description: "Pixeliert sensible Bereiche über der Aufnahme.",
+              clipLabel: "Mosaik",
+            },
+            {
+              id: "focus",
+              title: "Fokus",
+              description: "Hebt einen Bereich hervor und lässt Kontext sichtbar.",
+              clipLabel: "Fokus",
+            },
+            {
+              id: "text",
+              title: "Text",
+              description: "Fügt eine Textebene an jeder Stelle im Schnitt hinzu.",
+              clipLabel: "Text",
+            },
+            {
+              id: "image",
+              title: "Bild",
+              description: "Platziert ein Bild-Overlay als zeitgesteuerte Ebene.",
+              clipLabel: "Bild",
+            },
+          ],
+        },
         glassThumb: {
           modeLabels: {
             clear: "Klar",
@@ -2643,12 +2881,20 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             caption: "Native Glass-Materialien halten Bedienelemente klar und passen zu modernem macOS.",
           },
           {
-            title: "Shortcut-Aufnahme",
-            caption: "Aufnahmen per Tastatur starten, pausieren und beenden, ohne den Flow zu unterbrechen.",
+            title: "Tastenkürzel-Aufzeichnung",
+            caption: "Zeichnet Tastenkombinationen während der Aufnahme auf und zeigt sie im Video klar an.",
           },
           {
             title: "Leichte Beauty",
-            caption: "Bietet grundlegende Beauty-Effekte wie Hautglättung, Aufhellung, schmaleres Gesicht und größere Augen.",
+            caption: "Dezente Beauty-Effekte für ein klareres Kamerabild.",
+          },
+          {
+            title: "Dynamic Island",
+            caption: "Lange Exporte laufen im Hintergrund, während der Fortschritt in der Notch sichtbar bleibt.",
+          },
+          {
+            title: "Effekt-Ebenen",
+            caption: "Füge beliebig viele Effekt-Ebenen hinzu und verschiebe, skaliere und staple jeden Clip direkt auf der Timeline.",
           },
         ],
       },
@@ -3372,6 +3618,71 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             wide: "16:9",
           },
         },
+        dynamicIslandThumb: {
+          ariaLabel: "Dynamic Island のバックグラウンドタスクプレビュー",
+          materialLabel: "ノッチのマテリアル",
+          modeLabels: {
+            black: "ブラック",
+            glass: "Glass",
+          },
+          tasks: [
+            {
+              title: "ScreenCam ローンチ映像",
+              detail: "完了済み。Finder で確認できます。",
+              primaryAction: "Finder を開く",
+              secondary: "完了",
+              secondaryAction: "閉じる",
+              size: "384 MB",
+            },
+            {
+              title: "4K チュートリアル書き出し",
+              detail: "カメラとカーソルレイヤー込みで H.265 にエンコード中。",
+              primaryAction: "Finder を開く",
+              secondary: "残り 2 分",
+              secondaryAction: "閉じる",
+              size: "1.2 GB",
+            },
+            {
+              title: "GIF プレビュー圧縮",
+              detail: "共有しやすい小さなクリップ向けにフレームを最適化中。",
+              primaryAction: "Finder を開く",
+              secondary: "残り 42 秒",
+              secondaryAction: "閉じる",
+              size: "18 MB",
+            },
+          ],
+          wallpaperButtonAria: "壁紙を変更",
+        },
+        effectLayersThumb: {
+          ariaLabel: "エフェクトレイヤーのタイムラインプレビュー",
+          dragHint: "トラックへドラッグして追加",
+          effects: [
+            {
+              id: "mosaic",
+              title: "モザイク",
+              description: "録画上の隠したい範囲をピクセル化します。",
+              clipLabel: "モザイク",
+            },
+            {
+              id: "focus",
+              title: "フォーカス",
+              description: "文脈を残したまま、重要な範囲を強調します。",
+              clipLabel: "フォーカス",
+            },
+            {
+              id: "text",
+              title: "テキスト",
+              description: "編集内の任意の位置にテキストレイヤーを追加します。",
+              clipLabel: "テキスト",
+            },
+            {
+              id: "image",
+              title: "画像",
+              description: "画像オーバーレイを時間指定のレイヤーとして配置します。",
+              clipLabel: "画像",
+            },
+          ],
+        },
         glassThumb: {
           modeLabels: {
             clear: "クリア",
@@ -3398,12 +3709,20 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             caption: "ネイティブの glass マテリアルに対応し、操作面をクリアで macOS らしく保ちます。",
           },
           {
-            title: "ショートカット録画",
-            caption: "キーボードから録画の開始、一時停止、終了まで素早く操作できます。",
+            title: "ショートカット表示",
+            caption: "録画中のキーボードショートカット操作を記録し、動画内にわかりやすく表示します。",
           },
           {
             title: "軽い美肌補正",
-            caption: "肌のなめらか補正、美白、小顔、大きな目などの基本的な補正に対応します。",
+            caption: "カメラ映像を自然にすっきり見せます。",
+          },
+          {
+            title: "Dynamic Island",
+            caption: "長い書き出しをバックグラウンドに回し、ノッチから進行状況を確認できます。",
+          },
+          {
+            title: "エフェクトレイヤー",
+            caption: "必要なだけエフェクトレイヤーを追加し、タイムライン上で各 clip を移動・リサイズ・重ね合わせできます。",
           },
         ],
       },
@@ -4124,6 +4443,71 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             wide: "16:9",
           },
         },
+        dynamicIslandThumb: {
+          ariaLabel: "Dynamic Island 백그라운드 작업 미리보기",
+          materialLabel: "노치 소재",
+          modeLabels: {
+            black: "Black",
+            glass: "Glass",
+          },
+          tasks: [
+            {
+              title: "ScreenCam 런칭 영상",
+              detail: "완료됨. Finder에서 확인할 수 있습니다.",
+              primaryAction: "Finder 열기",
+              secondary: "완료",
+              secondaryAction: "닫기",
+              size: "384 MB",
+            },
+            {
+              title: "4K 튜토리얼 내보내기",
+              detail: "카메라와 커서 레이어를 포함해 H.265로 인코딩 중입니다.",
+              primaryAction: "Finder 열기",
+              secondary: "2분 남음",
+              secondaryAction: "닫기",
+              size: "1.2 GB",
+            },
+            {
+              title: "GIF 미리보기 압축",
+              detail: "더 작은 공유용 클립을 위해 프레임을 최적화 중입니다.",
+              primaryAction: "Finder 열기",
+              secondary: "42초 남음",
+              secondaryAction: "닫기",
+              size: "18 MB",
+            },
+          ],
+          wallpaperButtonAria: "배경화면 변경",
+        },
+        effectLayersThumb: {
+          ariaLabel: "효과 레이어 타임라인 미리보기",
+          dragHint: "트랙으로 드래그해 추가",
+          effects: [
+            {
+              id: "mosaic",
+              title: "모자이크",
+              description: "녹화 위의 민감한 영역을 픽셀 처리합니다.",
+              clipLabel: "모자이크",
+            },
+            {
+              id: "focus",
+              title: "포커스",
+              description: "맥락은 유지하면서 특정 영역을 강조합니다.",
+              clipLabel: "포커스",
+            },
+            {
+              id: "text",
+              title: "텍스트",
+              description: "편집의 원하는 위치에 텍스트 레이어를 추가합니다.",
+              clipLabel: "텍스트",
+            },
+            {
+              id: "image",
+              title: "이미지",
+              description: "이미지 오버레이를 시간 지정 레이어로 배치합니다.",
+              clipLabel: "이미지",
+            },
+          ],
+        },
         glassThumb: {
           modeLabels: {
             clear: "클리어",
@@ -4150,12 +4534,20 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             caption: "네이티브 glass 소재를 지원해 컨트롤을 선명하게 유지하고 최신 macOS 느낌에 맞춥니다.",
           },
           {
-            title: "단축키 녹화",
-            caption: "키보드로 녹화를 시작, 일시정지, 종료해 작업 흐름을 끊지 않습니다.",
+            title: "단축키 표시",
+            caption: "녹화 중 키보드 단축키 입력을 기록하고 영상에 선명하게 표시합니다.",
           },
           {
             title: "가벼운 보정",
-            caption: "피부 보정, 밝기 보정, 얼굴 슬림, 큰 눈 등 기본 보정 효과를 제공합니다.",
+            caption: "카메라 화면을 자연스럽고 깔끔하게 다듬습니다.",
+          },
+          {
+            title: "Dynamic Island",
+            caption: "긴 내보내기를 백그라운드로 보내고 노치에서 진행 상황을 계속 확인할 수 있습니다.",
+          },
+          {
+            title: "효과 레이어",
+            caption: "필요한 만큼 효과 레이어를 추가하고 타임라인에서 각 clip을 이동, 리사이즈, 스택할 수 있습니다.",
           },
         ],
       },

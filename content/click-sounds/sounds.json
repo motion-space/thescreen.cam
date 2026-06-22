@@ -1,0 +1,46 @@
+{
+  "sounds": [
+    {
+      "id": "magic-mouse",
+      "source": "audio/magic-mouse.wav",
+      "title": "Magic Mouse",
+      "tags": ["Mouse"],
+      "keywords": ["magic", "mouse"]
+    },
+    {
+      "id": "magic-trackpad",
+      "source": "audio/magic-trackpad.wav",
+      "title": "Magic Trackpad",
+      "tags": ["Trackpad"],
+      "keywords": ["magic", "trackpad"]
+    },
+    {
+      "id": "mx-master",
+      "source": "audio/mx-master.wav",
+      "title": "MX Master",
+      "tags": ["Mouse"],
+      "keywords": ["mx", "master", "mouse"]
+    },
+    {
+      "id": "game-mouse-1",
+      "source": "audio/game-mouse-1.wav",
+      "title": "Game Mouse 1",
+      "tags": ["Mouse", "Game"],
+      "keywords": ["game", "mouse", "click"]
+    },
+    {
+      "id": "game-mouse-2",
+      "source": "audio/game-mouse-2.wav",
+      "title": "Game Mouse 2",
+      "tags": ["Mouse", "Game"],
+      "keywords": ["game", "mouse", "click"]
+    },
+    {
+      "id": "angrymiao",
+      "source": "audio/angrymiao.wav",
+      "title": "Angry Miao",
+      "tags": ["Mouse"],
+      "keywords": ["angrymiao", "mouse", "click"]
+    }
+  ]
+}
