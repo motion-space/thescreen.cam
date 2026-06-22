@@ -1511,7 +1511,7 @@ type DynamicIslandGeometry = {
   top: number;
 };
 
-const dynamicIslandInitialWallpaperIndex = 2;
+const dynamicIslandInitialWallpaperIndex = 4;
 const dynamicIslandCompactHeight = 31;
 const dynamicIslandCompactCornerRadius = 12;
 const dynamicIslandExpandedCornerRadius = 32;
@@ -2701,6 +2701,7 @@ const canvasWallpaperSources = [
   "/feature-wallpapers/macos26-wallpaper-2.webp",
   "/feature-wallpapers/wallpaper-3.webp",
   "/feature-wallpapers/wallpaper-4.webp",
+  "/feature-wallpapers/dynamic-island-forest.webp",
 ];
 
 function createCanvasToolbarGroups(
