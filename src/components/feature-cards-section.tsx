@@ -1511,7 +1511,7 @@ type DynamicIslandGeometry = {
   top: number;
 };
 
-const dynamicIslandInitialWallpaperIndex = 4;
+const dynamicIslandInitialWallpaperIndex = 0;
 const dynamicIslandCompactHeight = 31;
 const dynamicIslandCompactCornerRadius = 12;
 const dynamicIslandExpandedCornerRadius = 32;
@@ -1846,7 +1846,7 @@ function DynamicIslandThumb({
     resizeObserver.observe(parent);
     resize();
 
-    void loadCanvasImages(canvasWallpaperSources)
+    void loadCanvasImages(dynamicIslandWallpaperSources)
       .then((loadedImages) => {
         if (!isMounted) return;
         images = loadedImages;
@@ -1889,7 +1889,12 @@ function DynamicIslandThumb({
     const state = wallpaperTransitionRef.current;
     if (state.isTransitioning) return;
 
-    startCanvasWallpaperTransition(state, 1, performance.now());
+    startCanvasWallpaperTransition(
+      state,
+      1,
+      performance.now(),
+      dynamicIslandWallpaperSources.length,
+    );
     setIsWallpaperSwitching(true);
     requestWallpaperFrame(true);
   };
@@ -1957,6 +1962,7 @@ function DynamicIslandThumb({
       wallpaperTransitionRef.current,
       deltaX,
       drag.width,
+      dynamicIslandWallpaperSources.length,
     );
     requestWallpaperFrame();
   };
@@ -1986,6 +1992,7 @@ function DynamicIslandThumb({
       wallpaperTransitionRef.current,
       deltaX,
       dragWidth,
+      dynamicIslandWallpaperSources.length,
     );
 
     const shouldCommit =
@@ -2112,6 +2119,7 @@ function DynamicIslandThumb({
       wallpaperTransitionRef.current,
       deltaX,
       drag.width,
+      dynamicIslandWallpaperSources.length,
     );
     requestWallpaperFrame();
   };
@@ -2141,6 +2149,7 @@ function DynamicIslandThumb({
       wallpaperTransitionRef.current,
       deltaX,
       dragWidth,
+      dynamicIslandWallpaperSources.length,
     );
 
     const shouldCommit =
@@ -2500,7 +2509,7 @@ function DynamicIslandGlassCanvas({
         shellContainer.add(baseGlass);
         scene.add(shellContainer);
 
-        const wallpaperImages = await loadCanvasImages(canvasWallpaperSources);
+        const wallpaperImages = await loadCanvasImages(dynamicIslandWallpaperSources);
         if (disposed) {
           device.destroy();
           return;
@@ -2701,7 +2710,10 @@ const canvasWallpaperSources = [
   "/feature-wallpapers/macos26-wallpaper-2.webp",
   "/feature-wallpapers/wallpaper-3.webp",
   "/feature-wallpapers/wallpaper-4.webp",
+];
+const dynamicIslandWallpaperSources = [
   "/feature-wallpapers/dynamic-island-forest.webp",
+  ...canvasWallpaperSources,
 ];
 
 function createCanvasToolbarGroups(
@@ -4185,6 +4197,7 @@ function startCanvasWallpaperTransition(
   state: CanvasWallpaperTransitionState,
   direction: CanvasWallpaperDirection,
   timestamp: number,
+  wallpaperCount = canvasWallpaperSources.length,
 ) {
   state.direction = direction;
   state.duration = canvasWallpaperTransitionDuration;
@@ -4193,6 +4206,7 @@ function startCanvasWallpaperTransition(
   state.nextIndex = getRelativeCanvasWallpaperIndex(
     state.currentIndex,
     direction,
+    wallpaperCount,
   );
   state.progress = 0;
   state.startProgress = 0;
@@ -4204,6 +4218,7 @@ function previewCanvasWallpaperDrag(
   state: CanvasWallpaperTransitionState,
   deltaX: number,
   width: number,
+  wallpaperCount = canvasWallpaperSources.length,
 ) {
   const progress = clamp(Math.abs(deltaX) / Math.max(1, width), 0, 1);
 
@@ -4226,6 +4241,7 @@ function previewCanvasWallpaperDrag(
   state.nextIndex = getRelativeCanvasWallpaperIndex(
     state.currentIndex,
     direction,
+    wallpaperCount,
   );
 }
 
@@ -4294,11 +4310,10 @@ function getCanvasWallpaperSettleDuration(from: number, to: number) {
 function getRelativeCanvasWallpaperIndex(
   index: number,
   direction: CanvasWallpaperDirection,
+  wallpaperCount = canvasWallpaperSources.length,
 ) {
-  return (
-    (index + direction + canvasWallpaperSources.length) %
-    canvasWallpaperSources.length
-  );
+  const count = Math.max(1, wallpaperCount);
+  return (index + direction + count) % count;
 }
 
 function getCanvasWallpaperFrameKey(
