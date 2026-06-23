@@ -1,3 +1,16 @@
+# 1.0.5
+
+- Exports can continue in the background with remaining-time estimates, a customizable notch progress surface, completed export actions, and genie-style window restore.
+- Timeline splitting has a dedicated mode with Option hold, a scissors cursor, and linked recording-audio focus.
+- Cursor settings can hide an idle cursor and use downloadable click sounds that play in preview and export, with downloaded sounds available offline.
+- Mockup assets can be downloaded and updated from the catalog, with series, model, color, and Apple Watch case and band choices reflected in the preview.
+- GIF export adds 1080p-and-lower resolution presets and estimated file size before export.
+- Existing workspaces keep their selected mockup while migrated assets finish downloading.
+- GIF exports preserve light UI colors and effect layer geometry more accurately.
+- Switching between GIF and Live Photo export keeps the trim preview stable, and the GIF format selector responds across its full segment.
+- Very short timeline clips are easier to select without accidentally trimming them.
+- Mockup catalog downloads use less memory, and long GIF exports allocate fewer frame buffers.
+
 # 1.0.4
 
 - Preview overlays share square resize handles, edge resizing, modifier-key resizing, and direct corner-radius dragging.
