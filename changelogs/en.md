@@ -1,3 +1,38 @@
+# 1.0.7
+
+- Captions support provider and local-model transcription, editable read-along segments, per-caption visibility, preset-backed styling, and cleaner export backgrounds.
+- Caption backgrounds support blur and liquid-glass materials with adjustable blur, saturation, glass style, and tint.
+- Camera overlays support adjustable corner smoothness and a softer square default style.
+- Effect layers are now named Annotation throughout the editor.
+- Editor settings can reorder and hide feature entries, with Animation, Keyboard, and Beauty hidden by default and extra hidden entries collected under More.
+- Recordings wait for enabled screen, microphone, and system audio inputs before writing media, and delayed audio sidecars stay aligned in preview, export, timeline clips, and waveforms.
+- Camera cleanup after early recording failures no longer crashes, and low-storage write failures keep recoverable media with a clear warning.
+- Disabled keyboard keys stay hidden after reopening projects, including preview and export.
+- Project opening and exports render initial video frames reliably, and dense caption and timeline groups separate correctly after deeper zoom.
+- Timeline hover cursors, scrub playheads, and zoom anchoring stay stable during playback, dragging, scrolling, and zooming.
+- Remote caption transcription uploads optimized temporary audio to reduce request size and catch provider file-size limits earlier.
+- Camera overlay previews, dense timeline tracks, and caption segment editing are more responsive on long recordings.
+
+# 1.0.6
+
+- Recordings can be paused and resumed from the toolbar, menu bar, or CLI, with paused time omitted from the saved workspace.
+- Image effect layers can fade in and out or skip entrance and exit animations.
+- Editor header title opens workspace options for renaming and showing the .cam file in Finder.
+- Crop Source can scale source dimensions by ratio, width, or height.
+- Screen Size padding can be adjusted per edge with a higher maximum range, and Device Padding supports negative offsets up to 3000 px.
+- Draft recordings stay separate from saved .cam workspaces, keep close-time save/delete choices, appear in Recent, and save to selected folders without repeated authorization or missing-media errors.
+- H.264 screen recordings start reliably on systems that reject unsupported frame-rate encoder hints.
+- Editor undo and preview cursor rendering are more reliable during repeated undo and transient layout updates.
+- Camera overlays no longer turn black after trimming a recording clip to its minimum length and undoing.
+- Zoom-track creation previews create the zoom clip when clicked.
+- Cursor click effects stay aligned on rotating iPhone mockups.
+- Mockup edges hide thin gaps without drawing over the recording.
+- Cursor click effects default to off, and clicked cursors shrink more clearly.
+- Recorded cursor shapes preserve more system states, with custom cursor styles falling back to the default pointer for unsupported shapes.
+- The recording toolbar opens reliably from the Dock, menu bar, and shortcuts after switching desktop spaces, while keeping its glass and position during audio capture and recording.
+- Window recording selection keeps a compact toolbar prompt with clickable Esc exit controls.
+- Click-sound preview playback stays responsive on recordings with dense cursor event histories.
+
 # 1.0.5
 
 - Exports can continue in the background with remaining-time estimates, a customizable notch progress surface, completed export actions, and genie-style window restore.
