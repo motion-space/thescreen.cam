@@ -83,6 +83,7 @@ export function SiteHeader({
     { label: copy.nav.changelog, href: localizedPath(locale, "/changelog"), path: "/changelog" },
     { label: copy.nav.support, href: localizedPath(locale, "/support"), path: "/support" },
   ];
+  const currentLanguageLabel = localeLabels[locale];
 
   useEffect(() => {
     if (!isMobileMenuOpen) return;
@@ -198,7 +199,14 @@ export function SiteHeader({
             <label className="sr-only" htmlFor="site-language">
               {languageLabel}
             </label>
-            <div className="relative text-muted-foreground transition-colors duration-300 focus-within:text-foreground hover:text-foreground">
+            <div className="relative inline-flex h-5 w-fit items-center gap-2 text-muted-foreground transition-colors duration-300 focus-within:text-foreground hover:text-foreground">
+              <span aria-hidden="true" className="text-sm text-current">
+                {currentLanguageLabel}
+              </span>
+              <span
+                className="pointer-events-none h-0 w-0 border-x-[4px] border-t-[5px] border-x-transparent border-t-current"
+                aria-hidden="true"
+              />
               <select
                 id="site-language"
                 aria-label={languageLabel}
@@ -210,7 +218,7 @@ export function SiteHeader({
                   }
                   window.location.href = event.currentTarget.value;
                 }}
-                className="h-5 w-auto appearance-none rounded-none border-0 bg-transparent py-0 pl-0 pr-4 text-sm text-current outline-none"
+                className="absolute -inset-x-2 inset-y-0 h-full cursor-pointer appearance-none rounded-none border-0 bg-transparent p-0 text-sm opacity-0 outline-none"
               >
                 {supportedLocales.map((language) => (
                   <option key={language} value={localizedPath(language, languagePath)} data-locale={language}>
@@ -218,10 +226,6 @@ export function SiteHeader({
                   </option>
                 ))}
               </select>
-              <span
-                className="pointer-events-none absolute right-0 top-1/2 h-0 w-0 -translate-y-1/2 border-x-[4px] border-t-[5px] border-x-transparent border-t-current"
-                aria-hidden="true"
-              />
             </div>
           </div>
 

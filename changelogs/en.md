@@ -1,3 +1,12 @@
+# 1.0.8
+
+- Recordings can finish into a floating quick-action card with rendered preview thumbnails, replay-from-start preview, editing, preset, export, save, source-save, and draft actions.
+- Camera background removal supports cached sticker styling with adjustable portrait-scaled outline, shadow, and frame preview.
+- Appearance settings can switch the editor, inspector panels, export surfaces, recording toolbar, tooltips, and material previews between dark, light, and automatic modes.
+- Camera overlays support more aspect ratios, background removal with inline progress, transparent portrait mode, packaged custom image backgrounds, and one-click settings copy to every camera clip.
+- Quick-action cards hide during capture selection, return after recording or cancellation, follow the active display, and keep every visible card clickable.
+- Transparent portrait camera overlays export correctly, gradient background edits refresh the preview immediately, manual zoom anchors stay visible, number-input dragging remains stable across screen edges, and the purchase screen follows the selected appearance.
+
 # 1.0.7
 
 - Captions support provider and local-model transcription, editable read-along segments, per-caption visibility, preset-backed styling, and cleaner export backgrounds.

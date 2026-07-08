@@ -1022,6 +1022,986 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
       featureList: ["네이티브 macOS 화면 녹화", "수동 줌 앵커", "사용자 지정 애니메이션 곡선", "기기 목업", "모자이크, 텍스트, 포커스, 사용자 이미지 레이어", "GIF 내보내기", "Live Photo 내보내기", "카메라 보정 효과", "미리보기와 일치하는 내보내기"],
     },
   },
+  "zh-Hant": {
+    meta: {
+      title: "Mac 版 Screen Studio 替代方案 | ScreenCam",
+      description:
+        "在找 Screen Studio 替代方案？ScreenCam 是原生 macOS 錄屏工具，應用體積更小、資源佔用更低、匯出更快，並支援手動變焦錨點、圖層、裝置樣機、GIF 和 Live Photo 匯出。",
+    },
+    imageAlt: "帶有原生 macOS 控制區的 ScreenCam 錄屏介面",
+    lastUpdated: "2026 年 6 月 13 日",
+    hero: {
+      eyebrow: "Mac 版 Screen Studio 替代方案",
+      title: "更輕量的 Screen Studio 替代方案。",
+      description:
+        "ScreenCam 保留精緻的 Mac 錄屏工作流，同時加入更深入的手動變焦、更豐富的圖層、更小的體積和更多匯出形態。",
+      appStoreCta: "在 Mac App Store 檢視 ScreenCam",
+      benchmarkCta: "檢視基準測試資料",
+      lastUpdatedLabel: "最後更新：",
+    },
+    performanceHighlights: [
+      {
+        value: "30x",
+        label: "更小應用體積",
+        detail: "約 20MB，對比基準約 600MB。",
+      },
+      {
+        value: "更低",
+        label: "CPU + 記憶體佔用",
+        detail: "並排基準測試讓效能結論保持可衡量。",
+      },
+      {
+        value: "更快",
+        label: "原生匯出鏈路",
+        detail: "基準對比中匯出耗時更短。",
+      },
+      {
+        value: "< 1/3",
+        label: "訂閱價格",
+        detail: "當前 App Store 價格會因地區而不同。",
+      },
+    ],
+    whySwitch: {
+      eyebrow: "為什麼切換",
+      title: "更快、更可控，同時沒有沉重負擔。",
+      description:
+        "Screen Studio 很適合自動化打磨。ScreenCam 面向想要更輕應用、可量化效能優勢，以及錄製後更直接控制的 Mac 創作者。",
+    },
+    features: {
+      eyebrow: "創作控制",
+      title: "ScreenCam 讓這些部分更容易被你掌控。",
+      items: [
+        {
+          title: "手動變焦錨點",
+          body: "一個變焦片段裡可以設定多箇中心、每個錨點的縮放比例和自定義曲線。",
+        },
+        {
+          title: "不限數量的圖層",
+          body: "馬賽克、文字、聚焦效果和自定義圖片可以在同一時間段內重疊。",
+        },
+        {
+          title: "裝置樣機",
+          body: "用 Mac、iPhone 和 Studio Display 風格外框完成更精緻的產品演示。",
+        },
+        {
+          title: "GIF + Live Photo",
+          body: "不僅能匯出完整影片，也能交付更輕的視覺素材。",
+        },
+        {
+          title: "攝像頭美顏",
+          body: "給真人講解類錄製提供輕量的人像修飾。",
+        },
+        {
+          title: "原生 Mac 體驗",
+          body: "Liquid Glass 風格介面、鍵盤優先錄製，以及 Mac App Store 分發。",
+        },
+      ],
+    },
+    comparison: {
+      eyebrow: "對比",
+      title: "ScreenCam vs Screen Studio",
+      description:
+        "兩款工具都能製作精緻影片。差異在於重心：Screen Studio 偏自動化，ScreenCam 更偏原生、輕量和手動控制。",
+      headers: {
+        feature: "功能",
+        screenCam: "ScreenCam",
+        screenStudio: "Screen Studio",
+      },
+      rows: [
+        {
+          feature: "效能負擔",
+          screenCam: "體積約小 30 倍，CPU 和記憶體佔用更低，匯出更快。",
+          screenStudio: "打磨完善，但安裝體積更重。",
+        },
+        {
+          feature: "變焦控制",
+          screenCam: "手動錨點、多箇中心、單獨縮放比例、可調曲線。",
+          screenStudio: "強項是自動變焦和順滑的游標驅動運動。",
+        },
+        {
+          feature: "圖層",
+          screenCam: "馬賽克、文字、聚焦、圖片圖層，可不限量重疊。",
+          screenStudio: "聚焦於游標運動、背景和遮罩的編輯流程。",
+        },
+        {
+          feature: "裝置呈現",
+          screenCam: "內建 Mac、iPhone 和 Studio Display 樣機。",
+          screenStudio: "iOS 和裝置錄製流程較強。",
+        },
+        {
+          feature: "匯出格式",
+          screenCam: "影片、GIF 和 Live Photo。",
+          screenStudio: "影片和 GIF，並帶有成熟預設設定。",
+        },
+        {
+          feature: "攝像頭修飾",
+          screenCam: "攝像頭浮窗控制，加輕量美顏效果。",
+          screenStudio: "動態攝像頭佈局和演示者呈現。",
+        },
+        {
+          feature: "價格",
+          screenCam: "免費下載；在支援地區訂閱價格低於三分之一。",
+          screenStudio: "訂閱價格以 Screen Studio 官方購買流程為準。",
+        },
+        {
+          feature: "字幕和轉寫",
+          screenCam: "暫未支援。已計劃 Apple 原生轉寫和第三方 BYOK 轉寫。",
+          screenStudio: "目前已有轉寫和字幕工作流。",
+        },
+      ],
+    },
+    bestFit: {
+      eyebrow: "適合場景",
+      title: "如果你需要這些，選 ScreenCam...",
+      items: [
+        "需要多個定向變焦中心的產品演示",
+        "帶裝置樣機和自定義畫幅的 Mac app 演示",
+        "需要打碼、聚焦高亮、文字和圖片的短片",
+        "需要 GIF 或 Live Photo 輸出的匯出流程",
+      ],
+      gapEyebrow: "當前差距",
+      gapTitle: "字幕功能還沒上線。",
+      gapDescription:
+        "ScreenCam 目前不支援字幕。計劃中的方向是提供 Apple 原生轉寫和第三方 BYOK 轉寫，同時不由 ScreenCam 自己運營轉寫服務。",
+      pricingCta: "檢視 App Store 價格",
+      screenStudioCta: "檢視 Screen Studio",
+    },
+    faq: {
+      eyebrow: "FAQ",
+      title: "從 Screen Studio 切換前的常見問題",
+      items: [
+        {
+          question: "ScreenCam 是 Screen Studio 替代方案嗎？",
+          answer:
+            "是。ScreenCam 是原生 macOS 錄屏和編輯工具，適合製作精緻產品演示、教程、app walkthrough 和社媒短片。如果你想要更小體積、更低資源佔用、更快匯出和更深入的手動變焦控制，它會特別合適。",
+        },
+        {
+          question: "ScreenCam 和 Screen Studio 有什麼不同？",
+          answer:
+            "ScreenCam 更關注原生 Mac 效能、手動變焦錨點、更豐富的時間線圖層、裝置樣機、Liquid Glass 風格介面、可配置動畫曲線、GIF 匯出和 Live Photo 匯出。",
+        },
+        {
+          question: "ScreenCam 比 Screen Studio 便宜嗎？",
+          answer:
+            "ScreenCam 可在 Mac App Store 免費下載，並提供應用內購買。當前價格因地區而異，但在支援地區 ScreenCam 的訂閱價格定位低於 Screen Studio 訂閱價的三分之一。",
+        },
+        {
+          question: "ScreenCam 支援字幕嗎？",
+          answer:
+            "暫未支援。字幕功能已在計劃中，目前方向是提供 Apple 原生轉寫和第三方 BYOK 轉寫，不由 ScreenCam 自己運營轉寫服務。",
+        },
+        {
+          question: "ScreenCam 支援自定義變焦動畫嗎？",
+          answer:
+            "支援。手動變焦模式支援自定義錨點、多個變焦中心、每個錨點的縮放比例和可配置動畫曲線，讓你在錄製後繼續引導觀眾注意力。",
+        },
+        {
+          question: "ScreenCam 可以匯出 GIF 或 Live Photo 嗎？",
+          answer:
+            "可以。ScreenCam 除了面向影片的匯出，也支援 GIF 和 Live Photo 等更豐富的匯出流程。",
+        },
+      ],
+    },
+    schema: {
+      breadcrumbName: "Screen Studio 替代方案",
+      about: ["Screen Studio 替代方案", "帶變焦的 Mac 錄屏工具"],
+      softwareDescription:
+        "ScreenCam 是原生 macOS 錄屏工具，支援清晰錄製、手動變焦錨點、圖層、裝置樣機、運動模糊和精確預覽匯出。",
+      featureList: ["原生 macOS 螢幕錄製", "手動變焦錨點", "自定義動畫曲線", "裝置樣機", "馬賽克、文字、聚焦和自定義圖片圖層", "GIF 匯出", "Live Photo 匯出", "攝像頭美顏", "精確預覽匯出"],
+    },
+  },
+  es: {
+    meta: {
+      title: "Screen Studio Alternativa para Mac | ScreenCam",
+      description:
+        "¿Busca una alternativa al Screen Studio? ScreenCam es un grabador de pantalla nativo macOS con un tamaño de aplicación más pequeño, menor uso de recursos, exportaciones más rápidas, anclajes de zoom manuales, capas, maquetas de dispositivos, exportación GIF y Live Photo.",
+    },
+    imageAlt: "Interfaz de grabación de pantalla ScreenCam con controles nativos macOS",
+    lastUpdated: "13 de junio de 2026",
+    hero: {
+      eyebrow: "Screen Studio Alternativa para Mac",
+      title: "Una alternativa más ligera al Screen Studio.",
+      description:
+        "ScreenCam mantiene el pulido flujo de trabajo de grabación de pantalla Mac, luego agrega un zoom manual más profundo, capas más ricas, espacio más pequeño y más formas de exportación.",
+      appStoreCta: "Ver ScreenCam en el Mac App Store",
+      benchmarkCta: "Ver datos de referencia",
+      lastUpdatedLabel: "Última actualización:",
+    },
+    performanceHighlights: [
+      {
+        value: "30x",
+        label: "huella de aplicación más pequeña",
+        detail: "Aproximadamente 20 MB frente a la base de referencia de aproximadamente 600 MB.",
+      },
+      {
+        value: "inferior",
+        label: "Uso de CPU + memoria",
+        detail: "Los datos comparativos en paralelo mantienen el reclamo mensurable.",
+      },
+      {
+        value: "Más rápido",
+        label: "ruta de exportación nativa",
+        detail: "Calendario de exportación más corto en la comparación de referencia.",
+      },
+      {
+        value: "< 1/3",
+        label: "precio de suscripción",
+        detail: "El precio actual del App Store varía según la región.",
+      },
+    ],
+    whySwitch: {
+      eyebrow: "¿Por qué cambiar?",
+      title: "Velocidad y control, sin pisar demasiado.",
+      description:
+        "Screen Studio es fantástico cuando quieres un pulido automático. ScreenCam es para creadores de Mac que desean una aplicación más liviana, mejoras en el rendimiento medido y un control más directo después de la grabación.",
+    },
+    features: {
+      eyebrow: "control creativo",
+      title: "Las piezas ScreenCam facilitan el manejo.",
+      items: [
+        {
+          title: "Anclajes de zoom manual",
+          body: "Múltiples centros, escala por anclaje y curvas personalizadas en un clip de zoom.",
+        },
+        {
+          title: "Capas ilimitadas",
+          body: "Los mosaicos, el texto, los efectos de enfoque y las imágenes personalizadas pueden superponerse en el mismo rango de tiempo.",
+        },
+        {
+          title: "Maquetas de dispositivos",
+          body: "Mac, iPhone y marcos estilo Studio Display para demostraciones de productos refinados.",
+        },
+        {
+          title: "GIF + Live Photo",
+          body: "Envíe grabaciones como recursos visuales rápidos, no solo archivos de vídeo completos.",
+        },
+        {
+          title: "Belleza de la cámara",
+          body: "Pulido ligero del presentador para recorridos guiados por cámaras.",
+        },
+        {
+          title: "Sensación nativa de Mac",
+          body: "Superficies estilo Liquid Glass, captura con teclado y distribución Mac App Store.",
+        },
+      ],
+    },
+    comparison: {
+      eyebrow: "Comparación",
+      title: "ScreenCam y Screen Studio",
+      description:
+        "Ambas herramientas pueden crear videos pulidos. La diferencia es dónde ponen su peso: el Screen Studio es automático, mientras que el ScreenCam es nativo, compacto y manual.",
+      headers: {
+        feature: "Característica",
+        screenCam: "ScreenCam",
+        screenStudio: "Screen Studio",
+      },
+      rows: [
+        {
+          feature: "Huella de rendimiento",
+          screenCam: "Aproximadamente 30 veces más pequeño, menor uso de CPU y memoria, exportaciones más rápidas.",
+          screenStudio: "Grabadora pulida con una huella instalada más pesada.",
+        },
+        {
+          feature: "control de zoom",
+          screenCam: "Anclajes manuales, centros múltiples, escala por ancla, curvas sintonizables.",
+          screenStudio: "Potente zoom automático y movimiento suave impulsado por el cursor.",
+        },
+        {
+          feature: "capas",
+          screenCam: "Mosaico, texto, enfoque, capas de imágenes, superposición ilimitada.",
+          screenStudio: "Editor enfocado en movimiento del cursor, fondos y enmascaramiento.",
+        },
+        {
+          feature: "Presentación del dispositivo",
+          screenCam: "Maquetas integradas de Mac, iPhone y Studio Display.",
+          screenStudio: "Fuerte flujo de trabajo de captura de dispositivos e iOS.",
+        },
+        {
+          feature: "Formatos de exportación",
+          screenCam: "Vídeo, GIF y Live Photo.",
+          screenStudio: "Video y GIF con fuertes valores predeterminados.",
+        },
+        {
+          feature: "Pulido de cámara",
+          screenCam: "Controles de superposición de cámara y efectos de belleza ligeros.",
+          screenStudio: "Diseños dinámicos de cámara y presentación de cámara web.",
+        },
+        {
+          feature: "Precios",
+          screenCam: "Descarga gratuita; la suscripción es inferior a un tercio en las regiones App Store admitidas.",
+          screenStudio: "El precio de la suscripción se muestra en el flujo de compras oficial de Screen Studio.",
+        },
+        {
+          feature: "Subtítulos y transcripciones",
+          screenCam: "Todavía no. Está prevista la transcripción BYOK nativa de Apple y de terceros.",
+          screenStudio: "Los flujos de trabajo de transcripción y subtítulos están disponibles hoy.",
+        },
+      ],
+    },
+    bestFit: {
+      eyebrow: "Mejor ajuste",
+      title: "Elija ScreenCam si...",
+      items: [
+        "ProDemostraciones de conductos que necesitan múltiples centros de zoom dirigidos",
+        "Tutoriales de la aplicación Mac con maquetas de dispositivos y marcos personalizados",
+        "Clips que necesitan redacción, resaltados de enfoque, texto e imágenes",
+        "Exportaciones que necesitan salida GIF o Live Photo",
+      ],
+      gapEyebrow: "Brecha actual",
+      gapTitle: "Los subtítulos aún no están aquí.",
+      gapDescription:
+        "ScreenCam no admite subtítulos hoy. Se espera que el soporte planificado ofrezca transcripción nativa Apple y transcripción BYOK de terceros, sin que ScreenCam opere su propio servicio de transcripción.",
+      pricingCta: "Consultar precios de App Store",
+      screenStudioCta: "Ver Screen Studio",
+    },
+    faq: {
+      eyebrow: "Preguntas frecuentes",
+      title: "Preguntas sobre el cambio de Screen Studio",
+      items: [
+        {
+          question: "¿Es ScreenCam una alternativa al Screen Studio?",
+          answer:
+            "Sí. ScreenCam es un grabador y editor de pantalla nativo macOS para demostraciones de productos, tutoriales, recorridos de aplicaciones y clips sociales. Es especialmente sólido si desea una aplicación más pequeña, un menor uso de recursos, exportaciones más rápidas y un control de zoom manual más profundo.",
+        },
+        {
+          question: "¿Qué diferencia al ScreenCam del Screen Studio?",
+          answer:
+            "ScreenCam se centra en el rendimiento nativo de Mac, anclajes de zoom manuales, capas más ricas basadas en el tiempo, maquetas de dispositivos, interfaz de usuario estilo Liquid Glass, curvas de animación configurables, exportación GIF y exportación Live Photo.",
+        },
+        {
+          question: "¿ScreenCam es más barato que Screen Studio?",
+          answer:
+            "ScreenCam es una descarga gratuita con compras dentro de la aplicación en el Mac App Store. El precio actual varía según la región, pero la suscripción de ScreenCam se ubica por debajo de un tercio del precio de suscripción de Screen Studio en las regiones admitidas.",
+        },
+        {
+          question: "¿ScreenCam admite subtítulos?",
+          answer:
+            "Todavía no. Está previsto el soporte de subtítulos. La dirección actual es ofrecer transcripción nativa de Apple y transcripción de terceros a través de BYOK, sin que ScreenCam ejecute su propio servicio de transcripción.",
+        },
+        {
+          question: "¿ScreenCam admite animaciones de zoom personalizadas?",
+          answer:
+            "Sí. El modo de zoom manual admite anclajes personalizados, múltiples centros de zoom, escala por anclaje y curvas de animación configurables, para que pueda dirigir la atención del espectador después de la grabación.",
+        },
+        {
+          question: "¿Puede ScreenCam exportar archivos GIF o Live Photo?",
+          answer:
+            "Sí. ScreenCam admite flujos de trabajo de exportación más completos, incluidos GIF y Live Photo, junto con exportaciones centradas en video.",
+        },
+      ],
+    },
+    schema: {
+      breadcrumbName: "Alternativa Screen Studio",
+      about: ["Alternativa Screen Studio", "Grabador de pantalla Mac con zoom"],
+      softwareDescription:
+        "ScreenCam es un grabador de pantalla nativo macOS para capturas nítidas, anclajes de zoom manuales, capas, maquetas de dispositivos, desenfoque de movimiento y exportación con vista previa precisa.",
+      featureList: [
+        "Grabación de pantalla nativa macOS",
+        "Anclajes de zoom manual",
+        "Curvas de animación personalizadas",
+        "Maquetas de dispositivos",
+        "Capas de mosaico, texto, enfoque e imágenes personalizadas",
+        "Exportación GIF",
+        "Exportación Live Photo",
+        "Efectos de belleza de la cámara.",
+        "Exportación con vista previa precisa",
+      ],
+    },
+  },
+  fr: {
+    meta: {
+      title: "Screen Studio Alternative à Mac | ScreenCam",
+      description:
+        "Vous recherchez une alternative au Screen Studio ? ScreenCam est un enregistreur d'écran natif macOS avec une taille d'application plus petite, une utilisation réduite des ressources, des exportations plus rapides, des ancres de zoom manuel, des calques, des maquettes d'appareil, GIF et une exportation Live Photo.",
+    },
+    imageAlt: "Interface d'enregistrement d'écran ScreenCam avec commandes natives macOS",
+    lastUpdated: "13 juin 2026",
+    hero: {
+      eyebrow: "Screen Studio Alternative à Mac",
+      title: "Une alternative plus légère au Screen Studio.",
+      description:
+        "ScreenCam conserve le flux de travail d'enregistrement d'écran raffiné du Mac, puis ajoute un zoom manuel plus profond, des calques plus riches, un encombrement réduit et davantage de formes d'exportation.",
+      appStoreCta: "Voir ScreenCam sur le Mac App Store",
+      benchmarkCta: "Afficher les données de référence",
+      lastUpdatedLabel: "Dernière mise à jour :",
+    },
+    performanceHighlights: [
+      {
+        value: "30x",
+        label: "empreinte d'application réduite",
+        detail: "Environ 20 Mo par rapport à la référence de référence d’environ 600 Mo.",
+      },
+      {
+        value: "Inférieur",
+        label: "Utilisation CPU + mémoire",
+        detail: "Les données de référence côte à côte permettent de maintenir la réclamation mesurable.",
+      },
+      {
+        value: "Plus rapide",
+        label: "chemin d'exportation natif",
+        detail: "Délais d’exportation plus courts dans la comparaison de référence.",
+      },
+      {
+        value: "< 1/3",
+        label: "prix d'abonnement",
+        detail: "Le prix actuel du App Store varie selon la région.",
+      },
+    ],
+    whySwitch: {
+      eyebrow: "Pourquoi changer",
+      title: "Vitesse et contrôle, sans encombrement important.",
+      description:
+        "Screen Studio est idéal lorsque vous souhaitez un polissage automatique. ScreenCam est destiné aux créateurs Mac qui souhaitent une application plus légère, des performances mesurées et un contrôle plus direct après l'enregistrement.",
+    },
+    features: {
+      eyebrow: "Contrôle créatif",
+      title: "Les pièces ScreenCam facilitent la direction.",
+      items: [
+        {
+          title: "Ancres de zoom manuel",
+          body: "Plusieurs centres, échelle par ancre et courbes personnalisées dans un seul clip de zoom.",
+        },
+        {
+          title: "Couches illimitées",
+          body: "La mosaïque, le texte, les effets de mise au point et les images personnalisées peuvent se chevaucher dans la même plage horaire.",
+        },
+        {
+          title: "Maquettes d'appareils",
+          body: "Cadrage de style Mac, iPhone et Studio Display pour des démonstrations de produits raffinées.",
+        },
+        {
+          title: "GIF + Live Photo",
+          body: "Expédiez les enregistrements sous forme de ressources visuelles rapides, et pas seulement de fichiers vidéo complets.",
+        },
+        {
+          title: "Beauté de l'appareil photo",
+          body: "Vernissage du présentateur léger pour les visites guidées par caméra.",
+        },
+        {
+          title: "Sensation native Mac",
+          body: "Surfaces de style verre liquide, capture par le clavier en premier et distribution Mac App Store.",
+        },
+      ],
+    },
+    comparison: {
+      eyebrow: "Comparaison",
+      title: "ScreenCam contre Screen Studio",
+      description:
+        "Les deux outils peuvent créer des vidéos soignées. La différence réside dans l'endroit où ils mettent leur poids : le Screen Studio est automatique, tandis que le ScreenCam est natif, compact et manuel.",
+      headers: {
+        feature: "Caractéristique",
+        screenCam: "ScreenCam",
+        screenStudio: "Screen Studio",
+      },
+      rows: [
+        {
+          feature: "Empreinte de performance",
+          screenCam: "Environ 30 fois plus petit, utilisation réduite du processeur et de la mémoire, exportations plus rapides.",
+          screenStudio: "Enregistreur poli avec une empreinte installée plus lourde.",
+        },
+        {
+          feature: "Contrôle du zoom",
+          screenCam: "Ancres manuelles, centres multiples, échelle par ancre, courbes réglables.",
+          screenStudio: "Zoom automatique puissant et mouvement fluide piloté par le curseur.",
+        },
+        {
+          feature: "Calques",
+          screenCam: "Mosaïque, texte, focus, calques d'image, chevauchement illimité.",
+          screenStudio: "Éditeur ciblé pour le mouvement du curseur, les arrière-plans et le masquage.",
+        },
+        {
+          feature: "Présentation de l'appareil",
+          screenCam: "Maquettes Mac, iPhone et Studio Display intégrées.",
+          screenStudio: "Flux de travail puissant de capture d’iOS et d’appareils.",
+        },
+        {
+          feature: "Formats d'exportation",
+          screenCam: "Vidéo, GIF et Live Photo.",
+          screenStudio: "Vidéo et GIF avec des valeurs par défaut élevées.",
+        },
+        {
+          feature: "Polissage de l'appareil photo",
+          screenCam: "Commandes de superposition de caméra et effets de beauté légers.",
+          screenStudio: "Dispositions de caméras dynamiques et présentation par webcam.",
+        },
+        {
+          feature: "Tarifs",
+          screenCam: "Téléchargement gratuit ; l'abonnement est inférieur à un tiers dans les régions App Store prises en charge.",
+          screenStudio: "Le prix de l'abonnement est indiqué sur le flux d'achat officiel de Screen Studio.",
+        },
+        {
+          feature: "Légendes et transcriptions",
+          screenCam: "Pas encore. Une transcription BYOK native et tierce de Apple est prévue.",
+          screenStudio: "Les workflows de transcription et de sous-titres sont disponibles dès aujourd'hui.",
+        },
+      ],
+    },
+    bestFit: {
+      eyebrow: "Meilleur ajustement",
+      title: "Choisissez ScreenCam si...",
+      items: [
+        "Démonstrations Product nécessitant plusieurs centres de zoom dirigés",
+        "Procédures pas à pas de l'application Mac avec maquettes d'appareils et cadrage personnalisé",
+        "Clips nécessitant une rédaction, des surbrillances, du texte et des images",
+        "Exportations nécessitant une sortie GIF ou Live Photo",
+      ],
+      gapEyebrow: "Écart actuel",
+      gapTitle: "Les sous-titres ne sont pas encore là.",
+      gapDescription:
+        "ScreenCam ne prend pas en charge les sous-titres aujourd'hui. Le support prévu devrait offrir la transcription native de Apple et la transcription BYOK tierce, sans que ScreenCam n'exploite son propre service de transcription.",
+      pricingCta: "Vérifiez les prix du App Store",
+      screenStudioCta: "Voir Screen Studio",
+    },
+    faq: {
+      eyebrow: "FAQ",
+      title: "Questions sur le passage de Screen Studio",
+      items: [
+        {
+          question: "ScreenCam est-il une alternative à Screen Studio ?",
+          answer:
+            "Oui. ScreenCam est un enregistreur et éditeur d'écran natif macOS pour des démonstrations de produits raffinées, des didacticiels, des procédures pas à pas d'applications et des clips sociaux. Il est particulièrement efficace si vous souhaitez une application plus petite, une utilisation moindre des ressources, des exportations plus rapides et un contrôle manuel plus approfondi du zoom.",
+        },
+        {
+          question: "Qu'est-ce qui différencie le ScreenCam du Screen Studio ?",
+          answer:
+            "ScreenCam se concentre sur les performances natives du Mac, les ancres de zoom manuel, les couches temporelles plus riches, les maquettes d'appareils, l'interface utilisateur de style Liquid Glass, les courbes d'animation configurables, l'exportation GIF et l'exportation Live Photo.",
+        },
+        {
+          question: "Le ScreenCam est-il moins cher que le Screen Studio ?",
+          answer:
+            "ScreenCam est un téléchargement gratuit avec achats intégrés sur le Mac App Store. Le prix actuel varie selon les régions, mais l'abonnement de ScreenCam est positionné en dessous d'un tiers du prix de l'abonnement de Screen Studio dans les régions prises en charge.",
+        },
+        {
+          question: "ScreenCam prend-il en charge les sous-titres ?",
+          answer:
+            "Pas encore. Un support des sous-titres est prévu. L'orientation actuelle est de proposer la transcription native de Apple et la transcription tierce via BYOK, sans que ScreenCam ne gère son propre service de transcription.",
+        },
+        {
+          question: "ScreenCam prend-il en charge les animations de zoom personnalisées ?",
+          answer:
+            "Oui. Le mode de zoom manuel prend en charge les ancres personnalisées, plusieurs centres de zoom, l'échelle par ancre et les courbes d'animation configurables, afin que vous puissiez diriger l'attention du spectateur après l'enregistrement.",
+        },
+        {
+          question: "ScreenCam peut-il exporter des fichiers GIF ou Live Photo ?",
+          answer:
+            "Oui. ScreenCam prend en charge des flux de travail d'exportation plus riches, notamment GIF et Live Photo, ainsi que des exportations axées sur la vidéo.",
+        },
+      ],
+    },
+    schema: {
+      breadcrumbName: "Screen Studio Alternative",
+      about: ["Screen Studio alternative", "Enregistreur d'écran Mac avec zoom"],
+      softwareDescription:
+        "ScreenCam est un enregistreur d'écran natif macOS pour une capture nette, des ancres de zoom manuel, des calques, des maquettes d'appareils, un flou de mouvement et une exportation précise avec un aperçu.",
+      featureList: [
+        "Enregistrement d'écran natif macOS",
+        "Ancres de zoom manuel",
+        "Courbes d'animation personnalisées",
+        "Maquettes d'appareils",
+        "Couches de mosaïque, de texte, de focus et d'images personnalisées",
+        "Exportation GIF",
+        "Exportation Live Photo",
+        "Effets de beauté de l'appareil photo",
+        "Exportation avec un aperçu précis",
+      ],
+    },
+  },
+  "pt-BR": {
+    meta: {
+      title: "Screen Studio Alternativa para Mac | ScreenCam",
+      description:
+        "Procurando uma alternativa Screen Studio? ScreenCam é um gravador de tela macOS nativo com tamanho de aplicativo menor, menor uso de recursos, exportações mais rápidas, âncoras de zoom manuais, camadas, maquetes de dispositivos, GIF e exportação Live Photo.",
+    },
+    imageAlt: "Interface do gravador de tela ScreenCam com controles nativos macOS",
+    lastUpdated: "13 de junho de 2026",
+    hero: {
+      eyebrow: "Screen Studio Alternativa para Mac",
+      title: "Uma alternativa Screen Studio mais leve.",
+      description:
+        "ScreenCam mantém o fluxo de trabalho de gravação de tela Mac sofisticado e, em seguida, adiciona zoom manual mais profundo, camadas mais ricas, espaço menor e mais formas de exportação.",
+      appStoreCta: "Veja ScreenCam no Mac App Store",
+      benchmarkCta: "Ver dados de referência",
+      lastUpdatedLabel: "Última atualização:",
+    },
+    performanceHighlights: [
+      {
+        value: "30x",
+        label: "pegada de aplicativo menor",
+        detail: "Cerca de 20 MB versus a linha de base do benchmark de aproximadamente 600 MB.",
+      },
+      {
+        value: "Inferior",
+        label: "Uso de CPU + memória",
+        detail: "Dados de benchmark lado a lado mantêm a afirmação mensurável.",
+      },
+      {
+        value: "Mais rápido",
+        label: "caminho de exportação nativo",
+        detail: "Menor tempo de exportação na comparação de benchmark.",
+      },
+      {
+        value: "<1/3",
+        label: "preço da assinatura",
+        detail: "O preço atual do App Store varia de acordo com a região.",
+      },
+    ],
+    whySwitch: {
+      eyebrow: "Por que mudar",
+      title: "Velocidade e controle, sem ocupar muito espaço.",
+      description:
+        "Screen Studio é ótimo quando você deseja polimento automático. ScreenCam é para criadores de Mac que desejam um aplicativo mais leve, ganhos de desempenho medidos e controle mais direto após a gravação.",
+    },
+    features: {
+      eyebrow: "Controle criativo",
+      title: "As peças ScreenCam facilitam o direcionamento.",
+      items: [
+        {
+          title: "Âncoras de zoom manuais",
+          body: "Vários centros, escala por âncora e curvas personalizadas em um clipe de zoom.",
+        },
+        {
+          title: "Camadas ilimitadas",
+          body: "Mosaico, texto, efeitos de foco e imagens personalizadas podem se sobrepor no mesmo intervalo de tempo.",
+        },
+        {
+          title: "Maquetes de dispositivos",
+          body: "Mac, iPhone e enquadramento estilo Studio Display para demonstrações de produtos sofisticados.",
+        },
+        {
+          title: "GIF + Live Photo",
+          body: "Envie gravações como recursos visuais rápidos, não apenas arquivos de vídeo completos.",
+        },
+        {
+          title: "Beleza da câmera",
+          body: "Polimento leve do apresentador para orientações conduzidas por câmera.",
+        },
+        {
+          title: "Sensação nativa Mac",
+          body: "Superfícies estilo Liquid Glass, captura com teclado e distribuição Mac App Store.",
+        },
+      ],
+    },
+    comparison: {
+      eyebrow: "Comparação",
+      title: "ScreenCam vs Screen Studio",
+      description:
+        "Ambas as ferramentas podem criar vídeos sofisticados. A diferença é onde eles colocam seu peso: Screen Studio é automático, enquanto ScreenCam é nativo, compacto e manual.",
+      headers: {
+        feature: "Recurso",
+        screenCam: "ScreenCam",
+        screenStudio: "Screen Studio",
+      },
+      rows: [
+        {
+          feature: "Pegada de desempenho",
+          screenCam: "Cerca de 30x menor, menor uso de CPU e memória, exportações mais rápidas.",
+          screenStudio: "Gravador polido com uma área instalada mais pesada.",
+        },
+        {
+          feature: "Controle de zoom",
+          screenCam: "Âncoras manuais, centros múltiplos, escala por âncora, curvas ajustáveis.",
+          screenStudio: "Zoom automático forte e movimento suave acionado pelo cursor.",
+        },
+        {
+          feature: "Camadas",
+          screenCam: "Mosaico, texto, foco, camadas de imagem, sobreposição ilimitada.",
+          screenStudio: "Editor focado para movimento do cursor, planos de fundo e mascaramento.",
+        },
+        {
+          feature: "Apresentação do dispositivo",
+          screenCam: "Maquetes Mac, iPhone e Studio Display integradas.",
+          screenStudio: "Forte fluxo de trabalho de captura de dispositivos e iOS.",
+        },
+        {
+          feature: "Exportar formatos",
+          screenCam: "Vídeo, GIF e Live Photo.",
+          screenStudio: "Vídeo e GIF com padrões fortes.",
+        },
+        {
+          feature: "Polimento de câmera",
+          screenCam: "Controles de sobreposição de câmera e efeitos de beleza leves.",
+          screenStudio: "Layouts de câmera dinâmicos e apresentação de webcam.",
+        },
+        {
+          feature: "Preços",
+          screenCam: "Download grátis; a assinatura está abaixo de um terço nas regiões App Store suportadas.",
+          screenStudio: "O preço da assinatura é mostrado no fluxo de compra oficial do Screen Studio.",
+        },
+        {
+          feature: "Legendas e transcrições",
+          screenCam: "Ainda não. Estão planejadas transcrições BYOK nativas de Apple e de terceiros.",
+          screenStudio: "Fluxos de trabalho de transcrição e legendas estão disponíveis hoje.",
+        },
+      ],
+    },
+    bestFit: {
+      eyebrow: "Melhor ajuste",
+      title: "Escolha ScreenCam se...",
+      items: [
+        "Demonstrações de dutos Pro que precisam de vários centros de zoom direcionados",
+        "Passo a passo do aplicativo Mac com modelos de dispositivos e enquadramento personalizado",
+        "Clipes que precisam de redação, realces de foco, texto e imagens",
+        "Exportações que precisam de saída GIF ou Live Photo",
+      ],
+      gapEyebrow: "Lacuna atual",
+      gapTitle: "As legendas ainda não chegaram.",
+      gapDescription:
+        "ScreenCam não oferece suporte a legendas hoje. Espera-se que o suporte planejado ofereça transcrição nativa Apple e transcrição BYOK de terceiros, sem que ScreenCam opere seu próprio serviço de transcrição.",
+      pricingCta: "Verifique o preço App Store",
+      screenStudioCta: "Ver Screen Studio",
+    },
+    faq: {
+      eyebrow: "Perguntas frequentes",
+      title: "Perguntas sobre a mudança de Screen Studio",
+      items: [
+        {
+          question: "ScreenCam é uma alternativa Screen Studio?",
+          answer:
+            "Sim. ScreenCam é um gravador de tela e editor nativo macOS para demonstrações de produtos sofisticados, tutoriais, orientações de aplicativos e clipes sociais. É especialmente forte se você deseja um aplicativo menor, menor uso de recursos, exportações mais rápidas e controle de zoom manual mais profundo.",
+        },
+        {
+          question: "O que torna ScreenCam diferente de Screen Studio?",
+          answer:
+            "ScreenCam se concentra no desempenho nativo do Mac, âncoras de zoom manuais, camadas mais ricas baseadas em tempo, modelos de dispositivos, interface de usuário estilo Liquid Glass, curvas de animação configuráveis, exportação GIF e exportação Live Photo.",
+        },
+        {
+          question: "ScreenCam é mais barato que Screen Studio?",
+          answer:
+            "ScreenCam é um download gratuito com compras no aplicativo no Mac App Store. O preço atual varia de acordo com a região, mas a assinatura do ScreenCam está posicionada abaixo de um terço do preço da assinatura do Screen Studio nas regiões suportadas.",
+        },
+        {
+          question: "ScreenCam suporta legendas?",
+          answer:
+            "Ainda não. O suporte a legendas está planejado. A direção atual é oferecer transcrição nativa Apple e transcrição de terceiros por meio de BYOK, sem que ScreenCam execute seu próprio serviço de transcrição.",
+        },
+        {
+          question: "ScreenCam oferece suporte a animações de zoom personalizadas?",
+          answer:
+            "Sim. O modo de zoom manual oferece suporte a âncoras personalizadas, vários centros de zoom, escala por âncora e curvas de animação configuráveis, para que você possa direcionar a atenção do visualizador após a gravação.",
+        },
+        {
+          question: "ScreenCam pode exportar arquivos GIF ou Live Photo?",
+          answer:
+            "Sim. ScreenCam suporta fluxos de trabalho de exportação mais ricos, incluindo GIF e Live Photo, juntamente com exportações focadas em vídeo.",
+        },
+      ],
+    },
+    schema: {
+      breadcrumbName: "Alternativa Screen Studio",
+      about: ["Alternativa Screen Studio", "Gravador de tela Mac com zoom"],
+      softwareDescription:
+        "ScreenCam é um gravador de tela nativo macOS para captura nítida, âncoras de zoom manual, camadas, maquetes de dispositivos, desfoque de movimento e exportação com visualização precisa.",
+      featureList: [
+        "Gravação de tela nativa macOS",
+        "Âncoras de zoom manuais",
+        "Curvas de animação personalizadas",
+        "Maquetes de dispositivos",
+        "Camadas de mosaico, texto, foco e imagem personalizada",
+        "Exportação GIF",
+        "Exportação Live Photo",
+        "Efeitos de beleza da câmera",
+        "Exportação com visualização precisa",
+      ],
+    },
+  },
+  it: {
+    meta: {
+      title: "Screen Studio Alternativa a Mac | ScreenCam",
+      description:
+        "Cerchi un'alternativa Screen Studio? ScreenCam è un registratore dello schermo macOS nativo con dimensioni dell'app più piccole, utilizzo inferiore delle risorse, esportazioni più veloci, ancoraggi dello zoom manuale, livelli, modelli di dispositivi, GIF ed esportazione Live Photo.",
+    },
+    imageAlt: "Interfaccia del registratore dello schermo ScreenCam con controlli nativi macOS",
+    lastUpdated: "13 giugno 2026",
+    hero: {
+      eyebrow: "Screen Studio Alternativa a Mac",
+      title: "Un'alternativa Screen Studio più leggera.",
+      description:
+        "ScreenCam mantiene il raffinato flusso di lavoro di registrazione dello schermo Mac, quindi aggiunge uno zoom manuale più profondo, livelli più ricchi, ingombro ridotto e più forme di esportazione.",
+      appStoreCta: "Visualizza ScreenCam su Mac App Store",
+      benchmarkCta: "Visualizza i dati di riferimento",
+      lastUpdatedLabel: "Ultimo aggiornamento:",
+    },
+    performanceHighlights: [
+      {
+        value: "30x",
+        label: "ingombro ridotto dell'app",
+        detail: "Circa 20 MB rispetto ai circa 600 MB di base del benchmark.",
+      },
+      {
+        value: "Più in basso",
+        label: "Utilizzo della CPU e della memoria",
+        detail: "I dati di benchmark affiancati mantengono l'affermazione misurabile.",
+      },
+      {
+        value: "Più veloce",
+        label: "percorso di esportazione nativo",
+        detail: "Tempi di esportazione più brevi nel confronto benchmark.",
+      },
+      {
+        value: "<1/3",
+        label: "prezzo di abbonamento",
+        detail: "I prezzi attuali di App Store variano in base alla regione.",
+      },
+    ],
+    whySwitch: {
+      eyebrow: "Perché cambiare",
+      title: "Velocità e controllo, senza l'ingombro pesante.",
+      description:
+        "Screen Studio è ottimo quando vuoi la lucidatura automatica. ScreenCam è per i creatori di Mac che desiderano un'app più leggera, prestazioni misurate e un controllo più diretto dopo la registrazione.",
+    },
+    features: {
+      eyebrow: "Controllo creativo",
+      title: "Le parti ScreenCam facilitano la direzione.",
+      items: [
+        {
+          title: "Ancoraggi zoom manuali",
+          body: "Centri multipli, scala per ancoraggio e curve personalizzate in un unico clip zoom.",
+        },
+        {
+          title: "Livelli illimitati",
+          body: "Mosaico, testo, effetti di messa a fuoco e immagini personalizzate possono sovrapporsi nello stesso intervallo di tempo.",
+        },
+        {
+          title: "Mockup del dispositivo",
+          body: "Mac, iPhone e cornici in stile Studio Display per dimostrazioni di prodotti raffinate.",
+        },
+        {
+          title: "GIF + Live Photo",
+          body: "Spedisci le registrazioni come risorse visive rapide, non solo come file video completi.",
+        },
+        {
+          title: "Bellezza della fotocamera",
+          body: "Lucido per presentatore di luci per procedure dettagliate guidate dalla telecamera.",
+        },
+        {
+          title: "Sensazione Mac nativa",
+          body: "Superfici in stile Liquid Glass, acquisizione tramite tastiera e distribuzione Mac App Store.",
+        },
+      ],
+    },
+    comparison: {
+      eyebrow: "Confronto",
+      title: "ScreenCam rispetto a Screen Studio",
+      description:
+        "Entrambi gli strumenti possono creare video raffinati. La differenza è dove mettono il loro peso: Screen Studio si appoggia all'automatico, mentre ScreenCam si appoggia al nativo, al compatto e al manuale.",
+      headers: {
+        feature: "Caratteristica",
+        screenCam: "ScreenCam",
+        screenStudio: "Screen Studio",
+      },
+      rows: [
+        {
+          feature: "Impronta prestazionale",
+          screenCam: "Circa 30 volte più piccolo, utilizzo inferiore di CPU e memoria, esportazioni più veloci.",
+          screenStudio: "Registratore lucidato con un ingombro installato più pesante.",
+        },
+        {
+          feature: "Controllo dello zoom",
+          screenCam: "Ancoraggi manuali, centri multipli, scala per ancoraggio, curve sintonizzabili.",
+          screenStudio: "Potente zoom automatico e movimento fluido guidato dal cursore.",
+        },
+        {
+          feature: "Strati",
+          screenCam: "Mosaico, testo, messa a fuoco, livelli di immagini, sovrapposizione illimitata.",
+          screenStudio: "Editor mirato per movimento del cursore, sfondi e mascheramenti.",
+        },
+        {
+          feature: "Presentazione del dispositivo",
+          screenCam: "Mockup Mac, iPhone e Studio Display integrati.",
+          screenStudio: "Flusso di lavoro di acquisizione iOS e dispositivo avanzato.",
+        },
+        {
+          feature: "Formati di esportazione",
+          screenCam: "Video, GIF e Live Photo.",
+          screenStudio: "Video e GIF con impostazioni predefinite avanzate.",
+        },
+        {
+          feature: "Lucidatura della fotocamera",
+          screenCam: "Controlli di sovrapposizione della fotocamera ed effetti di bellezza leggeri.",
+          screenStudio: "Layout dinamici della fotocamera e presentazione tramite webcam.",
+        },
+        {
+          feature: "Prezzi",
+          screenCam: "Download gratuito; l'abbonamento è inferiore a un terzo nelle regioni App Store supportate.",
+          screenStudio: "Il prezzo dell'abbonamento è mostrato nel flusso di acquisto ufficiale di Screen Studio.",
+        },
+        {
+          feature: "Didascalie e trascrizioni",
+          screenCam: "Non ancora. È prevista la trascrizione Apple nativa e BYOK di terze parti.",
+          screenStudio: "I flussi di lavoro per trascrizione e sottotitoli sono disponibili oggi.",
+        },
+      ],
+    },
+    bestFit: {
+      eyebrow: "La migliore vestibilità",
+      title: "Scegli ScreenCam se...",
+      items: [
+        "Pro demo di condotti che richiedono più centri di zoom diretti",
+        "Procedure dettagliate sull'app Mac con modelli di dispositivi e inquadrature personalizzate",
+        "Clip che necessitano di redazione, messa a fuoco di evidenziazioni, testo e immagini",
+        "Esportazioni che richiedono l'output GIF o Live Photo",
+      ],
+      gapEyebrow: "Divario attuale",
+      gapTitle: "I sottotitoli non sono ancora arrivati.",
+      gapDescription:
+        "ScreenCam oggi non supporta i sottotitoli. Si prevede che il supporto pianificato offra la trascrizione nativa Apple e la trascrizione BYOK di terze parti, senza che ScreenCam gestisca il proprio servizio di trascrizione.",
+      pricingCta: "Controlla i prezzi App Store",
+      screenStudioCta: "Visualizza Screen Studio",
+    },
+    faq: {
+      eyebrow: "Domande frequenti",
+      title: "Domande sul passaggio da Screen Studio",
+      items: [
+        {
+          question: "ScreenCam è un'alternativa a Screen Studio?",
+          answer:
+            "Sì. ScreenCam è un registratore ed editor di schermo nativo macOS per demo di prodotti, tutorial, procedure dettagliate di app e clip social raffinati. È particolarmente efficace se desideri un'app più piccola, un minore utilizzo delle risorse, esportazioni più veloci e un controllo manuale dello zoom più approfondito.",
+        },
+        {
+          question: "Cosa rende ScreenCam diverso da Screen Studio?",
+          answer:
+            "ScreenCam si concentra su prestazioni Mac native, ancoraggi di zoom manuale, livelli più ricchi basati sul tempo, modelli di dispositivi, interfaccia utente in stile vetro liquido, curve di animazione configurabili, esportazione GIF ed esportazione Live Photo.",
+        },
+        {
+          question: "ScreenCam è più economico di Screen Studio?",
+          answer:
+            "ScreenCam è un download gratuito con acquisti in-app su Mac App Store. I prezzi attuali variano in base alla regione, ma l'abbonamento a ScreenCam è posizionato al di sotto di un terzo del prezzo dell'abbonamento a Screen Studio nelle regioni supportate.",
+        },
+        {
+          question: "ScreenCam supporta i sottotitoli?",
+          answer:
+            "Non ancora. È previsto il supporto dei sottotitoli. La direzione attuale è quella di offrire la trascrizione nativa di Apple e la trascrizione di terze parti tramite BYOK, senza che ScreenCam esegua il proprio servizio di trascrizione.",
+        },
+        {
+          question: "ScreenCam supporta animazioni zoom personalizzate?",
+          answer:
+            "Sì. La modalità zoom manuale supporta ancoraggi personalizzati, centri di zoom multipli, scala per ancoraggio e curve di animazione configurabili, in modo da poter dirigere l'attenzione dello spettatore dopo la registrazione.",
+        },
+        {
+          question: "ScreenCam può esportare file GIF o Live Photo?",
+          answer:
+            "Sì. ScreenCam supporta flussi di lavoro di esportazione più ricchi, inclusi GIF e Live Photo, insieme alle esportazioni incentrate sui video.",
+        },
+      ],
+    },
+    schema: {
+      breadcrumbName: "Screen Studio Alternativa",
+      about: ["Alternativa Screen Studio", "Registratore dello schermo Mac con zoom"],
+      softwareDescription:
+        "ScreenCam è un registratore di schermo macOS nativo per acquisizioni nitide, ancoraggi di zoom manuali, livelli, modelli di dispositivi, motion blur ed esportazione accurata in anteprima.",
+      featureList: [
+        "Registrazione dello schermo nativa macOS",
+        "Ancoraggi zoom manuali",
+        "Curve di animazione personalizzate",
+        "Mockup del dispositivo",
+        "Livelli di mosaico, testo, messa a fuoco e immagini personalizzate",
+        "Esportazione GIF",
+        "Esportazione Live Photo",
+        "Effetti di bellezza della fotocamera",
+        "Esportazione accurata in anteprima",
+      ],
+    },
+  },
 };
 
 export function getScreenStudioAlternativeCopy(locale: Locale): ScreenStudioAlternativePageCopy {

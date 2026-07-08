@@ -4765,6 +4765,4370 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       yLabel: "Y",
     },
   },
+  "zh-Hant": {
+    common: {
+      skipToContent: "跳到正文",
+    },
+    header: {
+      appStore: "App Store",
+      backToMenuAria: "返回選單",
+      closeMenuAria: "關閉選單",
+      homeAria: "ScreenCam 首頁",
+      logoAlt: "ScreenCam 標誌",
+      menuAria: "開啟選單",
+      nav: {
+        changelog: "更新日誌",
+        docs: "文件",
+        privacy: "隱私",
+        support: "支援",
+        terms: "條款",
+      },
+      primaryNavigationAria: "主導航",
+    },
+    footer: {
+      appStoreButton: "在 App Store 檢視",
+      copyright: "保留所有權利。",
+      ctaText: "從 Mac App Store 獲取 ScreenCam。",
+      ctaTitle: "準備錄得更好嗎？",
+      description: "Mac 原生螢幕錄製。快速、輕量、強大。",
+      groups: {
+        legal: "法律",
+        product: "產品",
+        resources: "資源",
+      },
+      language: "語言",
+      legalLinks: {
+        privacy: "隱私",
+        terms: "條款",
+      },
+      productLinks: {
+        controls: "控制",
+        export: "匯出",
+        faq: "FAQ",
+        zoom: "變焦",
+      },
+      resourceLinks: {
+        alternatives: "替代方案",
+        bgm: "BGM",
+        changelog: "更新日誌",
+        docs: "文件",
+        motionBlurMask: "運動模糊遮罩",
+        support: "支援",
+      },
+      supportChannelsAria: "支援渠道",
+      systemStatus: "所有系統執行正常",
+    },
+    meta: {
+      changelog: {
+        title: "更新日誌 - ScreenCam",
+        description: "檢視 ScreenCam 的版本說明、產品改進、問題修復和更新歷史。",
+      },
+      docs: {
+        title: "文件 - ScreenCam",
+        description: "透過帶章節的影片演示和互動播放，快速上手 ScreenCam 的核心功能。",
+      },
+      home: {
+        title: "ScreenCam - 帶定向變焦的原生 macOS 螢幕錄製",
+        description:
+          "ScreenCam 是一款原生 macOS 螢幕錄製工具，支援高畫質錄製、手動變焦控制、時間線錨點、曲線調節和所見即所得匯出。",
+      },
+      motionBlurMask: {
+        title: "運動模糊遮罩工具 - ScreenCam",
+        description: "上傳圖片，繪製矩形運動模糊遮罩，調整模糊強度和方向，然後匯出合成結果。",
+      },
+      privacy: {
+        title: "隱私政策 - ScreenCam",
+        description:
+          "ScreenCam 的隱私政策說明 macOS app 如何處理錄製內容、許可權、可選分析、購買和網站資料。",
+      },
+      support: {
+        title: "支援 - ScreenCam",
+        description: "獲取 ScreenCam macOS 版幫助，包括支援聯絡方式、App Store 購買、系統要求和故障排查。",
+      },
+      terms: {
+        title: "使用條款 - ScreenCam",
+        description: "ScreenCam 使用條款說明 app 授權、訂閱、購買和支援聯絡方式。",
+      },
+    },
+    docs: {
+      chaptersTitle: "步驟",
+      description:
+        "看一遍流程，直接跳到需要的步驟。",
+      emptyVideoDescription:
+        "把這個功能的演示影片放到 public/docs，然後在 timeline JSON 裡填入影片路徑和校準後的時間點。",
+      emptyVideoTitle: "影片稍後新增",
+      eyebrow: "文件",
+      featureListAria: "文件主題",
+      playback: {
+        next: "下一步",
+        pause: "暫停",
+        play: "播放",
+        previous: "上一步",
+        restart: "重新開始",
+      },
+      progressLabel: "進度",
+      title: "ScreenCam 指南。",
+      videoAriaLabel: "文件演示影片",
+      features: {
+        basics: {
+          title: "基礎佈局",
+          summary: "瞭解預覽畫面、側邊欄、各類設定面板和時間線軌道。",
+          chapters: {
+            preview: {
+              title: "預覽畫面",
+              description: "用來實時預覽當前最終匯出的效果。",
+            },
+            sidebar: {
+              title: "側邊欄",
+              description: "所有的主要配置都在這裡。",
+            },
+            "screen-settings": {
+              title: "螢幕設定",
+              description: "用來設定螢幕內容，包括桌布、邊距、尺寸等。",
+            },
+            "device-settings": {
+              title: "裝置設定",
+              description: "給螢幕套上裝置外殼，在這裡選擇裝置，並配置裝置的樣式，例如背景。",
+            },
+            "keyboard-settings": {
+              title: "按鍵設定",
+              description: "設定錄製的快捷鍵顯示樣式、預設尺寸和位置。",
+            },
+            "beauty-settings": {
+              title: "美顏設定",
+              description: "開啟相機錄製後，在這裡對相機畫面做一些輕微的人像美顏。",
+            },
+            "mouse-settings": {
+              title: "滑鼠設定",
+              description: "設定滑鼠的基礎樣式。",
+            },
+            "animation-settings": {
+              title: "動畫設定",
+              description: "自定義鏡頭動畫，包括運動模糊強度和自定義曲線。",
+            },
+            tracks: {
+              title: "軌道",
+              description: "錄製、攝像頭、系統音訊、麥克風、縮放、鍵盤都會以時間軸片段的形式在這裡展示。",
+            },
+          },
+        },
+        "preview-control": {
+          title: "預覽控制",
+          summary: "調整預覽播放速度、預覽音量和時間線軌道縮放。",
+          chapters: {
+            "playback-rate": {
+              title: "倍數播放",
+              description:
+                "這裡調整預覽的播放速度，**隻影響預覽階段，不會影響匯出**。",
+            },
+            volume: {
+              title: "音量調節",
+              description:
+                "調整預覽的聲音，**隻影響預覽階段，不會影響匯出**。",
+            },
+            "track-zoom": {
+              title: "軌道縮放",
+              description: "調整軌道的縮放比例。",
+            },
+          },
+        },
+        "track-management": {
+          title: "軌道管理",
+          summary: "開啟軌道設定、調整排序、隱藏軌道、刪除軌道，並恢復已刪除軌道。",
+          chapters: {
+            entry: {
+              title: "入口",
+              description: "在軌道左側開啟軌道設定面板。",
+            },
+            sort: {
+              title: "排序",
+              description:
+                "拖拽前面的 {{icon:grip}} 排序圖示來進行排序，這個排序將會作為偏好儲存，下次也會使用這個排序。",
+            },
+            hide: {
+              title: "隱藏",
+              description:
+                "點選 {{icon:eye}} 圖示，隱藏不需要的軌道，這 **不會影響匯出**。",
+            },
+            delete: {
+              title: "刪除",
+              description:
+                "點選 {{icon:trash}} 圖示，刪除不需要的軌道，這**會影響最終的匯出**。",
+            },
+            restore: {
+              title: "恢復",
+              description: "已刪除的軌道會單獨顯示在下方，可以隨時點選恢復。",
+            },
+          },
+        },
+        "screen-settings": {
+          title: "螢幕設定",
+          summary: "這裡的螢幕指錄製畫面以及畫面可能帶有的背景部分，用來調整這些樣式。",
+          chapters: {
+            wallpaper: {
+              title: "桌布",
+              description:
+                "選擇從系統讀取的桌布，包括動態桌布。這部分不包含在應用安裝包內，不佔據空間，並且確保了最高的桌布質量。可以點選自定義在設定中配置更多的桌布目錄。",
+            },
+            "no-background": {
+              title: "無背景",
+              description:
+                "可以選擇不要背景，這在全屏錄製，或自己選擇區域錄製中尤其重要。但是要注意，**目前預設切換到無桌布時，會保留之前的邊距或尺寸設定，需要手動調成 0 來去掉黑邊**。",
+            },
+            gradient: {
+              title: "漸變",
+              description:
+                "選擇預設的線性漸變，你也可以自己任意地編輯漸變錨點和顏色，隨意加減錨點。",
+            },
+            "solid-color": {
+              title: "純色",
+              description: "選擇一個單一的顏色作為背景。",
+            },
+            "custom-background": {
+              title: "自定義",
+              description: "上傳自己的照片或影片作為背景。",
+            },
+            "adaptive-size": {
+              title: "螢幕尺寸自適應模式",
+              description: "在這個模式下畫面的大小透過調整上下或左右的邊距來控制。",
+            },
+            "sync-margins": {
+              title: "同步邊距",
+              description:
+                "開啟同步邊距後確保 4 邊的邊距是一致的，關閉後可以單獨控制上下或左右。注意，**如果選擇了畫面比例的功能，視覺上會確保最終的畫面符合比例，邊距看起來會和調的引數不一致**。",
+            },
+            "fixed-size": {
+              title: "螢幕尺寸固定模式",
+              description:
+                "這個模式下你可以手動輸入螢幕的尺寸。同樣，**如果選擇了畫面比例，會向外補充至目標的比例**。",
+            },
+          },
+        },
+        "workspace-file": {
+          title: "工程檔案",
+          summary:
+            "工程檔案是一次錄製完成時生成的所有錄製相關的原始檔案，包括全部素材與配置，可以用於分享，**在錄製完成時自動建立並儲存到一個預設位置**。",
+          chapters: {
+            "default-directory": {
+              title: "修改預設目錄",
+              description:
+                "開啟 <kbd>ScreenCam</kbd> > <kbd>設定</kbd> > <kbd>錄製</kbd> > <kbd>預設工作區目錄</kbd>，選擇預設目錄。",
+            },
+            "recent-projects": {
+              title: "快速訪問最近專案",
+              description: "在 <kbd>檔案</kbd> > <kbd>最近</kbd>。",
+            },
+            "default-directory-projects": {
+              title: "快速訪問預設位置的專案",
+              description: "在 <kbd>檔案</kbd> > <kbd>預設目錄</kbd>。",
+            },
+            "show-in-finder": {
+              title: "在 Finder 檢視當前檔案",
+              description:
+                "可以直接點選編輯器頂部的工程檔名，或者在 <kbd>檔案</kbd> > <kbd>在訪達開啟</kbd>。",
+            },
+            "manual-save": {
+              title: "手動儲存",
+              description:
+                "可以點選 <kbd>檔案</kbd> > <kbd>儲存</kbd>，或使用快捷鍵 <kbd>⌘</kbd><kbd>S</kbd> 手動儲存。大部分情況下會自動儲存。",
+            },
+            "save-as": {
+              title: "另存為",
+              description:
+                "點選 <kbd>檔案</kbd> > <kbd>另存為</kbd>，或使用快捷鍵 <kbd>⌘</kbd><kbd>⇧</kbd><kbd>S</kbd>，將副本儲存到自定義目錄。",
+            },
+          },
+        },
+        record: {
+          title: "錄製",
+          summary: "設定錄製內容、選擇來源，然後開始錄製。",
+          chapters: {
+            "prepare-capture": {
+              title: "準備錄製",
+              description: "開啟 ScreenCam，並確認錄製控制區已經準備好，再選擇錄製來源。",
+            },
+            "choose-source": {
+              title: "選擇來源",
+              description: "選擇顯示器、視窗、區域、攝像頭、麥克風和系統聲音等錄製選項。",
+            },
+            "start-recording": {
+              title: "開始錄製",
+              description: "啟動錄製，並確認當前錄製狀態後再繼續後續流程。",
+            },
+          },
+        },
+        zoom: {
+          title: "變焦",
+          summary: "新增時間線錨點，調整畫面在錄製中的移動方式。",
+          chapters: {
+            "zoom-track": {
+              title: "Zoom 軸",
+              description: "在 zoom 軸上自由建立或刪除 zoom 片段。",
+            },
+            "delete-clip": {
+              title: "刪除",
+              description: "選中一個 clip 後，按 Backspace 或 Delete 刪除。",
+              descriptionHtml:
+                "選中一個 clip 後，按 <kbd class=\"docs-key\">Backspace</kbd> 或 <kbd class=\"docs-key\">Delete</kbd> 刪除。",
+            },
+            "create-clip": {
+              title: "新建",
+              description: "在空白處點選或拖拽，直接新建 zoom clip。",
+            },
+            "merge-clips": {
+              title: "合併",
+              description: "resize 一個 clip，或拖拽它與另一個 clip 相交，鬆開後確認合併。",
+            },
+            "manual-mode": {
+              title: "手動模式",
+              description: "預設會根據點選事件自動運鏡，也可以切到手動模式，自定義錨點數量、縮放中心和放大比例。",
+            },
+            "select-anchor": {
+              title: "選擇錨點",
+              description: "選中一個錨點，編輯它自己的 zoom 設定。",
+            },
+            "adjust-center": {
+              title: "調整中心",
+              description: "直接拖拽預覽畫面，調整縮放的視覺中心。",
+            },
+            "adjust-scale-wheel": {
+              title: "調整縮放",
+              description: "在預覽畫面裡使用滑鼠滾輪，直接控制放大比例。",
+            },
+            "adjust-scale-panel": {
+              title: "設定面板調整",
+              description: "選中錨點後，也可以在右側設定面板裡拖動滑塊調整縮放。",
+            },
+          },
+        },
+        camera: {
+          title: "攝像頭",
+          summary: "調整攝像頭浮窗形狀，並應用輕量的外觀效果。",
+          chapters: {
+            "enable-camera": {
+              title: "啟用攝像頭",
+              description: "開啟攝像頭圖層，並把它放到適合當前錄製的位置。",
+            },
+            "shape-frame": {
+              title: "調整畫框",
+              description: "切換畫框形狀，並調整攝像頭浮窗尺寸來適配畫面。",
+            },
+            "apply-beauty": {
+              title: "應用美顏效果",
+              description: "調整輕量外觀設定，並保持預覽效果和最終匯出一致。",
+            },
+          },
+        },
+        shortcuts: {
+          title: "快捷鍵",
+          summary: "用鍵盤動作控制錄製，不打斷當前操作節奏。",
+          chapters: {
+            "capture-shortcut": {
+              title: "用快捷鍵開始",
+              description: "透過鍵盤觸發錄製控制，不需要頻繁回到工具欄。",
+            },
+            "pause-resume": {
+              title: "暫停或繼續",
+              description: "在較長錄製中，用快捷鍵暫停和繼續錄製。",
+            },
+            "finish-recording": {
+              title: "結束錄製",
+              description: "停止錄製並進入編輯流程，同時保持當前上下文。",
+            },
+          },
+        },
+        export: {
+          title: "匯出",
+          summary: "檢查結果、選擇輸出設定，並匯出錄製檔案。",
+          chapters: {
+            "choose-format": {
+              title: "選擇格式",
+              description: "根據目標用途選擇匯出格式和輸出設定。",
+            },
+            "review-preview": {
+              title: "檢查預覽",
+              description: "在渲染檔案前確認最終預覽效果。",
+            },
+            "export-file": {
+              title: "匯出檔案",
+              description: "渲染錄製內容，並儲存匯出的結果檔案。",
+            },
+          },
+        },
+      },
+    },
+    home: {
+      screenStudioAlternative: {
+        eyebrow: "Screen Studio 替代方案",
+        title: "想要更輕巧、手動控制更深入的 Mac 錄屏工具嗎？",
+        description:
+          "從應用體積、CPU 與記憶體佔用、匯出速度、手動變焦錨點、圖層、裝置樣機和匯出格式等方面對比 ScreenCam 與 Screen Studio。",
+        cta: "檢視 Mac 版 Screen Studio 替代方案",
+      },
+      structuredDataFeatureList: ["原生 macOS 螢幕錄製", "手動變焦錨點", "運動模糊轉場", "精確預覽匯出"],
+      hero: {
+        appStoreButton: "在 App Store 檢視",
+        builtWithLabel: "構建方式",
+        builtWithValue: "100% 原生",
+        systemLabel: "系統",
+        systemValue: "macOS 15+",
+        tagline: "原生 macOS 錄屏，帶手動變焦、運動模糊和精確匯出。",
+        titleLines: [
+          ["讓每一幀", "都清晰。"],
+          ["讓重點", "被看見。"],
+        ],
+      },
+      zoom: {
+        canvasLabels: {
+          autoPlayingDemo: "自動播放演示",
+          playMarker: "播放",
+          previewMarker: "預覽",
+          recordingClip: "錄製",
+          recordingTrack: "錄製",
+          timelinePreview: "時間線預覽",
+          zoomClip: "自動變焦",
+          zoomTrack: "變焦",
+        },
+        features: [
+          {
+            title: "動態變焦",
+            description: "鏡頭運動沿用 ScreenCam 匯出時的同一套彈簧時序。",
+          },
+          {
+            title: "時間線預覽",
+            description: "懸停在錄製或變焦軌道上，即可拖看精確的預覽幀。",
+          },
+          {
+            title: "運動模糊",
+            description: "變焦、平移和點選狀態都會按快門感取樣模糊。",
+          },
+        ],
+        subtitle: "帶運動模糊的變焦。",
+        timelineAria: "時間線預覽軌道",
+        title: "聚焦真正重要的畫面。",
+      },
+      deviceMockups: {
+        description: "用精緻裝置框匯出內容。iPhone、Mac、Studio Display，讓畫面呈現得剛剛好。",
+        eyebrow: "匯出選項",
+        formats: ["原始解析度", "Live Photo", "MP4 / MOV"],
+        imageAlt: {
+          iPhone: "iPhone 17 Pro Max",
+          macBook: "在 MacBook Pro 上執行的 ScreenCam app",
+          studioDisplay: "在 Studio Display 和 MacBook 上執行的 ScreenCam",
+        },
+        title: "每塊螢幕都好看",
+      },
+      controls: {
+        body: "手動模式給你完整的創作自由。給同一個變焦片段新增多個錨點，每個錨點都有自己的倍率和中心點。",
+        centerLabel: "中心",
+        dragCenter: "拖動調整中心",
+        eyebrow: "高階控制",
+        features: ["拖動錨點調整時間線位置", "為每個錨點設定 1x 到 5x 倍率", "為每次變焦設定自定義焦點", "錨點之間平滑過渡"],
+        pauseAria: "暫停模擬時間線播放",
+        pauseTitle: "暫停",
+        playAria: "播放模擬時間線",
+        playTitle: "播放",
+        scaleAria: "縮放倍率",
+        scaleLabel: "倍率",
+        titleMuted: "每個變焦點。",
+        titleStart: "完全掌控",
+      },
+      performance: {
+        cta: "檢視完整基準資料",
+        metrics: {
+          appSize: "App 體積",
+          appSizeNote: "約 20MB vs 600MB",
+          cpuUsage: "CPU 使用率",
+          exportTime: "匯出時間",
+          exportTimeNote: "越短越快",
+          memory: "記憶體",
+          others: "其他",
+          screenCam: "ScreenCam",
+        },
+        subtitle: "沒有 Electron。沒有 WebView。純原生效能。",
+        title: "原生，所以快",
+      },
+      featureCards: {
+        eyebrow: "更多特色",
+        title: "每一處小細節，都認真打磨。",
+        subtitle: "從錄製、編輯到匯出，圍繞 Mac 原生體驗，把常用流程做得更順手。",
+        beautyThumb: {
+          beforeLabel: "美顏關閉",
+          afterLabel: "美顏開啟",
+          disclosure: "人像由 AI 生成，僅用於演示產品真實的美顏效果。",
+          enterFloatingAria: "切換為攝像頭浮窗",
+          exitFloatingAria: "恢復完整攝像頭預覽",
+          pauseAria: "暫停美顏對比演示",
+          playAria: "播放美顏對比演示",
+          shapeCycleAria: "切換浮窗形狀",
+          shapeLabels: {
+            circle: "圓形",
+            square: "圓角方形",
+            wide: "16:9",
+          },
+        },
+        dynamicIslandThumb: {
+          ariaLabel: "Dynamic Island 後臺任務預覽",
+          materialLabel: "劉海材質",
+          modeLabels: {
+            black: "黑色",
+            glass: "Glass",
+          },
+          tasks: [
+            {
+              title: "ScreenCam 釋出影片",
+              detail: "已完成，可在 Finder 中檢視。",
+              primaryAction: "開啟 Finder",
+              secondary: "已完成",
+              secondaryAction: "完成",
+              size: "384 MB",
+            },
+            {
+              title: "4K 教程匯出",
+              detail: "正在編碼 H.265，包含攝像頭和游標圖層。",
+              primaryAction: "開啟 Finder",
+              secondary: "剩 2 分鐘",
+              secondaryAction: "完成",
+              size: "1.2 GB",
+            },
+            {
+              title: "GIF 預覽壓縮",
+              detail: "正在最佳化幀，生成更小的分享片段。",
+              primaryAction: "開啟 Finder",
+              secondary: "剩 42 秒",
+              secondaryAction: "完成",
+              size: "18 MB",
+            },
+          ],
+          wallpaperButtonAria: "切換桌布",
+        },
+        effectLayersThumb: {
+          ariaLabel: "特效圖層時間線預覽",
+          dragHint: "拖拽到軌道新增",
+          effects: [
+            {
+              id: "mosaic",
+              title: "馬賽克",
+              description: "給畫面中的敏感區域疊加馬賽克。",
+              clipLabel: "馬賽克",
+            },
+            {
+              id: "focus",
+              title: "聚焦",
+              description: "突出重點區域，同時保留上下文。",
+              clipLabel: "聚焦",
+            },
+            {
+              id: "text",
+              title: "文字",
+              description: "在剪輯中任意位置新增文字圖層。",
+              clipLabel: "文字",
+            },
+            {
+              id: "image",
+              title: "圖片",
+              description: "把圖片作為可計時的疊加圖層放入時間線。",
+              clipLabel: "圖片",
+            },
+          ],
+        },
+        glassThumb: {
+          modeLabels: {
+            clear: "通透",
+            regular: "常規",
+          },
+          toolbarItems: {
+            area: "區域",
+            camera: "攝像頭",
+            close: "隱藏 ScreenCam",
+            display: "螢幕",
+            iphone: "iPhone",
+            keyboard: "鍵盤事件錄製",
+            microphone: "麥克風",
+            settings: "設定",
+            systemAudio: "系統聲音錄製",
+            window: "視窗",
+            workspace: "開啟工作區",
+          },
+          wallpaperButtonAria: "切換桌布",
+        },
+        items: [
+          {
+            title: "Liquid Glass",
+            caption: "支援原生 glass 材質，讓控制層通透、清晰，並貼合現代 macOS 視覺。",
+          },
+          {
+            title: "快捷鍵展示",
+            caption: "錄製鍵盤快捷鍵操作，並在影片中清晰展示出來。",
+          },
+          {
+            title: "輕度美顏",
+            caption: "輕微最佳化相機畫面，讓人像更清爽自然。",
+          },
+          {
+            title: "Dynamic Island",
+            caption: "將長任務放到後臺，在 notch 中隨時關注進度。",
+          },
+          {
+            title: "特效圖層",
+            caption: "可以新增任意數量的特效圖層，在時間線上移動、縮放並堆疊每個 clip。",
+          },
+        ],
+      },
+      faq: {
+        eyebrow: "FAQ",
+        title: "常見問題",
+        items: [
+          {
+            question: "ScreenCam 和基於瀏覽器的錄屏工具有什麼不同？",
+            answer:
+              "ScreenCam 是為 macOS 打造的原生錄製和編輯 app。目標是提供緊湊、Mac 優先的工作流，包括本地捕捉、順滑編輯控制和精確預覽匯出。",
+          },
+          {
+            question: "最低需要哪個 macOS 版本？",
+            answer: "ScreenCam 需要 macOS 15 或更高版本。",
+          },
+          {
+            question: "有 Windows 版本嗎？",
+            answer: "目前沒有。ScreenCam 專注於 macOS，短期內沒有開發 Windows 版本的計劃。",
+          },
+          {
+            question: "可以匯出不同格式嗎？",
+            answer: "ScreenCam 面向高質量影片匯出，編輯器中的畫幅和運動控制會反映到最終輸出裡。",
+          },
+          {
+            question: "變焦功能如何工作？",
+            answer:
+              "你可以在時間線任意位置新增變焦點。手動模式下可以完全控制：設定多個不同倍率和焦點中心的錨點，並帶有順滑的運動模糊轉場。",
+          },
+          {
+            question: "支援多個顯示器嗎？",
+            answer: "ScreenCam 面向 Mac 螢幕錄製工作流，支援連線的顯示器、視窗和選定錄製區域。",
+          },
+        ],
+      },
+    },
+    legal: {
+      privacy: {
+        eyebrow: "隱私",
+        title: "隱私政策",
+        updated: "最後更新：2026 年 6 月 3 日",
+        sections: [
+          {
+            title: "概覽",
+            paragraphs: [
+              [
+                "ScreenCam 是一款原生 macOS 螢幕錄製和編輯 app。它的設計目標是在你的 Mac 本地處理錄製內容。ScreenCam 可能會為了 app 功能發起網路請求，例如 App Store 購買狀態；當你選擇啟用時，也可能傳送可選的匿名使用分析。我們不會在 app 中使用廣告追蹤器。",
+              ],
+            ],
+          },
+          {
+            title: "錄製內容和本地檔案",
+            paragraphs: [
+              [
+                "螢幕錄製、攝像頭影片、麥克風音訊、系統音訊、游標資料、匯出影片、工作區檔案和自定義桌布檔案會保留在你的裝置或你選擇的位置。ScreenCam 不會把這些內容上傳到 ScreenCam 伺服器。",
+              ],
+            ],
+          },
+          {
+            title: "匿名使用分析",
+            paragraphs: [
+              [
+                "ScreenCam 可能會詢問你是否願意分享匿名使用分析，以幫助我們瞭解哪些錄製和編輯功能執行良好。你可以隨時在 app 中開啟或關閉分析共享。如果關閉，ScreenCam 不會傳送使用分析。",
+              ],
+              [
+                "分析內容僅限產品使用、診斷和效能資訊，例如功能互動、app 版本、macOS 版本和一般裝置資訊。我們絕不會透過分析收集螢幕內容、音訊、攝像頭影片、專案檔案、檔名或輸入文字。",
+              ],
+            ],
+          },
+          {
+            title: "許可權",
+            paragraphs: [
+              [
+                "ScreenCam 可能會請求 macOS 的螢幕錄製、麥克風、攝像頭和檔案訪問許可權。這些許可權只用於提供錄製、編輯、匯出和使用者選擇檔案等功能。你可以在系統設定中管理這些許可權。",
+              ],
+            ],
+          },
+          {
+            title: "購買",
+            paragraphs: [
+              [
+                "ScreenCam Pro 訂閱和購買由 Apple 透過 Mac App Store 處理。ScreenCam 會透過 StoreKit 讀取購買和訂閱狀態，以解鎖 Pro 功能。ScreenCam 不會接收或儲存你的支付卡資訊。",
+              ],
+            ],
+          },
+          {
+            title: "網站",
+            paragraphs: [
+              [
+                "當你訪問 thescreen.cam 時，我們的託管和基礎設施提供商可能會處理標準伺服器日誌資料，例如 IP 地址、瀏覽器 user agent、請求 URL 和請求時間，用於安全、診斷和網站交付。本網站不使用廣告追蹤器。",
+              ],
+            ],
+          },
+          {
+            title: "變更和聯絡",
+            paragraphs: [["隨著 ScreenCam 變化，我們可能會更新本政策。如果你有隱私問題，請透過 ", emailLink, " 聯絡我們。"]],
+          },
+        ],
+      },
+      support: {
+        eyebrow: "支援",
+        title: "ScreenCam 支援",
+        updated: "獲取 ScreenCam macOS 版幫助。",
+        supportChannelsAria: "支援渠道",
+        sections: [
+          {
+            title: "聯絡",
+            showSupportChannels: true,
+            paragraphs: [["如需產品支援、報告問題、購買諮詢或反饋，請傳送郵件至 ", emailLink, "。"]],
+          },
+          {
+            title: "請包含這些資訊",
+            paragraphs: [
+              [
+                "報告問題時，請包含 macOS 版本、ScreenCam 版本、Mac 型號、錄製設定、匯出格式，以及簡短的問題描述。如果是視覺問題，截圖或短錄屏會很有幫助。",
+              ],
+            ],
+          },
+          {
+            title: "App Store 購買",
+            paragraphs: [
+              [
+                "ScreenCam 透過 Mac App Store 分發。計費、訂閱、續訂、取消和退款由 Apple 透過你的 Apple ID 與 App Store 賬戶設定處理。",
+              ],
+            ],
+          },
+          {
+            title: "系統要求",
+            paragraphs: [["ScreenCam 目前為 macOS 構建。沒有 Windows 版本，短期內也沒有 Windows 開發計劃。"]],
+          },
+          {
+            title: "隱私",
+            paragraphs: [["錄製內容和工作區檔案會在你的 Mac 本地處理。更多詳情請閱讀", { href: "/privacy", text: "隱私政策" }, "。"]],
+          },
+        ],
+      },
+      terms: {
+        eyebrow: "條款",
+        title: "使用條款",
+        updated: "最後更新：2026 年 5 月 20 日",
+        sections: [
+          {
+            title: "App 授權",
+            paragraphs: [
+              [
+                "除非適用法律另有要求，ScreenCam 根據 Apple 標準終端使用者許可協議 (EULA) 授權給你使用。你可以在 ",
+                appleEulaLink,
+                " 檢視 Apple 標準 EULA。",
+              ],
+            ],
+          },
+          {
+            title: "訂閱和購買",
+            paragraphs: [
+              [
+                "ScreenCam Pro 訂閱和購買由 Apple 透過 Mac App Store 處理。訂閱計費、續訂、取消、退款和賬戶管理均透過你的 Apple ID 與 App Store 賬戶設定完成。",
+              ],
+            ],
+          },
+          {
+            title: "ScreenCam 的使用",
+            paragraphs: [["你需要對使用 ScreenCam 建立的錄製內容、檔案和匯出結果負責。只有在擁有所需權利和許可時，才應錄製、編輯和分享內容。"]],
+          },
+          {
+            title: "隱私",
+            paragraphs: [["ScreenCam 的隱私實踐見", { href: "/privacy", text: "隱私政策" }, "。"]],
+          },
+          {
+            title: "聯絡",
+            paragraphs: [["如果你對這些條款有疑問，請透過 ", emailLink, " 聯絡我們。"]],
+          },
+        ],
+      },
+    },
+    changelog: {
+      description: "產品更新、修復和版本說明。",
+      eyebrow: "更新日誌",
+      intro: "產品更新、修復和版本說明。",
+      linkVersionLabel: "連結到版本",
+      title: "ScreenCam 更新日誌",
+    },
+    motionBlurTool: {
+      addMaskAria: "新增遮罩",
+      addMaskButton: "遮罩",
+      angleAria: "模糊角度",
+      angleLabel: "角度",
+      blurSettingsTitle: "模糊設定",
+      chooseImage: "選擇圖片",
+      clearImage: "清除圖片",
+      defaultMaskName: "遮罩",
+      deleteSelectedMaskAria: "刪除選中的遮罩",
+      description: "建立矩形模糊區域，調整方向和強度，然後匯出合成圖片。",
+      emptyMasksWithImage: "新增一個遮罩來模糊圖片的一部分。",
+      emptyMasksWithoutImage: "請先上傳圖片。",
+      exportButton: "匯出",
+      heightLabel: "高度",
+      linearMode: "線性",
+      maskButton: "遮罩",
+      masksTitle: "遮罩",
+      modeLabel: "模式",
+      nameLabel: "名稱",
+      previewAria: "運動模糊預覽",
+      replaceImageAria: "替換圖片",
+      selectedMaskEmpty: "選擇一個遮罩，以編輯模糊方向、強度、位置和大小。",
+      sourceTitle: "來源",
+      strengthAria: "模糊強度",
+      strengthLabel: "強度",
+      title: "運動模糊遮罩",
+      toolEyebrow: "工具",
+      uniformMode: "均勻",
+      uploadDescription: "將本地圖片拖到這裡，或選擇一個檔案開始編輯。",
+      uploadTitle: "上傳圖片",
+      widthLabel: "寬度",
+      xLabel: "X",
+      yLabel: "Y",
+    },
+  },
+  es: {
+    common: {
+      skipToContent: "Saltar al contenido",
+    },
+    header: {
+      appStore: "App Store",
+      backToMenuAria: "Volver al menú",
+      closeMenuAria: "Cerrar menú",
+      homeAria: "Inicio de ScreenCam",
+      logoAlt: "Logotipo ScreenCam",
+      menuAria: "abrir menú",
+      nav: {
+        changelog: "Registro de cambios",
+        docs: "Documentos",
+        privacy: "Privacidad",
+        support: "Soporte",
+        terms: "Términos",
+      },
+      primaryNavigationAria: "Navegación primaria",
+    },
+    footer: {
+      appStoreButton: "Ver en App Store",
+      copyright: "Todos los derechos reservados.",
+      ctaText: "Obtenga ScreenCam del Mac App Store.",
+      ctaTitle: "¿Listo para capturar mejor?",
+      description: "Grabación de pantalla nativa para Mac. Rápido, ligero, potente.",
+      groups: {
+        legal: "Legales",
+        product: "Producto",
+        resources: "Recursos",
+      },
+      language: "Idioma",
+      legalLinks: {
+        privacy: "Privacidad",
+        terms: "Términos",
+      },
+      productLinks: {
+        controls: "Controles",
+        export: "Exportar",
+        faq: "Preguntas frecuentes",
+        zoom: "Ampliar",
+      },
+      resourceLinks: {
+        alternatives: "Alternativas",
+        bgm: "BGM",
+        changelog: "Registro de cambios",
+        docs: "Documentos",
+        motionBlurMask: "Máscara de desenfoque de movimiento",
+        support: "Soporte",
+      },
+      supportChannelsAria: "Canales de soporte",
+      systemStatus: "Todos los sistemas funcionan correctamente",
+    },
+    meta: {
+      changelog: {
+        title: "Registro de cambios: ScreenCam",
+        description: "Siga las notas de la versión del ScreenCam, las mejoras del producto, las correcciones de errores y el historial de actualizaciones.",
+      },
+      docs: {
+        title: "Documentos - ScreenCam",
+        description:
+          "Aprenda ScreenCam con tutoriales en vídeo guiados, pasos por capítulos y reproducción interactiva.",
+      },
+      home: {
+        title: "ScreenCam - Grabación de pantalla nativa macOS con zoom dirigido",
+        description:
+          "ScreenCam es un grabador de pantalla nativo macOS para capturas nítidas, control de zoom manual, anclajes de línea de tiempo, ajuste de curvas y exportación con vista previa precisa.",
+      },
+      motionBlurMask: {
+        title: "Herramienta Máscara de desenfoque de movimiento - ScreenCam",
+        description:
+          "Cargue una imagen, dibuje máscaras de desenfoque de movimiento rectangulares, ajuste la intensidad y la dirección del desenfoque y luego exporte el resultado compuesto.",
+      },
+      privacy: {
+        title: "Política de privacidad - ScreenCam",
+        description:
+          "La política de privacidad de ScreenCam explica cómo la aplicación macOS maneja grabaciones, permisos, análisis opcionales, compras y datos del sitio web.",
+      },
+      support: {
+        title: "Soporte - ScreenCam",
+        description:
+          "Obtenga ayuda con ScreenCam para macOS, incluido el contacto de soporte, compras de App Store, requisitos y solución de problemas.",
+      },
+      terms: {
+        title: "Condiciones de uso - ScreenCam",
+        description:
+          "Los términos de uso de ScreenCam explican la licencia de la aplicación, las suscripciones, las compras y la información de contacto de soporte.",
+      },
+    },
+    docs: {
+      chaptersTitle: "Pasos",
+      description:
+        "Observe el flujo de trabajo y luego vaya directamente al paso que necesita.",
+      emptyVideoDescription:
+        "Coloque el archivo de demostración en public/docs para esta función, luego agregue la ruta del video y las marcas de tiempo calibradas a la línea de tiempo JSON.",
+      emptyVideoTitle: "Vídeo próximamente",
+      eyebrow: "Documentos",
+      featureListAria: "Temas de documentación",
+      playback: {
+        next: "Siguiente paso",
+        pause: "Pausa",
+        play: "Jugar",
+        previous: "Paso anterior",
+        restart: "Reiniciar",
+      },
+      progressLabel: "Progreso",
+      title: "Guías ScreenCam.",
+      videoAriaLabel: "Vídeo de demostración de documentación",
+      features: {
+        basics: {
+          title: "Conceptos básicos",
+          summary: "Familiarícese con la vista previa, la barra lateral, los paneles de configuración y las pistas de la línea de tiempo.",
+          chapters: {
+            preview: {
+              title: "Vista previa",
+              description: "Utilice el área de vista previa para ver el resultado final de la exportación actual en tiempo real.",
+            },
+            sidebar: {
+              title: "Barra lateral",
+              description: "Los paneles de configuración principales se encuentran en la barra lateral.",
+            },
+            "screen-settings": {
+              title: "Configuración de pantalla",
+              description: "Configure el contenido de la pantalla, incluido el fondo de pantalla, los márgenes, el tamaño y las opciones de diseño relacionadas.",
+            },
+            "device-settings": {
+              title: "Configuración del dispositivo",
+              description: "Envuelva la pantalla en un marco de dispositivo, elija el dispositivo y ajuste el estilo del marco, como el fondo.",
+            },
+            "keyboard-settings": {
+              title: "Configuración del teclado",
+              description: "Configure cómo aparecen los atajos grabados, incluido su tamaño y posición predeterminados.",
+            },
+            "beauty-settings": {
+              title: "Configuraciones de belleza",
+              description: "Una vez habilitada la grabación de la cámara, aplique mejoras sutiles del retrato a la imagen de la cámara.",
+            },
+            "mouse-settings": {
+              title: "Configuración del ratón",
+              description: "Ajuste el estilo visual básico del puntero del mouse.",
+            },
+            "animation-settings": {
+              title: "Configuración de animación",
+              description: "Personalice el movimiento de la cámara, incluida la intensidad del desenfoque de movimiento y curvas personalizadas.",
+            },
+            tracks: {
+              title: "Pistas",
+              description: "Los eventos de grabación, cámara, audio del sistema, micrófono, zoom y teclado aparecen aquí como clips de línea de tiempo.",
+            },
+          },
+        },
+        "preview-control": {
+          title: "Controles de vista previa",
+          summary: "Ajuste la velocidad de reproducción de la vista previa, el volumen de la vista previa y el zoom de la pista de la línea de tiempo mientras edita.",
+          chapters: {
+            "playback-rate": {
+              title: "Velocidad de reproducción",
+              description:
+                "Ajuste la velocidad de reproducción de la vista previa aquí. **Esto solo afecta la etapa de vista previa y no afecta la exportación.**",
+            },
+            volume: {
+              title: "Volumen",
+              description:
+                "Ajusta el sonido que escuchas durante la vista previa. **Esto solo afecta la etapa de vista previa y no afecta la exportación.**",
+            },
+            "track-zoom": {
+              title: "Zoom de seguimiento",
+              description: "Cambia el nivel de zoom de las pistas de la línea de tiempo.",
+            },
+          },
+        },
+        "track-management": {
+          title: "Gestión de seguimiento",
+          summary: "Abra la configuración de pistas, reordene las pistas, ocúltelas, elimínelas y restaure las pistas eliminadas.",
+          chapters: {
+            entry: {
+              title: "Entrada",
+              description: "Abra el panel de configuración de pistas desde el lado izquierdo de las pistas.",
+            },
+            sort: {
+              title: "ordenar",
+              description:
+                "Arrastre el controlador de clasificación {{icon:grip}} principal para reordenar las pistas. Este pedido se guarda como preferencia y se reutiliza la próxima vez.",
+            },
+            hide: {
+              title: "Ocultar",
+              description:
+                "Haga clic en {{icon:eye}} para ocultar las pistas que no necesita. **Esto no afecta la exportación.**",
+            },
+            delete: {
+              title: "Delete",
+              description:
+                "Haga clic en {{icon:trash}} para eliminar pistas que no necesita. **Esto afecta la exportación final.**",
+            },
+            restore: {
+              title: "Restaurar",
+              description:
+                "Las pistas Deleted aparecen por separado a continuación, donde puedes restaurarlas en cualquier momento.",
+            },
+          },
+        },
+        "screen-settings": {
+          title: "Configuración de pantalla",
+          summary: "Ajuste la pantalla grabada, su fondo, márgenes y comportamiento del tamaño de salida.",
+          chapters: {
+            wallpaper: {
+              title: "Fondo de pantalla",
+              description:
+                "Elija fondos de pantalla leídos desde el sistema, incluidos fondos de pantalla dinámicos. No están incluidos con la aplicación, no ocupan espacio en la aplicación y mantienen la más alta calidad de fondo de pantalla. Haga clic en Personalizado para configurar más carpetas de fondos de pantalla en Configuración.",
+            },
+            "no-background": {
+              title: "Sin antecedentes",
+              description:
+                "No elija ningún fondo, lo cual es especialmente importante para la grabación de pantalla completa o la grabación de área personalizada. **Actualmente, al cambiar a ningún fondo de pantalla se mantienen las configuraciones anteriores de margen o tamaño de forma predeterminada, así que configúrelas en 0 manualmente para eliminar los bordes negros.**",
+            },
+            gradient: {
+              title: "gradiente",
+              description:
+                "Elija un degradado lineal preestablecido o edite libremente los anclajes y colores del degradado, agregando o eliminando anclajes según sea necesario.",
+            },
+            "solid-color": {
+              title: "color sólido",
+              description: "Elija un solo color como fondo.",
+            },
+            "custom-background": {
+              title: "personalizado",
+              description: "Sube tu propia foto o vídeo como fondo.",
+            },
+            "adaptive-size": {
+              title: "Tamaño de pantalla adaptable",
+              description:
+                "En este modo, el tamaño de la pantalla se controla ajustando los márgenes verticales y horizontales.",
+            },
+            "sync-margins": {
+              title: "Márgenes de sincronización",
+              description:
+                "Habilite los márgenes de sincronización para mantener los cuatro lados consistentes. Desactívelo para controlar los márgenes verticales y horizontales por separado. **Si la relación de aspecto está habilitada, la imagen final se ajusta visualmente a esa relación, por lo que los márgenes pueden verse diferentes de los valores ingresados.**",
+            },
+            "fixed-size": {
+              title: "Tamaño de pantalla fijo",
+              description:
+                "En este modo, ingrese manualmente el tamaño de la pantalla. **Si la relación de aspecto está habilitada, el lienzo se expande hacia afuera hasta la relación objetivo.**",
+            },
+          },
+        },
+        "workspace-file": {
+          title: "Archivo Project",
+          summary:
+            "Un archivo de proyecto contiene todos los archivos sin procesar generados para una grabación completa, incluidos todos los activos y configuraciones. Puedes compartirlo y **se crea y guarda automáticamente en una ubicación predeterminada cuando finaliza la grabación.**",
+          chapters: {
+            "default-directory": {
+              title: "Cambiar el directorio predeterminado",
+              description:
+                "Abra <kbd>ScreenCam</kbd> > <kbd>Configuración</kbd> > <kbd>Grabación</kbd> > <kbd>Directorio del espacio de trabajo predeterminado</kbd>, luego elija la carpeta predeterminada.",
+            },
+            "recent-projects": {
+              title: "Abrir proyectos recientes",
+              description: "Utilice <kbd>File</kbd> > <kbd>Recent</kbd>.",
+            },
+            "default-directory-projects": {
+              title: "Abrir proyectos en la ubicación predeterminada",
+              description:
+                "Utilice <kbd>File</kbd> > <kbd>Directorio predeterminado</kbd>.",
+            },
+            "show-in-finder": {
+              title: "Mostrar el archivo actual en Finder",
+              description:
+                "Haga clic en el nombre del archivo del proyecto en la parte superior del editor o use <kbd>File</kbd> > <kbd>Mostrar en Finder</kbd>.",
+            },
+            "manual-save": {
+              title: "Guardar manualmente",
+              description:
+                "Utilice <kbd>File</kbd> > <kbd>Save</kbd>, o presione <kbd>⌘</kbd><kbd>S</kbd> para guardar manualmente. En la mayoría de los casos, el proyecto se guarda automáticamente.",
+            },
+            "save-as": {
+              title: "Guardar como",
+              description:
+                "Utilice <kbd>File</kbd> > <kbd>Save As</kbd>, o presione <kbd>⌘</kbd><kbd>⇧</kbd><kbd>S</kbd> para guardar una copia en una carpeta personalizada.",
+            },
+          },
+        },
+        record: {
+          title: "Registro",
+          summary: "Configure una captura, elija la fuente y comience a grabar.",
+          chapters: {
+            "prepare-capture": {
+              title: "preparar la captura",
+              description: "Abra ScreenCam y confirme que los controles de grabación estén listos antes de seleccionar una fuente.",
+            },
+            "choose-source": {
+              title: "Elige una fuente",
+              description: "Elija las opciones de pantalla, ventana, área, cámara, micrófono y audio del sistema para la grabación.",
+            },
+            "start-recording": {
+              title: "Empezar a grabar",
+              description: "Inicie la captura y verifique el estado de la grabación antes de pasar al flujo de trabajo.",
+            },
+          },
+        },
+        zoom: {
+          title: "Ampliar",
+          summary: "Agregue anclajes a la línea de tiempo y ajuste cómo se mueve la cámara a lo largo de la grabación.",
+          chapters: {
+            "zoom-track": {
+              title: "Pista de zoom",
+              description: "Cree y elimine clips de zoom libremente en la pista de zoom.",
+            },
+            "delete-clip": {
+              title: "Delete",
+              description: "Seleccione un clip y luego presione Backspace o Delete para eliminarlo.",
+              descriptionHtml:
+                "Seleccione un clip y luego presione <kbd class=\"docs-key\">Backspace</kbd> o <kbd class=\"docs-key\">Delete</kbd> para eliminarlo.",
+            },
+            "create-clip": {
+              title: "crear",
+              description: "Haga clic o arrastre en un área vacía para crear un nuevo clip de zoom.",
+            },
+            "merge-clips": {
+              title: "fusionar",
+              description: "Cambie el tamaño o arrastre un clip hasta que se cruce con otro clip, luego suéltelo para confirmar la fusión.",
+            },
+            "manual-mode": {
+              title: "Modo manual",
+              description: "Cambie del movimiento automático al modo manual y personalice el recuento, el centro y la escala de cada ancla.",
+            },
+            "select-anchor": {
+              title: "Seleccione un ancla",
+              description: "Seleccione un ancla para editar su configuración de zoom individual.",
+            },
+            "adjust-center": {
+              title: "Ajustar centro",
+              description: "Arrastre directamente en la vista previa para establecer el centro visual del zoom.",
+            },
+            "adjust-scale-wheel": {
+              title: "Ajustar escala",
+              description: "Utilice la rueda del mouse en la vista previa para controlar la escala de zoom.",
+            },
+            "adjust-scale-panel": {
+              title: "Ajustar la escala en la configuración",
+              description: "Seleccione un ancla, luego ajuste el control deslizante de escala en el panel de configuración derecho.",
+            },
+          },
+        },
+        camera: {
+          title: "cámara",
+          summary: "Dale forma a la superposición de la cámara y aplica ajustes de apariencia livianos.",
+          chapters: {
+            "enable-camera": {
+              title: "Habilitar la cámara",
+              description: "Encienda la capa de la cámara y colóquela donde admita la grabación.",
+            },
+            "shape-frame": {
+              title: "Dar forma al marco",
+              description: "Cambie entre formas de marco y ajuste el tamaño de la superposición de la cámara para la escena.",
+            },
+            "apply-beauty": {
+              title: "Aplicar efectos de belleza",
+              description: "Ajuste la configuración de apariencia sutil mientras mantiene la vista previa alineada con la exportación final.",
+            },
+          },
+        },
+        shortcuts: {
+          title: "Atajos",
+          summary: "Utilice las acciones del teclado para controlar la captura sin interrumpir el flujo.",
+          chapters: {
+            "capture-shortcut": {
+              title: "Comience con un atajo",
+              description: "Active los controles de grabación desde el teclado en lugar de recurrir a la barra de herramientas.",
+            },
+            "pause-resume": {
+              title: "Pausar o reanudar",
+              description: "Utilice acciones de acceso directo para pausar y continuar la captura durante grabaciones más largas.",
+            },
+            "finish-recording": {
+              title: "terminar la toma",
+              description: "Detén la grabación y pasa al editor sin perder el contexto.",
+            },
+          },
+        },
+        export: {
+          title: "Exportar",
+          summary: "Revise el resultado, elija la configuración de salida y exporte la grabación.",
+          chapters: {
+            "choose-format": {
+              title: "Elige el formato",
+              description: "Seleccione el formato de exportación y la configuración de salida para el destino.",
+            },
+            "review-preview": {
+              title: "Revisa la vista previa",
+              description: "Verifique la vista previa final antes de renderizar el archivo.",
+            },
+            "export-file": {
+              title: "Exportar el archivo",
+              description: "Renderice la grabación y guarde el resultado exportado.",
+            },
+          },
+        },
+      },
+    },
+    home: {
+      screenStudioAlternative: {
+        eyebrow: "Alternativa Screen Studio",
+        title: "¿Necesita un grabador de pantalla Mac más ligero y con un control manual más profundo?",
+        description:
+          "Compare ScreenCam con Screen Studio en términos de tamaño de aplicación, uso de CPU y memoria, velocidad de exportación, anclajes de zoom manual, capas, maquetas de dispositivos y formatos de exportación.",
+        cta: "Screen Studio alternativa para Mac",
+      },
+      structuredDataFeatureList: [
+        "Grabación de pantalla nativa macOS",
+        "Anclajes de zoom manual",
+        "Curvas de animación personalizadas",
+        "Maquetas de dispositivos",
+        "Capas de mosaico, texto, enfoque e imágenes personalizadas",
+        "Transiciones de desenfoque de movimiento",
+        "Exportación GIF",
+        "Exportación Live Photo",
+        "Efectos de belleza de la cámara.",
+        "Exportación con vista previa precisa",
+      ],
+      hero: {
+        appStoreButton: "Ver en App Store",
+        builtWithLabel: "Construido con",
+        builtWithValue: "100% Nativo",
+        systemLabel: "Sistema",
+        systemValue: "macOS 15+",
+        tagline: "Grabación en alta resolución con una cámara a la que puedes darle forma después de la toma.",
+        titleLines: [
+          ["Capturar", "Afilado."],
+          ["directo", "El marco."],
+        ],
+      },
+      zoom: {
+        canvasLabels: {
+          autoPlayingDemo: "Demostración de reproducción automática",
+          playMarker: "Jugar",
+          previewMarker: "Vista previa",
+          recordingClip: "Grabación",
+          recordingTrack: "Grabación",
+          timelinePreview: "Vista previa de la línea de tiempo",
+          zoomClip: "Zoom automático",
+          zoomTrack: "Ampliar",
+        },
+        features: [
+          {
+            title: "Zoom dinámico",
+            description: "El movimiento de la cámara sigue el mismo ritmo de resorte utilizado en las exportaciones ScreenCam.",
+          },
+          {
+            title: "Vista previa de la línea de tiempo",
+            description: "Pase el cursor sobre la pista Grabación o Zoom para desplazarse por el cuadro de vista previa exacto.",
+          },
+          {
+            title: "Desenfoque de movimiento",
+            description: "Los estados de zoom, panorámica y clic se muestran con un desenfoque estilo obturador.",
+          },
+        ],
+        subtitle: "Zoom con desenfoque de movimiento.",
+        timelineAria: "Pistas de vista previa de la línea de tiempo",
+        title: "Concéntrate en lo que importa.",
+      },
+      deviceMockups: {
+        description:
+          "Exporta con impresionantes marcos de dispositivo. iPhone, Mac, Studio Display: su contenido perfectamente presentado.",
+        eyebrow: "Exportar Option",
+        formats: ["Resolución original", "Live Photo", "MP4 / MOV"],
+        imageAlt: {
+          iPhone: "iPhone 17 Pro Máximo",
+          macBook: "Aplicación ScreenCam ejecutándose en MacBook Pro",
+          studioDisplay: "ScreenCam ejecutándose en Studio Display con MacBook",
+        },
+        title: "Hermosa en cada pantalla.",
+      },
+      controls: {
+        body:
+          "El modo manual te ofrece total libertad creativa. Agregue múltiples anclajes a un único clip de zoom, cada uno con su propia escala y punto central.",
+        centerLabel: "Centro",
+        dragCenter: "Arrastra para ajustar el centro",
+        eyebrow: "Controles avanzados",
+        features: [
+          "Arrastre los anclajes para reposicionarlos en la línea de tiempo",
+          "Ajuste la escala de 1x a 5x por ancla",
+          "Establecer un centro de enfoque personalizado para cada zoom",
+          "Transiciones suaves entre anclajes",
+        ],
+        pauseAria: "Pausar la reproducción de la línea de tiempo simulada",
+        pauseTitle: "Pausa",
+        playAria: "Reproducir reproducción de línea de tiempo simulada",
+        playTitle: "Jugar",
+        scaleAria: "Escala",
+        scaleLabel: "Escala",
+        titleMuted: "cada punto de zoom.",
+        titleStart: "Control total sobre",
+      },
+      performance: {
+        cta: "Ver datos de referencia completos",
+        metrics: {
+          appSize: "Tamaño de la aplicación",
+          appSizeNote: "alrededor de 20 MB frente a 600 MB",
+          cpuUsage: "Uso de CPU",
+          exportTime: "Tiempo de exportación",
+          exportTimeNote: "más corto es más rápido",
+          memory: "Memoria",
+          others: "Otros",
+          screenCam: "ScreenCam",
+        },
+        subtitle: "Sin electrón. Sin vistas web. Puro rendimiento nativo.",
+        title: "Nativo significa rápido.",
+      },
+      featureCards: {
+        eyebrow: "Características More",
+        title: "Pequeños detalles, listos para flujos de trabajo reales.",
+        subtitle: "Toques nativos que hacen que la grabación se sienta rápida, pulida y Mac-primera.",
+        beautyThumb: {
+          beforeLabel: "Belleza apagada",
+          afterLabel: "belleza en",
+          disclosure:
+            "Retrato generado por IA, utilizado únicamente para demostrar el efecto de belleza real.",
+          enterFloatingAria: "Mostrar como ventana de cámara flotante",
+          exitFloatingAria: "Volver la ventana de la cámara a la vista previa completa",
+          pauseAria: "Pausar demostración de comparación de belleza",
+          playAria: "Juegue la demostración de comparación de belleza",
+          shapeCycleAria: "Cambiar la forma de la ventana flotante",
+          shapeLabels: {
+            circle: "circulo",
+            square: "cuadrado redondeado",
+            wide: "16:9",
+          },
+        },
+        dynamicIslandThumb: {
+          ariaLabel: "Vista previa de la tarea en segundo plano de la isla dinámica",
+          materialLabel: "Material de muesca",
+          modeLabels: {
+            black: "negro",
+            glass: "vidrio",
+          },
+          tasks: [
+            {
+              title: "Película de lanzamiento ScreenCam",
+              detail: "Listo para revelar en Finder.",
+              primaryAction: "Abrir Finder",
+              secondary: "completo",
+              secondaryAction: "hecho",
+              size: "384 megas",
+            },
+            {
+              title: "Exportación de tutoriales 4K",
+              detail: "Codificación H.265 con capas de cámara y cursor.",
+              primaryAction: "Abrir Finder",
+              secondary: "quedan 2m",
+              secondaryAction: "hecho",
+              size: "1,2GB",
+            },
+            {
+              title: "Compresión de vista previa GIF",
+              detail: "Optimización de fotogramas para un clip compartible más pequeño.",
+              primaryAction: "Abrir Finder",
+              secondary: "42 quedan",
+              secondaryAction: "hecho",
+              size: "18 megas",
+            },
+          ],
+          wallpaperButtonAria: "Cambiar fondo de pantalla",
+        },
+        effectLayersThumb: {
+          ariaLabel: "Vista previa de la línea de tiempo de capas de efectos",
+          dragHint: "Arrastra a la pista para agregar",
+          effects: [
+            {
+              id: "mosaic",
+              title: "mosaico",
+              description: "Pixelate áreas sensibles encima de la grabación.",
+              clipLabel: "mosaico",
+            },
+            {
+              id: "focus",
+              title: "Enfoque",
+              description: "Resalte una región manteniendo visible el contexto.",
+              clipLabel: "Enfoque",
+            },
+            {
+              id: "text",
+              title: "Texto",
+              description: "Agrega una capa de texto en cualquier lugar de la edición.",
+              clipLabel: "Texto",
+            },
+            {
+              id: "image",
+              title: "Imagen",
+              description: "Coloque una superposición de imagen como una capa cronometrada.",
+              clipLabel: "Imagen",
+            },
+          ],
+        },
+        glassThumb: {
+          modeLabels: {
+            clear: "Borrar",
+            regular: "regular",
+          },
+          toolbarItems: {
+            area: "Área",
+            camera: "cámara",
+            close: "Ocultar ScreenCam",
+            display: "Pantalla",
+            iphone: "iPhone",
+            keyboard: "Grabación de eventos de teclado",
+            microphone: "micrófono",
+            settings: "Configuración",
+            systemAudio: "Grabación de sonido del sistema.",
+            window: "ventana",
+            workspace: "Abrir espacio de trabajo",
+          },
+          wallpaperButtonAria: "Cambiar fondo de pantalla",
+        },
+        items: [
+          {
+            title: "Vidrio líquido",
+            caption: "Los materiales de vidrio nativos mantienen los controles nítidos y combinan con las modernas superficies macOS.",
+          },
+          {
+            title: "Captura de acceso directo",
+            caption: "Grabe atajos de teclado durante la captura y muéstrelos claramente en el vídeo final.",
+          },
+          {
+            title: "Belleza ligera",
+            caption: "Aplique efectos de belleza sutiles para una apariencia de cámara más limpia.",
+          },
+          {
+            title: "Isla dinámica",
+            caption: "Coloque las exportaciones largas en segundo plano y mantenga el progreso visible desde el primer momento.",
+          },
+          {
+            title: "Capas de efectos",
+            caption: "Agregue tantas capas de efectos como necesite, luego mueva, cambie el tamaño y apile cada clip en la línea de tiempo.",
+          },
+        ],
+      },
+      faq: {
+        eyebrow: "Preguntas frecuentes",
+        title: "Preguntas y respuestas",
+        items: [
+          {
+            question: "¿Es ScreenCam una alternativa al Screen Studio?",
+            answer:
+              "Sí. ScreenCam es una alternativa nativa de macOS Screen Studio para creadores que desean una aplicación más pequeña, menor uso de recursos, exportaciones más rápidas, anclajes de zoom manuales, maquetas de dispositivos, capas más ricas, exportación GIF, exportación Live Photo y una primera experiencia de edición Mac.",
+          },
+          {
+            question: "¿En qué se diferencia el ScreenCam de las grabadoras basadas en navegador?",
+            answer:
+              "ScreenCam está diseñado para macOS como una aplicación nativa de grabación y edición. El objetivo es un flujo de trabajo compacto, pionero en el Mac, con captura local, controles de edición fluidos y exportación con vista previa precisa.",
+          },
+          {
+            question: "¿Cuál es la versión mínima requerida de macOS?",
+            answer: "ScreenCam requiere macOS 15 o posterior.",
+          },
+          {
+            question: "¿Existe una versión para Windows?",
+            answer:
+              "No ahora mismo. ScreenCam se centra en macOS y no planeamos desarrollar una versión para Windows en el corto plazo.",
+          },
+          {
+            question: "¿Puedo exportar a diferentes formatos?",
+            answer:
+              "ScreenCam está diseñado para exportar vídeo de alta calidad desde el editor, con controles de encuadre y movimiento reflejados en el resultado final.",
+          },
+          {
+            question: "¿Cómo funciona la función de zoom?",
+            answer:
+              "Puede agregar puntos de zoom en cualquier lugar de su línea de tiempo. En el modo manual, tienes control total: establece múltiples anclajes con diferentes niveles de zoom y centros de enfoque. Las transiciones incluyen efectos de desenfoque de movimiento suave.",
+          },
+          {
+            question: "¿Admite varios monitores?",
+            answer:
+              "ScreenCam está diseñado para los flujos de trabajo de grabación de pantalla Mac, incluidas pantallas, ventanas y regiones de captura conectadas.",
+          },
+        ],
+      },
+    },
+    legal: {
+      privacy: {
+        eyebrow: "Privacidad",
+        title: "Política de privacidad",
+        updated: "Última actualización: 3 de junio de 2026",
+        sections: [
+          {
+            title: "Descripción general",
+            paragraphs: [
+              [
+                "ScreenCam es una aplicación nativa de grabación y edición de pantalla macOS. La aplicación está diseñada para procesar grabaciones localmente en su Mac. ScreenCam puede realizar solicitudes de red para la funcionalidad de la aplicación, como el estado de compra de App Store y, cuando usted elige habilitarlo, análisis de uso anónimos opcionales. No utilizamos rastreadores de publicidad en la aplicación.",
+              ],
+            ],
+          },
+          {
+            title: "Grabaciones y archivos locales.",
+            paragraphs: [
+              [
+                "Las grabaciones de pantalla, el video de la cámara, el audio del micrófono, el audio del sistema, los datos del cursor, los videos exportados, los archivos del espacio de trabajo y los archivos de fondo de pantalla personalizados permanecen en su dispositivo o en las ubicaciones que elija. ScreenCam no carga este contenido a los servidores ScreenCam.",
+              ],
+            ],
+          },
+          {
+            title: "Análisis de uso anónimo",
+            paragraphs: [
+              [
+                "ScreenCam puede preguntarle si desea compartir análisis de uso anónimos para ayudarnos a comprender qué funciones de grabación y edición funcionan bien. Puede activar o desactivar el uso compartido de análisis en cualquier momento en la aplicación. Si el uso compartido de análisis está deshabilitado, ScreenCam no envía análisis de uso.",
+              ],
+              [
+                "Los análisis se limitan al uso del producto, diagnósticos e información de rendimiento, como interacciones de funciones, versión de la aplicación, versión macOS e información general del dispositivo. Nunca recopilamos contenido de pantalla, audio, video de cámara, archivos de proyecto, nombres de archivos o texto escrito a través de análisis.",
+              ],
+            ],
+          },
+          {
+            title: "Permisos",
+            paragraphs: [
+              [
+                "ScreenCam puede solicitarle a macOS permisos de grabación de pantalla, micrófono, cámara y acceso a archivos. Estos permisos se utilizan únicamente para proporcionar funciones de grabación, edición, exportación y archivos seleccionados por el usuario. Puede administrar estos permisos en Configuración del sistema.",
+              ],
+            ],
+          },
+          {
+            title: "Compras",
+            paragraphs: [
+              [
+                "Las suscripciones y compras ScreenCam Pro son procesadas por Apple a través de Mac App Store. ScreenCam lee el estado de compra y suscripción de StoreKit para que la aplicación pueda desbloquear las funciones de Pro. ScreenCam no recibe ni almacena los datos de su tarjeta de pago.",
+              ],
+            ],
+          },
+          {
+            title: "Sitio web",
+            paragraphs: [
+              [
+                "Cuando visita la pantalla .cam, nuestros proveedores de infraestructura y alojamiento pueden procesar datos de registro del servidor estándar, como la dirección IP, el agente de usuario del navegador, la URL de solicitud y la hora de solicitud para seguridad, diagnóstico y entrega del sitio web. El sitio web no utiliza rastreadores de publicidad.",
+              ],
+            ],
+          },
+          {
+            title: "Cambios y contacto",
+            paragraphs: [
+              ["Podemos actualizar esta política a medida que cambie ScreenCam. Si tiene preguntas sobre privacidad, contáctenos en", emailLink, "."],
+            ],
+          },
+        ],
+      },
+      support: {
+        eyebrow: "Soporte",
+        title: "Soporte ScreenCam",
+        updated: "Para obtener ayuda con ScreenCam para macOS.",
+        supportChannelsAria: "Canales de soporte",
+        sections: [
+          {
+            title: "Contacto",
+            showSupportChannels: true,
+            paragraphs: [
+              [
+                "Correo electrónico",
+                emailLink,
+                "para soporte de productos, informes de errores, preguntas sobre compras y comentarios.",
+              ],
+            ],
+          },
+          {
+            title: "Incluye estos detalles",
+            paragraphs: [
+              [
+                "Al informar un problema, incluya su versión macOS, versión ScreenCam, modelo Mac, configuración de grabación, formato de exportación y una breve descripción de lo sucedido. Las capturas de pantalla o grabaciones breves son útiles cuando el problema es visual.",
+              ],
+            ],
+          },
+          {
+            title: "App Store compras",
+            paragraphs: [
+              [
+                "ScreenCam se distribuye a través de Mac App Store. Apple maneja la facturación, las suscripciones, las renovaciones, las cancelaciones y los reembolsos a través de su ID de Apple y la configuración de su cuenta App Store.",
+              ],
+            ],
+          },
+          {
+            title: "Requisitos",
+            paragraphs: [
+              [
+                "ScreenCam está actualmente diseñado para macOS. No existe una versión para Windows y el desarrollo de Windows no está previsto a corto plazo.",
+              ],
+            ],
+          },
+          {
+            title: "Privacidad",
+            paragraphs: [
+              [
+                "Las grabaciones y los archivos del espacio de trabajo se procesan localmente en su Mac. Lea el",
+                { href: "/privacy", text: "Política de privacidad" },
+                "para más detalles.",
+              ],
+            ],
+          },
+        ],
+      },
+      terms: {
+        eyebrow: "Términos",
+        title: "Términos de uso",
+        updated: "Última actualización: 20 de mayo de 2026",
+        sections: [
+          {
+            title: "licencia de aplicación",
+            paragraphs: [
+              [
+                "ScreenCam tiene licencia para usted según el Acuerdo de licencia de usuario final estándar (EULA) de Apple, a menos que la ley aplicable exija lo contrario. Puede revisar el CLUF estándar de Apple en",
+                appleEulaLink,
+                ".",
+              ],
+            ],
+          },
+          {
+            title: "Suscripciones y compras",
+            paragraphs: [
+              [
+                "Las suscripciones y compras ScreenCam Pro son procesadas por Apple a través de Mac App Store. La facturación de la suscripción, la renovación, la cancelación, los reembolsos y la administración de la cuenta se manejan a través de su ID Apple y la configuración de su cuenta App Store.",
+              ],
+            ],
+          },
+          {
+            title: "Uso de ScreenCam",
+            paragraphs: [
+              [
+                "Usted es responsable de las grabaciones, archivos y exportaciones que cree con ScreenCam. Grabe, edite y comparta contenido únicamente cuando tenga los derechos y permisos necesarios para hacerlo.",
+              ],
+            ],
+          },
+          {
+            title: "Privacidad",
+            paragraphs: [
+              ["Las prácticas de privacidad de ScreenCam se describen en la", { href: "/privacy", text: "Política de privacidad" }, "."],
+            ],
+          },
+          {
+            title: "Contacto",
+            paragraphs: [
+              ["Si tiene preguntas sobre estos términos, contáctenos en", emailLink, "."],
+            ],
+          },
+        ],
+      },
+    },
+    changelog: {
+      description: "ProActualizaciones de conductos, correcciones y notas de la versión.",
+      eyebrow: "Registro de cambios",
+      intro: "ProActualizaciones de conductos, correcciones y notas de la versión.",
+      linkVersionLabel: "Enlace a la versión",
+      title: "Registro de cambios ScreenCam",
+    },
+    motionBlurTool: {
+      addMaskAria: "Agregar máscara",
+      addMaskButton: "máscara",
+      angleAria: "ángulo de desenfoque",
+      angleLabel: "ángulo",
+      blurSettingsTitle: "Configuración de desenfoque",
+      chooseImage: "Elige Imagen",
+      clearImage: "Imagen clara",
+      defaultMaskName: "máscara",
+      deleteSelectedMaskAria: "Delete máscara seleccionada",
+      description:
+        "Cree regiones de desenfoque rectangulares, ajuste la dirección y la intensidad y luego exporte la imagen compuesta.",
+      emptyMasksWithImage: "Agrega una máscara para difuminar parte de la imagen.",
+      emptyMasksWithoutImage: "Sube una imagen primero.",
+      exportButton: "Exportar",
+      heightLabel: "altura",
+      linearMode: "lineal",
+      maskButton: "máscara",
+      masksTitle: "Máscaras",
+      modeLabel: "Modo",
+      nameLabel: "Nombre",
+      previewAria: "Vista previa del desenfoque de movimiento",
+      replaceImageAria: "Reemplazar imagen",
+      selectedMaskEmpty: "Seleccione una máscara para editar la dirección, intensidad, posición y tamaño del desenfoque.",
+      sourceTitle: "Fuente",
+      strengthAria: "Fuerza de desenfoque",
+      strengthLabel: "fuerza",
+      title: "Máscara de desenfoque de movimiento",
+      toolEyebrow: "Herramienta",
+      uniformMode: "uniforme",
+      uploadDescription: "Suelta una imagen local aquí o elige un archivo para comenzar a editar.",
+      uploadTitle: "Sube una imagen",
+      widthLabel: "Ancho",
+      xLabel: "X",
+      yLabel: "Y",
+    },
+  },
+  fr: {
+    common: {
+      skipToContent: "Passer au contenu",
+    },
+    header: {
+      appStore: "App Store",
+      backToMenuAria: "Retour au menu",
+      closeMenuAria: "Fermer le menu",
+      homeAria: "Accueil ScreenCam",
+      logoAlt: "Logo ScreenCam",
+      menuAria: "Ouvrir le menu",
+      nav: {
+        changelog: "Journal des modifications",
+        docs: "Documents",
+        privacy: "Confidentialité",
+        support: "Assistance",
+        terms: "Conditions",
+      },
+      primaryNavigationAria: "Navigation principale",
+    },
+    footer: {
+      appStoreButton: "Voir sur App Store",
+      copyright: "Tous droits réservés.",
+      ctaText: "Obtenez ScreenCam à partir du Mac App Store.",
+      ctaTitle: "Prêt à mieux capturer ?",
+      description: "Enregistrement d'écran natif pour Mac. Rapide, léger, puissant.",
+      groups: {
+        legal: "Juridique",
+        product: "Produit",
+        resources: "Ressources",
+      },
+      language: "Langue",
+      legalLinks: {
+        privacy: "Confidentialité",
+        terms: "Conditions",
+      },
+      productLinks: {
+        controls: "Contrôles",
+        export: "Exporter",
+        faq: "FAQ",
+        zoom: "Zoomer",
+      },
+      resourceLinks: {
+        alternatives: "Alternatives",
+        bgm: "BGM",
+        changelog: "Journal des modifications",
+        docs: "Documents",
+        motionBlurMask: "Masque de flou de mouvement",
+        support: "Assistance",
+      },
+      supportChannelsAria: "Canaux d'assistance",
+      systemStatus: "Tous les systèmes opérationnels",
+    },
+    meta: {
+      changelog: {
+        title: "Journal des modifications - ScreenCam",
+        description: "Suivez les notes de version de ScreenCam, les améliorations du produit, les corrections de bugs et l'historique des mises à jour.",
+      },
+      docs: {
+        title: "Documents - ScreenCam",
+        description:
+          "Apprenez ScreenCam avec des procédures vidéo guidées, des étapes en chapitres et une lecture interactive.",
+      },
+      home: {
+        title: "ScreenCam - Enregistrement d'écran natif macOS avec zoom dirigé",
+        description:
+          "ScreenCam est un enregistreur d'écran natif macOS pour une capture nette, un contrôle manuel du zoom, des ancres de chronologie, un réglage des courbes et une exportation précise avec un aperçu.",
+      },
+      motionBlurMask: {
+        title: "Outil de masque de flou de mouvement - ScreenCam",
+        description:
+          "Téléchargez une image, dessinez des masques de flou de mouvement rectangulaires, ajustez la force et la direction du flou, puis exportez le résultat composé.",
+      },
+      privacy: {
+        title: "Politique de confidentialité - ScreenCam",
+        description:
+          "La politique de confidentialité de ScreenCam explique comment l'application macOS gère les enregistrements, les autorisations, les analyses facultatives, les achats et les données du site Web.",
+      },
+      support: {
+        title: "Assistance-ScreenCam",
+        description:
+          "Obtenez de l'aide sur ScreenCam pour macOS, y compris le contact de l'assistance, les achats de App Store, les exigences et le dépannage.",
+      },
+      terms: {
+        title: "Conditions d'utilisation - ScreenCam",
+        description:
+          "Les conditions d'utilisation de ScreenCam expliquent la licence de l'application, les abonnements, les achats et les coordonnées de l'assistance.",
+      },
+    },
+    docs: {
+      chaptersTitle: "Étapes",
+      description:
+        "Regardez le flux de travail, puis passez directement à l'étape dont vous avez besoin.",
+      emptyVideoDescription:
+        "Déposez le fichier de démonstration dans public/docs pour cette fonctionnalité, puis ajoutez le chemin vidéo et les horodatages calibrés à la chronologie JSON.",
+      emptyVideoTitle: "Vidéo à venir",
+      eyebrow: "Documents",
+      featureListAria: "Sujets de documentation",
+      playback: {
+        next: "Étape suivante",
+        pause: "Pause",
+        play: "Jouer",
+        previous: "Étape précédente",
+        restart: "Redémarrer",
+      },
+      progressLabel: "Progress",
+      title: "Guides ScreenCam.",
+      videoAriaLabel: "Vidéo de démonstration de la documentation",
+      features: {
+        basics: {
+          title: "Les bases",
+          summary: "Familiarisez-vous avec l'aperçu, la barre latérale, les panneaux de paramètres et les pistes de la chronologie.",
+          chapters: {
+            preview: {
+              title: "Aperçu",
+              description: "Utilisez la zone d'aperçu pour visualiser le résultat final de l'exportation en temps réel.",
+            },
+            sidebar: {
+              title: "Barre latérale",
+              description: "Les principaux panneaux de configuration se trouvent dans la barre latérale.",
+            },
+            "screen-settings": {
+              title: "Paramètres de l'écran",
+              description: "Configurez le contenu de l'écran, y compris le fond d'écran, les marges, la taille et les options de mise en page associées.",
+            },
+            "device-settings": {
+              title: "Paramètres de l'appareil",
+              description: "Enveloppez l'écran dans un cadre d'appareil, choisissez l'appareil et ajustez le style du cadre tel que l'arrière-plan.",
+            },
+            "keyboard-settings": {
+              title: "Paramètres du clavier",
+              description: "Définissez la façon dont les raccourcis enregistrés apparaissent, y compris leur taille et leur position par défaut.",
+            },
+            "beauty-settings": {
+              title: "Paramètres de beauté",
+              description: "Une fois l'enregistrement de la caméra activé, appliquez de subtiles améliorations de portrait à l'image de la caméra.",
+            },
+            "mouse-settings": {
+              title: "Paramètres de la souris",
+              description: "Ajustez le style visuel de base du pointeur de la souris.",
+            },
+            "animation-settings": {
+              title: "Paramètres d'animation",
+              description: "Personnalisez le mouvement de la caméra, y compris la force du flou de mouvement et les courbes personnalisées.",
+            },
+            tracks: {
+              title: "Pistes",
+              description: "Les événements d’enregistrement, de caméra, d’audio système, de microphone, de zoom et de clavier apparaissent ici sous forme de clips de chronologie.",
+            },
+          },
+        },
+        "preview-control": {
+          title: "Contrôles d'aperçu",
+          summary: "Ajustez la vitesse de lecture de l'aperçu, le volume de l'aperçu et le zoom de la piste temporelle pendant l'édition.",
+          chapters: {
+            "playback-rate": {
+              title: "Vitesse de lecture",
+              description:
+                "Ajustez ici la vitesse de lecture de l’aperçu. **Cela affecte uniquement l'étape de prévisualisation et n'affecte pas l'exportation.**",
+            },
+            volume: {
+              title: "Volume",
+              description:
+                "Ajustez le son que vous entendez pendant l'aperçu. **Cela affecte uniquement l'étape de prévisualisation et n'affecte pas l'exportation.**",
+            },
+            "track-zoom": {
+              title: "Zoom sur piste",
+              description: "Modifiez le niveau de zoom des pistes de la timeline.",
+            },
+          },
+        },
+        "track-management": {
+          title: "Gestion des pistes",
+          summary: "Ouvrez les paramètres des pistes, réorganisez les pistes, masquez-les, supprimez-les et restaurez les pistes supprimées.",
+          chapters: {
+            entry: {
+              title: "Entrée",
+              description: "Ouvrez le panneau des paramètres de piste sur le côté gauche des pistes.",
+            },
+            sort: {
+              title: "Trier",
+              description:
+                "Faites glisser la première poignée de tri {{icon:grip}} pour réorganiser les pistes. Cette commande est enregistrée comme préférence et réutilisée la prochaine fois.",
+            },
+            hide: {
+              title: "Masquer",
+              description:
+                "Cliquez sur {{icon:eye}} pour masquer les pistes dont vous n'avez pas besoin. **Cela n'affecte pas l'exportation.**",
+            },
+            delete: {
+              title: "Delete",
+              description:
+                "Cliquez sur {{icon:trash}} pour supprimer les pistes dont vous n'avez pas besoin. **Cela affecte l'exportation finale.**",
+            },
+            restore: {
+              title: "Restaurer",
+              description:
+                "Les pistes Deleted apparaissent séparément ci-dessous, où vous pouvez les restaurer à tout moment.",
+            },
+          },
+        },
+        "screen-settings": {
+          title: "Paramètres d'écran",
+          summary: "Ajustez l'écran enregistré, son arrière-plan, ses marges et le comportement de la taille de sortie.",
+          chapters: {
+            wallpaper: {
+              title: "Fond d'écran",
+              description:
+                "Choisissez les fonds d'écran lus sur le système, y compris les fonds d'écran dynamiques. Ils ne sont pas fournis avec l'application, ne prennent pas d'espace dans l'application et conservent la qualité de fond d'écran la plus élevée. Cliquez sur Personnalisé pour configurer davantage de dossiers de fonds d'écran dans Paramètres.",
+            },
+            "no-background": {
+              title: "Aucun arrière-plan",
+              description:
+                "Ne choisissez aucun arrière-plan, ce qui est particulièrement important pour l’enregistrement en plein écran ou l’enregistrement dans une zone personnalisée. **Actuellement, le passage à l'absence de fond d'écran conserve les paramètres de marge ou de taille précédents par défaut, vous devez donc les définir manuellement sur 0 pour supprimer les bordures noires.**",
+            },
+            gradient: {
+              title: "Dégradé",
+              description:
+                "Choisissez un dégradé linéaire prédéfini ou modifiez librement les ancres et les couleurs du dégradé, en ajoutant ou en supprimant des ancres selon vos besoins.",
+            },
+            "solid-color": {
+              title: "Couleur unie",
+              description: "Choisissez une seule couleur comme arrière-plan.",
+            },
+            "custom-background": {
+              title: "Personnalisé",
+              description: "Téléchargez votre propre photo ou vidéo comme arrière-plan.",
+            },
+            "adaptive-size": {
+              title: "Taille d'écran adaptative",
+              description:
+                "Dans ce mode, la taille de l'écran est contrôlée en ajustant les marges verticales et horizontales.",
+            },
+            "sync-margins": {
+              title: "Marges de synchronisation",
+              description:
+                "Activez les marges de synchronisation pour que les quatre côtés restent cohérents. Désactivez-le pour contrôler séparément les marges verticales et horizontales. **Si le rapport hauteur/largeur est activé, l'image finale est visuellement conforme à ce rapport, les marges peuvent donc sembler différentes des valeurs saisies.**",
+            },
+            "fixed-size": {
+              title: "Taille d'écran fixe",
+              description:
+                "Dans ce mode, entrez manuellement la taille de l'écran. **Si le rapport hauteur/largeur est activé, le canevas s'étend vers l'extérieur jusqu'au rapport cible.**",
+            },
+          },
+        },
+        "workspace-file": {
+          title: "Fichier Project",
+          summary:
+            "Un fichier de projet contient tous les fichiers bruts générés pour un enregistrement terminé, y compris chaque actif et configuration. Vous pouvez le partager, et **il est automatiquement créé et enregistré dans un emplacement par défaut une fois l'enregistrement terminé.**",
+          chapters: {
+            "default-directory": {
+              title: "Changer le répertoire par défaut",
+              description:
+                "Ouvrez <kbd>ScreenCam</kbd> > <kbd>Settings</kbd> > <kbd>Recording</kbd> > <kbd>Default workspace directory</kbd>, puis choisissez le dossier par défaut.",
+            },
+            "recent-projects": {
+              title: "Ouvrir les projets récents",
+              description: "Utilisez <kbd>File</kbd> > <kbd>Recent</kbd>.",
+            },
+            "default-directory-projects": {
+              title: "Ouvrir les projets à l'emplacement par défaut",
+              description:
+                "Utilisez <kbd>File</kbd> > <kbd>Default Directory</kbd>.",
+            },
+            "show-in-finder": {
+              title: "Afficher le fichier actuel dans Finder",
+              description:
+                "Cliquez sur le nom du fichier de projet en haut de l'éditeur ou utilisez <kbd>File</kbd> > <kbd>Show dans Finder</kbd>.",
+            },
+            "manual-save": {
+              title: "Enregistrer manuellement",
+              description:
+                "Utilisez <kbd>File</kbd> > <kbd>Save</kbd> ou appuyez sur <kbd>⌘</kbd><kbd>S</kbd> pour enregistrer manuellement. Dans la plupart des cas, le projet est enregistré automatiquement.",
+            },
+            "save-as": {
+              title: "Enregistrer sous",
+              description:
+                "Utilisez <kbd>File</kbd> > <kbd>Save As</kbd>, ou appuyez sur <kbd>⌘</kbd><kbd>⇧</kbd><kbd>S</kbd> pour enregistrer une copie dans un dossier personnalisé.",
+            },
+          },
+        },
+        record: {
+          title: "Enregistrer",
+          summary: "Configurez une capture, choisissez la source et démarrez l'enregistrement.",
+          chapters: {
+            "prepare-capture": {
+              title: "Préparez la capture",
+              description: "Ouvrez ScreenCam et confirmez que les commandes d'enregistrement sont prêtes avant de sélectionner une source.",
+            },
+            "choose-source": {
+              title: "Choisissez une source",
+              description: "Choisissez les options d’affichage, de fenêtre, de zone, de caméra, de microphone et d’audio système pour l’enregistrement.",
+            },
+            "start-recording": {
+              title: "Commencer l'enregistrement",
+              description: "Démarrez la capture et vérifiez l’état de l’enregistrement avant de passer au flux de travail.",
+            },
+          },
+        },
+        zoom: {
+          title: "Zoomer",
+          summary: "Ajoutez des ancres de chronologie et ajustez la façon dont la caméra se déplace tout au long de l'enregistrement.",
+          chapters: {
+            "zoom-track": {
+              title: "Zoom sur la piste",
+              description: "Créez et supprimez librement des clips de zoom sur la piste de zoom.",
+            },
+            "delete-clip": {
+              title: "Delete",
+              description: "Sélectionnez un clip, puis appuyez sur Backspace ou Delete pour le supprimer.",
+              descriptionHtml:
+                "Sélectionnez un clip, puis appuyez sur <kbd class=\"docs-key\">Backspace</kbd> ou <kbd class=\"docs-key\">Delete</kbd> pour le supprimer.",
+            },
+            "create-clip": {
+              title: "Créer",
+              description: "Cliquez ou faites glisser sur une zone vide pour créer un nouveau clip de zoom.",
+            },
+            "merge-clips": {
+              title: "Fusionner",
+              description: "Redimensionnez ou faites glisser un clip jusqu'à ce qu'il croise un autre clip, puis relâchez pour confirmer la fusion.",
+            },
+            "manual-mode": {
+              title: "Mode manuel",
+              description: "Passez du mouvement automatique au mode manuel et personnalisez le nombre, le centre et l'échelle de chaque ancre.",
+            },
+            "select-anchor": {
+              title: "Sélectionnez une ancre",
+              description: "Sélectionnez une ancre pour modifier ses paramètres de zoom individuels.",
+            },
+            "adjust-center": {
+              title: "Ajuster le centre",
+              description: "Faites glisser directement dans l'aperçu pour définir le centre visuel du zoom.",
+            },
+            "adjust-scale-wheel": {
+              title: "Ajuster l'échelle",
+              description: "Utilisez la molette de la souris dans l'aperçu pour contrôler l'échelle de zoom.",
+            },
+            "adjust-scale-panel": {
+              title: "Ajuster l'échelle dans les paramètres",
+              description: "Sélectionnez une ancre, puis réglez le curseur d'échelle dans le panneau de paramètres de droite.",
+            },
+          },
+        },
+        camera: {
+          title: "Appareil photo",
+          summary: "Façonnez la superposition de la caméra et appliquez des ajustements d’apparence légers.",
+          chapters: {
+            "enable-camera": {
+              title: "Activer la caméra",
+              description: "Allumez la couche de caméra et positionnez-la là où elle prend en charge l'enregistrement.",
+            },
+            "shape-frame": {
+              title: "Façonner le cadre",
+              description: "Basculez entre les formes de cadre et dimensionnez la superposition de caméra pour la scène.",
+            },
+            "apply-beauty": {
+              title: "Appliquer des effets de beauté",
+              description: "Ajustez les paramètres d’apparence subtils tout en gardant l’aperçu aligné sur l’exportation finale.",
+            },
+          },
+        },
+        shortcuts: {
+          title: "Raccourcis",
+          summary: "Utilisez les actions du clavier pour contrôler la capture sans interrompre le flux.",
+          chapters: {
+            "capture-shortcut": {
+              title: "Commencez par un raccourci",
+              description: "Déclenchez les commandes d’enregistrement à partir du clavier au lieu d’accéder à la barre d’outils.",
+            },
+            "pause-resume": {
+              title: "Mettre en pause ou reprendre",
+              description: "Utilisez des actions de raccourci pour suspendre et poursuivre la capture lors d'enregistrements plus longs.",
+            },
+            "finish-recording": {
+              title: "Terminez la prise",
+              description: "Arrêtez l'enregistrement et passez à l'éditeur sans perdre le contexte.",
+            },
+          },
+        },
+        export: {
+          title: "Exporter",
+          summary: "Examinez le résultat, choisissez les paramètres de sortie et exportez l'enregistrement.",
+          chapters: {
+            "choose-format": {
+              title: "Choisissez le format",
+              description: "Sélectionnez le format d'exportation et les paramètres de sortie pour la destination.",
+            },
+            "review-preview": {
+              title: "Revoir l'aperçu",
+              description: "Vérifiez l'aperçu final avant de rendre le fichier.",
+            },
+            "export-file": {
+              title: "Exporter le fichier",
+              description: "Effectuez le rendu de l'enregistrement et enregistrez le résultat exporté.",
+            },
+          },
+        },
+      },
+    },
+    home: {
+      screenStudioAlternative: {
+        eyebrow: "Screen Studio Alternative",
+        title: "Besoin d'un enregistreur d'écran Mac plus léger avec un contrôle manuel plus profond ?",
+        description:
+          "Comparez ScreenCam avec Screen Studio en termes de taille de l'application, d'utilisation du processeur et de la mémoire, de la vitesse d'exportation, des ancres de zoom manuel, des calques, des maquettes d'appareil et des formats d'exportation.",
+        cta: "Alternative au Screen Studio pour le Mac",
+      },
+      structuredDataFeatureList: [
+        "Enregistrement d'écran natif macOS",
+        "Ancres de zoom manuel",
+        "Courbes d'animation personnalisées",
+        "Maquettes d'appareils",
+        "Couches de mosaïque, de texte, de focus et d'images personnalisées",
+        "Transitions de flou de mouvement",
+        "Exportation GIF",
+        "Exportation Live Photo",
+        "Effets de beauté de l'appareil photo",
+        "Exportation avec un aperçu précis",
+      ],
+      hero: {
+        appStoreButton: "Voir sur App Store",
+        builtWithLabel: "Construit avec",
+        builtWithValue: "100% natif",
+        systemLabel: "Système",
+        systemValue: "macOS 15+",
+        tagline: "Enregistrement haute résolution avec une caméra que vous pouvez façonner après la prise.",
+        titleLines: [
+          ["Capturer", "Sharp."],
+          ["Direct", "Le cadre."],
+        ],
+      },
+      zoom: {
+        canvasLabels: {
+          autoPlayingDemo: "Démo à lecture automatique",
+          playMarker: "Jouer",
+          previewMarker: "Aperçu",
+          recordingClip: "Enregistrement",
+          recordingTrack: "Enregistrement",
+          timelinePreview: "Aperçu de la chronologie",
+          zoomClip: "Zoom automatique",
+          zoomTrack: "Zoomer",
+        },
+        features: [
+          {
+            title: "Zoom dynamique",
+            description: "Le mouvement de la caméra suit le même timing à ressort que celui utilisé par les exportations ScreenCam.",
+          },
+          {
+            title: "Aperçu de la chronologie",
+            description: "Survolez la piste d'enregistrement ou de zoom pour parcourir l'image d'aperçu exacte.",
+          },
+          {
+            title: "Flou de mouvement",
+            description: "Les états de zoom, de panoramique et de clic sont échantillonnés avec un flou de type obturateur.",
+          },
+        ],
+        subtitle: "Zoomez avec le flou de mouvement.",
+        timelineAria: "Pistes d'aperçu de la chronologie",
+        title: "Concentrez-vous sur ce qui compte.",
+      },
+      deviceMockups: {
+        description:
+          "Exportez avec de superbes images d’appareil. iPhone, Mac, Studio Display - votre contenu, parfaitement présenté.",
+        eyebrow: "Exporter les Option",
+        formats: ["Résolution originale", "Live Photo", "MP4 / MOUVEMENT"],
+        imageAlt: {
+          iPhone: "iPhone 17 Pro Max.",
+          macBook: "Application ScreenCam exécutée sur MacBook Pro",
+          studioDisplay: "ScreenCam exécuté sur Studio Display avec MacBook",
+        },
+        title: "Magnifique sur tous les écrans.",
+      },
+      controls: {
+        body:
+          "Le mode manuel vous offre une totale liberté de création. Ajoutez plusieurs ancres à un seul clip de zoom, chacune avec sa propre échelle et son propre point central.",
+        centerLabel: "Centre",
+        dragCenter: "Faites glisser pour ajuster le centre",
+        eyebrow: "Contrôles avancés",
+        features: [
+          "Faites glisser les ancres pour les repositionner sur la chronologie",
+          "Ajustez l'échelle de 1x à 5x par ancre",
+          "Définir un centre de mise au point personnalisé pour chaque zoom",
+          "Transitions fluides entre les ancres",
+        ],
+        pauseAria: "Suspendre la lecture de la chronologie simulée",
+        pauseTitle: "Pause",
+        playAria: "Jouer une simulation de lecture de la chronologie",
+        playTitle: "Jouer",
+        scaleAria: "Échelle",
+        scaleLabel: "Échelle",
+        titleMuted: "chaque point de zoom.",
+        titleStart: "Contrôle total sur",
+      },
+      performance: {
+        cta: "Afficher les données de référence complètes",
+        metrics: {
+          appSize: "Taille de l'application",
+          appSizeNote: "environ 20 Mo contre 600 Mo",
+          cpuUsage: "Utilisation du processeur",
+          exportTime: "Temps d'exportation",
+          exportTimeNote: "plus court est plus rapide",
+          memory: "Mémoire",
+          others: "D'autres",
+          screenCam: "ScreenCam",
+        },
+        subtitle: "Pas d'électron. Aucune vue Web. Performances natives pures.",
+        title: "Natif signifie rapide.",
+      },
+      featureCards: {
+        eyebrow: "More Caractéristiques",
+        title: "Des petits détails, prêts pour de vrais flux de travail.",
+        subtitle: "Des touches natives qui rendent l'enregistrement rapide, soigné et Mac-first.",
+        beautyThumb: {
+          beforeLabel: "Beauté Off",
+          afterLabel: "Beauté sur",
+          disclosure:
+            "Portrait généré par l'IA, utilisé uniquement pour démontrer le véritable effet de beauté.",
+          enterFloatingAria: "Afficher sous forme de fenêtre de caméra flottante",
+          exitFloatingAria: "Remettre la fenêtre de la caméra en aperçu complet",
+          pauseAria: "Suspendre la démo de comparaison beauté",
+          playAria: "Jouer à la démo de comparaison beauté",
+          shapeCycleAria: "Changer la forme de la fenêtre flottante",
+          shapeLabels: {
+            circle: "Cercle",
+            square: "Carré arrondi",
+            wide: "16:9",
+          },
+        },
+        dynamicIslandThumb: {
+          ariaLabel: "Aperçu de la tâche en arrière-plan de Dynamic Island",
+          materialLabel: "Matériau d'encoche",
+          modeLabels: {
+            black: "Noir",
+            glass: "Verre",
+          },
+          tasks: [
+            {
+              title: "Film de lancement ScreenCam",
+              detail: "Prêt à être révélé dans Finder.",
+              primaryAction: "Ouvrir Finder",
+              secondary: "Terminé",
+              secondaryAction: "Terminé",
+              size: "384 Mo",
+            },
+            {
+              title: "Exportation du didacticiel 4K",
+              detail: "Encodage H.265 avec couches de caméra et de curseur.",
+              primaryAction: "Ouvrir Finder",
+              secondary: "il reste 2 m",
+              secondaryAction: "Terminé",
+              size: "1,2 Go",
+            },
+            {
+              title: "Compression d'aperçu GIF",
+              detail: "Optimisation des images pour un clip partageable plus petit.",
+              primaryAction: "Ouvrir Finder",
+              secondary: "Il reste 42 secondes",
+              secondaryAction: "Terminé",
+              size: "18 Mo",
+            },
+          ],
+          wallpaperButtonAria: "Changer le fond d'écran",
+        },
+        effectLayersThumb: {
+          ariaLabel: "Aperçu de la chronologie des calques d'effet",
+          dragHint: "Faites glisser vers la piste pour ajouter",
+          effects: [
+            {
+              id: "mosaic",
+              title: "Mosaïque",
+              description: "Pixelisez les zones sensibles au-dessus de l'enregistrement.",
+              clipLabel: "Mosaïque",
+            },
+            {
+              id: "focus",
+              title: "Concentrez-vous",
+              description: "Mettez en surbrillance une région tout en gardant le contexte visible.",
+              clipLabel: "Concentrez-vous",
+            },
+            {
+              id: "text",
+              title: "Texte",
+              description: "Ajoutez un calque de texte n'importe où dans la modification.",
+              clipLabel: "Texte",
+            },
+            {
+              id: "image",
+              title: "Images",
+              description: "Placez une superposition d'image en tant que calque chronométré.",
+              clipLabel: "Images",
+            },
+          ],
+        },
+        glassThumb: {
+          modeLabels: {
+            clear: "Effacer",
+            regular: "régulier",
+          },
+          toolbarItems: {
+            area: "Zone",
+            camera: "Appareil photo",
+            close: "Masquer ScreenCam",
+            display: "Affichage",
+            iphone: "iPhone",
+            keyboard: "Enregistrement d'événements de clavier",
+            microphone: "Micro",
+            settings: "Paramètres",
+            systemAudio: "Enregistrement sonore du système",
+            window: "Fenêtre",
+            workspace: "Espace de travail ouvert",
+          },
+          wallpaperButtonAria: "Changer le fond d'écran",
+        },
+        items: [
+          {
+            title: "Verre liquide",
+            caption: "Les matériaux en verre natif maintiennent les commandes nettes tout en s'adaptant aux surfaces modernes macOS.",
+          },
+          {
+            title: "Capture de raccourci",
+            caption: "Enregistrez les raccourcis clavier pendant la capture et affichez-les clairement dans la vidéo finale.",
+          },
+          {
+            title: "Beauté légère",
+            caption: "Appliquez des effets de beauté subtils pour un look plus propre de l'appareil photo.",
+          },
+          {
+            title: "Île dynamique",
+            caption: "Mettez les exportations longues en arrière-plan et gardez les progrès visibles depuis l'encoche.",
+          },
+          {
+            title: "Calques d'effet",
+            caption: "Ajoutez autant de calques d’effets que nécessaire, puis déplacez, redimensionnez et empilez chaque clip sur la timeline.",
+          },
+        ],
+      },
+      faq: {
+        eyebrow: "FAQ",
+        title: "Questions et réponses",
+        items: [
+          {
+            question: "ScreenCam est-il une alternative à Screen Studio ?",
+            answer:
+              "Oui. ScreenCam est une alternative native à macOS Screen Studio pour les créateurs qui souhaitent une empreinte d'application plus petite, une utilisation réduite des ressources, des exportations plus rapides, des ancres de zoom manuel, des maquettes d'appareil, des couches plus riches, une exportation GIF, une exportation Live Photo et une première expérience d'édition Mac.",
+          },
+          {
+            question: "En quoi le ScreenCam est-il différent des enregistreurs basés sur navigateur ?",
+            answer:
+              "ScreenCam est conçu pour macOS en tant qu'application native d'enregistrement et d'édition. L'objectif est un flux de travail compact, comparable à celui du Mac, avec une capture locale, des commandes d'édition fluides et une exportation précise avec un aperçu précis.",
+          },
+          {
+            question: "Quelle est la version minimale de macOS requise ?",
+            answer: "ScreenCam nécessite macOS 15 ou version ultérieure.",
+          },
+          {
+            question: "Existe-t-il une version Windows ?",
+            answer:
+              "Pas maintenant. ScreenCam se concentre sur macOS, et nous ne prévoyons pas de développer une version Windows à court terme.",
+          },
+          {
+            question: "Puis-je exporter vers différents formats ?",
+            answer:
+              "ScreenCam est conçu pour l'exportation vidéo de haute qualité depuis l'éditeur, avec des commandes de cadrage et de mouvement reflétées dans la sortie finale.",
+          },
+          {
+            question: "Comment fonctionne la fonction zoom ?",
+            answer:
+              "Vous pouvez ajouter des points de zoom n'importe où sur votre timeline. En mode manuel, vous avez un contrôle total : définissez plusieurs ancres avec différents niveaux de zoom et centres de mise au point. Les transitions incluent des effets de flou de mouvement fluides.",
+          },
+          {
+            question: "Est-ce qu'il prend en charge plusieurs moniteurs ?",
+            answer:
+              "ScreenCam est conçu pour les flux de travail d'enregistrement d'écran Mac, y compris les écrans connectés, les fenêtres et les régions de capture.",
+          },
+        ],
+      },
+    },
+    legal: {
+      privacy: {
+        eyebrow: "Confidentialité",
+        title: "Politique de confidentialité",
+        updated: "Dernière mise à jour : 3 juin 2026",
+        sections: [
+          {
+            title: "Aperçu",
+            paragraphs: [
+              [
+                "ScreenCam est une application native d'enregistrement et d'édition d'écran macOS. L'application est conçue pour traiter les enregistrements localement sur votre Mac. ScreenCam peut effectuer des requêtes réseau pour des fonctionnalités d'application telles que le statut d'achat de App Store et, lorsque vous choisissez de l'activer, des analyses d'utilisation anonymes facultatives. Nous n'utilisons pas de trackers publicitaires dans l'application.",
+              ],
+            ],
+          },
+          {
+            title: "Enregistrements et fichiers locaux",
+            paragraphs: [
+              [
+                "Les enregistrements d'écran, la vidéo de la caméra, l'audio du microphone, l'audio du système, les données du curseur, les vidéos exportées, les fichiers de l'espace de travail et les fichiers de fond d'écran personnalisés restent sur votre appareil ou dans les emplacements de votre choix. ScreenCam ne télécharge pas ce contenu sur les serveurs ScreenCam.",
+              ],
+            ],
+          },
+          {
+            title: "Analyse d'utilisation anonyme",
+            paragraphs: [
+              [
+                "ScreenCam peut vous demander si vous souhaitez partager des analyses d'utilisation anonymes pour nous aider à comprendre quelles fonctionnalités d'enregistrement et d'édition fonctionnent bien. Vous pouvez activer ou désactiver le partage d'analyses à tout moment dans l'application. Si le partage d'analyses est désactivé, ScreenCam n'envoie pas d'analyses d'utilisation.",
+              ],
+              [
+                "Les analyses se limitent à l'utilisation du produit, aux diagnostics et aux informations sur les performances, telles que les interactions avec les fonctionnalités, la version de l'application, la version macOS et les informations générales sur l'appareil. Nous ne collectons jamais le contenu de l'écran, l'audio, la vidéo de la caméra, les fichiers de projet, les noms de fichiers ou le texte saisi via des analyses.",
+              ],
+            ],
+          },
+          {
+            title: "Autorisations",
+            paragraphs: [
+              [
+                "ScreenCam peut demander à macOS les autorisations d'enregistrement d'écran, de microphone, de caméra et d'accès aux fichiers. Ces autorisations sont utilisées uniquement pour fournir des fonctionnalités d'enregistrement, d'édition, d'exportation et de fichiers sélectionnés par l'utilisateur. Vous pouvez gérer ces autorisations dans les paramètres système.",
+              ],
+            ],
+          },
+          {
+            title: "Achats",
+            paragraphs: [
+              [
+                "Les abonnements et achats ScreenCam Pro sont traités par Apple via le Mac App Store. ScreenCam lit le statut d'achat et d'abonnement de StoreKit afin que l'application puisse déverrouiller les fonctionnalités de Pro. ScreenCam ne reçoit ni ne stocke les détails de votre carte de paiement.",
+              ],
+            ],
+          },
+          {
+            title: "Site Web",
+            paragraphs: [
+              [
+                "Lorsque vous visitez thescreen.cam, nos fournisseurs d'hébergement et d'infrastructure peuvent traiter les données de journal de serveur standard telles que l'adresse IP, l'agent utilisateur du navigateur, l'URL de la demande et l'heure de la demande pour la sécurité, les diagnostics et la livraison du site Web. Le site Internet n'utilise pas de trackers publicitaires.",
+              ],
+            ],
+          },
+          {
+            title: "Modifications et contact",
+            paragraphs: [
+              ["Nous pouvons mettre à jour cette politique à mesure que ScreenCam change. Si vous avez des questions sur la confidentialité, contactez-nous à", emailLink, "."],
+            ],
+          },
+        ],
+      },
+      support: {
+        eyebrow: "Assistance",
+        title: "ScreenCam Prise en charge",
+        updated: "Pour obtenir de l'aide sur ScreenCam pour macOS.",
+        supportChannelsAria: "Canaux d'assistance",
+        sections: [
+          {
+            title: "Contacter",
+            showSupportChannels: true,
+            paragraphs: [
+              [
+                "Courriel",
+                emailLink,
+                "pour l'assistance produit, les rapports de bogues, les questions d'achat et les commentaires.",
+              ],
+            ],
+          },
+          {
+            title: "Inclure ces détails",
+            paragraphs: [
+              [
+                "Lorsque vous signalez un problème, indiquez votre version macOS, votre version ScreenCam, votre modèle Mac, vos paramètres d'enregistrement, votre format d'exportation et une brève description de ce qui s'est passé. Les captures d'écran ou les courts enregistrements sont utiles lorsque le problème est visuel.",
+              ],
+            ],
+          },
+          {
+            title: "App Store achats",
+            paragraphs: [
+              [
+                "ScreenCam est distribué via le Mac App Store. La facturation, les abonnements, les renouvellements, les annulations et les remboursements sont gérés par Apple via votre identifiant Apple et les paramètres de votre compte App Store.",
+              ],
+            ],
+          },
+          {
+            title: "Exigences",
+            paragraphs: [
+              [
+                "ScreenCam est actuellement construit pour macOS. Il n’existe pas de version Windows, et le développement de Windows n’est pas prévu à court terme.",
+              ],
+            ],
+          },
+          {
+            title: "Confidentialité",
+            paragraphs: [
+              [
+                "Les enregistrements et les fichiers de l'espace de travail sont traités localement sur votre Mac. Lire le",
+                { href: "/privacy", text: "Politique de confidentialité" },
+                "pour plus de détails.",
+              ],
+            ],
+          },
+        ],
+      },
+      terms: {
+        eyebrow: "Conditions",
+        title: "Conditions d'utilisation",
+        updated: "Dernière mise à jour : 20 mai 2026",
+        sections: [
+          {
+            title: "Licence d'application",
+            paragraphs: [
+              [
+                "ScreenCam vous est concédé sous licence en vertu du contrat de licence utilisateur final standard (CLUF) de Apple, sauf disposition contraire de la loi applicable. Vous pouvez consulter le CLUF standard de Apple sur",
+                appleEulaLink,
+                ".",
+              ],
+            ],
+          },
+          {
+            title: "Abonnements et achats",
+            paragraphs: [
+              [
+                "Les abonnements et achats ScreenCam Pro sont traités par Apple via le Mac App Store. La facturation, le renouvellement, l'annulation, les remboursements et la gestion du compte des abonnements sont gérés via votre identifiant Apple et les paramètres de votre compte App Store.",
+              ],
+            ],
+          },
+          {
+            title: "Utilisation de ScreenCam",
+            paragraphs: [
+              [
+                "Vous êtes responsable des enregistrements, fichiers et exportations que vous créez avec ScreenCam. Enregistrez, modifiez et partagez du contenu uniquement lorsque vous disposez des droits et autorisations requis pour le faire.",
+              ],
+            ],
+          },
+          {
+            title: "Confidentialité",
+            paragraphs: [
+              ["Les pratiques de confidentialité de ScreenCam sont décrites dans le", { href: "/privacy", text: "Politique de confidentialité" }, "."],
+            ],
+          },
+          {
+            title: "Contacter",
+            paragraphs: [
+              ["Si vous avez des questions sur ces conditions, contactez-nous à", emailLink, "."],
+            ],
+          },
+        ],
+      },
+    },
+    changelog: {
+      description: "Product mises à jour, correctifs et notes de version.",
+      eyebrow: "Journal des modifications",
+      intro: "Product mises à jour, correctifs et notes de version.",
+      linkVersionLabel: "Lien vers la version",
+      title: "Journal des modifications ScreenCam",
+    },
+    motionBlurTool: {
+      addMaskAria: "Ajouter un masque",
+      addMaskButton: "Masque",
+      angleAria: "Angle de flou",
+      angleLabel: "Angle",
+      blurSettingsTitle: "Paramètres de flou",
+      chooseImage: "Choisir une image",
+      clearImage: "Image claire",
+      defaultMaskName: "Masque",
+      deleteSelectedMaskAria: "Delete masque sélectionné",
+      description:
+        "Créez des zones de flou rectangulaires, ajustez la direction et l'intensité, puis exportez l'image composée.",
+      emptyMasksWithImage: "Ajoutez un masque pour flouter une partie de l'image.",
+      emptyMasksWithoutImage: "Téléchargez d'abord une image.",
+      exportButton: "Exporter",
+      heightLabel: "Hauteur",
+      linearMode: "Linéaire",
+      maskButton: "Masque",
+      masksTitle: "Masques",
+      modeLabel: "Mode",
+      nameLabel: "Nom",
+      previewAria: "Aperçu du flou de mouvement",
+      replaceImageAria: "Remplacer l'image",
+      selectedMaskEmpty: "Sélectionnez un masque pour modifier la direction, l'intensité, la position et la taille du flou.",
+      sourceTitle: "Origine",
+      strengthAria: "Force du flou",
+      strengthLabel: "Force",
+      title: "Masque de flou de mouvement",
+      toolEyebrow: "Outil",
+      uniformMode: "Uniforme",
+      uploadDescription: "Déposez une image locale ici ou choisissez un fichier pour commencer l'édition.",
+      uploadTitle: "Télécharger une image",
+      widthLabel: "Largeur",
+      xLabel: "X",
+      yLabel: "Y",
+    },
+  },
+  "pt-BR": {
+    common: {
+      skipToContent: "Pular para o conteúdo",
+    },
+    header: {
+      appStore: "App Store",
+      backToMenuAria: "Voltar ao cardápio",
+      closeMenuAria: "Fechar menu",
+      homeAria: "Início do ScreenCam",
+      logoAlt: "ScreenCam Logo",
+      menuAria: "Abrir menu",
+      nav: {
+        changelog: "Registro de alterações",
+        docs: "Documentos",
+        privacy: "Privacidade",
+        support: "Suporte",
+        terms: "Termos",
+      },
+      primaryNavigationAria: "Navegação primária",
+    },
+    footer: {
+      appStoreButton: "Ver em App Store",
+      copyright: "Todos os direitos reservados.",
+      ctaText: "Obtenha ScreenCam do Mac App Store.",
+      ctaTitle: "Pronto para capturar melhor?",
+      description: "Gravação de tela nativa para Mac. Rápido, leve, poderoso.",
+      groups: {
+        legal: "Jurídico",
+        product: "Produto",
+        resources: "Recursos",
+      },
+      language: "Idioma",
+      legalLinks: {
+        privacy: "Privacidade",
+        terms: "Termos",
+      },
+      productLinks: {
+        controls: "Controles",
+        export: "Exportar",
+        faq: "Perguntas frequentes",
+        zoom: "Zoom",
+      },
+      resourceLinks: {
+        alternatives: "Alternativas",
+        bgm: "BGM",
+        changelog: "Registro de alterações",
+        docs: "Documentos",
+        motionBlurMask: "Máscara de desfoque de movimento",
+        support: "Suporte",
+      },
+      supportChannelsAria: "Canais de suporte",
+      systemStatus: "Todos os sistemas operando normalmente",
+    },
+    meta: {
+      changelog: {
+        title: "Registro de alterações - ScreenCam",
+        description: "Siga as notas de versão do ScreenCam, melhorias do produto, correções de bugs e histórico de atualizações.",
+      },
+      docs: {
+        title: "Documentos - ScreenCam",
+        description:
+          "Aprenda ScreenCam com tutoriais em vídeo guiados, etapas em capítulos e reprodução interativa.",
+      },
+      home: {
+        title: "ScreenCam - Gravação de tela nativa macOS com zoom direcionado",
+        description:
+          "ScreenCam é um gravador de tela nativo macOS para captura nítida, controle de zoom manual, âncoras de linha de tempo, ajuste de curva e exportação com visualização precisa.",
+      },
+      motionBlurMask: {
+        title: "Ferramenta de máscara de desfoque de movimento - ScreenCam",
+        description:
+          "Carregue uma imagem, desenhe máscaras retangulares de desfoque de movimento, ajuste a intensidade e a direção do desfoque e exporte o resultado composto.",
+      },
+      privacy: {
+        title: "Política de Privacidade - ScreenCam",
+        description:
+          "A política de privacidade do ScreenCam explica como o aplicativo macOS lida com gravações, permissões, análises opcionais, compras e dados do site.",
+      },
+      support: {
+        title: "Suporte - ScreenCam",
+        description:
+          "Obtenha ajuda com ScreenCam para macOS, incluindo contato de suporte, compras de App Store, requisitos e solução de problemas.",
+      },
+      terms: {
+        title: "Termos de Uso - ScreenCam",
+        description:
+          "Os termos de uso do ScreenCam explicam a licença do aplicativo, assinaturas, compras e informações de contato de suporte.",
+      },
+    },
+    docs: {
+      chaptersTitle: "Passos",
+      description:
+        "Observe o fluxo de trabalho e vá direto para a etapa necessária.",
+      emptyVideoDescription:
+        "Coloque o arquivo de demonstração em public/docs para esse recurso e adicione o caminho do vídeo e os carimbos de data/hora calibrados ao JSON da linha do tempo.",
+      emptyVideoTitle: "Vídeo em breve",
+      eyebrow: "Documentos",
+      featureListAria: "Tópicos de documentação",
+      playback: {
+        next: "Próxima etapa",
+        pause: "Pausa",
+        play: "Jogar",
+        previous: "Etapa anterior",
+        restart: "Reiniciar",
+      },
+      progressLabel: "Progresso",
+      title: "Guias ScreenCam.",
+      videoAriaLabel: "Vídeo de demonstração da documentação",
+      features: {
+        basics: {
+          title: "Noções básicas",
+          summary: "Familiarize-se com a visualização, a barra lateral, os painéis de configurações e as trilhas da linha do tempo.",
+          chapters: {
+            preview: {
+              title: "Visualização",
+              description: "Use a área de visualização para assistir ao resultado final da exportação atual em tempo real.",
+            },
+            sidebar: {
+              title: "Barra lateral",
+              description: "Os principais painéis de configuração ficam na barra lateral.",
+            },
+            "screen-settings": {
+              title: "Configurações de tela",
+              description: "Configure o conteúdo da tela, incluindo papel de parede, margens, tamanho e opções de layout relacionadas.",
+            },
+            "device-settings": {
+              title: "Configurações do dispositivo",
+              description: "Envolva a tela em um quadro de dispositivo, escolha o dispositivo e ajuste o estilo do quadro, como o plano de fundo.",
+            },
+            "keyboard-settings": {
+              title: "Configurações do teclado",
+              description: "Defina como os atalhos gravados aparecem, incluindo seu tamanho e posição padrão.",
+            },
+            "beauty-settings": {
+              title: "Configurações de beleza",
+              description: "Depois que a gravação da câmera for ativada, aplique aprimoramentos sutis de retrato à imagem da câmera.",
+            },
+            "mouse-settings": {
+              title: "Configurações do mouse",
+              description: "Ajuste o estilo visual básico do ponteiro do mouse.",
+            },
+            "animation-settings": {
+              title: "Configurações de animação",
+              description: "Personalize o movimento da câmera, incluindo intensidade de desfoque de movimento e curvas personalizadas.",
+            },
+            tracks: {
+              title: "Faixas",
+              description: "Eventos de gravação, câmera, áudio do sistema, microfone, zoom e teclado aparecem aqui como clipes da linha do tempo.",
+            },
+          },
+        },
+        "preview-control": {
+          title: "Controles de visualização",
+          summary: "Ajuste a velocidade de reprodução da visualização, o volume da visualização e o zoom da trilha da linha do tempo durante a edição.",
+          chapters: {
+            "playback-rate": {
+              title: "Velocidade de reprodução",
+              description:
+                "Ajuste a velocidade de reprodução da visualização aqui. **Isso afeta apenas o estágio de visualização e não afeta a exportação.**",
+            },
+            volume: {
+              title: "Volume",
+              description:
+                "Ajuste o som que você ouve durante a visualização. **Isso afeta apenas o estágio de visualização e não afeta a exportação.**",
+            },
+            "track-zoom": {
+              title: "Rastrear zoom",
+              description: "Altere o nível de zoom das trilhas da linha do tempo.",
+            },
+          },
+        },
+        "track-management": {
+          title: "Gerenciamento de trilhas",
+          summary: "Abra as configurações da trilha, reordene as trilhas, oculte-as, exclua-as e restaure as trilhas excluídas.",
+          chapters: {
+            entry: {
+              title: "Entrada",
+              description: "Abra o painel de configurações da trilha no lado esquerdo das trilhas.",
+            },
+            sort: {
+              title: "Classificar",
+              description:
+                "Arraste o identificador de classificação {{icon:grip}} inicial para reordenar as faixas. Este pedido é salvo como preferência e reutilizado na próxima vez.",
+            },
+            hide: {
+              title: "Esconder",
+              description:
+                "Clique em {{icon:eye}} para ocultar faixas desnecessárias. **Isso não afeta a exportação.**",
+            },
+            delete: {
+              title: "Delete",
+              description:
+                "Clique em {{icon:trash}} para excluir faixas desnecessárias. **Isso afeta a exportação final.**",
+            },
+            restore: {
+              title: "Restaurar",
+              description:
+                "As trilhas Deleted aparecem separadamente abaixo, onde você pode restaurá-las a qualquer momento.",
+            },
+          },
+        },
+        "screen-settings": {
+          title: "Configurações de tela",
+          summary: "Ajuste a tela gravada, seu plano de fundo, margens e comportamento do tamanho de saída.",
+          chapters: {
+            wallpaper: {
+              title: "Papel de parede",
+              description:
+                "Escolha papéis de parede lidos no sistema, incluindo papéis de parede dinâmicos. Eles não vêm com o aplicativo, não ocupam espaço do aplicativo e mantêm a mais alta qualidade de papel de parede. Clique em Personalizado para configurar mais pastas de papel de parede em Configurações.",
+            },
+            "no-background": {
+              title: "Sem plano de fundo",
+              description:
+                "Não escolha nenhum plano de fundo, o que é especialmente importante para gravação em tela inteira ou gravação de área personalizada. **Atualmente, mudar para nenhum papel de parede mantém as configurações anteriores de margem ou tamanho por padrão, então defina-as como 0 manualmente para remover bordas pretas.**",
+            },
+            gradient: {
+              title: "Gradiente",
+              description:
+                "Escolha um gradiente linear predefinido ou edite livremente âncoras e cores de gradiente, adicionando ou removendo âncoras conforme necessário.",
+            },
+            "solid-color": {
+              title: "Cor sólida",
+              description: "Escolha uma única cor como plano de fundo.",
+            },
+            "custom-background": {
+              title: "Personalizado",
+              description: "Carregue sua própria foto ou vídeo como plano de fundo.",
+            },
+            "adaptive-size": {
+              title: "Tamanho de tela adaptável",
+              description:
+                "Neste modo, o tamanho da tela é controlado ajustando as margens verticais e horizontais.",
+            },
+            "sync-margins": {
+              title: "Margens de sincronização",
+              description:
+                "Ative as margens de sincronização para manter todos os quatro lados consistentes. Desative-o para controlar as margens verticais e horizontais separadamente. **Se a proporção estiver ativada, a imagem final estará visualmente em conformidade com essa proporção, portanto as margens poderão parecer diferentes dos valores inseridos.**",
+            },
+            "fixed-size": {
+              title: "Tamanho de tela fixo",
+              description:
+                "Neste modo, insira manualmente o tamanho da tela. **Se a proporção estiver ativada, a tela se expandirá até a proporção desejada.**",
+            },
+          },
+        },
+        "workspace-file": {
+          title: "Arquivo de projeto Pro",
+          summary:
+            "Um arquivo de projeto contém todos os arquivos brutos gerados para uma gravação concluída, incluindo todos os ativos e configurações. Você pode compartilhá-lo e **ele será criado e salvo automaticamente em um local padrão quando a gravação terminar.**",
+          chapters: {
+            "default-directory": {
+              title: "Alterar o diretório padrão",
+              description:
+                "Abra <kbd>ScreenCam</kbd> > <kbd>Settings</kbd> > <kbd>Recording</kbd> > <kbd>Diretório de espaço de trabalho padrão</kbd> e escolha a pasta padrão.",
+            },
+            "recent-projects": {
+              title: "Abra projetos recentes",
+              description: "Use <kbd>Arquivo</kbd> > <kbd>Recente</kbd>.",
+            },
+            "default-directory-projects": {
+              title: "Abra projetos no local padrão",
+              description:
+                "Use <kbd>Arquivo</kbd> > <kbd>Diretório padrão</kbd>.",
+            },
+            "show-in-finder": {
+              title: "Mostrar o arquivo atual em Finder",
+              description:
+                "Clique no nome do arquivo do projeto na parte superior do editor ou use <kbd>File</kbd> > <kbd>Show em Finder</kbd>.",
+            },
+            "manual-save": {
+              title: "Salvar manualmente",
+              description:
+                "Use <kbd>File</kbd> > <kbd>Save</kbd> ou pressione <kbd>⌘</kbd><kbd>S</kbd> para salvar manualmente. Na maioria dos casos, o projeto é salvo automaticamente.",
+            },
+            "save-as": {
+              title: "Salvar como",
+              description:
+                "Use <kbd>File</kbd> > <kbd>Salvar como</kbd> ou pressione <kbd>⌘</kbd><kbd>⇧</kbd><kbd>S</kbd> para salvar uma cópia em uma pasta personalizada.",
+            },
+          },
+        },
+        record: {
+          title: "Gravar",
+          summary: "Configure uma captura, escolha a fonte e comece a gravar.",
+          chapters: {
+            "prepare-capture": {
+              title: "Prepare a captura",
+              description: "Abra ScreenCam e confirme se os controles de gravação estão prontos antes de selecionar uma fonte.",
+            },
+            "choose-source": {
+              title: "Escolha uma fonte",
+              description: "Escolha as opções de exibição, janela, área, câmera, microfone e áudio do sistema para a gravação.",
+            },
+            "start-recording": {
+              title: "Comece a gravar",
+              description: "Inicie a captura e verifique o estado da gravação antes de passar para o fluxo de trabalho.",
+            },
+          },
+        },
+        zoom: {
+          title: "Zoom",
+          summary: "Adicione âncoras na linha do tempo e ajuste como a câmera se move durante a gravação.",
+          chapters: {
+            "zoom-track": {
+              title: "Faixa de zoom",
+              description: "Crie e exclua clipes de zoom livremente na trilha de zoom.",
+            },
+            "delete-clip": {
+              title: "Delete",
+              description: "Selecione um clipe e pressione Backspace ou Delete para removê-lo.",
+              descriptionHtml:
+                "Selecione um clipe e pressione <kbd class=\"docs-key\">Backspace</kbd> ou <kbd class=\"docs-key\">Delete</kbd> para removê-lo.",
+            },
+            "create-clip": {
+              title: "Criar",
+              description: "Clique ou arraste em uma área vazia para criar um novo clipe de zoom.",
+            },
+            "merge-clips": {
+              title: "Mesclar",
+              description: "Redimensione ou arraste um clipe até que ele cruze outro clipe e solte para confirmar a mesclagem.",
+            },
+            "manual-mode": {
+              title: "Modo manual",
+              description: "Mude do movimento automático para o modo manual e personalize a contagem, o centro e a escala de cada âncora.",
+            },
+            "select-anchor": {
+              title: "Selecione uma âncora",
+              description: "Selecione uma âncora para editar suas configurações de zoom individuais.",
+            },
+            "adjust-center": {
+              title: "Ajustar centro",
+              description: "Arraste diretamente na visualização para definir o centro visual do zoom.",
+            },
+            "adjust-scale-wheel": {
+              title: "Ajustar escala",
+              description: "Use a roda do mouse na visualização para controlar a escala de zoom.",
+            },
+            "adjust-scale-panel": {
+              title: "Ajustar escala nas configurações",
+              description: "Selecione uma âncora e ajuste o controle deslizante de escala no painel de configurações direito.",
+            },
+          },
+        },
+        camera: {
+          title: "Câmera",
+          summary: "Dê forma à sobreposição da câmera e aplique ajustes leves de aparência.",
+          chapters: {
+            "enable-camera": {
+              title: "Habilite a câmera",
+              description: "Ligue a camada da câmera e posicione-a onde ela suporta a gravação.",
+            },
+            "shape-frame": {
+              title: "Dê forma à moldura",
+              description: "Alterne entre formatos de quadro e dimensione a sobreposição da câmera para a cena.",
+            },
+            "apply-beauty": {
+              title: "Aplique efeitos de beleza",
+              description: "Ajuste configurações sutis de aparência enquanto mantém a visualização alinhada com a exportação final.",
+            },
+          },
+        },
+        shortcuts: {
+          title: "Atalhos",
+          summary: "Use ações do teclado para controlar a captura sem interromper o fluxo.",
+          chapters: {
+            "capture-shortcut": {
+              title: "Comece com um atalho",
+              description: "Acione controles de gravação a partir do teclado em vez de acessar a barra de ferramentas.",
+            },
+            "pause-resume": {
+              title: "Pausar ou retomar",
+              description: "Use ações de atalho para pausar e continuar a captura durante gravações mais longas.",
+            },
+            "finish-recording": {
+              title: "Termine a tomada",
+              description: "Pare a gravação e vá para o editor sem perder o contexto.",
+            },
+          },
+        },
+        export: {
+          title: "Exportar",
+          summary: "Revise o resultado, escolha as configurações de saída e exporte a gravação.",
+          chapters: {
+            "choose-format": {
+              title: "Escolha o formato",
+              description: "Selecione o formato de exportação e as configurações de saída para o destino.",
+            },
+            "review-preview": {
+              title: "Revise a visualização",
+              description: "Verifique a visualização final antes de renderizar o arquivo.",
+            },
+            "export-file": {
+              title: "Exporte o arquivo",
+              description: "Renderize a gravação e salve o resultado exportado.",
+            },
+          },
+        },
+      },
+    },
+    home: {
+      screenStudioAlternative: {
+        eyebrow: "Alternativa Screen Studio",
+        title: "Precisa de um gravador de tela Mac mais leve com controle manual mais profundo?",
+        description:
+          "Compare ScreenCam com Screen Studio em tamanho de aplicativo, uso de CPU e memória, velocidade de exportação, âncoras de zoom manual, camadas, modelos de dispositivos e formatos de exportação.",
+        cta: "Alternativa Screen Studio para Mac",
+      },
+      structuredDataFeatureList: [
+        "Gravação de tela nativa macOS",
+        "Âncoras de zoom manuais",
+        "Curvas de animação personalizadas",
+        "Maquetes de dispositivos",
+        "Camadas de mosaico, texto, foco e imagem personalizada",
+        "Transições de desfoque de movimento",
+        "Exportação GIF",
+        "Exportação Live Photo",
+        "Efeitos de beleza da câmera",
+        "Exportação com visualização precisa",
+      ],
+      hero: {
+        appStoreButton: "Ver em App Store",
+        builtWithLabel: "Construído com",
+        builtWithValue: "100% nativo",
+        systemLabel: "Sistema",
+        systemValue: "macOS 15+",
+        tagline: "Gravação de alta resolução com uma câmera que você pode moldar após a captura.",
+        titleLines: [
+          ["Capturar", "Afiado."],
+          ["Direto", "O quadro."],
+        ],
+      },
+      zoom: {
+        canvasLabels: {
+          autoPlayingDemo: "Demonstração de reprodução automática",
+          playMarker: "Jogar",
+          previewMarker: "Visualização",
+          recordingClip: "Gravação",
+          recordingTrack: "Gravação",
+          timelinePreview: "Visualização da linha do tempo",
+          zoomClip: "Zoom automático",
+          zoomTrack: "Zoom",
+        },
+        features: [
+          {
+            title: "Zoom Dinâmico",
+            description: "O movimento da câmera segue o mesmo tempo de mola usado pelas exportações ScreenCam.",
+          },
+          {
+            title: "Visualização da linha do tempo",
+            description: "Passe o mouse sobre a trilha Gravação ou Zoom para limpar o quadro de visualização exato.",
+          },
+          {
+            title: "Desfoque de movimento",
+            description: "Os estados de zoom, panorâmica e clique são amostrados com desfoque estilo obturador.",
+          },
+        ],
+        subtitle: "Zoom com desfoque de movimento.",
+        timelineAria: "Faixas de visualização da linha do tempo",
+        title: "Concentre-se no que importa.",
+      },
+      deviceMockups: {
+        description:
+          "Exporte com molduras de dispositivos impressionantes. iPhone, Mac, Studio Display - seu conteúdo, perfeitamente apresentado.",
+        eyebrow: "Exportar Options",
+        formats: ["Resolução original", "Live Photo", "MP4/MOV"],
+        imageAlt: {
+          iPhone: "iPhone 17 Pro Máx.",
+          macBook: "Aplicativo ScreenCam em execução no MacBook Pro",
+          studioDisplay: "ScreenCam em execução no Studio Display com MacBook",
+        },
+        title: "Linda em todas as telas.",
+      },
+      controls: {
+        body:
+          "O modo manual oferece total liberdade criativa. Adicione várias âncoras a um único clipe de zoom, cada uma com sua própria escala e ponto central.",
+        centerLabel: "Centro",
+        dragCenter: "Arraste para ajustar o centro",
+        eyebrow: "Controles Avançados",
+        features: [
+          "Arraste as âncoras para reposicionar na linha do tempo",
+          "Ajuste a escala de 1x a 5x por âncora",
+          "Defina o centro de foco personalizado para cada zoom",
+          "Transições suaves entre âncoras",
+        ],
+        pauseAria: "Pausar a reprodução simulada da linha do tempo",
+        pauseTitle: "Pausa",
+        playAria: "Reproduzir reprodução simulada da linha do tempo",
+        playTitle: "Jogar",
+        scaleAria: "Escala",
+        scaleLabel: "Escala",
+        titleMuted: "cada ponto de zoom.",
+        titleStart: "Controle total sobre",
+      },
+      performance: {
+        cta: "Veja dados completos de benchmark",
+        metrics: {
+          appSize: "Tamanho do aplicativo",
+          appSizeNote: "cerca de 20 MB contra 600 MB",
+          cpuUsage: "Uso da CPU",
+          exportTime: "Tempo de exportação",
+          exportTimeNote: "mais curto é mais rápido",
+          memory: "Memória",
+          others: "Outros",
+          screenCam: "ScreenCam",
+        },
+        subtitle: "Sem elétron. Sem visualizações na web. Desempenho nativo puro.",
+        title: "Nativo significa rápido.",
+      },
+      featureCards: {
+        eyebrow: "Recursos do More",
+        title: "Pequenos detalhes, prontos para fluxos de trabalho reais.",
+        subtitle: "Toques nativos que tornam a gravação rápida, refinada e Mac em primeiro lugar.",
+        beautyThumb: {
+          beforeLabel: "Beleza desligada",
+          afterLabel: "Beleza ligada",
+          disclosure:
+            "Retrato gerado por IA, usado apenas para demonstrar o verdadeiro efeito de beleza.",
+          enterFloatingAria: "Mostrar como janela de câmera flutuante",
+          exitFloatingAria: "Retornar a janela da câmera para visualização completa",
+          pauseAria: "Pausar demonstração de comparação de beleza",
+          playAria: "Jogue uma demonstração de comparação de beleza",
+          shapeCycleAria: "Mudar o formato da janela flutuante",
+          shapeLabels: {
+            circle: "Círculo",
+            square: "Quadrado arredondado",
+            wide: "16:9",
+          },
+        },
+        dynamicIslandThumb: {
+          ariaLabel: "Pré-visualização da tarefa em segundo plano da Ilha Dinâmica",
+          materialLabel: "Material de entalhe",
+          modeLabels: {
+            black: "Preto",
+            glass: "Vidro",
+          },
+          tasks: [
+            {
+              title: "Filme de lançamento ScreenCam",
+              detail: "Pronto para revelar em Finder.",
+              primaryAction: "Abra Finder",
+              secondary: "Completo",
+              secondaryAction: "Concluído",
+              size: "384MB",
+            },
+            {
+              title: "Exportação de tutoriais em 4K",
+              detail: "Codificação H.265 com camadas de câmera e cursor.",
+              primaryAction: "Abra Finder",
+              secondary: "2m restantes",
+              secondaryAction: "Concluído",
+              size: "1,2GB",
+            },
+            {
+              title: "Compressão de visualização GIF",
+              detail: "Otimizando quadros para um clipe compartilhável menor.",
+              primaryAction: "Abra Finder",
+              secondary: "Faltam 42s",
+              secondaryAction: "Concluído",
+              size: "18MB",
+            },
+          ],
+          wallpaperButtonAria: "Alterar papel de parede",
+        },
+        effectLayersThumb: {
+          ariaLabel: "Visualização da linha do tempo das camadas de efeito",
+          dragHint: "Arraste até a faixa para adicionar",
+          effects: [
+            {
+              id: "mosaic",
+              title: "Mosaico",
+              description: "Pixelize áreas sensíveis na parte superior da gravação.",
+              clipLabel: "Mosaico",
+            },
+            {
+              id: "focus",
+              title: "Foco",
+              description: "Destaque uma região enquanto mantém o contexto visível.",
+              clipLabel: "Foco",
+            },
+            {
+              id: "text",
+              title: "Texto",
+              description: "Adicione uma camada de texto em qualquer lugar da edição.",
+              clipLabel: "Texto",
+            },
+            {
+              id: "image",
+              title: "Imagem",
+              description: "Coloque uma sobreposição de imagem como uma camada cronometrada.",
+              clipLabel: "Imagem",
+            },
+          ],
+        },
+        glassThumb: {
+          modeLabels: {
+            clear: "Limpar",
+            regular: "normal",
+          },
+          toolbarItems: {
+            area: "Área",
+            camera: "Câmera",
+            close: "Ocultar ScreenCam",
+            display: "Exibição",
+            iphone: "iPhone",
+            keyboard: "Gravação de eventos de teclado",
+            microphone: "Microfone",
+            settings: "Configurações",
+            systemAudio: "Gravação de som do sistema",
+            window: "Janela",
+            workspace: "Abrir espaço de trabalho",
+          },
+          wallpaperButtonAria: "Alterar papel de parede",
+        },
+        items: [
+          {
+            title: "Vidro Líquido",
+            caption: "Os materiais de vidro nativos mantêm os controles nítidos enquanto combinam com as superfícies macOS modernas.",
+          },
+          {
+            title: "Captura de atalho",
+            caption: "Grave atalhos de teclado durante a captura e exiba-os claramente no vídeo final.",
+          },
+          {
+            title: "Beleza leve",
+            caption: "Aplique efeitos de beleza sutis para obter uma aparência de câmera mais limpa.",
+          },
+          {
+            title: "Ilha Dinâmica",
+            caption: "Coloque as exportações longas em segundo plano e mantenha o progresso visível desde o nível.",
+          },
+          {
+            title: "Camadas de Efeito",
+            caption: "Adicione quantas camadas de efeitos forem necessárias e, em seguida, mova, redimensione e empilhe cada clipe na linha do tempo.",
+          },
+        ],
+      },
+      faq: {
+        eyebrow: "Perguntas frequentes",
+        title: "Perguntas e respostas",
+        items: [
+          {
+            question: "ScreenCam é uma alternativa Screen Studio?",
+            answer:
+              "Sim. ScreenCam é uma alternativa macOS Screen Studio nativa para criadores que desejam um tamanho menor de aplicativo, menor uso de recursos, exportações mais rápidas, âncoras de zoom manuais, maquetes de dispositivos, camadas mais ricas, exportação GIF, exportação Live Photo e uma experiência de edição Mac inovadora.",
+          },
+          {
+            question: "Qual a diferença entre o ScreenCam e os gravadores baseados em navegador?",
+            answer:
+              "ScreenCam foi desenvolvido para macOS como um aplicativo nativo de gravação e edição. O objetivo é um fluxo de trabalho compacto, pioneiro no Mac, com captura local, controles de edição suaves e exportação com visualização precisa.",
+          },
+          {
+            question: "Qual é a versão mínima do macOS necessária?",
+            answer: "ScreenCam requer macOS 15 ou posterior.",
+          },
+          {
+            question: "Existe uma versão para Windows?",
+            answer:
+              "Agora não. ScreenCam está focado em macOS e não planejamos desenvolver uma versão para Windows no curto prazo.",
+          },
+          {
+            question: "Posso exportar para diferentes formatos?",
+            answer:
+              "ScreenCam foi projetado para exportação de vídeo de alta qualidade do editor, com enquadramento e controles de movimento refletidos na saída final.",
+          },
+          {
+            question: "Como funciona o recurso de zoom?",
+            answer:
+              "Você pode adicionar pontos de zoom em qualquer lugar da sua linha do tempo. No modo manual, você tem controle total: defina múltiplas âncoras com diferentes níveis de zoom e centros de foco. As transições incluem efeitos de desfoque de movimento suave.",
+          },
+          {
+            question: "Suporta vários monitores?",
+            answer:
+              "ScreenCam foi desenvolvido para fluxos de trabalho de gravação de tela Mac, incluindo monitores conectados, janelas e regiões de captura.",
+          },
+        ],
+      },
+    },
+    legal: {
+      privacy: {
+        eyebrow: "Privacidade",
+        title: "Política de Privacidade",
+        updated: "Última atualização: 3 de junho de 2026",
+        sections: [
+          {
+            title: "Visão geral",
+            paragraphs: [
+              [
+                "ScreenCam é um aplicativo nativo de gravação e edição de tela macOS. O aplicativo foi projetado para processar gravações localmente em seu Mac. ScreenCam pode fazer solicitações de rede para funcionalidades do aplicativo, como status de compra App Store e, quando você optar por ativá-lo, análises de uso anônimas opcionais. Não usamos rastreadores de publicidade no aplicativo.",
+              ],
+            ],
+          },
+          {
+            title: "Gravações e arquivos locais",
+            paragraphs: [
+              [
+                "Gravações de tela, vídeo da câmera, áudio do microfone, áudio do sistema, dados do cursor, vídeos exportados, arquivos do espaço de trabalho e arquivos de papel de parede personalizados permanecem no seu dispositivo ou nos locais que você escolher. ScreenCam não carrega este conteúdo para servidores ScreenCam.",
+              ],
+            ],
+          },
+          {
+            title: "Análise de uso anônima",
+            paragraphs: [
+              [
+                "ScreenCam pode perguntar se você deseja compartilhar análises de uso anônimas para nos ajudar a entender quais recursos de gravação e edição funcionam bem. Você pode ativar ou desativar o compartilhamento de análises a qualquer momento no aplicativo. Se o compartilhamento de análises estiver desativado, ScreenCam não enviará análises de uso.",
+              ],
+              [
+                "As análises são limitadas ao uso do produto, diagnóstico e informações de desempenho, como interações de recursos, versão do aplicativo, versão macOS e informações gerais do dispositivo. Nunca coletamos conteúdo de tela, áudio, vídeo de câmera, arquivos de projeto, nomes de arquivos ou texto digitado por meio de análises.",
+              ],
+            ],
+          },
+          {
+            title: "Permissões",
+            paragraphs: [
+              [
+                "ScreenCam pode solicitar a macOS permissões de gravação de tela, microfone, câmera e acesso a arquivos. Essas permissões são usadas apenas para fornecer recursos de gravação, edição, exportação e arquivos selecionados pelo usuário. Você pode gerenciar essas permissões nas configurações do sistema.",
+              ],
+            ],
+          },
+          {
+            title: "Compras",
+            paragraphs: [
+              [
+                "Assinaturas e compras ScreenCam Pro são processadas por Apple por meio do Mac App Store. ScreenCam lê o status de compra e assinatura de StoreKit para que o aplicativo possa desbloquear os recursos do Pro. ScreenCam não recebe nem armazena os detalhes do seu cartão de pagamento.",
+              ],
+            ],
+          },
+          {
+            title: "Site",
+            paragraphs: [
+              [
+                "Quando você visita thescreen.cam, nossos provedores de hospedagem e infraestrutura podem processar dados de registro de servidor padrão, como endereço IP, agente do usuário do navegador, URL de solicitação e tempo de solicitação para segurança, diagnóstico e entrega do site. O site não usa rastreadores de publicidade.",
+              ],
+            ],
+          },
+          {
+            title: "Mudanças e contato",
+            paragraphs: [
+              ["Poderemos atualizar esta política à medida que ScreenCam mudar. Se você tiver dúvidas sobre privacidade, entre em contato conosco em", emailLink, "."],
+            ],
+          },
+        ],
+      },
+      support: {
+        eyebrow: "Suporte",
+        title: "Suporte ScreenCam",
+        updated: "Para obter ajuda com ScreenCam para macOS.",
+        supportChannelsAria: "Canais de suporte",
+        sections: [
+          {
+            title: "Contato",
+            showSupportChannels: true,
+            paragraphs: [
+              [
+                "E-mail",
+                emailLink,
+                "para suporte ao produto, relatórios de bugs, perguntas sobre compras e feedback.",
+              ],
+            ],
+          },
+          {
+            title: "Inclua esses detalhes",
+            paragraphs: [
+              [
+                "Ao relatar um problema, inclua sua versão macOS, versão ScreenCam, modelo Mac, configurações de gravação, formato de exportação e uma breve descrição do que aconteceu. Capturas de tela ou gravações curtas são úteis quando o problema é visual.",
+              ],
+            ],
+          },
+          {
+            title: "Compras de App Store",
+            paragraphs: [
+              [
+                "ScreenCam é distribuído por meio do Mac App Store. Faturamento, assinaturas, renovações, cancelamentos e reembolsos são gerenciados por Apple por meio de seu ID Apple e configurações de conta App Store.",
+              ],
+            ],
+          },
+          {
+            title: "Requisitos",
+            paragraphs: [
+              [
+                "ScreenCam é atualmente construído para macOS. Não existe uma versão para Windows e o desenvolvimento do Windows não está planejado no curto prazo.",
+              ],
+            ],
+          },
+          {
+            title: "Privacidade",
+            paragraphs: [
+              [
+                "As gravações e os arquivos do espaço de trabalho são processados localmente em seu Mac. Leia o",
+                { href: "/privacy", text: "Política de Privacidade" },
+                "para mais detalhes.",
+              ],
+            ],
+          },
+        ],
+      },
+      terms: {
+        eyebrow: "Termos",
+        title: "Termos de Uso",
+        updated: "Última atualização: 20 de maio de 2026",
+        sections: [
+          {
+            title: "Licença do aplicativo",
+            paragraphs: [
+              [
+                "ScreenCam é licenciado para você sob o Contrato de Licença de Usuário Final Padrão (EULA) de Apple, a menos que exigido de outra forma pela lei aplicável. Você pode revisar o EULA padrão do Apple em",
+                appleEulaLink,
+                ".",
+              ],
+            ],
+          },
+          {
+            title: "Assinaturas e compras",
+            paragraphs: [
+              [
+                "Assinaturas e compras ScreenCam Pro são processadas por Apple por meio do Mac App Store. O faturamento, a renovação, o cancelamento, os reembolsos e o gerenciamento da conta da assinatura são feitos por meio do seu ID Apple e das configurações da conta App Store.",
+              ],
+            ],
+          },
+          {
+            title: "Uso de ScreenCam",
+            paragraphs: [
+              [
+                "Você é responsável pelas gravações, arquivos e exportações criadas com ScreenCam. Grave, edite e compartilhe conteúdo somente quando você tiver os direitos e permissões necessários para fazê-lo.",
+              ],
+            ],
+          },
+          {
+            title: "Privacidade",
+            paragraphs: [
+              ["As práticas de privacidade de ScreenCam estão descritas no", { href: "/privacy", text: "Política de Privacidade" }, "."],
+            ],
+          },
+          {
+            title: "Contato",
+            paragraphs: [
+              ["Se você tiver dúvidas sobre estes termos, entre em contato conosco em", emailLink, "."],
+            ],
+          },
+        ],
+      },
+    },
+    changelog: {
+      description: "Atualizações, correções e notas de versão do Product.",
+      eyebrow: "Registro de alterações",
+      intro: "Atualizações, correções e notas de versão do Product.",
+      linkVersionLabel: "Link para a versão",
+      title: "Registro de alterações ScreenCam",
+    },
+    motionBlurTool: {
+      addMaskAria: "Adicionar máscara",
+      addMaskButton: "Máscara",
+      angleAria: "Ângulo de desfoque",
+      angleLabel: "Ângulo",
+      blurSettingsTitle: "Configurações de desfoque",
+      chooseImage: "Escolha a imagem",
+      clearImage: "Limpar imagem",
+      defaultMaskName: "Máscara",
+      deleteSelectedMaskAria: "Máscara selecionada Delete",
+      description:
+        "Crie regiões de desfoque retangulares, ajuste a direção e a intensidade e exporte a imagem composta.",
+      emptyMasksWithImage: "Adicione uma máscara para desfocar parte da imagem.",
+      emptyMasksWithoutImage: "Carregue uma imagem primeiro.",
+      exportButton: "Exportar",
+      heightLabel: "Altura",
+      linearMode: "linear",
+      maskButton: "Máscara",
+      masksTitle: "Máscaras",
+      modeLabel: "Modo",
+      nameLabel: "Nome",
+      previewAria: "Visualização do desfoque de movimento",
+      replaceImageAria: "Substituir imagem",
+      selectedMaskEmpty: "Selecione uma máscara para editar a direção, intensidade, posição e tamanho do desfoque.",
+      sourceTitle: "Fonte",
+      strengthAria: "Força do desfoque",
+      strengthLabel: "Força",
+      title: "Máscara de desfoque de movimento",
+      toolEyebrow: "Ferramenta",
+      uniformMode: "Uniforme",
+      uploadDescription: "Solte uma imagem local aqui ou escolha um arquivo para começar a editar.",
+      uploadTitle: "Carregar uma imagem",
+      widthLabel: "Largura",
+      xLabel: "X",
+      yLabel: "Y",
+    },
+  },
+  it: {
+    common: {
+      skipToContent: "Vai al contenuto",
+    },
+    header: {
+      appStore: "App Store",
+      backToMenuAria: "Torna al menù",
+      closeMenuAria: "Chiudi menù",
+      homeAria: "Home ScreenCam",
+      logoAlt: "Logo ScreenCam",
+      menuAria: "Apri il menu",
+      nav: {
+        changelog: "Registro delle modifiche",
+        docs: "Documenti",
+        privacy: "Privacy",
+        support: "Supporto",
+        terms: "Termini",
+      },
+      primaryNavigationAria: "Navigazione primaria",
+    },
+    footer: {
+      appStoreButton: "Visualizza su App Store",
+      copyright: "Tutti i diritti riservati.",
+      ctaText: "Ottieni ScreenCam da Mac App Store.",
+      ctaTitle: "Pronti per catturare meglio?",
+      description: "Registrazione dello schermo nativa per Mac. Veloce, leggero, potente.",
+      groups: {
+        legal: "Legale",
+        product: "Prodotto",
+        resources: "Risorse",
+      },
+      language: "Lingua",
+      legalLinks: {
+        privacy: "Privacy",
+        terms: "Termini",
+      },
+      productLinks: {
+        controls: "Controlli",
+        export: "Esporta",
+        faq: "Domande frequenti",
+        zoom: "Zoom",
+      },
+      resourceLinks: {
+        alternatives: "Alternative",
+        bgm: "BGM",
+        changelog: "Registro delle modifiche",
+        docs: "Documenti",
+        motionBlurMask: "Maschera di sfocatura movimento",
+        support: "Supporto",
+      },
+      supportChannelsAria: "Canali di supporto",
+      systemStatus: "Tutti i sistemi sono operativi",
+    },
+    meta: {
+      changelog: {
+        title: "Registro delle modifiche: ScreenCam",
+        description: "Segui le note di rilascio di ScreenCam, i miglioramenti del prodotto, le correzioni di bug e la cronologia degli aggiornamenti.",
+      },
+      docs: {
+        title: "Documenti: ScreenCam",
+        description:
+          "Impara ScreenCam con procedure video guidate, passaggi suddivisi in capitoli e riproduzione interattiva.",
+      },
+      home: {
+        title: "ScreenCam - Registrazione nativa dello schermo macOS con zoom diretto",
+        description:
+          "ScreenCam è un registratore di schermo macOS nativo per cattura nitida, controllo manuale dello zoom, ancoraggi della timeline, regolazione della curva ed esportazione accurata in anteprima.",
+      },
+      motionBlurMask: {
+        title: "Strumento maschera effetto movimento - ScreenCam",
+        description:
+          "Carica un'immagine, disegna maschere di motion blur rettangolari, regola l'intensità e la direzione della sfocatura, quindi esporta il risultato composito.",
+      },
+      privacy: {
+        title: "Informativa sulla privacy - ScreenCam",
+        description:
+          "L'informativa sulla privacy di ScreenCam spiega come l'app macOS gestisce registrazioni, autorizzazioni, analisi opzionali, acquisti e dati del sito Web.",
+      },
+      support: {
+        title: "Supporto: ScreenCam",
+        description:
+          "Ottieni assistenza con ScreenCam per macOS, inclusi contatto di supporto, acquisti App Store, requisiti e risoluzione dei problemi.",
+      },
+      terms: {
+        title: "Condizioni d'uso - ScreenCam",
+        description:
+          "I termini di utilizzo di ScreenCam spiegano la licenza dell'app, gli abbonamenti, gli acquisti e le informazioni di contatto del supporto.",
+      },
+    },
+    docs: {
+      chaptersTitle: "Passi",
+      description:
+        "Guarda il flusso di lavoro, quindi vai direttamente al passaggio che ti serve.",
+      emptyVideoDescription:
+        "Trascina il file demo in public/docs per questa funzionalità, quindi aggiungi il percorso video e i timestamp calibrati al JSON della timeline.",
+      emptyVideoTitle: "Video in arrivo",
+      eyebrow: "Documenti",
+      featureListAria: "Argomenti della documentazione",
+      playback: {
+        next: "Prossimo passo",
+        pause: "Pausa",
+        play: "Gioca",
+        previous: "Passaggio precedente",
+        restart: "Ricominciare",
+      },
+      progressLabel: "Progresso",
+      title: "ScreenCam Guide.",
+      videoAriaLabel: "Video dimostrativo della documentazione",
+      features: {
+        basics: {
+          title: "Nozioni di base",
+          summary: "Acquisisci familiarità con l'anteprima, la barra laterale, i pannelli delle impostazioni e le tracce della timeline.",
+          chapters: {
+            preview: {
+              title: "Anteprima",
+              description: "Utilizza l'area di anteprima per guardare il risultato finale dell'esportazione corrente in tempo reale.",
+            },
+            sidebar: {
+              title: "Barra laterale",
+              description: "I principali pannelli di configurazione si trovano nella barra laterale.",
+            },
+            "screen-settings": {
+              title: "Impostazioni dello schermo",
+              description: "Configura il contenuto dello schermo, inclusi sfondo, margini, dimensioni e relative opzioni di layout.",
+            },
+            "device-settings": {
+              title: "Impostazioni del dispositivo",
+              description: "Avvolgi lo schermo nella cornice di un dispositivo, scegli il dispositivo e regola lo stile della cornice, ad esempio lo sfondo.",
+            },
+            "keyboard-settings": {
+              title: "Impostazioni della tastiera",
+              description: "Imposta la modalità di visualizzazione dei collegamenti registrati, comprese le dimensioni e la posizione predefinite.",
+            },
+            "beauty-settings": {
+              title: "Impostazioni di bellezza",
+              description: "Dopo aver abilitato la registrazione della fotocamera, applica sottili miglioramenti al ritratto all'immagine della fotocamera.",
+            },
+            "mouse-settings": {
+              title: "Impostazioni del mouse",
+              description: "Regola lo stile visivo di base per il puntatore del mouse.",
+            },
+            "animation-settings": {
+              title: "Impostazioni dell'animazione",
+              description: "Personalizza il movimento della fotocamera, inclusa l'intensità del motion blur e le curve personalizzate.",
+            },
+            tracks: {
+              title: "Tracce",
+              description: "Gli eventi di registrazione, fotocamera, audio di sistema, microfono, zoom e tastiera vengono visualizzati qui come clip della timeline.",
+            },
+          },
+        },
+        "preview-control": {
+          title: "Controlli di anteprima",
+          summary: "Regola la velocità di riproduzione dell'anteprima, il volume dell'anteprima e lo zoom della traccia della timeline durante la modifica.",
+          chapters: {
+            "playback-rate": {
+              title: "Velocità di riproduzione",
+              description:
+                "Regola qui la velocità di riproduzione dell'anteprima. **Ciò influisce solo sulla fase di anteprima e non influisce sull'esportazione.**",
+            },
+            volume: {
+              title: "Volume",
+              description:
+                "Regola il suono che senti durante l'anteprima. **Ciò influisce solo sulla fase di anteprima e non influisce sull'esportazione.**",
+            },
+            "track-zoom": {
+              title: "Traccia lo zoom",
+              description: "Modifica il livello di zoom delle tracce della timeline.",
+            },
+          },
+        },
+        "track-management": {
+          title: "Gestione delle tracce",
+          summary: "Apri le impostazioni della traccia, riordina le tracce, nascondile, eliminale e ripristina le tracce eliminate.",
+          chapters: {
+            entry: {
+              title: "Entrata",
+              description: "Apri il pannello delle impostazioni della traccia dal lato sinistro delle tracce.",
+            },
+            sort: {
+              title: "Ordina",
+              description:
+                "Trascina la maniglia di ordinamento {{icon:grip}} principale per riordinare le tracce. Questo ordine viene salvato come preferenza e riutilizzato la prossima volta.",
+            },
+            hide: {
+              title: "Nasconditi",
+              description:
+                "Fai clic su {{icon:eye}} per nascondere le tracce che non ti servono. **Ciò non influisce sull'esportazione.**",
+            },
+            delete: {
+              title: "Delete",
+              description:
+                "Fare clic su {{icon:trash}} per eliminare le tracce non necessarie. **Ciò influisce sull'esportazione finale.**",
+            },
+            restore: {
+              title: "Ripristina",
+              description:
+                "Le tracce Deleted vengono visualizzate separatamente di seguito, dove puoi ripristinarle in qualsiasi momento.",
+            },
+          },
+        },
+        "screen-settings": {
+          title: "Impostazioni dello schermo",
+          summary: "Ottimizza lo schermo registrato, il suo sfondo, i margini e il comportamento delle dimensioni di output.",
+          chapters: {
+            wallpaper: {
+              title: "Carta da parati",
+              description:
+                "Scegli gli sfondi letti dal sistema, inclusi gli sfondi dinamici. Non sono inclusi nell'app, non occupano spazio nell'app e mantengono la massima qualità dello sfondo. Fai clic su Personalizzato per configurare più cartelle di sfondi in Impostazioni.",
+            },
+            "no-background": {
+              title: "Nessuno sfondo",
+              description:
+                "Non scegliere lo sfondo, il che è particolarmente importante per la registrazione a schermo intero o per la registrazione in aree personalizzate. **Attualmente, il passaggio a nessuno sfondo mantiene le impostazioni di margine o dimensione precedenti per impostazione predefinita, quindi impostale manualmente su 0 per rimuovere i bordi neri.**",
+            },
+            gradient: {
+              title: "Gradiente",
+              description:
+                "Scegli un gradiente lineare preimpostato o modifica liberamente gli ancoraggi e i colori del gradiente, aggiungendo o rimuovendo gli ancoraggi secondo necessità.",
+            },
+            "solid-color": {
+              title: "Colore solido",
+              description: "Scegli un singolo colore come sfondo.",
+            },
+            "custom-background": {
+              title: "Personalizzato",
+              description: "Carica la tua foto o il tuo video come sfondo.",
+            },
+            "adaptive-size": {
+              title: "Dimensioni dello schermo adattabili",
+              description:
+                "In questa modalità, la dimensione dello schermo viene controllata regolando i margini verticali e orizzontali.",
+            },
+            "sync-margins": {
+              title: "Sincronizza i margini",
+              description:
+                "Abilita i margini di sincronizzazione per mantenere coerenti tutti e quattro i lati. Disabilitalo per controllare separatamente i margini verticali e orizzontali. **Se le proporzioni sono abilitate, l'immagine finale è visivamente conforme a tali proporzioni, pertanto i margini potrebbero apparire diversi dai valori immessi.**",
+            },
+            "fixed-size": {
+              title: "Dimensioni dello schermo fisse",
+              description:
+                "In questa modalità, inserire manualmente le dimensioni dello schermo. **Se le proporzioni sono abilitate, la tela si espande verso l'esterno fino alle proporzioni target.**",
+            },
+          },
+        },
+        "workspace-file": {
+          title: "File Project",
+          summary:
+            "Un file di progetto contiene tutti i file grezzi generati per una registrazione completata, incluse tutte le risorse e configurazioni. Puoi condividerlo e **viene creato e salvato automaticamente in una posizione predefinita al termine della registrazione.**",
+          chapters: {
+            "default-directory": {
+              title: "Cambia la directory predefinita",
+              description:
+                "Apri <kbd>ScreenCam</kbd> > <kbd>Impostazioni</kbd> > <kbd>Registrazione</kbd> > <kbd>Directory area di lavoro predefinita</kbd>, quindi scegli la cartella predefinita.",
+            },
+            "recent-projects": {
+              title: "Apri progetti recenti",
+              description: "Utilizza <kbd>File</kbd> > <kbd>Recente</kbd>.",
+            },
+            "default-directory-projects": {
+              title: "Apri i progetti nella posizione predefinita",
+              description:
+                "Utilizza <kbd>File</kbd> > <kbd>Directory predefinita</kbd>.",
+            },
+            "show-in-finder": {
+              title: "Mostra il file corrente in Finder",
+              description:
+                "Fai clic sul nome del file di progetto nella parte superiore dell'editor oppure utilizza <kbd>File</kbd> > <kbd>Mostra in Finder</kbd>.",
+            },
+            "manual-save": {
+              title: "Salva manualmente",
+              description:
+                "Utilizzare <kbd>File</kbd> > <kbd>Salva</kbd> oppure premere <kbd>⌘</kbd><kbd>S</kbd> per salvare manualmente. Nella maggior parte dei casi, il progetto viene salvato automaticamente.",
+            },
+            "save-as": {
+              title: "Salva con nome",
+              description:
+                "Utilizzare <kbd>File</kbd> > <kbd>Salva con nome</kbd> oppure premere <kbd>⌘</kbd><kbd>⇧</kbd><kbd>S</kbd> per salvare una copia in una cartella personalizzata.",
+            },
+          },
+        },
+        record: {
+          title: "Registra",
+          summary: "Imposta un'acquisizione, scegli la sorgente e avvia la registrazione.",
+          chapters: {
+            "prepare-capture": {
+              title: "Preparare la cattura",
+              description: "Apri ScreenCam e conferma che i controlli di registrazione sono pronti prima di selezionare una sorgente.",
+            },
+            "choose-source": {
+              title: "Scegli una fonte",
+              description: "Scegli le opzioni di visualizzazione, finestra, area, fotocamera, microfono e audio di sistema per la registrazione.",
+            },
+            "start-recording": {
+              title: "Inizia a registrare",
+              description: "Avvia l'acquisizione e verifica lo stato della registrazione prima di passare al flusso di lavoro.",
+            },
+          },
+        },
+        zoom: {
+          title: "Zoom",
+          summary: "Aggiungi ancoraggi alla timeline e regola il modo in cui la telecamera si muove durante la registrazione.",
+          chapters: {
+            "zoom-track": {
+              title: "Zoom traccia",
+              description: "Crea ed elimina liberamente clip di zoom sulla traccia di zoom.",
+            },
+            "delete-clip": {
+              title: "Delete",
+              description: "Selezionare una clip, quindi premere Backspace o Delete per rimuoverla.",
+              descriptionHtml:
+                "Selezionare una clip, quindi premere <kbd class=\"docs-key\">Backspace</kbd> o <kbd class=\"docs-key\">Delete</kbd> per rimuoverla.",
+            },
+            "create-clip": {
+              title: "Crea",
+              description: "Fare clic o trascinare su un'area vuota per creare una nuova clip di zoom.",
+            },
+            "merge-clips": {
+              title: "Unisci",
+              description: "Ridimensiona o trascina una clip finché non interseca un'altra clip, quindi rilascia per confermare l'unione.",
+            },
+            "manual-mode": {
+              title: "Modalità manuale",
+              description: "Passa dal movimento automatico alla modalità manuale e personalizza il conteggio, il centro e la scala di ogni ancora.",
+            },
+            "select-anchor": {
+              title: "Seleziona un'ancora",
+              description: "Seleziona un'ancora per modificarne le singole impostazioni di zoom.",
+            },
+            "adjust-center": {
+              title: "Regolare il centro",
+              description: "Trascina direttamente nell'anteprima per impostare il centro visivo dello zoom.",
+            },
+            "adjust-scale-wheel": {
+              title: "Regola la scala",
+              description: "Utilizzare la rotellina del mouse nell'anteprima per controllare la scala dello zoom.",
+            },
+            "adjust-scale-panel": {
+              title: "Regola la scala nelle impostazioni",
+              description: "Seleziona un'ancora, quindi regola il cursore della scala nel pannello delle impostazioni di destra.",
+            },
+          },
+        },
+        camera: {
+          title: "Fotocamera",
+          summary: "Modella la sovrapposizione della fotocamera e applica leggere regolazioni dell'aspetto.",
+          chapters: {
+            "enable-camera": {
+              title: "Abilita la fotocamera",
+              description: "Accendi il livello della fotocamera e posizionalo dove supporta la registrazione.",
+            },
+            "shape-frame": {
+              title: "Modella la cornice",
+              description: "Passa da una forma all'altra della cornice e ridimensiona la sovrapposizione della telecamera per la scena.",
+            },
+            "apply-beauty": {
+              title: "Applicare effetti di bellezza",
+              description: "Ottimizza le impostazioni dell'aspetto discreto mantenendo l'anteprima allineata con l'esportazione finale.",
+            },
+          },
+        },
+        shortcuts: {
+          title: "Scorciatoie",
+          summary: "Utilizza le azioni della tastiera per controllare l'acquisizione senza interrompere il flusso.",
+          chapters: {
+            "capture-shortcut": {
+              title: "Inizia con una scorciatoia",
+              description: "Attiva i controlli di registrazione dalla tastiera invece di raggiungere la barra degli strumenti.",
+            },
+            "pause-resume": {
+              title: "Metti in pausa o riprendi",
+              description: "Utilizza le azioni di scelta rapida per mettere in pausa e continuare l'acquisizione durante registrazioni più lunghe.",
+            },
+            "finish-recording": {
+              title: "Finisci la ripresa",
+              description: "Interrompi la registrazione e passa all'editor senza perdere il contesto.",
+            },
+          },
+        },
+        export: {
+          title: "Esporta",
+          summary: "Controlla il risultato, scegli le impostazioni di output ed esporta la registrazione.",
+          chapters: {
+            "choose-format": {
+              title: "Scegli il formato",
+              description: "Seleziona il formato di esportazione e le impostazioni di output per la destinazione.",
+            },
+            "review-preview": {
+              title: "Esamina l'anteprima",
+              description: "Controlla l'anteprima finale prima di eseguire il rendering del file.",
+            },
+            "export-file": {
+              title: "Esporta il file",
+              description: "Esegui il rendering della registrazione e salva il risultato esportato.",
+            },
+          },
+        },
+      },
+    },
+    home: {
+      screenStudioAlternative: {
+        eyebrow: "Screen Studio Alternativa",
+        title: "Hai bisogno di un registratore dello schermo Mac più leggero con un controllo manuale più approfondito?",
+        description:
+          "Confronta ScreenCam con Screen Studio in base alle dimensioni dell'app, all'utilizzo della CPU e della memoria, alla velocità di esportazione, agli ancoraggi dello zoom manuale, ai livelli, ai modelli di dispositivi e ai formati di esportazione.",
+        cta: "Screen Studio alternativa a Mac",
+      },
+      structuredDataFeatureList: [
+        "Registrazione dello schermo nativa macOS",
+        "Ancoraggi zoom manuali",
+        "Curve di animazione personalizzate",
+        "Mockup del dispositivo",
+        "Livelli di mosaico, testo, messa a fuoco e immagini personalizzate",
+        "Transizioni di motion blur",
+        "Esportazione GIF",
+        "Esportazione Live Photo",
+        "Effetti di bellezza della fotocamera",
+        "Esportazione accurata in anteprima",
+      ],
+      hero: {
+        appStoreButton: "Visualizza su App Store",
+        builtWithLabel: "Costruito con",
+        builtWithValue: "100% nativo",
+        systemLabel: "Sistema",
+        systemValue: "macOS 15+",
+        tagline: "Registrazione ad alta risoluzione con una fotocamera che puoi modellare dopo la ripresa.",
+        titleLines: [
+          ["Cattura", "Affilato."],
+          ["Diretto", "La cornice."],
+        ],
+      },
+      zoom: {
+        canvasLabels: {
+          autoPlayingDemo: "Demo con riproduzione automatica",
+          playMarker: "Gioca",
+          previewMarker: "Anteprima",
+          recordingClip: "Registrazione",
+          recordingTrack: "Registrazione",
+          timelinePreview: "Anteprima della sequenza temporale",
+          zoomClip: "Zoom automatico",
+          zoomTrack: "Zoom",
+        },
+        features: [
+          {
+            title: "Zoom dinamico",
+            description: "Il movimento della fotocamera segue lo stesso tempismo primaverile utilizzato dalle esportazioni ScreenCam.",
+          },
+          {
+            title: "Anteprima della sequenza temporale",
+            description: "Passa il mouse sulla traccia Registrazione o Zoom per scorrere l'esatto fotogramma di anteprima.",
+          },
+          {
+            title: "Sfocatura movimento",
+            description: "Gli stati di zoom, panoramica e clic vengono campionati con sfocatura in stile otturatore.",
+          },
+        ],
+        subtitle: "Zoom con motion blur.",
+        timelineAria: "Tracce di anteprima della timeline",
+        title: "Concentrati su ciò che conta.",
+      },
+      deviceMockups: {
+        description:
+          "Esporta con straordinari frame di dispositivi. iPhone, Mac, Studio Display: i tuoi contenuti presentati alla perfezione.",
+        eyebrow: "Esporta Option",
+        formats: ["Risoluzione originale", "Live Photo", "MP4/MOV"],
+        imageAlt: {
+          iPhone: "iPhone 17 Pro Velocità max",
+          macBook: "Applicazione ScreenCam in esecuzione su MacBook Pro",
+          studioDisplay: "ScreenCam in esecuzione su Studio Display con MacBook",
+        },
+        title: "Bellissimo su ogni schermo.",
+      },
+      controls: {
+        body:
+          "La modalità manuale ti offre completa libertà creativa. Aggiungi più ancoraggi a un singolo clip zoom, ciascuno con la propria scala e il proprio punto centrale.",
+        centerLabel: "Centro",
+        dragCenter: "Trascina per regolare il centro",
+        eyebrow: "Controlli avanzati",
+        features: [
+          "Trascina le ancore per riposizionarle sulla timeline",
+          "Regola la scala da 1x a 5x per ancoraggio",
+          "Imposta un centro di messa a fuoco personalizzato per ogni zoom",
+          "Transizioni fluide tra le ancore",
+        ],
+        pauseAria: "Metti in pausa la riproduzione della timeline fittizia",
+        pauseTitle: "Pausa",
+        playAria: "Riproduci la riproduzione della timeline simulata",
+        playTitle: "Gioca",
+        scaleAria: "Scala",
+        scaleLabel: "Scala",
+        titleMuted: "ogni punto di zoom.",
+        titleStart: "Controllo totale su",
+      },
+      performance: {
+        cta: "Visualizza i dati benchmark completi",
+        metrics: {
+          appSize: "Dimensioni dell'app",
+          appSizeNote: "circa 20 MB contro 600 MB",
+          cpuUsage: "Utilizzo della CPU",
+          exportTime: "Orario di esportazione",
+          exportTimeNote: "più corto è più veloce",
+          memory: "Memoria",
+          others: "Altri",
+          screenCam: "ScreenCam",
+        },
+        subtitle: "Nessun elettrone. Nessuna visualizzazione web. Pura prestazione nativa.",
+        title: "Nativo significa veloce.",
+      },
+      featureCards: {
+        eyebrow: "Caratteristiche More",
+        title: "Piccoli dettagli, pronti per flussi di lavoro reali.",
+        subtitle: "Tocchi nativi che rendono la registrazione veloce, raffinata e Mac-first.",
+        beautyThumb: {
+          beforeLabel: "Bellezza spenta",
+          afterLabel: "Bellezza accesa",
+          disclosure:
+            "Ritratto generato dall'intelligenza artificiale, utilizzato solo per dimostrare il reale effetto di bellezza.",
+          enterFloatingAria: "Mostra come finestra della fotocamera mobile",
+          exitFloatingAria: "Riporta la finestra della fotocamera all'anteprima completa",
+          pauseAria: "Metti in pausa la demo del confronto di bellezza",
+          playAria: "Gioca alla demo comparativa di bellezza",
+          shapeCycleAria: "Cambia la forma della finestra mobile",
+          shapeLabels: {
+            circle: "Cerchio",
+            square: "Quadrato arrotondato",
+            wide: "16:9",
+          },
+        },
+        dynamicIslandThumb: {
+          ariaLabel: "Anteprima dell'attività in background dell'isola dinamica",
+          materialLabel: "Materiale della tacca",
+          modeLabels: {
+            black: "Nero",
+            glass: "Vetro",
+          },
+          tasks: [
+            {
+              title: "ScreenCam filmato di lancio",
+              detail: "Pronto per essere rivelato in Finder.",
+              primaryAction: "Apri Finder",
+              secondary: "Completo",
+              secondaryAction: "Fatto",
+              size: "384 MB",
+            },
+            {
+              title: "Esportazione tutorial 4K",
+              detail: "Codifica H.265 con livelli di fotocamera e cursore.",
+              primaryAction: "Apri Finder",
+              secondary: "2m rimasti",
+              secondaryAction: "Fatto",
+              size: "1,2GB",
+            },
+            {
+              title: "Compressione dell'anteprima GIF",
+              detail: "Ottimizzazione dei fotogrammi per una clip condivisibile più piccola.",
+              primaryAction: "Apri Finder",
+              secondary: "42 rimasti",
+              secondaryAction: "Fatto",
+              size: "18MB",
+            },
+          ],
+          wallpaperButtonAria: "Cambia lo sfondo",
+        },
+        effectLayersThumb: {
+          ariaLabel: "Anteprima della timeline dei livelli di effetti",
+          dragHint: "Trascina sulla traccia per aggiungerla",
+          effects: [
+            {
+              id: "mosaic",
+              title: "Mosaico",
+              description: "Pixela le aree sensibili sopra la registrazione.",
+              clipLabel: "Mosaico",
+            },
+            {
+              id: "focus",
+              title: "Concentrarsi",
+              description: "Evidenzia una regione mantenendo visibile il contesto.",
+              clipLabel: "Concentrarsi",
+            },
+            {
+              id: "text",
+              title: "Testo",
+              description: "Aggiungi un livello di testo ovunque nella modifica.",
+              clipLabel: "Testo",
+            },
+            {
+              id: "image",
+              title: "Immagine",
+              description: "Posiziona una sovrapposizione di immagini come livello temporizzato.",
+              clipLabel: "Immagine",
+            },
+          ],
+        },
+        glassThumb: {
+          modeLabels: {
+            clear: "Chiaro",
+            regular: "regolare",
+          },
+          toolbarItems: {
+            area: "Zona",
+            camera: "Fotocamera",
+            close: "Nascondi ScreenCam",
+            display: "Visualizzazione",
+            iphone: "iPhone",
+            keyboard: "Registrazione degli eventi da tastiera",
+            microphone: "Microfono",
+            settings: "Impostazioni",
+            systemAudio: "Registrazione audio del sistema",
+            window: "Finestra",
+            workspace: "Apri l'area di lavoro",
+          },
+          wallpaperButtonAria: "Cambia lo sfondo",
+        },
+        items: [
+          {
+            title: "Vetro liquido",
+            caption: "I materiali in vetro nativi mantengono i controlli nitidi abbinandosi alle moderne superfici macOS.",
+          },
+          {
+            title: "Cattura scorciatoia",
+            caption: "Registra le scorciatoie da tastiera durante l'acquisizione e visualizzale chiaramente nel video finale.",
+          },
+          {
+            title: "Bellezza leggera",
+            caption: "Applica delicati effetti di bellezza per un aspetto più pulito della fotocamera.",
+          },
+          {
+            title: "Isola dinamica",
+            caption: "Metti le esportazioni lunghe in background e mantieni i progressi visibili dalla tacca.",
+          },
+          {
+            title: "Livelli di effetti",
+            caption: "Aggiungi tutti i livelli di effetti di cui hai bisogno, quindi sposta, ridimensiona e impila ogni clip sulla timeline.",
+          },
+        ],
+      },
+      faq: {
+        eyebrow: "Domande frequenti",
+        title: "Domande e risposte",
+        items: [
+          {
+            question: "ScreenCam è un'alternativa a Screen Studio?",
+            answer:
+              "Sì. ScreenCam è un'alternativa nativa a macOS Screen Studio per i creatori che desiderano un ingombro ridotto dell'app, un minore utilizzo delle risorse, esportazioni più veloci, ancoraggi di zoom manuali, modelli di dispositivi, livelli più ricchi, esportazione GIF, esportazione Live Photo e un'esperienza di modifica Mac inedita.",
+          },
+          {
+            question: "In cosa differisce il ScreenCam dai registratori basati su browser?",
+            answer:
+              "ScreenCam è progettato per macOS come app nativa di registrazione e modifica. L'obiettivo è un flusso di lavoro compatto Mac con acquisizione locale, controlli di modifica fluidi ed esportazione accurata in anteprima.",
+          },
+          {
+            question: "Qual è la versione minima macOS richiesta?",
+            answer: "ScreenCam richiede macOS 15 o successivo.",
+          },
+          {
+            question: "Esiste una versione per Windows?",
+            answer:
+              "Non adesso. ScreenCam è focalizzato su macOS e non prevediamo di sviluppare una versione Windows a breve termine.",
+          },
+          {
+            question: "Posso esportare in formati diversi?",
+            answer:
+              "ScreenCam è progettato per l'esportazione di video di alta qualità dall'editor, con controlli di inquadratura e movimento riflessi nell'output finale.",
+          },
+          {
+            question: "Come funziona la funzione di zoom?",
+            answer:
+              "Puoi aggiungere punti di zoom ovunque sulla timeline. In modalità manuale, hai il controllo completo: imposta più ancoraggi con diversi livelli di zoom e centri di messa a fuoco. Le transizioni includono effetti di motion blur fluidi.",
+          },
+          {
+            question: "Supporta più monitor?",
+            answer:
+              "ScreenCam è progettato per i flussi di lavoro di registrazione dello schermo Mac, inclusi display collegati, finestre e regioni di acquisizione.",
+          },
+        ],
+      },
+    },
+    legal: {
+      privacy: {
+        eyebrow: "Privacy",
+        title: "Informativa sulla privacy",
+        updated: "Ultimo aggiornamento: 3 giugno 2026",
+        sections: [
+          {
+            title: "Panoramica",
+            paragraphs: [
+              [
+                "ScreenCam è un'app nativa per la registrazione e la modifica dello schermo macOS. L'app è progettata per elaborare le registrazioni localmente sul tuo Mac. ScreenCam può effettuare richieste di rete per funzionalità dell'app come lo stato di acquisto di App Store e, quando si sceglie di abilitarlo, analisi facoltative sull'utilizzo anonimo. Non utilizziamo tracker pubblicitari nell'app.",
+              ],
+            ],
+          },
+          {
+            title: "Registrazioni e file locali",
+            paragraphs: [
+              [
+                "Le registrazioni dello schermo, i video della fotocamera, l'audio del microfono, l'audio del sistema, i dati del cursore, i video esportati, i file dell'area di lavoro e i file degli sfondi personalizzati rimangono sul tuo dispositivo o nelle posizioni che scegli. ScreenCam non carica questo contenuto sui server ScreenCam.",
+              ],
+            ],
+          },
+          {
+            title: "Analisi dell'utilizzo anonimo",
+            paragraphs: [
+              [
+                "ScreenCam potrebbe chiederti se desideri condividere analisi anonime sull'utilizzo per aiutarci a capire quali funzionalità di registrazione e modifica funzionano bene. Puoi attivare o disattivare la condivisione delle analisi in qualsiasi momento nell'app. Se la condivisione delle analisi è disabilitata, ScreenCam non invia analisi sull'utilizzo.",
+              ],
+              [
+                "Le analisi sono limitate all'utilizzo del prodotto, alla diagnostica e alle informazioni sulle prestazioni, come interazioni con le funzionalità, versione dell'app, versione macOS e informazioni generali sul dispositivo. Non raccogliamo mai contenuti dello schermo, audio, video della fotocamera, file di progetto, nomi di file o testo digitato tramite analisi.",
+              ],
+            ],
+          },
+          {
+            title: "Autorizzazioni",
+            paragraphs: [
+              [
+                "ScreenCam potrebbe chiedere a macOS le autorizzazioni per la registrazione dello schermo, il microfono, la fotocamera e l'accesso ai file. Queste autorizzazioni vengono utilizzate solo per fornire funzionalità di registrazione, modifica, esportazione e file selezionati dall'utente. Puoi gestire queste autorizzazioni nelle Impostazioni di sistema.",
+              ],
+            ],
+          },
+          {
+            title: "Acquisti",
+            paragraphs: [
+              [
+                "Gli abbonamenti e gli acquisti ScreenCam Pro vengono elaborati da Apple tramite Mac App Store. ScreenCam legge lo stato dell'acquisto e dell'abbonamento da StoreKit in modo che l'app possa sbloccare le funzionalità Pro. ScreenCam non riceve né memorizza i dettagli della tua carta di pagamento.",
+              ],
+            ],
+          },
+          {
+            title: "Sito web",
+            paragraphs: [
+              [
+                "Quando visiti la schermata.cam, i nostri fornitori di hosting e infrastruttura possono elaborare dati di registro del server standard come indirizzo IP, agente utente del browser, URL di richiesta e tempo di richiesta per la sicurezza, la diagnostica e la consegna del sito web. Il sito web non utilizza tracker pubblicitari.",
+              ],
+            ],
+          },
+          {
+            title: "Modifiche e contatti",
+            paragraphs: [
+              ["Potremmo aggiornare questa politica man mano che ScreenCam cambia. Se hai domande sulla privacy, contattaci all'indirizzo", emailLink, "."],
+            ],
+          },
+        ],
+      },
+      support: {
+        eyebrow: "Supporto",
+        title: "Supporto ScreenCam",
+        updated: "Per assistenza con ScreenCam per macOS.",
+        supportChannelsAria: "Canali di supporto",
+        sections: [
+          {
+            title: "Contatto",
+            showSupportChannels: true,
+            paragraphs: [
+              [
+                "E-mail",
+                emailLink,
+                "per supporto prodotto, segnalazioni di bug, domande sull'acquisto e feedback.",
+              ],
+            ],
+          },
+          {
+            title: "Includi questi dettagli",
+            paragraphs: [
+              [
+                "Quando segnali un problema, includi la versione macOS, la versione ScreenCam, il modello Mac, le impostazioni di registrazione, il formato di esportazione e una breve descrizione dell'accaduto. Schermate o brevi registrazioni sono utili quando il problema è visivo.",
+              ],
+            ],
+          },
+          {
+            title: "Acquisti App Store",
+            paragraphs: [
+              [
+                "ScreenCam è distribuito tramite Mac App Store. Fatturazione, abbonamenti, rinnovi, cancellazioni e rimborsi vengono gestiti da Apple tramite l'ID Apple e le impostazioni dell'account App Store.",
+              ],
+            ],
+          },
+          {
+            title: "Requisiti",
+            paragraphs: [
+              [
+                "ScreenCam è attualmente costruito per macOS. Non esiste una versione per Windows e lo sviluppo di Windows non è pianificato a breve termine.",
+              ],
+            ],
+          },
+          {
+            title: "Privacy",
+            paragraphs: [
+              [
+                "Le registrazioni e i file dell'area di lavoro vengono elaborati localmente sul tuo Mac. Leggi il",
+                { href: "/privacy", text: "Informativa sulla privacy" },
+                "per maggiori dettagli.",
+              ],
+            ],
+          },
+        ],
+      },
+      terms: {
+        eyebrow: "Termini",
+        title: "Condizioni d'uso",
+        updated: "Ultimo aggiornamento: 20 maggio 2026",
+        sections: [
+          {
+            title: "Licenza dell'app",
+            paragraphs: [
+              [
+                "ScreenCam viene concesso in licenza ai sensi del contratto di licenza standard per l'utente finale (EULA) di Apple, salvo diversamente richiesto dalla legge applicabile. È possibile consultare l'EULA standard di Apple all'indirizzo",
+                appleEulaLink,
+                ".",
+              ],
+            ],
+          },
+          {
+            title: "Abbonamenti e acquisti",
+            paragraphs: [
+              [
+                "Gli abbonamenti e gli acquisti ScreenCam Pro vengono elaborati da Apple tramite Mac App Store. La fatturazione, il rinnovo, l'annullamento, i rimborsi e la gestione dell'account dell'abbonamento vengono gestiti tramite l'ID Apple e le impostazioni dell'account App Store.",
+              ],
+            ],
+          },
+          {
+            title: "Utilizzo di ScreenCam",
+            paragraphs: [
+              [
+                "Sei responsabile delle registrazioni, dei file e delle esportazioni che crei con ScreenCam. Registra, modifica e condividi contenuti solo quando disponi dei diritti e delle autorizzazioni necessari per farlo.",
+              ],
+            ],
+          },
+          {
+            title: "Privacy",
+            paragraphs: [
+              ["Le pratiche sulla privacy di ScreenCam sono descritte nel", { href: "/privacy", text: "Informativa sulla privacy" }, "."],
+            ],
+          },
+          {
+            title: "Contatto",
+            paragraphs: [
+              ["Se hai domande su questi termini, contattaci all'indirizzo", emailLink, "."],
+            ],
+          },
+        ],
+      },
+    },
+    changelog: {
+      description: "Proaggiornamenti, correzioni e note di rilascio del condotto.",
+      eyebrow: "Registro delle modifiche",
+      intro: "Proaggiornamenti, correzioni e note di rilascio del condotto.",
+      linkVersionLabel: "Collegamento alla versione",
+      title: "ScreenCam Registro modifiche",
+    },
+    motionBlurTool: {
+      addMaskAria: "Aggiungi maschera",
+      addMaskButton: "Maschera",
+      angleAria: "Angolo di sfocatura",
+      angleLabel: "Angolo",
+      blurSettingsTitle: "Impostazioni di sfocatura",
+      chooseImage: "Scegli Immagine",
+      clearImage: "Immagine chiara",
+      defaultMaskName: "Maschera",
+      deleteSelectedMaskAria: "Delete maschera selezionata",
+      description:
+        "Costruisci regioni di sfocatura rettangolari, regola la direzione e l'intensità, quindi esporta l'immagine composita.",
+      emptyMasksWithImage: "Aggiungi una maschera per sfocare parte dell'immagine.",
+      emptyMasksWithoutImage: "Carica prima un'immagine.",
+      exportButton: "Esporta",
+      heightLabel: "Altezza",
+      linearMode: "Lineare",
+      maskButton: "Maschera",
+      masksTitle: "Maschere",
+      modeLabel: "Modalità",
+      nameLabel: "Nome",
+      previewAria: "Anteprima della sfocatura del movimento",
+      replaceImageAria: "Sostituisci l'immagine",
+      selectedMaskEmpty: "Seleziona una maschera per modificarne la direzione, l'intensità, la posizione e le dimensioni della sfocatura.",
+      sourceTitle: "Fonte",
+      strengthAria: "Intensità della sfocatura",
+      strengthLabel: "Forza",
+      title: "Maschera di sfocatura movimento",
+      toolEyebrow: "Strumento",
+      uniformMode: "Uniforme",
+      uploadDescription: "Trascina qui un'immagine locale o scegli un file per iniziare a modificare.",
+      uploadTitle: "Carica un'immagine",
+      widthLabel: "Larghezza",
+      xLabel: "X",
+      yLabel: "Y",
+    },
+  },
 };
 
 export const translations: Record<Locale, LocaleTranslation> =

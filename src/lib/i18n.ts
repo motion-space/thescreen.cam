@@ -3,7 +3,18 @@ export const appStoreUrl =
   "https://apps.apple.com/cn/app/screencam-screen-studio/id6770877568?l=en-GB&mt=12";
 
 export const defaultLocale = "en";
-export const supportedLocales = ["en", "zh-Hans", "de", "ja", "ko"] as const;
+export const supportedLocales = [
+  "en",
+  "zh-Hans",
+  "zh-Hant",
+  "de",
+  "ja",
+  "ko",
+  "es",
+  "fr",
+  "pt-BR",
+  "it",
+] as const;
 export const localizedLocales = supportedLocales.filter((locale) => locale !== defaultLocale);
 export const localePreferenceCookieName = "screenCamLocale";
 
@@ -12,9 +23,14 @@ export type Locale = (typeof supportedLocales)[number];
 export const localeLabels: Record<Locale, string> = {
   en: "English",
   "zh-Hans": "简体中文",
+  "zh-Hant": "繁體中文",
   de: "Deutsch",
   ja: "日本語",
   ko: "한국어",
+  es: "Español",
+  fr: "Français",
+  "pt-BR": "Português (Brasil)",
+  it: "Italiano",
 };
 
 export function isLocale(value: string | undefined): value is Locale {
@@ -31,12 +47,26 @@ export function matchSupportedLocale(value: string | undefined): Locale | undefi
   const locale = value.trim().toLowerCase();
   if (!locale || locale === "*") return undefined;
 
+  if (
+    locale.startsWith("zh-hant") ||
+    locale.startsWith("zh-tw") ||
+    locale.startsWith("zh-hk") ||
+    locale.startsWith("zh-mo")
+  ) {
+    return "zh-Hant";
+  }
+
   if (locale === "zh" || locale.startsWith("zh-")) {
     return "zh-Hans";
   }
 
+  const languageCode = locale.split("-")[0];
+  if (languageCode === "pt") {
+    return "pt-BR";
+  }
+
   return supportedLocales.find(
-    (supportedLocale) => supportedLocale.toLowerCase() === locale.split("-")[0],
+    (supportedLocale) => supportedLocale.toLowerCase() === languageCode,
   );
 }
 
