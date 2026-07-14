@@ -1,8 +1,31 @@
+# 1.1.0
+
+- Los clips de Zoom manual ahora usan un único centro y nivel de zoom, con el minimapa en Ajustes del clip.
+- Los clips de Zoom adyacentes ahora se mueven y escalan juntos sin fusionarse ni restablecerse a 1x.
+- Las vistas previas ampliadas conservan el detalle de origen en cualquier tamaño de ventana del editor.
+- Las vistas previas al pasar por la línea de tiempo mantienen la fluidez al cruzar los límites de clips de Zoom.
+
+# 1.0.9
+
+- Los anclajes manuales de Zoom ahora usan controles de lienzo 1:1 más ágiles con un minimapa alineado con el renderizado.
+- Los preajustes mantienen disponibles los fondos personalizados y fondos de pantalla entre proyectos, reinicios y al compartir.
+- Las vistas previas ampliadas mantienen nítido el texto original en ventanas de editor más pequeñas.
+- Los mockups de pantalla genérica pueden ajustar el tamaño del borde, los radios de esquina internos y externos, el estilo del soporte y su tamaño.
+- Antes de renderizar, las exportaciones comprueban el espacio disponible en disco para evitar fallos al final del proceso.
+- Las grabaciones de pantalla y iPhone con alta frecuencia de fotogramas mantienen la respuesta del audio y reducen fotogramas redundantes en cola y renderizados.
+- Las exportaciones recortadas de vídeo, GIF y Live Photo empiezan a decodificar cerca del intervalo seleccionado, mientras que los cambios solo de audio pueden reutilizar el vídeo ya renderizado.
+- La vista previa, la línea de tiempo, el cursor, la forma de onda, los subtítulos, la superposición de cámara y el procesamiento del proyecto usan cachés limitadas y trabajo compartido para que las grabaciones largas sean más fluidas.
+- Las exportaciones GIF y en paralelo usan canalizaciones limitadas y una programación de recursos más equitativa para reducir la contención.
+- Las vistas previas al pasar por la línea de tiempo ya no vuelven al fotograma del cabezal al moverse verticalmente entre clips.
+- Al arrastrar el cabezal de reproducción durante la reproducción, la línea de tiempo pausa y continúa al soltar.
+- Los cursores al pasar, los cabezales de arrastre y las etiquetas de la regla de la línea de tiempo responden mejor durante la actualización de vista previa, la reproducción y los límites de zoom.
+
 # 1.0.8
 
 - Las grabaciones pueden finalizar en una tarjeta flotante de acción rápida con miniaturas de vista previa renderizadas, vista previa de reproducción desde el inicio, edición, preajuste, exportación, guardado, guardado de fuente y acciones de borrador.
 - La eliminación del fondo de la cámara admite el estilo de pegatinas almacenadas en caché con vista previa de marco, sombra y contorno en escala vertical ajustable.
 - La configuración de apariencia puede cambiar el editor, los paneles de inspección, las superficies de exportación, la barra de herramientas de grabación, la información sobre herramientas y las vistas previas de materiales entre los modos oscuro, claro y automático.
+- Los ajustes de idioma de la app ahora incluyen chino tradicional, español, francés, portugués de Brasil e italiano.
 - Las superposiciones de cámara admiten más relaciones de aspecto, eliminación de fondo con progreso en línea, modo de retrato transparente, fondos de imágenes personalizados empaquetados y configuración con un solo clic para copiar a cada clip de la cámara.
 - Las tarjetas de acción rápida se ocultan durante la selección de captura, regresan después de la grabación o cancelación, siguen la pantalla activa y permiten hacer clic en todas las tarjetas visibles.
 - Las superposiciones transparentes de la cámara de retrato se exportan correctamente, las ediciones de fondo degradado actualizan la vista previa inmediatamente, los anclajes de zoom manual permanecen visibles, el arrastre de entrada de números permanece estable en los bordes de la pantalla y la pantalla de compra sigue la apariencia seleccionada.
