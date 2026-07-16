@@ -1,8 +1,36 @@
+# 1.1.0
+
+- Quick Focus adds customizable shortcuts, interactive locked zoom with edge-push navigation and seamless level switching, plus optional ProMotion rendering up to 120 Hz.
+- Custom sliders, draggable number inputs, and precise editor interactions now provide tactile trackpad feedback.
+- Keyboard overlays show the correct base key and keep held keys stable until release.
+- Exports no longer fail when a recorded audio track is disabled.
+- The recording toolbar stays on the correct display in vertically arranged multi-monitor setups.
+- Manual Zoom clips now use a single center and zoom level, with the mini map in Clip Settings.
+- Adjacent Zoom clips now move and scale together without merging or resetting to 1x.
+- Zoomed previews preserve source detail at every editor window size.
+- Timeline hover previews stay responsive across Zoom clip boundaries.
+
+# 1.0.9
+
+- Manual Zoom anchors now use responsive 1:1 canvas controls with a render-aligned mini map.
+- Presets keep custom backgrounds and wallpapers available across projects, launches, and sharing.
+- Zoomed previews keep source text sharp in smaller editor windows.
+- Generic Display mockups can be customized with border size, inner and outer corner radius, stand style, and stand size.
+- Exports now check available disk space before rendering to avoid late failures.
+- High-frame-rate screen and iPhone recording keeps audio responsive while reducing redundant queued and rendered frames.
+- Trimmed video, GIF, and Live Photo exports start decoding near the selected range, while audio-only changes can reuse already rendered video.
+- Preview, timeline, cursor, waveform, caption, camera overlay, and workspace processing use bounded caches and shared work for smoother long recordings.
+- GIF and parallel exports use bounded pipelines and fairer resource scheduling to reduce contention.
+- Timeline hover previews no longer flicker back to the playhead frame when moving vertically across clips.
+- Timeline scrubbing during playback pauses while dragging and resumes after release.
+- Timeline hover cursors, scrub playheads, and ruler labels stay more responsive through preview refreshes, playback, and zoom boundaries.
+
 # 1.0.8
 
 - Recordings can finish into a floating quick-action card with rendered preview thumbnails, replay-from-start preview, editing, preset, export, save, source-save, and draft actions.
 - Camera background removal supports cached sticker styling with adjustable portrait-scaled outline, shadow, and frame preview.
 - Appearance settings can switch the editor, inspector panels, export surfaces, recording toolbar, tooltips, and material previews between dark, light, and automatic modes.
+- App language settings now include Traditional Chinese, Spanish, French, Brazilian Portuguese, and Italian.
 - Camera overlays support more aspect ratios, background removal with inline progress, transparent portrait mode, packaged custom image backgrounds, and one-click settings copy to every camera clip.
 - Quick-action cards hide during capture selection, return after recording or cancellation, follow the active display, and keep every visible card clickable.
 - Transparent portrait camera overlays export correctly, gradient background edits refresh the preview immediately, manual zoom anchors stay visible, number-input dragging remains stable across screen edges, and the purchase screen follows the selected appearance.

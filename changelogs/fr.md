@@ -1,8 +1,36 @@
+# 1.1.0
+
+- Quick Focus ajoute des raccourcis personnalisables, un zoom verrouillé interactif avec navigation par poussée sur les bords et changement de niveau fluide, ainsi qu’un rendu ProMotion optionnel jusqu’à 120 Hz.
+- Les curseurs personnalisés, les champs numériques déplaçables et les interactions précises de l’éditeur offrent désormais un retour haptique du trackpad.
+- Les superpositions de clavier affichent la bonne touche de base et stabilisent les touches maintenues jusqu’à leur relâchement.
+- Les exports n’échouent plus lorsqu’une piste audio enregistrée est désactivée.
+- La barre d’enregistrement reste sur le bon écran lorsque plusieurs moniteurs sont disposés verticalement.
+- Les clips de zoom manuels utilisent désormais un seul centre et niveau de zoom, avec la mini-carte dans les réglages du clip.
+- Les clips de zoom adjacents se déplacent et changent désormais d’échelle ensemble, sans fusionner ni revenir à 1x.
+- Les aperçus agrandis préservent les détails de la source, quelle que soit la taille de la fenêtre de l’éditeur.
+- Les aperçus au survol de la timeline restent fluides en traversant les limites des clips de zoom.
+
+# 1.0.9
+
+- Les ancres de zoom manuelles utilisent désormais des commandes de canevas 1:1 plus réactives avec une mini-carte alignée sur le rendu.
+- Les préréglages conservent les arrière-plans et fonds d’écran personnalisés entre les projets, les redémarrages et le partage.
+- Les aperçus agrandis gardent le texte source net dans les fenêtres d’éditeur plus petites.
+- Les maquettes d'écran générique peuvent ajuster la taille de bordure, les rayons d'angle internes et externes, le style du pied et sa taille.
+- Les exports vérifient maintenant l’espace disque disponible avant le rendu pour éviter les échecs tardifs.
+- Les enregistrements d’écran et d’iPhone à fréquence d’images élevée préservent la réactivité audio tout en réduisant les images redondantes mises en file d’attente et rendues.
+- Les exports vidéo, GIF et Live Photo rognés commencent le décodage près de la plage sélectionnée, tandis que les modifications audio seules peuvent réutiliser la vidéo déjà rendue.
+- L’aperçu, la timeline, le curseur, la forme d’onde, les sous-titres, la superposition caméra et le traitement du projet utilisent des caches limités et du travail partagé pour fluidifier les enregistrements longs.
+- Les exports GIF et parallèles utilisent des pipelines limités et une répartition plus équitable des ressources pour réduire les conflits.
+- Les aperçus au survol de la timeline ne reviennent plus à l'image de la tête de lecture lors d'un déplacement vertical entre les clips.
+- Faire glisser la tête de lecture de la timeline pendant la lecture met la lecture en pause, puis la reprend au relâchement.
+- Les curseurs de survol, les têtes de lecture de scrub et les libellés de règle de la timeline restent plus réactifs pendant les actualisations d'aperçu, la lecture et les limites de zoom.
+
 # 1.0.8
 
 - Les enregistrements peuvent se terminer dans une carte d'action rapide flottante avec des vignettes d'aperçu rendues, un aperçu de relecture depuis le début, des actions d'édition, de préréglage, d'exportation, de sauvegarde, de sauvegarde à la source et de brouillon.
 - La suppression de l’arrière-plan de l’appareil photo prend en charge le style des autocollants mis en cache avec un aperçu réglable du contour, de l’ombre et du cadre à l’échelle du portrait.
 - Les paramètres d'apparence peuvent faire basculer l'éditeur, les panneaux d'inspecteur, les surfaces d'exportation, la barre d'outils d'enregistrement, les info-bulles et les aperçus de matériaux entre les modes sombre, clair et automatique.
+- Les paramètres de langue de l’app prennent désormais en charge le chinois traditionnel, l’espagnol, le français, le portugais du Brésil et l’italien.
 - Les superpositions de caméra prennent en charge davantage de formats d'image, la suppression de l'arrière-plan avec progression en ligne, le mode portrait transparent, les arrière-plans d'images personnalisés et la copie des paramètres en un clic dans chaque clip de caméra.
 - Les cartes d'action rapide se cachent pendant la sélection de capture, reviennent après l'enregistrement ou l'annulation, suivent l'affichage actif et gardent chaque carte visible cliquable.
 - Les superpositions transparentes de caméra portrait s'exportent correctement, les modifications d'arrière-plan dégradé actualisent immédiatement l'aperçu, les ancres de zoom manuel restent visibles, le glissement de la saisie numérique reste stable sur les bords de l'écran et l'écran d'achat suit l'apparence sélectionnée.

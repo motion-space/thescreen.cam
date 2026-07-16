@@ -1,8 +1,36 @@
+# 1.1.0
+
+- Quick Focus bietet anpassbare Tastenkürzel, interaktiven gesperrten Zoom mit Navigation durch Schieben am Rand und nahtlosem Wechsel der Zoomstufe sowie optionales ProMotion-Rendering mit bis zu 120 Hz.
+- Benutzerdefinierte Schieberegler, ziehbare Zahleneingaben und präzise Editorinteraktionen geben jetzt haptisches Trackpad-Feedback.
+- Tastatur-Overlays zeigen die richtige Basistaste und halten gedrückte Tasten bis zum Loslassen stabil.
+- Exporte schlagen nicht mehr fehl, wenn eine aufgezeichnete Audiospur deaktiviert ist.
+- Die Aufnahmesymbolleiste bleibt bei vertikal angeordneten Monitoren auf dem richtigen Display.
+- Manuelle Zoom-Clips verwenden jetzt einen einzigen Mittelpunkt und Zoomfaktor; die Minikarte befindet sich in den Clip-Einstellungen.
+- Benachbarte Zoom-Clips verschieben und skalieren jetzt gemeinsam, ohne zusammengeführt oder auf 1x zurückgesetzt zu werden.
+- Vergrößerte Vorschauen bewahren Quelldetails bei jeder Editorfenstergröße.
+- Hover-Vorschauen in der Timeline bleiben über Zoom-Clip-Grenzen hinweg reaktionsschnell.
+
+# 1.0.9
+
+- Manuelle Zoom-Anker verwenden jetzt reaktionsschnelle 1:1-Leinwandsteuerelemente mit einer am Rendering ausgerichteten Minikarte.
+- Voreinstellungen halten benutzerdefinierte Hintergründe und Hintergrundbilder projektübergreifend, nach Neustarts und beim Teilen verfügbar.
+- Vergrößerte Vorschauen zeigen Quelltext auch in kleineren Editorfenstern scharf.
+- Allgemeine Display-Mockups lassen sich mit Rahmenbreite, inneren und äußeren Eckenradien, Ständerstil und Ständergröße anpassen.
+- Exporte prüfen vor dem Rendern den verfügbaren Speicherplatz, um späte Abbrüche zu vermeiden.
+- Bildschirm- und iPhone-Aufnahmen mit hoher Bildrate halten die Audiowiedergabe reaktionsschnell und reduzieren überflüssige, wartende und gerenderte Frames.
+- Zugeschnittene Video-, GIF- und Live-Photo-Exporte beginnen die Decodierung nahe dem ausgewählten Bereich; bei reinen Audioänderungen kann bereits gerendertes Video wiederverwendet werden.
+- Vorschau, Timeline, Cursor, Wellenform, Untertitel, Kamera-Overlay und Projektverarbeitung verwenden begrenzte Caches und gemeinsam genutzte Arbeit, damit lange Aufnahmen flüssiger laufen.
+- GIF- und parallele Exporte verwenden begrenzte Pipelines und eine fairere Ressourcenplanung, um Konkurrenz zu verringern.
+- Timeline-Hover-Vorschauen springen beim vertikalen Wechsel zwischen Clips nicht mehr zum Playhead-Frame zurück.
+- Beim Ziehen des Timeline-Playheads während der Wiedergabe pausiert die Wiedergabe und läuft nach dem Loslassen weiter.
+- Timeline-Hover-Cursor, Scrub-Playheads und Linealbeschriftungen reagieren bei Vorschauaktualisierungen, Wiedergabe und Zoomgrenzen flüssiger.
+
 # 1.0.8
 
 - Aufzeichnungen können in einer schwebenden Schnellaktionskarte mit gerenderten Vorschau-Miniaturansichten, Wiedergabe-vom-Start-Vorschau, Bearbeitung, Voreinstellung, Export, Speichern, Quellenspeicherung und Entwurfsaktionen abgeschlossen werden.
 - Das Entfernen des Kamerahintergrunds unterstützt das Styling von zwischengespeicherten Aufklebern mit anpassbarer Umriss-, Schatten- und Rahmenvorschau im Hochformat.
 - Mit den Darstellungseinstellungen können Sie den Editor, die Inspektorfelder, die Exportoberflächen, die Aufzeichnungssymbolleiste, die Tooltips und die Materialvorschau zwischen dunklem, hellem und automatischem Modus umschalten.
+- Die App-Spracheinstellungen unterstützen jetzt Traditionelles Chinesisch, Spanisch, Französisch, brasilianisches Portugiesisch und Italienisch.
 - Kamera-Overlays unterstützen mehr Seitenverhältnisse, Hintergrundentfernung mit Inline-Fortschritt, transparenten Porträtmodus, verpackte benutzerdefinierte Bildhintergründe und das Kopieren von Einstellungen mit einem Klick in jeden Kameraclip.
 - Schnellaktionskarten werden während der Aufnahmeauswahl ausgeblendet, kehren nach der Aufnahme oder dem Abbruch zurück, folgen der aktiven Anzeige und sorgen dafür, dass jede sichtbare Karte anklickbar bleibt.
 - Transparente Porträtkamera-Overlays werden korrekt exportiert, Verlaufshintergrundänderungen aktualisieren die Vorschau sofort, manuelle Zoomanker bleiben sichtbar, das Ziehen bei der Zahleneingabe bleibt über die Bildschirmränder hinweg stabil und der Kaufbildschirm folgt dem ausgewählten Erscheinungsbild.

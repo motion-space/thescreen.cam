@@ -1,8 +1,36 @@
+# 1.1.0
+
+- O Quick Focus adiciona atalhos personalizáveis, zoom bloqueado interativo com navegação ao empurrar as bordas e troca fluida de nível, além de renderização ProMotion opcional de até 120 Hz.
+- Controles deslizantes personalizados, entradas numéricas arrastáveis e interações precisas do editor agora oferecem resposta tátil do trackpad.
+- As sobreposições de teclado mostram a tecla base correta e mantêm as teclas pressionadas estáveis até serem soltas.
+- As exportações não falham mais quando uma faixa de áudio gravada é desativada.
+- A barra de gravação permanece na tela correta em configurações com monitores dispostos verticalmente.
+- Os clipes de Zoom manual agora usam um único centro e nível de zoom, com o minimapa nos ajustes do clipe.
+- Clipes de Zoom adjacentes agora se movem e mudam de escala juntos, sem se fundir nem redefinir para 1x.
+- As pré-visualizações ampliadas preservam os detalhes da fonte em qualquer tamanho de janela do editor.
+- As pré-visualizações ao passar pela linha do tempo permanecem responsivas ao cruzar limites de clipes de Zoom.
+
+# 1.0.9
+
+- As âncoras manuais de Zoom agora usam controles ágeis de tela 1:1 com um minimapa alinhado à renderização.
+- Os presets mantêm planos de fundo e papéis de parede personalizados disponíveis entre projetos, reinicializações e compartilhamento.
+- As visualizações ampliadas mantêm o texto da origem nítido em janelas menores do editor.
+- Os mockups de tela genérica podem ajustar tamanho da borda, raios dos cantos internos e externos, estilo do suporte e tamanho do suporte.
+- As exportações agora verificam o espaço disponível em disco antes da renderização para evitar falhas no fim do processo.
+- Gravações de tela e iPhone em alta taxa de quadros mantêm o áudio responsivo enquanto reduzem quadros redundantes enfileirados e renderizados.
+- Exportações recortadas de vídeo, GIF e Live Photo começam a decodificar perto do intervalo selecionado, enquanto alterações apenas de áudio podem reutilizar o vídeo já renderizado.
+- Visualização, linha do tempo, cursor, forma de onda, legendas, sobreposição da câmera e processamento do projeto usam caches limitados e trabalho compartilhado para deixar gravações longas mais fluidas.
+- Exportações GIF e paralelas usam pipelines limitados e um agendamento de recursos mais justo para reduzir a contenção.
+- As pré-visualizações ao passar pela linha do tempo não voltam mais para o quadro do cabeçote ao mover verticalmente entre clipes.
+- Ao arrastar o cabeçote da linha do tempo durante a reprodução, a reprodução pausa e continua ao soltar.
+- Cursores ao passar, cabeçotes de arraste e rótulos da régua da linha do tempo respondem melhor durante atualizações de pré-visualização, reprodução e limites de zoom.
+
 # 1.0.8
 
 - As gravações podem terminar em um cartão flutuante de ação rápida com miniaturas de visualização renderizadas, visualização repetida desde o início, edição, predefinição, exportação, salvamento, salvamento de origem e ações de rascunho.
 - A remoção de fundo da câmera suporta estilo de adesivo em cache com contorno ajustável em escala de retrato, sombra e visualização de quadro.
 - As configurações de aparência podem alternar o editor, os painéis do inspetor, as superfícies de exportação, a barra de ferramentas de gravação, as dicas de ferramentas e as visualizações de materiais entre os modos escuro, claro e automático.
+- As configurações de idioma do app agora incluem chinês tradicional, espanhol, francês, português do Brasil e italiano.
 - As sobreposições de câmera suportam mais proporções de aspecto, remoção de fundo com progresso inline, modo retrato transparente, planos de fundo de imagem personalizados empacotados e cópia de configurações com um clique para cada clipe de câmera.
 - Os cartões de ação rápida são ocultados durante a seleção da captura, retornam após a gravação ou cancelamento, seguem a exibição ativa e mantêm todos os cartões visíveis clicáveis.
 - As sobreposições de câmera de retrato transparente são exportadas corretamente, as edições de fundo gradiente atualizam a visualização imediatamente, as âncoras de zoom manual permanecem visíveis, o arrasto de entrada de número permanece estável nas bordas da tela e a tela de compra segue a aparência selecionada.

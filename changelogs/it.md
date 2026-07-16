@@ -1,8 +1,36 @@
+# 1.1.0
+
+- Quick Focus aggiunge scorciatoie personalizzabili, zoom bloccato interattivo con navigazione spingendo sui bordi e cambio di livello fluido, oltre al rendering ProMotion opzionale fino a 120 Hz.
+- I cursori personalizzati, gli input numerici trascinabili e le interazioni precise dell’editor ora offrono un feedback aptico del trackpad.
+- Le sovrapposizioni della tastiera mostrano il tasto base corretto e mantengono stabili i tasti premuti fino al rilascio.
+- Le esportazioni non falliscono più quando viene disattivata una traccia audio registrata.
+- La barra di registrazione rimane sul display corretto nelle configurazioni con più monitor disposti verticalmente.
+- I clip Zoom manuali ora usano un unico centro e livello di zoom, con la mini mappa nelle impostazioni del clip.
+- I clip Zoom adiacenti ora si spostano e scalano insieme senza unirsi né ripristinarsi a 1x.
+- Le anteprime ingrandite preservano i dettagli sorgente a qualsiasi dimensione della finestra dell'editor.
+- Le anteprime al passaggio sulla timeline restano reattive oltre i confini dei clip Zoom.
+
+# 1.0.9
+
+- Gli ancoraggi Zoom manuali ora usano controlli canvas 1:1 più reattivi con una mini mappa allineata al rendering.
+- I preset mantengono disponibili sfondi e wallpaper personalizzati tra progetti, riavvii e condivisione.
+- Le anteprime ingrandite mantengono nitido il testo sorgente nelle finestre dell'editor più piccole.
+- I mockup di schermo generico possono regolare dimensione del bordo, raggi degli angoli interni ed esterni, stile del supporto e dimensione del supporto.
+- Le esportazioni ora controllano lo spazio disponibile su disco prima del rendering, evitando errori nelle fasi finali.
+- Le registrazioni dello schermo e iPhone ad alta frequenza di fotogrammi mantengono reattivo l'audio, riducendo i fotogrammi ridondanti messi in coda e renderizzati.
+- Le esportazioni ritagliate di video, GIF e Live Photo iniziano la decodifica vicino all'intervallo selezionato, mentre le modifiche solo audio possono riutilizzare il video già renderizzato.
+- Anteprima, timeline, cursore, forma d'onda, sottotitoli, sovrapposizione fotocamera ed elaborazione del progetto usano cache limitate e lavoro condiviso per rendere più fluide le registrazioni lunghe.
+- Le esportazioni GIF e parallele usano pipeline limitate e una pianificazione delle risorse più equa per ridurre la contesa.
+- Le anteprime al passaggio sulla timeline non tornano più al fotogramma della testina quando ci si sposta verticalmente tra clip.
+- Trascinando la testina della timeline durante la riproduzione, la riproduzione si mette in pausa e riprende al rilascio.
+- Cursori al passaggio, testine di scrub ed etichette del righello della timeline restano più reattivi durante aggiornamenti dell'anteprima, riproduzione e limiti di zoom.
+
 # 1.0.8
 
 - Le registrazioni possono terminare in una scheda mobile ad azione rapida con miniature di anteprima renderizzate, anteprima di riproduzione dall'inizio, modifica, preimpostazione, esportazione, salvataggio, salvataggio della sorgente e azioni di bozza.
 - La rimozione dello sfondo della fotocamera supporta lo stile degli adesivi memorizzati nella cache con contorni regolabili in scala verticale, ombre e anteprima dei fotogrammi.
 - Le impostazioni dell'aspetto possono cambiare l'editor, i pannelli di ispezione, le superfici di esportazione, la barra degli strumenti di registrazione, le descrizioni comandi e le anteprime dei materiali tra le modalità scuro, chiaro e automatico.
+- Le impostazioni della lingua dell’app ora includono cinese tradizionale, spagnolo, francese, portoghese brasiliano e italiano.
 - Le sovrapposizioni della fotocamera supportano più proporzioni, rimozione dello sfondo con avanzamento in linea, modalità ritratto trasparente, sfondi di immagini personalizzate in pacchetto e impostazioni con un clic copiate su ogni clip della fotocamera.
 - Le carte ad azione rapida si nascondono durante la selezione dell'acquisizione, ritornano dopo la registrazione o l'annullamento, seguono la visualizzazione attiva e mantengono cliccabile ogni carta visibile.
 - Le sovrapposizioni trasparenti della fotocamera con ritratto vengono esportate correttamente, le modifiche allo sfondo sfumato aggiornano immediatamente l'anteprima, gli ancoraggi dello zoom manuale rimangono visibili, il trascinamento dell'immissione di numeri rimane stabile sui bordi dello schermo e la schermata di acquisto segue l'aspetto selezionato.
