@@ -1,5 +1,10 @@
 # 1.1.0
 
+- Il movimento del cursore ora può inclinarsi leggermente a sinistra o a destra, con un angolo massimo regolabile.
+- La sfocatura di movimento della fotocamera appare e scompare gradualmente durante gli spostamenti senza ammorbidire i fotogrammi statici dell’anteprima.
+- Le anteprime ingrandite mantengono nitido il testo sorgente quando i mockup usano sfondi animati.
+- Il cursore ora si sposta in modo fluido tra le posizioni registrate, con sfocatura di movimento adattata allo zoom nell’anteprima e nell’esportazione.
+- Le anteprime dopo la registrazione si aprono in modo più fluido e la scorciatoia Spazio funziona senza l’autorizzazione Monitoraggio input.
 - Gli sfondi personalizzati Screen e mockup ora supportano video in loop fluido con velocità regolabile da 0,1× a 2× nell’anteprima e nell’esportazione.
 - ScreenCam ora è disponibile esclusivamente per Mac con Apple Silicon, riducendo notevolmente le dimensioni di installazione.
 - Gli sfondi video personalizzati ad alta risoluzione restano fluidi nell’anteprima e vengono esportati molto più velocemente.

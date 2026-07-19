@@ -217,16 +217,16 @@ const structuredData = {
               <thead class="bg-secondary/40 text-xs uppercase tracking-[0.18em] text-muted-foreground">
                 <tr>
                   <th class="w-[20%] border-b border-border/70 px-5 py-4 font-medium">{copy.comparison.headers.feature}</th>
-                  <th class="w-[40%] border-b border-border/70 px-5 py-4 font-medium">{copy.comparison.headers.screenCam}</th>
                   <th class="w-[40%] border-b border-border/70 px-5 py-4 font-medium">{copy.comparison.headers.screenStudio}</th>
+                  <th class="w-[40%] border-b border-border/70 px-5 py-4 font-medium">{copy.comparison.headers.screenCam}</th>
                 </tr>
               </thead>
               <tbody>
                 {copy.comparison.rows.map((row) => (
                   <tr class="border-b border-border/60 last:border-b-0">
                     <th class="align-top px-5 py-4 text-sm font-semibold text-foreground">{row.feature}</th>
-                    <td class="align-top px-5 py-4 leading-6 text-muted-foreground">{row.screenCam}</td>
                     <td class="align-top px-5 py-4 leading-6 text-muted-foreground">{row.screenStudio}</td>
+                    <td class="align-top px-5 py-4 leading-6 text-muted-foreground">{row.screenCam}</td>
                   </tr>
                 ))}
               </tbody>

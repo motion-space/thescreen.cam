@@ -1,5 +1,10 @@
 # 1.1.0
 
+- Cursor movement can now tilt subtly left or right with an adjustable maximum angle.
+- Camera motion blur now fades around movement without softening static preview frames.
+- Zoomed previews keep source text sharp when mockups use animated backgrounds.
+- Cursor movement now flows smoothly between recorded positions, with zoom-aware motion blur in preview and export.
+- Post-recording previews now open smoothly, and their Space shortcut works without Input Monitoring permission.
 - Screen and mockup custom backgrounds now support smoothly looping videos with adjustable 0.1x–2x playback speed in preview and export.
 - ScreenCam now targets Apple silicon Macs exclusively, significantly reducing the app's install size.
 - High-resolution custom video backgrounds stay smooth in preview and export significantly faster.

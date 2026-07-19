@@ -1,5 +1,10 @@
 # 1.1.0
 
+- Le mouvement du curseur peut désormais s’incliner légèrement vers la gauche ou la droite, avec un angle maximal réglable.
+- Le flou de mouvement de la caméra apparaît et disparaît progressivement autour des déplacements sans adoucir les images fixes de l’aperçu.
+- Les aperçus agrandis conservent la netteté du texte source lorsque les mockups utilisent des arrière-plans animés.
+- Le curseur se déplace maintenant avec fluidité entre les positions enregistrées, avec un flou de mouvement adapté au zoom dans l’aperçu et l’export.
+- Les aperçus après enregistrement s’ouvrent plus fluidement et leur raccourci Espace fonctionne sans autorisation de surveillance des entrées.
 - Les arrière-plans personnalisés Screen et mockup prennent désormais en charge les vidéos en boucle fluide avec une vitesse réglable de 0,1× à 2× dans l’aperçu et l’export.
 - ScreenCam cible désormais exclusivement les Mac avec puce Apple, ce qui réduit considérablement la taille d’installation.
 - Les arrière-plans vidéo personnalisés en haute résolution restent fluides dans l’aperçu et s’exportent beaucoup plus rapidement.

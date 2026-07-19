@@ -1,5 +1,10 @@
 # 1.1.0
 
+- El movimiento del cursor puede inclinarse sutilmente a izquierda o derecha con un ángulo máximo ajustable.
+- El desenfoque de movimiento de la cámara aparece y desaparece suavemente alrededor del movimiento sin suavizar los fotogramas estáticos de la vista previa.
+- Las vistas previas ampliadas mantienen nítido el texto original cuando los mockups usan fondos animados.
+- El cursor se mueve con fluidez entre las posiciones grabadas, con desenfoque de movimiento adaptado al zoom en la vista previa y la exportación.
+- Las vistas previas posteriores a la grabación se abren con fluidez y su atajo de Espacio funciona sin permiso de monitorización de entrada.
 - Los fondos personalizados de Screen y mockup ahora admiten vídeos en bucle fluido con velocidad ajustable de 0,1× a 2× en la vista previa y la exportación.
 - ScreenCam ahora está disponible exclusivamente para Mac con Apple Silicon, lo que reduce considerablemente el tamaño de instalación.
 - Los fondos de vídeo personalizados de alta resolución se mantienen fluidos en la vista previa y se exportan mucho más rápido.

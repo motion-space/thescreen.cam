@@ -1,5 +1,10 @@
 # 1.1.0
 
+- Cursorbewegungen können sich jetzt leicht nach links oder rechts neigen; der maximale Winkel ist einstellbar.
+- Die Bewegungsunschärfe der Kamera wird rund um Bewegungen sanft ein- und ausgeblendet, ohne ruhende Vorschaubilder weichzuzeichnen.
+- Vergrößerte Vorschauen halten Quelltext scharf, wenn Mockups animierte Hintergründe verwenden.
+- Cursorbewegungen verlaufen jetzt flüssig zwischen aufgezeichneten Positionen, mit zoomabhängiger Bewegungsunschärfe in Vorschau und Export.
+- Vorschauen nach der Aufnahme öffnen sich jetzt flüssig, und die Leertaste funktioniert ohne Berechtigung zur Eingabeüberwachung.
 - Benutzerdefinierte Hintergründe für Screen und Mockups unterstützen jetzt flüssig wiederholte Videos mit einstellbarer Wiedergabegeschwindigkeit von 0,1× bis 2× in Vorschau und Export.
 - ScreenCam ist jetzt ausschließlich für Macs mit Apple Chip ausgelegt und benötigt deutlich weniger Speicherplatz.
 - Hochauflösende benutzerdefinierte Videohintergründe bleiben in der Vorschau flüssig und werden deutlich schneller exportiert.

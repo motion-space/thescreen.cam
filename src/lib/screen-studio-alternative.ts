@@ -115,7 +115,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
       eyebrow: "Why switch",
       title: "Speed and control, without the heavy footprint.",
       description:
-        "Screen Studio is great when you want automatic polish. ScreenCam is for Mac creators who want a lighter app, measured performance wins, and more direct control after recording.",
+        "Screen Studio covers the core automated recording workflow. ScreenCam goes further with a lighter native app, measured performance wins, and deeper automatic and manual control after recording.",
     },
     features: {
       eyebrow: "Creative control",
@@ -131,7 +131,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         },
         {
           title: "Device mockups",
-          body: "Mac, iPhone, and Studio Display-style framing for polished product demos.",
+          body: "Mac, iPhone, Apple Watch, and Studio Display-style framing for product demos.",
         },
         {
           title: "GIF + Live Photo",
@@ -151,7 +151,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
       eyebrow: "Comparison",
       title: "ScreenCam vs Screen Studio",
       description:
-        "Both tools can create polished videos. The difference is where they put their weight: Screen Studio leans automatic, while ScreenCam leans native, compact, and manual.",
+        "Screen Studio covers the core recording and editing workflow. ScreenCam builds on it with a smaller native footprint, deeper control, richer creative tools, and more output options.",
       headers: {
         feature: "Feature",
         screenCam: "ScreenCam",
@@ -161,32 +161,37 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         {
           feature: "Performance footprint",
           screenCam: "About 30x smaller, lower CPU and memory use, faster exports.",
-          screenStudio: "Polished recorder with a heavier installed footprint.",
+          screenStudio: "Standard screen recording, editing, and export pipeline.",
         },
         {
           feature: "Zoom control",
-          screenCam: "Manual anchors, multiple centers, per-anchor scale, tunable curves.",
-          screenStudio: "Strong auto zoom and smooth cursor-driven motion.",
+          screenCam: "Auto zoom with highly customizable animation curves.",
+          screenStudio: "Auto zoom and cursor-driven motion.",
         },
         {
           feature: "Layers",
           screenCam: "Mosaic, text, focus, image layers, unlimited overlap.",
-          screenStudio: "Focused editor for cursor motion, backgrounds, and masking.",
+          screenStudio: "Core overlays, backgrounds, and masking.",
         },
         {
           feature: "Device presentation",
-          screenCam: "Built-in Mac, iPhone, and Studio Display mockups.",
-          screenStudio: "Strong iOS and device capture workflow.",
+          screenCam: "Built-in Mac, iPhone, Apple Watch, and Studio Display mockups.",
+          screenStudio: "Core device capture and presentation workflow.",
         },
         {
           feature: "Export formats",
           screenCam: "Video, GIF, and Live Photo.",
-          screenStudio: "Video and GIF with strong defaults.",
+          screenStudio: "Video and GIF export.",
+        },
+        {
+          feature: "Background music",
+          screenCam: "Freely trim and arrange music with fade-in and fade-out controls.",
+          screenStudio: "Basic background music selection.",
         },
         {
           feature: "Camera polish",
-          screenCam: "Camera overlay controls plus lightweight beauty effects.",
-          screenStudio: "Dynamic camera layouts and webcam presentation.",
+          screenCam: "Camera layouts, background removal, beauty controls, and sticker effects.",
+          screenStudio: "Camera layouts and webcam presentation.",
         },
         {
           feature: "Pricing",
@@ -195,8 +200,8 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         },
         {
           feature: "Captions and transcripts",
-          screenCam: "Not yet. Apple-native and third-party BYOK transcription are planned.",
-          screenStudio: "Transcript and subtitle workflows are available today.",
+          screenCam: "More transcription providers with BYOK, highly customizable read-along captions, and Liquid Glass backgrounds.",
+          screenStudio: "Core transcription and subtitle workflow.",
         },
       ],
     },
@@ -209,10 +214,10 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         "Clips that need redaction, focus highlights, text, and images",
         "Exports that need GIF or Live Photo output",
       ],
-      gapEyebrow: "Current gap",
-      gapTitle: "Subtitles are not here yet.",
+      gapEyebrow: "Captions",
+      gapTitle: "Captions styled your way.",
       gapDescription:
-        "ScreenCam does not support subtitles today. Planned support is expected to offer Apple-native transcription and third-party BYOK transcription, without ScreenCam operating its own transcription service.",
+        "Choose from multiple transcription providers with BYOK, fine-tune highly customizable read-along captions, and style them with reusable presets, including blur and Liquid Glass backgrounds.",
       pricingCta: "Check App Store pricing",
       screenStudioCta: "View Screen Studio",
     },
@@ -238,7 +243,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         {
           question: "Does ScreenCam support subtitles?",
           answer:
-            "Not yet. Subtitle support is planned. The current direction is to offer Apple-native transcription and third-party transcription through BYOK, without ScreenCam running its own transcription service.",
+            "Yes. ScreenCam offers multiple transcription providers with BYOK, highly customizable read-along captions, per-caption visibility, reusable styles, and blur or Liquid Glass backgrounds.",
         },
         {
           question: "Does ScreenCam support custom zoom animations?",
@@ -313,7 +318,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
       eyebrow: "为什么切换",
       title: "更快、更可控，同时没有沉重负担。",
       description:
-        "Screen Studio 很适合自动化打磨。ScreenCam 面向想要更轻应用、可量化性能优势，以及录制后更直接控制的 Mac 创作者。",
+        "Screen Studio 覆盖基础自动化录制流程。ScreenCam 在此之上提供更轻的原生应用、可量化的性能优势，以及录制后更深入的自动与手动控制。",
     },
     features: {
       eyebrow: "创作控制",
@@ -329,7 +334,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         },
         {
           title: "设备样机",
-          body: "用 Mac、iPhone 和 Studio Display 风格外框完成更精致的产品演示。",
+          body: "用 Mac、iPhone、Apple Watch 和 Studio Display 风格外框制作产品演示。",
         },
         {
           title: "GIF + Live Photo",
@@ -349,7 +354,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
       eyebrow: "对比",
       title: "ScreenCam vs Screen Studio",
       description:
-        "两款工具都能制作精致视频。差异在于重心：Screen Studio 偏自动化，ScreenCam 更偏原生、轻量和手动控制。",
+        "Screen Studio 覆盖基础录制和编辑流程。ScreenCam 在此之上提供更小的原生体积、更深入的控制、更丰富的创作工具和更多输出格式。",
       headers: {
         feature: "功能",
         screenCam: "ScreenCam",
@@ -359,32 +364,37 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         {
           feature: "性能负担",
           screenCam: "体积约小 30 倍，CPU 和内存占用更低，导出更快。",
-          screenStudio: "打磨完善，但安装体积更重。",
+          screenStudio: "提供基础录屏、编辑和导出流程。",
         },
         {
           feature: "变焦控制",
-          screenCam: "手动锚点、多个中心、单独缩放比例、可调曲线。",
-          screenStudio: "强项是自动变焦和顺滑的光标驱动运动。",
+          screenCam: "自动变焦，并支持高度可自定义的动画曲线。",
+          screenStudio: "提供自动变焦和光标驱动运动。",
         },
         {
           feature: "图层",
           screenCam: "马赛克、文字、聚焦、图片图层，可不限量重叠。",
-          screenStudio: "聚焦于光标运动、背景和遮罩的编辑流程。",
+          screenStudio: "提供基础浮层、背景和遮罩功能。",
         },
         {
           feature: "设备呈现",
-          screenCam: "内置 Mac、iPhone 和 Studio Display 样机。",
-          screenStudio: "iOS 和设备录制流程较强。",
+          screenCam: "内置 Mac、iPhone、Apple Watch 和 Studio Display 样机。",
+          screenStudio: "提供基础设备录制和呈现流程。",
         },
         {
           feature: "导出格式",
           screenCam: "视频、GIF 和 Live Photo。",
-          screenStudio: "视频和 GIF，并带有成熟默认设置。",
+          screenStudio: "支持视频和 GIF 导出。",
+        },
+        {
+          feature: "背景音乐",
+          screenCam: "支持自由剪辑和编排音乐，并可设置淡入淡出。",
+          screenStudio: "提供基础背景音乐选择。",
         },
         {
           feature: "摄像头修饰",
-          screenCam: "摄像头浮窗控制，加轻量美颜效果。",
-          screenStudio: "动态摄像头布局和演示者呈现。",
+          screenCam: "支持摄像头布局、背景移除、美颜控制和贴纸效果。",
+          screenStudio: "提供摄像头布局和演示者呈现。",
         },
         {
           feature: "价格",
@@ -393,8 +403,8 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         },
         {
           feature: "字幕和转写",
-          screenCam: "暂未支持。已计划 Apple 原生转写和第三方 BYOK 转写。",
-          screenStudio: "目前已有转写和字幕工作流。",
+          screenCam: "更多转写 Provider 选择并支持 BYOK，高度可定制的 Read Along 字幕及 Liquid Glass 背景。",
+          screenStudio: "提供基础转写和字幕工作流。",
         },
       ],
     },
@@ -407,10 +417,10 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         "需要打码、聚焦高亮、文字和图片的短片",
         "需要 GIF 或 Live Photo 输出的导出流程",
       ],
-      gapEyebrow: "当前差距",
-      gapTitle: "字幕功能还没上线。",
+      gapEyebrow: "字幕功能",
+      gapTitle: "字幕样式，由你定义。",
       gapDescription:
-        "ScreenCam 目前不支持字幕。计划中的方向是提供 Apple 原生转写和第三方 BYOK 转写，同时不由 ScreenCam 自己运营转写服务。",
+        "可从多个转写 Provider 中选择并使用 BYOK，精细定制 Read Along 字幕，还能通过可复用预设设置模糊和 Liquid Glass 背景。",
       pricingCta: "查看 App Store 价格",
       screenStudioCta: "查看 Screen Studio",
     },
@@ -436,7 +446,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         {
           question: "ScreenCam 支持字幕吗？",
           answer:
-            "暂未支持。字幕功能已在计划中，目前方向是提供 Apple 原生转写和第三方 BYOK 转写，不由 ScreenCam 自己运营转写服务。",
+            "支持。ScreenCam 提供多个转写 Provider 和 BYOK、高度可定制的 Read Along 字幕、单条字幕显隐、可复用样式，以及模糊或 Liquid Glass 背景。",
         },
         {
           question: "ScreenCam 支持自定义变焦动画吗？",
@@ -501,7 +511,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
       eyebrow: "Warum wechseln",
       title: "Geschwindigkeit und Kontrolle, ohne schweres Gepäck.",
       description:
-        "Screen Studio ist stark, wenn du automatische Politur möchtest. ScreenCam ist für Mac-Creator, die eine leichtere App, messbare Performance-Vorteile und mehr direkte Kontrolle nach der Aufnahme wollen.",
+        "Screen Studio deckt den grundlegenden automatisierten Aufnahme-Workflow ab. ScreenCam geht mit einer leichteren nativen App, messbaren Performance-Vorteilen und tieferer automatischer wie manueller Kontrolle weiter.",
     },
     features: {
       eyebrow: "Kreative Kontrolle",
@@ -517,7 +527,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         },
         {
           title: "Geräte-Mockups",
-          body: "Mac-, iPhone- und Studio-Display-Rahmen für hochwertige Produktdemos.",
+          body: "Mac-, iPhone-, Apple-Watch- und Studio-Display-Rahmen für Produktdemos.",
         },
         {
           title: "GIF + Live Photo",
@@ -537,7 +547,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
       eyebrow: "Vergleich",
       title: "ScreenCam vs Screen Studio",
       description:
-        "Beide Tools können hochwertige Videos erstellen. Der Unterschied liegt im Schwerpunkt: Screen Studio setzt stärker auf Automatik, ScreenCam auf native, kompakte und manuelle Kontrolle.",
+        "Screen Studio deckt den grundlegenden Aufnahme- und Bearbeitungs-Workflow ab. ScreenCam erweitert ihn um einen kleineren nativen Footprint, tiefere Kontrolle, mehr Kreativwerkzeuge und zusätzliche Ausgabeformate.",
       headers: {
         feature: "Funktion",
         screenCam: "ScreenCam",
@@ -547,32 +557,37 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         {
           feature: "Performance-Fußabdruck",
           screenCam: "Etwa 30x kleiner, niedrigere CPU- und Speichernutzung, schnellere Exporte.",
-          screenStudio: "Ausgereifter Recorder mit schwererem Installationsumfang.",
+          screenStudio: "Grundlegender Workflow für Bildschirmaufnahme, Bearbeitung und Export.",
         },
         {
           feature: "Zoom-Steuerung",
-          screenCam: "Manuelle Anker, mehrere Zentren, Skalierung pro Anker, anpassbare Kurven.",
-          screenStudio: "Starker Auto-Zoom und geschmeidige, cursorbasierte Bewegung.",
+          screenCam: "Auto-Zoom mit umfassend anpassbaren Animationskurven.",
+          screenStudio: "Auto-Zoom und cursorbasierte Bewegung.",
         },
         {
           feature: "Ebenen",
           screenCam: "Mosaik, Text, Fokus, Bildebenen und unbegrenzte Überlappung.",
-          screenStudio: "Fokussierter Editor für Cursorbewegung, Hintergründe und Maskierung.",
+          screenStudio: "Grundlegende Overlays, Hintergründe und Maskierung.",
         },
         {
           feature: "Gerätepräsentation",
-          screenCam: "Integrierte Mac-, iPhone- und Studio-Display-Mockups.",
-          screenStudio: "Starker Workflow für iOS- und Geräteaufnahmen.",
+          screenCam: "Integrierte Mac-, iPhone-, Apple-Watch- und Studio-Display-Mockups.",
+          screenStudio: "Grundlegender Workflow für Geräteaufnahme und -präsentation.",
         },
         {
           feature: "Exportformate",
           screenCam: "Video, GIF und Live Photo.",
-          screenStudio: "Video und GIF mit starken Voreinstellungen.",
+          screenStudio: "Video- und GIF-Export.",
+        },
+        {
+          feature: "Hintergrundmusik",
+          screenCam: "Musik frei schneiden und anordnen, inklusive Ein- und Ausblendsteuerung.",
+          screenStudio: "Grundlegende Auswahl an Hintergrundmusik.",
         },
         {
           feature: "Kamera-Polish",
-          screenCam: "Kamera-Overlay-Steuerung plus leichte Beauty-Effekte.",
-          screenStudio: "Dynamische Kamera-Layouts und Webcam-Präsentation.",
+          screenCam: "Kamera-Layouts, Hintergrundentfernung, Beauty-Steuerung und Sticker-Effekte.",
+          screenStudio: "Kamera-Layouts und Webcam-Präsentation.",
         },
         {
           feature: "Preis",
@@ -581,8 +596,8 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         },
         {
           feature: "Untertitel und Transkripte",
-          screenCam: "Noch nicht. Apple-native und BYOK-Transkription über Drittanbieter sind geplant.",
-          screenStudio: "Transkript- und Untertitel-Workflows sind heute verfügbar.",
+          screenCam: "Mehr Transkriptionsanbieter mit BYOK, umfassend anpassbare Read-along-Untertitel und Liquid-Glass-Hintergründe.",
+          screenStudio: "Grundlegender Workflow für Transkription und Untertitel.",
         },
       ],
     },
@@ -595,10 +610,10 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         "Clips Unkenntlichmachung, Fokus-Highlights, Text und Bilder brauchen",
         "Exports GIF- oder Live-Photo-Ausgabe brauchen",
       ],
-      gapEyebrow: "Aktuelle Lücke",
-      gapTitle: "Untertitel sind noch nicht da.",
+      gapEyebrow: "Untertitel",
+      gapTitle: "Untertitel in deinem Stil.",
       gapDescription:
-        "ScreenCam unterstützt heute noch keine Untertitel. Geplant ist Apple-native Transkription und BYOK-Transkription über Drittanbieter, ohne dass ScreenCam selbst einen Transkriptionsdienst betreibt.",
+        "Wähle aus mehreren Transkriptionsanbietern mit BYOK, passe Read-along-Untertitel detailliert an und gestalte sie mit wiederverwendbaren Vorlagen sowie Unschärfe- oder Liquid-Glass-Hintergründen.",
       pricingCta: "App-Store-Preis prüfen",
       screenStudioCta: "Screen Studio ansehen",
     },
@@ -624,7 +639,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         {
           question: "Unterstützt ScreenCam Untertitel?",
           answer:
-            "Noch nicht. Untertitel sind geplant. Die aktuelle Richtung ist Apple-native Transkription und BYOK-Transkription über Drittanbieter, ohne dass ScreenCam einen eigenen Transkriptionsdienst betreibt.",
+            "Ja. ScreenCam bietet mehrere Transkriptionsanbieter mit BYOK, umfassend anpassbare Read-along-Untertitel, Sichtbarkeit pro Untertitel, wiederverwendbare Stile sowie Unschärfe- oder Liquid-Glass-Hintergründe.",
         },
         {
           question: "Unterstützt ScreenCam eigene Zoom-Animationen?",
@@ -689,7 +704,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
       eyebrow: "切り替える理由",
       title: "重さを抑えながら、速度とコントロールを。",
       description:
-        "自動で整った仕上がりが欲しいとき、Screen Studio は優れています。ScreenCam は、より軽いアプリ、測定可能な性能差、録画後の直接的なコントロールを求める Mac クリエイター向けです。",
+        "Screen Studio は基本的な自動収録ワークフローをカバーします。ScreenCam は、より軽いネイティブアプリ、測定可能な性能差、録画後の高度な自動・手動制御を追加します。",
     },
     features: {
       eyebrow: "クリエイティブ制御",
@@ -705,7 +720,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         },
         {
           title: "デバイスモックアップ",
-          body: "Mac、iPhone、Studio Display 風のフレームで、プロダクトデモをきれいに見せられます。",
+          body: "Mac、iPhone、Apple Watch、Studio Display 風のフレームでプロダクトデモを作れます。",
         },
         {
           title: "GIF + Live Photo",
@@ -725,7 +740,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
       eyebrow: "比較",
       title: "ScreenCam vs Screen Studio",
       description:
-        "どちらのツールでも洗練された動画を作れます。違いは重心です。Screen Studio は自動化寄り、ScreenCam はネイティブ、コンパクト、手動制御寄りです。",
+        "Screen Studio は基本的な収録・編集ワークフローをカバーします。ScreenCam は、より小さなネイティブ構成、高度な制御、豊富なクリエイティブ機能、より多くの出力形式を追加します。",
       headers: {
         feature: "機能",
         screenCam: "ScreenCam",
@@ -735,32 +750,37 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         {
           feature: "パフォーマンス負荷",
           screenCam: "約 30 倍小さく、CPU とメモリ使用量が低く、書き出しも高速です。",
-          screenStudio: "洗練されたレコーダーですが、インストールサイズは大きめです。",
+          screenStudio: "基本的な画面収録、編集、書き出しのワークフロー。",
         },
         {
           feature: "ズーム制御",
-          screenCam: "手動アンカー、複数中心、アンカーごとの拡大率、調整可能なカーブ。",
-          screenStudio: "強力な自動ズームと、カーソル駆動のなめらかな動き。",
+          screenCam: "自動ズームと高度にカスタマイズできるアニメーションカーブ。",
+          screenStudio: "自動ズームとカーソル駆動の動き。",
         },
         {
           feature: "レイヤー",
           screenCam: "モザイク、テキスト、フォーカス、画像レイヤーを無制限に重ねられます。",
-          screenStudio: "カーソル動作、背景、マスク向けの集中した編集体験。",
+          screenStudio: "基本的なオーバーレイ、背景、マスク機能。",
         },
         {
           feature: "デバイス表示",
-          screenCam: "Mac、iPhone、Studio Display のモックアップを内蔵。",
-          screenStudio: "iOS とデバイス収録のワークフローが強力です。",
+          screenCam: "Mac、iPhone、Apple Watch、Studio Display のモックアップを内蔵。",
+          screenStudio: "基本的なデバイス収録と表示のワークフロー。",
         },
         {
           feature: "書き出し形式",
           screenCam: "動画、GIF、Live Photo。",
-          screenStudio: "動画と GIF。優れたデフォルト設定があります。",
+          screenStudio: "動画と GIF の書き出し。",
+        },
+        {
+          feature: "BGM",
+          screenCam: "音楽を自由に編集・配置し、フェードインとフェードアウトを設定できます。",
+          screenStudio: "基本的な BGM 選択。",
         },
         {
           feature: "カメラ仕上げ",
-          screenCam: "カメラオーバーレイ制御と軽い補正効果。",
-          screenStudio: "動的なカメラレイアウトと Web カメラ表示。",
+          screenCam: "カメラレイアウト、背景除去、補正コントロール、ステッカー効果。",
+          screenStudio: "カメラレイアウトと Web カメラ表示。",
         },
         {
           feature: "価格",
@@ -769,8 +789,8 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         },
         {
           feature: "字幕と文字起こし",
-          screenCam: "未対応です。Apple ネイティブとサードパーティ BYOK の文字起こしを計画しています。",
-          screenStudio: "文字起こしと字幕ワークフローを現在利用できます。",
+          screenCam: "複数の文字起こしプロバイダーと BYOK、高度にカスタマイズできる Read Along 字幕、Liquid Glass 背景に対応。",
+          screenStudio: "基本的な文字起こしと字幕のワークフロー。",
         },
       ],
     },
@@ -783,10 +803,10 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         "ぼかし、フォーカス強調、テキスト、画像が必要なクリップ",
         "GIF または Live Photo として書き出したい録画",
       ],
-      gapEyebrow: "現在の未対応点",
-      gapTitle: "字幕はまだありません。",
+      gapEyebrow: "字幕",
+      gapTitle: "字幕を思いどおりのスタイルに。",
       gapDescription:
-        "ScreenCam は現在字幕に対応していません。予定している方向性は、Apple ネイティブ文字起こしとサードパーティ BYOK 文字起こしで、ScreenCam 自身が文字起こしサービスを運営するものではありません。",
+        "複数の文字起こしプロバイダーと BYOK を選択でき、Read Along 字幕を細かくカスタマイズし、再利用可能なプリセットでぼかしや Liquid Glass 背景を設定できます。",
       pricingCta: "App Store 価格を確認",
       screenStudioCta: "Screen Studio を見る",
     },
@@ -812,7 +832,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         {
           question: "ScreenCam は字幕に対応していますか？",
           answer:
-            "まだ対応していません。字幕機能は計画中です。現在の方向性は Apple ネイティブ文字起こしとサードパーティ BYOK 文字起こしで、ScreenCam 自身が文字起こしサービスを運営するものではありません。",
+            "はい。複数の文字起こしプロバイダーと BYOK、高度にカスタマイズできる Read Along 字幕、字幕ごとの表示切り替え、再利用可能なスタイル、ぼかしや Liquid Glass 背景に対応しています。",
         },
         {
           question: "ScreenCam はカスタムズームアニメーションに対応していますか？",
@@ -877,7 +897,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
       eyebrow: "전환 이유",
       title: "무거운 부담 없이 속도와 제어를.",
       description:
-        "자동으로 다듬어진 결과가 필요하다면 Screen Studio도 좋습니다. ScreenCam은 더 가벼운 앱, 측정 가능한 성능 이점, 녹화 후 더 직접적인 제어를 원하는 Mac 크리에이터를 위한 도구입니다.",
+        "Screen Studio는 기본 자동 녹화 워크플로를 제공합니다. ScreenCam은 더 가벼운 네이티브 앱, 측정 가능한 성능 이점, 녹화 후 더 깊은 자동 및 수동 제어를 더합니다.",
     },
     features: {
       eyebrow: "창작 제어",
@@ -893,7 +913,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         },
         {
           title: "기기 목업",
-          body: "Mac, iPhone, Studio Display 스타일 프레임으로 제품 데모를 더 완성도 있게 보여줍니다.",
+          body: "Mac, iPhone, Apple Watch, Studio Display 스타일 프레임으로 제품 데모를 구성합니다.",
         },
         {
           title: "GIF + Live Photo",
@@ -913,7 +933,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
       eyebrow: "비교",
       title: "ScreenCam vs Screen Studio",
       description:
-        "두 도구 모두 세련된 영상을 만들 수 있습니다. 차이는 무게중심입니다. Screen Studio는 자동화에, ScreenCam은 네이티브, 컴팩트함, 수동 제어에 더 가깝습니다.",
+        "Screen Studio는 기본 녹화 및 편집 워크플로를 제공합니다. ScreenCam은 더 작은 네이티브 구성, 깊은 제어, 풍부한 창작 도구, 더 많은 출력 형식을 추가합니다.",
       headers: {
         feature: "기능",
         screenCam: "ScreenCam",
@@ -923,32 +943,37 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         {
           feature: "성능 부담",
           screenCam: "약 30배 더 작고, CPU 및 메모리 사용량이 낮으며, 내보내기가 더 빠릅니다.",
-          screenStudio: "세련된 레코더지만 설치 크기가 더 무겁습니다.",
+          screenStudio: "기본 화면 녹화, 편집 및 내보내기 워크플로.",
         },
         {
           feature: "줌 제어",
-          screenCam: "수동 앵커, 여러 중심, 앵커별 배율, 조정 가능한 곡선.",
-          screenStudio: "강력한 자동 줌과 부드러운 커서 기반 움직임.",
+          screenCam: "자동 줌과 고도로 사용자 지정 가능한 애니메이션 곡선.",
+          screenStudio: "자동 줌과 커서 기반 움직임.",
         },
         {
           feature: "레이어",
           screenCam: "모자이크, 텍스트, 포커스, 이미지 레이어를 제한 없이 겹칠 수 있습니다.",
-          screenStudio: "커서 움직임, 배경, 마스킹 중심의 편집 흐름.",
+          screenStudio: "기본 오버레이, 배경 및 마스킹 기능.",
         },
         {
           feature: "기기 표현",
-          screenCam: "Mac, iPhone, Studio Display 목업이 내장되어 있습니다.",
-          screenStudio: "iOS 및 기기 녹화 워크플로가 강합니다.",
+          screenCam: "Mac, iPhone, Apple Watch, Studio Display 목업이 내장되어 있습니다.",
+          screenStudio: "기본 기기 녹화 및 프레젠테이션 워크플로.",
         },
         {
           feature: "내보내기 형식",
           screenCam: "동영상, GIF, Live Photo.",
-          screenStudio: "동영상과 GIF, 강력한 기본값.",
+          screenStudio: "동영상 및 GIF 내보내기.",
+        },
+        {
+          feature: "배경 음악",
+          screenCam: "음악을 자유롭게 편집하고 배치하며 페이드 인과 페이드 아웃을 설정할 수 있습니다.",
+          screenStudio: "기본 배경 음악 선택.",
         },
         {
           feature: "카메라 연출",
-          screenCam: "카메라 오버레이 제어와 가벼운 보정 효과.",
-          screenStudio: "동적인 카메라 레이아웃과 웹캠 프레젠테이션.",
+          screenCam: "카메라 레이아웃, 배경 제거, 보정 제어 및 스티커 효과.",
+          screenStudio: "카메라 레이아웃과 웹캠 프레젠테이션.",
         },
         {
           feature: "가격",
@@ -957,8 +982,8 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         },
         {
           feature: "자막과 전사",
-          screenCam: "아직 없습니다. Apple 네이티브 및 서드파티 BYOK 전사를 계획 중입니다.",
-          screenStudio: "전사와 자막 워크플로를 현재 사용할 수 있습니다.",
+          screenCam: "더 다양한 전사 제공자와 BYOK, 고도로 사용자 지정 가능한 Read Along 자막, Liquid Glass 배경을 지원합니다.",
+          screenStudio: "기본 전사 및 자막 워크플로.",
         },
       ],
     },
@@ -971,10 +996,10 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         "모자이크, 포커스 강조, 텍스트, 이미지가 필요한 클립",
         "GIF 또는 Live Photo 출력이 필요한 내보내기",
       ],
-      gapEyebrow: "현재 빈틈",
-      gapTitle: "자막은 아직 없습니다.",
+      gapEyebrow: "자막",
+      gapTitle: "원하는 방식으로 자막을 스타일링하세요.",
       gapDescription:
-        "ScreenCam은 현재 자막을 지원하지 않습니다. 계획 중인 방향은 Apple 네이티브 전사와 서드파티 BYOK 전사를 제공하되, ScreenCam이 자체 전사 서비스를 운영하지 않는 것입니다.",
+        "여러 전사 제공자와 BYOK를 선택하고, Read Along 자막을 세밀하게 사용자 지정하며, 재사용 가능한 프리셋으로 블러 또는 Liquid Glass 배경을 적용할 수 있습니다.",
       pricingCta: "App Store 가격 확인",
       screenStudioCta: "Screen Studio 보기",
     },
@@ -1000,7 +1025,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         {
           question: "ScreenCam은 자막을 지원하나요?",
           answer:
-            "아직은 아닙니다. 자막 기능은 계획 중입니다. 현재 방향은 Apple 네이티브 전사와 서드파티 BYOK 전사를 제공하되, ScreenCam이 자체 전사 서비스를 운영하지 않는 것입니다.",
+            "예. ScreenCam은 여러 전사 제공자와 BYOK, 고도로 사용자 지정 가능한 Read Along 자막, 자막별 표시 여부, 재사용 가능한 스타일, 블러 또는 Liquid Glass 배경을 지원합니다.",
         },
         {
           question: "ScreenCam은 사용자 지정 줌 애니메이션을 지원하나요?",
@@ -1065,7 +1090,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
       eyebrow: "為什麼切換",
       title: "更快、更可控，同時沒有沉重負擔。",
       description:
-        "Screen Studio 很適合自動化打磨。ScreenCam 面向想要更輕應用、可量化效能優勢，以及錄製後更直接控制的 Mac 創作者。",
+        "Screen Studio 覆蓋基礎自動化錄製流程。ScreenCam 在此之上提供更輕的原生應用、可量化的效能優勢，以及錄製後更深入的自動與手動控制。",
     },
     features: {
       eyebrow: "創作控制",
@@ -1081,7 +1106,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         },
         {
           title: "裝置樣機",
-          body: "用 Mac、iPhone 和 Studio Display 風格外框完成更精緻的產品演示。",
+          body: "用 Mac、iPhone、Apple Watch 和 Studio Display 風格外框製作產品演示。",
         },
         {
           title: "GIF + Live Photo",
@@ -1101,7 +1126,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
       eyebrow: "對比",
       title: "ScreenCam vs Screen Studio",
       description:
-        "兩款工具都能製作精緻影片。差異在於重心：Screen Studio 偏自動化，ScreenCam 更偏原生、輕量和手動控制。",
+        "Screen Studio 覆蓋基礎錄製和編輯流程。ScreenCam 在此之上提供更小的原生體積、更深入的控制、更豐富的創作工具和更多輸出格式。",
       headers: {
         feature: "功能",
         screenCam: "ScreenCam",
@@ -1111,32 +1136,37 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         {
           feature: "效能負擔",
           screenCam: "體積約小 30 倍，CPU 和記憶體佔用更低，匯出更快。",
-          screenStudio: "打磨完善，但安裝體積更重。",
+          screenStudio: "提供基礎錄屏、編輯和匯出流程。",
         },
         {
           feature: "變焦控制",
-          screenCam: "手動錨點、多箇中心、單獨縮放比例、可調曲線。",
-          screenStudio: "強項是自動變焦和順滑的游標驅動運動。",
+          screenCam: "自動變焦，並支援高度可自訂的動畫曲線。",
+          screenStudio: "提供自動變焦和游標驅動運動。",
         },
         {
           feature: "圖層",
           screenCam: "馬賽克、文字、聚焦、圖片圖層，可不限量重疊。",
-          screenStudio: "聚焦於游標運動、背景和遮罩的編輯流程。",
+          screenStudio: "提供基礎浮層、背景和遮罩功能。",
         },
         {
           feature: "裝置呈現",
-          screenCam: "內建 Mac、iPhone 和 Studio Display 樣機。",
-          screenStudio: "iOS 和裝置錄製流程較強。",
+          screenCam: "內建 Mac、iPhone、Apple Watch 和 Studio Display 樣機。",
+          screenStudio: "提供基礎裝置錄製和呈現流程。",
         },
         {
           feature: "匯出格式",
           screenCam: "影片、GIF 和 Live Photo。",
-          screenStudio: "影片和 GIF，並帶有成熟預設設定。",
+          screenStudio: "支援影片和 GIF 匯出。",
+        },
+        {
+          feature: "背景音樂",
+          screenCam: "支援自由剪輯和編排音樂，並可設定淡入淡出。",
+          screenStudio: "提供基礎背景音樂選擇。",
         },
         {
           feature: "攝像頭修飾",
-          screenCam: "攝像頭浮窗控制，加輕量美顏效果。",
-          screenStudio: "動態攝像頭佈局和演示者呈現。",
+          screenCam: "支援攝像頭佈局、背景移除、美顏控制和貼紙效果。",
+          screenStudio: "提供攝像頭佈局和演示者呈現。",
         },
         {
           feature: "價格",
@@ -1145,8 +1175,8 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         },
         {
           feature: "字幕和轉寫",
-          screenCam: "暫未支援。已計劃 Apple 原生轉寫和第三方 BYOK 轉寫。",
-          screenStudio: "目前已有轉寫和字幕工作流。",
+          screenCam: "更多轉寫 Provider 選擇並支援 BYOK，高度可自訂的 Read Along 字幕及 Liquid Glass 背景。",
+          screenStudio: "提供基礎轉寫和字幕工作流。",
         },
       ],
     },
@@ -1159,10 +1189,10 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         "需要打碼、聚焦高亮、文字和圖片的短片",
         "需要 GIF 或 Live Photo 輸出的匯出流程",
       ],
-      gapEyebrow: "當前差距",
-      gapTitle: "字幕功能還沒上線。",
+      gapEyebrow: "字幕功能",
+      gapTitle: "字幕樣式，由你定義。",
       gapDescription:
-        "ScreenCam 目前不支援字幕。計劃中的方向是提供 Apple 原生轉寫和第三方 BYOK 轉寫，同時不由 ScreenCam 自己運營轉寫服務。",
+        "可從多個轉寫 Provider 中選擇並使用 BYOK，精細自訂 Read Along 字幕，還能透過可重用預設設定模糊和 Liquid Glass 背景。",
       pricingCta: "檢視 App Store 價格",
       screenStudioCta: "檢視 Screen Studio",
     },
@@ -1188,7 +1218,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         {
           question: "ScreenCam 支援字幕嗎？",
           answer:
-            "暫未支援。字幕功能已在計劃中，目前方向是提供 Apple 原生轉寫和第三方 BYOK 轉寫，不由 ScreenCam 自己運營轉寫服務。",
+            "支援。ScreenCam 提供多個轉寫 Provider 和 BYOK、高度可自訂的 Read Along 字幕、單條字幕顯示隱藏、可重用樣式，以及模糊或 Liquid Glass 背景。",
         },
         {
           question: "ScreenCam 支援自定義變焦動畫嗎？",
@@ -1253,7 +1283,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
       eyebrow: "¿Por qué cambiar?",
       title: "Velocidad y control, sin pisar demasiado.",
       description:
-        "Screen Studio es fantástico cuando quieres un pulido automático. ScreenCam es para creadores de Mac que desean una aplicación más liviana, mejoras en el rendimiento medido y un control más directo después de la grabación.",
+        "Screen Studio cubre el flujo automatizado básico de grabación. ScreenCam va más allá con una app nativa más ligera, ventajas de rendimiento medibles y un control automático y manual más profundo tras grabar.",
     },
     features: {
       eyebrow: "control creativo",
@@ -1269,7 +1299,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         },
         {
           title: "Maquetas de dispositivos",
-          body: "Mac, iPhone y marcos estilo Studio Display para demostraciones de productos refinados.",
+          body: "Marcos estilo Mac, iPhone, Apple Watch y Studio Display para demostraciones de productos.",
         },
         {
           title: "GIF + Live Photo",
@@ -1289,7 +1319,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
       eyebrow: "Comparación",
       title: "ScreenCam y Screen Studio",
       description:
-        "Ambas herramientas pueden crear videos pulidos. La diferencia es dónde ponen su peso: el Screen Studio es automático, mientras que el ScreenCam es nativo, compacto y manual.",
+        "Screen Studio cubre el flujo básico de grabación y edición. ScreenCam lo amplía con una app nativa más pequeña, controles más profundos, más herramientas creativas y más formatos de salida.",
       headers: {
         feature: "Característica",
         screenCam: "ScreenCam",
@@ -1299,32 +1329,37 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         {
           feature: "Huella de rendimiento",
           screenCam: "Aproximadamente 30 veces más pequeño, menor uso de CPU y memoria, exportaciones más rápidas.",
-          screenStudio: "Grabadora pulida con una huella instalada más pesada.",
+          screenStudio: "Flujo básico de grabación, edición y exportación de pantalla.",
         },
         {
           feature: "control de zoom",
-          screenCam: "Anclajes manuales, centros múltiples, escala por ancla, curvas sintonizables.",
-          screenStudio: "Potente zoom automático y movimiento suave impulsado por el cursor.",
+          screenCam: "Zoom automático con curvas de animación altamente personalizables.",
+          screenStudio: "Zoom automático y movimiento impulsado por el cursor.",
         },
         {
           feature: "capas",
           screenCam: "Mosaico, texto, enfoque, capas de imágenes, superposición ilimitada.",
-          screenStudio: "Editor enfocado en movimiento del cursor, fondos y enmascaramiento.",
+          screenStudio: "Superposiciones, fondos y enmascaramiento básicos.",
         },
         {
           feature: "Presentación del dispositivo",
-          screenCam: "Maquetas integradas de Mac, iPhone y Studio Display.",
-          screenStudio: "Fuerte flujo de trabajo de captura de dispositivos e iOS.",
+          screenCam: "Maquetas integradas de Mac, iPhone, Apple Watch y Studio Display.",
+          screenStudio: "Flujo básico de captura y presentación de dispositivos.",
         },
         {
           feature: "Formatos de exportación",
           screenCam: "Vídeo, GIF y Live Photo.",
-          screenStudio: "Video y GIF con fuertes valores predeterminados.",
+          screenStudio: "Exportación de video y GIF.",
+        },
+        {
+          feature: "Música de fondo",
+          screenCam: "Recorta y organiza la música libremente con controles de entrada y salida gradual.",
+          screenStudio: "Selección básica de música de fondo.",
         },
         {
           feature: "Pulido de cámara",
-          screenCam: "Controles de superposición de cámara y efectos de belleza ligeros.",
-          screenStudio: "Diseños dinámicos de cámara y presentación de cámara web.",
+          screenCam: "Diseños de cámara, eliminación de fondo, controles de belleza y efectos de pegatinas.",
+          screenStudio: "Diseños de cámara y presentación de cámara web.",
         },
         {
           feature: "Precios",
@@ -1333,8 +1368,8 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         },
         {
           feature: "Subtítulos y transcripciones",
-          screenCam: "Todavía no. Está prevista la transcripción BYOK nativa de Apple y de terceros.",
-          screenStudio: "Los flujos de trabajo de transcripción y subtítulos están disponibles hoy.",
+          screenCam: "Más proveedores de transcripción con BYOK, subtítulos Read Along muy personalizables y fondos Liquid Glass.",
+          screenStudio: "Flujo básico de transcripción y subtítulos.",
         },
       ],
     },
@@ -1347,10 +1382,10 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         "Clips que necesitan redacción, resaltados de enfoque, texto e imágenes",
         "Exportaciones que necesitan salida GIF o Live Photo",
       ],
-      gapEyebrow: "Brecha actual",
-      gapTitle: "Los subtítulos aún no están aquí.",
+      gapEyebrow: "Subtítulos",
+      gapTitle: "Subtítulos con tu propio estilo.",
       gapDescription:
-        "ScreenCam no admite subtítulos hoy. Se espera que el soporte planificado ofrezca transcripción nativa Apple y transcripción BYOK de terceros, sin que ScreenCam opere su propio servicio de transcripción.",
+        "Elige entre varios proveedores de transcripción con BYOK, personaliza al detalle los subtítulos Read Along y aplica ajustes reutilizables con fondos desenfocados o Liquid Glass.",
       pricingCta: "Consultar precios de App Store",
       screenStudioCta: "Ver Screen Studio",
     },
@@ -1376,7 +1411,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         {
           question: "¿ScreenCam admite subtítulos?",
           answer:
-            "Todavía no. Está previsto el soporte de subtítulos. La dirección actual es ofrecer transcripción nativa de Apple y transcripción de terceros a través de BYOK, sin que ScreenCam ejecute su propio servicio de transcripción.",
+            "Sí. ScreenCam ofrece varios proveedores de transcripción con BYOK, subtítulos Read Along muy personalizables, visibilidad por subtítulo, estilos reutilizables y fondos desenfocados o Liquid Glass.",
         },
         {
           question: "¿ScreenCam admite animaciones de zoom personalizadas?",
@@ -1451,7 +1486,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
       eyebrow: "Pourquoi changer",
       title: "Vitesse et contrôle, sans encombrement important.",
       description:
-        "Screen Studio est idéal lorsque vous souhaitez un polissage automatique. ScreenCam est destiné aux créateurs Mac qui souhaitent une application plus légère, des performances mesurées et un contrôle plus direct après l'enregistrement.",
+        "Screen Studio couvre le flux automatisé de base pour l’enregistrement. ScreenCam va plus loin avec une app native plus légère, des gains de performance mesurables et un contrôle automatique et manuel plus poussé après l’enregistrement.",
     },
     features: {
       eyebrow: "Contrôle créatif",
@@ -1467,7 +1502,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         },
         {
           title: "Maquettes d'appareils",
-          body: "Cadrage de style Mac, iPhone et Studio Display pour des démonstrations de produits raffinées.",
+          body: "Cadrage de style Mac, iPhone, Apple Watch et Studio Display pour les démonstrations de produits.",
         },
         {
           title: "GIF + Live Photo",
@@ -1487,7 +1522,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
       eyebrow: "Comparaison",
       title: "ScreenCam contre Screen Studio",
       description:
-        "Les deux outils peuvent créer des vidéos soignées. La différence réside dans l'endroit où ils mettent leur poids : le Screen Studio est automatique, tandis que le ScreenCam est natif, compact et manuel.",
+        "Screen Studio couvre le flux de base pour l’enregistrement et le montage. ScreenCam l’enrichit avec une app native plus compacte, des contrôles plus poussés, davantage d’outils créatifs et plus de formats de sortie.",
       headers: {
         feature: "Caractéristique",
         screenCam: "ScreenCam",
@@ -1497,32 +1532,37 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         {
           feature: "Empreinte de performance",
           screenCam: "Environ 30 fois plus petit, utilisation réduite du processeur et de la mémoire, exportations plus rapides.",
-          screenStudio: "Enregistreur poli avec une empreinte installée plus lourde.",
+          screenStudio: "Flux de base pour l’enregistrement, le montage et l’exportation d’écran.",
         },
         {
           feature: "Contrôle du zoom",
-          screenCam: "Ancres manuelles, centres multiples, échelle par ancre, courbes réglables.",
-          screenStudio: "Zoom automatique puissant et mouvement fluide piloté par le curseur.",
+          screenCam: "Zoom automatique avec des courbes d’animation hautement personnalisables.",
+          screenStudio: "Zoom automatique et mouvement piloté par le curseur.",
         },
         {
           feature: "Calques",
           screenCam: "Mosaïque, texte, focus, calques d'image, chevauchement illimité.",
-          screenStudio: "Éditeur ciblé pour le mouvement du curseur, les arrière-plans et le masquage.",
+          screenStudio: "Superpositions, arrière-plans et masquage de base.",
         },
         {
           feature: "Présentation de l'appareil",
-          screenCam: "Maquettes Mac, iPhone et Studio Display intégrées.",
-          screenStudio: "Flux de travail puissant de capture d’iOS et d’appareils.",
+          screenCam: "Maquettes Mac, iPhone, Apple Watch et Studio Display intégrées.",
+          screenStudio: "Flux de base pour la capture et la présentation d’appareils.",
         },
         {
           feature: "Formats d'exportation",
           screenCam: "Vidéo, GIF et Live Photo.",
-          screenStudio: "Vidéo et GIF avec des valeurs par défaut élevées.",
+          screenStudio: "Exportation vidéo et GIF.",
+        },
+        {
+          feature: "Musique de fond",
+          screenCam: "Découpez et organisez librement la musique avec des fondus d’entrée et de sortie.",
+          screenStudio: "Sélection basique de musique de fond.",
         },
         {
           feature: "Polissage de l'appareil photo",
-          screenCam: "Commandes de superposition de caméra et effets de beauté légers.",
-          screenStudio: "Dispositions de caméras dynamiques et présentation par webcam.",
+          screenCam: "Dispositions de caméra, suppression de l’arrière-plan, retouches beauté et effets d’autocollants.",
+          screenStudio: "Dispositions de caméra et présentation par webcam.",
         },
         {
           feature: "Tarifs",
@@ -1531,8 +1571,8 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         },
         {
           feature: "Légendes et transcriptions",
-          screenCam: "Pas encore. Une transcription BYOK native et tierce de Apple est prévue.",
-          screenStudio: "Les workflows de transcription et de sous-titres sont disponibles dès aujourd'hui.",
+          screenCam: "Davantage de fournisseurs de transcription avec BYOK, des sous-titres Read Along hautement personnalisables et des arrière-plans Liquid Glass.",
+          screenStudio: "Flux de base pour la transcription et les sous-titres.",
         },
       ],
     },
@@ -1545,10 +1585,10 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         "Clips nécessitant une rédaction, des surbrillances, du texte et des images",
         "Exportations nécessitant une sortie GIF ou Live Photo",
       ],
-      gapEyebrow: "Écart actuel",
-      gapTitle: "Les sous-titres ne sont pas encore là.",
+      gapEyebrow: "Sous-titres",
+      gapTitle: "Des sous-titres à votre image.",
       gapDescription:
-        "ScreenCam ne prend pas en charge les sous-titres aujourd'hui. Le support prévu devrait offrir la transcription native de Apple et la transcription BYOK tierce, sans que ScreenCam n'exploite son propre service de transcription.",
+        "Choisissez parmi plusieurs fournisseurs de transcription avec BYOK, personnalisez précisément les sous-titres Read Along et appliquez des préréglages réutilisables avec des arrière-plans flous ou Liquid Glass.",
       pricingCta: "Vérifiez les prix du App Store",
       screenStudioCta: "Voir Screen Studio",
     },
@@ -1574,7 +1614,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         {
           question: "ScreenCam prend-il en charge les sous-titres ?",
           answer:
-            "Pas encore. Un support des sous-titres est prévu. L'orientation actuelle est de proposer la transcription native de Apple et la transcription tierce via BYOK, sans que ScreenCam ne gère son propre service de transcription.",
+            "Oui. ScreenCam propose plusieurs fournisseurs de transcription avec BYOK, des sous-titres Read Along hautement personnalisables, la visibilité par sous-titre, des styles réutilisables et des arrière-plans flous ou Liquid Glass.",
         },
         {
           question: "ScreenCam prend-il en charge les animations de zoom personnalisées ?",
@@ -1649,7 +1689,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
       eyebrow: "Por que mudar",
       title: "Velocidade e controle, sem ocupar muito espaço.",
       description:
-        "Screen Studio é ótimo quando você deseja polimento automático. ScreenCam é para criadores de Mac que desejam um aplicativo mais leve, ganhos de desempenho medidos e controle mais direto após a gravação.",
+        "Screen Studio cobre o fluxo automatizado básico de gravação. ScreenCam vai além com um app nativo mais leve, ganhos de desempenho mensuráveis e controles automáticos e manuais mais profundos após a gravação.",
     },
     features: {
       eyebrow: "Controle criativo",
@@ -1665,7 +1705,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         },
         {
           title: "Maquetes de dispositivos",
-          body: "Mac, iPhone e enquadramento estilo Studio Display para demonstrações de produtos sofisticados.",
+          body: "Enquadramento estilo Mac, iPhone, Apple Watch e Studio Display para demonstrações de produtos.",
         },
         {
           title: "GIF + Live Photo",
@@ -1685,7 +1725,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
       eyebrow: "Comparação",
       title: "ScreenCam vs Screen Studio",
       description:
-        "Ambas as ferramentas podem criar vídeos sofisticados. A diferença é onde eles colocam seu peso: Screen Studio é automático, enquanto ScreenCam é nativo, compacto e manual.",
+        "Screen Studio cobre o fluxo básico de gravação e edição. ScreenCam o amplia com um app nativo menor, controles mais profundos, mais ferramentas criativas e mais formatos de saída.",
       headers: {
         feature: "Recurso",
         screenCam: "ScreenCam",
@@ -1695,32 +1735,37 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         {
           feature: "Pegada de desempenho",
           screenCam: "Cerca de 30x menor, menor uso de CPU e memória, exportações mais rápidas.",
-          screenStudio: "Gravador polido com uma área instalada mais pesada.",
+          screenStudio: "Fluxo básico de gravação, edição e exportação de tela.",
         },
         {
           feature: "Controle de zoom",
-          screenCam: "Âncoras manuais, centros múltiplos, escala por âncora, curvas ajustáveis.",
-          screenStudio: "Zoom automático forte e movimento suave acionado pelo cursor.",
+          screenCam: "Zoom automático com curvas de animação altamente personalizáveis.",
+          screenStudio: "Zoom automático e movimento acionado pelo cursor.",
         },
         {
           feature: "Camadas",
           screenCam: "Mosaico, texto, foco, camadas de imagem, sobreposição ilimitada.",
-          screenStudio: "Editor focado para movimento do cursor, planos de fundo e mascaramento.",
+          screenStudio: "Sobreposições, planos de fundo e mascaramento básicos.",
         },
         {
           feature: "Apresentação do dispositivo",
-          screenCam: "Maquetes Mac, iPhone e Studio Display integradas.",
-          screenStudio: "Forte fluxo de trabalho de captura de dispositivos e iOS.",
+          screenCam: "Maquetes Mac, iPhone, Apple Watch e Studio Display integradas.",
+          screenStudio: "Fluxo básico de captura e apresentação de dispositivos.",
         },
         {
           feature: "Exportar formatos",
           screenCam: "Vídeo, GIF e Live Photo.",
-          screenStudio: "Vídeo e GIF com padrões fortes.",
+          screenStudio: "Exportação de vídeo e GIF.",
+        },
+        {
+          feature: "Música de fundo",
+          screenCam: "Corte e organize músicas livremente com controles de fade-in e fade-out.",
+          screenStudio: "Seleção básica de música de fundo.",
         },
         {
           feature: "Polimento de câmera",
-          screenCam: "Controles de sobreposição de câmera e efeitos de beleza leves.",
-          screenStudio: "Layouts de câmera dinâmicos e apresentação de webcam.",
+          screenCam: "Layouts de câmera, remoção de fundo, controles de beleza e efeitos de adesivos.",
+          screenStudio: "Layouts de câmera e apresentação de webcam.",
         },
         {
           feature: "Preços",
@@ -1729,8 +1774,8 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         },
         {
           feature: "Legendas e transcrições",
-          screenCam: "Ainda não. Estão planejadas transcrições BYOK nativas de Apple e de terceiros.",
-          screenStudio: "Fluxos de trabalho de transcrição e legendas estão disponíveis hoje.",
+          screenCam: "Mais provedores de transcrição com BYOK, legendas Read Along altamente personalizáveis e fundos Liquid Glass.",
+          screenStudio: "Fluxo básico de transcrição e legendas.",
         },
       ],
     },
@@ -1743,10 +1788,10 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         "Clipes que precisam de redação, realces de foco, texto e imagens",
         "Exportações que precisam de saída GIF ou Live Photo",
       ],
-      gapEyebrow: "Lacuna atual",
-      gapTitle: "As legendas ainda não chegaram.",
+      gapEyebrow: "Legendas",
+      gapTitle: "Legendas com o seu estilo.",
       gapDescription:
-        "ScreenCam não oferece suporte a legendas hoje. Espera-se que o suporte planejado ofereça transcrição nativa Apple e transcrição BYOK de terceiros, sem que ScreenCam opere seu próprio serviço de transcrição.",
+        "Escolha entre vários provedores de transcrição com BYOK, personalize detalhadamente as legendas Read Along e aplique predefinições reutilizáveis com fundos desfocados ou Liquid Glass.",
       pricingCta: "Verifique o preço App Store",
       screenStudioCta: "Ver Screen Studio",
     },
@@ -1772,7 +1817,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         {
           question: "ScreenCam suporta legendas?",
           answer:
-            "Ainda não. O suporte a legendas está planejado. A direção atual é oferecer transcrição nativa Apple e transcrição de terceiros por meio de BYOK, sem que ScreenCam execute seu próprio serviço de transcrição.",
+            "Sim. ScreenCam oferece vários provedores de transcrição com BYOK, legendas Read Along altamente personalizáveis, visibilidade por legenda, estilos reutilizáveis e fundos desfocados ou Liquid Glass.",
         },
         {
           question: "ScreenCam oferece suporte a animações de zoom personalizadas?",
@@ -1847,7 +1892,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
       eyebrow: "Perché cambiare",
       title: "Velocità e controllo, senza l'ingombro pesante.",
       description:
-        "Screen Studio è ottimo quando vuoi la lucidatura automatica. ScreenCam è per i creatori di Mac che desiderano un'app più leggera, prestazioni misurate e un controllo più diretto dopo la registrazione.",
+        "Screen Studio copre il flusso automatizzato di base per la registrazione. ScreenCam va oltre con un’app nativa più leggera, vantaggi prestazionali misurabili e controlli automatici e manuali più profondi dopo la registrazione.",
     },
     features: {
       eyebrow: "Controllo creativo",
@@ -1863,7 +1908,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         },
         {
           title: "Mockup del dispositivo",
-          body: "Mac, iPhone e cornici in stile Studio Display per dimostrazioni di prodotti raffinate.",
+          body: "Cornici in stile Mac, iPhone, Apple Watch e Studio Display per le demo di prodotto.",
         },
         {
           title: "GIF + Live Photo",
@@ -1883,7 +1928,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
       eyebrow: "Confronto",
       title: "ScreenCam rispetto a Screen Studio",
       description:
-        "Entrambi gli strumenti possono creare video raffinati. La differenza è dove mettono il loro peso: Screen Studio si appoggia all'automatico, mentre ScreenCam si appoggia al nativo, al compatto e al manuale.",
+        "Screen Studio copre il flusso di base per registrazione e modifica. ScreenCam lo amplia con un’app nativa più compatta, controlli più profondi, più strumenti creativi e più formati di output.",
       headers: {
         feature: "Caratteristica",
         screenCam: "ScreenCam",
@@ -1893,32 +1938,37 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         {
           feature: "Impronta prestazionale",
           screenCam: "Circa 30 volte più piccolo, utilizzo inferiore di CPU e memoria, esportazioni più veloci.",
-          screenStudio: "Registratore lucidato con un ingombro installato più pesante.",
+          screenStudio: "Flusso di base per registrazione, modifica ed esportazione dello schermo.",
         },
         {
           feature: "Controllo dello zoom",
-          screenCam: "Ancoraggi manuali, centri multipli, scala per ancoraggio, curve sintonizzabili.",
-          screenStudio: "Potente zoom automatico e movimento fluido guidato dal cursore.",
+          screenCam: "Zoom automatico con curve di animazione altamente personalizzabili.",
+          screenStudio: "Zoom automatico e movimento guidato dal cursore.",
         },
         {
           feature: "Strati",
           screenCam: "Mosaico, testo, messa a fuoco, livelli di immagini, sovrapposizione illimitata.",
-          screenStudio: "Editor mirato per movimento del cursore, sfondi e mascheramenti.",
+          screenStudio: "Sovrapposizioni, sfondi e mascheramento di base.",
         },
         {
           feature: "Presentazione del dispositivo",
-          screenCam: "Mockup Mac, iPhone e Studio Display integrati.",
-          screenStudio: "Flusso di lavoro di acquisizione iOS e dispositivo avanzato.",
+          screenCam: "Mockup Mac, iPhone, Apple Watch e Studio Display integrati.",
+          screenStudio: "Flusso di base per acquisizione e presentazione dei dispositivi.",
         },
         {
           feature: "Formati di esportazione",
           screenCam: "Video, GIF e Live Photo.",
-          screenStudio: "Video e GIF con impostazioni predefinite avanzate.",
+          screenStudio: "Esportazione video e GIF.",
+        },
+        {
+          feature: "Musica di sottofondo",
+          screenCam: "Taglia e organizza liberamente la musica con controlli di dissolvenza in entrata e in uscita.",
+          screenStudio: "Selezione di base della musica di sottofondo.",
         },
         {
           feature: "Lucidatura della fotocamera",
-          screenCam: "Controlli di sovrapposizione della fotocamera ed effetti di bellezza leggeri.",
-          screenStudio: "Layout dinamici della fotocamera e presentazione tramite webcam.",
+          screenCam: "Layout della fotocamera, rimozione dello sfondo, controlli di bellezza ed effetti adesivo.",
+          screenStudio: "Layout della fotocamera e presentazione tramite webcam.",
         },
         {
           feature: "Prezzi",
@@ -1927,8 +1977,8 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         },
         {
           feature: "Didascalie e trascrizioni",
-          screenCam: "Non ancora. È prevista la trascrizione Apple nativa e BYOK di terze parti.",
-          screenStudio: "I flussi di lavoro per trascrizione e sottotitoli sono disponibili oggi.",
+          screenCam: "Più provider di trascrizione con BYOK, sottotitoli Read Along altamente personalizzabili e sfondi Liquid Glass.",
+          screenStudio: "Flusso di base per trascrizione e sottotitoli.",
         },
       ],
     },
@@ -1941,10 +1991,10 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         "Clip che necessitano di redazione, messa a fuoco di evidenziazioni, testo e immagini",
         "Esportazioni che richiedono l'output GIF o Live Photo",
       ],
-      gapEyebrow: "Divario attuale",
-      gapTitle: "I sottotitoli non sono ancora arrivati.",
+      gapEyebrow: "Sottotitoli",
+      gapTitle: "Sottotitoli con il tuo stile.",
       gapDescription:
-        "ScreenCam oggi non supporta i sottotitoli. Si prevede che il supporto pianificato offra la trascrizione nativa Apple e la trascrizione BYOK di terze parti, senza che ScreenCam gestisca il proprio servizio di trascrizione.",
+        "Scegli tra più provider di trascrizione con BYOK, personalizza nel dettaglio i sottotitoli Read Along e applica preset riutilizzabili con sfondi sfocati o Liquid Glass.",
       pricingCta: "Controlla i prezzi App Store",
       screenStudioCta: "Visualizza Screen Studio",
     },
@@ -1970,7 +2020,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         {
           question: "ScreenCam supporta i sottotitoli?",
           answer:
-            "Non ancora. È previsto il supporto dei sottotitoli. La direzione attuale è quella di offrire la trascrizione nativa di Apple e la trascrizione di terze parti tramite BYOK, senza che ScreenCam esegua il proprio servizio di trascrizione.",
+            "Sì. ScreenCam offre più provider di trascrizione con BYOK, sottotitoli Read Along altamente personalizzabili, visibilità per sottotitolo, stili riutilizzabili e sfondi sfocati o Liquid Glass.",
         },
         {
           question: "ScreenCam supporta animazioni zoom personalizzate?",
