@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generatedAt": "2026-06-13T03:09:15.520Z",
+  "generatedAt": "2026-07-19T07:24:34.222Z",
   "previewSeconds": 5,
   "tracks": [
     {
@@ -243,6 +243,178 @@
         "seconds": 5,
         "size": 81128
       }
+    },
+    {
+      "id": "circuit-dust-bounce",
+      "title": "Circuit Dust Bounce",
+      "tags": [
+        "纯音乐"
+      ],
+      "keywords": [
+        "circuit",
+        "dust",
+        "bounce",
+        "instrumental"
+      ],
+      "duration": 55.995,
+      "durationMs": 55995,
+      "size": 1796860,
+      "sourceSha256": "b673fbc6dd72a2ef1ec7105fc6fbf189f47bce327c2dfd1710b822cdaa1ea595",
+      "audioUrl": "/bgm/audio/circuit-dust-bounce.mp3",
+      "previewUrl": "/bgm/previews/circuit-dust-bounce-preview.mp3",
+      "downloadUrl": "/bgm/audio/circuit-dust-bounce.mp3",
+      "preview": {
+        "start": 25.497,
+        "seconds": 5,
+        "size": 81257
+      }
+    },
+    {
+      "id": "velvet-circuit-bounce",
+      "title": "Velvet Circuit Bounce",
+      "tags": [
+        "纯音乐"
+      ],
+      "keywords": [
+        "velvet",
+        "circuit",
+        "bounce",
+        "instrumental"
+      ],
+      "duration": 116.274,
+      "durationMs": 116274,
+      "size": 3728090,
+      "sourceSha256": "edbe527fe00d325f7cb1a41c9a59761c270ae63545e26d3ee8aeae43a8c90a3a",
+      "audioUrl": "/bgm/audio/velvet-circuit-bounce.mp3",
+      "previewUrl": "/bgm/previews/velvet-circuit-bounce-preview.mp3",
+      "downloadUrl": "/bgm/audio/velvet-circuit-bounce.mp3",
+      "preview": {
+        "start": 55.637,
+        "seconds": 5,
+        "size": 81257
+      }
+    },
+    {
+      "id": "velvet-circuit-rain",
+      "title": "Velvet Circuit Rain",
+      "tags": [
+        "纯音乐"
+      ],
+      "keywords": [
+        "velvet",
+        "circuit",
+        "rain",
+        "instrumental"
+      ],
+      "duration": 79.958,
+      "durationMs": 79958,
+      "size": 2564165,
+      "sourceSha256": "1ed79d350449ba85ae8aba540c93da7efddec0da1833e04d101e3e62981b08bf",
+      "audioUrl": "/bgm/audio/velvet-circuit-rain.mp3",
+      "previewUrl": "/bgm/previews/velvet-circuit-rain-preview.mp3",
+      "downloadUrl": "/bgm/audio/velvet-circuit-rain.mp3",
+      "preview": {
+        "start": 37.479,
+        "seconds": 5,
+        "size": 81257
+      }
+    },
+    {
+      "id": "dust-and-glass",
+      "title": "Dust and Glass",
+      "tags": [
+        "纯音乐"
+      ],
+      "keywords": [
+        "dust",
+        "glass",
+        "instrumental"
+      ],
+      "duration": 165.384,
+      "durationMs": 165384,
+      "size": 5301188,
+      "sourceSha256": "5793e7b91b208f0082c6f66e753f2ce3802666ea35fbe8c6a1e2b6f8c7fe10d5",
+      "audioUrl": "/bgm/audio/dust-and-glass.mp3",
+      "previewUrl": "/bgm/previews/dust-and-glass-preview.mp3",
+      "downloadUrl": "/bgm/audio/dust-and-glass.mp3",
+      "preview": {
+        "start": 80.192,
+        "seconds": 5,
+        "size": 81257
+      }
+    },
+    {
+      "id": "neon-launch-groove",
+      "title": "Neon Launch Groove",
+      "tags": [
+        "纯音乐"
+      ],
+      "keywords": [
+        "neon",
+        "launch",
+        "groove",
+        "instrumental"
+      ],
+      "duration": 119.188,
+      "durationMs": 119188,
+      "size": 3820970,
+      "sourceSha256": "edaa29c596c0eac27bc0edea64b0590ddccb1e4fde62995dbc9c848a1c09c41c",
+      "audioUrl": "/bgm/audio/neon-launch-groove.mp3",
+      "previewUrl": "/bgm/previews/neon-launch-groove-preview.mp3",
+      "downloadUrl": "/bgm/audio/neon-launch-groove.mp3",
+      "preview": {
+        "start": 57.094,
+        "seconds": 5,
+        "size": 81257
+      }
+    },
+    {
+      "id": "lowlight-bloom",
+      "title": "Lowlight Bloom",
+      "tags": [
+        "纯音乐"
+      ],
+      "keywords": [
+        "lowlight",
+        "bloom",
+        "instrumental"
+      ],
+      "duration": 117.748,
+      "durationMs": 117748,
+      "size": 3774948,
+      "sourceSha256": "8e0ab3b1d9f60d5f1ac1cbeb95cb2a3fa54b2316ec04ac59b7b1e5e88444fffa",
+      "audioUrl": "/bgm/audio/lowlight-bloom.mp3",
+      "previewUrl": "/bgm/previews/lowlight-bloom-preview.mp3",
+      "downloadUrl": "/bgm/audio/lowlight-bloom.mp3",
+      "preview": {
+        "start": 56.374,
+        "seconds": 5,
+        "size": 81257
+      }
+    },
+    {
+      "id": "launch-pulse",
+      "title": "Launch Pulse",
+      "tags": [
+        "纯音乐"
+      ],
+      "keywords": [
+        "launch",
+        "pulse",
+        "instrumental"
+      ],
+      "duration": 150.935,
+      "durationMs": 150936,
+      "size": 3622452,
+      "sourceSha256": "69d92f33f89dcbf290f90d16fb1354a9499eba7cb83cec099b011ddcd46a62ec",
+      "audioUrl": "/bgm/audio/launch-pulse.mp3",
+      "previewUrl": "/bgm/previews/launch-pulse-preview.mp3",
+      "downloadUrl": "/bgm/audio/launch-pulse.mp3",
+      "preview": {
+        "start": 72.968,
+        "seconds": 5,
+        "size": 81128
+      }
     }
   ],
   "tags": [
@@ -251,19 +423,30 @@
   ],
   "keywords": [
     "80s",
+    "bloom",
+    "bounce",
     "canvas",
+    "circuit",
     "clear",
+    "dust",
     "flow",
     "flowing",
     "forward",
+    "glass",
+    "groove",
     "hiphop",
     "instrumental",
     "interface",
     "launch",
     "lofi",
+    "lowlight",
     "momentum",
+    "neon",
     "path",
+    "pulse",
     "quiet",
-    "signal"
+    "rain",
+    "signal",
+    "velvet"
   ]
 }

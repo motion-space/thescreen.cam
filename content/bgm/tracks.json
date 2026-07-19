@@ -69,6 +69,55 @@
       "title": "Signal Flow",
       "tags": ["纯音乐"],
       "keywords": ["signal", "flow", "instrumental"]
+    },
+    {
+      "id": "circuit-dust-bounce",
+      "source": "audio/circuit-dust-bounce.mp3",
+      "title": "Circuit Dust Bounce",
+      "tags": ["纯音乐"],
+      "keywords": ["circuit", "dust", "bounce", "instrumental"]
+    },
+    {
+      "id": "velvet-circuit-bounce",
+      "source": "audio/velvet-circuit-bounce.mp3",
+      "title": "Velvet Circuit Bounce",
+      "tags": ["纯音乐"],
+      "keywords": ["velvet", "circuit", "bounce", "instrumental"]
+    },
+    {
+      "id": "velvet-circuit-rain",
+      "source": "audio/velvet-circuit-rain.mp3",
+      "title": "Velvet Circuit Rain",
+      "tags": ["纯音乐"],
+      "keywords": ["velvet", "circuit", "rain", "instrumental"]
+    },
+    {
+      "id": "dust-and-glass",
+      "source": "audio/dust-and-glass.mp3",
+      "title": "Dust and Glass",
+      "tags": ["纯音乐"],
+      "keywords": ["dust", "glass", "instrumental"]
+    },
+    {
+      "id": "neon-launch-groove",
+      "source": "audio/neon-launch-groove.mp3",
+      "title": "Neon Launch Groove",
+      "tags": ["纯音乐"],
+      "keywords": ["neon", "launch", "groove", "instrumental"]
+    },
+    {
+      "id": "lowlight-bloom",
+      "source": "audio/lowlight-bloom.mp3",
+      "title": "Lowlight Bloom",
+      "tags": ["纯音乐"],
+      "keywords": ["lowlight", "bloom", "instrumental"]
+    },
+    {
+      "id": "launch-pulse",
+      "source": "audio/launch-pulse.mp3",
+      "title": "Launch Pulse",
+      "tags": ["纯音乐"],
+      "keywords": ["launch", "pulse", "instrumental"]
     }
   ]
 }
