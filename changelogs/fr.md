@@ -1,5 +1,14 @@
 # 1.1.0
 
+- Les arrière-plans personnalisés Screen et mockup prennent désormais en charge les vidéos en boucle fluide avec une vitesse réglable de 0,1× à 2× dans l’aperçu et l’export.
+- ScreenCam cible désormais exclusivement les Mac avec puce Apple, ce qui réduit considérablement la taille d’installation.
+- Les arrière-plans vidéo personnalisés en haute résolution restent fluides dans l’aperçu et s’exportent beaucoup plus rapidement.
+- L’aperçu de lecture garde le mouvement du curseur synchronisé, tandis que le zoom et la caméra restent fluides lors des changements de vitesse.
+- Les boutons de format et de recadrage du canevas ne déplacent plus la fenêtre de l’éditeur.
+- Les clips de zoom manuels restent stables jusqu’à la fin du dézoom, même lorsque le point focal est proche d’un bord.
+- Les réglages d’ombre utilisent désormais des pavés bidimensionnels haptiques dont la direction, le décalage, le flou et l’intensité s’adaptent à la taille de l’image.
+- Les réglages de fenêtre permettent désormais d’ajuster le lissage des coins ainsi que l’épaisseur et la couleur de la bordure, sans modifier la géométrie du contenu capturé et en conservant des bords nets à tous les niveaux de zoom.
+- Les cadres Screen conservent des coins lisses, des bords nets et des ombres visibles sur les arrière-plans clairs.
 - Quick Focus ajoute des raccourcis personnalisables, un zoom verrouillé interactif avec navigation par poussée sur les bords et changement de niveau fluide, ainsi qu’un rendu ProMotion optionnel jusqu’à 120 Hz.
 - Les curseurs personnalisés, les champs numériques déplaçables et les interactions précises de l’éditeur offrent désormais un retour haptique du trackpad.
 - Les superpositions de clavier affichent la bonne touche de base et stabilisent les touches maintenues jusqu’à leur relâchement.

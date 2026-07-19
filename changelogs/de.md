@@ -1,5 +1,14 @@
 # 1.1.0
 
+- Benutzerdefinierte Hintergründe für Screen und Mockups unterstützen jetzt flüssig wiederholte Videos mit einstellbarer Wiedergabegeschwindigkeit von 0,1× bis 2× in Vorschau und Export.
+- ScreenCam ist jetzt ausschließlich für Macs mit Apple Chip ausgelegt und benötigt deutlich weniger Speicherplatz.
+- Hochauflösende benutzerdefinierte Videohintergründe bleiben in der Vorschau flüssig und werden deutlich schneller exportiert.
+- Die Wiedergabevorschau hält Cursorbewegungen synchron, während Zoom und Kamerabewegung auch bei Geschwindigkeitsänderungen flüssig bleiben.
+- Die Schaltflächen für Seitenverhältnis und Zuschnitt ziehen das Editorfenster nicht mehr mit.
+- Manuelle Zoom-Clips bleiben bis zum Ende des Herauszoomens ruhig, auch wenn der Fokus nahe am Bildrand liegt.
+- Schatten lassen sich jetzt über haptische zweidimensionale Felder steuern, deren Richtung, Versatz, Unschärfe und Stärke an die Bildgröße angepasst sind.
+- Die Fenstereinstellungen bieten jetzt anpassbare Eckenglättung sowie konfigurierbare Rahmenbreite und -farbe, ohne die Geometrie des aufgenommenen Inhalts zu verändern, und halten Kanten bei jeder Zoomstufe scharf.
+- Screen-Rahmen behalten auf hellen Hintergründen glatte Ecken, saubere Kanten und gut sichtbare Schatten.
 - Quick Focus bietet anpassbare Tastenkürzel, interaktiven gesperrten Zoom mit Navigation durch Schieben am Rand und nahtlosem Wechsel der Zoomstufe sowie optionales ProMotion-Rendering mit bis zu 120 Hz.
 - Benutzerdefinierte Schieberegler, ziehbare Zahleneingaben und präzise Editorinteraktionen geben jetzt haptisches Trackpad-Feedback.
 - Tastatur-Overlays zeigen die richtige Basistaste und halten gedrückte Tasten bis zum Loslassen stabil.

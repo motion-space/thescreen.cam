@@ -1,5 +1,14 @@
 # 1.1.0
 
+- Screen and mockup custom backgrounds now support smoothly looping videos with adjustable 0.1x–2x playback speed in preview and export.
+- ScreenCam now targets Apple silicon Macs exclusively, significantly reducing the app's install size.
+- High-resolution custom video backgrounds stay smooth in preview and export significantly faster.
+- Playback preview keeps cursor motion synchronized while zoom and camera movement remain smooth across speed changes.
+- Canvas aspect-ratio and crop controls no longer drag the editor window.
+- Manual Zoom clips stay steady near source edges through the end of zoom-out.
+- Shadow controls now use tactile two-dimensional pads with size-aware direction, offset, blur, and strength.
+- Window controls now support adjustable corner smoothness and configurable border width and color while preserving captured-content geometry and crisp edges at every zoom level.
+- Screen frames keep smooth corners, clean edges, and visible shadows on light backgrounds.
 - Quick Focus adds customizable shortcuts, interactive locked zoom with edge-push navigation and seamless level switching, plus optional ProMotion rendering up to 120 Hz.
 - Custom sliders, draggable number inputs, and precise editor interactions now provide tactile trackpad feedback.
 - Keyboard overlays show the correct base key and keep held keys stable until release.

@@ -1,5 +1,14 @@
 # 1.1.0
 
+- Gli sfondi personalizzati Screen e mockup ora supportano video in loop fluido con velocità regolabile da 0,1× a 2× nell’anteprima e nell’esportazione.
+- ScreenCam ora è disponibile esclusivamente per Mac con Apple Silicon, riducendo notevolmente le dimensioni di installazione.
+- Gli sfondi video personalizzati ad alta risoluzione restano fluidi nell’anteprima e vengono esportati molto più velocemente.
+- L’anteprima di riproduzione mantiene sincronizzato il movimento del cursore, mentre zoom e fotocamera restano fluidi durante i cambi di velocità.
+- I pulsanti per le proporzioni e il ritaglio dell’area di lavoro non trascinano più la finestra dell’editor.
+- I clip Zoom manuali restano stabili fino alla fine dello zoom indietro, anche quando il punto focale è vicino a un bordo.
+- I controlli dell’ombra ora usano pannelli bidimensionali con feedback aptico e adattano direzione, scostamento, sfocatura e intensità alle dimensioni del fotogramma.
+- Le impostazioni della finestra ora consentono di regolare la morbidezza degli angoli e configurare spessore e colore del bordo, senza alterare la geometria del contenuto acquisito e mantenendo i bordi nitidi a ogni livello di zoom.
+- Le cornici Screen mantengono angoli uniformi, bordi puliti e ombre visibili sugli sfondi chiari.
 - Quick Focus aggiunge scorciatoie personalizzabili, zoom bloccato interattivo con navigazione spingendo sui bordi e cambio di livello fluido, oltre al rendering ProMotion opzionale fino a 120 Hz.
 - I cursori personalizzati, gli input numerici trascinabili e le interazioni precise dell’editor ora offrono un feedback aptico del trackpad.
 - Le sovrapposizioni della tastiera mostrano il tasto base corretto e mantengono stabili i tasti premuti fino al rilascio.
