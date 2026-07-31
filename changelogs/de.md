@@ -1,23 +1,38 @@
+# 1.1.2
+
+- Aufnahmeclips unterstützen jetzt Wiedergabegeschwindigkeiten bis zu 10×.
+- Fensteraufnahmen flackern in halbtransparenten Seitenleisten und an Fensterrändern nicht mehr.
+
+# 1.1.1
+
+- Untertiteleinstellungen sind immer verfügbar; Untertitel lassen sich manuell hinzufügen und Untertitel- oder Wortclips direkt in der Timeline löschen.
+- Automatisch erkannte Fensterecken und Abstände bei gewölbten Screens werden jetzt gleichmäßig und passend geglättet.
+- Zoom-Clips lassen sich auch in vergrößerten Timelines zuverlässig auswählen und in der Länge anpassen.
+- Timeline-Clips flackern beim Zoomen nicht mehr.
+- Timeline-Zoom und Größenänderungen von Zoom-Clips bleiben auch in Projekten mit vielen Clips flüssig.
+
 # 1.1.0
 
 - Cursorbewegungen können sich jetzt leicht nach links oder rechts neigen; der maximale Winkel ist einstellbar.
 - Die Bewegungsunschärfe der Kamera wird rund um Bewegungen sanft ein- und ausgeblendet, ohne ruhende Vorschaubilder weichzuzeichnen.
 - Vergrößerte Vorschauen halten Quelltext scharf, wenn Mockups animierte Hintergründe verwenden.
-- Cursorbewegungen verlaufen jetzt flüssig zwischen aufgezeichneten Positionen, mit zoomabhängiger Bewegungsunschärfe in Vorschau und Export.
+- Cursorbewegungen und langes Drücken stimmen jetzt zwischen Vorschau und Export überein, mit geschwindigkeitsabhängiger Interpolation und zoomabhängiger Bewegungsunschärfe.
+- Die Cursor-Darstellung stürzt vor dem ersten aufgezeichneten Cursorereignis nicht mehr ab.
 - Vorschauen nach der Aufnahme öffnen sich jetzt flüssig, und die Leertaste funktioniert ohne Berechtigung zur Eingabeüberwachung.
 - Benutzerdefinierte Hintergründe für Screen und Mockups unterstützen jetzt flüssig wiederholte Videos mit einstellbarer Wiedergabegeschwindigkeit von 0,1× bis 2× in Vorschau und Export.
 - ScreenCam ist jetzt ausschließlich für Macs mit Apple Chip ausgelegt und benötigt deutlich weniger Speicherplatz.
-- Hochauflösende benutzerdefinierte Videohintergründe bleiben in der Vorschau flüssig und werden deutlich schneller exportiert.
+- Hochauflösende benutzerdefinierte Videohintergründe bleiben in der Vorschau flüssig, werden in pausierten Vorschauen auch unter hoher Systemlast zuverlässig geladen und deutlich schneller exportiert.
+- Bei Teilausgaben bleiben Videohintergründe an der richtigen Position der Timeline.
 - Die Wiedergabevorschau hält Cursorbewegungen synchron, während Zoom und Kamerabewegung auch bei Geschwindigkeitsänderungen flüssig bleiben.
 - Die Schaltflächen für Seitenverhältnis und Zuschnitt ziehen das Editorfenster nicht mehr mit.
 - Manuelle Zoom-Clips bleiben bis zum Ende des Herauszoomens ruhig, auch wenn der Fokus nahe am Bildrand liegt.
-- Schatten lassen sich jetzt über haptische zweidimensionale Felder steuern, deren Richtung, Versatz, Unschärfe und Stärke an die Bildgröße angepasst sind.
+- Schatten lassen sich jetzt über haptische zweidimensionale Felder steuern, deren Richtung, Versatz, Unschärfe und Stärke an die Bildgröße angepasst sind; selbst bei großem Versatz bleiben Schatten weich, statt sich in massive schwarze Flächen zu verwandeln.
 - Die Fenstereinstellungen bieten jetzt anpassbare Eckenglättung sowie konfigurierbare Rahmenbreite und -farbe, ohne die Geometrie des aufgenommenen Inhalts zu verändern, und halten Kanten bei jeder Zoomstufe scharf.
 - Screen-Rahmen behalten auf hellen Hintergründen glatte Ecken, saubere Kanten und gut sichtbare Schatten.
 - Quick Focus bietet anpassbare Tastenkürzel, interaktiven gesperrten Zoom mit Navigation durch Schieben am Rand und nahtlosem Wechsel der Zoomstufe sowie optionales ProMotion-Rendering mit bis zu 120 Hz.
 - Benutzerdefinierte Schieberegler, ziehbare Zahleneingaben und präzise Editorinteraktionen geben jetzt haptisches Trackpad-Feedback.
-- Tastatur-Overlays zeigen die richtige Basistaste und halten gedrückte Tasten bis zum Loslassen stabil.
-- Exporte schlagen nicht mehr fehl, wenn eine aufgezeichnete Audiospur deaktiviert ist.
+- Tastatur-Overlays zeigen die richtige Basistaste und halten lang gedrückte Tasten bis zum ersten passenden Loslassen stabil.
+- Exporte mit Audiomischung behalten das gerenderte Video ohne zusätzlichen Kodierungsschritt bei, und Exporte schlagen nicht mehr fehl, wenn eine aufgezeichnete Audiospur deaktiviert ist.
 - Die Aufnahmesymbolleiste bleibt bei vertikal angeordneten Monitoren auf dem richtigen Display.
 - Manuelle Zoom-Clips verwenden jetzt einen einzigen Mittelpunkt und Zoomfaktor; die Minikarte befindet sich in den Clip-Einstellungen.
 - Benachbarte Zoom-Clips verschieben und skalieren jetzt gemeinsam, ohne zusammengeführt oder auf 1x zurückgesetzt zu werden.

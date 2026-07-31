@@ -1,23 +1,38 @@
+# 1.1.2
+
+- Recording clips now support playback speeds up to 10x.
+- Window recordings no longer flicker in translucent sidebars or along window edges.
+
+# 1.1.1
+
+- Caption settings are always available, captions can be added manually, and caption or word clips can be deleted directly from their timelines.
+- Automatically detected window corners and curved Screen insets now follow matching, even smoothing.
+- Zoom clips can be selected and resized reliably, including on zoomed-in timelines.
+- Timeline clips no longer flicker while zooming.
+- Timeline zooming and Zoom clip resizing stay responsive in projects with many clips.
+
 # 1.1.0
 
 - Cursor movement can now tilt subtly left or right with an adjustable maximum angle.
 - Camera motion blur now fades around movement without softening static preview frames.
 - Zoomed previews keep source text sharp when mockups use animated backgrounds.
-- Cursor movement now flows smoothly between recorded positions, with zoom-aware motion blur in preview and export.
+- Cursor movement and long presses now stay consistent between preview and export, with speed-aware interpolation and zoom-aware motion blur.
+- Cursor rendering no longer crashes before the first recorded event.
 - Post-recording previews now open smoothly, and their Space shortcut works without Input Monitoring permission.
 - Screen and mockup custom backgrounds now support smoothly looping videos with adjustable 0.1x–2x playback speed in preview and export.
 - ScreenCam now targets Apple silicon Macs exclusively, significantly reducing the app's install size.
-- High-resolution custom video backgrounds stay smooth in preview and export significantly faster.
+- High-resolution custom video backgrounds stay smooth, load reliably in paused previews under system load, and export significantly faster.
+- Partial exports keep video backgrounds aligned to the correct timeline position.
 - Playback preview keeps cursor motion synchronized while zoom and camera movement remain smooth across speed changes.
 - Canvas aspect-ratio and crop controls no longer drag the editor window.
 - Manual Zoom clips stay steady near source edges through the end of zoom-out.
-- Shadow controls now use tactile two-dimensional pads with size-aware direction, offset, blur, and strength.
+- Shadow controls now use tactile two-dimensional pads with size-aware direction, offset, blur, and strength, while large offsets keep shadows soft instead of turning solid black.
 - Window controls now support adjustable corner smoothness and configurable border width and color while preserving captured-content geometry and crisp edges at every zoom level.
 - Screen frames keep smooth corners, clean edges, and visible shadows on light backgrounds.
 - Quick Focus adds customizable shortcuts, interactive locked zoom with edge-push navigation and seamless level switching, plus optional ProMotion rendering up to 120 Hz.
 - Custom sliders, draggable number inputs, and precise editor interactions now provide tactile trackpad feedback.
-- Keyboard overlays show the correct base key and keep held keys stable until release.
-- Exports no longer fail when a recorded audio track is disabled.
+- Keyboard overlays show the correct base key, and held keys stay stable until the first matching key release.
+- Mixed-audio exports preserve rendered video without an extra encoding pass, and exports no longer fail when a recorded audio track is disabled.
 - The recording toolbar stays on the correct display in vertically arranged multi-monitor setups.
 - Manual Zoom clips now use a single center and zoom level, with the mini map in Clip Settings.
 - Adjacent Zoom clips now move and scale together without merging or resetting to 1x.

@@ -1,23 +1,38 @@
+# 1.1.2
+
+- Os clipes de gravação agora aceitam velocidades de reprodução de até 10×.
+- As gravações de janelas não piscam mais nas barras laterais translúcidas nem nas bordas da janela.
+
+# 1.1.1
+
+- Os ajustes de legendas estão sempre disponíveis; você pode adicionar legendas manualmente e excluir clipes de legenda ou palavra diretamente nas linhas do tempo.
+- Os cantos de janela detectados automaticamente e as margens de Screens curvos agora têm suavização uniforme e consistente.
+- Clipes de Zoom podem ser selecionados e redimensionados com segurança, mesmo com a linha do tempo ampliada.
+- Os clipes não piscam mais ao ampliar ou reduzir a linha do tempo.
+- O zoom da linha do tempo e o redimensionamento de clipes de Zoom permanecem fluidos em projetos com muitos clipes.
+
 # 1.1.0
 
 - O movimento do cursor agora pode inclinar levemente para a esquerda ou direita, com ângulo máximo ajustável.
 - O desfoque de movimento da câmera surge e desaparece suavemente ao redor dos movimentos sem suavizar quadros estáticos da pré-visualização.
 - As pré-visualizações ampliadas mantêm o texto da origem nítido quando os mockups usam fundos animados.
-- O cursor agora se move suavemente entre as posições gravadas, com desfoque de movimento adaptado ao zoom na pré-visualização e na exportação.
+- O movimento e os pressionamentos longos do cursor agora permanecem consistentes entre a pré-visualização e a exportação, com interpolação adaptada à velocidade e desfoque de movimento adaptado ao zoom.
+- A renderização do cursor não causa mais falha antes do primeiro evento de cursor gravado.
 - As pré-visualizações após a gravação abrem com mais fluidez e o atalho de Espaço funciona sem permissão de Monitoramento de Entrada.
 - Os fundos personalizados de Screen e mockup agora aceitam vídeos em loop suave com velocidade ajustável de 0,1× a 2× na pré-visualização e na exportação.
 - O ScreenCam agora é exclusivo para Macs com Apple Silicon, reduzindo significativamente o tamanho da instalação.
-- Fundos de vídeo personalizados em alta resolução permanecem fluidos na pré-visualização e são exportados muito mais rápido.
+- Fundos de vídeo personalizados em alta resolução permanecem fluidos, carregam com segurança em pré-visualizações pausadas sob carga do sistema e são exportados muito mais rápido.
+- Exportações parciais mantêm os fundos de vídeo na posição correta da linha do tempo.
 - A pré-visualização mantém o movimento do cursor sincronizado, enquanto o zoom e a câmera continuam suaves durante mudanças de velocidade.
 - Os botões de proporção e recorte da tela não arrastam mais a janela do editor.
 - Os clipes de Zoom manual permanecem estáveis até o fim do afastamento, mesmo com o foco próximo a uma borda.
-- Os controles de sombra agora usam painéis bidimensionais com resposta tátil e ajustam direção, deslocamento, desfoque e intensidade ao tamanho do quadro.
+- Os controles de sombra agora usam painéis bidimensionais com resposta tátil e ajustam direção, deslocamento, desfoque e intensidade ao tamanho do quadro; mesmo com grandes deslocamentos, as sombras permanecem suaves em vez de virarem blocos pretos sólidos.
 - Os ajustes da janela agora permitem regular a suavidade dos cantos e configurar a espessura e a cor da borda, sem alterar a geometria do conteúdo capturado e mantendo bordas nítidas em todos os níveis de zoom.
 - As molduras Screen mantêm cantos suaves, bordas limpas e sombras visíveis em fundos claros.
 - O Quick Focus adiciona atalhos personalizáveis, zoom bloqueado interativo com navegação ao empurrar as bordas e troca fluida de nível, além de renderização ProMotion opcional de até 120 Hz.
 - Controles deslizantes personalizados, entradas numéricas arrastáveis e interações precisas do editor agora oferecem resposta tátil do trackpad.
-- As sobreposições de teclado mostram a tecla base correta e mantêm as teclas pressionadas estáveis até serem soltas.
-- As exportações não falham mais quando uma faixa de áudio gravada é desativada.
+- As sobreposições de teclado mostram a tecla base correta e mantêm um pressionamento longo estável até a primeira liberação de tecla correspondente.
+- Exportações com mixagem de áudio preservam o vídeo renderizado sem recodificação adicional e não falham mais quando uma faixa de áudio gravada é desativada.
 - A barra de gravação permanece na tela correta em configurações com monitores dispostos verticalmente.
 - Os clipes de Zoom manual agora usam um único centro e nível de zoom, com o minimapa nos ajustes do clipe.
 - Clipes de Zoom adjacentes agora se movem e mudam de escala juntos, sem se fundir nem redefinir para 1x.

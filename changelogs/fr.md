@@ -1,23 +1,38 @@
+# 1.1.2
+
+- Les clips d’enregistrement prennent désormais en charge des vitesses de lecture allant jusqu’à 10×.
+- Les enregistrements de fenêtre ne scintillent plus dans les barres latérales translucides ni sur les bords de la fenêtre.
+
+# 1.1.1
+
+- Les réglages de sous-titres sont toujours disponibles ; vous pouvez ajouter des sous-titres manuellement et supprimer les clips de sous-titres ou de mots directement depuis leur timeline.
+- Les coins de fenêtre détectés automatiquement et les marges des Screens incurvés bénéficient désormais d’un lissage uniforme et cohérent.
+- Les clips Zoom peuvent être sélectionnés et redimensionnés de façon fiable, même lorsque la timeline est agrandie.
+- Les clips ne scintillent plus lors du zoom de la timeline.
+- Le zoom de la timeline et le redimensionnement des clips Zoom restent fluides dans les projets comportant de nombreux clips.
+
 # 1.1.0
 
 - Le mouvement du curseur peut désormais s’incliner légèrement vers la gauche ou la droite, avec un angle maximal réglable.
 - Le flou de mouvement de la caméra apparaît et disparaît progressivement autour des déplacements sans adoucir les images fixes de l’aperçu.
 - Les aperçus agrandis conservent la netteté du texte source lorsque les mockups utilisent des arrière-plans animés.
-- Le curseur se déplace maintenant avec fluidité entre les positions enregistrées, avec un flou de mouvement adapté au zoom dans l’aperçu et l’export.
+- Les déplacements et les appuis prolongés du curseur correspondent désormais entre l’aperçu et l’export, avec une interpolation adaptée à la vitesse et un flou de mouvement adapté au zoom.
+- Le rendu du curseur ne provoque plus de plantage avant le premier événement de curseur enregistré.
 - Les aperçus après enregistrement s’ouvrent plus fluidement et leur raccourci Espace fonctionne sans autorisation de surveillance des entrées.
 - Les arrière-plans personnalisés Screen et mockup prennent désormais en charge les vidéos en boucle fluide avec une vitesse réglable de 0,1× à 2× dans l’aperçu et l’export.
 - ScreenCam cible désormais exclusivement les Mac avec puce Apple, ce qui réduit considérablement la taille d’installation.
-- Les arrière-plans vidéo personnalisés en haute résolution restent fluides dans l’aperçu et s’exportent beaucoup plus rapidement.
+- Les arrière-plans vidéo personnalisés en haute résolution restent fluides, se chargent de manière fiable dans les aperçus en pause lorsque le système est sollicité et s’exportent beaucoup plus rapidement.
+- Les exports partiels conservent les arrière-plans vidéo à la bonne position sur la timeline.
 - L’aperçu de lecture garde le mouvement du curseur synchronisé, tandis que le zoom et la caméra restent fluides lors des changements de vitesse.
 - Les boutons de format et de recadrage du canevas ne déplacent plus la fenêtre de l’éditeur.
 - Les clips de zoom manuels restent stables jusqu’à la fin du dézoom, même lorsque le point focal est proche d’un bord.
-- Les réglages d’ombre utilisent désormais des pavés bidimensionnels haptiques dont la direction, le décalage, le flou et l’intensité s’adaptent à la taille de l’image.
+- Les réglages d’ombre utilisent désormais des pavés bidimensionnels haptiques dont la direction, le décalage, le flou et l’intensité s’adaptent à la taille de l’image ; même avec un décalage important, les ombres restent douces au lieu de devenir des aplats noirs.
 - Les réglages de fenêtre permettent désormais d’ajuster le lissage des coins ainsi que l’épaisseur et la couleur de la bordure, sans modifier la géométrie du contenu capturé et en conservant des bords nets à tous les niveaux de zoom.
 - Les cadres Screen conservent des coins lisses, des bords nets et des ombres visibles sur les arrière-plans clairs.
 - Quick Focus ajoute des raccourcis personnalisables, un zoom verrouillé interactif avec navigation par poussée sur les bords et changement de niveau fluide, ainsi qu’un rendu ProMotion optionnel jusqu’à 120 Hz.
 - Les curseurs personnalisés, les champs numériques déplaçables et les interactions précises de l’éditeur offrent désormais un retour haptique du trackpad.
-- Les superpositions de clavier affichent la bonne touche de base et stabilisent les touches maintenues jusqu’à leur relâchement.
-- Les exports n’échouent plus lorsqu’une piste audio enregistrée est désactivée.
+- Les superpositions de clavier affichent la bonne touche de base et maintiennent les appuis prolongés jusqu’au premier relâchement correspondant.
+- Les exports avec mixage audio conservent la vidéo rendue sans réencodage supplémentaire et n’échouent plus lorsqu’une piste audio enregistrée est désactivée.
 - La barre d’enregistrement reste sur le bon écran lorsque plusieurs moniteurs sont disposés verticalement.
 - Les clips de zoom manuels utilisent désormais un seul centre et niveau de zoom, avec la mini-carte dans les réglages du clip.
 - Les clips de zoom adjacents se déplacent et changent désormais d’échelle ensemble, sans fusionner ni revenir à 1x.

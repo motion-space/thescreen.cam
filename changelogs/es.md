@@ -1,23 +1,38 @@
+# 1.1.2
+
+- Los clips de grabación ahora admiten velocidades de reproducción de hasta 10×.
+- Las grabaciones de ventanas ya no parpadean en las barras laterales translúcidas ni en los bordes de la ventana.
+
+# 1.1.1
+
+- Los ajustes de subtítulos siempre están disponibles; puedes añadir subtítulos manualmente y eliminar clips de subtítulos o palabras directamente desde sus líneas de tiempo.
+- Las esquinas de ventana detectadas automáticamente y los márgenes de Screen curvos ahora tienen un suavizado uniforme y coherente.
+- Los clips de Zoom se pueden seleccionar y redimensionar de forma fiable, incluso con la línea de tiempo ampliada.
+- Los clips ya no parpadean al ampliar o reducir la línea de tiempo.
+- El zoom de la línea de tiempo y el ajuste de clips de Zoom mantienen la fluidez en proyectos con muchos clips.
+
 # 1.1.0
 
 - El movimiento del cursor puede inclinarse sutilmente a izquierda o derecha con un ángulo máximo ajustable.
 - El desenfoque de movimiento de la cámara aparece y desaparece suavemente alrededor del movimiento sin suavizar los fotogramas estáticos de la vista previa.
 - Las vistas previas ampliadas mantienen nítido el texto original cuando los mockups usan fondos animados.
-- El cursor se mueve con fluidez entre las posiciones grabadas, con desenfoque de movimiento adaptado al zoom en la vista previa y la exportación.
+- El movimiento y las pulsaciones prolongadas del cursor ahora coinciden entre la vista previa y la exportación, con interpolación adaptada a la velocidad y desenfoque de movimiento adaptado al zoom.
+- El renderizado del cursor ya no provoca un cierre inesperado antes del primer evento de cursor grabado.
 - Las vistas previas posteriores a la grabación se abren con fluidez y su atajo de Espacio funciona sin permiso de monitorización de entrada.
 - Los fondos personalizados de Screen y mockup ahora admiten vídeos en bucle fluido con velocidad ajustable de 0,1× a 2× en la vista previa y la exportación.
 - ScreenCam ahora está disponible exclusivamente para Mac con Apple Silicon, lo que reduce considerablemente el tamaño de instalación.
-- Los fondos de vídeo personalizados de alta resolución se mantienen fluidos en la vista previa y se exportan mucho más rápido.
+- Los fondos de vídeo personalizados de alta resolución se mantienen fluidos, se cargan de forma fiable en vistas previas pausadas bajo carga del sistema y se exportan mucho más rápido.
+- Las exportaciones parciales mantienen los fondos de vídeo en la posición correcta de la línea de tiempo.
 - La vista previa mantiene sincronizado el movimiento del cursor mientras el zoom y la cámara siguen siendo fluidos durante los cambios de velocidad.
 - Los botones de relación de aspecto y recorte del lienzo ya no arrastran la ventana del editor.
 - Los clips de Zoom manual permanecen estables hasta el final del alejamiento, incluso al enfocar cerca de un borde.
-- Los controles de sombra ahora usan paneles bidimensionales con respuesta háptica y ajustan la dirección, el desplazamiento, el desenfoque y la intensidad al tamaño del cuadro.
+- Los controles de sombra ahora usan paneles bidimensionales con respuesta háptica y ajustan la dirección, el desplazamiento, el desenfoque y la intensidad al tamaño del cuadro; incluso con desplazamientos grandes, las sombras permanecen suaves en lugar de convertirse en bloques negros sólidos.
 - Los ajustes de ventana ahora permiten regular la suavidad de las esquinas y configurar el grosor y el color del borde, sin alterar la geometría del contenido capturado y manteniendo los bordes nítidos en todos los niveles de zoom.
 - Los marcos Screen mantienen esquinas suaves, bordes limpios y sombras visibles sobre fondos claros.
 - Quick Focus incorpora atajos personalizables, zoom bloqueado interactivo con navegación al empujar los bordes y cambio fluido de nivel, además de renderizado ProMotion opcional de hasta 120 Hz.
 - Los controles deslizantes personalizados, las entradas numéricas arrastrables y las interacciones precisas del editor ahora ofrecen respuesta háptica del trackpad.
-- Las superposiciones de teclado muestran la tecla base correcta y mantienen estables las teclas pulsadas hasta soltarlas.
-- Las exportaciones ya no fallan cuando se desactiva una pista de audio grabada.
+- Las superposiciones de teclado muestran la tecla base correcta y mantienen estable una pulsación prolongada hasta la primera liberación de tecla coincidente.
+- Las exportaciones con mezcla de audio conservan el vídeo renderizado sin una codificación adicional y ya no fallan cuando se desactiva una pista de audio grabada.
 - La barra de grabación permanece en la pantalla correcta en configuraciones de varios monitores dispuestos verticalmente.
 - Los clips de Zoom manual ahora usan un único centro y nivel de zoom, con el minimapa en Ajustes del clip.
 - Los clips de Zoom adyacentes ahora se mueven y escalan juntos sin fusionarse ni restablecerse a 1x.
