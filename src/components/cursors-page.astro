@@ -21,30 +21,18 @@ const { locale } = Astro.props;
 const t = getTranslation(locale);
 const path = "/cursors";
 const packs = cursorCatalog.packs as CursorPack[];
-const copy = {
-  eyebrow: "Cursor Library",
-  title: "Cursor Packs",
-  description: "Browse custom cursor packs for ScreenCam.",
-  available: "Available cursor packs",
-  states: "states",
-  state: "state",
-  createTitle: "Create with Codex",
-  createDescription: "Install the cursor skill, then tell Codex what you want.",
-  createCommand: "npx --yes screencam-cursors@latest install",
-};
-const meta = {
-  title: "Cursor Library | ScreenCam",
-  description: "Browse the open catalog of custom mouse cursor packs available in ScreenCam.",
-};
+const copy = t.cursors;
+const meta = copy.meta;
 const assetUrl = (pack: CursorPack, asset: CursorAsset) =>
   `${pack.assetBaseURL}${asset.fileName}`;
 const stateName = (value: string) =>
+  copy.stateNames[value] ??
   value
     .split("-")
     .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
     .join(" ");
 const formatBytes = (value: number) =>
-  `${new Intl.NumberFormat("en", { maximumFractionDigits: 0 }).format(value / 1024)} KB`;
+  `${new Intl.NumberFormat(locale, { maximumFractionDigits: 0 }).format(value / 1024)} KB`;
 const packByteCount = (pack: CursorPack) =>
   pack.manifest.assets.reduce((total, asset) => total + asset.byteCount, 0);
 const packName = (pack: CursorPack) =>
@@ -52,7 +40,7 @@ const packName = (pack: CursorPack) =>
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  name: "ScreenCam Cursor Library",
+  name: copy.title,
   url: `${siteUrl}${localizedPath(locale, path)}`,
   itemListElement: packs.map((pack, index) => ({
     "@type": "ListItem",
@@ -93,11 +81,11 @@ const structuredData = {
 
       <section class="cursor-create" aria-labelledby="cursor-create-title">
         <div class="cursor-create-copy">
-          <p class="cursor-eyebrow">Make your own</p>
+          <p class="cursor-eyebrow">{copy.createEyebrow}</p>
           <h2 id="cursor-create-title">{copy.createTitle}</h2>
           <p>{copy.createDescription}</p>
         </div>
-        <div class="cursor-create-terminal" aria-label={copy.createCommand}>
+        <div class="cursor-create-terminal" aria-label={copy.command}>
           <div class="cursor-terminal-bar">
             <div class="cursor-terminal-dots" aria-hidden="true">
               <span></span>
@@ -107,15 +95,17 @@ const structuredData = {
             <button
               type="button"
               class="cursor-copy-button"
-              data-copy-command={copy.createCommand}
-              aria-label="Copy install command"
-              title="Copy install command"
+              data-copy-command={copy.command}
+              data-copy-label={copy.aria.copyInstallCommand}
+              data-copied-label={copy.aria.copied}
+              aria-label={copy.aria.copyInstallCommand}
+              title={copy.aria.copyInstallCommand}
             >
               <Copy className="cursor-copy-icon" aria-hidden="true" />
               <Check className="cursor-copy-success-icon" aria-hidden="true" />
             </button>
           </div>
-          <code><span class="cursor-terminal-prompt">$</span> {copy.createCommand}</code>
+          <code><span class="cursor-terminal-prompt">$</span> {copy.command}</code>
         </div>
       </section>
 
@@ -142,7 +132,7 @@ const structuredData = {
                     <img
                       data-cursor-preview
                       src={assetUrl(pack, arrow)}
-                      alt={`${name} default cursor`}
+                      alt={`${name} ${copy.aria.defaultCursor}`}
                       width={arrow.pixelWidth}
                       height={arrow.pixelHeight}
                       loading="lazy"
@@ -150,10 +140,12 @@ const structuredData = {
                     />
                     {stateCount > 1 && (
                       <div class="cursor-card-preview-select">
-                        <label class="sr-only" for={`${pack.manifest.id}-state`}>Preview state</label>
+                        <label class="sr-only" for={`${pack.manifest.id}-state`}>{copy.aria.previewState}</label>
                         <select
                           id={`${pack.manifest.id}-state`}
-                          aria-label={`${name} preview state`}
+                          aria-label={`${name} ${copy.aria.previewState}`}
+                          data-cursor-name={name}
+                          data-cursor-label={copy.aria.cursor}
                           data-cursor-state-select
                         >
                           {
@@ -210,7 +202,9 @@ const structuredData = {
           preview.src = assetUrl;
           preview.width = Number(option.dataset.pixelWidth ?? preview.width);
           preview.height = Number(option.dataset.pixelHeight ?? preview.height);
-          preview.alt = `${select.getAttribute("aria-label")?.replace(" preview state", "") ?? "Cursor"} ${option.textContent?.trim() ?? ""} cursor`;
+          const cursorName = select.dataset.cursorName ?? "";
+          const cursorLabel = select.dataset.cursorLabel ?? "";
+          preview.alt = `${cursorName} ${option.textContent?.trim() ?? ""} ${cursorLabel}`.trim();
         });
       });
 
@@ -224,12 +218,12 @@ const structuredData = {
           try {
             await navigator.clipboard.writeText(command);
             button.classList.add("is-copied");
-            button.setAttribute("aria-label", "Copied");
-            button.setAttribute("title", "Copied");
+            button.setAttribute("aria-label", button.dataset.copiedLabel ?? "");
+            button.setAttribute("title", button.dataset.copiedLabel ?? "");
             window.setTimeout(() => {
               button.classList.remove("is-copied");
-              button.setAttribute("aria-label", "Copy install command");
-              button.setAttribute("title", "Copy install command");
+              button.setAttribute("aria-label", button.dataset.copyLabel ?? "");
+              button.setAttribute("title", button.dataset.copyLabel ?? "");
             }, 1800);
           } catch {
             button.blur();

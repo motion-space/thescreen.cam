@@ -315,6 +315,31 @@ export type LegalPageCopy = {
   }>;
 };
 
+export type CursorPageCopy = {
+  aria: {
+    copied: string;
+    copyInstallCommand: string;
+    cursor: string;
+    defaultCursor: string;
+    previewState: string;
+  };
+  available: string;
+  createDescription: string;
+  createEyebrow: string;
+  createTitle: string;
+  description: string;
+  eyebrow: string;
+  meta: {
+    description: string;
+    title: string;
+  };
+  state: string;
+  stateNames: Record<string, string>;
+  states: string;
+  title: string;
+  command: string;
+};
+
 type PageMeta = {
   description: string;
   title: string;
@@ -331,6 +356,7 @@ type LocaleTranslation = {
   common: {
     skipToContent: string;
   };
+  cursors: CursorPageCopy;
   footer: FooterCopy;
   header: HeaderCopy;
   docs: DocsCopy;
@@ -1404,6 +1430,42 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         ],
       },
     },
+    cursors: {
+      aria: {
+        copied: "Copied",
+        copyInstallCommand: "Copy install command",
+        cursor: "cursor",
+        defaultCursor: "default cursor",
+        previewState: "preview state",
+      },
+      available: "Available cursor packs",
+      command: "npx --yes screencam-cursors@latest install",
+      createDescription: "Install the cursor skill, then tell Codex what you want.",
+      createEyebrow: "Make your own",
+      createTitle: "Create with Codex",
+      description: "Browse custom cursor packs for ScreenCam.",
+      eyebrow: "Cursor Library",
+      meta: {
+        title: "Cursor Library | ScreenCam",
+        description: "Browse the open catalog of custom mouse cursor packs available in ScreenCam.",
+      },
+      state: "state",
+      stateNames: {
+        arrow: "Arrow",
+        pointer: "Pointer",
+        "open-hand": "Open hand",
+        "closed-hand": "Closed hand",
+        "resize-ew": "Resize horizontal",
+        "resize-nesw": "Resize diagonal",
+        "resize-ns": "Resize vertical",
+        "resize-nwse": "Resize diagonal",
+        text: "Text",
+        crosshair: "Crosshair",
+        "not-allowed": "Not allowed",
+      },
+      states: "states",
+      title: "Cursor Packs",
+    },
     changelog: {
       description: "Product updates, fixes, and release notes.",
       eyebrow: "Changelog",
@@ -2230,6 +2292,42 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           },
         ],
       },
+    },
+    cursors: {
+      aria: {
+        copied: "已复制",
+        copyInstallCommand: "复制安装命令",
+        cursor: "光标",
+        defaultCursor: "默认光标",
+        previewState: "预览状态",
+      },
+      available: "可用光标包",
+      command: "npx --yes screencam-cursors@latest install",
+      createDescription: "安装光标技能，然后告诉 Codex 你想要什么。",
+      createEyebrow: "自定义你的光标",
+      createTitle: "使用 Codex 创建",
+      description: "浏览适用于 ScreenCam 的自定义光标包。",
+      eyebrow: "光标库",
+      meta: {
+        title: "光标库 | ScreenCam",
+        description: "浏览 ScreenCam 中可用的开放自定义鼠标光标包目录。",
+      },
+      state: "个状态",
+      stateNames: {
+        arrow: "箭头",
+        pointer: "指针",
+        "open-hand": "张开手",
+        "closed-hand": "握拳",
+        "resize-ew": "水平调整",
+        "resize-nesw": "对角调整",
+        "resize-ns": "垂直调整",
+        "resize-nwse": "对角调整",
+        text: "文本",
+        crosshair: "十字准星",
+        "not-allowed": "禁止",
+      },
+      states: "个状态",
+      title: "光标包",
     },
     changelog: {
       description: "产品更新、修复和版本说明。",
@@ -3080,6 +3178,42 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         ],
       },
     },
+    cursors: {
+      aria: {
+        copied: "Kopiert",
+        copyInstallCommand: "Installationsbefehl kopieren",
+        cursor: "Mauszeiger",
+        defaultCursor: "Standard-Mauszeiger",
+        previewState: "Vorschauzustand",
+      },
+      available: "Verfügbare Cursor-Pakete",
+      command: "npx --yes screencam-cursors@latest install",
+      createDescription: "Installiere das Cursor-Skill und sage Codex, was du möchtest.",
+      createEyebrow: "Eigenen Cursor erstellen",
+      createTitle: "Mit Codex erstellen",
+      description: "Durchsuche benutzerdefinierte Cursor-Pakete für ScreenCam.",
+      eyebrow: "Cursor-Bibliothek",
+      meta: {
+        title: "Cursor-Bibliothek | ScreenCam",
+        description: "Durchsuche den offenen Katalog benutzerdefinierter Mauszeiger-Pakete für ScreenCam.",
+      },
+      state: "Zustand",
+      stateNames: {
+        arrow: "Pfeil",
+        pointer: "Zeiger",
+        "open-hand": "Offene Hand",
+        "closed-hand": "Geschlossene Hand",
+        "resize-ew": "Horizontale Größenänderung",
+        "resize-nesw": "Diagonale Größenänderung",
+        "resize-ns": "Vertikale Größenänderung",
+        "resize-nwse": "Diagonale Größenänderung",
+        text: "Text",
+        crosshair: "Fadenkreuz",
+        "not-allowed": "Nicht zulässig",
+      },
+      states: "Zustände",
+      title: "Cursor-Pakete",
+    },
     changelog: {
       description: "Produktupdates, Fehlerbehebungen und Versionshinweise.",
       eyebrow: "Changelog",
@@ -3906,6 +4040,42 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           },
         ],
       },
+    },
+    cursors: {
+      aria: {
+        copied: "コピーしました",
+        copyInstallCommand: "インストールコマンドをコピー",
+        cursor: "カーソル",
+        defaultCursor: "デフォルトカーソル",
+        previewState: "プレビュー状態",
+      },
+      available: "利用可能なカーソルパック",
+      command: "npx --yes screencam-cursors@latest install",
+      createDescription: "カーソルスキルをインストールして、Codex に作りたいものを伝えます。",
+      createEyebrow: "自分のカーソルを作る",
+      createTitle: "Codex で作成",
+      description: "ScreenCam 用のカスタムカーソルパックを閲覧。",
+      eyebrow: "カーソルライブラリ",
+      meta: {
+        title: "カーソルライブラリ | ScreenCam",
+        description: "ScreenCam で利用できるカスタムマウスカーソルの公開カタログを閲覧できます。",
+      },
+      state: "状態",
+      stateNames: {
+        arrow: "矢印",
+        pointer: "ポインター",
+        "open-hand": "開いた手",
+        "closed-hand": "握った手",
+        "resize-ew": "水平リサイズ",
+        "resize-nesw": "斜めリサイズ",
+        "resize-ns": "垂直リサイズ",
+        "resize-nwse": "斜めリサイズ",
+        text: "テキスト",
+        crosshair: "十字カーソル",
+        "not-allowed": "禁止",
+      },
+      states: "状態",
+      title: "カーソルパック",
     },
     changelog: {
       description: "製品アップデート、修正、リリースノート。",
@@ -4734,6 +4904,42 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         ],
       },
     },
+    cursors: {
+      aria: {
+        copied: "복사됨",
+        copyInstallCommand: "설치 명령 복사",
+        cursor: "커서",
+        defaultCursor: "기본 커서",
+        previewState: "미리보기 상태",
+      },
+      available: "사용 가능한 커서 팩",
+      command: "npx --yes screencam-cursors@latest install",
+      createDescription: "커서 스킬을 설치한 다음 Codex에 원하는 것을 알려 주세요.",
+      createEyebrow: "나만의 커서 만들기",
+      createTitle: "Codex로 만들기",
+      description: "ScreenCam용 사용자 지정 커서 팩을 둘러보세요.",
+      eyebrow: "커서 라이브러리",
+      meta: {
+        title: "커서 라이브러리 | ScreenCam",
+        description: "ScreenCam에서 사용할 수 있는 사용자 지정 마우스 커서 팩의 공개 카탈로그를 둘러보세요.",
+      },
+      state: "상태",
+      stateNames: {
+        arrow: "화살표",
+        pointer: "포인터",
+        "open-hand": "펼친 손",
+        "closed-hand": "쥔 손",
+        "resize-ew": "가로 크기 조절",
+        "resize-nesw": "대각선 크기 조절",
+        "resize-ns": "세로 크기 조절",
+        "resize-nwse": "대각선 크기 조절",
+        text: "텍스트",
+        crosshair: "십자선",
+        "not-allowed": "금지",
+      },
+      states: "상태",
+      title: "커서 팩",
+    },
     changelog: {
       description: "제품 업데이트, 수정 사항, 릴리스 노트.",
       eyebrow: "변경 내역",
@@ -5559,6 +5765,42 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           },
         ],
       },
+    },
+    cursors: {
+      aria: {
+        copied: "已複製",
+        copyInstallCommand: "複製安裝指令",
+        cursor: "游標",
+        defaultCursor: "預設游標",
+        previewState: "預覽狀態",
+      },
+      available: "可用游標包",
+      command: "npx --yes screencam-cursors@latest install",
+      createDescription: "安裝游標技能，然後告訴 Codex 你想要什麼。",
+      createEyebrow: "自訂你的游標",
+      createTitle: "使用 Codex 建立",
+      description: "瀏覽適用於 ScreenCam 的自訂游標包。",
+      eyebrow: "游標庫",
+      meta: {
+        title: "游標庫 | ScreenCam",
+        description: "瀏覽 ScreenCam 中可用的開放自訂滑鼠游標包目錄。",
+      },
+      state: "個狀態",
+      stateNames: {
+        arrow: "箭頭",
+        pointer: "指標",
+        "open-hand": "張開手",
+        "closed-hand": "握拳",
+        "resize-ew": "水平調整",
+        "resize-nesw": "對角調整",
+        "resize-ns": "垂直調整",
+        "resize-nwse": "對角調整",
+        text: "文字",
+        crosshair: "十字準星",
+        "not-allowed": "禁止",
+      },
+      states: "個狀態",
+      title: "游標包",
     },
     changelog: {
       description: "產品更新、修復和版本說明。",
@@ -6445,6 +6687,42 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           },
         ],
       },
+    },
+    cursors: {
+      aria: {
+        copied: "Copiado",
+        copyInstallCommand: "Copiar comando de instalación",
+        cursor: "cursor",
+        defaultCursor: "cursor predeterminado",
+        previewState: "estado de vista previa",
+      },
+      available: "Paquetes de cursores disponibles",
+      command: "npx --yes screencam-cursors@latest install",
+      createDescription: "Instala la skill de cursores y dile a Codex qué quieres.",
+      createEyebrow: "Crea el tuyo",
+      createTitle: "Crear con Codex",
+      description: "Explora paquetes de cursores personalizados para ScreenCam.",
+      eyebrow: "Biblioteca de cursores",
+      meta: {
+        title: "Biblioteca de cursores | ScreenCam",
+        description: "Explora el catálogo abierto de paquetes de cursores personalizados disponibles en ScreenCam.",
+      },
+      state: "estado",
+      stateNames: {
+        arrow: "Flecha",
+        pointer: "Puntero",
+        "open-hand": "Mano abierta",
+        "closed-hand": "Mano cerrada",
+        "resize-ew": "Redimensionar horizontalmente",
+        "resize-nesw": "Redimensionar diagonalmente",
+        "resize-ns": "Redimensionar verticalmente",
+        "resize-nwse": "Redimensionar diagonalmente",
+        text: "Texto",
+        crosshair: "Punto de mira",
+        "not-allowed": "No permitido",
+      },
+      states: "estados",
+      title: "Paquetes de cursores",
     },
     changelog: {
       description: "ProActualizaciones de conductos, correcciones y notas de la versión.",
@@ -7333,6 +7611,42 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         ],
       },
     },
+    cursors: {
+      aria: {
+        copied: "Copié",
+        copyInstallCommand: "Copier la commande d’installation",
+        cursor: "curseur",
+        defaultCursor: "curseur par défaut",
+        previewState: "état de l’aperçu",
+      },
+      available: "Packs de curseurs disponibles",
+      command: "npx --yes screencam-cursors@latest install",
+      createDescription: "Installez la compétence de curseurs, puis dites à Codex ce que vous voulez.",
+      createEyebrow: "Créez le vôtre",
+      createTitle: "Créer avec Codex",
+      description: "Parcourez les packs de curseurs personnalisés pour ScreenCam.",
+      eyebrow: "Bibliothèque de curseurs",
+      meta: {
+        title: "Bibliothèque de curseurs | ScreenCam",
+        description: "Parcourez le catalogue ouvert des packs de curseurs personnalisés disponibles dans ScreenCam.",
+      },
+      state: "état",
+      stateNames: {
+        arrow: "Flèche",
+        pointer: "Pointeur",
+        "open-hand": "Main ouverte",
+        "closed-hand": "Main fermée",
+        "resize-ew": "Redimensionnement horizontal",
+        "resize-nesw": "Redimensionnement diagonal",
+        "resize-ns": "Redimensionnement vertical",
+        "resize-nwse": "Redimensionnement diagonal",
+        text: "Texte",
+        crosshair: "Réticule",
+        "not-allowed": "Interdit",
+      },
+      states: "états",
+      title: "Packs de curseurs",
+    },
     changelog: {
       description: "Product mises à jour, correctifs et notes de version.",
       eyebrow: "Journal des modifications",
@@ -8220,6 +8534,42 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         ],
       },
     },
+    cursors: {
+      aria: {
+        copied: "Copiado",
+        copyInstallCommand: "Copiar comando de instalação",
+        cursor: "cursor",
+        defaultCursor: "cursor padrão",
+        previewState: "estado da prévia",
+      },
+      available: "Pacotes de cursores disponíveis",
+      command: "npx --yes screencam-cursors@latest install",
+      createDescription: "Instale a skill de cursores e diga ao Codex o que você quer.",
+      createEyebrow: "Crie o seu",
+      createTitle: "Criar com o Codex",
+      description: "Navegue pelos pacotes de cursores personalizados para o ScreenCam.",
+      eyebrow: "Biblioteca de cursores",
+      meta: {
+        title: "Biblioteca de cursores | ScreenCam",
+        description: "Navegue pelo catálogo aberto de pacotes de cursores personalizados disponíveis no ScreenCam.",
+      },
+      state: "estado",
+      stateNames: {
+        arrow: "Seta",
+        pointer: "Ponteiro",
+        "open-hand": "Mão aberta",
+        "closed-hand": "Mão fechada",
+        "resize-ew": "Redimensionar horizontalmente",
+        "resize-nesw": "Redimensionar diagonalmente",
+        "resize-ns": "Redimensionar verticalmente",
+        "resize-nwse": "Redimensionar diagonalmente",
+        text: "Texto",
+        crosshair: "Mira",
+        "not-allowed": "Não permitido",
+      },
+      states: "estados",
+      title: "Pacotes de cursores",
+    },
     changelog: {
       description: "Atualizações, correções e notas de versão do Product.",
       eyebrow: "Registro de alterações",
@@ -9106,6 +9456,42 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           },
         ],
       },
+    },
+    cursors: {
+      aria: {
+        copied: "Copiato",
+        copyInstallCommand: "Copia comando di installazione",
+        cursor: "cursore",
+        defaultCursor: "cursore predefinito",
+        previewState: "stato anteprima",
+      },
+      available: "Pacchetti cursore disponibili",
+      command: "npx --yes screencam-cursors@latest install",
+      createDescription: "Installa la skill per i cursori, poi dì a Codex cosa vuoi.",
+      createEyebrow: "Crea il tuo",
+      createTitle: "Crea con Codex",
+      description: "Esplora i pacchetti cursore personalizzati per ScreenCam.",
+      eyebrow: "Libreria cursori",
+      meta: {
+        title: "Libreria cursori | ScreenCam",
+        description: "Esplora il catalogo aperto dei pacchetti cursore personalizzati disponibili in ScreenCam.",
+      },
+      state: "stato",
+      stateNames: {
+        arrow: "Freccia",
+        pointer: "Puntatore",
+        "open-hand": "Mano aperta",
+        "closed-hand": "Mano chiusa",
+        "resize-ew": "Ridimensionamento orizzontale",
+        "resize-nesw": "Ridimensionamento diagonale",
+        "resize-ns": "Ridimensionamento verticale",
+        "resize-nwse": "Ridimensionamento diagonale",
+        text: "Testo",
+        crosshair: "Mirino",
+        "not-allowed": "Non consentito",
+      },
+      states: "stati",
+      title: "Pacchetti cursore",
     },
     changelog: {
       description: "Proaggiornamenti, correzioni e note di rilascio del condotto.",
