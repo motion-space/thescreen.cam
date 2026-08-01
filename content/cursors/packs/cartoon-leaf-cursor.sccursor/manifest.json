@@ -1,0 +1,158 @@
+{
+  "assets" : [
+    {
+      "byteCount" : 33122,
+      "fileName" : "cursors/arrow.png",
+      "hotspot" : {
+        "x" : 16,
+        "y" : 8
+      },
+      "pixelHeight" : 208,
+      "pixelWidth" : 160,
+      "scale" : 8,
+      "sha256" : "3b75cccdd520e749a7b9b554ba4719fd7bb8f6296c632069844a2cc90502acd9",
+      "visualType" : "arrow"
+    },
+    {
+      "byteCount" : 27704,
+      "fileName" : "cursors/text.png",
+      "hotspot" : {
+        "x" : 64,
+        "y" : 104
+      },
+      "pixelHeight" : 216,
+      "pixelWidth" : 128,
+      "scale" : 8,
+      "sha256" : "e91a5aa00702a0dccc1292f26683c2fc28e522da80a721496034277a5513a513",
+      "visualType" : "text"
+    },
+    {
+      "byteCount" : 30583,
+      "fileName" : "cursors/pointer.png",
+      "hotspot" : {
+        "x" : 32,
+        "y" : 8
+      },
+      "pixelHeight" : 216,
+      "pixelWidth" : 128,
+      "scale" : 8,
+      "sha256" : "bc98e1c47f3c210b4d138a0f3d6c392159d66d79bede2e5591cd780464714d9c",
+      "visualType" : "pointer"
+    },
+    {
+      "byteCount" : 27806,
+      "fileName" : "cursors/crosshair.png",
+      "hotspot" : {
+        "x" : 64,
+        "y" : 104
+      },
+      "pixelHeight" : 216,
+      "pixelWidth" : 128,
+      "scale" : 8,
+      "sha256" : "5f6aef0410c3d13d4c17daa8a6522c002212b4b02b5d973a883e864bde1b87c1",
+      "visualType" : "crosshair"
+    },
+    {
+      "byteCount" : 28399,
+      "fileName" : "cursors/open-hand.png",
+      "hotspot" : {
+        "x" : 64,
+        "y" : 104
+      },
+      "pixelHeight" : 208,
+      "pixelWidth" : 128,
+      "scale" : 8,
+      "sha256" : "d7b608b694f8fb6f48bfef213e8d9b173411abb72f18f8e7b719221a95fe1634",
+      "visualType" : "open-hand"
+    },
+    {
+      "byteCount" : 26796,
+      "fileName" : "cursors/closed-hand.png",
+      "hotspot" : {
+        "x" : 64,
+        "y" : 96
+      },
+      "pixelHeight" : 200,
+      "pixelWidth" : 128,
+      "scale" : 8,
+      "sha256" : "4cda7c6263b5b5ed0d855c3ff1b9bf975206b585ff89213bab566008a2eefd90",
+      "visualType" : "closed-hand"
+    },
+    {
+      "byteCount" : 24086,
+      "fileName" : "cursors/resize-ew.png",
+      "hotspot" : {
+        "x" : 96,
+        "y" : 56
+      },
+      "pixelHeight" : 120,
+      "pixelWidth" : 192,
+      "scale" : 8,
+      "sha256" : "35625255023ce9824f2723dad8172f2688080ff8fe4c103df83c73efc973f40e",
+      "visualType" : "resize-ew"
+    },
+    {
+      "byteCount" : 26482,
+      "fileName" : "cursors/resize-ns.png",
+      "hotspot" : {
+        "x" : 56,
+        "y" : 104
+      },
+      "pixelHeight" : 208,
+      "pixelWidth" : 120,
+      "scale" : 8,
+      "sha256" : "6c8c7533807707e4c8f5ec405e35e4c753c266957bec4daa357e3109a898b4cb",
+      "visualType" : "resize-ns"
+    },
+    {
+      "byteCount" : 31467,
+      "fileName" : "cursors/resize-nwse.png",
+      "hotspot" : {
+        "x" : 88,
+        "y" : 88
+      },
+      "pixelHeight" : 176,
+      "pixelWidth" : 176,
+      "scale" : 8,
+      "sha256" : "aacc3bc9e1ea1fdfcfedfa956371c26a97d186276f7ff290ecd11c795cbe743e",
+      "visualType" : "resize-nwse"
+    },
+    {
+      "byteCount" : 30790,
+      "fileName" : "cursors/resize-nesw.png",
+      "hotspot" : {
+        "x" : 80,
+        "y" : 88
+      },
+      "pixelHeight" : 184,
+      "pixelWidth" : 168,
+      "scale" : 8,
+      "sha256" : "41789a874a4b40b0df4dff39b51829e8fe9bcabaed719d1611851a95cb432211",
+      "visualType" : "resize-nesw"
+    }
+  ],
+  "description" : "A cheerful cursor family made from one reusable cartoon leaf, rotated for each interaction state.",
+  "id" : "cartoon-leaf-cursor",
+  "localizedNames" : {
+    "de" : "Cartoon-Blattcursor",
+    "en" : "Cartoon Leaf Cursor",
+    "es" : "Cursor de hoja caricaturesca",
+    "fr" : "Curseur feuille cartoon",
+    "it" : "Cursore a foglia cartoon",
+    "ja" : "カートゥーンの葉っぱカーソル",
+    "ko" : "만화풍 잎사귀 커서",
+    "pt-BR" : "Cursor de folha cartunesca",
+    "zh-Hans" : "卡通叶子指针",
+    "zh-Hant" : "卡通葉子指標"
+  },
+  "minimumReaderSchemaVersion" : 2,
+  "name" : "Cartoon Leaf Cursor",
+  "schemaVersion" : 2,
+  "tags" : [
+    "cartoon",
+    "leaf",
+    "nature",
+    "green"
+  ],
+  "version" : "1.0.0"
+}

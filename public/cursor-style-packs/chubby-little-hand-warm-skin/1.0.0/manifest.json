@@ -1,0 +1,81 @@
+{
+  "assets": [
+    {
+      "byteCount": 30007,
+      "fileName": "cursors/arrow.png",
+      "hotspot": {
+        "x": 24,
+        "y": 8
+      },
+      "pixelHeight": 216,
+      "pixelWidth": 200,
+      "scale": 8,
+      "sha256": "7a03ca4abf53f98ef5d0f7ef9da1a63a1bec3f71516bd864471f9f0f568cacd2",
+      "visualType": "arrow"
+    },
+    {
+      "byteCount": 23513,
+      "fileName": "cursors/pointer.png",
+      "hotspot": {
+        "x": 72,
+        "y": 8
+      },
+      "pixelHeight": 216,
+      "pixelWidth": 176,
+      "scale": 8,
+      "sha256": "20c37f5f10bd3a63697e36f6c60c610e5bc37e01c9990919098dc97b0d96fe64",
+      "visualType": "pointer"
+    },
+    {
+      "byteCount": 30421,
+      "fileName": "cursors/open-hand.png",
+      "hotspot": {
+        "x": 96,
+        "y": 104
+      },
+      "pixelHeight": 208,
+      "pixelWidth": 192,
+      "scale": 8,
+      "sha256": "40f89a6a5af65f87a455866a243fce85367546305b0a6c95a8a1dc29b03c6070",
+      "visualType": "open-hand"
+    },
+    {
+      "byteCount": 24653,
+      "fileName": "cursors/closed-hand.png",
+      "hotspot": {
+        "x": 88,
+        "y": 96
+      },
+      "pixelHeight": 192,
+      "pixelWidth": 176,
+      "scale": 8,
+      "sha256": "1859fc59a61a588250d0a3d4290a9b896c993591302fe1d96c922a062e4db0a0",
+      "visualType": "closed-hand"
+    }
+  ],
+  "description": "The exact Chubby Little Hand cursor family in a warm golden-beige skin tone.",
+  "id": "chubby-little-hand-warm-skin",
+  "localizedNames": {
+    "de": "Pummelige kleine Hand – warmer Hautton",
+    "en": "Warm Skin Chubby Little Hand",
+    "es": "Manita regordeta de piel cálida",
+    "fr": "Petite main potelée au teint chaud",
+    "it": "Manina paffuta dalla carnagione calda",
+    "ja": "暖かな肌色のぷっくり小さな手",
+    "ko": "따뜻한 피부색 통통한 작은 손",
+    "pt-BR": "Mãozinha gordinha de tom de pele quente",
+    "zh-Hans": "暖肤色胖嘟嘟小手",
+    "zh-Hant": "暖膚色胖嘟嘟小手"
+  },
+  "minimumReaderSchemaVersion": 2,
+  "name": "Warm Skin Chubby Little Hand",
+  "schemaVersion": 2,
+  "tags": [
+    "cute",
+    "hand",
+    "rounded",
+    "skin-tone",
+    "cursor-family"
+  ],
+  "version": "1.0.0"
+}

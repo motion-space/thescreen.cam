@@ -1,0 +1,42 @@
+{
+  "assets" : [
+    {
+      "byteCount" : 38880,
+      "fileName" : "cursors/arrow.png",
+      "hotspot" : {
+        "x" : 24,
+        "y" : 8
+      },
+      "pixelHeight" : 224,
+      "pixelWidth" : 192,
+      "scale" : 8,
+      "sha256" : "4fffce865961ccc39782fb19b253fc192c15879b069237471b6cfd04587927e1",
+      "visualType" : "arrow"
+    }
+  ],
+  "description" : "A single angled cartoon lipstick used as the default arrow cursor.",
+  "id" : "cartoon-lipstick-cursor",
+  "localizedNames" : {
+    "de" : "Cartoon-Lippenstift-Cursor",
+    "en" : "Cartoon Lipstick Cursor",
+    "es" : "Cursor de lápiz labial de dibujos",
+    "fr" : "Curseur rouge à lèvres cartoon",
+    "it" : "Cursore rossetto cartoon",
+    "ja" : "カートゥーン口紅カーソル",
+    "ko" : "카툰 립스틱 커서",
+    "pt-BR" : "Cursor de batom cartunesco",
+    "zh-Hans" : "卡通口红指针",
+    "zh-Hant" : "卡通口紅指標"
+  },
+  "minimumReaderSchemaVersion" : 2,
+  "name" : "Cartoon Lipstick Cursor",
+  "schemaVersion" : 2,
+  "tags" : [
+    "cartoon",
+    "lipstick",
+    "cosmetic",
+    "pink",
+    "arrow"
+  ],
+  "version" : "1.0.0"
+}

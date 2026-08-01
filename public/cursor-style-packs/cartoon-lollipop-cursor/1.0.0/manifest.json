@@ -1,0 +1,146 @@
+{
+  "assets": [
+    {
+      "byteCount": 42951,
+      "fileName": "cursors/arrow.png",
+      "hotspot": {
+        "x": 88,
+        "y": 8
+      },
+      "pixelHeight": 208,
+      "pixelWidth": 200,
+      "scale": 8,
+      "sha256": "d559915d65b70aec67c975e59761684bbc57b6b8ee8f9e31da3175d5061a66d9",
+      "visualType": "arrow"
+    },
+    {
+      "byteCount": 33024,
+      "fileName": "cursors/text.png",
+      "hotspot": {
+        "x": 72,
+        "y": 112
+      },
+      "pixelHeight": 224,
+      "pixelWidth": 144,
+      "scale": 8,
+      "sha256": "b13a2eec4cee200ded7435f5fd90b3aa773fc86885e701fa93acacc42fc0f222",
+      "visualType": "text"
+    },
+    {
+      "byteCount": 37891,
+      "fileName": "cursors/pointer.png",
+      "hotspot": {
+        "x": 80,
+        "y": 8
+      },
+      "pixelHeight": 216,
+      "pixelWidth": 160,
+      "scale": 8,
+      "sha256": "416eeb11ebeab60f86f2a888a3e481191d4c5cbfdf337435bf2e5aab301eb493",
+      "visualType": "pointer"
+    },
+    {
+      "byteCount": 34473,
+      "fileName": "cursors/open-hand.png",
+      "hotspot": {
+        "x": 72,
+        "y": 112
+      },
+      "pixelHeight": 224,
+      "pixelWidth": 144,
+      "scale": 8,
+      "sha256": "bb04afbffc7d607d97df46a4b49b034502de2ab296bd6abbc2741da1a4992c97",
+      "visualType": "open-hand"
+    },
+    {
+      "byteCount": 33807,
+      "fileName": "cursors/closed-hand.png",
+      "hotspot": {
+        "x": 72,
+        "y": 96
+      },
+      "pixelHeight": 192,
+      "pixelWidth": 152,
+      "scale": 8,
+      "sha256": "dc1905022e0d72765651978295ccd0eff8524994c2f630a871b69e1a50b784e1",
+      "visualType": "closed-hand"
+    },
+    {
+      "byteCount": 31838,
+      "fileName": "cursors/resize-ew.png",
+      "hotspot": {
+        "x": 104,
+        "y": 72
+      },
+      "pixelHeight": 144,
+      "pixelWidth": 216,
+      "scale": 8,
+      "sha256": "cd7cdd73f3f9bf562573efe1c0282b906308f334f2b14876a67acdcca252ed99",
+      "visualType": "resize-ew"
+    },
+    {
+      "byteCount": 31256,
+      "fileName": "cursors/resize-ns.png",
+      "hotspot": {
+        "x": 64,
+        "y": 112
+      },
+      "pixelHeight": 224,
+      "pixelWidth": 136,
+      "scale": 8,
+      "sha256": "6c0fd78a011d7ac4524d01923bdaa87a069345d194dc484c3d981e57b4fc6bd2",
+      "visualType": "resize-ns"
+    },
+    {
+      "byteCount": 37378,
+      "fileName": "cursors/resize-nwse.png",
+      "hotspot": {
+        "x": 96,
+        "y": 104
+      },
+      "pixelHeight": 208,
+      "pixelWidth": 192,
+      "scale": 8,
+      "sha256": "cbcf8584dcf04cb8bde19c450ea66f376d939d8eee3f92fd177135c001b5f9bb",
+      "visualType": "resize-nwse"
+    },
+    {
+      "byteCount": 39109,
+      "fileName": "cursors/resize-nesw.png",
+      "hotspot": {
+        "x": 96,
+        "y": 104
+      },
+      "pixelHeight": 208,
+      "pixelWidth": 192,
+      "scale": 8,
+      "sha256": "dc17f4265dcdfc29fbe61dbcc1068e6f6195686b3852beb242aa5732f0a7715c",
+      "visualType": "resize-nesw"
+    }
+  ],
+  "description": "A cheerful cursor family built from one cartoon lollipop motif rotated for every state.",
+  "id": "cartoon-lollipop-cursor",
+  "localizedNames": {
+    "de": "Cartoon-Lutscher-Cursor",
+    "en": "Cartoon Lollipop Cursor",
+    "es": "Cursor de piruleta de dibujos",
+    "fr": "Curseur sucette cartoon",
+    "it": "Cursore lecca-lecca cartoon",
+    "ja": "カートゥーンロリポップカーソル",
+    "ko": "만화 막대사탕 커서",
+    "pt-BR": "Cursor de pirulito cartunesco",
+    "zh-Hans": "卡通棒棒糖指针",
+    "zh-Hant": "卡通棒棒糖指標"
+  },
+  "minimumReaderSchemaVersion": 2,
+  "name": "Cartoon Lollipop Cursor",
+  "schemaVersion": 2,
+  "tags": [
+    "cartoon",
+    "lollipop",
+    "candy",
+    "cute",
+    "rotated"
+  ],
+  "version": "1.0.0"
+}

@@ -11,6 +11,7 @@ export type HeaderCopy = {
   menuAria: string;
   nav: {
     changelog: string;
+    cursors: string;
     docs: string;
     privacy: string;
     support: string;
@@ -45,6 +46,7 @@ export type FooterCopy = {
     alternatives?: string;
     bgm: string;
     changelog: string;
+    cursors: string;
     docs: string;
     motionBlurMask: string;
     support: string;
@@ -572,6 +574,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       menuAria: "Open menu",
       nav: {
         changelog: "Changelog",
+        cursors: "Cursors",
         docs: "Docs",
         privacy: "Privacy",
         support: "Support",
@@ -605,6 +608,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         alternatives: "Alternatives",
         bgm: "BGM",
         changelog: "Changelog",
+        cursors: "Cursors",
         docs: "Docs",
         motionBlurMask: "Motion Blur Mask",
         support: "Support",
@@ -1457,6 +1461,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       menuAria: "打开菜单",
       nav: {
         changelog: "更新日志",
+        cursors: "鼠标指针",
         docs: "文档",
         privacy: "隐私",
         support: "支持",
@@ -1490,6 +1495,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         alternatives: "替代方案",
         bgm: "BGM",
         changelog: "更新日志",
+        cursors: "鼠标指针",
         docs: "文档",
         motionBlurMask: "运动模糊遮罩",
         support: "支持",
@@ -2281,6 +2287,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       menuAria: "Menü öffnen",
       nav: {
         changelog: "Changelog",
+        cursors: "Mauszeiger",
         docs: "Docs",
         privacy: "Datenschutz",
         support: "Support",
@@ -2314,6 +2321,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         alternatives: "Alternativen",
         bgm: "BGM",
         changelog: "Changelog",
+        cursors: "Mauszeiger",
         docs: "Docs",
         motionBlurMask: "Motion Blur Mask",
         support: "Support",
@@ -3128,6 +3136,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       menuAria: "メニューを開く",
       nav: {
         changelog: "変更履歴",
+        cursors: "カーソル",
         docs: "ドキュメント",
         privacy: "プライバシー",
         support: "サポート",
@@ -3161,6 +3170,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         alternatives: "代替ツール",
         bgm: "BGM",
         changelog: "変更履歴",
+        cursors: "カーソル",
         docs: "ドキュメント",
         motionBlurMask: "モーションブラー マスク",
         support: "サポート",
@@ -3953,6 +3963,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       menuAria: "메뉴 열기",
       nav: {
         changelog: "변경 내역",
+        cursors: "커서",
         docs: "문서",
         privacy: "개인정보",
         support: "지원",
@@ -3986,6 +3997,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         alternatives: "대안",
         bgm: "BGM",
         changelog: "변경 내역",
+        cursors: "커서",
         docs: "문서",
         motionBlurMask: "모션 블러 마스크",
         support: "지원",
@@ -4778,6 +4790,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       menuAria: "開啟選單",
       nav: {
         changelog: "更新日誌",
+        cursors: "滑鼠指標",
         docs: "文件",
         privacy: "隱私",
         support: "支援",
@@ -4811,6 +4824,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         alternatives: "替代方案",
         bgm: "BGM",
         changelog: "更新日誌",
+        cursors: "滑鼠指標",
         docs: "文件",
         motionBlurMask: "運動模糊遮罩",
         support: "支援",
@@ -5602,6 +5616,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       menuAria: "abrir menú",
       nav: {
         changelog: "Registro de cambios",
+        cursors: "Cursores",
         docs: "Documentos",
         privacy: "Privacidad",
         support: "Soporte",
@@ -5635,6 +5650,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         alternatives: "Alternativas",
         bgm: "BGM",
         changelog: "Registro de cambios",
+        cursors: "Cursores",
         docs: "Documentos",
         motionBlurMask: "Máscara de desenfoque de movimiento",
         support: "Soporte",
@@ -6487,6 +6503,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       menuAria: "Ouvrir le menu",
       nav: {
         changelog: "Journal des modifications",
+        cursors: "Curseurs",
         docs: "Documents",
         privacy: "Confidentialité",
         support: "Assistance",
@@ -6520,6 +6537,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         alternatives: "Alternatives",
         bgm: "BGM",
         changelog: "Journal des modifications",
+        cursors: "Curseurs",
         docs: "Documents",
         motionBlurMask: "Masque de flou de mouvement",
         support: "Assistance",
@@ -7372,6 +7390,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       menuAria: "Abrir menu",
       nav: {
         changelog: "Registro de alterações",
+        cursors: "Cursores",
         docs: "Documentos",
         privacy: "Privacidade",
         support: "Suporte",
@@ -7405,6 +7424,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         alternatives: "Alternativas",
         bgm: "BGM",
         changelog: "Registro de alterações",
+        cursors: "Cursores",
         docs: "Documentos",
         motionBlurMask: "Máscara de desfoque de movimento",
         support: "Suporte",
@@ -8257,6 +8277,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       menuAria: "Apri il menu",
       nav: {
         changelog: "Registro delle modifiche",
+        cursors: "Cursori",
         docs: "Documenti",
         privacy: "Privacy",
         support: "Supporto",
@@ -8290,6 +8311,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         alternatives: "Alternative",
         bgm: "BGM",
         changelog: "Registro delle modifiche",
+        cursors: "Cursori",
         docs: "Documenti",
         motionBlurMask: "Maschera di sfocatura movimento",
         support: "Supporto",

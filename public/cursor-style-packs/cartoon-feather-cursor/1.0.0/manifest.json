@@ -1,0 +1,172 @@
+{
+  "assets": [
+    {
+      "byteCount": 30903,
+      "fileName": "cursors/arrow.png",
+      "hotspot": {
+        "x": 24,
+        "y": 8
+      },
+      "pixelHeight": 176,
+      "pixelWidth": 152,
+      "scale": 8,
+      "sha256": "19e2e476969b37640a2b15f2a9a5b6b07e088ee03236e2c402d6311dcdce80b7",
+      "visualType": "arrow"
+    },
+    {
+      "byteCount": 25348,
+      "fileName": "cursors/text.png",
+      "hotspot": {
+        "x": 48,
+        "y": 104
+      },
+      "pixelHeight": 208,
+      "pixelWidth": 96,
+      "scale": 8,
+      "sha256": "d64642b7d7e20dff1d572d13b31682ff778ec266abe89dd4fac388d79fb52b42",
+      "visualType": "text"
+    },
+    {
+      "byteCount": 27265,
+      "fileName": "cursors/pointer.png",
+      "hotspot": {
+        "x": 40,
+        "y": 8
+      },
+      "pixelHeight": 216,
+      "pixelWidth": 96,
+      "scale": 8,
+      "sha256": "19bfa62bfb500620a2a278c142c01531a8fb3ca4fd0d2bcfa33786824e81feb2",
+      "visualType": "pointer"
+    },
+    {
+      "byteCount": 25912,
+      "fileName": "cursors/crosshair.png",
+      "hotspot": {
+        "x": 48,
+        "y": 104
+      },
+      "pixelHeight": 216,
+      "pixelWidth": 96,
+      "scale": 8,
+      "sha256": "27b9ddf5adb2e573c17b2adbe90d1ad2a47be61f3acffbf819ac1e5690e2ce88",
+      "visualType": "crosshair"
+    },
+    {
+      "byteCount": 27313,
+      "fileName": "cursors/open-hand.png",
+      "hotspot": {
+        "x": 48,
+        "y": 112
+      },
+      "pixelHeight": 224,
+      "pixelWidth": 96,
+      "scale": 8,
+      "sha256": "8a20a4045e2ec70eed853b6aa0cb63877d26b0178c4ed4cee243910a66a2388e",
+      "visualType": "open-hand"
+    },
+    {
+      "byteCount": 27477,
+      "fileName": "cursors/closed-hand.png",
+      "hotspot": {
+        "x": 48,
+        "y": 112
+      },
+      "pixelHeight": 224,
+      "pixelWidth": 96,
+      "scale": 8,
+      "sha256": "1ebdfe8e6df6cfd5c03b4aba5c9cf6b158157b1ff3885cdb852ad70097848d15",
+      "visualType": "closed-hand"
+    },
+    {
+      "byteCount": 25927,
+      "fileName": "cursors/resize-ew.png",
+      "hotspot": {
+        "x": 112,
+        "y": 48
+      },
+      "pixelHeight": 96,
+      "pixelWidth": 224,
+      "scale": 8,
+      "sha256": "9354a83fe4b3b0f362bfd83a59cc9d0154117e07477f4bcdb8b1e0607af55b1b",
+      "visualType": "resize-ew"
+    },
+    {
+      "byteCount": 25752,
+      "fileName": "cursors/resize-ns.png",
+      "hotspot": {
+        "x": 48,
+        "y": 104
+      },
+      "pixelHeight": 208,
+      "pixelWidth": 96,
+      "scale": 8,
+      "sha256": "17a6a9d25286589ca9fbed397cbc1fde08a81f43a74d14860457b7f545a2eccf",
+      "visualType": "resize-ns"
+    },
+    {
+      "byteCount": 32323,
+      "fileName": "cursors/resize-nwse.png",
+      "hotspot": {
+        "x": 80,
+        "y": 88
+      },
+      "pixelHeight": 176,
+      "pixelWidth": 168,
+      "scale": 8,
+      "sha256": "974cc0b7d2c3dbb7b9d362c4218ad4e25fcb1e1f8234c4d9929b5e84e0ad24bd",
+      "visualType": "resize-nwse"
+    },
+    {
+      "byteCount": 32009,
+      "fileName": "cursors/resize-nesw.png",
+      "hotspot": {
+        "x": 80,
+        "y": 88
+      },
+      "pixelHeight": 176,
+      "pixelWidth": 160,
+      "scale": 8,
+      "sha256": "d9ecef15aa59a126fb564b6e7538e7f329cbe2c22a716402371e30c5202fe6e3",
+      "visualType": "resize-nesw"
+    },
+    {
+      "byteCount": 25901,
+      "fileName": "cursors/not-allowed.png",
+      "hotspot": {
+        "x": 48,
+        "y": 104
+      },
+      "pixelHeight": 216,
+      "pixelWidth": 96,
+      "scale": 8,
+      "sha256": "a5b177120fe7515853f3705708a0f53de2edbcc32e47a9079740360685e03054",
+      "visualType": "not-allowed"
+    }
+  ],
+  "description": "A playful cursor family made from one cartoon feather, rotated for each pointer and resize state.",
+  "id": "cartoon-feather-cursor",
+  "localizedNames": {
+    "de": "Cartoon-Federzeiger",
+    "en": "Cartoon Feather Cursor",
+    "es": "Cursor de pluma de caricatura",
+    "fr": "Curseur plume cartoon",
+    "it": "Cursore a piuma cartoon",
+    "ja": "カートゥーン羽根カーソル",
+    "ko": "만화 깃털 커서",
+    "pt-BR": "Cursor de pena cartunesca",
+    "zh-Hans": "卡通羽毛指针",
+    "zh-Hant": "卡通羽毛指標"
+  },
+  "minimumReaderSchemaVersion": 2,
+  "name": "Cartoon Feather Cursor",
+  "schemaVersion": 2,
+  "tags": [
+    "cartoon",
+    "feather",
+    "playful",
+    "rotated",
+    "cursor"
+  ],
+  "version": "1.0.0"
+}

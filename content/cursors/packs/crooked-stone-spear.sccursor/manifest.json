@@ -1,0 +1,173 @@
+{
+  "assets" : [
+    {
+      "byteCount" : 30066,
+      "fileName" : "cursors/arrow.png",
+      "hotspot" : {
+        "x" : 16,
+        "y" : 8
+      },
+      "pixelHeight" : 224,
+      "pixelWidth" : 200,
+      "scale" : 8,
+      "sha256" : "923f1d2799135367c3d18d61ef041462f01b39d970e0898748be8be6ed521f95",
+      "visualType" : "arrow"
+    },
+    {
+      "byteCount" : 15945,
+      "fileName" : "cursors/text.png",
+      "hotspot" : {
+        "x" : 32,
+        "y" : 104
+      },
+      "pixelHeight" : 208,
+      "pixelWidth" : 64,
+      "scale" : 8,
+      "sha256" : "c6a6cace71862c0e3b333ba17dcc733d5ac5d4ce1f1a1e4140f580d7d0cd3125",
+      "visualType" : "text"
+    },
+    {
+      "byteCount" : 19025,
+      "fileName" : "cursors/pointer.png",
+      "hotspot" : {
+        "x" : 40,
+        "y" : 8
+      },
+      "pixelHeight" : 224,
+      "pixelWidth" : 80,
+      "scale" : 8,
+      "sha256" : "22de676cb2538d93e26550039a298ee089b7be67de9f5c1793247105792dda15",
+      "visualType" : "pointer"
+    },
+    {
+      "byteCount" : 30863,
+      "fileName" : "cursors/crosshair.png",
+      "hotspot" : {
+        "x" : 112,
+        "y" : 104
+      },
+      "pixelHeight" : 208,
+      "pixelWidth" : 224,
+      "scale" : 8,
+      "sha256" : "50e42f55e1d968941e9d0ad3e247a9d239d02a01b692c8d7622c40b130f7a079",
+      "visualType" : "crosshair"
+    },
+    {
+      "byteCount" : 42551,
+      "fileName" : "cursors/open-hand.png",
+      "hotspot" : {
+        "x" : 72,
+        "y" : 104
+      },
+      "pixelHeight" : 208,
+      "pixelWidth" : 144,
+      "scale" : 8,
+      "sha256" : "8aff0c7889936d46f00211cfdad1986cb180b37e69dae0404d694b34421985ee",
+      "visualType" : "open-hand"
+    },
+    {
+      "byteCount" : 40926,
+      "fileName" : "cursors/closed-hand.png",
+      "hotspot" : {
+        "x" : 64,
+        "y" : 96
+      },
+      "pixelHeight" : 192,
+      "pixelWidth" : 136,
+      "scale" : 8,
+      "sha256" : "62fafaf0e45c78ae0c0628ead3f02053de3a4e9b0af79dbcdae200d1ba33a839",
+      "visualType" : "closed-hand"
+    },
+    {
+      "byteCount" : 16777,
+      "fileName" : "cursors/resize-ew.png",
+      "hotspot" : {
+        "x" : 120,
+        "y" : 32
+      },
+      "pixelHeight" : 64,
+      "pixelWidth" : 240,
+      "scale" : 8,
+      "sha256" : "30ccd2094766febd56cb710d8293a50573668677872351acb1ae4c2f46aca86c",
+      "visualType" : "resize-ew"
+    },
+    {
+      "byteCount" : 15432,
+      "fileName" : "cursors/resize-ns.png",
+      "hotspot" : {
+        "x" : 32,
+        "y" : 104
+      },
+      "pixelHeight" : 208,
+      "pixelWidth" : 64,
+      "scale" : 8,
+      "sha256" : "fd0b4d7306c7467f3f6d3ed95d3b00ea66c6a9b77c0d1bc523a125430ec41595",
+      "visualType" : "resize-ns"
+    },
+    {
+      "byteCount" : 24239,
+      "fileName" : "cursors/resize-nwse.png",
+      "hotspot" : {
+        "x" : 96,
+        "y" : 104
+      },
+      "pixelHeight" : 208,
+      "pixelWidth" : 192,
+      "scale" : 8,
+      "sha256" : "835aaa32ece8059d35ab8de59a3a4d3e63ea68de4a413a6bb622cff758178107",
+      "visualType" : "resize-nwse"
+    },
+    {
+      "byteCount" : 23931,
+      "fileName" : "cursors/resize-nesw.png",
+      "hotspot" : {
+        "x" : 96,
+        "y" : 104
+      },
+      "pixelHeight" : 208,
+      "pixelWidth" : 192,
+      "scale" : 8,
+      "sha256" : "4627843b974cf2b7d899c3142b49c3a3712adb26b5573578af313cd0bca327f1",
+      "visualType" : "resize-nesw"
+    },
+    {
+      "byteCount" : 46690,
+      "fileName" : "cursors/not-allowed.png",
+      "hotspot" : {
+        "x" : 112,
+        "y" : 104
+      },
+      "pixelHeight" : 208,
+      "pixelWidth" : 224,
+      "scale" : 8,
+      "sha256" : "1703b33c3075b3e597aa5644d3d89c966f1bf5a2b7400e5143fe2dd40ed16b4d",
+      "visualType" : "not-allowed"
+    }
+  ],
+  "description" : "A playful cartoon cursor family made from a crooked ancient wooden shaft and a sharpened stone tip.",
+  "id" : "crooked-stone-spear",
+  "localizedNames" : {
+    "de" : "Gekrümmter Steinspieß",
+    "en" : "Crooked Stone Spear",
+    "es" : "Lanza de piedra torcida",
+    "fr" : "Lance de pierre tordue",
+    "it" : "Lancia di pietra storta",
+    "ja" : "曲がり木の石槍",
+    "ko" : "구부러진 나무 돌창",
+    "pt-BR" : "Lança de pedra torta",
+    "zh-Hans" : "弯木石矛",
+    "zh-Hant" : "彎木石矛"
+  },
+  "minimumReaderSchemaVersion" : 2,
+  "name" : "Crooked Stone Spear",
+  "schemaVersion" : 2,
+  "tags" : [
+    "cartoon",
+    "stone",
+    "spear",
+    "wood",
+    "ancient",
+    "handmade"
+  ],
+  "version" : "1.0.0"
+}

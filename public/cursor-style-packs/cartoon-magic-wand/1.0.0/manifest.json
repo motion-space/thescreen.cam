@@ -1,0 +1,54 @@
+{
+  "assets": [
+    {
+      "byteCount": 43953,
+      "fileName": "cursors/arrow.png",
+      "hotspot": {
+        "x": 32,
+        "y": 8
+      },
+      "pixelHeight": 224,
+      "pixelWidth": 176,
+      "scale": 8,
+      "sha256": "b21fdbc471824d232a1299ace620392220c169f6aade78748ff95ff644cd253e",
+      "visualType": "arrow"
+    },
+    {
+      "byteCount": 27106,
+      "fileName": "cursors/text.png",
+      "hotspot": {
+        "x": 48,
+        "y": 112
+      },
+      "pixelHeight": 224,
+      "pixelWidth": 96,
+      "scale": 8,
+      "sha256": "7a06078f5074c806b58ea19ac06679f33d84790b6eebd13300cd7734cd051cc5",
+      "visualType": "text"
+    }
+  ],
+  "description": "A focused cartoon magic-wand cursor family with arrow and text states.",
+  "id": "cartoon-magic-wand",
+  "localizedNames": {
+    "de": "Cartoon-Zauberstab",
+    "en": "Cartoon Magic Wand",
+    "es": "Varita mágica de dibujos",
+    "fr": "Baguette magique cartoon",
+    "it": "Bacchetta magica cartoon",
+    "ja": "カートゥーン魔法の杖",
+    "ko": "카툰 마법 지팡이",
+    "pt-BR": "Varinha mágica de desenho",
+    "zh-Hans": "卡通魔法棒",
+    "zh-Hant": "卡通魔法棒"
+  },
+  "minimumReaderSchemaVersion": 2,
+  "name": "Cartoon Magic Wand",
+  "schemaVersion": 2,
+  "tags": [
+    "cartoon",
+    "magic",
+    "wand",
+    "focused"
+  ],
+  "version": "1.0.0"
+}

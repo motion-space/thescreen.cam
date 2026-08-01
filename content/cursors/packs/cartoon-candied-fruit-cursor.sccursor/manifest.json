@@ -1,0 +1,159 @@
+{
+  "assets" : [
+    {
+      "byteCount" : 28229,
+      "fileName" : "cursors/arrow.png",
+      "hotspot" : {
+        "x" : 48,
+        "y" : 8
+      },
+      "pixelHeight" : 200,
+      "pixelWidth" : 168,
+      "scale" : 8,
+      "sha256" : "1708813bb635492dc7f7b43bd27926c4563edbf562a8a4f7c827804ce87bff48",
+      "visualType" : "arrow"
+    },
+    {
+      "byteCount" : 23050,
+      "fileName" : "cursors/text.png",
+      "hotspot" : {
+        "x" : 40,
+        "y" : 112
+      },
+      "pixelHeight" : 224,
+      "pixelWidth" : 80,
+      "scale" : 8,
+      "sha256" : "eba7d36168e46fbda0f63004caadda2c615682d6ef0278f3ec136a030a5ffe9e",
+      "visualType" : "text"
+    },
+    {
+      "byteCount" : 25734,
+      "fileName" : "cursors/pointer.png",
+      "hotspot" : {
+        "x" : 104,
+        "y" : 8
+      },
+      "pixelHeight" : 216,
+      "pixelWidth" : 144,
+      "scale" : 8,
+      "sha256" : "d446636c754e7191b13005746ff490ded2a3ffca395ec8786315219df96591be",
+      "visualType" : "pointer"
+    },
+    {
+      "byteCount" : 26541,
+      "fileName" : "cursors/open-hand.png",
+      "hotspot" : {
+        "x" : 48,
+        "y" : 112
+      },
+      "pixelHeight" : 224,
+      "pixelWidth" : 96,
+      "scale" : 8,
+      "sha256" : "8e64d4a2fcccf17efa5d65e0d18990f727ec6537a99f07ff11db8932dcdb6fa9",
+      "visualType" : "open-hand"
+    },
+    {
+      "byteCount" : 25802,
+      "fileName" : "cursors/closed-hand.png",
+      "hotspot" : {
+        "x" : 40,
+        "y" : 112
+      },
+      "pixelHeight" : 224,
+      "pixelWidth" : 88,
+      "scale" : 8,
+      "sha256" : "776b00d9eb879ee299c47ca0371d29232f5e1fe10761d02babc6cdf8a90d5fba",
+      "visualType" : "closed-hand"
+    },
+    {
+      "byteCount" : 23177,
+      "fileName" : "cursors/resize-ew.png",
+      "hotspot" : {
+        "x" : 120,
+        "y" : 40
+      },
+      "pixelHeight" : 80,
+      "pixelWidth" : 240,
+      "scale" : 8,
+      "sha256" : "02a7bc0b57317257b21b67e484bf7406bea7742ece5c8ffe425c052e6adbbf0f",
+      "visualType" : "resize-ew"
+    },
+    {
+      "byteCount" : 23752,
+      "fileName" : "cursors/resize-ns.png",
+      "hotspot" : {
+        "x" : 40,
+        "y" : 112
+      },
+      "pixelHeight" : 224,
+      "pixelWidth" : 80,
+      "scale" : 8,
+      "sha256" : "b58b0ca0f0d3079d201fbe925cb402b728727839cbcf92050c7d2a9c2a3388a6",
+      "visualType" : "resize-ns"
+    },
+    {
+      "byteCount" : 26881,
+      "fileName" : "cursors/resize-nwse.png",
+      "hotspot" : {
+        "x" : 88,
+        "y" : 96
+      },
+      "pixelHeight" : 192,
+      "pixelWidth" : 176,
+      "scale" : 8,
+      "sha256" : "d8ccf190977fcf80652b4421542ae14b3e7ea4581f70da7d43aec97a437a52ce",
+      "visualType" : "resize-nwse"
+    },
+    {
+      "byteCount" : 26753,
+      "fileName" : "cursors/resize-nesw.png",
+      "hotspot" : {
+        "x" : 88,
+        "y" : 96
+      },
+      "pixelHeight" : 192,
+      "pixelWidth" : 176,
+      "scale" : 8,
+      "sha256" : "b630ce631a92e0f173b58178d1e462d706cbf306d683256a13636faaca283814",
+      "visualType" : "resize-nesw"
+    },
+    {
+      "byteCount" : 26717,
+      "fileName" : "cursors/not-allowed.png",
+      "hotspot" : {
+        "x" : 88,
+        "y" : 96
+      },
+      "pixelHeight" : 192,
+      "pixelWidth" : 176,
+      "scale" : 8,
+      "sha256" : "5bc767cba338b67391b28a34a618f9176b7be018cd404cba27d33aa86a08eec5",
+      "visualType" : "not-allowed"
+    }
+  ],
+  "description" : "A cheerful cursor family built from one glossy candied-fruit skewer, reused across pointer, text, hand, resize, and interaction states.",
+  "id" : "cartoon-candied-fruit-cursor",
+  "localizedNames" : {
+    "de" : "Kandierte-Früchte-Cursor im Cartoon-Stil",
+    "en" : "Cartoon Candied-Fruit Cursor",
+    "es" : "Cursor de fruta confitada caricaturesca",
+    "fr" : "Curseur de fruit confit cartoon",
+    "it" : "Cursore di frutta candita cartoon",
+    "ja" : "カートゥーンフルーツキャンディカーソル",
+    "ko" : "카툰 과일 사탕 커서",
+    "pt-BR" : "Cursor de fruta cristalizada cartunesca",
+    "zh-Hans" : "卡通糖葫芦指针",
+    "zh-Hant" : "卡通糖葫蘆指標"
+  },
+  "minimumReaderSchemaVersion" : 2,
+  "name" : "Cartoon Candied-Fruit Cursor",
+  "schemaVersion" : 2,
+  "tags" : [
+    "cartoon",
+    "candied-fruit",
+    "fruit-skewer",
+    "sweet",
+    "food"
+  ],
+  "version" : "1.0.0"
+}

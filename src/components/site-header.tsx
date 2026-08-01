@@ -80,6 +80,7 @@ export function SiteHeader({
   const [panelDirection, setPanelDirection] = useState(1);
   const navLinks = [
     { label: copy.nav.docs, href: localizedPath(locale, "/docs"), path: "/docs" },
+    { label: copy.nav.cursors, href: localizedPath(locale, "/cursors"), path: "/cursors" },
     { label: copy.nav.changelog, href: localizedPath(locale, "/changelog"), path: "/changelog" },
     { label: copy.nav.support, href: localizedPath(locale, "/support"), path: "/support" },
   ];

@@ -1,6 +1,6 @@
 # ScreenCam Website
 
-ScreenCam is a native macOS screen recording app. This repository contains the public website, docs pages, changelog pages, and downloadable BGM catalog for ScreenCam.
+ScreenCam is a native macOS screen recording app. This repository contains the public website, docs pages, changelog pages, downloadable BGM catalog, and open cursor catalog for ScreenCam.
 
 ## Links
 
@@ -73,12 +73,28 @@ The generator writes:
 
 `ffmpeg` and `ffprobe` are required for BGM generation.
 
+## Cursor Catalog
+
+Cursor pack sources live in `content/cursors/packs/` and are curated by
+`content/cursors/catalog.json`.
+
+Validate and publish the static cursor API:
+
+```bash
+npm run cursors:build
+npm run cursors:check
+```
+
+See [`content/cursors/README.md`](content/cursors/README.md) for the API layout
+and pull request contribution workflow.
+
 ## Project Structure
 
 - `src/pages/`: Astro routes and API endpoints
 - `src/components/`: page sections and interactive React components
 - `src/lib/`: i18n, translations, and shared site config
 - `content/bgm/`: BGM source workflow and metadata
+- `content/cursors/`: cursor pack sources, catalog order, and contribution guide
 - `public/`: static assets served by the site
 - `scripts/`: build utilities
 

@@ -1,0 +1,3831 @@
+{
+  "schemaVersion": 3,
+  "minimumReaderSchemaVersion": 3,
+  "generatedAt": "2026-08-01T10:25:13.000Z",
+  "packs": [
+    {
+      "manifest": {
+        "assets": [
+          {
+            "byteCount": 41911,
+            "fileName": "cursors/arrow.png",
+            "hotspot": {
+              "x": 24,
+              "y": 8
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 240,
+            "scale": 8,
+            "sha256": "35d5b404138df0d533f1cd809269e98d6a40f94cc8384a4fe8eff53cdc47aa44",
+            "visualType": "arrow"
+          }
+        ],
+        "description": "A cute star-tipped magic wand default cursor.",
+        "id": "cute-magic-wand",
+        "minimumReaderSchemaVersion": 2,
+        "name": "Cute Magic Wand",
+        "localizedNames": {
+          "de": "Niedlicher Zauberstab",
+          "en": "Cute Magic Wand",
+          "es": "Varita mágica adorable",
+          "fr": "Baguette magique adorable",
+          "it": "Bacchetta magica adorabile",
+          "ja": "かわいい魔法の杖",
+          "ko": "귀여운 마법 지팡이",
+          "pt-BR": "Varinha mágica fofa",
+          "zh-Hans": "可爱魔法棒",
+          "zh-Hant": "可愛魔法棒"
+        },
+        "schemaVersion": 2,
+        "tags": [
+          "cute",
+          "magic",
+          "wand",
+          "default"
+        ],
+        "version": "1.0.0"
+      },
+      "assetBaseURL": "/cursor-style-packs/cute-magic-wand/1.0.0/"
+    },
+    {
+      "manifest": {
+        "assets": [
+          {
+            "byteCount": 43953,
+            "fileName": "cursors/arrow.png",
+            "hotspot": {
+              "x": 32,
+              "y": 8
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 176,
+            "scale": 8,
+            "sha256": "b21fdbc471824d232a1299ace620392220c169f6aade78748ff95ff644cd253e",
+            "visualType": "arrow"
+          },
+          {
+            "byteCount": 27106,
+            "fileName": "cursors/text.png",
+            "hotspot": {
+              "x": 48,
+              "y": 112
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 96,
+            "scale": 8,
+            "sha256": "7a06078f5074c806b58ea19ac06679f33d84790b6eebd13300cd7734cd051cc5",
+            "visualType": "text"
+          }
+        ],
+        "description": "A focused cartoon magic-wand cursor family with arrow and text states.",
+        "id": "cartoon-magic-wand",
+        "localizedNames": {
+          "de": "Cartoon-Zauberstab",
+          "en": "Cartoon Magic Wand",
+          "es": "Varita mágica de dibujos",
+          "fr": "Baguette magique cartoon",
+          "it": "Bacchetta magica cartoon",
+          "ja": "カートゥーン魔法の杖",
+          "ko": "카툰 마법 지팡이",
+          "pt-BR": "Varinha mágica de desenho",
+          "zh-Hans": "卡通魔法棒",
+          "zh-Hant": "卡通魔法棒"
+        },
+        "minimumReaderSchemaVersion": 2,
+        "name": "Cartoon Magic Wand",
+        "schemaVersion": 2,
+        "tags": [
+          "cartoon",
+          "magic",
+          "wand",
+          "focused"
+        ],
+        "version": "1.0.0"
+      },
+      "assetBaseURL": "/cursor-style-packs/cartoon-magic-wand/1.0.0/"
+    },
+    {
+      "manifest": {
+        "assets": [
+          {
+            "byteCount": 43380,
+            "fileName": "cursors/arrow.png",
+            "hotspot": {
+              "x": 24,
+              "y": 8
+            },
+            "pixelHeight": 216,
+            "pixelWidth": 200,
+            "scale": 8,
+            "sha256": "12f4d42f58f62e1a8863a7371f7e9a822f8960ef0426c1ea48aa9d122fee5867",
+            "visualType": "arrow"
+          },
+          {
+            "byteCount": 32951,
+            "fileName": "cursors/pointer.png",
+            "hotspot": {
+              "x": 72,
+              "y": 8
+            },
+            "pixelHeight": 216,
+            "pixelWidth": 176,
+            "scale": 8,
+            "sha256": "1470a08b68c8aa764c21ff58411dc56a50be170a463335f050bc7e3421c30d25",
+            "visualType": "pointer"
+          },
+          {
+            "byteCount": 40751,
+            "fileName": "cursors/open-hand.png",
+            "hotspot": {
+              "x": 96,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 192,
+            "scale": 8,
+            "sha256": "5d0187caa326beea77812ff713f5890ab0b2de1f972c6c76834781487cc8994c",
+            "visualType": "open-hand"
+          },
+          {
+            "byteCount": 37650,
+            "fileName": "cursors/closed-hand.png",
+            "hotspot": {
+              "x": 88,
+              "y": 96
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 176,
+            "scale": 8,
+            "sha256": "523787d7c0c8815ad5538d8932fbb06d81178524f1d39fe83bbcdcee37036f7c",
+            "visualType": "closed-hand"
+          }
+        ],
+        "description": "A cute, rounded hand cursor family with default, pointer, open-hand, and closed-hand states.",
+        "id": "chubby-little-hand",
+        "localizedNames": {
+          "de": "Pummelige kleine Hand",
+          "en": "Chubby Little Hand",
+          "es": "Manita regordeta",
+          "fr": "Petite main potelée",
+          "it": "Manina paffuta",
+          "ja": "ぷっくり小さな手",
+          "ko": "통통한 작은 손",
+          "pt-BR": "Mãozinha gordinha",
+          "zh-Hans": "胖嘟嘟小手",
+          "zh-Hant": "胖嘟嘟小手"
+        },
+        "minimumReaderSchemaVersion": 2,
+        "name": "Chubby Little Hand",
+        "schemaVersion": 2,
+        "tags": [
+          "cute",
+          "hand",
+          "rounded",
+          "cursor-family"
+        ],
+        "version": "1.1.0"
+      },
+      "assetBaseURL": "/cursor-style-packs/chubby-little-hand/1.1.0/"
+    },
+    {
+      "manifest": {
+        "assets": [
+          {
+            "byteCount": 34090,
+            "fileName": "cursors/arrow.png",
+            "hotspot": {
+              "x": 24,
+              "y": 8
+            },
+            "pixelHeight": 216,
+            "pixelWidth": 200,
+            "scale": 8,
+            "sha256": "44896f65cb788613ed73fcfd0f314580035fc9278df13e96a63e688b8da43884",
+            "visualType": "arrow"
+          },
+          {
+            "byteCount": 26534,
+            "fileName": "cursors/pointer.png",
+            "hotspot": {
+              "x": 72,
+              "y": 8
+            },
+            "pixelHeight": 216,
+            "pixelWidth": 176,
+            "scale": 8,
+            "sha256": "3a0c07e86aff2cb41922c254f9aaae0ef201d2afda1385556b4892e5b7edf214",
+            "visualType": "pointer"
+          },
+          {
+            "byteCount": 33517,
+            "fileName": "cursors/open-hand.png",
+            "hotspot": {
+              "x": 96,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 192,
+            "scale": 8,
+            "sha256": "5af6e84f21146ce1a5fcd3c8588a1f21905ef6ddcde91aa3ab52db8e2618f569",
+            "visualType": "open-hand"
+          },
+          {
+            "byteCount": 28642,
+            "fileName": "cursors/closed-hand.png",
+            "hotspot": {
+              "x": 88,
+              "y": 96
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 176,
+            "scale": 8,
+            "sha256": "edb64b25eb03b3dc69918c5e765493d4c5dba6caa03ed81b886bab34a8eb19c0",
+            "visualType": "closed-hand"
+          }
+        ],
+        "description": "The exact Chubby Little Hand cursor family in a light peach skin tone.",
+        "id": "chubby-little-hand-light-skin",
+        "localizedNames": {
+          "de": "Pummelige kleine Hand – heller Hautton",
+          "en": "Light Skin Chubby Little Hand",
+          "es": "Manita regordeta de piel clara",
+          "fr": "Petite main potelée à peau claire",
+          "it": "Manina paffuta dalla pelle chiara",
+          "ja": "明るい肌色のぷっくり小さな手",
+          "ko": "밝은 피부색 통통한 작은 손",
+          "pt-BR": "Mãozinha gordinha de pele clara",
+          "zh-Hans": "白皙肤色胖嘟嘟小手",
+          "zh-Hant": "白皙膚色胖嘟嘟小手"
+        },
+        "minimumReaderSchemaVersion": 2,
+        "name": "Light Skin Chubby Little Hand",
+        "schemaVersion": 2,
+        "tags": [
+          "cute",
+          "hand",
+          "rounded",
+          "skin-tone",
+          "cursor-family"
+        ],
+        "version": "1.0.0"
+      },
+      "assetBaseURL": "/cursor-style-packs/chubby-little-hand-light-skin/1.0.0/"
+    },
+    {
+      "manifest": {
+        "assets": [
+          {
+            "byteCount": 30007,
+            "fileName": "cursors/arrow.png",
+            "hotspot": {
+              "x": 24,
+              "y": 8
+            },
+            "pixelHeight": 216,
+            "pixelWidth": 200,
+            "scale": 8,
+            "sha256": "7a03ca4abf53f98ef5d0f7ef9da1a63a1bec3f71516bd864471f9f0f568cacd2",
+            "visualType": "arrow"
+          },
+          {
+            "byteCount": 23513,
+            "fileName": "cursors/pointer.png",
+            "hotspot": {
+              "x": 72,
+              "y": 8
+            },
+            "pixelHeight": 216,
+            "pixelWidth": 176,
+            "scale": 8,
+            "sha256": "20c37f5f10bd3a63697e36f6c60c610e5bc37e01c9990919098dc97b0d96fe64",
+            "visualType": "pointer"
+          },
+          {
+            "byteCount": 30421,
+            "fileName": "cursors/open-hand.png",
+            "hotspot": {
+              "x": 96,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 192,
+            "scale": 8,
+            "sha256": "40f89a6a5af65f87a455866a243fce85367546305b0a6c95a8a1dc29b03c6070",
+            "visualType": "open-hand"
+          },
+          {
+            "byteCount": 24653,
+            "fileName": "cursors/closed-hand.png",
+            "hotspot": {
+              "x": 88,
+              "y": 96
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 176,
+            "scale": 8,
+            "sha256": "1859fc59a61a588250d0a3d4290a9b896c993591302fe1d96c922a062e4db0a0",
+            "visualType": "closed-hand"
+          }
+        ],
+        "description": "The exact Chubby Little Hand cursor family in a warm golden-beige skin tone.",
+        "id": "chubby-little-hand-warm-skin",
+        "localizedNames": {
+          "de": "Pummelige kleine Hand – warmer Hautton",
+          "en": "Warm Skin Chubby Little Hand",
+          "es": "Manita regordeta de piel cálida",
+          "fr": "Petite main potelée au teint chaud",
+          "it": "Manina paffuta dalla carnagione calda",
+          "ja": "暖かな肌色のぷっくり小さな手",
+          "ko": "따뜻한 피부색 통통한 작은 손",
+          "pt-BR": "Mãozinha gordinha de tom de pele quente",
+          "zh-Hans": "暖肤色胖嘟嘟小手",
+          "zh-Hant": "暖膚色胖嘟嘟小手"
+        },
+        "minimumReaderSchemaVersion": 2,
+        "name": "Warm Skin Chubby Little Hand",
+        "schemaVersion": 2,
+        "tags": [
+          "cute",
+          "hand",
+          "rounded",
+          "skin-tone",
+          "cursor-family"
+        ],
+        "version": "1.0.0"
+      },
+      "assetBaseURL": "/cursor-style-packs/chubby-little-hand-warm-skin/1.0.0/"
+    },
+    {
+      "manifest": {
+        "assets": [
+          {
+            "byteCount": 30477,
+            "fileName": "cursors/arrow.png",
+            "hotspot": {
+              "x": 24,
+              "y": 8
+            },
+            "pixelHeight": 216,
+            "pixelWidth": 200,
+            "scale": 8,
+            "sha256": "824ce0172d68a818338b69844304ccabf425f062d494ecc5b57a7d8e0aa85f74",
+            "visualType": "arrow"
+          },
+          {
+            "byteCount": 23897,
+            "fileName": "cursors/pointer.png",
+            "hotspot": {
+              "x": 72,
+              "y": 8
+            },
+            "pixelHeight": 216,
+            "pixelWidth": 176,
+            "scale": 8,
+            "sha256": "367bf75c2f9eeedd4c6e48298a2496ced4121094ceabcacf5d87ee69b7b11b66",
+            "visualType": "pointer"
+          },
+          {
+            "byteCount": 30470,
+            "fileName": "cursors/open-hand.png",
+            "hotspot": {
+              "x": 96,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 192,
+            "scale": 8,
+            "sha256": "8b60a5de46e0ebae7d23188a423b338cde5898e416e959402f53d6fcf7462bf2",
+            "visualType": "open-hand"
+          },
+          {
+            "byteCount": 26982,
+            "fileName": "cursors/closed-hand.png",
+            "hotspot": {
+              "x": 88,
+              "y": 96
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 176,
+            "scale": 8,
+            "sha256": "48cd573320fcc1e5f7ccc656e976831d196546040fb2b890f97d6947eb98be59",
+            "visualType": "closed-hand"
+          }
+        ],
+        "description": "The exact Chubby Little Hand cursor family in a rich deep-brown skin tone.",
+        "id": "chubby-little-hand-deep-skin",
+        "localizedNames": {
+          "de": "Pummelige kleine Hand – dunkler Hautton",
+          "en": "Deep Skin Chubby Little Hand",
+          "es": "Manita regordeta de piel oscura",
+          "fr": "Petite main potelée à peau foncée",
+          "it": "Manina paffuta dalla pelle scura",
+          "ja": "濃い肌色のぷっくり小さな手",
+          "ko": "짙은 피부색 통통한 작은 손",
+          "pt-BR": "Mãozinha gordinha de pele escura",
+          "zh-Hans": "深肤色胖嘟嘟小手",
+          "zh-Hant": "深膚色胖嘟嘟小手"
+        },
+        "minimumReaderSchemaVersion": 2,
+        "name": "Deep Skin Chubby Little Hand",
+        "schemaVersion": 2,
+        "tags": [
+          "cute",
+          "hand",
+          "rounded",
+          "skin-tone",
+          "cursor-family"
+        ],
+        "version": "1.0.0"
+      },
+      "assetBaseURL": "/cursor-style-packs/chubby-little-hand-deep-skin/1.0.0/"
+    },
+    {
+      "manifest": {
+        "assets": [
+          {
+            "byteCount": 51549,
+            "fileName": "cursors/arrow.png",
+            "hotspot": {
+              "x": 8,
+              "y": 0
+            },
+            "pixelHeight": 216,
+            "pixelWidth": 224,
+            "scale": 8,
+            "sha256": "2448c6d0ca3f8faf8e76a6a62a6de3bad1849594e159775a0d15914de5f12685",
+            "visualType": "arrow"
+          },
+          {
+            "byteCount": 57449,
+            "fileName": "cursors/open-hand.png",
+            "hotspot": {
+              "x": 104,
+              "y": 112
+            },
+            "pixelHeight": 216,
+            "pixelWidth": 224,
+            "scale": 8,
+            "sha256": "89ed63a72cf936a581d0cf6897784ddeb0708c7427db1403041837d1b4c27926",
+            "visualType": "open-hand"
+          },
+          {
+            "byteCount": 47511,
+            "fileName": "cursors/closed-hand.png",
+            "hotspot": {
+              "x": 104,
+              "y": 88
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 208,
+            "scale": 8,
+            "sha256": "d7e2ca4ebdfc6afc8ca435ff6556c8de2948c507279449376b64eeafde6fa3f6",
+            "visualType": "closed-hand"
+          }
+        ],
+        "description": "A photorealistic top-down orange tabby cat paw cursor family with relaxed, open, and closed states and a broad softly faded lower-right wrist transition.",
+        "id": "realistic-orange-tabby-cat-paw",
+        "minimumReaderSchemaVersion": 2,
+        "name": "Realistic Orange Tabby Cat Paw",
+        "localizedNames": {
+          "de": "Realistische orangefarbene Tigerkatzenpfote",
+          "en": "Realistic Orange Tabby Cat Paw",
+          "es": "Pata realista de gato atigrado naranja",
+          "fr": "Patte réaliste de chat tigré roux",
+          "it": "Zampa realistica di gatto soriano arancione",
+          "ja": "リアルな茶トラ猫の前足",
+          "ko": "사실적인 주황 줄무늬 고양이 발",
+          "pt-BR": "Pata realista de gato tigrado laranja",
+          "zh-Hans": "写实橘猫爪",
+          "zh-Hant": "寫實橘貓爪"
+        },
+        "schemaVersion": 2,
+        "tags": [
+          "cat",
+          "paw",
+          "realistic",
+          "orange",
+          "tabby",
+          "top-down",
+          "soft-edge"
+        ],
+        "version": "1.0.1"
+      },
+      "assetBaseURL": "/cursor-style-packs/realistic-orange-tabby-cat-paw/1.0.1/"
+    },
+    {
+      "manifest": {
+        "assets": [
+          {
+            "byteCount": 35114,
+            "fileName": "cursors/arrow.png",
+            "hotspot": {
+              "x": 8,
+              "y": 8
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 200,
+            "scale": 8,
+            "sha256": "de21f4138888e68fc60aaaa9307b509f128c5f0ff17c461ccd3325eb1a8d9eeb",
+            "visualType": "arrow"
+          }
+        ],
+        "description": "A cheerful fresh leek default cursor in crisp green and white.",
+        "id": "fresh-leek-pointer",
+        "minimumReaderSchemaVersion": 2,
+        "name": "Fresh Leek Pointer",
+        "localizedNames": {
+          "de": "Frischer Lauchzeiger",
+          "en": "Fresh Leek Pointer",
+          "es": "Puntero de puerro fresco",
+          "fr": "Pointeur poireau frais",
+          "it": "Puntatore porro fresco",
+          "ja": "フレッシュな長ねぎポインター",
+          "ko": "싱그러운 대파 포인터",
+          "pt-BR": "Ponteiro de alho-poró fresco",
+          "zh-Hans": "清新大葱指针",
+          "zh-Hant": "清新青蔥指標"
+        },
+        "schemaVersion": 2,
+        "tags": [
+          "leek",
+          "green",
+          "cheerful"
+        ],
+        "version": "1.0.0"
+      },
+      "assetBaseURL": "/cursor-style-packs/fresh-leek-pointer/1.0.0/"
+    },
+    {
+      "manifest": {
+        "assets": [
+          {
+            "byteCount": 42673,
+            "fileName": "cursors/arrow.png",
+            "hotspot": {
+              "x": 16,
+              "y": 8
+            },
+            "pixelHeight": 216,
+            "pixelWidth": 184,
+            "scale": 8,
+            "sha256": "6b228ea7e2127e8a61596e57fb3c38ca0e6f4f58bbcc6892fe5de45e2d74fc1d",
+            "visualType": "arrow"
+          },
+          {
+            "byteCount": 23217,
+            "fileName": "cursors/text.png",
+            "hotspot": {
+              "x": 56,
+              "y": 120
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 104,
+            "scale": 8,
+            "sha256": "ab4f848938376aa05459459b4a84be3f6a7e49858fb921ddf0d5aa1793a37fe7",
+            "visualType": "text"
+          },
+          {
+            "byteCount": 53902,
+            "fileName": "cursors/pointer.png",
+            "hotspot": {
+              "x": 56,
+              "y": 8
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 168,
+            "scale": 8,
+            "sha256": "0464428696c9ad0c4c534feb0f1bde18fdc429b5dc68e9980ed7410a629ff2ee",
+            "visualType": "pointer"
+          },
+          {
+            "byteCount": 43675,
+            "fileName": "cursors/crosshair.png",
+            "hotspot": {
+              "x": 112,
+              "y": 112
+            },
+            "pixelHeight": 216,
+            "pixelWidth": 224,
+            "scale": 8,
+            "sha256": "0dac3b253a6fc36fc6ede5466de253a7acf7875287f0a3a3d8e2ab68627ccef0",
+            "visualType": "crosshair"
+          },
+          {
+            "byteCount": 59436,
+            "fileName": "cursors/open-hand.png",
+            "hotspot": {
+              "x": 72,
+              "y": 120
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 160,
+            "scale": 8,
+            "sha256": "134557697af760c9e57964623c9a00d37b92cffc0390eb9d9148a73c8c6509aa",
+            "visualType": "open-hand"
+          },
+          {
+            "byteCount": 50487,
+            "fileName": "cursors/closed-hand.png",
+            "hotspot": {
+              "x": 88,
+              "y": 88
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 160,
+            "scale": 8,
+            "sha256": "d86d022138d03c8028d16c4148b32c961ba11a28e17160defc947e009a5d6d06",
+            "visualType": "closed-hand"
+          },
+          {
+            "byteCount": 25043,
+            "fileName": "cursors/resize-ew.png",
+            "hotspot": {
+              "x": 120,
+              "y": 48
+            },
+            "pixelHeight": 104,
+            "pixelWidth": 240,
+            "scale": 8,
+            "sha256": "45712875b4ab97fe0a25410abe4b8f4fe304a5186a55c12d2768966c94398c86",
+            "visualType": "resize-ew"
+          },
+          {
+            "byteCount": 24200,
+            "fileName": "cursors/resize-ns.png",
+            "hotspot": {
+              "x": 56,
+              "y": 120
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 112,
+            "scale": 8,
+            "sha256": "53d0fed5283bdd4badf40f1c58cfc8e73a089b68f4ab3a87ab0b4c3e4c1d6335",
+            "visualType": "resize-ns"
+          },
+          {
+            "byteCount": 27371,
+            "fileName": "cursors/resize-nwse.png",
+            "hotspot": {
+              "x": 96,
+              "y": 104
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 192,
+            "scale": 8,
+            "sha256": "cc10a6310f6edd528b01245a926395e3d55a5103cc6509042ea857233c4864f8",
+            "visualType": "resize-nwse"
+          },
+          {
+            "byteCount": 27279,
+            "fileName": "cursors/resize-nesw.png",
+            "hotspot": {
+              "x": 96,
+              "y": 104
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 184,
+            "scale": 8,
+            "sha256": "9f9e5c4fff6f3c6b8e2447a0abed0ed7901eddd7ec2a99e596d23893cad50a1a",
+            "visualType": "resize-nesw"
+          },
+          {
+            "byteCount": 69520,
+            "fileName": "cursors/not-allowed.png",
+            "hotspot": {
+              "x": 120,
+              "y": 120
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 232,
+            "scale": 8,
+            "sha256": "7b748348a3334d94fa84bc4d014bda2cc9064b6744e32863fd3761fc90311c20",
+            "visualType": "not-allowed"
+          }
+        ],
+        "description": "Ornate fantasy battle cursors in antique gold, ivory, and sapphire blue.",
+        "id": "gilded-arcane-cursors",
+        "localizedNames": {
+          "de": "Vergoldete arkane Zeiger",
+          "en": "Gilded Arcane Cursors",
+          "es": "Cursores arcanos dorados",
+          "fr": "Curseurs arcaniques dorés",
+          "it": "Cursori arcani dorati",
+          "ja": "金彩秘術カーソル",
+          "ko": "금빛 비전 커서",
+          "pt-BR": "Cursores arcanos dourados",
+          "zh-Hans": "鎏金奥术指针",
+          "zh-Hant": "鎏金奧術游標"
+        },
+        "minimumReaderSchemaVersion": 2,
+        "name": "Gilded Arcane Cursors",
+        "schemaVersion": 2,
+        "tags": [
+          "fantasy",
+          "moba",
+          "gilded",
+          "arcane",
+          "blue",
+          "battle"
+        ],
+        "version": "1.0.0"
+      },
+      "assetBaseURL": "/cursor-style-packs/gilded-arcane-cursors/1.0.0/"
+    },
+    {
+      "manifest": {
+        "assets": [
+          {
+            "byteCount": 6980,
+            "fileName": "cursors/arrow.png",
+            "hotspot": {
+              "x": 24,
+              "y": 8
+            },
+            "pixelHeight": 104,
+            "pixelWidth": 104,
+            "scale": 8,
+            "sha256": "a9f84631d41c0d014ff625cc47b19422111dd6cd00ae50111df3079ed40908cd",
+            "visualType": "arrow"
+          },
+          {
+            "byteCount": 22624,
+            "fileName": "cursors/text.png",
+            "hotspot": {
+              "x": 56,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 120,
+            "scale": 8,
+            "sha256": "6e6ce2564260f959b3f337a32c99174ac02f03bd4f5c8d59cc29dd95d20cc1bf",
+            "visualType": "text"
+          },
+          {
+            "byteCount": 23107,
+            "fileName": "cursors/pointer.png",
+            "hotspot": {
+              "x": 48,
+              "y": 8
+            },
+            "pixelHeight": 216,
+            "pixelWidth": 120,
+            "scale": 8,
+            "sha256": "015fa8b4c2b6837255e372071a9bbca63d21bc1c5cfe0b96b420a0e2d1f91f71",
+            "visualType": "pointer"
+          },
+          {
+            "byteCount": 22160,
+            "fileName": "cursors/crosshair.png",
+            "hotspot": {
+              "x": 64,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 128,
+            "scale": 8,
+            "sha256": "cd901b1a5d4302a324470232d2ba5abac4fa6ec091a6466c2623921d8feb789a",
+            "visualType": "crosshair"
+          },
+          {
+            "byteCount": 21622,
+            "fileName": "cursors/open-hand.png",
+            "hotspot": {
+              "x": 56,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 112,
+            "scale": 8,
+            "sha256": "f44c55059fcd5e6bda6cad017855e3dc264f45bd9903fd0491d2644f212a6c4a",
+            "visualType": "open-hand"
+          },
+          {
+            "byteCount": 22160,
+            "fileName": "cursors/closed-hand.png",
+            "hotspot": {
+              "x": 64,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 128,
+            "scale": 8,
+            "sha256": "cd901b1a5d4302a324470232d2ba5abac4fa6ec091a6466c2623921d8feb789a",
+            "visualType": "closed-hand"
+          },
+          {
+            "byteCount": 17389,
+            "fileName": "cursors/resize-nwse.png",
+            "hotspot": {
+              "x": 80,
+              "y": 80
+            },
+            "pixelHeight": 160,
+            "pixelWidth": 160,
+            "scale": 8,
+            "sha256": "17e8c992e02c66fa913d6a7407fec24cefe2cb1f8c37627928fb8f5daaf39fd2",
+            "visualType": "resize-nwse"
+          },
+          {
+            "byteCount": 16977,
+            "fileName": "cursors/resize-nesw.png",
+            "hotspot": {
+              "x": 64,
+              "y": 88
+            },
+            "pixelHeight": 184,
+            "pixelWidth": 128,
+            "scale": 8,
+            "sha256": "ffbf63fa05919f0e9b8d93601228a502b64b13f91d2594514ea28bf9950ca412",
+            "visualType": "resize-nesw"
+          }
+        ],
+        "description": "Slim realistic silver-shaded furry cat forepaws based on a narrow dorsal-view reference, with soft feathered edges and rotation-based cursor states.",
+        "id": "silver-shaded-cat-paw",
+        "localizedNames": {
+          "de": "Flauschige silberne Katzenpfote",
+          "en": "Silver Shaded Furry Cat Paw",
+          "es": "Pata de gato plateada y peluda",
+          "fr": "Patte de chat argentée et duveteuse",
+          "it": "Zampa di gatto argentata e pelosa",
+          "ja": "シルバーシェードのふわふわ猫の前足",
+          "ko": "실버 셰이드 복슬복슬 고양이 발",
+          "pt-BR": "Pata de gato prateada e peluda",
+          "zh-Hans": "银渐层蓬松猫爪",
+          "zh-Hant": "銀漸層蓬鬆貓爪"
+        },
+        "minimumReaderSchemaVersion": 2,
+        "name": "Silver Shaded Furry Cat Paw",
+        "schemaVersion": 2,
+        "tags": [
+          "cat",
+          "paw",
+          "silver",
+          "shaded",
+          "furry",
+          "realistic",
+          "feathered"
+        ],
+        "version": "1.0.2"
+      },
+      "assetBaseURL": "/cursor-style-packs/silver-shaded-cat-paw/1.0.2/"
+    },
+    {
+      "manifest": {
+        "assets": [
+          {
+            "byteCount": 9074,
+            "fileName": "cursors/arrow.png",
+            "hotspot": {
+              "x": 24,
+              "y": 8
+            },
+            "pixelHeight": 96,
+            "pixelWidth": 104,
+            "scale": 8,
+            "sha256": "3d9e9a02dbe41943b27fcaaf5d752f2a07f2efb332506a0ec1cad81fc2c03ede",
+            "visualType": "arrow"
+          },
+          {
+            "byteCount": 29882,
+            "fileName": "cursors/text.png",
+            "hotspot": {
+              "x": 64,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 128,
+            "scale": 8,
+            "sha256": "c8e25f6b61db197c205f930898547759210ba29afd9c1600e9e2824d15e085b1",
+            "visualType": "text"
+          },
+          {
+            "byteCount": 39464,
+            "fileName": "cursors/open-hand.png",
+            "hotspot": {
+              "x": 88,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 184,
+            "scale": 8,
+            "sha256": "1afa314a5e7330c6b3d850fb762454c62b08bedd7aec375288b5a682e6ab8784",
+            "visualType": "open-hand"
+          },
+          {
+            "byteCount": 26998,
+            "fileName": "cursors/closed-hand.png",
+            "hotspot": {
+              "x": 48,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 96,
+            "scale": 8,
+            "sha256": "885cdb0c10406f0ca482f50767f4c4d0bf1bfd115cff204ae6f13e2de310967f",
+            "visualType": "closed-hand"
+          },
+          {
+            "byteCount": 26998,
+            "fileName": "cursors/resize-ns.png",
+            "hotspot": {
+              "x": 48,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 96,
+            "scale": 8,
+            "sha256": "885cdb0c10406f0ca482f50767f4c4d0bf1bfd115cff204ae6f13e2de310967f",
+            "visualType": "resize-ns"
+          },
+          {
+            "byteCount": 37459,
+            "fileName": "cursors/resize-nwse.png",
+            "hotspot": {
+              "x": 96,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 200,
+            "scale": 8,
+            "sha256": "f6294831d93a700cf579bee69ca2e7a97f1183c3655b404b1a9bd024c7d30254",
+            "visualType": "resize-nwse"
+          },
+          {
+            "byteCount": 38814,
+            "fileName": "cursors/resize-nesw.png",
+            "hotspot": {
+              "x": 96,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 192,
+            "scale": 8,
+            "sha256": "234caa3057a1edf7e11f6fd359b2336d117b38aa5233293a31f07a7d49d512f2",
+            "visualType": "resize-nesw"
+          }
+        ],
+        "description": "Reference-shaped blue-gray realistic cat paw segments with softly feathered fur and diagonal poses, with closed-hand reusing the resize-ns paw resource.",
+        "id": "realistic-blue-cat-paw",
+        "localizedNames": {
+          "de": "Realistische blaue Katzenpfote",
+          "en": "Realistic Blue Cat Paw",
+          "es": "Pata de gato azul realista",
+          "fr": "Patte de chat bleue réaliste",
+          "it": "Zampa di gatto blu realistica",
+          "ja": "リアルな青い猫の肉球",
+          "ko": "사실적인 파란 고양이 발",
+          "pt-BR": "Pata de gato azul realista",
+          "zh-Hans": "写实蓝猫爪",
+          "zh-Hant": "寫實藍貓爪"
+        },
+        "minimumReaderSchemaVersion": 2,
+        "name": "Realistic Blue Cat Paw",
+        "schemaVersion": 2,
+        "tags": [
+          "blue-cat",
+          "cat-paw",
+          "reference-shape",
+          "realistic",
+          "fur",
+          "back-of-paw"
+        ],
+        "version": "2.0.3"
+      },
+      "assetBaseURL": "/cursor-style-packs/realistic-blue-cat-paw/2.0.3/"
+    },
+    {
+      "manifest": {
+        "assets": [
+          {
+            "byteCount": 30066,
+            "fileName": "cursors/arrow.png",
+            "hotspot": {
+              "x": 16,
+              "y": 8
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 200,
+            "scale": 8,
+            "sha256": "923f1d2799135367c3d18d61ef041462f01b39d970e0898748be8be6ed521f95",
+            "visualType": "arrow"
+          },
+          {
+            "byteCount": 15945,
+            "fileName": "cursors/text.png",
+            "hotspot": {
+              "x": 32,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 64,
+            "scale": 8,
+            "sha256": "c6a6cace71862c0e3b333ba17dcc733d5ac5d4ce1f1a1e4140f580d7d0cd3125",
+            "visualType": "text"
+          },
+          {
+            "byteCount": 19025,
+            "fileName": "cursors/pointer.png",
+            "hotspot": {
+              "x": 40,
+              "y": 8
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 80,
+            "scale": 8,
+            "sha256": "22de676cb2538d93e26550039a298ee089b7be67de9f5c1793247105792dda15",
+            "visualType": "pointer"
+          },
+          {
+            "byteCount": 30863,
+            "fileName": "cursors/crosshair.png",
+            "hotspot": {
+              "x": 112,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 224,
+            "scale": 8,
+            "sha256": "50e42f55e1d968941e9d0ad3e247a9d239d02a01b692c8d7622c40b130f7a079",
+            "visualType": "crosshair"
+          },
+          {
+            "byteCount": 42551,
+            "fileName": "cursors/open-hand.png",
+            "hotspot": {
+              "x": 72,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 144,
+            "scale": 8,
+            "sha256": "8aff0c7889936d46f00211cfdad1986cb180b37e69dae0404d694b34421985ee",
+            "visualType": "open-hand"
+          },
+          {
+            "byteCount": 40926,
+            "fileName": "cursors/closed-hand.png",
+            "hotspot": {
+              "x": 64,
+              "y": 96
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 136,
+            "scale": 8,
+            "sha256": "62fafaf0e45c78ae0c0628ead3f02053de3a4e9b0af79dbcdae200d1ba33a839",
+            "visualType": "closed-hand"
+          },
+          {
+            "byteCount": 16777,
+            "fileName": "cursors/resize-ew.png",
+            "hotspot": {
+              "x": 120,
+              "y": 32
+            },
+            "pixelHeight": 64,
+            "pixelWidth": 240,
+            "scale": 8,
+            "sha256": "30ccd2094766febd56cb710d8293a50573668677872351acb1ae4c2f46aca86c",
+            "visualType": "resize-ew"
+          },
+          {
+            "byteCount": 15432,
+            "fileName": "cursors/resize-ns.png",
+            "hotspot": {
+              "x": 32,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 64,
+            "scale": 8,
+            "sha256": "fd0b4d7306c7467f3f6d3ed95d3b00ea66c6a9b77c0d1bc523a125430ec41595",
+            "visualType": "resize-ns"
+          },
+          {
+            "byteCount": 24239,
+            "fileName": "cursors/resize-nwse.png",
+            "hotspot": {
+              "x": 96,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 192,
+            "scale": 8,
+            "sha256": "835aaa32ece8059d35ab8de59a3a4d3e63ea68de4a413a6bb622cff758178107",
+            "visualType": "resize-nwse"
+          },
+          {
+            "byteCount": 23931,
+            "fileName": "cursors/resize-nesw.png",
+            "hotspot": {
+              "x": 96,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 192,
+            "scale": 8,
+            "sha256": "4627843b974cf2b7d899c3142b49c3a3712adb26b5573578af313cd0bca327f1",
+            "visualType": "resize-nesw"
+          },
+          {
+            "byteCount": 46690,
+            "fileName": "cursors/not-allowed.png",
+            "hotspot": {
+              "x": 112,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 224,
+            "scale": 8,
+            "sha256": "1703b33c3075b3e597aa5644d3d89c966f1bf5a2b7400e5143fe2dd40ed16b4d",
+            "visualType": "not-allowed"
+          }
+        ],
+        "description": "A playful cartoon cursor family made from a crooked ancient wooden shaft and a sharpened stone tip.",
+        "id": "crooked-stone-spear",
+        "localizedNames": {
+          "de": "Gekrümmter Steinspieß",
+          "en": "Crooked Stone Spear",
+          "es": "Lanza de piedra torcida",
+          "fr": "Lance de pierre tordue",
+          "it": "Lancia di pietra storta",
+          "ja": "曲がり木の石槍",
+          "ko": "구부러진 나무 돌창",
+          "pt-BR": "Lança de pedra torta",
+          "zh-Hans": "弯木石矛",
+          "zh-Hant": "彎木石矛"
+        },
+        "minimumReaderSchemaVersion": 2,
+        "name": "Crooked Stone Spear",
+        "schemaVersion": 2,
+        "tags": [
+          "cartoon",
+          "stone",
+          "spear",
+          "wood",
+          "ancient",
+          "handmade"
+        ],
+        "version": "1.0.0"
+      },
+      "assetBaseURL": "/cursor-style-packs/crooked-stone-spear/1.0.0/"
+    },
+    {
+      "manifest": {
+        "assets": [
+          {
+            "byteCount": 44903,
+            "fileName": "cursors/arrow.png",
+            "hotspot": {
+              "x": 24,
+              "y": 8
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 200,
+            "scale": 8,
+            "sha256": "fd014cdadf5feda14ce74e560cbbaf965b08f01c93460e85604b039073bc89fa",
+            "visualType": "arrow"
+          },
+          {
+            "byteCount": 36906,
+            "fileName": "cursors/text.png",
+            "hotspot": {
+              "x": 88,
+              "y": 104
+            },
+            "pixelHeight": 216,
+            "pixelWidth": 176,
+            "scale": 8,
+            "sha256": "d60ced23e6505d5a7c4a70308eec95358e8f384af23fdd11068bc734dfb3dc5d",
+            "visualType": "text"
+          },
+          {
+            "byteCount": 46049,
+            "fileName": "cursors/pointer.png",
+            "hotspot": {
+              "x": 64,
+              "y": 8
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 200,
+            "scale": 8,
+            "sha256": "63fbcbbdc2d65411dcf4259ede7aad5376dc5d7cf811bf8d7b0104def1578c16",
+            "visualType": "pointer"
+          },
+          {
+            "byteCount": 38754,
+            "fileName": "cursors/crosshair.png",
+            "hotspot": {
+              "x": 112,
+              "y": 112
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 224,
+            "scale": 8,
+            "sha256": "d6ecfb87afead76dacd5c30c6e4c0dffb57086d60ffae916cfde74efcc7d0f50",
+            "visualType": "crosshair"
+          },
+          {
+            "byteCount": 46673,
+            "fileName": "cursors/open-hand.png",
+            "hotspot": {
+              "x": 80,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 160,
+            "scale": 8,
+            "sha256": "2f887ede183557b43337164cd5f982964ba36eda0b44799b8d78c95f033b8e83",
+            "visualType": "open-hand"
+          },
+          {
+            "byteCount": 44750,
+            "fileName": "cursors/closed-hand.png",
+            "hotspot": {
+              "x": 80,
+              "y": 96
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 160,
+            "scale": 8,
+            "sha256": "7a35df51911405353a975fa1b44cd5a9e460db08cea73167805eeccda86a0e4f",
+            "visualType": "closed-hand"
+          }
+        ],
+        "description": "A cheerful cartoon hamster companion cursor family with a classic pointer arrow and clean cocoa outlines.",
+        "id": "honey-hamster",
+        "localizedNames": {
+          "de": "Honig-Hamster",
+          "en": "Honey Hamster",
+          "es": "Hámster de Miel",
+          "fr": "Hamster au Miel",
+          "it": "Criceto al Miele",
+          "ja": "はちみつハムスター",
+          "ko": "꿀 햄스터",
+          "pt-BR": "Hamster de Mel",
+          "zh-Hans": "蜜糖仓鼠",
+          "zh-Hant": "蜜糖倉鼠"
+        },
+        "minimumReaderSchemaVersion": 2,
+        "name": "Honey Hamster",
+        "schemaVersion": 2,
+        "tags": [
+          "hamster",
+          "cartoon",
+          "cute",
+          "companion",
+          "warm"
+        ],
+        "version": "1.0.1"
+      },
+      "assetBaseURL": "/cursor-style-packs/honey-hamster/1.0.1/"
+    },
+    {
+      "manifest": {
+        "assets": [
+          {
+            "byteCount": 38880,
+            "fileName": "cursors/arrow.png",
+            "hotspot": {
+              "x": 24,
+              "y": 8
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 192,
+            "scale": 8,
+            "sha256": "4fffce865961ccc39782fb19b253fc192c15879b069237471b6cfd04587927e1",
+            "visualType": "arrow"
+          }
+        ],
+        "description": "A single angled cartoon lipstick used as the default arrow cursor.",
+        "id": "cartoon-lipstick-cursor",
+        "localizedNames": {
+          "de": "Cartoon-Lippenstift-Cursor",
+          "en": "Cartoon Lipstick Cursor",
+          "es": "Cursor de lápiz labial de dibujos",
+          "fr": "Curseur rouge à lèvres cartoon",
+          "it": "Cursore rossetto cartoon",
+          "ja": "カートゥーン口紅カーソル",
+          "ko": "카툰 립스틱 커서",
+          "pt-BR": "Cursor de batom cartunesco",
+          "zh-Hans": "卡通口红指针",
+          "zh-Hant": "卡通口紅指標"
+        },
+        "minimumReaderSchemaVersion": 2,
+        "name": "Cartoon Lipstick Cursor",
+        "schemaVersion": 2,
+        "tags": [
+          "cartoon",
+          "lipstick",
+          "cosmetic",
+          "pink",
+          "arrow"
+        ],
+        "version": "1.0.0"
+      },
+      "assetBaseURL": "/cursor-style-packs/cartoon-lipstick-cursor/1.0.0/"
+    },
+    {
+      "manifest": {
+        "assets": [
+          {
+            "byteCount": 42951,
+            "fileName": "cursors/arrow.png",
+            "hotspot": {
+              "x": 88,
+              "y": 8
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 200,
+            "scale": 8,
+            "sha256": "d559915d65b70aec67c975e59761684bbc57b6b8ee8f9e31da3175d5061a66d9",
+            "visualType": "arrow"
+          },
+          {
+            "byteCount": 33024,
+            "fileName": "cursors/text.png",
+            "hotspot": {
+              "x": 72,
+              "y": 112
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 144,
+            "scale": 8,
+            "sha256": "b13a2eec4cee200ded7435f5fd90b3aa773fc86885e701fa93acacc42fc0f222",
+            "visualType": "text"
+          },
+          {
+            "byteCount": 37891,
+            "fileName": "cursors/pointer.png",
+            "hotspot": {
+              "x": 80,
+              "y": 8
+            },
+            "pixelHeight": 216,
+            "pixelWidth": 160,
+            "scale": 8,
+            "sha256": "416eeb11ebeab60f86f2a888a3e481191d4c5cbfdf337435bf2e5aab301eb493",
+            "visualType": "pointer"
+          },
+          {
+            "byteCount": 34473,
+            "fileName": "cursors/open-hand.png",
+            "hotspot": {
+              "x": 72,
+              "y": 112
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 144,
+            "scale": 8,
+            "sha256": "bb04afbffc7d607d97df46a4b49b034502de2ab296bd6abbc2741da1a4992c97",
+            "visualType": "open-hand"
+          },
+          {
+            "byteCount": 33807,
+            "fileName": "cursors/closed-hand.png",
+            "hotspot": {
+              "x": 72,
+              "y": 96
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 152,
+            "scale": 8,
+            "sha256": "dc1905022e0d72765651978295ccd0eff8524994c2f630a871b69e1a50b784e1",
+            "visualType": "closed-hand"
+          },
+          {
+            "byteCount": 31838,
+            "fileName": "cursors/resize-ew.png",
+            "hotspot": {
+              "x": 104,
+              "y": 72
+            },
+            "pixelHeight": 144,
+            "pixelWidth": 216,
+            "scale": 8,
+            "sha256": "cd7cdd73f3f9bf562573efe1c0282b906308f334f2b14876a67acdcca252ed99",
+            "visualType": "resize-ew"
+          },
+          {
+            "byteCount": 31256,
+            "fileName": "cursors/resize-ns.png",
+            "hotspot": {
+              "x": 64,
+              "y": 112
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 136,
+            "scale": 8,
+            "sha256": "6c0fd78a011d7ac4524d01923bdaa87a069345d194dc484c3d981e57b4fc6bd2",
+            "visualType": "resize-ns"
+          },
+          {
+            "byteCount": 37378,
+            "fileName": "cursors/resize-nwse.png",
+            "hotspot": {
+              "x": 96,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 192,
+            "scale": 8,
+            "sha256": "cbcf8584dcf04cb8bde19c450ea66f376d939d8eee3f92fd177135c001b5f9bb",
+            "visualType": "resize-nwse"
+          },
+          {
+            "byteCount": 39109,
+            "fileName": "cursors/resize-nesw.png",
+            "hotspot": {
+              "x": 96,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 192,
+            "scale": 8,
+            "sha256": "dc17f4265dcdfc29fbe61dbcc1068e6f6195686b3852beb242aa5732f0a7715c",
+            "visualType": "resize-nesw"
+          }
+        ],
+        "description": "A cheerful cursor family built from one cartoon lollipop motif rotated for every state.",
+        "id": "cartoon-lollipop-cursor",
+        "localizedNames": {
+          "de": "Cartoon-Lutscher-Cursor",
+          "en": "Cartoon Lollipop Cursor",
+          "es": "Cursor de piruleta de dibujos",
+          "fr": "Curseur sucette cartoon",
+          "it": "Cursore lecca-lecca cartoon",
+          "ja": "カートゥーンロリポップカーソル",
+          "ko": "만화 막대사탕 커서",
+          "pt-BR": "Cursor de pirulito cartunesco",
+          "zh-Hans": "卡通棒棒糖指针",
+          "zh-Hant": "卡通棒棒糖指標"
+        },
+        "minimumReaderSchemaVersion": 2,
+        "name": "Cartoon Lollipop Cursor",
+        "schemaVersion": 2,
+        "tags": [
+          "cartoon",
+          "lollipop",
+          "candy",
+          "cute",
+          "rotated"
+        ],
+        "version": "1.0.0"
+      },
+      "assetBaseURL": "/cursor-style-packs/cartoon-lollipop-cursor/1.0.0/"
+    },
+    {
+      "manifest": {
+        "assets": [
+          {
+            "byteCount": 38208,
+            "fileName": "cursors/arrow.png",
+            "hotspot": {
+              "x": 40,
+              "y": 8
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 184,
+            "scale": 8,
+            "sha256": "8aba1475589858523e97b28a04d1f7204d5d6925b6b3f8ac005ddc7c690f5c35",
+            "visualType": "arrow"
+          },
+          {
+            "byteCount": 28058,
+            "fileName": "cursors/text.png",
+            "hotspot": {
+              "x": 64,
+              "y": 112
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 128,
+            "scale": 8,
+            "sha256": "9e83e221110a66639e22f8089abb07646eabb34d796460cfdd8bcc10b10f3515",
+            "visualType": "text"
+          },
+          {
+            "byteCount": 36982,
+            "fileName": "cursors/pointer.png",
+            "hotspot": {
+              "x": 32,
+              "y": 8
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 176,
+            "scale": 8,
+            "sha256": "a63829335994ed1a1058d7cf6fbe76832237c8c85250532573c531bc0afe0557",
+            "visualType": "pointer"
+          },
+          {
+            "byteCount": 27525,
+            "fileName": "cursors/crosshair.png",
+            "hotspot": {
+              "x": 64,
+              "y": 112
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 128,
+            "scale": 8,
+            "sha256": "58d7415fe0c16d4dc53994a054b7cba119c70029a7ed469684ed8412f350420b",
+            "visualType": "crosshair"
+          },
+          {
+            "byteCount": 27589,
+            "fileName": "cursors/open-hand.png",
+            "hotspot": {
+              "x": 64,
+              "y": 112
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 128,
+            "scale": 8,
+            "sha256": "cd1b62eb6c81440adae8935a101640f6a112face4984918e7cac31420a99a0d6",
+            "visualType": "open-hand"
+          },
+          {
+            "byteCount": 28114,
+            "fileName": "cursors/closed-hand.png",
+            "hotspot": {
+              "x": 64,
+              "y": 112
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 128,
+            "scale": 8,
+            "sha256": "653b05784d5f4ed00dacb6fb0ace2455eb0e40d2c9bcf554c009e1f752b161b3",
+            "visualType": "closed-hand"
+          },
+          {
+            "byteCount": 28452,
+            "fileName": "cursors/resize-ew.png",
+            "hotspot": {
+              "x": 112,
+              "y": 56
+            },
+            "pixelHeight": 120,
+            "pixelWidth": 232,
+            "scale": 8,
+            "sha256": "1443f1fd098a6c621cfb4e986088c9618af1519e7f3a2b1ae12153e8c530b7c4",
+            "visualType": "resize-ew"
+          },
+          {
+            "byteCount": 27905,
+            "fileName": "cursors/resize-ns.png",
+            "hotspot": {
+              "x": 64,
+              "y": 112
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 128,
+            "scale": 8,
+            "sha256": "1c026ffd4636aa27ee1ec13b9b9a28f19f52be00117c9846e1c612160aa6fa4b",
+            "visualType": "resize-ns"
+          },
+          {
+            "byteCount": 37107,
+            "fileName": "cursors/resize-nwse.png",
+            "hotspot": {
+              "x": 96,
+              "y": 112
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 192,
+            "scale": 8,
+            "sha256": "d801bef1b1ccfd6e6dde5c4318498b56733fb5cfe88519a98ea52740bb6fcfb9",
+            "visualType": "resize-nwse"
+          },
+          {
+            "byteCount": 36545,
+            "fileName": "cursors/resize-nesw.png",
+            "hotspot": {
+              "x": 96,
+              "y": 112
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 192,
+            "scale": 8,
+            "sha256": "1a0b4df9bddf2dd28e48fd07a12ea9ff741923889062ec5c5a666b437f5ee1b6",
+            "visualType": "resize-nesw"
+          },
+          {
+            "byteCount": 27864,
+            "fileName": "cursors/not-allowed.png",
+            "hotspot": {
+              "x": 64,
+              "y": 112
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 128,
+            "scale": 8,
+            "sha256": "617b6eafe514bcd0a4d0512112c4ae96ac6b4a4d2fcbf9c97310f93761e56087",
+            "visualType": "not-allowed"
+          }
+        ],
+        "description": "A playful cartoon baby bottle reused across the cursor family through rotation and simple pose changes.",
+        "id": "cartoon-baby-bottle-cursor",
+        "localizedNames": {
+          "de": "Cartoon-Babyflaschenzeiger",
+          "en": "Cartoon Baby Bottle Cursor",
+          "es": "Cursor de biberón de dibujos",
+          "fr": "Curseur biberon cartoon",
+          "it": "Cursore biberon cartoon",
+          "ja": "カートゥーン哺乳びんカーソル",
+          "ko": "카툰 젖병 커서",
+          "pt-BR": "Cursor de mamadeira cartunesca",
+          "zh-Hans": "卡通奶瓶指针",
+          "zh-Hant": "卡通奶瓶指標"
+        },
+        "minimumReaderSchemaVersion": 2,
+        "name": "Cartoon Baby Bottle Cursor",
+        "schemaVersion": 2,
+        "tags": [
+          "cartoon",
+          "baby-bottle",
+          "pastel",
+          "blue",
+          "pink"
+        ],
+        "version": "1.0.0"
+      },
+      "assetBaseURL": "/cursor-style-packs/cartoon-baby-bottle-cursor/1.0.0/"
+    },
+    {
+      "manifest": {
+        "assets": [
+          {
+            "byteCount": 28980,
+            "fileName": "cursors/arrow.png",
+            "hotspot": {
+              "x": 48,
+              "y": 8
+            },
+            "pixelHeight": 184,
+            "pixelWidth": 168,
+            "scale": 8,
+            "sha256": "f4732b8cd138cb759504ad97a315b88929b9fccc6355566b2e8bfd30668ffd56",
+            "visualType": "arrow"
+          },
+          {
+            "byteCount": 25998,
+            "fileName": "cursors/text.png",
+            "hotspot": {
+              "x": 64,
+              "y": 96
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 128,
+            "scale": 8,
+            "sha256": "2c18f8659cb12bb8ec0cf107e38ac759bbf10fd9b43ba65ffa7dced5db1926cc",
+            "visualType": "text"
+          },
+          {
+            "byteCount": 24287,
+            "fileName": "cursors/pointer.png",
+            "hotspot": {
+              "x": 80,
+              "y": 8
+            },
+            "pixelHeight": 184,
+            "pixelWidth": 144,
+            "scale": 8,
+            "sha256": "450da6f9f20973d2a3bd70c1abb03b4d5e5e9dbb0cd0449624e80f95c43b0ea5",
+            "visualType": "pointer"
+          },
+          {
+            "byteCount": 22450,
+            "fileName": "cursors/crosshair.png",
+            "hotspot": {
+              "x": 88,
+              "y": 56
+            },
+            "pixelHeight": 112,
+            "pixelWidth": 176,
+            "scale": 8,
+            "sha256": "4a3bd6c10096e6dc43936e02bea3ec80da587375b9d04b537455f3faeefa844d",
+            "visualType": "crosshair"
+          },
+          {
+            "byteCount": 25956,
+            "fileName": "cursors/open-hand.png",
+            "hotspot": {
+              "x": 64,
+              "y": 96
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 128,
+            "scale": 8,
+            "sha256": "12026c5302590e2419adb340f53d66dbfe5d68b51c011be06f5cf0a4206a292e",
+            "visualType": "open-hand"
+          },
+          {
+            "byteCount": 25351,
+            "fileName": "cursors/closed-hand.png",
+            "hotspot": {
+              "x": 64,
+              "y": 88
+            },
+            "pixelHeight": 184,
+            "pixelWidth": 128,
+            "scale": 8,
+            "sha256": "4ab690d405e14a23dc2b0996f912fdb6564ef3952b0cdf97703c132f0a0f6811",
+            "visualType": "closed-hand"
+          },
+          {
+            "byteCount": 20117,
+            "fileName": "cursors/resize-ew.png",
+            "hotspot": {
+              "x": 112,
+              "y": 40
+            },
+            "pixelHeight": 80,
+            "pixelWidth": 224,
+            "scale": 8,
+            "sha256": "5785c4a4bc39b8ebc23e961c30177714eda639d34e8af47e5a826073df3def48",
+            "visualType": "resize-ew"
+          },
+          {
+            "byteCount": 18480,
+            "fileName": "cursors/resize-ns.png",
+            "hotspot": {
+              "x": 40,
+              "y": 96
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 80,
+            "scale": 8,
+            "sha256": "4b3c500544ac1fea5399fe65a4701224c46b38e6dff242a74d0e0ea0c65d50ac",
+            "visualType": "resize-ns"
+          },
+          {
+            "byteCount": 28438,
+            "fileName": "cursors/resize-nwse.png",
+            "hotspot": {
+              "x": 104,
+              "y": 96
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 208,
+            "scale": 8,
+            "sha256": "bcaea7849fbff7a4838b23618bdcead4758de48d6f6c4fdea48a61eb97ed7757",
+            "visualType": "resize-nwse"
+          },
+          {
+            "byteCount": 28238,
+            "fileName": "cursors/resize-nesw.png",
+            "hotspot": {
+              "x": 104,
+              "y": 96
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 208,
+            "scale": 8,
+            "sha256": "020ea181a16f7c540ba10449e02d86f177cd791bf83433a59225f7670c0dab06",
+            "visualType": "resize-nesw"
+          },
+          {
+            "byteCount": 25956,
+            "fileName": "cursors/not-allowed.png",
+            "hotspot": {
+              "x": 64,
+              "y": 96
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 128,
+            "scale": 8,
+            "sha256": "12026c5302590e2419adb340f53d66dbfe5d68b51c011be06f5cf0a4206a292e",
+            "visualType": "not-allowed"
+          }
+        ],
+        "description": "One cheerful cartoon sea lion reused and rotated across cursor states.",
+        "id": "cartoon-sea-lion-cursor",
+        "localizedNames": {
+          "de": "Cartoon-Seelöwen-Cursor",
+          "en": "Cartoon Sea Lion Cursor",
+          "es": "Cursor de león marino caricaturesco",
+          "fr": "Curseur otarie cartoon",
+          "it": "Cursore leone marino cartoon",
+          "ja": "カートゥーンアシカカーソル",
+          "ko": "카툰 바다사자 커서",
+          "pt-BR": "Cursor de leão-marinho cartoon",
+          "zh-Hans": "卡通海狮指针",
+          "zh-Hant": "卡通海獅指標"
+        },
+        "minimumReaderSchemaVersion": 2,
+        "name": "Cartoon Sea Lion Cursor",
+        "schemaVersion": 2,
+        "tags": [
+          "sea-lion",
+          "cartoon",
+          "seal",
+          "rotated",
+          "marine"
+        ],
+        "version": "1.0.0"
+      },
+      "assetBaseURL": "/cursor-style-packs/cartoon-sea-lion-cursor/1.0.0/"
+    },
+    {
+      "manifest": {
+        "assets": [
+          {
+            "byteCount": 40891,
+            "fileName": "cursors/arrow.png",
+            "hotspot": {
+              "x": 32,
+              "y": 8
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 184,
+            "scale": 8,
+            "sha256": "c259ab4304732cce79d9b13dcfbb74238f4f7117969173908b2df9cb34235e8a",
+            "visualType": "arrow"
+          },
+          {
+            "byteCount": 31059,
+            "fileName": "cursors/resize-ew.png",
+            "hotspot": {
+              "x": 120,
+              "y": 48
+            },
+            "pixelHeight": 96,
+            "pixelWidth": 240,
+            "scale": 8,
+            "sha256": "86a1ce2a2bcaf02472d86655021571b880af568a1fda82684ec8502146dbc191",
+            "visualType": "resize-ew"
+          },
+          {
+            "byteCount": 35441,
+            "fileName": "cursors/resize-nwse.png",
+            "hotspot": {
+              "x": 96,
+              "y": 96
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 192,
+            "scale": 8,
+            "sha256": "c923e9fec0f371acb5ad0e6c7c7ee76ab9093df6c8bfd5a95e43d8f021704c71",
+            "visualType": "resize-nwse"
+          },
+          {
+            "byteCount": 35055,
+            "fileName": "cursors/resize-nesw.png",
+            "hotspot": {
+              "x": 96,
+              "y": 96
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 192,
+            "scale": 8,
+            "sha256": "1a92f638d90f475b573aa7c4d6eae0ca73935ab7ae29ab61326beb06983f3433",
+            "visualType": "resize-nesw"
+          }
+        ],
+        "description": "A cheerful cartoon baguette cursor family built from one reusable bread shape and rotated resize poses.",
+        "id": "cartoon-baguette",
+        "localizedNames": {
+          "de": "Cartoon-Baguette",
+          "en": "Cartoon Baguette",
+          "es": "Bagueta de caricatura",
+          "fr": "Baguette cartoon",
+          "it": "Baguette cartoon",
+          "ja": "カートゥーン・バゲット",
+          "ko": "만화풍 바게트",
+          "pt-BR": "Baguete cartunesca",
+          "zh-Hans": "卡通法棍",
+          "zh-Hant": "卡通法棍"
+        },
+        "minimumReaderSchemaVersion": 2,
+        "name": "Cartoon Baguette",
+        "schemaVersion": 2,
+        "tags": [
+          "cartoon",
+          "bread",
+          "baguette",
+          "food",
+          "playful"
+        ],
+        "version": "1.0.0"
+      },
+      "assetBaseURL": "/cursor-style-packs/cartoon-baguette/1.0.0/"
+    },
+    {
+      "manifest": {
+        "assets": [
+          {
+            "byteCount": 30903,
+            "fileName": "cursors/arrow.png",
+            "hotspot": {
+              "x": 24,
+              "y": 8
+            },
+            "pixelHeight": 176,
+            "pixelWidth": 152,
+            "scale": 8,
+            "sha256": "19e2e476969b37640a2b15f2a9a5b6b07e088ee03236e2c402d6311dcdce80b7",
+            "visualType": "arrow"
+          },
+          {
+            "byteCount": 25348,
+            "fileName": "cursors/text.png",
+            "hotspot": {
+              "x": 48,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 96,
+            "scale": 8,
+            "sha256": "d64642b7d7e20dff1d572d13b31682ff778ec266abe89dd4fac388d79fb52b42",
+            "visualType": "text"
+          },
+          {
+            "byteCount": 27265,
+            "fileName": "cursors/pointer.png",
+            "hotspot": {
+              "x": 40,
+              "y": 8
+            },
+            "pixelHeight": 216,
+            "pixelWidth": 96,
+            "scale": 8,
+            "sha256": "19bfa62bfb500620a2a278c142c01531a8fb3ca4fd0d2bcfa33786824e81feb2",
+            "visualType": "pointer"
+          },
+          {
+            "byteCount": 25912,
+            "fileName": "cursors/crosshair.png",
+            "hotspot": {
+              "x": 48,
+              "y": 104
+            },
+            "pixelHeight": 216,
+            "pixelWidth": 96,
+            "scale": 8,
+            "sha256": "27b9ddf5adb2e573c17b2adbe90d1ad2a47be61f3acffbf819ac1e5690e2ce88",
+            "visualType": "crosshair"
+          },
+          {
+            "byteCount": 27313,
+            "fileName": "cursors/open-hand.png",
+            "hotspot": {
+              "x": 48,
+              "y": 112
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 96,
+            "scale": 8,
+            "sha256": "8a20a4045e2ec70eed853b6aa0cb63877d26b0178c4ed4cee243910a66a2388e",
+            "visualType": "open-hand"
+          },
+          {
+            "byteCount": 27477,
+            "fileName": "cursors/closed-hand.png",
+            "hotspot": {
+              "x": 48,
+              "y": 112
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 96,
+            "scale": 8,
+            "sha256": "1ebdfe8e6df6cfd5c03b4aba5c9cf6b158157b1ff3885cdb852ad70097848d15",
+            "visualType": "closed-hand"
+          },
+          {
+            "byteCount": 25927,
+            "fileName": "cursors/resize-ew.png",
+            "hotspot": {
+              "x": 112,
+              "y": 48
+            },
+            "pixelHeight": 96,
+            "pixelWidth": 224,
+            "scale": 8,
+            "sha256": "9354a83fe4b3b0f362bfd83a59cc9d0154117e07477f4bcdb8b1e0607af55b1b",
+            "visualType": "resize-ew"
+          },
+          {
+            "byteCount": 25752,
+            "fileName": "cursors/resize-ns.png",
+            "hotspot": {
+              "x": 48,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 96,
+            "scale": 8,
+            "sha256": "17a6a9d25286589ca9fbed397cbc1fde08a81f43a74d14860457b7f545a2eccf",
+            "visualType": "resize-ns"
+          },
+          {
+            "byteCount": 32323,
+            "fileName": "cursors/resize-nwse.png",
+            "hotspot": {
+              "x": 80,
+              "y": 88
+            },
+            "pixelHeight": 176,
+            "pixelWidth": 168,
+            "scale": 8,
+            "sha256": "974cc0b7d2c3dbb7b9d362c4218ad4e25fcb1e1f8234c4d9929b5e84e0ad24bd",
+            "visualType": "resize-nwse"
+          },
+          {
+            "byteCount": 32009,
+            "fileName": "cursors/resize-nesw.png",
+            "hotspot": {
+              "x": 80,
+              "y": 88
+            },
+            "pixelHeight": 176,
+            "pixelWidth": 160,
+            "scale": 8,
+            "sha256": "d9ecef15aa59a126fb564b6e7538e7f329cbe2c22a716402371e30c5202fe6e3",
+            "visualType": "resize-nesw"
+          },
+          {
+            "byteCount": 25901,
+            "fileName": "cursors/not-allowed.png",
+            "hotspot": {
+              "x": 48,
+              "y": 104
+            },
+            "pixelHeight": 216,
+            "pixelWidth": 96,
+            "scale": 8,
+            "sha256": "a5b177120fe7515853f3705708a0f53de2edbcc32e47a9079740360685e03054",
+            "visualType": "not-allowed"
+          }
+        ],
+        "description": "A playful cursor family made from one cartoon feather, rotated for each pointer and resize state.",
+        "id": "cartoon-feather-cursor",
+        "localizedNames": {
+          "de": "Cartoon-Federzeiger",
+          "en": "Cartoon Feather Cursor",
+          "es": "Cursor de pluma de caricatura",
+          "fr": "Curseur plume cartoon",
+          "it": "Cursore a piuma cartoon",
+          "ja": "カートゥーン羽根カーソル",
+          "ko": "만화 깃털 커서",
+          "pt-BR": "Cursor de pena cartunesca",
+          "zh-Hans": "卡通羽毛指针",
+          "zh-Hant": "卡通羽毛指標"
+        },
+        "minimumReaderSchemaVersion": 2,
+        "name": "Cartoon Feather Cursor",
+        "schemaVersion": 2,
+        "tags": [
+          "cartoon",
+          "feather",
+          "playful",
+          "rotated",
+          "cursor"
+        ],
+        "version": "1.0.0"
+      },
+      "assetBaseURL": "/cursor-style-packs/cartoon-feather-cursor/1.0.0/"
+    },
+    {
+      "manifest": {
+        "assets": [
+          {
+            "byteCount": 22322,
+            "fileName": "cursors/arrow.png",
+            "hotspot": {
+              "x": 24,
+              "y": 8
+            },
+            "pixelHeight": 136,
+            "pixelWidth": 136,
+            "scale": 8,
+            "sha256": "5a5976c6e09bf4d5881c6ee0a612ca713f818dc4a81734782aa4247e529aedc1",
+            "visualType": "arrow"
+          },
+          {
+            "byteCount": 22322,
+            "fileName": "cursors/pointer.png",
+            "hotspot": {
+              "x": 24,
+              "y": 8
+            },
+            "pixelHeight": 136,
+            "pixelWidth": 136,
+            "scale": 8,
+            "sha256": "5a5976c6e09bf4d5881c6ee0a612ca713f818dc4a81734782aa4247e529aedc1",
+            "visualType": "pointer"
+          },
+          {
+            "byteCount": 20959,
+            "fileName": "cursors/resize-ew.png",
+            "hotspot": {
+              "x": 80,
+              "y": 48
+            },
+            "pixelHeight": 104,
+            "pixelWidth": 168,
+            "scale": 8,
+            "sha256": "eb33a562ae799d757b1bfdf125b01e626f6454757f8ac1739e878bd823b7c7e7",
+            "visualType": "resize-ew"
+          },
+          {
+            "byteCount": 21561,
+            "fileName": "cursors/resize-ns.png",
+            "hotspot": {
+              "x": 48,
+              "y": 80
+            },
+            "pixelHeight": 168,
+            "pixelWidth": 104,
+            "scale": 8,
+            "sha256": "741a33c029df7b02fe67e8437036e6e9a7426790711f50781177886a30ac988a",
+            "visualType": "resize-ns"
+          },
+          {
+            "byteCount": 22407,
+            "fileName": "cursors/resize-nwse.png",
+            "hotspot": {
+              "x": 72,
+              "y": 72
+            },
+            "pixelHeight": 144,
+            "pixelWidth": 144,
+            "scale": 8,
+            "sha256": "982c68edf68371d7208a3179603f42d24c0f22236c54c427ef0935cedc2c7b89",
+            "visualType": "resize-nwse"
+          },
+          {
+            "byteCount": 22100,
+            "fileName": "cursors/resize-nesw.png",
+            "hotspot": {
+              "x": 72,
+              "y": 72
+            },
+            "pixelHeight": 144,
+            "pixelWidth": 144,
+            "scale": 8,
+            "sha256": "e5803f7abf11f551f8d823ec953741950b8386dc83c8b17135b5d08b3f519ee9",
+            "visualType": "resize-nesw"
+          }
+        ],
+        "description": "A cheerful single-corn pointer family with a 45-degree upper-left default angle and rotated states.",
+        "id": "cartoon-corn-pointer",
+        "localizedNames": {
+          "de": "Cartoon-Maiszeiger",
+          "en": "Cartoon Corn Pointer",
+          "es": "Puntero de maíz caricaturesco",
+          "fr": "Pointeur maïs cartoon",
+          "it": "Puntatore a pannocchia cartoon",
+          "ja": "カートゥーンとうもろこしポインター",
+          "ko": "만화 옥수수 포인터",
+          "pt-BR": "Ponteiro de milho cartunesco",
+          "zh-Hans": "卡通玉米指针",
+          "zh-Hant": "卡通玉米游標"
+        },
+        "minimumReaderSchemaVersion": 2,
+        "name": "Cartoon Corn Pointer",
+        "schemaVersion": 2,
+        "tags": [
+          "corn",
+          "cartoon",
+          "food",
+          "rotated",
+          "playful"
+        ],
+        "version": "1.0.0"
+      },
+      "assetBaseURL": "/cursor-style-packs/cartoon-corn-pointer/1.0.0/"
+    },
+    {
+      "manifest": {
+        "assets": [
+          {
+            "byteCount": 39258,
+            "fileName": "cursors/arrow.png",
+            "hotspot": {
+              "x": 32,
+              "y": 8
+            },
+            "pixelHeight": 200,
+            "pixelWidth": 168,
+            "scale": 8,
+            "sha256": "111da6308b6623f6cc46ecd4a2bf192f6f8d6c85fbd3e72ffe7097c84aa17445",
+            "visualType": "arrow"
+          },
+          {
+            "byteCount": 35266,
+            "fileName": "cursors/text.png",
+            "hotspot": {
+              "x": 72,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 152,
+            "scale": 8,
+            "sha256": "398d22fb3c9dfb81924417c5825aff4a828907b648386e98dd603519879b1c32",
+            "visualType": "text"
+          },
+          {
+            "byteCount": 36466,
+            "fileName": "cursors/pointer.png",
+            "hotspot": {
+              "x": 48,
+              "y": 8
+            },
+            "pixelHeight": 200,
+            "pixelWidth": 152,
+            "scale": 8,
+            "sha256": "581546c54e1ccf95329db93443a0b3f96c214e8b325afa43f0becced2a07d3b4",
+            "visualType": "pointer"
+          },
+          {
+            "byteCount": 35266,
+            "fileName": "cursors/crosshair.png",
+            "hotspot": {
+              "x": 72,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 152,
+            "scale": 8,
+            "sha256": "398d22fb3c9dfb81924417c5825aff4a828907b648386e98dd603519879b1c32",
+            "visualType": "crosshair"
+          },
+          {
+            "byteCount": 40376,
+            "fileName": "cursors/open-hand.png",
+            "hotspot": {
+              "x": 96,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 192,
+            "scale": 8,
+            "sha256": "fb907d0087fa8c38c37780917daad5636e724c7a87d469f8376b1e4c27eb08f3",
+            "visualType": "open-hand"
+          },
+          {
+            "byteCount": 28833,
+            "fileName": "cursors/closed-hand.png",
+            "hotspot": {
+              "x": 72,
+              "y": 88
+            },
+            "pixelHeight": 176,
+            "pixelWidth": 144,
+            "scale": 8,
+            "sha256": "ded980665a9e2c2d0e68c55ff5bb84664a3fd41311a86f4f2099f07cdac96f04",
+            "visualType": "closed-hand"
+          },
+          {
+            "byteCount": 41572,
+            "fileName": "cursors/resize-ew.png",
+            "hotspot": {
+              "x": 112,
+              "y": 72
+            },
+            "pixelHeight": 144,
+            "pixelWidth": 224,
+            "scale": 8,
+            "sha256": "a4ad15bb4470a9248167fb4185a775a363cb328e8a916f863cf69f92b8f26379",
+            "visualType": "resize-ew"
+          },
+          {
+            "byteCount": 25306,
+            "fileName": "cursors/resize-ns.png",
+            "hotspot": {
+              "x": 48,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 96,
+            "scale": 8,
+            "sha256": "32ae3b9714e6c7541da871dc0d97ce624b9aec4e373fa04656ae4dacba506f08",
+            "visualType": "resize-ns"
+          },
+          {
+            "byteCount": 31107,
+            "fileName": "cursors/resize-nwse.png",
+            "hotspot": {
+              "x": 104,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 208,
+            "scale": 8,
+            "sha256": "32bfb9270812533ab0bc5ed4e400652e910104eea17e5901e4f7a05aecea049b",
+            "visualType": "resize-nwse"
+          },
+          {
+            "byteCount": 30229,
+            "fileName": "cursors/resize-nesw.png",
+            "hotspot": {
+              "x": 104,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 216,
+            "scale": 8,
+            "sha256": "a1fb81df49507a06d923fa4209cd5c87561463c366feb3ab0328048850005a5d",
+            "visualType": "resize-nesw"
+          },
+          {
+            "byteCount": 48384,
+            "fileName": "cursors/not-allowed.png",
+            "hotspot": {
+              "x": 88,
+              "y": 96
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 184,
+            "scale": 8,
+            "sha256": "4b33b251f6e12065fc5d80c8acb950b5fb6620bdcd78bd5dd75f8e8929060d3a",
+            "visualType": "not-allowed"
+          }
+        ],
+        "description": "A cheerful cartoon Christmas tree cursor family made from one reusable festive tree illustration.",
+        "id": "cartoon-christmas-tree",
+        "localizedNames": {
+          "de": "Cartoon-Weihnachtsbaum",
+          "en": "Cartoon Christmas Tree",
+          "es": "Árbol de Navidad de dibujos",
+          "fr": "Sapin de Noël cartoon",
+          "it": "Albero di Natale cartoon",
+          "ja": "カートゥーンのクリスマスツリー",
+          "ko": "카툰 크리스마스 트리",
+          "pt-BR": "Árvore de Natal cartoon",
+          "zh-Hans": "卡通圣诞树",
+          "zh-Hant": "卡通聖誕樹"
+        },
+        "minimumReaderSchemaVersion": 2,
+        "name": "Cartoon Christmas Tree",
+        "schemaVersion": 2,
+        "tags": [
+          "christmas",
+          "tree",
+          "cartoon",
+          "festive",
+          "holiday"
+        ],
+        "version": "1.0.0"
+      },
+      "assetBaseURL": "/cursor-style-packs/cartoon-christmas-tree/1.0.0/"
+    },
+    {
+      "manifest": {
+        "assets": [
+          {
+            "byteCount": 28229,
+            "fileName": "cursors/arrow.png",
+            "hotspot": {
+              "x": 48,
+              "y": 8
+            },
+            "pixelHeight": 200,
+            "pixelWidth": 168,
+            "scale": 8,
+            "sha256": "1708813bb635492dc7f7b43bd27926c4563edbf562a8a4f7c827804ce87bff48",
+            "visualType": "arrow"
+          },
+          {
+            "byteCount": 23050,
+            "fileName": "cursors/text.png",
+            "hotspot": {
+              "x": 40,
+              "y": 112
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 80,
+            "scale": 8,
+            "sha256": "eba7d36168e46fbda0f63004caadda2c615682d6ef0278f3ec136a030a5ffe9e",
+            "visualType": "text"
+          },
+          {
+            "byteCount": 25734,
+            "fileName": "cursors/pointer.png",
+            "hotspot": {
+              "x": 104,
+              "y": 8
+            },
+            "pixelHeight": 216,
+            "pixelWidth": 144,
+            "scale": 8,
+            "sha256": "d446636c754e7191b13005746ff490ded2a3ffca395ec8786315219df96591be",
+            "visualType": "pointer"
+          },
+          {
+            "byteCount": 26541,
+            "fileName": "cursors/open-hand.png",
+            "hotspot": {
+              "x": 48,
+              "y": 112
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 96,
+            "scale": 8,
+            "sha256": "8e64d4a2fcccf17efa5d65e0d18990f727ec6537a99f07ff11db8932dcdb6fa9",
+            "visualType": "open-hand"
+          },
+          {
+            "byteCount": 25802,
+            "fileName": "cursors/closed-hand.png",
+            "hotspot": {
+              "x": 40,
+              "y": 112
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 88,
+            "scale": 8,
+            "sha256": "776b00d9eb879ee299c47ca0371d29232f5e1fe10761d02babc6cdf8a90d5fba",
+            "visualType": "closed-hand"
+          },
+          {
+            "byteCount": 23177,
+            "fileName": "cursors/resize-ew.png",
+            "hotspot": {
+              "x": 120,
+              "y": 40
+            },
+            "pixelHeight": 80,
+            "pixelWidth": 240,
+            "scale": 8,
+            "sha256": "02a7bc0b57317257b21b67e484bf7406bea7742ece5c8ffe425c052e6adbbf0f",
+            "visualType": "resize-ew"
+          },
+          {
+            "byteCount": 23752,
+            "fileName": "cursors/resize-ns.png",
+            "hotspot": {
+              "x": 40,
+              "y": 112
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 80,
+            "scale": 8,
+            "sha256": "b58b0ca0f0d3079d201fbe925cb402b728727839cbcf92050c7d2a9c2a3388a6",
+            "visualType": "resize-ns"
+          },
+          {
+            "byteCount": 26881,
+            "fileName": "cursors/resize-nwse.png",
+            "hotspot": {
+              "x": 88,
+              "y": 96
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 176,
+            "scale": 8,
+            "sha256": "d8ccf190977fcf80652b4421542ae14b3e7ea4581f70da7d43aec97a437a52ce",
+            "visualType": "resize-nwse"
+          },
+          {
+            "byteCount": 26753,
+            "fileName": "cursors/resize-nesw.png",
+            "hotspot": {
+              "x": 88,
+              "y": 96
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 176,
+            "scale": 8,
+            "sha256": "b630ce631a92e0f173b58178d1e462d706cbf306d683256a13636faaca283814",
+            "visualType": "resize-nesw"
+          },
+          {
+            "byteCount": 26717,
+            "fileName": "cursors/not-allowed.png",
+            "hotspot": {
+              "x": 88,
+              "y": 96
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 176,
+            "scale": 8,
+            "sha256": "5bc767cba338b67391b28a34a618f9176b7be018cd404cba27d33aa86a08eec5",
+            "visualType": "not-allowed"
+          }
+        ],
+        "description": "A cheerful cursor family built from one glossy candied-fruit skewer, reused across pointer, text, hand, resize, and interaction states.",
+        "id": "cartoon-candied-fruit-cursor",
+        "localizedNames": {
+          "de": "Kandierte-Früchte-Cursor im Cartoon-Stil",
+          "en": "Cartoon Candied-Fruit Cursor",
+          "es": "Cursor de fruta confitada caricaturesca",
+          "fr": "Curseur de fruit confit cartoon",
+          "it": "Cursore di frutta candita cartoon",
+          "ja": "カートゥーンフルーツキャンディカーソル",
+          "ko": "카툰 과일 사탕 커서",
+          "pt-BR": "Cursor de fruta cristalizada cartunesca",
+          "zh-Hans": "卡通糖葫芦指针",
+          "zh-Hant": "卡通糖葫蘆指標"
+        },
+        "minimumReaderSchemaVersion": 2,
+        "name": "Cartoon Candied-Fruit Cursor",
+        "schemaVersion": 2,
+        "tags": [
+          "cartoon",
+          "candied-fruit",
+          "fruit-skewer",
+          "sweet",
+          "food"
+        ],
+        "version": "1.0.0"
+      },
+      "assetBaseURL": "/cursor-style-packs/cartoon-candied-fruit-cursor/1.0.0/"
+    },
+    {
+      "manifest": {
+        "assets": [
+          {
+            "byteCount": 42214,
+            "fileName": "cursors/arrow.png",
+            "hotspot": {
+              "x": 24,
+              "y": 8
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 176,
+            "scale": 8,
+            "sha256": "db04ac1878061584249039ad85028e3b6f2350d1a71305e550b068d2cdf27a7d",
+            "visualType": "arrow"
+          },
+          {
+            "byteCount": 35878,
+            "fileName": "cursors/text.png",
+            "hotspot": {
+              "x": 72,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 152,
+            "scale": 8,
+            "sha256": "9c6ce25566abb408e2473310d23f4b5af1f19b7fe80ddbe46b5d6e99b9a35eb4",
+            "visualType": "text"
+          },
+          {
+            "byteCount": 41746,
+            "fileName": "cursors/pointer.png",
+            "hotspot": {
+              "x": 56,
+              "y": 8
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 160,
+            "scale": 8,
+            "sha256": "805f3c749135b1eb5099cd3bf120ad6ba0977f0142894beab76ce6e8af4c0113",
+            "visualType": "pointer"
+          },
+          {
+            "byteCount": 32181,
+            "fileName": "cursors/crosshair.png",
+            "hotspot": {
+              "x": 96,
+              "y": 112
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 192,
+            "scale": 8,
+            "sha256": "a8ba8232eb504718500687cbb59188b7636963031de36b0e01ecbcba93c808b7",
+            "visualType": "crosshair"
+          },
+          {
+            "byteCount": 38062,
+            "fileName": "cursors/open-hand.png",
+            "hotspot": {
+              "x": 80,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 160,
+            "scale": 8,
+            "sha256": "0bc02be41621a1427e6f537cf3f8275bb212aa66e59e0645c00b1e75523eaee3",
+            "visualType": "open-hand"
+          },
+          {
+            "byteCount": 36704,
+            "fileName": "cursors/closed-hand.png",
+            "hotspot": {
+              "x": 80,
+              "y": 96
+            },
+            "pixelHeight": 200,
+            "pixelWidth": 160,
+            "scale": 8,
+            "sha256": "5e26d0b47194dfa5044901dd542886a87b7b809b21a1e863dc1844695ad9cccc",
+            "visualType": "closed-hand"
+          },
+          {
+            "byteCount": 34765,
+            "fileName": "cursors/resize-ew.png",
+            "hotspot": {
+              "x": 96,
+              "y": 72
+            },
+            "pixelHeight": 152,
+            "pixelWidth": 200,
+            "scale": 8,
+            "sha256": "3ae2d0edb6737565f90ddf921969f710214d1c379765ac8d0e58b1b37c7bdf50",
+            "visualType": "resize-ew"
+          },
+          {
+            "byteCount": 30792,
+            "fileName": "cursors/resize-ns.png",
+            "hotspot": {
+              "x": 56,
+              "y": 112
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 120,
+            "scale": 8,
+            "sha256": "b17cef78f1fe6c7d28b08b43e26d8136b10bd2591dae98ebaab7a97ab302cd44",
+            "visualType": "resize-ns"
+          },
+          {
+            "byteCount": 34990,
+            "fileName": "cursors/resize-nwse.png",
+            "hotspot": {
+              "x": 88,
+              "y": 96
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 176,
+            "scale": 8,
+            "sha256": "539d97922955b17be4c6546b5188e77f8ebcf4fc026fb2872e4978651ca60716",
+            "visualType": "resize-nwse"
+          },
+          {
+            "byteCount": 33166,
+            "fileName": "cursors/resize-nesw.png",
+            "hotspot": {
+              "x": 80,
+              "y": 96
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 168,
+            "scale": 8,
+            "sha256": "3960532bd5e52f96269006d0567c6486f8545dc07aab7135287547eb29779061",
+            "visualType": "resize-nesw"
+          }
+        ],
+        "description": "A cheerful cartoon pizza-slice cursor family with warm cheese, red toppings, and bold dark outlines, reusing one slice at different angles.",
+        "id": "cartoon-pizza-slice",
+        "localizedNames": {
+          "de": "Cartoon-Pizzastück-Cursor",
+          "en": "Cartoon Pizza Slice Cursor",
+          "es": "Cursor de porción de pizza de dibujos",
+          "fr": "Curseur de part de pizza cartoon",
+          "it": "Cursore fetta di pizza cartoon",
+          "ja": "カートゥーンピザスライスカーソル",
+          "ko": "카툰 피자 조각 커서",
+          "pt-BR": "Cursor de fatia de pizza cartunesca",
+          "zh-Hans": "卡通披萨片指针",
+          "zh-Hant": "卡通披薩片指標"
+        },
+        "minimumReaderSchemaVersion": 2,
+        "name": "Cartoon Pizza Slice Cursor",
+        "schemaVersion": 2,
+        "tags": [
+          "pizza",
+          "food",
+          "cartoon",
+          "playful",
+          "colorful",
+          "slice"
+        ],
+        "version": "1.0.0"
+      },
+      "assetBaseURL": "/cursor-style-packs/cartoon-pizza-slice/1.0.0/"
+    },
+    {
+      "manifest": {
+        "assets": [
+          {
+            "byteCount": 21151,
+            "fileName": "cursors/arrow.png",
+            "hotspot": {
+              "x": 24,
+              "y": 8
+            },
+            "pixelHeight": 176,
+            "pixelWidth": 136,
+            "scale": 8,
+            "sha256": "18f167894303bdd1c767d47645c1140f6be317205157317233c7910978f11eba",
+            "visualType": "arrow"
+          },
+          {
+            "byteCount": 18506,
+            "fileName": "cursors/text.png",
+            "hotspot": {
+              "x": 40,
+              "y": 96
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 80,
+            "scale": 8,
+            "sha256": "90bd62e8ffad5c22f3a48bab071b7cc076c8bee458670e7b5ef6e993b3f45040",
+            "visualType": "text"
+          },
+          {
+            "byteCount": 19878,
+            "fileName": "cursors/pointer.png",
+            "hotspot": {
+              "x": 96,
+              "y": 8
+            },
+            "pixelHeight": 184,
+            "pixelWidth": 120,
+            "scale": 8,
+            "sha256": "d0a4b797053a6e55f0d211b19f83098cd1ab49d0f85bd9bcd9176bd1e289b755",
+            "visualType": "pointer"
+          },
+          {
+            "byteCount": 17198,
+            "fileName": "cursors/crosshair.png",
+            "hotspot": {
+              "x": 40,
+              "y": 96
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 80,
+            "scale": 8,
+            "sha256": "a007a503f292e20393cb67924843df81fa7428356933cb16746ae946bc1d7848",
+            "visualType": "crosshair"
+          },
+          {
+            "byteCount": 16159,
+            "fileName": "cursors/open-hand.png",
+            "hotspot": {
+              "x": 56,
+              "y": 80
+            },
+            "pixelHeight": 160,
+            "pixelWidth": 112,
+            "scale": 8,
+            "sha256": "bc1b3fc0c0d6743b16fdbf6051055f42baa1f3e0c13c6aaea41be517a79fd590",
+            "visualType": "open-hand"
+          },
+          {
+            "byteCount": 14654,
+            "fileName": "cursors/closed-hand.png",
+            "hotspot": {
+              "x": 40,
+              "y": 88
+            },
+            "pixelHeight": 176,
+            "pixelWidth": 80,
+            "scale": 8,
+            "sha256": "d23e85c85c02324c630628c79ba56f41ff03b77d273f89102d14a4e7a0823077",
+            "visualType": "closed-hand"
+          },
+          {
+            "byteCount": 14811,
+            "fileName": "cursors/resize-ew.png",
+            "hotspot": {
+              "x": 88,
+              "y": 40
+            },
+            "pixelHeight": 80,
+            "pixelWidth": 176,
+            "scale": 8,
+            "sha256": "7b9bb1e722bdc025c64771c23158ab2ed31c57e57ad66e636303a54cb06a8c80",
+            "visualType": "resize-ew"
+          },
+          {
+            "byteCount": 15207,
+            "fileName": "cursors/resize-ns.png",
+            "hotspot": {
+              "x": 40,
+              "y": 88
+            },
+            "pixelHeight": 176,
+            "pixelWidth": 80,
+            "scale": 8,
+            "sha256": "40272c684a49a1163d477d5125f6dd255ac335dffb76668eb7a1d8b78896c4ab",
+            "visualType": "resize-ns"
+          },
+          {
+            "byteCount": 18595,
+            "fileName": "cursors/resize-nwse.png",
+            "hotspot": {
+              "x": 72,
+              "y": 72
+            },
+            "pixelHeight": 144,
+            "pixelWidth": 144,
+            "scale": 8,
+            "sha256": "d3e874c7f4e3c6d4c09e9d4cf644060efb9472d34d6c7e009c853b21ee44dd29",
+            "visualType": "resize-nwse"
+          },
+          {
+            "byteCount": 18080,
+            "fileName": "cursors/resize-nesw.png",
+            "hotspot": {
+              "x": 72,
+              "y": 80
+            },
+            "pixelHeight": 160,
+            "pixelWidth": 144,
+            "scale": 8,
+            "sha256": "caaab004ced2fe6ed6ee6aa85e51abd1505693e4d44a8dade623b75bea555ee1",
+            "visualType": "resize-nesw"
+          },
+          {
+            "byteCount": 16484,
+            "fileName": "cursors/not-allowed.png",
+            "hotspot": {
+              "x": 64,
+              "y": 72
+            },
+            "pixelHeight": 152,
+            "pixelWidth": 128,
+            "scale": 8,
+            "sha256": "40584572657f8c10ef62ae15461b6f11684aa4626c34319d72d4364835b87c34",
+            "visualType": "not-allowed"
+          }
+        ],
+        "description": "One cartoon carrot reused by rotation for every cursor state, with no added symbol elements.",
+        "id": "cartoon-carrot-cursors",
+        "localizedNames": {
+          "de": "Cartoon-Möhrenzeiger",
+          "en": "Cartoon Carrot Cursors",
+          "es": "Cursores de zanahoria de dibujos",
+          "fr": "Curseurs carotte cartoon",
+          "it": "Cursori carota cartoon",
+          "ja": "カートゥーンにんじんカーソル",
+          "ko": "만화 당근 커서",
+          "pt-BR": "Cursores de cenoura cartunescos",
+          "zh-Hans": "卡通胡萝卜指针",
+          "zh-Hant": "卡通胡蘿蔔指標"
+        },
+        "minimumReaderSchemaVersion": 2,
+        "name": "Cartoon Carrot Cursors",
+        "schemaVersion": 2,
+        "tags": [
+          "carrot",
+          "cartoon",
+          "food",
+          "rotating",
+          "single-asset"
+        ],
+        "version": "1.0.0"
+      },
+      "assetBaseURL": "/cursor-style-packs/cartoon-carrot-cursors/1.0.0/"
+    },
+    {
+      "manifest": {
+        "assets": [
+          {
+            "byteCount": 19670,
+            "fileName": "cursors/arrow.png",
+            "hotspot": {
+              "x": 40,
+              "y": 8
+            },
+            "pixelHeight": 144,
+            "pixelWidth": 152,
+            "scale": 8,
+            "sha256": "19c32b9182499cd01bbefbb7f8ace06ee7cd8334fbf0dbc8e5c7d346a817f098",
+            "visualType": "arrow"
+          },
+          {
+            "byteCount": 19637,
+            "fileName": "cursors/text.png",
+            "hotspot": {
+              "x": 72,
+              "y": 72
+            },
+            "pixelHeight": 144,
+            "pixelWidth": 144,
+            "scale": 8,
+            "sha256": "5a83bc440d0b64f59db6910db8af2035d3daf90b9f06308575cae69761fbe984",
+            "visualType": "text"
+          },
+          {
+            "byteCount": 19670,
+            "fileName": "cursors/pointer.png",
+            "hotspot": {
+              "x": 40,
+              "y": 8
+            },
+            "pixelHeight": 144,
+            "pixelWidth": 152,
+            "scale": 8,
+            "sha256": "19c32b9182499cd01bbefbb7f8ace06ee7cd8334fbf0dbc8e5c7d346a817f098",
+            "visualType": "pointer"
+          },
+          {
+            "byteCount": 19637,
+            "fileName": "cursors/crosshair.png",
+            "hotspot": {
+              "x": 72,
+              "y": 72
+            },
+            "pixelHeight": 144,
+            "pixelWidth": 144,
+            "scale": 8,
+            "sha256": "5a83bc440d0b64f59db6910db8af2035d3daf90b9f06308575cae69761fbe984",
+            "visualType": "crosshair"
+          },
+          {
+            "byteCount": 19637,
+            "fileName": "cursors/open-hand.png",
+            "hotspot": {
+              "x": 72,
+              "y": 72
+            },
+            "pixelHeight": 144,
+            "pixelWidth": 144,
+            "scale": 8,
+            "sha256": "5a83bc440d0b64f59db6910db8af2035d3daf90b9f06308575cae69761fbe984",
+            "visualType": "open-hand"
+          },
+          {
+            "byteCount": 19637,
+            "fileName": "cursors/closed-hand.png",
+            "hotspot": {
+              "x": 72,
+              "y": 72
+            },
+            "pixelHeight": 144,
+            "pixelWidth": 144,
+            "scale": 8,
+            "sha256": "5a83bc440d0b64f59db6910db8af2035d3daf90b9f06308575cae69761fbe984",
+            "visualType": "closed-hand"
+          },
+          {
+            "byteCount": 19348,
+            "fileName": "cursors/resize-ew.png",
+            "hotspot": {
+              "x": 72,
+              "y": 72
+            },
+            "pixelHeight": 144,
+            "pixelWidth": 144,
+            "scale": 8,
+            "sha256": "688e99a1bb06c000ee5238f2dc161e9dca453ad828ba5b1550fb8f7bb9853334",
+            "visualType": "resize-ew"
+          },
+          {
+            "byteCount": 19637,
+            "fileName": "cursors/resize-ns.png",
+            "hotspot": {
+              "x": 72,
+              "y": 72
+            },
+            "pixelHeight": 144,
+            "pixelWidth": 144,
+            "scale": 8,
+            "sha256": "5a83bc440d0b64f59db6910db8af2035d3daf90b9f06308575cae69761fbe984",
+            "visualType": "resize-ns"
+          },
+          {
+            "byteCount": 18664,
+            "fileName": "cursors/resize-nwse.png",
+            "hotspot": {
+              "x": 88,
+              "y": 48
+            },
+            "pixelHeight": 104,
+            "pixelWidth": 176,
+            "scale": 8,
+            "sha256": "8b76ce8a1f27de1af08a0b6fda818b9076cb84fe7d0061d1106c391820870752",
+            "visualType": "resize-nwse"
+          },
+          {
+            "byteCount": 18997,
+            "fileName": "cursors/resize-nesw.png",
+            "hotspot": {
+              "x": 48,
+              "y": 88
+            },
+            "pixelHeight": 176,
+            "pixelWidth": 104,
+            "scale": 8,
+            "sha256": "ceb216145cd7d15c4b308b640647635f723ba0153c8164bb0dc85f301454ec01",
+            "visualType": "resize-nesw"
+          },
+          {
+            "byteCount": 19637,
+            "fileName": "cursors/not-allowed.png",
+            "hotspot": {
+              "x": 72,
+              "y": 72
+            },
+            "pixelHeight": 144,
+            "pixelWidth": 144,
+            "scale": 8,
+            "sha256": "5a83bc440d0b64f59db6910db8af2035d3daf90b9f06308575cae69761fbe984",
+            "visualType": "not-allowed"
+          }
+        ],
+        "description": "A faceless cartoon ice-cream cone set on the upper-left 45-degree diagonal and reused across cursor states.",
+        "id": "cartoon-ice-cream",
+        "localizedNames": {
+          "de": "Cartoon-Eis",
+          "en": "Cartoon Ice Cream",
+          "es": "Helado de dibujos",
+          "fr": "Glace cartoon",
+          "it": "Gelato cartone animato",
+          "ja": "カートゥーンアイスクリーム",
+          "ko": "만화 아이스크림",
+          "pt-BR": "Sorvete cartunesco",
+          "zh-Hans": "卡通冰淇淋",
+          "zh-Hant": "卡通冰淇淋"
+        },
+        "minimumReaderSchemaVersion": 2,
+        "name": "Cartoon Ice Cream",
+        "schemaVersion": 2,
+        "tags": [
+          "ice-cream",
+          "cartoon",
+          "food",
+          "pastel",
+          "rotated",
+          "faceless"
+        ],
+        "version": "1.0.3"
+      },
+      "assetBaseURL": "/cursor-style-packs/cartoon-ice-cream/1.0.3/"
+    },
+    {
+      "manifest": {
+        "assets": [
+          {
+            "byteCount": 26726,
+            "fileName": "cursors/arrow.png",
+            "hotspot": {
+              "x": 40,
+              "y": 8
+            },
+            "pixelHeight": 184,
+            "pixelWidth": 176,
+            "scale": 8,
+            "sha256": "01b650c6232c8e98cf2d97cf346a977f0695ae50d9010339ee95d04ed02fa8dd",
+            "visualType": "arrow"
+          },
+          {
+            "byteCount": 22453,
+            "fileName": "cursors/pointer.png",
+            "hotspot": {
+              "x": 40,
+              "y": 8
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 112,
+            "scale": 8,
+            "sha256": "ec6e51785a42033ad21723a75f5bbd8fc5b29ef298214e49cebb333d61ddbdc6",
+            "visualType": "pointer"
+          },
+          {
+            "byteCount": 21619,
+            "fileName": "cursors/open-hand.png",
+            "hotspot": {
+              "x": 48,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 96,
+            "scale": 8,
+            "sha256": "18253e1be8482f4c24e3fae0e37de541c4dc21acce1caaa92818bde56cddc450",
+            "visualType": "open-hand"
+          },
+          {
+            "byteCount": 16225,
+            "fileName": "cursors/closed-hand.png",
+            "hotspot": {
+              "x": 40,
+              "y": 88
+            },
+            "pixelHeight": 176,
+            "pixelWidth": 88,
+            "scale": 8,
+            "sha256": "d417e84d8ff771cbac87f794fc8867570067059af06389c742efba638166c9c1",
+            "visualType": "closed-hand"
+          },
+          {
+            "byteCount": 18139,
+            "fileName": "cursors/resize-ew.png",
+            "hotspot": {
+              "x": 104,
+              "y": 40
+            },
+            "pixelHeight": 88,
+            "pixelWidth": 208,
+            "scale": 8,
+            "sha256": "b42602426eac17b4f43ab16a284c641e362a49dff7955342a71e98a3d7e2449f",
+            "visualType": "resize-ew"
+          },
+          {
+            "byteCount": 16009,
+            "fileName": "cursors/resize-ns.png",
+            "hotspot": {
+              "x": 40,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 80,
+            "scale": 8,
+            "sha256": "5b29909bb83e846d50cf589d336f180b7f6769be410c3231679d62dbaf9999f1",
+            "visualType": "resize-ns"
+          },
+          {
+            "byteCount": 22849,
+            "fileName": "cursors/resize-nwse.png",
+            "hotspot": {
+              "x": 80,
+              "y": 88
+            },
+            "pixelHeight": 176,
+            "pixelWidth": 160,
+            "scale": 8,
+            "sha256": "ba8227520e44a417b09eb4e185c07bfba0a958bb4a9acb9dcf9e27735d73e51d",
+            "visualType": "resize-nwse"
+          },
+          {
+            "byteCount": 21553,
+            "fileName": "cursors/resize-nesw.png",
+            "hotspot": {
+              "x": 72,
+              "y": 88
+            },
+            "pixelHeight": 176,
+            "pixelWidth": 152,
+            "scale": 8,
+            "sha256": "06a6a4167049bd52e0c2360fa5f87fb26cd124c7723e9693e036f36c8132667e",
+            "visualType": "resize-nesw"
+          }
+        ],
+        "description": "A crisp cartoon pixel torch cursor family with warm flame colors and simple expressive poses.",
+        "id": "cartoon-pixel-torch",
+        "localizedNames": {
+          "de": "Cartoon-Pixel-Fackel",
+          "en": "Cartoon Pixel Torch",
+          "es": "Antorcha de Píxeles Animada",
+          "fr": "Torche Pixel Cartoon",
+          "it": "Torcia Pixel Cartoon",
+          "ja": "カートゥーン風ピクセル松明",
+          "ko": "카툰 픽셀 횃불",
+          "pt-BR": "Tocha Pixel Cartunesca",
+          "zh-Hans": "卡通像素火把",
+          "zh-Hant": "卡通像素火把"
+        },
+        "minimumReaderSchemaVersion": 2,
+        "name": "Cartoon Pixel Torch",
+        "schemaVersion": 2,
+        "tags": [
+          "pixel",
+          "cartoon",
+          "torch",
+          "warm"
+        ],
+        "version": "1.0.1"
+      },
+      "assetBaseURL": "/cursor-style-packs/cartoon-pixel-torch/1.0.1/"
+    },
+    {
+      "manifest": {
+        "assets": [
+          {
+            "byteCount": 38353,
+            "fileName": "cursors/arrow.png",
+            "hotspot": {
+              "x": 16,
+              "y": 8
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 200,
+            "scale": 8,
+            "sha256": "c511c141323d5d80f020a9b040b35117555e5ab50c2e99d7607ea748c871f827",
+            "visualType": "arrow"
+          },
+          {
+            "byteCount": 18773,
+            "fileName": "cursors/text.png",
+            "hotspot": {
+              "x": 40,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 80,
+            "scale": 8,
+            "sha256": "b44e63f2356ddd8676aa88867339c9e0ef86cfd163f368f22452572e8b36899c",
+            "visualType": "text"
+          },
+          {
+            "byteCount": 37870,
+            "fileName": "cursors/pointer.png",
+            "hotspot": {
+              "x": 16,
+              "y": 8
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 200,
+            "scale": 8,
+            "sha256": "bb313eab5e93c65879b2750871f4be9726aa6baea770485952a7c4447777ae70",
+            "visualType": "pointer"
+          },
+          {
+            "byteCount": 28492,
+            "fileName": "cursors/crosshair.png",
+            "hotspot": {
+              "x": 104,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 208,
+            "scale": 8,
+            "sha256": "50a513cd2393544876798e4c3e6ff2862db2a3de20c7aca5a4c703aca079ab4d",
+            "visualType": "crosshair"
+          },
+          {
+            "byteCount": 18506,
+            "fileName": "cursors/open-hand.png",
+            "hotspot": {
+              "x": 40,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 80,
+            "scale": 8,
+            "sha256": "b0a525fc03dc62d8d7ddd9f210cfb9c9ac8235d119df0cf156e9c1a68a1b1dba",
+            "visualType": "open-hand"
+          },
+          {
+            "byteCount": 19034,
+            "fileName": "cursors/closed-hand.png",
+            "hotspot": {
+              "x": 40,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 80,
+            "scale": 8,
+            "sha256": "362d01712fbe3ae4fb9786032468f6ab641a767138ea7619c7911344975d58cd",
+            "visualType": "closed-hand"
+          },
+          {
+            "byteCount": 18310,
+            "fileName": "cursors/resize-ew.png",
+            "hotspot": {
+              "x": 112,
+              "y": 32
+            },
+            "pixelHeight": 72,
+            "pixelWidth": 224,
+            "scale": 8,
+            "sha256": "1c38b56fe980357a43f1a57bd0bcb7882ad2861a7015046d4ae145b03a21772b",
+            "visualType": "resize-ew"
+          },
+          {
+            "byteCount": 17836,
+            "fileName": "cursors/resize-ns.png",
+            "hotspot": {
+              "x": 32,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 72,
+            "scale": 8,
+            "sha256": "f660027987a1840feff714a21c7d50172790bb1bb0be6a9d4642110b5c9f0c7b",
+            "visualType": "resize-ns"
+          },
+          {
+            "byteCount": 33815,
+            "fileName": "cursors/resize-nwse.png",
+            "hotspot": {
+              "x": 96,
+              "y": 96
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 192,
+            "scale": 8,
+            "sha256": "08a07069585e6e0792b82d789000923ba6d37d5368f3fd5fbc5b7f2f20a9af9c",
+            "visualType": "resize-nwse"
+          },
+          {
+            "byteCount": 35634,
+            "fileName": "cursors/resize-nesw.png",
+            "hotspot": {
+              "x": 96,
+              "y": 96
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 192,
+            "scale": 8,
+            "sha256": "5be5fc99dfcbc0fda535010207c35c948a04ada58e1d316335819e0754e47150",
+            "visualType": "resize-nesw"
+          }
+        ],
+        "description": "A compact yellow tied umbrella cursor family with a 45-degree upper-left default direction.",
+        "id": "cartoon-umbrella",
+        "localizedNames": {
+          "de": "Gelber Cartoon-Langschirm",
+          "en": "Yellow Cartoon Umbrella",
+          "es": "Paraguas largo amarillo de dibujos",
+          "fr": "Parapluie cartoon jaune à long manche",
+          "it": "Ombrello cartoon giallo a manico lungo",
+          "ja": "黄色いカートゥーン長柄傘",
+          "ko": "노란 카툰 장우산",
+          "pt-BR": "Guarda-chuva cartunesco amarelo de cabo longo",
+          "zh-Hans": "黄色卡通长柄雨伞",
+          "zh-Hant": "黃色卡通長柄雨傘"
+        },
+        "minimumReaderSchemaVersion": 2,
+        "name": "Yellow Cartoon Umbrella",
+        "schemaVersion": 2,
+        "tags": [
+          "cartoon",
+          "umbrella",
+          "yellow",
+          "tied",
+          "folded",
+          "upper-left",
+          "rotating"
+        ],
+        "version": "1.0.3"
+      },
+      "assetBaseURL": "/cursor-style-packs/cartoon-umbrella/1.0.3/"
+    },
+    {
+      "manifest": {
+        "assets": [
+          {
+            "byteCount": 33122,
+            "fileName": "cursors/arrow.png",
+            "hotspot": {
+              "x": 16,
+              "y": 8
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 160,
+            "scale": 8,
+            "sha256": "3b75cccdd520e749a7b9b554ba4719fd7bb8f6296c632069844a2cc90502acd9",
+            "visualType": "arrow"
+          },
+          {
+            "byteCount": 27704,
+            "fileName": "cursors/text.png",
+            "hotspot": {
+              "x": 64,
+              "y": 104
+            },
+            "pixelHeight": 216,
+            "pixelWidth": 128,
+            "scale": 8,
+            "sha256": "e91a5aa00702a0dccc1292f26683c2fc28e522da80a721496034277a5513a513",
+            "visualType": "text"
+          },
+          {
+            "byteCount": 30583,
+            "fileName": "cursors/pointer.png",
+            "hotspot": {
+              "x": 32,
+              "y": 8
+            },
+            "pixelHeight": 216,
+            "pixelWidth": 128,
+            "scale": 8,
+            "sha256": "bc98e1c47f3c210b4d138a0f3d6c392159d66d79bede2e5591cd780464714d9c",
+            "visualType": "pointer"
+          },
+          {
+            "byteCount": 27806,
+            "fileName": "cursors/crosshair.png",
+            "hotspot": {
+              "x": 64,
+              "y": 104
+            },
+            "pixelHeight": 216,
+            "pixelWidth": 128,
+            "scale": 8,
+            "sha256": "5f6aef0410c3d13d4c17daa8a6522c002212b4b02b5d973a883e864bde1b87c1",
+            "visualType": "crosshair"
+          },
+          {
+            "byteCount": 28399,
+            "fileName": "cursors/open-hand.png",
+            "hotspot": {
+              "x": 64,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 128,
+            "scale": 8,
+            "sha256": "d7b608b694f8fb6f48bfef213e8d9b173411abb72f18f8e7b719221a95fe1634",
+            "visualType": "open-hand"
+          },
+          {
+            "byteCount": 26796,
+            "fileName": "cursors/closed-hand.png",
+            "hotspot": {
+              "x": 64,
+              "y": 96
+            },
+            "pixelHeight": 200,
+            "pixelWidth": 128,
+            "scale": 8,
+            "sha256": "4cda7c6263b5b5ed0d855c3ff1b9bf975206b585ff89213bab566008a2eefd90",
+            "visualType": "closed-hand"
+          },
+          {
+            "byteCount": 24086,
+            "fileName": "cursors/resize-ew.png",
+            "hotspot": {
+              "x": 96,
+              "y": 56
+            },
+            "pixelHeight": 120,
+            "pixelWidth": 192,
+            "scale": 8,
+            "sha256": "35625255023ce9824f2723dad8172f2688080ff8fe4c103df83c73efc973f40e",
+            "visualType": "resize-ew"
+          },
+          {
+            "byteCount": 26482,
+            "fileName": "cursors/resize-ns.png",
+            "hotspot": {
+              "x": 56,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 120,
+            "scale": 8,
+            "sha256": "6c8c7533807707e4c8f5ec405e35e4c753c266957bec4daa357e3109a898b4cb",
+            "visualType": "resize-ns"
+          },
+          {
+            "byteCount": 31467,
+            "fileName": "cursors/resize-nwse.png",
+            "hotspot": {
+              "x": 88,
+              "y": 88
+            },
+            "pixelHeight": 176,
+            "pixelWidth": 176,
+            "scale": 8,
+            "sha256": "aacc3bc9e1ea1fdfcfedfa956371c26a97d186276f7ff290ecd11c795cbe743e",
+            "visualType": "resize-nwse"
+          },
+          {
+            "byteCount": 30790,
+            "fileName": "cursors/resize-nesw.png",
+            "hotspot": {
+              "x": 80,
+              "y": 88
+            },
+            "pixelHeight": 184,
+            "pixelWidth": 168,
+            "scale": 8,
+            "sha256": "41789a874a4b40b0df4dff39b51829e8fe9bcabaed719d1611851a95cb432211",
+            "visualType": "resize-nesw"
+          }
+        ],
+        "description": "A cheerful cursor family made from one reusable cartoon leaf, rotated for each interaction state.",
+        "id": "cartoon-leaf-cursor",
+        "localizedNames": {
+          "de": "Cartoon-Blattcursor",
+          "en": "Cartoon Leaf Cursor",
+          "es": "Cursor de hoja caricaturesca",
+          "fr": "Curseur feuille cartoon",
+          "it": "Cursore a foglia cartoon",
+          "ja": "カートゥーンの葉っぱカーソル",
+          "ko": "만화풍 잎사귀 커서",
+          "pt-BR": "Cursor de folha cartunesca",
+          "zh-Hans": "卡通叶子指针",
+          "zh-Hant": "卡通葉子指標"
+        },
+        "minimumReaderSchemaVersion": 2,
+        "name": "Cartoon Leaf Cursor",
+        "schemaVersion": 2,
+        "tags": [
+          "cartoon",
+          "leaf",
+          "nature",
+          "green"
+        ],
+        "version": "1.0.0"
+      },
+      "assetBaseURL": "/cursor-style-packs/cartoon-leaf-cursor/1.0.0/"
+    },
+    {
+      "manifest": {
+        "assets": [
+          {
+            "byteCount": 28554,
+            "fileName": "cursors/arrow.png",
+            "hotspot": {
+              "x": 48,
+              "y": 8
+            },
+            "pixelHeight": 168,
+            "pixelWidth": 208,
+            "scale": 8,
+            "sha256": "188324bb3c0fd8b7a4fef54c747498e168f752af414c35c80e7af56f10cd18a9",
+            "visualType": "arrow"
+          },
+          {
+            "byteCount": 24956,
+            "fileName": "cursors/text.png",
+            "hotspot": {
+              "x": 40,
+              "y": 112
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 88,
+            "scale": 8,
+            "sha256": "8c628d2e3c39f6a780bc2e77f62447962df5c5dc3d3da036a6b4dfcdf86c761b",
+            "visualType": "text"
+          },
+          {
+            "byteCount": 29533,
+            "fileName": "cursors/pointer.png",
+            "hotspot": {
+              "x": 112,
+              "y": 8
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 160,
+            "scale": 8,
+            "sha256": "7656a695a460e17c909063809e0369175a4f6a52eef98efa7276696ec228f6b9",
+            "visualType": "pointer"
+          },
+          {
+            "byteCount": 30717,
+            "fileName": "cursors/open-hand.png",
+            "hotspot": {
+              "x": 64,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 136,
+            "scale": 8,
+            "sha256": "72c8bcbfe8e26bbd92028dbdf1eefe8fa75435eff54152d2436618ebabd3e299",
+            "visualType": "open-hand"
+          },
+          {
+            "byteCount": 34055,
+            "fileName": "cursors/closed-hand.png",
+            "hotspot": {
+              "x": 80,
+              "y": 88
+            },
+            "pixelHeight": 176,
+            "pixelWidth": 160,
+            "scale": 8,
+            "sha256": "cc53de012a2de1fdd2a86f40b3d165ec8cebb02c76eee589600d3caa939c4380",
+            "visualType": "closed-hand"
+          },
+          {
+            "byteCount": 26087,
+            "fileName": "cursors/resize-ew.png",
+            "hotspot": {
+              "x": 112,
+              "y": 56
+            },
+            "pixelHeight": 112,
+            "pixelWidth": 232,
+            "scale": 8,
+            "sha256": "87a4067e0374d9004498268f12e8a4d219a052ec4be6ca29409eacbf9fa53078",
+            "visualType": "resize-ew"
+          },
+          {
+            "byteCount": 24145,
+            "fileName": "cursors/resize-ns.png",
+            "hotspot": {
+              "x": 40,
+              "y": 112
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 88,
+            "scale": 8,
+            "sha256": "529bc0d7a6f3cbb3e456dee0bb9fd3a9deee7cd1705abeb59a3b7abaee161601",
+            "visualType": "resize-ns"
+          },
+          {
+            "byteCount": 31970,
+            "fileName": "cursors/resize-nwse.png",
+            "hotspot": {
+              "x": 96,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 192,
+            "scale": 8,
+            "sha256": "269827136d563388534590ae7159c969ae2e65e9ee80fc31bcff55c2ec606f2b",
+            "visualType": "resize-nwse"
+          },
+          {
+            "byteCount": 31939,
+            "fileName": "cursors/resize-nesw.png",
+            "hotspot": {
+              "x": 96,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 192,
+            "scale": 8,
+            "sha256": "2c6ec53681efdef2d932d7650ecda7dc5c92309cc54113e5ba6ed92bcb44927e",
+            "visualType": "resize-nesw"
+          }
+        ],
+        "description": "A simple unpersonified caterpillar cursor with a side-view default pointer and one worm per state.",
+        "id": "emoji-caterpillar",
+        "localizedNames": {
+          "de": "Emoji-Raupe",
+          "en": "Emoji Caterpillar",
+          "es": "Oruga emoji",
+          "fr": "Chenille emoji",
+          "it": "Bruco emoji",
+          "ja": "絵文字の毛虫",
+          "ko": "이모지 애벌레",
+          "pt-BR": "Lagarta emoji",
+          "zh-Hans": "表情包毛毛虫",
+          "zh-Hant": "表情包毛毛蟲"
+        },
+        "minimumReaderSchemaVersion": 2,
+        "name": "Emoji Caterpillar",
+        "schemaVersion": 2,
+        "tags": [
+          "emoji",
+          "caterpillar",
+          "bug",
+          "green",
+          "side-view",
+          "simple"
+        ],
+        "version": "1.0.1"
+      },
+      "assetBaseURL": "/cursor-style-packs/emoji-caterpillar/1.0.1/"
+    },
+    {
+      "manifest": {
+        "assets": [
+          {
+            "byteCount": 40948,
+            "fileName": "cursors/arrow.png",
+            "hotspot": {
+              "x": 24,
+              "y": 8
+            },
+            "pixelHeight": 216,
+            "pixelWidth": 192,
+            "scale": 8,
+            "sha256": "edc27847ebf2f94e7c42ff84e28e5035d44b5146d96ca53c9042418451a99f70",
+            "visualType": "arrow"
+          },
+          {
+            "byteCount": 31511,
+            "fileName": "cursors/text.png",
+            "hotspot": {
+              "x": 72,
+              "y": 112
+            },
+            "pixelHeight": 224,
+            "pixelWidth": 144,
+            "scale": 8,
+            "sha256": "e5d2baf65997696634e191e52266089f96d0a813855bdad946e08b1bfbf01721",
+            "visualType": "text"
+          },
+          {
+            "byteCount": 34502,
+            "fileName": "cursors/pointer.png",
+            "hotspot": {
+              "x": 24,
+              "y": 8
+            },
+            "pixelHeight": 200,
+            "pixelWidth": 176,
+            "scale": 8,
+            "sha256": "b4d7d617be89977775310342b49e15c7f69e389d70693f367df4df33c2e41f24",
+            "visualType": "pointer"
+          },
+          {
+            "byteCount": 34206,
+            "fileName": "cursors/crosshair.png",
+            "hotspot": {
+              "x": 80,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 160,
+            "scale": 8,
+            "sha256": "1bb4292066bb309cee052c3b59f3dfca1593999367124e59bd208e754ea32451",
+            "visualType": "crosshair"
+          },
+          {
+            "byteCount": 36025,
+            "fileName": "cursors/open-hand.png",
+            "hotspot": {
+              "x": 88,
+              "y": 88
+            },
+            "pixelHeight": 176,
+            "pixelWidth": 176,
+            "scale": 8,
+            "sha256": "2612fae7705b7e863427b933a7287e8245a62103caf3af7f20150a2f7cfa07b0",
+            "visualType": "open-hand"
+          },
+          {
+            "byteCount": 35501,
+            "fileName": "cursors/closed-hand.png",
+            "hotspot": {
+              "x": 88,
+              "y": 88
+            },
+            "pixelHeight": 176,
+            "pixelWidth": 176,
+            "scale": 8,
+            "sha256": "22d3ddcd1400e7ea5e8d00b2eac8f1910ef5e06b61783a522d239e407c5fb11b",
+            "visualType": "closed-hand"
+          },
+          {
+            "byteCount": 38630,
+            "fileName": "cursors/resize-ew.png",
+            "hotspot": {
+              "x": 112,
+              "y": 64
+            },
+            "pixelHeight": 136,
+            "pixelWidth": 224,
+            "scale": 8,
+            "sha256": "25e55ac3df3e43b0878e21844bd82263b569b641771de433c8861217949124da",
+            "visualType": "resize-ew"
+          },
+          {
+            "byteCount": 29013,
+            "fileName": "cursors/resize-ns.png",
+            "hotspot": {
+              "x": 56,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 112,
+            "scale": 8,
+            "sha256": "3198874314126cff43f8826f588356a27fddeaab48b7f661bd1ac2f1f82ebc1f",
+            "visualType": "resize-ns"
+          },
+          {
+            "byteCount": 33531,
+            "fileName": "cursors/resize-nwse.png",
+            "hotspot": {
+              "x": 88,
+              "y": 96
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 176,
+            "scale": 8,
+            "sha256": "d45ccd96b99dbb899c63fb901c7a4d2e413683909a03d0d0373c7e7117af8699",
+            "visualType": "resize-nwse"
+          },
+          {
+            "byteCount": 32598,
+            "fileName": "cursors/resize-nesw.png",
+            "hotspot": {
+              "x": 80,
+              "y": 96
+            },
+            "pixelHeight": 192,
+            "pixelWidth": 168,
+            "scale": 8,
+            "sha256": "dd5c50ae12c152c51d229972f37eaba524b0fd59f97c4394f250f48fd418ef0e",
+            "visualType": "resize-nesw"
+          },
+          {
+            "byteCount": 59520,
+            "fileName": "cursors/not-allowed.png",
+            "hotspot": {
+              "x": 104,
+              "y": 104
+            },
+            "pixelHeight": 208,
+            "pixelWidth": 208,
+            "scale": 8,
+            "sha256": "2a5631859a274c52ea08f7b0a026cc91b5f2ddf16b1ba831e410242541898764",
+            "visualType": "not-allowed"
+          }
+        ],
+        "description": "A cheerful cartoon watermelon cursor family using one reusable wedge rotated for each interaction state and a complete round watermelon for disabled state.",
+        "id": "cartoon-watermelon",
+        "localizedNames": {
+          "de": "Cartoon-Wassermelonen-Cursor",
+          "en": "Cartoon Watermelon Cursor",
+          "es": "Cursor de sandía caricaturesca",
+          "fr": "Curseur pastèque cartoon",
+          "it": "Cursore anguria cartoon",
+          "ja": "カートゥーンスイカカーソル",
+          "ko": "카툰 수박 커서",
+          "pt-BR": "Cursor de melancia cartunesca",
+          "zh-Hans": "卡通西瓜指针",
+          "zh-Hant": "卡通西瓜指標"
+        },
+        "minimumReaderSchemaVersion": 2,
+        "name": "Cartoon Watermelon Cursor",
+        "schemaVersion": 2,
+        "tags": [
+          "watermelon",
+          "cartoon",
+          "fruit",
+          "playful"
+        ],
+        "version": "1.0.0"
+      },
+      "assetBaseURL": "/cursor-style-packs/cartoon-watermelon/1.0.0/"
+    }
+  ]
+}

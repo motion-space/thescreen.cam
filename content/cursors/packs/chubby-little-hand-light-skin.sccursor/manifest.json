@@ -1,0 +1,81 @@
+{
+  "assets" : [
+    {
+      "byteCount" : 34090,
+      "fileName" : "cursors/arrow.png",
+      "hotspot" : {
+        "x" : 24,
+        "y" : 8
+      },
+      "pixelHeight" : 216,
+      "pixelWidth" : 200,
+      "scale" : 8,
+      "sha256" : "44896f65cb788613ed73fcfd0f314580035fc9278df13e96a63e688b8da43884",
+      "visualType" : "arrow"
+    },
+    {
+      "byteCount" : 26534,
+      "fileName" : "cursors/pointer.png",
+      "hotspot" : {
+        "x" : 72,
+        "y" : 8
+      },
+      "pixelHeight" : 216,
+      "pixelWidth" : 176,
+      "scale" : 8,
+      "sha256" : "3a0c07e86aff2cb41922c254f9aaae0ef201d2afda1385556b4892e5b7edf214",
+      "visualType" : "pointer"
+    },
+    {
+      "byteCount" : 33517,
+      "fileName" : "cursors/open-hand.png",
+      "hotspot" : {
+        "x" : 96,
+        "y" : 104
+      },
+      "pixelHeight" : 208,
+      "pixelWidth" : 192,
+      "scale" : 8,
+      "sha256" : "5af6e84f21146ce1a5fcd3c8588a1f21905ef6ddcde91aa3ab52db8e2618f569",
+      "visualType" : "open-hand"
+    },
+    {
+      "byteCount" : 28642,
+      "fileName" : "cursors/closed-hand.png",
+      "hotspot" : {
+        "x" : 88,
+        "y" : 96
+      },
+      "pixelHeight" : 192,
+      "pixelWidth" : 176,
+      "scale" : 8,
+      "sha256" : "edb64b25eb03b3dc69918c5e765493d4c5dba6caa03ed81b886bab34a8eb19c0",
+      "visualType" : "closed-hand"
+    }
+  ],
+  "description" : "The exact Chubby Little Hand cursor family in a light peach skin tone.",
+  "id" : "chubby-little-hand-light-skin",
+  "localizedNames" : {
+    "de" : "Pummelige kleine Hand – heller Hautton",
+    "en" : "Light Skin Chubby Little Hand",
+    "es" : "Manita regordeta de piel clara",
+    "fr" : "Petite main potelée à peau claire",
+    "it" : "Manina paffuta dalla pelle chiara",
+    "ja" : "明るい肌色のぷっくり小さな手",
+    "ko" : "밝은 피부색 통통한 작은 손",
+    "pt-BR" : "Mãozinha gordinha de pele clara",
+    "zh-Hans" : "白皙肤色胖嘟嘟小手",
+    "zh-Hant" : "白皙膚色胖嘟嘟小手"
+  },
+  "minimumReaderSchemaVersion" : 2,
+  "name" : "Light Skin Chubby Little Hand",
+  "schemaVersion" : 2,
+  "tags" : [
+    "cute",
+    "hand",
+    "rounded",
+    "skin-tone",
+    "cursor-family"
+  ],
+  "version" : "1.0.0"
+}

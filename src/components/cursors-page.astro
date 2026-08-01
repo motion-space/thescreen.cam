@@ -1,0 +1,241 @@
+---
+import "../styles/global.css";
+import { Check, Copy } from "lucide-react";
+import cursorCatalog from "../data/generated/cursors.json";
+import type { Locale } from "../lib/i18n";
+import { localizedPath, siteUrl } from "../lib/i18n";
+import { getTranslation } from "../lib/translations";
+import { Footer } from "./footer";
+import PageHead from "./page-head.astro";
+import { SiteHeader } from "./site-header";
+import { SmoothScroll } from "./smooth-scroll";
+
+interface Props {
+  locale: Locale;
+}
+
+type CursorPack = (typeof cursorCatalog.packs)[number];
+type CursorAsset = CursorPack["manifest"]["assets"][number];
+
+const { locale } = Astro.props;
+const t = getTranslation(locale);
+const path = "/cursors";
+const packs = cursorCatalog.packs as CursorPack[];
+const copy = {
+  eyebrow: "Cursor Library",
+  title: "Cursor Packs",
+  description: "Browse custom cursor packs for ScreenCam.",
+  available: "Available cursor packs",
+  states: "states",
+  state: "state",
+  createTitle: "Create with Codex",
+  createDescription: "Install the cursor skill, then tell Codex what you want.",
+  createCommand: "npx --yes screencam-cursors@latest install",
+};
+const meta = {
+  title: "Cursor Library | ScreenCam",
+  description: "Browse the open catalog of custom mouse cursor packs available in ScreenCam.",
+};
+const assetUrl = (pack: CursorPack, asset: CursorAsset) =>
+  `${pack.assetBaseURL}${asset.fileName}`;
+const stateName = (value: string) =>
+  value
+    .split("-")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
+const formatBytes = (value: number) =>
+  `${new Intl.NumberFormat("en", { maximumFractionDigits: 0 }).format(value / 1024)} KB`;
+const packByteCount = (pack: CursorPack) =>
+  pack.manifest.assets.reduce((total, asset) => total + asset.byteCount, 0);
+const packName = (pack: CursorPack) =>
+  pack.manifest.localizedNames?.[locale] ?? pack.manifest.name;
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "ScreenCam Cursor Library",
+  url: `${siteUrl}${localizedPath(locale, path)}`,
+  itemListElement: packs.map((pack, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: packName(pack),
+    description: pack.manifest.description,
+    image: `${siteUrl}${assetUrl(pack, pack.manifest.assets[0])}`,
+    url: `${siteUrl}${localizedPath(locale, path)}#${pack.manifest.id}`,
+  })),
+};
+---
+
+<!doctype html>
+<html lang={locale} class="dark">
+  <head>
+    <PageHead
+      locale={locale}
+      path={path}
+      title={meta.title}
+      description={meta.description}
+      robots="index, follow, max-image-preview:large"
+      structuredData={structuredData}
+    />
+  </head>
+  <body class="bg-background font-sans text-foreground antialiased">
+    <SmoothScroll client:media="(hover: hover) and (pointer: fine)" />
+    <a class="skip-link" href="#main">{t.common.skipToContent}</a>
+    <SiteHeader copy={t.header} currentPath={path} languageLabel={t.footer.language} locale={locale} client:load />
+
+    <main id="main" class="cursor-page">
+      <section class="cursor-hero">
+        <div class="cursor-hero-copy">
+          <p class="cursor-eyebrow">{copy.eyebrow}</p>
+          <h1>{copy.title}</h1>
+          <p>{copy.description}</p>
+        </div>
+      </section>
+
+      <section class="cursor-create" aria-labelledby="cursor-create-title">
+        <div class="cursor-create-copy">
+          <p class="cursor-eyebrow">Make your own</p>
+          <h2 id="cursor-create-title">{copy.createTitle}</h2>
+          <p>{copy.createDescription}</p>
+        </div>
+        <div class="cursor-create-terminal" aria-label={copy.createCommand}>
+          <div class="cursor-terminal-bar">
+            <div class="cursor-terminal-dots" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <button
+              type="button"
+              class="cursor-copy-button"
+              data-copy-command={copy.createCommand}
+              aria-label="Copy install command"
+              title="Copy install command"
+            >
+              <Copy className="cursor-copy-icon" aria-hidden="true" />
+              <Check className="cursor-copy-success-icon" aria-hidden="true" />
+            </button>
+          </div>
+          <code><span class="cursor-terminal-prompt">$</span> {copy.createCommand}</code>
+        </div>
+      </section>
+
+      <section class="cursor-library" aria-labelledby="cursor-library-title">
+        <div class="cursor-toolbar">
+          <div>
+            <h2 id="cursor-library-title">{copy.available}</h2>
+            <p>{packs.length} / {packs.length}</p>
+          </div>
+        </div>
+
+        <div class="cursor-grid">
+          {
+            packs.map((pack) => {
+              const arrow = pack.manifest.assets.find((asset) => asset.visualType === "arrow")
+                ?? pack.manifest.assets[0];
+              const stateCount = pack.manifest.assets.length;
+              const name = packName(pack);
+
+              return (
+                <article class="cursor-card" id={pack.manifest.id}>
+                  <div class="cursor-card-preview" data-cursor-card-preview>
+                    <div class="cursor-card-preview-grid" aria-hidden="true"></div>
+                    <img
+                      data-cursor-preview
+                      src={assetUrl(pack, arrow)}
+                      alt={`${name} default cursor`}
+                      width={arrow.pixelWidth}
+                      height={arrow.pixelHeight}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    {stateCount > 1 && (
+                      <div class="cursor-card-preview-select">
+                        <label class="sr-only" for={`${pack.manifest.id}-state`}>Preview state</label>
+                        <select
+                          id={`${pack.manifest.id}-state`}
+                          aria-label={`${name} preview state`}
+                          data-cursor-state-select
+                        >
+                          {
+                            pack.manifest.assets.map((asset) => (
+                              <option
+                                value={asset.visualType}
+                                data-asset-url={assetUrl(pack, asset)}
+                                data-pixel-width={asset.pixelWidth}
+                                data-pixel-height={asset.pixelHeight}
+                                selected={asset.fileName === arrow.fileName}
+                              >
+                                {stateName(asset.visualType)}
+                              </option>
+                            ))
+                          }
+                        </select>
+                      </div>
+                    )}
+                  </div>
+
+                  <div class="cursor-card-copy">
+                    <div class="cursor-card-heading">
+                      <div>
+                        <h3>{name}</h3>
+                        <p>
+                          v{pack.manifest.version} · {formatBytes(packByteCount(pack))} · {stateCount}{" "}
+                          {stateCount === 1 ? copy.state : copy.states}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </article>
+              );
+            })
+          }
+        </div>
+      </section>
+    </main>
+
+    <Footer copy={t.footer} locale={locale} client:visible={{ rootMargin: "-25% 0px" }} />
+
+    <script>
+      document.querySelectorAll("[data-cursor-state-select]").forEach((select) => {
+        if (!(select instanceof HTMLSelectElement)) return;
+
+        const preview = select.closest("[data-cursor-card-preview]")?.querySelector("[data-cursor-preview]");
+        if (!(preview instanceof HTMLImageElement)) return;
+
+        select.addEventListener("change", () => {
+          const option = select.selectedOptions[0];
+          const assetUrl = option?.dataset.assetUrl;
+          if (!assetUrl) return;
+
+          preview.src = assetUrl;
+          preview.width = Number(option.dataset.pixelWidth ?? preview.width);
+          preview.height = Number(option.dataset.pixelHeight ?? preview.height);
+          preview.alt = `${select.getAttribute("aria-label")?.replace(" preview state", "") ?? "Cursor"} ${option.textContent?.trim() ?? ""} cursor`;
+        });
+      });
+
+      document.querySelectorAll("[data-copy-command]").forEach((button) => {
+        if (!(button instanceof HTMLButtonElement)) return;
+
+        button.addEventListener("click", async () => {
+          const command = button.dataset.copyCommand;
+          if (!command) return;
+
+          try {
+            await navigator.clipboard.writeText(command);
+            button.classList.add("is-copied");
+            button.setAttribute("aria-label", "Copied");
+            button.setAttribute("title", "Copied");
+            window.setTimeout(() => {
+              button.classList.remove("is-copied");
+              button.setAttribute("aria-label", "Copy install command");
+              button.setAttribute("title", "Copy install command");
+            }, 1800);
+          } catch {
+            button.blur();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

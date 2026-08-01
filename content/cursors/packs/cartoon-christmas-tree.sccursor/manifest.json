@@ -1,0 +1,172 @@
+{
+  "assets" : [
+    {
+      "byteCount" : 39258,
+      "fileName" : "cursors/arrow.png",
+      "hotspot" : {
+        "x" : 32,
+        "y" : 8
+      },
+      "pixelHeight" : 200,
+      "pixelWidth" : 168,
+      "scale" : 8,
+      "sha256" : "111da6308b6623f6cc46ecd4a2bf192f6f8d6c85fbd3e72ffe7097c84aa17445",
+      "visualType" : "arrow"
+    },
+    {
+      "byteCount" : 35266,
+      "fileName" : "cursors/text.png",
+      "hotspot" : {
+        "x" : 72,
+        "y" : 104
+      },
+      "pixelHeight" : 208,
+      "pixelWidth" : 152,
+      "scale" : 8,
+      "sha256" : "398d22fb3c9dfb81924417c5825aff4a828907b648386e98dd603519879b1c32",
+      "visualType" : "text"
+    },
+    {
+      "byteCount" : 36466,
+      "fileName" : "cursors/pointer.png",
+      "hotspot" : {
+        "x" : 48,
+        "y" : 8
+      },
+      "pixelHeight" : 200,
+      "pixelWidth" : 152,
+      "scale" : 8,
+      "sha256" : "581546c54e1ccf95329db93443a0b3f96c214e8b325afa43f0becced2a07d3b4",
+      "visualType" : "pointer"
+    },
+    {
+      "byteCount" : 35266,
+      "fileName" : "cursors/crosshair.png",
+      "hotspot" : {
+        "x" : 72,
+        "y" : 104
+      },
+      "pixelHeight" : 208,
+      "pixelWidth" : 152,
+      "scale" : 8,
+      "sha256" : "398d22fb3c9dfb81924417c5825aff4a828907b648386e98dd603519879b1c32",
+      "visualType" : "crosshair"
+    },
+    {
+      "byteCount" : 40376,
+      "fileName" : "cursors/open-hand.png",
+      "hotspot" : {
+        "x" : 96,
+        "y" : 104
+      },
+      "pixelHeight" : 208,
+      "pixelWidth" : 192,
+      "scale" : 8,
+      "sha256" : "fb907d0087fa8c38c37780917daad5636e724c7a87d469f8376b1e4c27eb08f3",
+      "visualType" : "open-hand"
+    },
+    {
+      "byteCount" : 28833,
+      "fileName" : "cursors/closed-hand.png",
+      "hotspot" : {
+        "x" : 72,
+        "y" : 88
+      },
+      "pixelHeight" : 176,
+      "pixelWidth" : 144,
+      "scale" : 8,
+      "sha256" : "ded980665a9e2c2d0e68c55ff5bb84664a3fd41311a86f4f2099f07cdac96f04",
+      "visualType" : "closed-hand"
+    },
+    {
+      "byteCount" : 41572,
+      "fileName" : "cursors/resize-ew.png",
+      "hotspot" : {
+        "x" : 112,
+        "y" : 72
+      },
+      "pixelHeight" : 144,
+      "pixelWidth" : 224,
+      "scale" : 8,
+      "sha256" : "a4ad15bb4470a9248167fb4185a775a363cb328e8a916f863cf69f92b8f26379",
+      "visualType" : "resize-ew"
+    },
+    {
+      "byteCount" : 25306,
+      "fileName" : "cursors/resize-ns.png",
+      "hotspot" : {
+        "x" : 48,
+        "y" : 104
+      },
+      "pixelHeight" : 208,
+      "pixelWidth" : 96,
+      "scale" : 8,
+      "sha256" : "32ae3b9714e6c7541da871dc0d97ce624b9aec4e373fa04656ae4dacba506f08",
+      "visualType" : "resize-ns"
+    },
+    {
+      "byteCount" : 31107,
+      "fileName" : "cursors/resize-nwse.png",
+      "hotspot" : {
+        "x" : 104,
+        "y" : 104
+      },
+      "pixelHeight" : 208,
+      "pixelWidth" : 208,
+      "scale" : 8,
+      "sha256" : "32bfb9270812533ab0bc5ed4e400652e910104eea17e5901e4f7a05aecea049b",
+      "visualType" : "resize-nwse"
+    },
+    {
+      "byteCount" : 30229,
+      "fileName" : "cursors/resize-nesw.png",
+      "hotspot" : {
+        "x" : 104,
+        "y" : 104
+      },
+      "pixelHeight" : 208,
+      "pixelWidth" : 216,
+      "scale" : 8,
+      "sha256" : "a1fb81df49507a06d923fa4209cd5c87561463c366feb3ab0328048850005a5d",
+      "visualType" : "resize-nesw"
+    },
+    {
+      "byteCount" : 48384,
+      "fileName" : "cursors/not-allowed.png",
+      "hotspot" : {
+        "x" : 88,
+        "y" : 96
+      },
+      "pixelHeight" : 192,
+      "pixelWidth" : 184,
+      "scale" : 8,
+      "sha256" : "4b33b251f6e12065fc5d80c8acb950b5fb6620bdcd78bd5dd75f8e8929060d3a",
+      "visualType" : "not-allowed"
+    }
+  ],
+  "description" : "A cheerful cartoon Christmas tree cursor family made from one reusable festive tree illustration.",
+  "id" : "cartoon-christmas-tree",
+  "localizedNames" : {
+    "de" : "Cartoon-Weihnachtsbaum",
+    "en" : "Cartoon Christmas Tree",
+    "es" : "Árbol de Navidad de dibujos",
+    "fr" : "Sapin de Noël cartoon",
+    "it" : "Albero di Natale cartoon",
+    "ja" : "カートゥーンのクリスマスツリー",
+    "ko" : "카툰 크리스마스 트리",
+    "pt-BR" : "Árvore de Natal cartoon",
+    "zh-Hans" : "卡通圣诞树",
+    "zh-Hant" : "卡通聖誕樹"
+  },
+  "minimumReaderSchemaVersion" : 2,
+  "name" : "Cartoon Christmas Tree",
+  "schemaVersion" : 2,
+  "tags" : [
+    "christmas",
+    "tree",
+    "cartoon",
+    "festive",
+    "holiday"
+  ],
+  "version" : "1.0.0"
+}

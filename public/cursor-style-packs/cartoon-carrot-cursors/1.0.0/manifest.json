@@ -1,0 +1,172 @@
+{
+  "assets": [
+    {
+      "byteCount": 21151,
+      "fileName": "cursors/arrow.png",
+      "hotspot": {
+        "x": 24,
+        "y": 8
+      },
+      "pixelHeight": 176,
+      "pixelWidth": 136,
+      "scale": 8,
+      "sha256": "18f167894303bdd1c767d47645c1140f6be317205157317233c7910978f11eba",
+      "visualType": "arrow"
+    },
+    {
+      "byteCount": 18506,
+      "fileName": "cursors/text.png",
+      "hotspot": {
+        "x": 40,
+        "y": 96
+      },
+      "pixelHeight": 192,
+      "pixelWidth": 80,
+      "scale": 8,
+      "sha256": "90bd62e8ffad5c22f3a48bab071b7cc076c8bee458670e7b5ef6e993b3f45040",
+      "visualType": "text"
+    },
+    {
+      "byteCount": 19878,
+      "fileName": "cursors/pointer.png",
+      "hotspot": {
+        "x": 96,
+        "y": 8
+      },
+      "pixelHeight": 184,
+      "pixelWidth": 120,
+      "scale": 8,
+      "sha256": "d0a4b797053a6e55f0d211b19f83098cd1ab49d0f85bd9bcd9176bd1e289b755",
+      "visualType": "pointer"
+    },
+    {
+      "byteCount": 17198,
+      "fileName": "cursors/crosshair.png",
+      "hotspot": {
+        "x": 40,
+        "y": 96
+      },
+      "pixelHeight": 192,
+      "pixelWidth": 80,
+      "scale": 8,
+      "sha256": "a007a503f292e20393cb67924843df81fa7428356933cb16746ae946bc1d7848",
+      "visualType": "crosshair"
+    },
+    {
+      "byteCount": 16159,
+      "fileName": "cursors/open-hand.png",
+      "hotspot": {
+        "x": 56,
+        "y": 80
+      },
+      "pixelHeight": 160,
+      "pixelWidth": 112,
+      "scale": 8,
+      "sha256": "bc1b3fc0c0d6743b16fdbf6051055f42baa1f3e0c13c6aaea41be517a79fd590",
+      "visualType": "open-hand"
+    },
+    {
+      "byteCount": 14654,
+      "fileName": "cursors/closed-hand.png",
+      "hotspot": {
+        "x": 40,
+        "y": 88
+      },
+      "pixelHeight": 176,
+      "pixelWidth": 80,
+      "scale": 8,
+      "sha256": "d23e85c85c02324c630628c79ba56f41ff03b77d273f89102d14a4e7a0823077",
+      "visualType": "closed-hand"
+    },
+    {
+      "byteCount": 14811,
+      "fileName": "cursors/resize-ew.png",
+      "hotspot": {
+        "x": 88,
+        "y": 40
+      },
+      "pixelHeight": 80,
+      "pixelWidth": 176,
+      "scale": 8,
+      "sha256": "7b9bb1e722bdc025c64771c23158ab2ed31c57e57ad66e636303a54cb06a8c80",
+      "visualType": "resize-ew"
+    },
+    {
+      "byteCount": 15207,
+      "fileName": "cursors/resize-ns.png",
+      "hotspot": {
+        "x": 40,
+        "y": 88
+      },
+      "pixelHeight": 176,
+      "pixelWidth": 80,
+      "scale": 8,
+      "sha256": "40272c684a49a1163d477d5125f6dd255ac335dffb76668eb7a1d8b78896c4ab",
+      "visualType": "resize-ns"
+    },
+    {
+      "byteCount": 18595,
+      "fileName": "cursors/resize-nwse.png",
+      "hotspot": {
+        "x": 72,
+        "y": 72
+      },
+      "pixelHeight": 144,
+      "pixelWidth": 144,
+      "scale": 8,
+      "sha256": "d3e874c7f4e3c6d4c09e9d4cf644060efb9472d34d6c7e009c853b21ee44dd29",
+      "visualType": "resize-nwse"
+    },
+    {
+      "byteCount": 18080,
+      "fileName": "cursors/resize-nesw.png",
+      "hotspot": {
+        "x": 72,
+        "y": 80
+      },
+      "pixelHeight": 160,
+      "pixelWidth": 144,
+      "scale": 8,
+      "sha256": "caaab004ced2fe6ed6ee6aa85e51abd1505693e4d44a8dade623b75bea555ee1",
+      "visualType": "resize-nesw"
+    },
+    {
+      "byteCount": 16484,
+      "fileName": "cursors/not-allowed.png",
+      "hotspot": {
+        "x": 64,
+        "y": 72
+      },
+      "pixelHeight": 152,
+      "pixelWidth": 128,
+      "scale": 8,
+      "sha256": "40584572657f8c10ef62ae15461b6f11684aa4626c34319d72d4364835b87c34",
+      "visualType": "not-allowed"
+    }
+  ],
+  "description": "One cartoon carrot reused by rotation for every cursor state, with no added symbol elements.",
+  "id": "cartoon-carrot-cursors",
+  "localizedNames": {
+    "de": "Cartoon-Möhrenzeiger",
+    "en": "Cartoon Carrot Cursors",
+    "es": "Cursores de zanahoria de dibujos",
+    "fr": "Curseurs carotte cartoon",
+    "it": "Cursori carota cartoon",
+    "ja": "カートゥーンにんじんカーソル",
+    "ko": "만화 당근 커서",
+    "pt-BR": "Cursores de cenoura cartunescos",
+    "zh-Hans": "卡通胡萝卜指针",
+    "zh-Hant": "卡通胡蘿蔔指標"
+  },
+  "minimumReaderSchemaVersion": 2,
+  "name": "Cartoon Carrot Cursors",
+  "schemaVersion": 2,
+  "tags": [
+    "carrot",
+    "cartoon",
+    "food",
+    "rotating",
+    "single-asset"
+  ],
+  "version": "1.0.0"
+}

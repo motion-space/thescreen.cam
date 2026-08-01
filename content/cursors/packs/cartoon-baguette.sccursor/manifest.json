@@ -1,0 +1,81 @@
+{
+  "assets" : [
+    {
+      "byteCount" : 40891,
+      "fileName" : "cursors/arrow.png",
+      "hotspot" : {
+        "x" : 32,
+        "y" : 8
+      },
+      "pixelHeight" : 224,
+      "pixelWidth" : 184,
+      "scale" : 8,
+      "sha256" : "c259ab4304732cce79d9b13dcfbb74238f4f7117969173908b2df9cb34235e8a",
+      "visualType" : "arrow"
+    },
+    {
+      "byteCount" : 31059,
+      "fileName" : "cursors/resize-ew.png",
+      "hotspot" : {
+        "x" : 120,
+        "y" : 48
+      },
+      "pixelHeight" : 96,
+      "pixelWidth" : 240,
+      "scale" : 8,
+      "sha256" : "86a1ce2a2bcaf02472d86655021571b880af568a1fda82684ec8502146dbc191",
+      "visualType" : "resize-ew"
+    },
+    {
+      "byteCount" : 35441,
+      "fileName" : "cursors/resize-nwse.png",
+      "hotspot" : {
+        "x" : 96,
+        "y" : 96
+      },
+      "pixelHeight" : 192,
+      "pixelWidth" : 192,
+      "scale" : 8,
+      "sha256" : "c923e9fec0f371acb5ad0e6c7c7ee76ab9093df6c8bfd5a95e43d8f021704c71",
+      "visualType" : "resize-nwse"
+    },
+    {
+      "byteCount" : 35055,
+      "fileName" : "cursors/resize-nesw.png",
+      "hotspot" : {
+        "x" : 96,
+        "y" : 96
+      },
+      "pixelHeight" : 192,
+      "pixelWidth" : 192,
+      "scale" : 8,
+      "sha256" : "1a92f638d90f475b573aa7c4d6eae0ca73935ab7ae29ab61326beb06983f3433",
+      "visualType" : "resize-nesw"
+    }
+  ],
+  "description" : "A cheerful cartoon baguette cursor family built from one reusable bread shape and rotated resize poses.",
+  "id" : "cartoon-baguette",
+  "localizedNames" : {
+    "de" : "Cartoon-Baguette",
+    "en" : "Cartoon Baguette",
+    "es" : "Bagueta de caricatura",
+    "fr" : "Baguette cartoon",
+    "it" : "Baguette cartoon",
+    "ja" : "カートゥーン・バゲット",
+    "ko" : "만화풍 바게트",
+    "pt-BR" : "Baguete cartunesca",
+    "zh-Hans" : "卡通法棍",
+    "zh-Hant" : "卡通法棍"
+  },
+  "minimumReaderSchemaVersion" : 2,
+  "name" : "Cartoon Baguette",
+  "schemaVersion" : 2,
+  "tags" : [
+    "cartoon",
+    "bread",
+    "baguette",
+    "food",
+    "playful"
+  ],
+  "version" : "1.0.0"
+}

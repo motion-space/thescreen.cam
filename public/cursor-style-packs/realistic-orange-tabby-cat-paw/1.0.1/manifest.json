@@ -1,0 +1,70 @@
+{
+  "assets": [
+    {
+      "byteCount": 51549,
+      "fileName": "cursors/arrow.png",
+      "hotspot": {
+        "x": 8,
+        "y": 0
+      },
+      "pixelHeight": 216,
+      "pixelWidth": 224,
+      "scale": 8,
+      "sha256": "2448c6d0ca3f8faf8e76a6a62a6de3bad1849594e159775a0d15914de5f12685",
+      "visualType": "arrow"
+    },
+    {
+      "byteCount": 57449,
+      "fileName": "cursors/open-hand.png",
+      "hotspot": {
+        "x": 104,
+        "y": 112
+      },
+      "pixelHeight": 216,
+      "pixelWidth": 224,
+      "scale": 8,
+      "sha256": "89ed63a72cf936a581d0cf6897784ddeb0708c7427db1403041837d1b4c27926",
+      "visualType": "open-hand"
+    },
+    {
+      "byteCount": 47511,
+      "fileName": "cursors/closed-hand.png",
+      "hotspot": {
+        "x": 104,
+        "y": 88
+      },
+      "pixelHeight": 192,
+      "pixelWidth": 208,
+      "scale": 8,
+      "sha256": "d7e2ca4ebdfc6afc8ca435ff6556c8de2948c507279449376b64eeafde6fa3f6",
+      "visualType": "closed-hand"
+    }
+  ],
+  "description": "A photorealistic top-down orange tabby cat paw cursor family with relaxed, open, and closed states and a broad softly faded lower-right wrist transition.",
+  "id": "realistic-orange-tabby-cat-paw",
+  "minimumReaderSchemaVersion": 2,
+  "name": "Realistic Orange Tabby Cat Paw",
+  "localizedNames": {
+    "de": "Realistische orangefarbene Tigerkatzenpfote",
+    "en": "Realistic Orange Tabby Cat Paw",
+    "es": "Pata realista de gato atigrado naranja",
+    "fr": "Patte réaliste de chat tigré roux",
+    "it": "Zampa realistica di gatto soriano arancione",
+    "ja": "リアルな茶トラ猫の前足",
+    "ko": "사실적인 주황 줄무늬 고양이 발",
+    "pt-BR": "Pata realista de gato tigrado laranja",
+    "zh-Hans": "写实橘猫爪",
+    "zh-Hant": "寫實橘貓爪"
+  },
+  "schemaVersion": 2,
+  "tags": [
+    "cat",
+    "paw",
+    "realistic",
+    "orange",
+    "tabby",
+    "top-down",
+    "soft-edge"
+  ],
+  "version": "1.0.1"
+}

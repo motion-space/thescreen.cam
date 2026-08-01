@@ -1,0 +1,121 @@
+{
+  "assets": [
+    {
+      "byteCount": 9074,
+      "fileName": "cursors/arrow.png",
+      "hotspot": {
+        "x": 24,
+        "y": 8
+      },
+      "pixelHeight": 96,
+      "pixelWidth": 104,
+      "scale": 8,
+      "sha256": "3d9e9a02dbe41943b27fcaaf5d752f2a07f2efb332506a0ec1cad81fc2c03ede",
+      "visualType": "arrow"
+    },
+    {
+      "byteCount": 29882,
+      "fileName": "cursors/text.png",
+      "hotspot": {
+        "x": 64,
+        "y": 104
+      },
+      "pixelHeight": 208,
+      "pixelWidth": 128,
+      "scale": 8,
+      "sha256": "c8e25f6b61db197c205f930898547759210ba29afd9c1600e9e2824d15e085b1",
+      "visualType": "text"
+    },
+    {
+      "byteCount": 39464,
+      "fileName": "cursors/open-hand.png",
+      "hotspot": {
+        "x": 88,
+        "y": 104
+      },
+      "pixelHeight": 208,
+      "pixelWidth": 184,
+      "scale": 8,
+      "sha256": "1afa314a5e7330c6b3d850fb762454c62b08bedd7aec375288b5a682e6ab8784",
+      "visualType": "open-hand"
+    },
+    {
+      "byteCount": 26998,
+      "fileName": "cursors/closed-hand.png",
+      "hotspot": {
+        "x": 48,
+        "y": 104
+      },
+      "pixelHeight": 208,
+      "pixelWidth": 96,
+      "scale": 8,
+      "sha256": "885cdb0c10406f0ca482f50767f4c4d0bf1bfd115cff204ae6f13e2de310967f",
+      "visualType": "closed-hand"
+    },
+    {
+      "byteCount": 26998,
+      "fileName": "cursors/resize-ns.png",
+      "hotspot": {
+        "x": 48,
+        "y": 104
+      },
+      "pixelHeight": 208,
+      "pixelWidth": 96,
+      "scale": 8,
+      "sha256": "885cdb0c10406f0ca482f50767f4c4d0bf1bfd115cff204ae6f13e2de310967f",
+      "visualType": "resize-ns"
+    },
+    {
+      "byteCount": 37459,
+      "fileName": "cursors/resize-nwse.png",
+      "hotspot": {
+        "x": 96,
+        "y": 104
+      },
+      "pixelHeight": 208,
+      "pixelWidth": 200,
+      "scale": 8,
+      "sha256": "f6294831d93a700cf579bee69ca2e7a97f1183c3655b404b1a9bd024c7d30254",
+      "visualType": "resize-nwse"
+    },
+    {
+      "byteCount": 38814,
+      "fileName": "cursors/resize-nesw.png",
+      "hotspot": {
+        "x": 96,
+        "y": 104
+      },
+      "pixelHeight": 208,
+      "pixelWidth": 192,
+      "scale": 8,
+      "sha256": "234caa3057a1edf7e11f6fd359b2336d117b38aa5233293a31f07a7d49d512f2",
+      "visualType": "resize-nesw"
+    }
+  ],
+  "description": "Reference-shaped blue-gray realistic cat paw segments with softly feathered fur and diagonal poses, with closed-hand reusing the resize-ns paw resource.",
+  "id": "realistic-blue-cat-paw",
+  "localizedNames": {
+    "de": "Realistische blaue Katzenpfote",
+    "en": "Realistic Blue Cat Paw",
+    "es": "Pata de gato azul realista",
+    "fr": "Patte de chat bleue réaliste",
+    "it": "Zampa di gatto blu realistica",
+    "ja": "リアルな青い猫の肉球",
+    "ko": "사실적인 파란 고양이 발",
+    "pt-BR": "Pata de gato azul realista",
+    "zh-Hans": "写实蓝猫爪",
+    "zh-Hant": "寫實藍貓爪"
+  },
+  "minimumReaderSchemaVersion": 2,
+  "name": "Realistic Blue Cat Paw",
+  "schemaVersion": 2,
+  "tags": [
+    "blue-cat",
+    "cat-paw",
+    "reference-shape",
+    "realistic",
+    "fur",
+    "back-of-paw"
+  ],
+  "version": "2.0.3"
+}

@@ -1,0 +1,80 @@
+{
+  "assets": [
+    {
+      "byteCount": 43380,
+      "fileName": "cursors/arrow.png",
+      "hotspot": {
+        "x": 24,
+        "y": 8
+      },
+      "pixelHeight": 216,
+      "pixelWidth": 200,
+      "scale": 8,
+      "sha256": "12f4d42f58f62e1a8863a7371f7e9a822f8960ef0426c1ea48aa9d122fee5867",
+      "visualType": "arrow"
+    },
+    {
+      "byteCount": 32951,
+      "fileName": "cursors/pointer.png",
+      "hotspot": {
+        "x": 72,
+        "y": 8
+      },
+      "pixelHeight": 216,
+      "pixelWidth": 176,
+      "scale": 8,
+      "sha256": "1470a08b68c8aa764c21ff58411dc56a50be170a463335f050bc7e3421c30d25",
+      "visualType": "pointer"
+    },
+    {
+      "byteCount": 40751,
+      "fileName": "cursors/open-hand.png",
+      "hotspot": {
+        "x": 96,
+        "y": 104
+      },
+      "pixelHeight": 208,
+      "pixelWidth": 192,
+      "scale": 8,
+      "sha256": "5d0187caa326beea77812ff713f5890ab0b2de1f972c6c76834781487cc8994c",
+      "visualType": "open-hand"
+    },
+    {
+      "byteCount": 37650,
+      "fileName": "cursors/closed-hand.png",
+      "hotspot": {
+        "x": 88,
+        "y": 96
+      },
+      "pixelHeight": 192,
+      "pixelWidth": 176,
+      "scale": 8,
+      "sha256": "523787d7c0c8815ad5538d8932fbb06d81178524f1d39fe83bbcdcee37036f7c",
+      "visualType": "closed-hand"
+    }
+  ],
+  "description": "A cute, rounded hand cursor family with default, pointer, open-hand, and closed-hand states.",
+  "id": "chubby-little-hand",
+  "localizedNames": {
+    "de": "Pummelige kleine Hand",
+    "en": "Chubby Little Hand",
+    "es": "Manita regordeta",
+    "fr": "Petite main potelée",
+    "it": "Manina paffuta",
+    "ja": "ぷっくり小さな手",
+    "ko": "통통한 작은 손",
+    "pt-BR": "Mãozinha gordinha",
+    "zh-Hans": "胖嘟嘟小手",
+    "zh-Hant": "胖嘟嘟小手"
+  },
+  "minimumReaderSchemaVersion": 2,
+  "name": "Chubby Little Hand",
+  "schemaVersion": 2,
+  "tags": [
+    "cute",
+    "hand",
+    "rounded",
+    "cursor-family"
+  ],
+  "version": "1.1.0"
+}

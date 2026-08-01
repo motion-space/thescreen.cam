@@ -1,0 +1,161 @@
+{
+  "assets": [
+    {
+      "byteCount": 38353,
+      "fileName": "cursors/arrow.png",
+      "hotspot": {
+        "x": 16,
+        "y": 8
+      },
+      "pixelHeight": 192,
+      "pixelWidth": 200,
+      "scale": 8,
+      "sha256": "c511c141323d5d80f020a9b040b35117555e5ab50c2e99d7607ea748c871f827",
+      "visualType": "arrow"
+    },
+    {
+      "byteCount": 18773,
+      "fileName": "cursors/text.png",
+      "hotspot": {
+        "x": 40,
+        "y": 104
+      },
+      "pixelHeight": 208,
+      "pixelWidth": 80,
+      "scale": 8,
+      "sha256": "b44e63f2356ddd8676aa88867339c9e0ef86cfd163f368f22452572e8b36899c",
+      "visualType": "text"
+    },
+    {
+      "byteCount": 37870,
+      "fileName": "cursors/pointer.png",
+      "hotspot": {
+        "x": 16,
+        "y": 8
+      },
+      "pixelHeight": 192,
+      "pixelWidth": 200,
+      "scale": 8,
+      "sha256": "bb313eab5e93c65879b2750871f4be9726aa6baea770485952a7c4447777ae70",
+      "visualType": "pointer"
+    },
+    {
+      "byteCount": 28492,
+      "fileName": "cursors/crosshair.png",
+      "hotspot": {
+        "x": 104,
+        "y": 104
+      },
+      "pixelHeight": 208,
+      "pixelWidth": 208,
+      "scale": 8,
+      "sha256": "50a513cd2393544876798e4c3e6ff2862db2a3de20c7aca5a4c703aca079ab4d",
+      "visualType": "crosshair"
+    },
+    {
+      "byteCount": 18506,
+      "fileName": "cursors/open-hand.png",
+      "hotspot": {
+        "x": 40,
+        "y": 104
+      },
+      "pixelHeight": 208,
+      "pixelWidth": 80,
+      "scale": 8,
+      "sha256": "b0a525fc03dc62d8d7ddd9f210cfb9c9ac8235d119df0cf156e9c1a68a1b1dba",
+      "visualType": "open-hand"
+    },
+    {
+      "byteCount": 19034,
+      "fileName": "cursors/closed-hand.png",
+      "hotspot": {
+        "x": 40,
+        "y": 104
+      },
+      "pixelHeight": 208,
+      "pixelWidth": 80,
+      "scale": 8,
+      "sha256": "362d01712fbe3ae4fb9786032468f6ab641a767138ea7619c7911344975d58cd",
+      "visualType": "closed-hand"
+    },
+    {
+      "byteCount": 18310,
+      "fileName": "cursors/resize-ew.png",
+      "hotspot": {
+        "x": 112,
+        "y": 32
+      },
+      "pixelHeight": 72,
+      "pixelWidth": 224,
+      "scale": 8,
+      "sha256": "1c38b56fe980357a43f1a57bd0bcb7882ad2861a7015046d4ae145b03a21772b",
+      "visualType": "resize-ew"
+    },
+    {
+      "byteCount": 17836,
+      "fileName": "cursors/resize-ns.png",
+      "hotspot": {
+        "x": 32,
+        "y": 104
+      },
+      "pixelHeight": 208,
+      "pixelWidth": 72,
+      "scale": 8,
+      "sha256": "f660027987a1840feff714a21c7d50172790bb1bb0be6a9d4642110b5c9f0c7b",
+      "visualType": "resize-ns"
+    },
+    {
+      "byteCount": 33815,
+      "fileName": "cursors/resize-nwse.png",
+      "hotspot": {
+        "x": 96,
+        "y": 96
+      },
+      "pixelHeight": 192,
+      "pixelWidth": 192,
+      "scale": 8,
+      "sha256": "08a07069585e6e0792b82d789000923ba6d37d5368f3fd5fbc5b7f2f20a9af9c",
+      "visualType": "resize-nwse"
+    },
+    {
+      "byteCount": 35634,
+      "fileName": "cursors/resize-nesw.png",
+      "hotspot": {
+        "x": 96,
+        "y": 96
+      },
+      "pixelHeight": 192,
+      "pixelWidth": 192,
+      "scale": 8,
+      "sha256": "5be5fc99dfcbc0fda535010207c35c948a04ada58e1d316335819e0754e47150",
+      "visualType": "resize-nesw"
+    }
+  ],
+  "description": "A compact yellow tied umbrella cursor family with a 45-degree upper-left default direction.",
+  "id": "cartoon-umbrella",
+  "localizedNames": {
+    "de": "Gelber Cartoon-Langschirm",
+    "en": "Yellow Cartoon Umbrella",
+    "es": "Paraguas largo amarillo de dibujos",
+    "fr": "Parapluie cartoon jaune à long manche",
+    "it": "Ombrello cartoon giallo a manico lungo",
+    "ja": "黄色いカートゥーン長柄傘",
+    "ko": "노란 카툰 장우산",
+    "pt-BR": "Guarda-chuva cartunesco amarelo de cabo longo",
+    "zh-Hans": "黄色卡通长柄雨伞",
+    "zh-Hant": "黃色卡通長柄雨傘"
+  },
+  "minimumReaderSchemaVersion": 2,
+  "name": "Yellow Cartoon Umbrella",
+  "schemaVersion": 2,
+  "tags": [
+    "cartoon",
+    "umbrella",
+    "yellow",
+    "tied",
+    "folded",
+    "upper-left",
+    "rotating"
+  ],
+  "version": "1.0.3"
+}
