@@ -1,0 +1,172 @@
+{
+  "assets": [
+    {
+      "byteCount": 38208,
+      "fileName": "cursors/arrow.png",
+      "hotspot": {
+        "x": 40,
+        "y": 8
+      },
+      "pixelHeight": 224,
+      "pixelWidth": 184,
+      "scale": 8,
+      "sha256": "8aba1475589858523e97b28a04d1f7204d5d6925b6b3f8ac005ddc7c690f5c35",
+      "visualType": "arrow"
+    },
+    {
+      "byteCount": 28058,
+      "fileName": "cursors/text.png",
+      "hotspot": {
+        "x": 64,
+        "y": 112
+      },
+      "pixelHeight": 224,
+      "pixelWidth": 128,
+      "scale": 8,
+      "sha256": "9e83e221110a66639e22f8089abb07646eabb34d796460cfdd8bcc10b10f3515",
+      "visualType": "text"
+    },
+    {
+      "byteCount": 36982,
+      "fileName": "cursors/pointer.png",
+      "hotspot": {
+        "x": 32,
+        "y": 8
+      },
+      "pixelHeight": 224,
+      "pixelWidth": 176,
+      "scale": 8,
+      "sha256": "a63829335994ed1a1058d7cf6fbe76832237c8c85250532573c531bc0afe0557",
+      "visualType": "pointer"
+    },
+    {
+      "byteCount": 27525,
+      "fileName": "cursors/crosshair.png",
+      "hotspot": {
+        "x": 64,
+        "y": 112
+      },
+      "pixelHeight": 224,
+      "pixelWidth": 128,
+      "scale": 8,
+      "sha256": "58d7415fe0c16d4dc53994a054b7cba119c70029a7ed469684ed8412f350420b",
+      "visualType": "crosshair"
+    },
+    {
+      "byteCount": 27589,
+      "fileName": "cursors/open-hand.png",
+      "hotspot": {
+        "x": 64,
+        "y": 112
+      },
+      "pixelHeight": 224,
+      "pixelWidth": 128,
+      "scale": 8,
+      "sha256": "cd1b62eb6c81440adae8935a101640f6a112face4984918e7cac31420a99a0d6",
+      "visualType": "open-hand"
+    },
+    {
+      "byteCount": 28114,
+      "fileName": "cursors/closed-hand.png",
+      "hotspot": {
+        "x": 64,
+        "y": 112
+      },
+      "pixelHeight": 224,
+      "pixelWidth": 128,
+      "scale": 8,
+      "sha256": "653b05784d5f4ed00dacb6fb0ace2455eb0e40d2c9bcf554c009e1f752b161b3",
+      "visualType": "closed-hand"
+    },
+    {
+      "byteCount": 28452,
+      "fileName": "cursors/resize-ew.png",
+      "hotspot": {
+        "x": 112,
+        "y": 56
+      },
+      "pixelHeight": 120,
+      "pixelWidth": 232,
+      "scale": 8,
+      "sha256": "1443f1fd098a6c621cfb4e986088c9618af1519e7f3a2b1ae12153e8c530b7c4",
+      "visualType": "resize-ew"
+    },
+    {
+      "byteCount": 27905,
+      "fileName": "cursors/resize-ns.png",
+      "hotspot": {
+        "x": 64,
+        "y": 112
+      },
+      "pixelHeight": 224,
+      "pixelWidth": 128,
+      "scale": 8,
+      "sha256": "1c026ffd4636aa27ee1ec13b9b9a28f19f52be00117c9846e1c612160aa6fa4b",
+      "visualType": "resize-ns"
+    },
+    {
+      "byteCount": 37107,
+      "fileName": "cursors/resize-nwse.png",
+      "hotspot": {
+        "x": 96,
+        "y": 112
+      },
+      "pixelHeight": 224,
+      "pixelWidth": 192,
+      "scale": 8,
+      "sha256": "d801bef1b1ccfd6e6dde5c4318498b56733fb5cfe88519a98ea52740bb6fcfb9",
+      "visualType": "resize-nwse"
+    },
+    {
+      "byteCount": 36545,
+      "fileName": "cursors/resize-nesw.png",
+      "hotspot": {
+        "x": 96,
+        "y": 112
+      },
+      "pixelHeight": 224,
+      "pixelWidth": 192,
+      "scale": 8,
+      "sha256": "1a0b4df9bddf2dd28e48fd07a12ea9ff741923889062ec5c5a666b437f5ee1b6",
+      "visualType": "resize-nesw"
+    },
+    {
+      "byteCount": 27864,
+      "fileName": "cursors/not-allowed.png",
+      "hotspot": {
+        "x": 64,
+        "y": 112
+      },
+      "pixelHeight": 224,
+      "pixelWidth": 128,
+      "scale": 8,
+      "sha256": "617b6eafe514bcd0a4d0512112c4ae96ac6b4a4d2fcbf9c97310f93761e56087",
+      "visualType": "not-allowed"
+    }
+  ],
+  "description": "A playful cartoon baby bottle reused across the cursor family through rotation and simple pose changes.",
+  "id": "cartoon-baby-bottle-cursor",
+  "localizedNames": {
+    "de": "Cartoon-Babyflaschenzeiger",
+    "en": "Cartoon Baby Bottle Cursor",
+    "es": "Cursor de biberón de dibujos",
+    "fr": "Curseur biberon cartoon",
+    "it": "Cursore biberon cartoon",
+    "ja": "カートゥーン哺乳びんカーソル",
+    "ko": "카툰 젖병 커서",
+    "pt-BR": "Cursor de mamadeira cartunesca",
+    "zh-Hans": "卡通奶瓶指针",
+    "zh-Hant": "卡通奶瓶指標"
+  },
+  "minimumReaderSchemaVersion": 2,
+  "name": "Cartoon Baby Bottle Cursor",
+  "schemaVersion": 2,
+  "tags": [
+    "cartoon",
+    "baby-bottle",
+    "pastel",
+    "blue",
+    "pink"
+  ],
+  "version": "1.0.0"
+}

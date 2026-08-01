@@ -1,0 +1,81 @@
+{
+  "assets": [
+    {
+      "byteCount": 30477,
+      "fileName": "cursors/arrow.png",
+      "hotspot": {
+        "x": 24,
+        "y": 8
+      },
+      "pixelHeight": 216,
+      "pixelWidth": 200,
+      "scale": 8,
+      "sha256": "824ce0172d68a818338b69844304ccabf425f062d494ecc5b57a7d8e0aa85f74",
+      "visualType": "arrow"
+    },
+    {
+      "byteCount": 23897,
+      "fileName": "cursors/pointer.png",
+      "hotspot": {
+        "x": 72,
+        "y": 8
+      },
+      "pixelHeight": 216,
+      "pixelWidth": 176,
+      "scale": 8,
+      "sha256": "367bf75c2f9eeedd4c6e48298a2496ced4121094ceabcacf5d87ee69b7b11b66",
+      "visualType": "pointer"
+    },
+    {
+      "byteCount": 30470,
+      "fileName": "cursors/open-hand.png",
+      "hotspot": {
+        "x": 96,
+        "y": 104
+      },
+      "pixelHeight": 208,
+      "pixelWidth": 192,
+      "scale": 8,
+      "sha256": "8b60a5de46e0ebae7d23188a423b338cde5898e416e959402f53d6fcf7462bf2",
+      "visualType": "open-hand"
+    },
+    {
+      "byteCount": 26982,
+      "fileName": "cursors/closed-hand.png",
+      "hotspot": {
+        "x": 88,
+        "y": 96
+      },
+      "pixelHeight": 192,
+      "pixelWidth": 176,
+      "scale": 8,
+      "sha256": "48cd573320fcc1e5f7ccc656e976831d196546040fb2b890f97d6947eb98be59",
+      "visualType": "closed-hand"
+    }
+  ],
+  "description": "The exact Chubby Little Hand cursor family in a rich deep-brown skin tone.",
+  "id": "chubby-little-hand-deep-skin",
+  "localizedNames": {
+    "de": "Pummelige kleine Hand – dunkler Hautton",
+    "en": "Deep Skin Chubby Little Hand",
+    "es": "Manita regordeta de piel oscura",
+    "fr": "Petite main potelée à peau foncée",
+    "it": "Manina paffuta dalla pelle scura",
+    "ja": "濃い肌色のぷっくり小さな手",
+    "ko": "짙은 피부색 통통한 작은 손",
+    "pt-BR": "Mãozinha gordinha de pele escura",
+    "zh-Hans": "深肤色胖嘟嘟小手",
+    "zh-Hant": "深膚色胖嘟嘟小手"
+  },
+  "minimumReaderSchemaVersion": 2,
+  "name": "Deep Skin Chubby Little Hand",
+  "schemaVersion": 2,
+  "tags": [
+    "cute",
+    "hand",
+    "rounded",
+    "skin-tone",
+    "cursor-family"
+  ],
+  "version": "1.0.0"
+}

@@ -1,0 +1,135 @@
+{
+  "assets": [
+    {
+      "byteCount": 6980,
+      "fileName": "cursors/arrow.png",
+      "hotspot": {
+        "x": 24,
+        "y": 8
+      },
+      "pixelHeight": 104,
+      "pixelWidth": 104,
+      "scale": 8,
+      "sha256": "a9f84631d41c0d014ff625cc47b19422111dd6cd00ae50111df3079ed40908cd",
+      "visualType": "arrow"
+    },
+    {
+      "byteCount": 22624,
+      "fileName": "cursors/text.png",
+      "hotspot": {
+        "x": 56,
+        "y": 104
+      },
+      "pixelHeight": 208,
+      "pixelWidth": 120,
+      "scale": 8,
+      "sha256": "6e6ce2564260f959b3f337a32c99174ac02f03bd4f5c8d59cc29dd95d20cc1bf",
+      "visualType": "text"
+    },
+    {
+      "byteCount": 23107,
+      "fileName": "cursors/pointer.png",
+      "hotspot": {
+        "x": 48,
+        "y": 8
+      },
+      "pixelHeight": 216,
+      "pixelWidth": 120,
+      "scale": 8,
+      "sha256": "015fa8b4c2b6837255e372071a9bbca63d21bc1c5cfe0b96b420a0e2d1f91f71",
+      "visualType": "pointer"
+    },
+    {
+      "byteCount": 22160,
+      "fileName": "cursors/crosshair.png",
+      "hotspot": {
+        "x": 64,
+        "y": 104
+      },
+      "pixelHeight": 208,
+      "pixelWidth": 128,
+      "scale": 8,
+      "sha256": "cd901b1a5d4302a324470232d2ba5abac4fa6ec091a6466c2623921d8feb789a",
+      "visualType": "crosshair"
+    },
+    {
+      "byteCount": 21622,
+      "fileName": "cursors/open-hand.png",
+      "hotspot": {
+        "x": 56,
+        "y": 104
+      },
+      "pixelHeight": 208,
+      "pixelWidth": 112,
+      "scale": 8,
+      "sha256": "f44c55059fcd5e6bda6cad017855e3dc264f45bd9903fd0491d2644f212a6c4a",
+      "visualType": "open-hand"
+    },
+    {
+      "byteCount": 22160,
+      "fileName": "cursors/closed-hand.png",
+      "hotspot": {
+        "x": 64,
+        "y": 104
+      },
+      "pixelHeight": 208,
+      "pixelWidth": 128,
+      "scale": 8,
+      "sha256": "cd901b1a5d4302a324470232d2ba5abac4fa6ec091a6466c2623921d8feb789a",
+      "visualType": "closed-hand"
+    },
+    {
+      "byteCount": 17389,
+      "fileName": "cursors/resize-nwse.png",
+      "hotspot": {
+        "x": 80,
+        "y": 80
+      },
+      "pixelHeight": 160,
+      "pixelWidth": 160,
+      "scale": 8,
+      "sha256": "17e8c992e02c66fa913d6a7407fec24cefe2cb1f8c37627928fb8f5daaf39fd2",
+      "visualType": "resize-nwse"
+    },
+    {
+      "byteCount": 16977,
+      "fileName": "cursors/resize-nesw.png",
+      "hotspot": {
+        "x": 64,
+        "y": 88
+      },
+      "pixelHeight": 184,
+      "pixelWidth": 128,
+      "scale": 8,
+      "sha256": "ffbf63fa05919f0e9b8d93601228a502b64b13f91d2594514ea28bf9950ca412",
+      "visualType": "resize-nesw"
+    }
+  ],
+  "description": "Slim realistic silver-shaded furry cat forepaws based on a narrow dorsal-view reference, with soft feathered edges and rotation-based cursor states.",
+  "id": "silver-shaded-cat-paw",
+  "localizedNames": {
+    "de": "Flauschige silberne Katzenpfote",
+    "en": "Silver Shaded Furry Cat Paw",
+    "es": "Pata de gato plateada y peluda",
+    "fr": "Patte de chat argentée et duveteuse",
+    "it": "Zampa di gatto argentata e pelosa",
+    "ja": "シルバーシェードのふわふわ猫の前足",
+    "ko": "실버 셰이드 복슬복슬 고양이 발",
+    "pt-BR": "Pata de gato prateada e peluda",
+    "zh-Hans": "银渐层蓬松猫爪",
+    "zh-Hant": "銀漸層蓬鬆貓爪"
+  },
+  "minimumReaderSchemaVersion": 2,
+  "name": "Silver Shaded Furry Cat Paw",
+  "schemaVersion": 2,
+  "tags": [
+    "cat",
+    "paw",
+    "silver",
+    "shaded",
+    "furry",
+    "realistic",
+    "feathered"
+  ],
+  "version": "1.0.2"
+}

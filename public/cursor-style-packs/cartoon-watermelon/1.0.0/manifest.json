@@ -1,0 +1,171 @@
+{
+  "assets": [
+    {
+      "byteCount": 40948,
+      "fileName": "cursors/arrow.png",
+      "hotspot": {
+        "x": 24,
+        "y": 8
+      },
+      "pixelHeight": 216,
+      "pixelWidth": 192,
+      "scale": 8,
+      "sha256": "edc27847ebf2f94e7c42ff84e28e5035d44b5146d96ca53c9042418451a99f70",
+      "visualType": "arrow"
+    },
+    {
+      "byteCount": 31511,
+      "fileName": "cursors/text.png",
+      "hotspot": {
+        "x": 72,
+        "y": 112
+      },
+      "pixelHeight": 224,
+      "pixelWidth": 144,
+      "scale": 8,
+      "sha256": "e5d2baf65997696634e191e52266089f96d0a813855bdad946e08b1bfbf01721",
+      "visualType": "text"
+    },
+    {
+      "byteCount": 34502,
+      "fileName": "cursors/pointer.png",
+      "hotspot": {
+        "x": 24,
+        "y": 8
+      },
+      "pixelHeight": 200,
+      "pixelWidth": 176,
+      "scale": 8,
+      "sha256": "b4d7d617be89977775310342b49e15c7f69e389d70693f367df4df33c2e41f24",
+      "visualType": "pointer"
+    },
+    {
+      "byteCount": 34206,
+      "fileName": "cursors/crosshair.png",
+      "hotspot": {
+        "x": 80,
+        "y": 104
+      },
+      "pixelHeight": 208,
+      "pixelWidth": 160,
+      "scale": 8,
+      "sha256": "1bb4292066bb309cee052c3b59f3dfca1593999367124e59bd208e754ea32451",
+      "visualType": "crosshair"
+    },
+    {
+      "byteCount": 36025,
+      "fileName": "cursors/open-hand.png",
+      "hotspot": {
+        "x": 88,
+        "y": 88
+      },
+      "pixelHeight": 176,
+      "pixelWidth": 176,
+      "scale": 8,
+      "sha256": "2612fae7705b7e863427b933a7287e8245a62103caf3af7f20150a2f7cfa07b0",
+      "visualType": "open-hand"
+    },
+    {
+      "byteCount": 35501,
+      "fileName": "cursors/closed-hand.png",
+      "hotspot": {
+        "x": 88,
+        "y": 88
+      },
+      "pixelHeight": 176,
+      "pixelWidth": 176,
+      "scale": 8,
+      "sha256": "22d3ddcd1400e7ea5e8d00b2eac8f1910ef5e06b61783a522d239e407c5fb11b",
+      "visualType": "closed-hand"
+    },
+    {
+      "byteCount": 38630,
+      "fileName": "cursors/resize-ew.png",
+      "hotspot": {
+        "x": 112,
+        "y": 64
+      },
+      "pixelHeight": 136,
+      "pixelWidth": 224,
+      "scale": 8,
+      "sha256": "25e55ac3df3e43b0878e21844bd82263b569b641771de433c8861217949124da",
+      "visualType": "resize-ew"
+    },
+    {
+      "byteCount": 29013,
+      "fileName": "cursors/resize-ns.png",
+      "hotspot": {
+        "x": 56,
+        "y": 104
+      },
+      "pixelHeight": 208,
+      "pixelWidth": 112,
+      "scale": 8,
+      "sha256": "3198874314126cff43f8826f588356a27fddeaab48b7f661bd1ac2f1f82ebc1f",
+      "visualType": "resize-ns"
+    },
+    {
+      "byteCount": 33531,
+      "fileName": "cursors/resize-nwse.png",
+      "hotspot": {
+        "x": 88,
+        "y": 96
+      },
+      "pixelHeight": 192,
+      "pixelWidth": 176,
+      "scale": 8,
+      "sha256": "d45ccd96b99dbb899c63fb901c7a4d2e413683909a03d0d0373c7e7117af8699",
+      "visualType": "resize-nwse"
+    },
+    {
+      "byteCount": 32598,
+      "fileName": "cursors/resize-nesw.png",
+      "hotspot": {
+        "x": 80,
+        "y": 96
+      },
+      "pixelHeight": 192,
+      "pixelWidth": 168,
+      "scale": 8,
+      "sha256": "dd5c50ae12c152c51d229972f37eaba524b0fd59f97c4394f250f48fd418ef0e",
+      "visualType": "resize-nesw"
+    },
+    {
+      "byteCount": 59520,
+      "fileName": "cursors/not-allowed.png",
+      "hotspot": {
+        "x": 104,
+        "y": 104
+      },
+      "pixelHeight": 208,
+      "pixelWidth": 208,
+      "scale": 8,
+      "sha256": "2a5631859a274c52ea08f7b0a026cc91b5f2ddf16b1ba831e410242541898764",
+      "visualType": "not-allowed"
+    }
+  ],
+  "description": "A cheerful cartoon watermelon cursor family using one reusable wedge rotated for each interaction state and a complete round watermelon for disabled state.",
+  "id": "cartoon-watermelon",
+  "localizedNames": {
+    "de": "Cartoon-Wassermelonen-Cursor",
+    "en": "Cartoon Watermelon Cursor",
+    "es": "Cursor de sandía caricaturesca",
+    "fr": "Curseur pastèque cartoon",
+    "it": "Cursore anguria cartoon",
+    "ja": "カートゥーンスイカカーソル",
+    "ko": "카툰 수박 커서",
+    "pt-BR": "Cursor de melancia cartunesca",
+    "zh-Hans": "卡通西瓜指针",
+    "zh-Hant": "卡通西瓜指標"
+  },
+  "minimumReaderSchemaVersion": 2,
+  "name": "Cartoon Watermelon Cursor",
+  "schemaVersion": 2,
+  "tags": [
+    "watermelon",
+    "cartoon",
+    "fruit",
+    "playful"
+  ],
+  "version": "1.0.0"
+}

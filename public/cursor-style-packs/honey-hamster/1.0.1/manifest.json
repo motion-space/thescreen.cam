@@ -1,0 +1,107 @@
+{
+  "assets": [
+    {
+      "byteCount": 44903,
+      "fileName": "cursors/arrow.png",
+      "hotspot": {
+        "x": 24,
+        "y": 8
+      },
+      "pixelHeight": 224,
+      "pixelWidth": 200,
+      "scale": 8,
+      "sha256": "fd014cdadf5feda14ce74e560cbbaf965b08f01c93460e85604b039073bc89fa",
+      "visualType": "arrow"
+    },
+    {
+      "byteCount": 36906,
+      "fileName": "cursors/text.png",
+      "hotspot": {
+        "x": 88,
+        "y": 104
+      },
+      "pixelHeight": 216,
+      "pixelWidth": 176,
+      "scale": 8,
+      "sha256": "d60ced23e6505d5a7c4a70308eec95358e8f384af23fdd11068bc734dfb3dc5d",
+      "visualType": "text"
+    },
+    {
+      "byteCount": 46049,
+      "fileName": "cursors/pointer.png",
+      "hotspot": {
+        "x": 64,
+        "y": 8
+      },
+      "pixelHeight": 224,
+      "pixelWidth": 200,
+      "scale": 8,
+      "sha256": "63fbcbbdc2d65411dcf4259ede7aad5376dc5d7cf811bf8d7b0104def1578c16",
+      "visualType": "pointer"
+    },
+    {
+      "byteCount": 38754,
+      "fileName": "cursors/crosshair.png",
+      "hotspot": {
+        "x": 112,
+        "y": 112
+      },
+      "pixelHeight": 224,
+      "pixelWidth": 224,
+      "scale": 8,
+      "sha256": "d6ecfb87afead76dacd5c30c6e4c0dffb57086d60ffae916cfde74efcc7d0f50",
+      "visualType": "crosshair"
+    },
+    {
+      "byteCount": 46673,
+      "fileName": "cursors/open-hand.png",
+      "hotspot": {
+        "x": 80,
+        "y": 104
+      },
+      "pixelHeight": 208,
+      "pixelWidth": 160,
+      "scale": 8,
+      "sha256": "2f887ede183557b43337164cd5f982964ba36eda0b44799b8d78c95f033b8e83",
+      "visualType": "open-hand"
+    },
+    {
+      "byteCount": 44750,
+      "fileName": "cursors/closed-hand.png",
+      "hotspot": {
+        "x": 80,
+        "y": 96
+      },
+      "pixelHeight": 192,
+      "pixelWidth": 160,
+      "scale": 8,
+      "sha256": "7a35df51911405353a975fa1b44cd5a9e460db08cea73167805eeccda86a0e4f",
+      "visualType": "closed-hand"
+    }
+  ],
+  "description": "A cheerful cartoon hamster companion cursor family with a classic pointer arrow and clean cocoa outlines.",
+  "id": "honey-hamster",
+  "localizedNames": {
+    "de": "Honig-Hamster",
+    "en": "Honey Hamster",
+    "es": "Hámster de Miel",
+    "fr": "Hamster au Miel",
+    "it": "Criceto al Miele",
+    "ja": "はちみつハムスター",
+    "ko": "꿀 햄스터",
+    "pt-BR": "Hamster de Mel",
+    "zh-Hans": "蜜糖仓鼠",
+    "zh-Hant": "蜜糖倉鼠"
+  },
+  "minimumReaderSchemaVersion": 2,
+  "name": "Honey Hamster",
+  "schemaVersion": 2,
+  "tags": [
+    "hamster",
+    "cartoon",
+    "cute",
+    "companion",
+    "warm"
+  ],
+  "version": "1.0.1"
+}

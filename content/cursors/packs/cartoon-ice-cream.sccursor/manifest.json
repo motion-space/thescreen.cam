@@ -1,0 +1,173 @@
+{
+  "assets" : [
+    {
+      "byteCount" : 19670,
+      "fileName" : "cursors/arrow.png",
+      "hotspot" : {
+        "x" : 40,
+        "y" : 8
+      },
+      "pixelHeight" : 144,
+      "pixelWidth" : 152,
+      "scale" : 8,
+      "sha256" : "19c32b9182499cd01bbefbb7f8ace06ee7cd8334fbf0dbc8e5c7d346a817f098",
+      "visualType" : "arrow"
+    },
+    {
+      "byteCount" : 19637,
+      "fileName" : "cursors/text.png",
+      "hotspot" : {
+        "x" : 72,
+        "y" : 72
+      },
+      "pixelHeight" : 144,
+      "pixelWidth" : 144,
+      "scale" : 8,
+      "sha256" : "5a83bc440d0b64f59db6910db8af2035d3daf90b9f06308575cae69761fbe984",
+      "visualType" : "text"
+    },
+    {
+      "byteCount" : 19670,
+      "fileName" : "cursors/pointer.png",
+      "hotspot" : {
+        "x" : 40,
+        "y" : 8
+      },
+      "pixelHeight" : 144,
+      "pixelWidth" : 152,
+      "scale" : 8,
+      "sha256" : "19c32b9182499cd01bbefbb7f8ace06ee7cd8334fbf0dbc8e5c7d346a817f098",
+      "visualType" : "pointer"
+    },
+    {
+      "byteCount" : 19637,
+      "fileName" : "cursors/crosshair.png",
+      "hotspot" : {
+        "x" : 72,
+        "y" : 72
+      },
+      "pixelHeight" : 144,
+      "pixelWidth" : 144,
+      "scale" : 8,
+      "sha256" : "5a83bc440d0b64f59db6910db8af2035d3daf90b9f06308575cae69761fbe984",
+      "visualType" : "crosshair"
+    },
+    {
+      "byteCount" : 19637,
+      "fileName" : "cursors/open-hand.png",
+      "hotspot" : {
+        "x" : 72,
+        "y" : 72
+      },
+      "pixelHeight" : 144,
+      "pixelWidth" : 144,
+      "scale" : 8,
+      "sha256" : "5a83bc440d0b64f59db6910db8af2035d3daf90b9f06308575cae69761fbe984",
+      "visualType" : "open-hand"
+    },
+    {
+      "byteCount" : 19637,
+      "fileName" : "cursors/closed-hand.png",
+      "hotspot" : {
+        "x" : 72,
+        "y" : 72
+      },
+      "pixelHeight" : 144,
+      "pixelWidth" : 144,
+      "scale" : 8,
+      "sha256" : "5a83bc440d0b64f59db6910db8af2035d3daf90b9f06308575cae69761fbe984",
+      "visualType" : "closed-hand"
+    },
+    {
+      "byteCount" : 19348,
+      "fileName" : "cursors/resize-ew.png",
+      "hotspot" : {
+        "x" : 72,
+        "y" : 72
+      },
+      "pixelHeight" : 144,
+      "pixelWidth" : 144,
+      "scale" : 8,
+      "sha256" : "688e99a1bb06c000ee5238f2dc161e9dca453ad828ba5b1550fb8f7bb9853334",
+      "visualType" : "resize-ew"
+    },
+    {
+      "byteCount" : 19637,
+      "fileName" : "cursors/resize-ns.png",
+      "hotspot" : {
+        "x" : 72,
+        "y" : 72
+      },
+      "pixelHeight" : 144,
+      "pixelWidth" : 144,
+      "scale" : 8,
+      "sha256" : "5a83bc440d0b64f59db6910db8af2035d3daf90b9f06308575cae69761fbe984",
+      "visualType" : "resize-ns"
+    },
+    {
+      "byteCount" : 18664,
+      "fileName" : "cursors/resize-nwse.png",
+      "hotspot" : {
+        "x" : 88,
+        "y" : 48
+      },
+      "pixelHeight" : 104,
+      "pixelWidth" : 176,
+      "scale" : 8,
+      "sha256" : "8b76ce8a1f27de1af08a0b6fda818b9076cb84fe7d0061d1106c391820870752",
+      "visualType" : "resize-nwse"
+    },
+    {
+      "byteCount" : 18997,
+      "fileName" : "cursors/resize-nesw.png",
+      "hotspot" : {
+        "x" : 48,
+        "y" : 88
+      },
+      "pixelHeight" : 176,
+      "pixelWidth" : 104,
+      "scale" : 8,
+      "sha256" : "ceb216145cd7d15c4b308b640647635f723ba0153c8164bb0dc85f301454ec01",
+      "visualType" : "resize-nesw"
+    },
+    {
+      "byteCount" : 19637,
+      "fileName" : "cursors/not-allowed.png",
+      "hotspot" : {
+        "x" : 72,
+        "y" : 72
+      },
+      "pixelHeight" : 144,
+      "pixelWidth" : 144,
+      "scale" : 8,
+      "sha256" : "5a83bc440d0b64f59db6910db8af2035d3daf90b9f06308575cae69761fbe984",
+      "visualType" : "not-allowed"
+    }
+  ],
+  "description" : "A faceless cartoon ice-cream cone set on the upper-left 45-degree diagonal and reused across cursor states.",
+  "id" : "cartoon-ice-cream",
+  "localizedNames" : {
+    "de" : "Cartoon-Eis",
+    "en" : "Cartoon Ice Cream",
+    "es" : "Helado de dibujos",
+    "fr" : "Glace cartoon",
+    "it" : "Gelato cartone animato",
+    "ja" : "カートゥーンアイスクリーム",
+    "ko" : "만화 아이스크림",
+    "pt-BR" : "Sorvete cartunesco",
+    "zh-Hans" : "卡通冰淇淋",
+    "zh-Hant" : "卡通冰淇淋"
+  },
+  "minimumReaderSchemaVersion" : 2,
+  "name" : "Cartoon Ice Cream",
+  "schemaVersion" : 2,
+  "tags" : [
+    "ice-cream",
+    "cartoon",
+    "food",
+    "pastel",
+    "rotated",
+    "faceless"
+  ],
+  "version" : "1.0.3"
+}

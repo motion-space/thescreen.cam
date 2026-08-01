@@ -1,0 +1,40 @@
+{
+  "assets": [
+    {
+      "byteCount": 35114,
+      "fileName": "cursors/arrow.png",
+      "hotspot": {
+        "x": 8,
+        "y": 8
+      },
+      "pixelHeight": 224,
+      "pixelWidth": 200,
+      "scale": 8,
+      "sha256": "de21f4138888e68fc60aaaa9307b509f128c5f0ff17c461ccd3325eb1a8d9eeb",
+      "visualType": "arrow"
+    }
+  ],
+  "description": "A cheerful fresh leek default cursor in crisp green and white.",
+  "id": "fresh-leek-pointer",
+  "minimumReaderSchemaVersion": 2,
+  "name": "Fresh Leek Pointer",
+  "localizedNames": {
+    "de": "Frischer Lauchzeiger",
+    "en": "Fresh Leek Pointer",
+    "es": "Puntero de puerro fresco",
+    "fr": "Pointeur poireau frais",
+    "it": "Puntatore porro fresco",
+    "ja": "フレッシュな長ねぎポインター",
+    "ko": "싱그러운 대파 포인터",
+    "pt-BR": "Ponteiro de alho-poró fresco",
+    "zh-Hans": "清新大葱指针",
+    "zh-Hant": "清新青蔥指標"
+  },
+  "schemaVersion": 2,
+  "tags": [
+    "leek",
+    "green",
+    "cheerful"
+  ],
+  "version": "1.0.0"
+}

@@ -1,0 +1,147 @@
+{
+  "assets": [
+    {
+      "byteCount": 28554,
+      "fileName": "cursors/arrow.png",
+      "hotspot": {
+        "x": 48,
+        "y": 8
+      },
+      "pixelHeight": 168,
+      "pixelWidth": 208,
+      "scale": 8,
+      "sha256": "188324bb3c0fd8b7a4fef54c747498e168f752af414c35c80e7af56f10cd18a9",
+      "visualType": "arrow"
+    },
+    {
+      "byteCount": 24956,
+      "fileName": "cursors/text.png",
+      "hotspot": {
+        "x": 40,
+        "y": 112
+      },
+      "pixelHeight": 224,
+      "pixelWidth": 88,
+      "scale": 8,
+      "sha256": "8c628d2e3c39f6a780bc2e77f62447962df5c5dc3d3da036a6b4dfcdf86c761b",
+      "visualType": "text"
+    },
+    {
+      "byteCount": 29533,
+      "fileName": "cursors/pointer.png",
+      "hotspot": {
+        "x": 112,
+        "y": 8
+      },
+      "pixelHeight": 208,
+      "pixelWidth": 160,
+      "scale": 8,
+      "sha256": "7656a695a460e17c909063809e0369175a4f6a52eef98efa7276696ec228f6b9",
+      "visualType": "pointer"
+    },
+    {
+      "byteCount": 30717,
+      "fileName": "cursors/open-hand.png",
+      "hotspot": {
+        "x": 64,
+        "y": 104
+      },
+      "pixelHeight": 208,
+      "pixelWidth": 136,
+      "scale": 8,
+      "sha256": "72c8bcbfe8e26bbd92028dbdf1eefe8fa75435eff54152d2436618ebabd3e299",
+      "visualType": "open-hand"
+    },
+    {
+      "byteCount": 34055,
+      "fileName": "cursors/closed-hand.png",
+      "hotspot": {
+        "x": 80,
+        "y": 88
+      },
+      "pixelHeight": 176,
+      "pixelWidth": 160,
+      "scale": 8,
+      "sha256": "cc53de012a2de1fdd2a86f40b3d165ec8cebb02c76eee589600d3caa939c4380",
+      "visualType": "closed-hand"
+    },
+    {
+      "byteCount": 26087,
+      "fileName": "cursors/resize-ew.png",
+      "hotspot": {
+        "x": 112,
+        "y": 56
+      },
+      "pixelHeight": 112,
+      "pixelWidth": 232,
+      "scale": 8,
+      "sha256": "87a4067e0374d9004498268f12e8a4d219a052ec4be6ca29409eacbf9fa53078",
+      "visualType": "resize-ew"
+    },
+    {
+      "byteCount": 24145,
+      "fileName": "cursors/resize-ns.png",
+      "hotspot": {
+        "x": 40,
+        "y": 112
+      },
+      "pixelHeight": 224,
+      "pixelWidth": 88,
+      "scale": 8,
+      "sha256": "529bc0d7a6f3cbb3e456dee0bb9fd3a9deee7cd1705abeb59a3b7abaee161601",
+      "visualType": "resize-ns"
+    },
+    {
+      "byteCount": 31970,
+      "fileName": "cursors/resize-nwse.png",
+      "hotspot": {
+        "x": 96,
+        "y": 104
+      },
+      "pixelHeight": 208,
+      "pixelWidth": 192,
+      "scale": 8,
+      "sha256": "269827136d563388534590ae7159c969ae2e65e9ee80fc31bcff55c2ec606f2b",
+      "visualType": "resize-nwse"
+    },
+    {
+      "byteCount": 31939,
+      "fileName": "cursors/resize-nesw.png",
+      "hotspot": {
+        "x": 96,
+        "y": 104
+      },
+      "pixelHeight": 208,
+      "pixelWidth": 192,
+      "scale": 8,
+      "sha256": "2c6ec53681efdef2d932d7650ecda7dc5c92309cc54113e5ba6ed92bcb44927e",
+      "visualType": "resize-nesw"
+    }
+  ],
+  "description": "A simple unpersonified caterpillar cursor with a side-view default pointer and one worm per state.",
+  "id": "emoji-caterpillar",
+  "localizedNames": {
+    "de": "Emoji-Raupe",
+    "en": "Emoji Caterpillar",
+    "es": "Oruga emoji",
+    "fr": "Chenille emoji",
+    "it": "Bruco emoji",
+    "ja": "絵文字の毛虫",
+    "ko": "이모지 애벌레",
+    "pt-BR": "Lagarta emoji",
+    "zh-Hans": "表情包毛毛虫",
+    "zh-Hant": "表情包毛毛蟲"
+  },
+  "minimumReaderSchemaVersion": 2,
+  "name": "Emoji Caterpillar",
+  "schemaVersion": 2,
+  "tags": [
+    "emoji",
+    "caterpillar",
+    "bug",
+    "green",
+    "side-view",
+    "simple"
+  ],
+  "version": "1.0.1"
+}

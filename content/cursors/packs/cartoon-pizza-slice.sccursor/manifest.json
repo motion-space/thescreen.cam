@@ -1,0 +1,160 @@
+{
+  "assets" : [
+    {
+      "byteCount" : 42214,
+      "fileName" : "cursors/arrow.png",
+      "hotspot" : {
+        "x" : 24,
+        "y" : 8
+      },
+      "pixelHeight" : 208,
+      "pixelWidth" : 176,
+      "scale" : 8,
+      "sha256" : "db04ac1878061584249039ad85028e3b6f2350d1a71305e550b068d2cdf27a7d",
+      "visualType" : "arrow"
+    },
+    {
+      "byteCount" : 35878,
+      "fileName" : "cursors/text.png",
+      "hotspot" : {
+        "x" : 72,
+        "y" : 104
+      },
+      "pixelHeight" : 208,
+      "pixelWidth" : 152,
+      "scale" : 8,
+      "sha256" : "9c6ce25566abb408e2473310d23f4b5af1f19b7fe80ddbe46b5d6e99b9a35eb4",
+      "visualType" : "text"
+    },
+    {
+      "byteCount" : 41746,
+      "fileName" : "cursors/pointer.png",
+      "hotspot" : {
+        "x" : 56,
+        "y" : 8
+      },
+      "pixelHeight" : 224,
+      "pixelWidth" : 160,
+      "scale" : 8,
+      "sha256" : "805f3c749135b1eb5099cd3bf120ad6ba0977f0142894beab76ce6e8af4c0113",
+      "visualType" : "pointer"
+    },
+    {
+      "byteCount" : 32181,
+      "fileName" : "cursors/crosshair.png",
+      "hotspot" : {
+        "x" : 96,
+        "y" : 112
+      },
+      "pixelHeight" : 224,
+      "pixelWidth" : 192,
+      "scale" : 8,
+      "sha256" : "a8ba8232eb504718500687cbb59188b7636963031de36b0e01ecbcba93c808b7",
+      "visualType" : "crosshair"
+    },
+    {
+      "byteCount" : 38062,
+      "fileName" : "cursors/open-hand.png",
+      "hotspot" : {
+        "x" : 80,
+        "y" : 104
+      },
+      "pixelHeight" : 208,
+      "pixelWidth" : 160,
+      "scale" : 8,
+      "sha256" : "0bc02be41621a1427e6f537cf3f8275bb212aa66e59e0645c00b1e75523eaee3",
+      "visualType" : "open-hand"
+    },
+    {
+      "byteCount" : 36704,
+      "fileName" : "cursors/closed-hand.png",
+      "hotspot" : {
+        "x" : 80,
+        "y" : 96
+      },
+      "pixelHeight" : 200,
+      "pixelWidth" : 160,
+      "scale" : 8,
+      "sha256" : "5e26d0b47194dfa5044901dd542886a87b7b809b21a1e863dc1844695ad9cccc",
+      "visualType" : "closed-hand"
+    },
+    {
+      "byteCount" : 34765,
+      "fileName" : "cursors/resize-ew.png",
+      "hotspot" : {
+        "x" : 96,
+        "y" : 72
+      },
+      "pixelHeight" : 152,
+      "pixelWidth" : 200,
+      "scale" : 8,
+      "sha256" : "3ae2d0edb6737565f90ddf921969f710214d1c379765ac8d0e58b1b37c7bdf50",
+      "visualType" : "resize-ew"
+    },
+    {
+      "byteCount" : 30792,
+      "fileName" : "cursors/resize-ns.png",
+      "hotspot" : {
+        "x" : 56,
+        "y" : 112
+      },
+      "pixelHeight" : 224,
+      "pixelWidth" : 120,
+      "scale" : 8,
+      "sha256" : "b17cef78f1fe6c7d28b08b43e26d8136b10bd2591dae98ebaab7a97ab302cd44",
+      "visualType" : "resize-ns"
+    },
+    {
+      "byteCount" : 34990,
+      "fileName" : "cursors/resize-nwse.png",
+      "hotspot" : {
+        "x" : 88,
+        "y" : 96
+      },
+      "pixelHeight" : 192,
+      "pixelWidth" : 176,
+      "scale" : 8,
+      "sha256" : "539d97922955b17be4c6546b5188e77f8ebcf4fc026fb2872e4978651ca60716",
+      "visualType" : "resize-nwse"
+    },
+    {
+      "byteCount" : 33166,
+      "fileName" : "cursors/resize-nesw.png",
+      "hotspot" : {
+        "x" : 80,
+        "y" : 96
+      },
+      "pixelHeight" : 192,
+      "pixelWidth" : 168,
+      "scale" : 8,
+      "sha256" : "3960532bd5e52f96269006d0567c6486f8545dc07aab7135287547eb29779061",
+      "visualType" : "resize-nesw"
+    }
+  ],
+  "description" : "A cheerful cartoon pizza-slice cursor family with warm cheese, red toppings, and bold dark outlines, reusing one slice at different angles.",
+  "id" : "cartoon-pizza-slice",
+  "localizedNames" : {
+    "de" : "Cartoon-Pizzastück-Cursor",
+    "en" : "Cartoon Pizza Slice Cursor",
+    "es" : "Cursor de porción de pizza de dibujos",
+    "fr" : "Curseur de part de pizza cartoon",
+    "it" : "Cursore fetta di pizza cartoon",
+    "ja" : "カートゥーンピザスライスカーソル",
+    "ko" : "카툰 피자 조각 커서",
+    "pt-BR" : "Cursor de fatia de pizza cartunesca",
+    "zh-Hans" : "卡通披萨片指针",
+    "zh-Hant" : "卡通披薩片指標"
+  },
+  "minimumReaderSchemaVersion" : 2,
+  "name" : "Cartoon Pizza Slice Cursor",
+  "schemaVersion" : 2,
+  "tags" : [
+    "pizza",
+    "food",
+    "cartoon",
+    "playful",
+    "colorful",
+    "slice"
+  ],
+  "version" : "1.0.0"
+}

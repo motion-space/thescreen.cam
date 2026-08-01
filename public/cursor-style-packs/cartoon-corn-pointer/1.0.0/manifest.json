@@ -1,0 +1,107 @@
+{
+  "assets": [
+    {
+      "byteCount": 22322,
+      "fileName": "cursors/arrow.png",
+      "hotspot": {
+        "x": 24,
+        "y": 8
+      },
+      "pixelHeight": 136,
+      "pixelWidth": 136,
+      "scale": 8,
+      "sha256": "5a5976c6e09bf4d5881c6ee0a612ca713f818dc4a81734782aa4247e529aedc1",
+      "visualType": "arrow"
+    },
+    {
+      "byteCount": 22322,
+      "fileName": "cursors/pointer.png",
+      "hotspot": {
+        "x": 24,
+        "y": 8
+      },
+      "pixelHeight": 136,
+      "pixelWidth": 136,
+      "scale": 8,
+      "sha256": "5a5976c6e09bf4d5881c6ee0a612ca713f818dc4a81734782aa4247e529aedc1",
+      "visualType": "pointer"
+    },
+    {
+      "byteCount": 20959,
+      "fileName": "cursors/resize-ew.png",
+      "hotspot": {
+        "x": 80,
+        "y": 48
+      },
+      "pixelHeight": 104,
+      "pixelWidth": 168,
+      "scale": 8,
+      "sha256": "eb33a562ae799d757b1bfdf125b01e626f6454757f8ac1739e878bd823b7c7e7",
+      "visualType": "resize-ew"
+    },
+    {
+      "byteCount": 21561,
+      "fileName": "cursors/resize-ns.png",
+      "hotspot": {
+        "x": 48,
+        "y": 80
+      },
+      "pixelHeight": 168,
+      "pixelWidth": 104,
+      "scale": 8,
+      "sha256": "741a33c029df7b02fe67e8437036e6e9a7426790711f50781177886a30ac988a",
+      "visualType": "resize-ns"
+    },
+    {
+      "byteCount": 22407,
+      "fileName": "cursors/resize-nwse.png",
+      "hotspot": {
+        "x": 72,
+        "y": 72
+      },
+      "pixelHeight": 144,
+      "pixelWidth": 144,
+      "scale": 8,
+      "sha256": "982c68edf68371d7208a3179603f42d24c0f22236c54c427ef0935cedc2c7b89",
+      "visualType": "resize-nwse"
+    },
+    {
+      "byteCount": 22100,
+      "fileName": "cursors/resize-nesw.png",
+      "hotspot": {
+        "x": 72,
+        "y": 72
+      },
+      "pixelHeight": 144,
+      "pixelWidth": 144,
+      "scale": 8,
+      "sha256": "e5803f7abf11f551f8d823ec953741950b8386dc83c8b17135b5d08b3f519ee9",
+      "visualType": "resize-nesw"
+    }
+  ],
+  "description": "A cheerful single-corn pointer family with a 45-degree upper-left default angle and rotated states.",
+  "id": "cartoon-corn-pointer",
+  "localizedNames": {
+    "de": "Cartoon-Maiszeiger",
+    "en": "Cartoon Corn Pointer",
+    "es": "Puntero de maíz caricaturesco",
+    "fr": "Pointeur maïs cartoon",
+    "it": "Puntatore a pannocchia cartoon",
+    "ja": "カートゥーンとうもろこしポインター",
+    "ko": "만화 옥수수 포인터",
+    "pt-BR": "Ponteiro de milho cartunesco",
+    "zh-Hans": "卡通玉米指针",
+    "zh-Hant": "卡通玉米游標"
+  },
+  "minimumReaderSchemaVersion": 2,
+  "name": "Cartoon Corn Pointer",
+  "schemaVersion": 2,
+  "tags": [
+    "corn",
+    "cartoon",
+    "food",
+    "rotated",
+    "playful"
+  ],
+  "version": "1.0.0"
+}

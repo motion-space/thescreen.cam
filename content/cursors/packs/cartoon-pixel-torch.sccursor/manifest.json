@@ -1,0 +1,132 @@
+{
+  "assets" : [
+    {
+      "byteCount" : 26726,
+      "fileName" : "cursors/arrow.png",
+      "hotspot" : {
+        "x" : 40,
+        "y" : 8
+      },
+      "pixelHeight" : 184,
+      "pixelWidth" : 176,
+      "scale" : 8,
+      "sha256" : "01b650c6232c8e98cf2d97cf346a977f0695ae50d9010339ee95d04ed02fa8dd",
+      "visualType" : "arrow"
+    },
+    {
+      "byteCount" : 22453,
+      "fileName" : "cursors/pointer.png",
+      "hotspot" : {
+        "x" : 40,
+        "y" : 8
+      },
+      "pixelHeight" : 208,
+      "pixelWidth" : 112,
+      "scale" : 8,
+      "sha256" : "ec6e51785a42033ad21723a75f5bbd8fc5b29ef298214e49cebb333d61ddbdc6",
+      "visualType" : "pointer"
+    },
+    {
+      "byteCount" : 21619,
+      "fileName" : "cursors/open-hand.png",
+      "hotspot" : {
+        "x" : 48,
+        "y" : 104
+      },
+      "pixelHeight" : 208,
+      "pixelWidth" : 96,
+      "scale" : 8,
+      "sha256" : "18253e1be8482f4c24e3fae0e37de541c4dc21acce1caaa92818bde56cddc450",
+      "visualType" : "open-hand"
+    },
+    {
+      "byteCount" : 16225,
+      "fileName" : "cursors/closed-hand.png",
+      "hotspot" : {
+        "x" : 40,
+        "y" : 88
+      },
+      "pixelHeight" : 176,
+      "pixelWidth" : 88,
+      "scale" : 8,
+      "sha256" : "d417e84d8ff771cbac87f794fc8867570067059af06389c742efba638166c9c1",
+      "visualType" : "closed-hand"
+    },
+    {
+      "byteCount" : 18139,
+      "fileName" : "cursors/resize-ew.png",
+      "hotspot" : {
+        "x" : 104,
+        "y" : 40
+      },
+      "pixelHeight" : 88,
+      "pixelWidth" : 208,
+      "scale" : 8,
+      "sha256" : "b42602426eac17b4f43ab16a284c641e362a49dff7955342a71e98a3d7e2449f",
+      "visualType" : "resize-ew"
+    },
+    {
+      "byteCount" : 16009,
+      "fileName" : "cursors/resize-ns.png",
+      "hotspot" : {
+        "x" : 40,
+        "y" : 104
+      },
+      "pixelHeight" : 208,
+      "pixelWidth" : 80,
+      "scale" : 8,
+      "sha256" : "5b29909bb83e846d50cf589d336f180b7f6769be410c3231679d62dbaf9999f1",
+      "visualType" : "resize-ns"
+    },
+    {
+      "byteCount" : 22849,
+      "fileName" : "cursors/resize-nwse.png",
+      "hotspot" : {
+        "x" : 80,
+        "y" : 88
+      },
+      "pixelHeight" : 176,
+      "pixelWidth" : 160,
+      "scale" : 8,
+      "sha256" : "ba8227520e44a417b09eb4e185c07bfba0a958bb4a9acb9dcf9e27735d73e51d",
+      "visualType" : "resize-nwse"
+    },
+    {
+      "byteCount" : 21553,
+      "fileName" : "cursors/resize-nesw.png",
+      "hotspot" : {
+        "x" : 72,
+        "y" : 88
+      },
+      "pixelHeight" : 176,
+      "pixelWidth" : 152,
+      "scale" : 8,
+      "sha256" : "06a6a4167049bd52e0c2360fa5f87fb26cd124c7723e9693e036f36c8132667e",
+      "visualType" : "resize-nesw"
+    }
+  ],
+  "description" : "A crisp cartoon pixel torch cursor family with warm flame colors and simple expressive poses.",
+  "id" : "cartoon-pixel-torch",
+  "localizedNames" : {
+    "de" : "Cartoon-Pixel-Fackel",
+    "en" : "Cartoon Pixel Torch",
+    "es" : "Antorcha de Píxeles Animada",
+    "fr" : "Torche Pixel Cartoon",
+    "it" : "Torcia Pixel Cartoon",
+    "ja" : "カートゥーン風ピクセル松明",
+    "ko" : "카툰 픽셀 횃불",
+    "pt-BR" : "Tocha Pixel Cartunesca",
+    "zh-Hans" : "卡通像素火把",
+    "zh-Hant" : "卡通像素火把"
+  },
+  "minimumReaderSchemaVersion" : 2,
+  "name" : "Cartoon Pixel Torch",
+  "schemaVersion" : 2,
+  "tags" : [
+    "pixel",
+    "cartoon",
+    "torch",
+    "warm"
+  ],
+  "version" : "1.0.1"
+}

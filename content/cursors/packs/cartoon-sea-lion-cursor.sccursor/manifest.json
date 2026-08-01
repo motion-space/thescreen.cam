@@ -1,0 +1,172 @@
+{
+  "assets" : [
+    {
+      "byteCount" : 28980,
+      "fileName" : "cursors/arrow.png",
+      "hotspot" : {
+        "x" : 48,
+        "y" : 8
+      },
+      "pixelHeight" : 184,
+      "pixelWidth" : 168,
+      "scale" : 8,
+      "sha256" : "f4732b8cd138cb759504ad97a315b88929b9fccc6355566b2e8bfd30668ffd56",
+      "visualType" : "arrow"
+    },
+    {
+      "byteCount" : 25998,
+      "fileName" : "cursors/text.png",
+      "hotspot" : {
+        "x" : 64,
+        "y" : 96
+      },
+      "pixelHeight" : 192,
+      "pixelWidth" : 128,
+      "scale" : 8,
+      "sha256" : "2c18f8659cb12bb8ec0cf107e38ac759bbf10fd9b43ba65ffa7dced5db1926cc",
+      "visualType" : "text"
+    },
+    {
+      "byteCount" : 24287,
+      "fileName" : "cursors/pointer.png",
+      "hotspot" : {
+        "x" : 80,
+        "y" : 8
+      },
+      "pixelHeight" : 184,
+      "pixelWidth" : 144,
+      "scale" : 8,
+      "sha256" : "450da6f9f20973d2a3bd70c1abb03b4d5e5e9dbb0cd0449624e80f95c43b0ea5",
+      "visualType" : "pointer"
+    },
+    {
+      "byteCount" : 22450,
+      "fileName" : "cursors/crosshair.png",
+      "hotspot" : {
+        "x" : 88,
+        "y" : 56
+      },
+      "pixelHeight" : 112,
+      "pixelWidth" : 176,
+      "scale" : 8,
+      "sha256" : "4a3bd6c10096e6dc43936e02bea3ec80da587375b9d04b537455f3faeefa844d",
+      "visualType" : "crosshair"
+    },
+    {
+      "byteCount" : 25956,
+      "fileName" : "cursors/open-hand.png",
+      "hotspot" : {
+        "x" : 64,
+        "y" : 96
+      },
+      "pixelHeight" : 192,
+      "pixelWidth" : 128,
+      "scale" : 8,
+      "sha256" : "12026c5302590e2419adb340f53d66dbfe5d68b51c011be06f5cf0a4206a292e",
+      "visualType" : "open-hand"
+    },
+    {
+      "byteCount" : 25351,
+      "fileName" : "cursors/closed-hand.png",
+      "hotspot" : {
+        "x" : 64,
+        "y" : 88
+      },
+      "pixelHeight" : 184,
+      "pixelWidth" : 128,
+      "scale" : 8,
+      "sha256" : "4ab690d405e14a23dc2b0996f912fdb6564ef3952b0cdf97703c132f0a0f6811",
+      "visualType" : "closed-hand"
+    },
+    {
+      "byteCount" : 20117,
+      "fileName" : "cursors/resize-ew.png",
+      "hotspot" : {
+        "x" : 112,
+        "y" : 40
+      },
+      "pixelHeight" : 80,
+      "pixelWidth" : 224,
+      "scale" : 8,
+      "sha256" : "5785c4a4bc39b8ebc23e961c30177714eda639d34e8af47e5a826073df3def48",
+      "visualType" : "resize-ew"
+    },
+    {
+      "byteCount" : 18480,
+      "fileName" : "cursors/resize-ns.png",
+      "hotspot" : {
+        "x" : 40,
+        "y" : 96
+      },
+      "pixelHeight" : 192,
+      "pixelWidth" : 80,
+      "scale" : 8,
+      "sha256" : "4b3c500544ac1fea5399fe65a4701224c46b38e6dff242a74d0e0ea0c65d50ac",
+      "visualType" : "resize-ns"
+    },
+    {
+      "byteCount" : 28438,
+      "fileName" : "cursors/resize-nwse.png",
+      "hotspot" : {
+        "x" : 104,
+        "y" : 96
+      },
+      "pixelHeight" : 192,
+      "pixelWidth" : 208,
+      "scale" : 8,
+      "sha256" : "bcaea7849fbff7a4838b23618bdcead4758de48d6f6c4fdea48a61eb97ed7757",
+      "visualType" : "resize-nwse"
+    },
+    {
+      "byteCount" : 28238,
+      "fileName" : "cursors/resize-nesw.png",
+      "hotspot" : {
+        "x" : 104,
+        "y" : 96
+      },
+      "pixelHeight" : 192,
+      "pixelWidth" : 208,
+      "scale" : 8,
+      "sha256" : "020ea181a16f7c540ba10449e02d86f177cd791bf83433a59225f7670c0dab06",
+      "visualType" : "resize-nesw"
+    },
+    {
+      "byteCount" : 25956,
+      "fileName" : "cursors/not-allowed.png",
+      "hotspot" : {
+        "x" : 64,
+        "y" : 96
+      },
+      "pixelHeight" : 192,
+      "pixelWidth" : 128,
+      "scale" : 8,
+      "sha256" : "12026c5302590e2419adb340f53d66dbfe5d68b51c011be06f5cf0a4206a292e",
+      "visualType" : "not-allowed"
+    }
+  ],
+  "description" : "One cheerful cartoon sea lion reused and rotated across cursor states.",
+  "id" : "cartoon-sea-lion-cursor",
+  "localizedNames" : {
+    "de" : "Cartoon-Seelöwen-Cursor",
+    "en" : "Cartoon Sea Lion Cursor",
+    "es" : "Cursor de león marino caricaturesco",
+    "fr" : "Curseur otarie cartoon",
+    "it" : "Cursore leone marino cartoon",
+    "ja" : "カートゥーンアシカカーソル",
+    "ko" : "카툰 바다사자 커서",
+    "pt-BR" : "Cursor de leão-marinho cartoon",
+    "zh-Hans" : "卡通海狮指针",
+    "zh-Hant" : "卡通海獅指標"
+  },
+  "minimumReaderSchemaVersion" : 2,
+  "name" : "Cartoon Sea Lion Cursor",
+  "schemaVersion" : 2,
+  "tags" : [
+    "sea-lion",
+    "cartoon",
+    "seal",
+    "rotated",
+    "marine"
+  ],
+  "version" : "1.0.0"
+}

@@ -354,6 +354,165 @@
     @apply block;
   }
 
+  .cursor-page {
+    @apply min-h-screen pb-24 pt-32;
+  }
+
+  .cursor-hero {
+    @apply mx-auto w-full max-w-7xl px-6 pb-10 text-center md:px-12;
+  }
+
+  .cursor-hero-copy {
+    @apply mx-auto max-w-3xl;
+  }
+
+  .cursor-eyebrow {
+    @apply mb-4 text-xs font-medium uppercase tracking-[0.28em] text-muted-foreground;
+  }
+
+  .cursor-hero h1 {
+    @apply whitespace-nowrap text-[clamp(2.75rem,8vw,6.5rem)] font-bold leading-[0.92] text-foreground;
+  }
+
+  .cursor-hero-copy > p:last-child {
+    @apply mx-auto mt-4 max-w-xl text-base leading-7 text-muted-foreground md:text-lg;
+  }
+
+  .cursor-create {
+    @apply mx-auto mt-16 flex w-[calc(100%-3rem)] max-w-[1184px] flex-col gap-8 overflow-hidden border border-border/70 bg-foreground/[0.035] p-6 md:w-[calc(100%-6rem)] md:flex-row md:items-center md:justify-between md:p-8;
+  }
+
+  .cursor-create-copy {
+    @apply max-w-xl;
+  }
+
+  .cursor-create .cursor-eyebrow {
+    @apply mb-3;
+  }
+
+  .cursor-create h2 {
+    @apply text-2xl font-semibold text-foreground md:text-3xl;
+  }
+
+  .cursor-create-copy > p:not(.cursor-eyebrow) {
+    @apply mt-2 text-sm leading-6 text-muted-foreground md:text-base;
+  }
+
+  .cursor-create-terminal {
+    @apply w-full max-w-[530px] shrink-0 border border-white/[0.16] bg-[#181818] p-5 text-left shadow-[0_18px_50px_rgba(0,0,0,0.5)] ring-1 ring-white/[0.04] md:p-7;
+    background: linear-gradient(180deg, #1c1c1c 0%, #151515 100%);
+  }
+
+  .cursor-terminal-bar {
+    @apply mb-6 flex items-center justify-between;
+  }
+
+  .cursor-terminal-dots {
+    @apply flex gap-2;
+  }
+
+  .cursor-terminal-dots span {
+    @apply h-3 w-3 rounded-full;
+  }
+
+  .cursor-terminal-dots span:nth-child(1) {
+    @apply bg-[#ff5f57];
+  }
+
+  .cursor-terminal-dots span:nth-child(2) {
+    @apply bg-[#febc2e];
+  }
+
+  .cursor-terminal-dots span:nth-child(3) {
+    @apply bg-[#28c840];
+  }
+
+  .cursor-copy-button {
+    @apply inline-flex h-8 w-8 items-center justify-center border border-transparent bg-transparent text-foreground/60 transition-colors hover:border-white/[0.12] hover:bg-white/[0.06] hover:text-foreground focus-visible:border-white/20 focus-visible:bg-white/[0.08] active:scale-[0.97];
+  }
+
+  .cursor-copy-button svg {
+    @apply h-4 w-4;
+  }
+
+  .cursor-copy-success-icon,
+  .cursor-copy-button.is-copied .cursor-copy-icon {
+    @apply hidden;
+  }
+
+  .cursor-copy-button.is-copied .cursor-copy-success-icon {
+    @apply block text-[#51e890];
+  }
+
+  .cursor-create-terminal code {
+    @apply block break-all text-sm font-semibold leading-6 text-foreground md:text-base;
+  }
+
+  .cursor-terminal-prompt {
+    @apply mr-2 text-[#51e890];
+  }
+
+  .cursor-library {
+    @apply mx-auto mt-40 w-full max-w-7xl px-6 md:px-12;
+  }
+
+  .cursor-toolbar h2 {
+    @apply text-2xl font-semibold text-foreground;
+  }
+
+  .cursor-toolbar p {
+    @apply mt-1 text-sm text-muted-foreground;
+  }
+
+  .cursor-grid {
+    @apply mt-5 grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5;
+  }
+
+  .cursor-card {
+    @apply overflow-hidden border border-border/70 bg-foreground/[0.025] transition-colors hover:border-foreground/30 hover:bg-foreground/[0.04];
+  }
+
+  .cursor-card-preview {
+    @apply relative flex aspect-[4/3] items-center justify-center overflow-hidden border-b border-border/70 bg-[#101010];
+    background:
+      radial-gradient(circle at 50% 48%, rgba(255, 255, 255, 0.075), transparent 35%),
+      linear-gradient(145deg, rgba(255, 255, 255, 0.025), transparent 50%);
+  }
+
+  .cursor-card-preview-grid {
+    @apply absolute inset-0 opacity-30;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+    background-size: 32px 32px;
+    -webkit-mask-image: radial-gradient(circle at center, black, transparent 76%);
+    mask-image: radial-gradient(circle at center, black, transparent 76%);
+  }
+
+  .cursor-card-preview > img {
+    @apply relative z-10 max-h-[54%] max-w-[48%] object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.5)];
+  }
+
+  .cursor-card-preview-select {
+    @apply absolute bottom-2 right-2 z-20;
+  }
+
+  .cursor-card-preview-select select {
+    @apply max-w-[calc(100vw-4rem)] border-0 bg-background/90 px-2 py-1.5 text-[11px] font-medium text-foreground shadow-lg outline-none backdrop-blur transition-colors focus:ring-0;
+  }
+
+  .cursor-card-copy {
+    @apply p-4;
+  }
+
+  .cursor-card-heading h3 {
+    @apply truncate text-base font-semibold leading-snug text-foreground;
+  }
+
+  .cursor-card-heading p {
+    @apply mt-1 text-sm text-muted-foreground;
+  }
+
   .site-footer {
     @apply mx-auto flex w-full max-w-7xl flex-wrap items-center gap-x-8 gap-y-3 border-t border-border/50 px-6 py-8 text-sm text-muted-foreground md:px-12;
   }

@@ -10,3 +10,8 @@ npm-debug.log*
 !.dev.vars.example
 .env*
 !.env.example
+
+# Local cursor pack import/export artifacts
+/.cursor-pack-backups/
+/GeneratedCursorPacks/
+/*.sccursor/

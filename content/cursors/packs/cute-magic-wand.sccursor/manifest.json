@@ -1,0 +1,41 @@
+{
+  "assets" : [
+    {
+      "byteCount" : 41911,
+      "fileName" : "cursors/arrow.png",
+      "hotspot" : {
+        "x" : 24,
+        "y" : 8
+      },
+      "pixelHeight" : 224,
+      "pixelWidth" : 240,
+      "scale" : 8,
+      "sha256" : "35d5b404138df0d533f1cd809269e98d6a40f94cc8384a4fe8eff53cdc47aa44",
+      "visualType" : "arrow"
+    }
+  ],
+  "description" : "A cute star-tipped magic wand default cursor.",
+  "id" : "cute-magic-wand",
+  "minimumReaderSchemaVersion" : 2,
+  "name" : "Cute Magic Wand",
+  "localizedNames" : {
+    "de" : "Niedlicher Zauberstab",
+    "en" : "Cute Magic Wand",
+    "es" : "Varita mágica adorable",
+    "fr" : "Baguette magique adorable",
+    "it" : "Bacchetta magica adorabile",
+    "ja" : "かわいい魔法の杖",
+    "ko" : "귀여운 마법 지팡이",
+    "pt-BR" : "Varinha mágica fofa",
+    "zh-Hans" : "可爱魔法棒",
+    "zh-Hant" : "可愛魔法棒"
+  },
+  "schemaVersion" : 2,
+  "tags" : [
+    "cute",
+    "magic",
+    "wand",
+    "default"
+  ],
+  "version" : "1.0.0"
+}

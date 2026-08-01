@@ -1,0 +1,173 @@
+{
+  "assets": [
+    {
+      "byteCount": 42673,
+      "fileName": "cursors/arrow.png",
+      "hotspot": {
+        "x": 16,
+        "y": 8
+      },
+      "pixelHeight": 216,
+      "pixelWidth": 184,
+      "scale": 8,
+      "sha256": "6b228ea7e2127e8a61596e57fb3c38ca0e6f4f58bbcc6892fe5de45e2d74fc1d",
+      "visualType": "arrow"
+    },
+    {
+      "byteCount": 23217,
+      "fileName": "cursors/text.png",
+      "hotspot": {
+        "x": 56,
+        "y": 120
+      },
+      "pixelHeight": 224,
+      "pixelWidth": 104,
+      "scale": 8,
+      "sha256": "ab4f848938376aa05459459b4a84be3f6a7e49858fb921ddf0d5aa1793a37fe7",
+      "visualType": "text"
+    },
+    {
+      "byteCount": 53902,
+      "fileName": "cursors/pointer.png",
+      "hotspot": {
+        "x": 56,
+        "y": 8
+      },
+      "pixelHeight": 224,
+      "pixelWidth": 168,
+      "scale": 8,
+      "sha256": "0464428696c9ad0c4c534feb0f1bde18fdc429b5dc68e9980ed7410a629ff2ee",
+      "visualType": "pointer"
+    },
+    {
+      "byteCount": 43675,
+      "fileName": "cursors/crosshair.png",
+      "hotspot": {
+        "x": 112,
+        "y": 112
+      },
+      "pixelHeight": 216,
+      "pixelWidth": 224,
+      "scale": 8,
+      "sha256": "0dac3b253a6fc36fc6ede5466de253a7acf7875287f0a3a3d8e2ab68627ccef0",
+      "visualType": "crosshair"
+    },
+    {
+      "byteCount": 59436,
+      "fileName": "cursors/open-hand.png",
+      "hotspot": {
+        "x": 72,
+        "y": 120
+      },
+      "pixelHeight": 224,
+      "pixelWidth": 160,
+      "scale": 8,
+      "sha256": "134557697af760c9e57964623c9a00d37b92cffc0390eb9d9148a73c8c6509aa",
+      "visualType": "open-hand"
+    },
+    {
+      "byteCount": 50487,
+      "fileName": "cursors/closed-hand.png",
+      "hotspot": {
+        "x": 88,
+        "y": 88
+      },
+      "pixelHeight": 192,
+      "pixelWidth": 160,
+      "scale": 8,
+      "sha256": "d86d022138d03c8028d16c4148b32c961ba11a28e17160defc947e009a5d6d06",
+      "visualType": "closed-hand"
+    },
+    {
+      "byteCount": 25043,
+      "fileName": "cursors/resize-ew.png",
+      "hotspot": {
+        "x": 120,
+        "y": 48
+      },
+      "pixelHeight": 104,
+      "pixelWidth": 240,
+      "scale": 8,
+      "sha256": "45712875b4ab97fe0a25410abe4b8f4fe304a5186a55c12d2768966c94398c86",
+      "visualType": "resize-ew"
+    },
+    {
+      "byteCount": 24200,
+      "fileName": "cursors/resize-ns.png",
+      "hotspot": {
+        "x": 56,
+        "y": 120
+      },
+      "pixelHeight": 224,
+      "pixelWidth": 112,
+      "scale": 8,
+      "sha256": "53d0fed5283bdd4badf40f1c58cfc8e73a089b68f4ab3a87ab0b4c3e4c1d6335",
+      "visualType": "resize-ns"
+    },
+    {
+      "byteCount": 27371,
+      "fileName": "cursors/resize-nwse.png",
+      "hotspot": {
+        "x": 96,
+        "y": 104
+      },
+      "pixelHeight": 192,
+      "pixelWidth": 192,
+      "scale": 8,
+      "sha256": "cc10a6310f6edd528b01245a926395e3d55a5103cc6509042ea857233c4864f8",
+      "visualType": "resize-nwse"
+    },
+    {
+      "byteCount": 27279,
+      "fileName": "cursors/resize-nesw.png",
+      "hotspot": {
+        "x": 96,
+        "y": 104
+      },
+      "pixelHeight": 192,
+      "pixelWidth": 184,
+      "scale": 8,
+      "sha256": "9f9e5c4fff6f3c6b8e2447a0abed0ed7901eddd7ec2a99e596d23893cad50a1a",
+      "visualType": "resize-nesw"
+    },
+    {
+      "byteCount": 69520,
+      "fileName": "cursors/not-allowed.png",
+      "hotspot": {
+        "x": 120,
+        "y": 120
+      },
+      "pixelHeight": 224,
+      "pixelWidth": 232,
+      "scale": 8,
+      "sha256": "7b748348a3334d94fa84bc4d014bda2cc9064b6744e32863fd3761fc90311c20",
+      "visualType": "not-allowed"
+    }
+  ],
+  "description": "Ornate fantasy battle cursors in antique gold, ivory, and sapphire blue.",
+  "id": "gilded-arcane-cursors",
+  "localizedNames": {
+    "de": "Vergoldete arkane Zeiger",
+    "en": "Gilded Arcane Cursors",
+    "es": "Cursores arcanos dorados",
+    "fr": "Curseurs arcaniques dorés",
+    "it": "Cursori arcani dorati",
+    "ja": "金彩秘術カーソル",
+    "ko": "금빛 비전 커서",
+    "pt-BR": "Cursores arcanos dourados",
+    "zh-Hans": "鎏金奥术指针",
+    "zh-Hant": "鎏金奧術游標"
+  },
+  "minimumReaderSchemaVersion": 2,
+  "name": "Gilded Arcane Cursors",
+  "schemaVersion": 2,
+  "tags": [
+    "fantasy",
+    "moba",
+    "gilded",
+    "arcane",
+    "blue",
+    "battle"
+  ],
+  "version": "1.0.0"
+}

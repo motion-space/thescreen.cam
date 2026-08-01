@@ -38,6 +38,7 @@ export function Footer({
         href: localizedPath(locale, "/screen-studio-alternative"),
       },
       { label: copy.resourceLinks.docs, href: localizedPath(locale, "/docs") },
+      { label: copy.resourceLinks.cursors, href: localizedPath(locale, "/cursors") },
       { label: copy.resourceLinks.bgm, href: localizedPath(locale, "/bgm") },
       { label: copy.resourceLinks.motionBlurMask, href: localizedPath(locale, "/motion-blur-mask") },
       { label: copy.resourceLinks.changelog, href: localizedPath(locale, "/changelog") },
