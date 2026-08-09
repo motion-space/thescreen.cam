@@ -1,0 +1,189 @@
+{
+  "version": 2,
+  "generatedAt": "2026-08-08T16:53:15.421Z",
+  "sounds": [
+    {
+      "id": "magic-mouse",
+      "title": "Magic Mouse",
+      "tags": [
+        "Mouse"
+      ],
+      "keywords": [
+        "magic",
+        "mouse"
+      ],
+      "down": {
+        "duration": 0.023,
+        "durationMs": 23,
+        "size": 4494,
+        "sha256": "34576628866ae469a097b4bf81f2ccb4ec15046639e144d2e20260bf86ee73a0",
+        "audioUrl": "/click-sounds/v2/audio/magic-mouse-down.wav",
+        "downloadUrl": "/click-sounds/v2/audio/magic-mouse-down.wav"
+      },
+      "up": {
+        "duration": 0.053,
+        "durationMs": 53,
+        "size": 10254,
+        "sha256": "50bee4280c3879cd828100ae89fb44f83cb0856ab9982a053232cb2a3cb7edb5",
+        "audioUrl": "/click-sounds/v2/audio/magic-mouse-up.wav",
+        "downloadUrl": "/click-sounds/v2/audio/magic-mouse-up.wav"
+      }
+    },
+    {
+      "id": "magic-trackpad",
+      "title": "Magic Trackpad",
+      "tags": [
+        "Trackpad"
+      ],
+      "keywords": [
+        "magic",
+        "trackpad"
+      ],
+      "down": {
+        "duration": 0.16,
+        "durationMs": 160,
+        "size": 30798,
+        "sha256": "4f0642152eabe6909cd7d6f6801fd30213f8b2b1a7f4dd63a7e62cd8f99ccb4f",
+        "audioUrl": "/click-sounds/v2/audio/magic-trackpad-down.wav",
+        "downloadUrl": "/click-sounds/v2/audio/magic-trackpad-down.wav"
+      },
+      "up": {
+        "duration": 0.058,
+        "durationMs": 58,
+        "size": 11214,
+        "sha256": "698f9871dafe68b3bdc4526bcff85acb4c87475d07735d8e98ca099fda957e3b",
+        "audioUrl": "/click-sounds/v2/audio/magic-trackpad-up.wav",
+        "downloadUrl": "/click-sounds/v2/audio/magic-trackpad-up.wav"
+      }
+    },
+    {
+      "id": "mx-master",
+      "title": "MX Master",
+      "tags": [
+        "Mouse"
+      ],
+      "keywords": [
+        "mx",
+        "master",
+        "mouse"
+      ],
+      "down": {
+        "duration": 0.038,
+        "durationMs": 38,
+        "size": 7374,
+        "sha256": "f8bb616123d5741db79bd67026cff7b9bd64872ed4df55549481aa1c63c45131",
+        "audioUrl": "/click-sounds/v2/audio/mx-master-down.wav",
+        "downloadUrl": "/click-sounds/v2/audio/mx-master-down.wav"
+      },
+      "up": {
+        "duration": 0.065,
+        "durationMs": 65,
+        "size": 12558,
+        "sha256": "fb2da97c3beece77df99bf71c1553e9986b7a9f11090d2ca4493e8d94a40b31a",
+        "audioUrl": "/click-sounds/v2/audio/mx-master-up.wav",
+        "downloadUrl": "/click-sounds/v2/audio/mx-master-up.wav"
+      }
+    },
+    {
+      "id": "game-mouse-1",
+      "title": "Game Mouse 1",
+      "tags": [
+        "Mouse",
+        "Game"
+      ],
+      "keywords": [
+        "game",
+        "mouse",
+        "click"
+      ],
+      "down": {
+        "duration": 0.1,
+        "durationMs": 100,
+        "size": 17718,
+        "sha256": "b625b837d9b5e60378db4bfea58a6cf600b0aae46a0329f4e2c40371343f974b",
+        "audioUrl": "/click-sounds/v2/audio/game-mouse-1-down.wav",
+        "downloadUrl": "/click-sounds/v2/audio/game-mouse-1-down.wav"
+      },
+      "up": {
+        "duration": 0.029,
+        "durationMs": 29,
+        "size": 5190,
+        "sha256": "54837d468dd5a6d51366c0cc63f5e8c173e36a2834fc35f20187ebd07231f539",
+        "audioUrl": "/click-sounds/v2/audio/game-mouse-1-up.wav",
+        "downloadUrl": "/click-sounds/v2/audio/game-mouse-1-up.wav"
+      }
+    },
+    {
+      "id": "game-mouse-2",
+      "title": "Game Mouse 2",
+      "tags": [
+        "Mouse",
+        "Game"
+      ],
+      "keywords": [
+        "game",
+        "mouse",
+        "click"
+      ],
+      "down": {
+        "duration": 0.1,
+        "durationMs": 100,
+        "size": 17718,
+        "sha256": "4035133c64bd85872bbc5d2fe97d4d0d9e1276ee0dfbbbc24b14c8b7321aa9f0",
+        "audioUrl": "/click-sounds/v2/audio/game-mouse-2-down.wav",
+        "downloadUrl": "/click-sounds/v2/audio/game-mouse-2-down.wav"
+      },
+      "up": {
+        "duration": 0.021,
+        "durationMs": 21,
+        "size": 3778,
+        "sha256": "05c838e4804d679a01d7159a759f53619cc9b6b86f364d54ba3426a4d2e93f5d",
+        "audioUrl": "/click-sounds/v2/audio/game-mouse-2-up.wav",
+        "downloadUrl": "/click-sounds/v2/audio/game-mouse-2-up.wav"
+      }
+    },
+    {
+      "id": "angrymiao",
+      "title": "Angry Miao",
+      "tags": [
+        "Mouse"
+      ],
+      "keywords": [
+        "angrymiao",
+        "mouse",
+        "click"
+      ],
+      "down": {
+        "duration": 0.065,
+        "durationMs": 65,
+        "size": 12558,
+        "sha256": "8c2732855410dddce719b4ad911adc0b072d0a771a11b959bac18cefd79eb642",
+        "audioUrl": "/click-sounds/v2/audio/angrymiao-down.wav",
+        "downloadUrl": "/click-sounds/v2/audio/angrymiao-down.wav"
+      },
+      "up": {
+        "duration": 0.05,
+        "durationMs": 50,
+        "size": 9678,
+        "sha256": "1688509991a4ed961580b35b6d9f23f1cccdcf96eb6c74f8980aa5d065dc9df8",
+        "audioUrl": "/click-sounds/v2/audio/angrymiao-up.wav",
+        "downloadUrl": "/click-sounds/v2/audio/angrymiao-up.wav"
+      }
+    }
+  ],
+  "tags": [
+    "Game",
+    "Mouse",
+    "Trackpad"
+  ],
+  "keywords": [
+    "angrymiao",
+    "click",
+    "game",
+    "magic",
+    "master",
+    "mouse",
+    "mx",
+    "trackpad"
+  ]
+}

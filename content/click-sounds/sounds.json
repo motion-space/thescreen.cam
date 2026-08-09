@@ -3,6 +3,8 @@
     {
       "id": "magic-mouse",
       "source": "audio/magic-mouse.wav",
+      "downSource": "v2/audio/magic-mouse-down.wav",
+      "upSource": "v2/audio/magic-mouse-up.wav",
       "title": "Magic Mouse",
       "tags": ["Mouse"],
       "keywords": ["magic", "mouse"]
@@ -10,6 +12,8 @@
     {
       "id": "magic-trackpad",
       "source": "audio/magic-trackpad.wav",
+      "downSource": "v2/audio/magic-trackpad-down.wav",
+      "upSource": "v2/audio/magic-trackpad-up.wav",
       "title": "Magic Trackpad",
       "tags": ["Trackpad"],
       "keywords": ["magic", "trackpad"]
@@ -17,6 +21,8 @@
     {
       "id": "mx-master",
       "source": "audio/mx-master.wav",
+      "downSource": "v2/audio/mx-master-down.wav",
+      "upSource": "v2/audio/mx-master-up.wav",
       "title": "MX Master",
       "tags": ["Mouse"],
       "keywords": ["mx", "master", "mouse"]
@@ -24,6 +30,8 @@
     {
       "id": "game-mouse-1",
       "source": "audio/game-mouse-1.wav",
+      "downSource": "v2/audio/game-mouse-1-down.wav",
+      "upSource": "v2/audio/game-mouse-1-up.wav",
       "title": "Game Mouse 1",
       "tags": ["Mouse", "Game"],
       "keywords": ["game", "mouse", "click"]
@@ -31,6 +39,8 @@
     {
       "id": "game-mouse-2",
       "source": "audio/game-mouse-2.wav",
+      "downSource": "v2/audio/game-mouse-2-down.wav",
+      "upSource": "v2/audio/game-mouse-2-up.wav",
       "title": "Game Mouse 2",
       "tags": ["Mouse", "Game"],
       "keywords": ["game", "mouse", "click"]
@@ -38,6 +48,8 @@
     {
       "id": "angrymiao",
       "source": "audio/angrymiao.wav",
+      "downSource": "v2/audio/angrymiao-down.wav",
+      "upSource": "v2/audio/angrymiao-up.wav",
       "title": "Angry Miao",
       "tags": ["Mouse"],
       "keywords": ["angrymiao", "mouse", "click"]
