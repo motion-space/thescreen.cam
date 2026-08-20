@@ -6,7 +6,7 @@ export const prerender = true;
 export const GET: APIRoute = async () =>
   new Response(JSON.stringify(mockupsManifest), {
     headers: {
-      "Cache-Control": "public, max-age=3600",
+      "Cache-Control": "no-store",
       "Content-Type": "application/json; charset=utf-8",
     },
   });

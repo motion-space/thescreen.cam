@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-06-19T09:53:23.578Z",
+  "generatedAt": "2026-08-20T09:00:44.671Z",
   "series": [
     {
       "id": "apple-watch-series-11",
@@ -10,6 +10,15 @@
       "manifestUrl": "/mockups/series/apple-watch-series-11.json",
       "assetCount": 39,
       "totalSize": 1767746
+    },
+    {
+      "id": "iphone-16-series",
+      "name": "iPhone 16 Series",
+      "kind": "phone",
+      "version": 6,
+      "manifestUrl": "/mockups/series/iphone-16-series.json",
+      "assetCount": 5,
+      "totalSize": 128046
     },
     {
       "id": "iphone-17-series",

@@ -1,0 +1,123 @@
+{
+  "id": "iphone-16-series",
+  "name": "iPhone 16 Series",
+  "kind": "phone",
+  "version": 6,
+  "defaultModelID": "iphone-16-plus",
+  "models": [
+    {
+      "id": "iphone-16-plus",
+      "name": "iPhone 16 Plus",
+      "screenResolution": {
+        "width": 1290,
+        "height": 2796
+      },
+      "renderGeometry": {
+        "canvasSize": {
+          "width": 844,
+          "height": 1726
+        },
+        "screenRect": {
+          "x": 41,
+          "y": 36,
+          "width": 762,
+          "height": 1652
+        },
+        "screenCornerRadius": 92,
+        "screenBottomCornerRadius": 92,
+        "clipShape": "roundedRect"
+      },
+      "defaultVariantID": "black",
+      "variants": [
+        {
+          "id": "black",
+          "name": "Black",
+          "swatchHex": "#2E2E30",
+          "assets": [
+            {
+              "role": "chrome",
+              "pixelWidth": 844,
+              "pixelHeight": 1726,
+              "url": "/mockups/assets/iphone-16-series/iphone-16-plus/black.webp",
+              "downloadUrl": "/mockups/assets/iphone-16-series/iphone-16-plus/black.webp",
+              "contentType": "image/webp",
+              "size": 21426,
+              "sha256": "edeba1135be0d8f7d29792d4091cbc78e6b72eafe696b7c5fb0ad018eb08c835"
+            }
+          ]
+        },
+        {
+          "id": "white",
+          "name": "White",
+          "swatchHex": "#F2F1E9",
+          "assets": [
+            {
+              "role": "chrome",
+              "pixelWidth": 844,
+              "pixelHeight": 1726,
+              "url": "/mockups/assets/iphone-16-series/iphone-16-plus/white.webp",
+              "downloadUrl": "/mockups/assets/iphone-16-series/iphone-16-plus/white.webp",
+              "contentType": "image/webp",
+              "size": 23448,
+              "sha256": "ccced6b8e34eb0eb2ac1df5aa432748eb6da60c2d927e040aae9df35e855e143"
+            }
+          ]
+        },
+        {
+          "id": "teal",
+          "name": "Teal",
+          "swatchHex": "#5D7D7A",
+          "assets": [
+            {
+              "role": "chrome",
+              "pixelWidth": 844,
+              "pixelHeight": 1726,
+              "url": "/mockups/assets/iphone-16-series/iphone-16-plus/teal.webp",
+              "downloadUrl": "/mockups/assets/iphone-16-series/iphone-16-plus/teal.webp",
+              "contentType": "image/webp",
+              "size": 26614,
+              "sha256": "94e777106b5efcbc453afb8c64f7b160b68673fa3a44dc0d750cc087afd1dd31"
+            }
+          ]
+        },
+        {
+          "id": "pink",
+          "name": "Pink",
+          "swatchHex": "#D5A7B4",
+          "assets": [
+            {
+              "role": "chrome",
+              "pixelWidth": 844,
+              "pixelHeight": 1726,
+              "url": "/mockups/assets/iphone-16-series/iphone-16-plus/pink.webp",
+              "downloadUrl": "/mockups/assets/iphone-16-series/iphone-16-plus/pink.webp",
+              "contentType": "image/webp",
+              "size": 27984,
+              "sha256": "675ee51009b5acabfb3f245c773a56bffee6571b42d03a6821cf92f18ce9dd83"
+            }
+          ]
+        },
+        {
+          "id": "ultramarine",
+          "name": "Ultramarine",
+          "swatchHex": "#56658F",
+          "assets": [
+            {
+              "role": "chrome",
+              "pixelWidth": 844,
+              "pixelHeight": 1726,
+              "url": "/mockups/assets/iphone-16-series/iphone-16-plus/ultramarine.webp",
+              "downloadUrl": "/mockups/assets/iphone-16-series/iphone-16-plus/ultramarine.webp",
+              "contentType": "image/webp",
+              "size": 28574,
+              "sha256": "67eed1cf394e732b6461035a1dce186902f25e66b30656ad4520c3e94ec898c6"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "legacyAliases": [],
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-20T09:00:44.671Z"
+}

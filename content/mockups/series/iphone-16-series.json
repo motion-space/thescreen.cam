@@ -1,0 +1,90 @@
+{
+  "id": "iphone-16-series",
+  "name": "iPhone 16 Series",
+  "kind": "phone",
+  "version": 6,
+  "defaultModelID": "iphone-16-plus",
+  "models": [
+    {
+      "id": "iphone-16-plus",
+      "name": "iPhone 16 Plus",
+      "screenResolution": { "width": 1290, "height": 2796 },
+      "renderGeometry": {
+        "canvasSize": { "width": 844, "height": 1726 },
+        "screenRect": { "x": 41, "y": 36, "width": 762, "height": 1652 },
+        "screenCornerRadius": 92,
+        "screenBottomCornerRadius": 92,
+        "clipShape": "roundedRect"
+      },
+      "defaultVariantID": "black",
+      "variants": [
+        {
+          "id": "black",
+          "name": "Black",
+          "swatchHex": "#2E2E30",
+          "assets": [
+            {
+              "role": "chrome",
+              "source": "iphone-16-series/iphone-16-plus/black.webp",
+              "pixelWidth": 844,
+              "pixelHeight": 1726
+            }
+          ]
+        },
+        {
+          "id": "white",
+          "name": "White",
+          "swatchHex": "#F2F1E9",
+          "assets": [
+            {
+              "role": "chrome",
+              "source": "iphone-16-series/iphone-16-plus/white.webp",
+              "pixelWidth": 844,
+              "pixelHeight": 1726
+            }
+          ]
+        },
+        {
+          "id": "teal",
+          "name": "Teal",
+          "swatchHex": "#5D7D7A",
+          "assets": [
+            {
+              "role": "chrome",
+              "source": "iphone-16-series/iphone-16-plus/teal.webp",
+              "pixelWidth": 844,
+              "pixelHeight": 1726
+            }
+          ]
+        },
+        {
+          "id": "pink",
+          "name": "Pink",
+          "swatchHex": "#D5A7B4",
+          "assets": [
+            {
+              "role": "chrome",
+              "source": "iphone-16-series/iphone-16-plus/pink.webp",
+              "pixelWidth": 844,
+              "pixelHeight": 1726
+            }
+          ]
+        },
+        {
+          "id": "ultramarine",
+          "name": "Ultramarine",
+          "swatchHex": "#56658F",
+          "assets": [
+            {
+              "role": "chrome",
+              "source": "iphone-16-series/iphone-16-plus/ultramarine.webp",
+              "pixelWidth": 844,
+              "pixelHeight": 1726
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "legacyAliases": []
+}
