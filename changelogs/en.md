@@ -1,7 +1,54 @@
+# 1.3.1
+
+- Screenshot quick-action cards remain usable and can always be dismissed when a desktop wallpaper or temporary file is unavailable.
+
+# 1.3.0
+
+- 3D Lens camera controls are now available by default.
+- ScreenCam now launches correctly on macOS 15.
+- iPhone recordings now capture the selected Mac microphone.
+- iPhone recordings now fit their device frame correctly, including iPhone 17 Pro, without extra wallpaper, padding, or thin edge lines.
+- Area screenshots now preserve open macOS menus, ignore repeated shortcuts, support very small selections, and stay responsive while dragging.
+
+# 1.2.0
+
+- Experimental 3D Lens zoom clips can tilt the screen plane, preview and drag focus points, double-click the canvas to focus, adjust depth of field, and transition smoothly between adjacent 3D shots.
+- 3D Lens clips can add customizable moving glass reflections with softbox, window, or strip-light shapes.
+- Zoom clips show their entry curve on the timeline, where dragging its anchor adjusts or disables the zoom-in animation.
+- 3D Lens focus previews fall back to the zoom clip's first frame when the intended frame is unavailable.
+- Cursor click sounds now play distinct press and release audio in sync with clicks, long presses, and drags.
+- Area and window selection overlays now appear reliably for recordings and screenshots, and completing a screenshot no longer crashes while closing the overlay or showing its quick-action card.
+- Frozen window screenshots preserve the exact frame shown during selection.
+- Screenshot shortcuts remain available while recording, recording controls stay clickable, and global shortcuts require exact modifier combinations.
+- Screenshot annotations now support reusable dashed pen styles, show both curve handles for lines and arrows, lock pen and highlighter strokes to fixed directions with Shift, and clearly mark move-only freehand selections.
+- Timeline clips now show identifying icons and manual zoom levels; Command-dragging a Zoom entry anchor adjusts its level.
+- Moving or resizing a Zoom clip, or adjusting its entry-speed anchor, no longer changes the selection; adjacent resize handles also remain assigned to the correct clip at shared edges.
+- Slow custom spring curves now preview and animate smoothly through the end instead of jumping to the final position.
+- Moving and resizing Zoom clips stays smooth while their curves and adjacent transitions update live.
+- Capture selection, screenshot editing and quick previews, large-project zoom waveforms, and 3D Lens editing now respond more quickly.
+- Resizing the recording editor window now stays responsive by avoiding repeated preview resource rebuilds.
+
+# 1.1.3
+
+- Capture screenshots or open existing images for editing, with optional custom shortcuts, instant capture of the display under the pointer with visual and shutter-sound feedback, frozen-screen selection, temporary-file cleanup, quick actions, window screenshot background presets using the captured desktop wallpaper, device mockups, final canvas aspect ratios, cropping, annotations, responsive copy progress, and live export size and quality previews up to 5K.
+- Optional Cursor timeline clips can override the global cursor style for any part of a recording.
+- MacBook mockup previews and exports no longer crash when rendering very small or invalid frame geometry.
+- Preview and export stay smooth in projects with many cursor style override clips.
+- Cursor animations and caption editing stay responsive in long, event-heavy recordings.
+- Large-window recording startup uses less memory, while background previews and cursor pack downloads keep the editor responsive.
+- Window screenshot quick-action cards now appear before full-resolution background rendering completes, and resizing the screenshot editor reuses the rendered preview to avoid repeated checkerboard and shadow compositing.
+
 # 1.1.2
 
 - Recording clips now support playback speeds up to 10x.
 - Window recordings no longer flicker in translucent sidebars or along window edges.
+- Finder reveal actions now bring Finder to the foreground, and quick exports return to the recording actions after revealing the result.
+- Project file pickers now remember the last folder used to open a project.
+- Cursor style packs load instantly from the local library and can be downloaded, updated in place, localized, privately renamed, imported, shared, and managed in Settings.
+- Create cursor packs from cropped images with automatic background removal and an adjustable click point, preview them in Finder, and render them consistently in projects and exports.
+- Submit locally created cursor packs to the open official catalog through an agent-assisted pull request.
+- Cursor size and movement rotation now support wider adjustment ranges.
+- Cursor size stays consistent between the editor preview and exported video.
 
 # 1.1.1
 

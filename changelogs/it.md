@@ -1,7 +1,54 @@
+# 1.3.1
+
+- Le schede delle azioni rapide per gli screenshot restano utilizzabili e possono sempre essere chiuse quando lo sfondo della scrivania o un file temporaneo non è disponibile.
+
+# 1.3.0
+
+- I controlli della fotocamera con obiettivo 3D sono ora disponibili per impostazione predefinita.
+- ScreenCam ora si avvia correttamente su macOS 15.
+- Le registrazioni da iPhone ora acquisiscono il microfono del Mac selezionato.
+- Le registrazioni da iPhone ora si adattano correttamente alla cornice del dispositivo, incluso iPhone 17 Pro, senza sfondi, spaziature o sottili linee aggiuntive sui bordi.
+- Gli screenshot di un’area ora conservano i menu macOS aperti, ignorano le scorciatoie ripetute, supportano selezioni molto piccole e rimangono reattivi durante il trascinamento.
+
+# 1.2.0
+
+- Le clip di zoom sperimentali con obiettivo 3D consentono di inclinare il piano dello schermo, visualizzare e trascinare i punti di messa a fuoco, mettere a fuoco con un doppio clic sulla tela, regolare la profondità di campo e passare fluidamente tra riprese 3D adiacenti.
+- Le clip con obiettivo 3D possono aggiungere riflessi di vetro animati e personalizzabili a forma di softbox, finestra o striscia luminosa.
+- Le clip di zoom mostrano la curva di ingresso nella timeline; trascinandone l'ancora è possibile regolare o disattivare l'animazione di avvicinamento.
+- Le anteprime della messa a fuoco con obiettivo 3D usano il primo fotogramma della clip di zoom quando quello previsto non è disponibile.
+- I suoni dei clic del cursore ora distinguono pressione e rilascio, sincronizzandosi con clic, pressioni prolungate e trascinamenti.
+- Le selezioni di area e finestra ora compaiono in modo affidabile per registrazioni e screenshot; completare uno screenshot non causa più arresti anomali durante la chiusura della selezione o la visualizzazione della scheda delle azioni rapide.
+- Gli screenshot di finestre bloccate conservano il fotogramma esatto mostrato durante la selezione.
+- Le scorciatoie per gli screenshot restano disponibili durante la registrazione, i controlli di registrazione rimangono cliccabili e le scorciatoie globali richiedono combinazioni esatte dei tasti modificatori.
+- Le annotazioni degli screenshot ora supportano stili di penna tratteggiata riutilizzabili, mostrano entrambe le maniglie delle curve per linee e frecce, bloccano i tratti di penna ed evidenziatore su direzioni fisse con Maiusc e identificano chiaramente le selezioni a mano libera che possono solo essere spostate.
+- Le clip nella timeline ora mostrano icone identificative e livelli di zoom manuali; trascina l’ancora di ingresso dello zoom tenendo premuto Comando per regolarne il livello.
+- Spostare o ridimensionare una clip di zoom, oppure regolarne l’ancora della velocità di ingresso, non modifica più la selezione; sui bordi condivisi, le maniglie restano associate alla clip corretta.
+- Le curve molla personalizzate più lente ora scorrono fluidamente fino alla fine nell’anteprima e nell’animazione, senza saltare alla posizione finale.
+- Lo spostamento e il ridimensionamento delle clip di zoom rimangono fluidi mentre curve e transizioni adiacenti si aggiornano in tempo reale.
+- La selezione di registrazioni e screenshot, la modifica e l'anteprima rapida degli screenshot, le forme d'onda dello zoom nei progetti di grandi dimensioni e la modifica con obiettivo 3D ora rispondono più rapidamente.
+- Il ridimensionamento della finestra dell'editor di registrazione rimane fluido evitando di ricreare ripetutamente le risorse di anteprima.
+
+# 1.1.3
+
+- Acquisisci schermate o apri immagini esistenti per modificarle, con scorciatoie personalizzate facoltative, acquisizione immediata dello schermo su cui si trova il puntatore con riscontro visivo e suono dell’otturatore, selezione a schermo bloccato, pulizia dei file temporanei, azioni rapide, preset di sfondo per le schermate delle finestre basati sullo sfondo della scrivania acquisito, mockup di dispositivi, proporzioni finali della tela, ritaglio, annotazioni, avanzamento della copia reattivo e anteprime in tempo reale di dimensioni e qualità di esportazione fino a 5K.
+- Le clip cursore facoltative nella timeline possono sostituire lo stile globale del cursore in qualsiasi parte di una registrazione.
+- Le anteprime e le esportazioni con mockup MacBook non si arrestano più durante il rendering di geometrie del fotogramma molto piccole o non valide.
+- Anteprima ed esportazione restano fluide nei progetti con molte clip che sostituiscono lo stile del cursore.
+- Le animazioni del cursore e la modifica dei sottotitoli restano reattive nelle registrazioni lunghe e ricche di eventi.
+- L’avvio della registrazione di finestre grandi usa meno memoria, mentre le anteprime dello sfondo e i download dei pacchetti cursore mantengono reattivo l’editor.
+- Le schede di azione rapida per le schermate delle finestre ora compaiono prima che termini il rendering dello sfondo a piena risoluzione; il ridimensionamento della finestra dell’editor di schermate riutilizza l’anteprima renderizzata ed evita di ricomporre ripetutamente la scacchiera di trasparenza e le ombre decorative.
+
 # 1.1.2
 
 - Le clip di registrazione ora supportano velocità di riproduzione fino a 10×.
 - Le registrazioni delle finestre non sfarfallano più nelle barre laterali traslucide o lungo i bordi della finestra.
+- Le azioni per mostrare nel Finder ora portano il Finder in primo piano, mentre le esportazioni rapide tornano alle azioni di registrazione dopo aver mostrato il file esportato.
+- I selettori di file dei progetti ora ricordano l’ultima cartella usata per aprire un progetto.
+- I pacchetti di stili del cursore si caricano subito dalla libreria locale e possono essere scaricati, aggiornati sul posto, localizzati, rinominati privatamente, importati, condivisi e gestiti nelle Impostazioni.
+- Crea pacchetti cursore da immagini ritagliate con rimozione automatica dello sfondo e punto di clic regolabile, visualizzali in anteprima nel Finder e ottieni un rendering coerente nei progetti e nelle esportazioni.
+- I pacchetti cursore creati localmente possono essere inviati al catalogo ufficiale aperto tramite una pull request assistita da un agente.
+- Le dimensioni del cursore e la rotazione durante il movimento ora offrono intervalli di regolazione più ampi.
+- Le dimensioni del cursore restano coerenti tra l’anteprima dell’editor e il video esportato.
 
 # 1.1.1
 

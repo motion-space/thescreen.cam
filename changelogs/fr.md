@@ -1,7 +1,54 @@
+# 1.3.1
+
+- Les cartes d’actions rapides de capture restent utilisables et peuvent toujours être fermées lorsqu’un fond d’écran ou un fichier temporaire est indisponible.
+
+# 1.3.0
+
+- Les commandes de caméra avec objectif 3D sont désormais disponibles par défaut.
+- ScreenCam se lance désormais correctement sous macOS 15.
+- Les enregistrements d’iPhone capturent désormais le microphone Mac sélectionné.
+- Les enregistrements d’iPhone s’ajustent désormais correctement au cadre de l’appareil, y compris l’iPhone 17 Pro, sans fond d’écran, marge ni fine ligne supplémentaire sur les bords.
+- Les captures de zone conservent désormais les menus macOS ouverts, ignorent les raccourcis répétés, prennent en charge les très petites sélections et restent fluides pendant le déplacement.
+
+# 1.2.0
+
+- Les clips de zoom expérimentaux avec objectif 3D permettent d'incliner le plan de l'écran, de prévisualiser et déplacer les points de mise au point, de faire la mise au point par double-clic sur le canevas, de régler la profondeur de champ et d'enchaîner fluidement des plans 3D adjacents.
+- Les clips avec objectif 3D peuvent ajouter des reflets de verre animés et personnalisables en forme de boîte à lumière, de fenêtre ou de bande lumineuse.
+- Les clips de zoom affichent leur courbe d'entrée dans la timeline ; déplacer son ancre permet d'ajuster ou de désactiver l'animation de zoom avant.
+- Les aperçus de mise au point avec objectif 3D utilisent la première image du clip de zoom lorsque l'image prévue n'est pas disponible.
+- Les sons de clic du curseur distinguent désormais l'appui et le relâchement, en synchronisation avec les clics, les appuis prolongés et les glissements.
+- Les sélections de zone et de fenêtre s'affichent désormais de façon fiable pour les enregistrements et les captures d'écran ; terminer une capture ne provoque plus de plantage lors de la fermeture de la sélection ou de l'affichage de la carte d'actions rapides.
+- Les captures de fenêtres figées conservent exactement l'image affichée pendant la sélection.
+- Les raccourcis de capture restent disponibles pendant l'enregistrement, les commandes d'enregistrement restent cliquables et les raccourcis globaux exigent une combinaison exacte de touches de modification.
+- Les annotations de capture prennent désormais en charge des styles de trait pointillé réutilisables, affichent les deux poignées de courbe des lignes et des flèches, verrouillent les traits du stylo et du surligneur dans des directions fixes avec Maj et signalent clairement les sélections à main levée uniquement déplaçables.
+- Les clips de la timeline affichent désormais des icônes d’identification et des niveaux de zoom manuels ; faites glisser l’ancre d’entrée d’un zoom avec Commande enfoncée pour régler son niveau.
+- Déplacer ou redimensionner un clip de zoom, ou régler son ancre de vitesse d’entrée, ne modifie plus la sélection ; aux limites partagées, les poignées restent également associées au bon clip.
+- Les courbes de ressort personnalisées lentes restent désormais fluides jusqu’à la fin dans l’aperçu et l’animation, sans saut vers la position finale.
+- Le déplacement et le redimensionnement des clips de zoom restent fluides pendant la mise à jour en direct de leurs courbes et transitions adjacentes.
+- La sélection des enregistrements et captures, la modification et l'aperçu rapide des captures, les formes d'onde de zoom des grands projets et l'édition avec objectif 3D répondent désormais plus rapidement.
+- Le redimensionnement de la fenêtre de l'éditeur d'enregistrement reste fluide en évitant de reconstruire plusieurs fois les ressources d'aperçu.
+
+# 1.1.3
+
+- Capturez des écrans ou ouvrez des images existantes pour les modifier, avec des raccourcis personnalisés facultatifs, la capture instantanée de l’écran où se trouve le pointeur avec retour visuel et son d’obturateur, la sélection sur écran figé, le nettoyage des fichiers temporaires, des actions rapides, des préréglages d’arrière-plan de capture de fenêtre utilisant le fond d’écran du bureau capturé, des mockups d’appareil, les proportions finales du canevas, le recadrage, les annotations, une progression de copie réactive et des aperçus en direct de la taille et de la qualité d’export jusqu’en 5K.
+- Des clips de curseur facultatifs dans la timeline peuvent remplacer le style global du curseur sur n’importe quelle partie d’un enregistrement.
+- Les aperçus et exports avec un mockup MacBook ne plantent plus lors du rendu d’une géométrie d’image très petite ou non valide.
+- L’aperçu et l’export restent fluides dans les projets comportant de nombreux clips de remplacement du style du curseur.
+- Les animations du curseur et l’édition des sous-titres restent réactives dans les enregistrements longs et riches en événements.
+- Le démarrage de l’enregistrement de grandes fenêtres utilise moins de mémoire, tandis que les aperçus d’arrière-plan et les téléchargements de packs de curseurs préservent la réactivité de l’éditeur.
+- Les cartes d’actions rapides des captures de fenêtre s’affichent désormais avant la fin du rendu de l’arrière-plan en pleine résolution ; le redimensionnement de la fenêtre de l’éditeur de captures réutilise l’aperçu rendu et évite de recomposer le damier de transparence et les ombres décoratives.
+
 # 1.1.2
 
 - Les clips d’enregistrement prennent désormais en charge des vitesses de lecture allant jusqu’à 10×.
 - Les enregistrements de fenêtre ne scintillent plus dans les barres latérales translucides ni sur les bords de la fenêtre.
+- Les actions d’affichage dans le Finder placent désormais le Finder au premier plan, et les exports rapides reviennent aux actions d’enregistrement après l’affichage du fichier exporté.
+- Les sélecteurs de fichiers de projet mémorisent désormais le dernier dossier utilisé pour ouvrir un projet.
+- Les packs de styles de curseur se chargent instantanément depuis la bibliothèque locale et peuvent être téléchargés, mis à jour sur place, localisés, renommés en privé, importés, partagés et gérés dans Réglages.
+- Créez des packs de curseur à partir d’images recadrées avec suppression automatique de l’arrière-plan et point de clic réglable, prévisualisez-les dans le Finder et profitez d’un rendu cohérent dans les projets et les exports.
+- Les packs de curseur créés localement peuvent être proposés au catalogue officiel ouvert via une pull request assistée par un agent.
+- La taille du curseur et sa rotation pendant les déplacements offrent désormais des plages de réglage plus étendues.
+- La taille du curseur reste cohérente entre l’aperçu de l’éditeur et la vidéo exportée.
 
 # 1.1.1
 

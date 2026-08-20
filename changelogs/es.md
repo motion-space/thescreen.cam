@@ -1,7 +1,54 @@
+# 1.3.1
+
+- Las tarjetas de acciones rápidas de capturas siguen funcionando y siempre se pueden cerrar cuando no está disponible el fondo de escritorio o un archivo temporal.
+
+# 1.3.0
+
+- Los controles de cámara con lente 3D ahora están disponibles de forma predeterminada.
+- ScreenCam ahora se inicia correctamente en macOS 15.
+- Las grabaciones de iPhone ahora capturan el micrófono del Mac seleccionado.
+- Las grabaciones de iPhone ahora encajan correctamente en el marco del dispositivo, incluido el iPhone 17 Pro, sin fondos, márgenes ni líneas finas adicionales en los bordes.
+- Las capturas de área ahora conservan los menús abiertos de macOS, ignoran atajos repetidos, admiten selecciones muy pequeñas y responden con fluidez durante el arrastre.
+
+# 1.2.0
+
+- Los clips de zoom experimentales con lente 3D permiten inclinar el plano de la pantalla, previsualizar y arrastrar puntos de enfoque, enfocar con doble clic en el lienzo, ajustar la profundidad de campo y realizar transiciones fluidas entre tomas 3D adyacentes.
+- Los clips con lente 3D pueden añadir reflejos de cristal en movimiento personalizables con formas de softbox, ventana o tira de luz.
+- Los clips de zoom muestran su curva de entrada en la línea de tiempo; al arrastrar el ancla se puede ajustar o desactivar la animación de acercamiento.
+- Las vistas previas de enfoque con lente 3D usan el primer fotograma del clip de zoom cuando el fotograma previsto no está disponible.
+- Los sonidos de clic del cursor ahora reproducen sonidos distintos al pulsar y soltar, sincronizados con clics, pulsaciones prolongadas y arrastres.
+- Las capas de selección de área y ventana ahora aparecen de forma fiable en grabaciones y capturas; al completar una captura, la app ya no se cierra al ocultar la selección o mostrar la tarjeta de acciones rápidas.
+- Las capturas de ventanas congeladas conservan el fotograma exacto mostrado durante la selección.
+- Los atajos de captura siguen disponibles durante la grabación, los controles de grabación permanecen accesibles y los atajos globales solo responden a combinaciones exactas de teclas modificadoras.
+- Las anotaciones de capturas ahora admiten estilos de lápiz discontinuo reutilizables, muestran ambos tiradores de curva en líneas y flechas, bloquean los trazos de lápiz y resaltador en direcciones fijas con Mayús e identifican claramente las selecciones a mano alzada que solo se pueden mover.
+- Los clips de la línea de tiempo ahora muestran iconos identificativos y niveles de zoom manuales; arrastra el ancla de entrada del zoom con Comando pulsado para ajustar su nivel.
+- Mover o redimensionar un clip de zoom, o ajustar el ancla de velocidad de entrada, ya no cambia la selección; en los bordes compartidos, los tiradores también permanecen asignados al clip correcto.
+- Las curvas de resorte personalizadas lentas ahora se previsualizan y animan con fluidez hasta el final, sin saltar a la posición final.
+- Mover y redimensionar clips de zoom se mantiene fluido mientras sus curvas y transiciones adyacentes se actualizan en vivo.
+- La selección de grabaciones y capturas, la edición y previsualización rápida de capturas, las formas de onda de zoom en proyectos grandes y la edición con lente 3D ahora responden más rápido.
+- Cambiar el tamaño de la ventana del editor de grabaciones ahora se mantiene fluido al evitar reconstrucciones repetidas de los recursos de previsualización.
+
+# 1.1.3
+
+- Ahora puedes capturar pantallas o abrir imágenes existentes para editarlas, con atajos personalizados opcionales, captura instantánea de la pantalla donde está el puntero con respuesta visual y sonido de obturador, selección sobre una pantalla congelada, limpieza de archivos temporales, acciones rápidas, preajustes de fondo para capturas de ventanas con el fondo de escritorio capturado, mockups de dispositivos, relaciones de aspecto finales del lienzo, recorte, anotaciones, progreso de copia fluido y vistas previas en vivo del tamaño y la calidad de exportación hasta 5K.
+- Los clips opcionales de cursor en la línea de tiempo pueden sustituir el estilo global del cursor en cualquier parte de una grabación.
+- Las vistas previas y exportaciones con marcos de MacBook ya no fallan al renderizar geometrías de fotograma muy pequeñas o no válidas.
+- La vista previa y la exportación siguen siendo fluidas en proyectos con muchos clips que sustituyen el estilo del cursor.
+- Las animaciones del cursor y la edición de subtítulos mantienen una respuesta rápida en grabaciones largas con muchos eventos.
+- El inicio de grabaciones de ventanas grandes usa menos memoria, y las vistas previas de fondo y descargas de paquetes de cursores mantienen la fluidez del editor.
+- Las tarjetas de acciones rápidas para capturas de ventanas ahora aparecen antes de que termine de renderizarse el fondo a resolución completa; al redimensionar la ventana del editor de capturas, se reutiliza la vista previa renderizada y se evita recomponer repetidamente el patrón de transparencia y las sombras decorativas.
+
 # 1.1.2
 
 - Los clips de grabación ahora admiten velocidades de reproducción de hasta 10×.
 - Las grabaciones de ventanas ya no parpadean en las barras laterales translúcidas ni en los bordes de la ventana.
+- Las acciones para mostrar en Finder ahora ponen Finder en primer plano, y las exportaciones rápidas vuelven a las acciones de grabación después de mostrar el archivo exportado.
+- Los selectores de archivos de proyectos ahora recuerdan la última carpeta usada para abrir un proyecto.
+- Los paquetes de estilos de cursor se cargan al instante desde la biblioteca local y se pueden descargar, actualizar, localizar, renombrar de forma privada, importar, compartir y gestionar en Ajustes.
+- Crea paquetes de cursor a partir de imágenes recortadas con eliminación automática del fondo y un punto de clic ajustable; previsualízalos en Finder y obtén un renderizado uniforme en proyectos y exportaciones.
+- Los paquetes de cursor creados localmente se pueden enviar al catálogo oficial abierto mediante una pull request asistida por un agente.
+- El tamaño del cursor y la rotación durante el movimiento ahora admiten intervalos de ajuste más amplios.
+- El tamaño del cursor se mantiene uniforme entre la vista previa del editor y el vídeo exportado.
 
 # 1.1.1
 

@@ -1,7 +1,54 @@
+# 1.3.1
+
+- Screenshot-Schnellaktionskarten bleiben nutzbar und können jederzeit geschlossen werden, wenn ein Schreibtischhintergrund oder eine temporäre Datei nicht verfügbar ist.
+
+# 1.3.0
+
+- Die Kamerasteuerung für das 3D-Objektiv ist jetzt standardmäßig verfügbar.
+- ScreenCam startet jetzt korrekt unter macOS 15.
+- iPhone-Aufnahmen zeichnen jetzt das ausgewählte Mac-Mikrofon auf.
+- iPhone-Aufnahmen passen jetzt korrekt in den Geräterahmen, einschließlich iPhone 17 Pro, ohne zusätzlichen Hintergrund, Abstand oder dünne Randlinien.
+- Bereichs-Screenshots behalten geöffnete macOS-Menüs bei, ignorieren wiederholte Tastenkürzel, unterstützen sehr kleine Auswahlen und reagieren beim Ziehen flüssig.
+
+# 1.2.0
+
+- Experimentelle 3D-Linsen-Zoomclips können die Bildfläche neigen, Fokuspunkte anzeigen und verschieben, per Doppelklick auf die Arbeitsfläche fokussieren, die Schärfentiefe anpassen und benachbarte 3D-Einstellungen weich überblenden.
+- 3D-Linsen-Clips können anpassbare, bewegte Glasreflexionen in Form von Softboxen, Fenstern oder Lichtstreifen hinzufügen.
+- Zoomclips zeigen ihre Einstiegskurve in der Timeline; durch Ziehen des Ankers lässt sich die Zoom-in-Animation anpassen oder deaktivieren.
+- 3D-Linsen-Fokusvorschauen verwenden das erste Bild des Zoomclips, wenn das vorgesehene Bild nicht verfügbar ist.
+- Cursor-Klickgeräusche geben beim Klicken, langen Drücken und Ziehen jetzt synchron unterschiedliche Töne für Drücken und Loslassen wieder.
+- Bereichs- und Fensterauswahl werden bei Aufnahmen und Screenshots zuverlässig eingeblendet; nach einem Screenshot stürzt die App beim Schließen der Auswahl oder Anzeigen der Schnellaktionskarte nicht mehr ab.
+- Eingefrorene Fenster-Screenshots bewahren exakt das Bild, das bei der Auswahl angezeigt wurde.
+- Screenshot-Kurzbefehle bleiben während einer Aufnahme verfügbar, die Aufnahmesteuerung bleibt anklickbar und globale Kurzbefehle reagieren nur auf exakt passende Sondertasten.
+- Screenshot-Anmerkungen unterstützen jetzt wiederverwendbare gestrichelte Stiftstile, zeigen beide Kurvengriffe für Linien und Pfeile, fixieren Stift- und Textmarkerstriche mit der Umschalttaste auf feste Richtungen und kennzeichnen Freihandauswahlen, die nur verschoben werden können.
+- Timeline-Clips zeigen jetzt Erkennungssymbole und manuelle Zoomstufen; durch Ziehen eines Zoom-Einstiegsankers bei gedrückter Befehlstaste lässt sich die Stufe anpassen.
+- Beim Verschieben, Ändern der Größe oder Anpassen des Einstiegsgeschwindigkeitsankers eines Zoomclips ändert sich die Auswahl nicht mehr; an gemeinsamen Kanten bleiben die Größenänderungsgriffe dem richtigen Clip zugeordnet.
+- Langsame benutzerdefinierte Federkurven laufen in Vorschau und Animation nun weich bis zum Ende, statt zur Endposition zu springen.
+- Zoomclips lassen sich auch dann flüssig verschieben und skalieren, wenn ihre Kurven und benachbarten Übergänge live aktualisiert werden.
+- Aufnahme- und Screenshot-Auswahl, Screenshot-Bearbeitung und Schnellvorschau, Zoom-Wellenformen großer Projekte sowie die Bearbeitung mit der 3D-Linse reagieren jetzt schneller.
+- Beim Ändern der Größe des Aufnahmeeditors werden Vorschauressourcen nicht mehr wiederholt neu aufgebaut, sodass die Bedienung flüssig bleibt.
+
+# 1.1.3
+
+- Screenshots lassen sich aufnehmen und vorhandene Bilder öffnen und bearbeiten – mit optionalen eigenen Tastaturkurzbefehlen, sofortiger Aufnahme des Bildschirms unter dem Mauszeiger samt visueller Rückmeldung und Auslöseton, Auswahl am eingefrorenen Bildschirm, Bereinigung temporärer Dateien, Schnellaktionen, Hintergrundvorgaben für Fenster-Screenshots mit dem erfassten Schreibtischhintergrund, Gerätemockups, finalen Seitenverhältnissen der Arbeitsfläche, Zuschneiden, Anmerkungen, reaktionsschneller Kopierfortschrittsanzeige und Live-Vorschauen von Exportgröße und -qualität bis 5K.
+- Optionale Cursor-Clips in der Timeline können den globalen Cursor-Stil für beliebige Abschnitte einer Aufnahme überschreiben.
+- Vorschau und Export von MacBook-Mockups stürzen beim Rendern sehr kleiner oder ungültiger Frame-Geometrien nicht mehr ab.
+- Vorschau und Export bleiben auch in Projekten mit vielen Cursor-Stilüberschreibungen flüssig.
+- Cursor-Animationen und Untertitelbearbeitung reagieren auch in langen, ereignisreichen Aufnahmen schnell.
+- Beim Start großer Fensteraufnahmen wird weniger Arbeitsspeicher benötigt; Hintergrundvorschauen und Cursor-Paket-Downloads beeinträchtigen die Reaktionsfähigkeit des Editors weniger.
+- Schnellaktionskarten für Fenster-Screenshots erscheinen jetzt, bevor der Hintergrund in voller Auflösung fertig gerendert ist; beim Ändern der Größe des Screenshot-Editors wird die bereits gerenderte Vorschau wiederverwendet, wodurch Schachbretthintergrund und Schatten nicht wiederholt zusammengesetzt werden.
+
 # 1.1.2
 
 - Aufnahmeclips unterstützen jetzt Wiedergabegeschwindigkeiten bis zu 10×.
 - Fensteraufnahmen flackern in halbtransparenten Seitenleisten und an Fensterrändern nicht mehr.
+- Aktionen zum Anzeigen im Finder bringen den Finder jetzt in den Vordergrund; Schnellexporte kehren nach dem Anzeigen der fertigen Datei zu den Aufnahmeaktionen zurück.
+- Die Dateiauswahl für Projekte merkt sich jetzt den zuletzt zum Öffnen eines Projekts verwendeten Ordner.
+- Cursor-Stilpakete werden sofort aus der lokalen Bibliothek geladen und lassen sich herunterladen, direkt aktualisieren, lokalisieren, privat umbenennen, importieren, teilen und in den Einstellungen verwalten.
+- Cursor-Pakete lassen sich aus zugeschnittenen Bildern mit automatischer Hintergrundentfernung und einstellbarem Klickpunkt erstellen, im Finder in der Vorschau anzeigen und in Projekten wie Exporten einheitlich darstellen.
+- Lokal erstellte Cursor-Pakete können mit Unterstützung eines Agents per Pull Request zum offenen offiziellen Katalog beigetragen werden.
+- Cursorgröße und Bewegungsdrehung lassen sich jetzt über größere Bereiche einstellen.
+- Die Cursorgröße bleibt zwischen Editorvorschau und exportiertem Video konsistent.
 
 # 1.1.1
 
