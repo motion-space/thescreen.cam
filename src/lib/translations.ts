@@ -665,12 +665,12 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       privacy: {
         title: "Privacy Policy - ScreenCam",
         description:
-          "ScreenCam's privacy policy explains how the macOS app handles recordings, permissions, optional analytics, purchases, and website data.",
+          "ScreenCam's privacy policy explains how the macOS and Windows apps handle recordings, permissions, optional analytics, purchases, and website data.",
       },
       support: {
         title: "Support - ScreenCam",
         description:
-          "Get help with ScreenCam for macOS, including support contact, App Store purchases, requirements, and troubleshooting.",
+          "Get help with ScreenCam for macOS and Windows, including support contact, store purchases, requirements, and troubleshooting.",
       },
       terms: {
         title: "Terms of Use - ScreenCam",
@@ -1246,7 +1246,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           {
             question: "Is there a Windows version?",
             answer:
-              "Not right now. ScreenCam is focused on macOS, and we do not plan to develop a Windows version in the short term.",
+              "A Windows version is in preparation and will be released through the Microsoft Store.",
           },
           {
             question: "Can I export to different formats?",
@@ -1270,13 +1270,13 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       privacy: {
         eyebrow: "Privacy",
         title: "Privacy Policy",
-        updated: "Last updated: June 3, 2026",
+        updated: "Last updated: August 28, 2026",
         sections: [
           {
             title: "Overview",
             paragraphs: [
               [
-                "ScreenCam is a native macOS screen recording and editing app. The app is designed to process recordings locally on your Mac. ScreenCam may make network requests for app functionality such as App Store purchase status and, when you choose to enable it, optional anonymous usage analytics. We do not use advertising trackers in the app.",
+                "ScreenCam is a native screen recording and editing app for macOS and Windows. The app is designed to process recordings locally on your device. ScreenCam may make network requests for app functionality such as Apple App Store or Microsoft Store license status and, when you choose to enable it, optional anonymous usage analytics. We do not use advertising trackers in the app.",
               ],
             ],
           },
@@ -1295,7 +1295,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
                 "ScreenCam may ask whether you want to share anonymous usage analytics to help us understand which recording and editing features work well. You can turn analytics sharing on or off at any time in the app. If analytics sharing is disabled, ScreenCam does not send usage analytics.",
               ],
               [
-                "Analytics are limited to product usage, diagnostics, and performance information, such as feature interactions, app version, macOS version, and general device information. We never collect screen content, audio, camera video, project files, file names, or typed text through analytics.",
+                "Analytics are limited to product usage, diagnostics, and performance information, such as feature interactions, app version, operating system version, and general device information. We never collect screen content, audio, camera video, project files, file names, or typed text through analytics.",
               ],
             ],
           },
@@ -1303,7 +1303,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "Permissions",
             paragraphs: [
               [
-                "ScreenCam may ask macOS for screen recording, microphone, camera, and file access permissions. These permissions are used only to provide recording, editing, exporting, and user-selected file features. You can manage these permissions in System Settings.",
+                "ScreenCam may ask your operating system for screen recording, microphone, camera, and file access permissions. These permissions are used only to provide recording, editing, exporting, and user-selected file features. You can manage these permissions in system settings.",
               ],
             ],
           },
@@ -1311,7 +1311,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "Purchases",
             paragraphs: [
               [
-                "ScreenCam Pro subscriptions and purchases are processed by Apple through the Mac App Store. ScreenCam reads purchase and subscription status from StoreKit so the app can unlock Pro features. ScreenCam does not receive or store your payment card details.",
+                "ScreenCam purchases are processed by Apple through the Mac App Store or by Microsoft through the Microsoft Store. ScreenCam reads license status from the relevant store so the app can verify access. ScreenCam does not receive or store your payment card details.",
               ],
             ],
           },
@@ -1334,7 +1334,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       support: {
         eyebrow: "Support",
         title: "ScreenCam Support",
-        updated: "For help with ScreenCam for macOS.",
+        updated: "For help with ScreenCam for macOS or Windows.",
         supportChannelsAria: "Support channels",
         sections: [
           {
@@ -1352,15 +1352,15 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "Include these details",
             paragraphs: [
               [
-                "When reporting an issue, include your macOS version, ScreenCam version, Mac model, recording settings, export format, and a short description of what happened. Screenshots or short recordings are useful when the issue is visual.",
+                "When reporting an issue, include your operating system version, ScreenCam version, device model, recording settings, export format, and a short description of what happened. Screenshots or short recordings are useful when the issue is visual.",
               ],
             ],
           },
           {
-            title: "App Store purchases",
+            title: "Store purchases",
             paragraphs: [
               [
-                "ScreenCam is distributed through the Mac App Store. Billing, subscriptions, renewals, cancellations, and refunds are handled by Apple through your Apple ID and App Store account settings.",
+                "ScreenCam for macOS is distributed through the Mac App Store. The Windows version will be distributed through the Microsoft Store. Billing, subscriptions, renewals, cancellations, and refunds are handled by the store where you purchased ScreenCam.",
               ],
             ],
           },
@@ -1368,7 +1368,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "Requirements",
             paragraphs: [
               [
-                "ScreenCam is currently built for macOS. There is no Windows version, and Windows development is not planned in the short term.",
+                "ScreenCam is available for macOS 15 or later. A Windows version is in preparation for the Microsoft Store.",
               ],
             ],
           },
@@ -1376,7 +1376,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "Privacy",
             paragraphs: [
               [
-                "Recordings and workspace files are processed locally on your Mac. Read the ",
+                "Recordings and workspace files are processed locally on your device. Read the ",
                 { href: "/privacy", text: "Privacy Policy" },
                 " for more detail.",
               ],
@@ -1586,11 +1586,11 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       privacy: {
         title: "隐私政策 - ScreenCam",
         description:
-          "ScreenCam 的隐私政策说明 macOS app 如何处理录制内容、权限、可选分析、购买和网站数据。",
+          "ScreenCam 的隐私政策说明 macOS 和 Windows app 如何处理录制内容、权限、可选分析、购买和网站数据。",
       },
       support: {
         title: "支持 - ScreenCam",
-        description: "获取 ScreenCam macOS 版帮助，包括支持联系方式、App Store 购买、系统要求和故障排查。",
+        description: "获取 ScreenCam macOS 和 Windows 版帮助，包括支持联系方式、商店购买、系统要求和故障排查。",
       },
       terms: {
         title: "使用条款 - ScreenCam",
@@ -2137,7 +2137,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           },
           {
             question: "有 Windows 版本吗？",
-            answer: "目前没有。ScreenCam 专注于 macOS，短期内没有开发 Windows 版本的计划。",
+            answer: "Windows 版本正在准备中，将通过 Microsoft Store 发布。",
           },
           {
             question: "可以导出不同格式吗？",
@@ -2159,13 +2159,13 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       privacy: {
         eyebrow: "隐私",
         title: "隐私政策",
-        updated: "最后更新：2026 年 6 月 3 日",
+        updated: "最后更新：2026 年 8 月 28 日",
         sections: [
           {
             title: "概览",
             paragraphs: [
               [
-                "ScreenCam 是一款原生 macOS 屏幕录制和编辑 app。它的设计目标是在你的 Mac 本地处理录制内容。ScreenCam 可能会为了 app 功能发起网络请求，例如 App Store 购买状态；当你选择启用时，也可能发送可选的匿名使用分析。我们不会在 app 中使用广告追踪器。",
+                "ScreenCam 是一款面向 macOS 和 Windows 的原生屏幕录制与编辑 app。它会在你的设备本地处理录制内容。ScreenCam 可能会为 Apple App Store 或 Microsoft Store 许可证状态等 app 功能发起网络请求；当你选择启用时，也可能发送可选的匿名使用分析。我们不会在 app 中使用广告追踪器。",
               ],
             ],
           },
@@ -2184,7 +2184,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
                 "ScreenCam 可能会询问你是否愿意分享匿名使用分析，以帮助我们了解哪些录制和编辑功能运行良好。你可以随时在 app 中开启或关闭分析共享。如果关闭，ScreenCam 不会发送使用分析。",
               ],
               [
-                "分析内容仅限产品使用、诊断和性能信息，例如功能交互、app 版本、macOS 版本和一般设备信息。我们绝不会通过分析收集屏幕内容、音频、摄像头视频、项目文件、文件名或输入文本。",
+                "分析内容仅限产品使用、诊断和性能信息，例如功能交互、app 版本、操作系统版本和一般设备信息。我们绝不会通过分析收集屏幕内容、音频、摄像头视频、项目文件、文件名或输入文本。",
               ],
             ],
           },
@@ -2192,7 +2192,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "权限",
             paragraphs: [
               [
-                "ScreenCam 可能会请求 macOS 的屏幕录制、麦克风、摄像头和文件访问权限。这些权限只用于提供录制、编辑、导出和用户选择文件等功能。你可以在系统设置中管理这些权限。",
+                "ScreenCam 可能会向操作系统请求屏幕录制、麦克风、摄像头和文件访问权限。这些权限只用于提供录制、编辑、导出和用户选择文件等功能。你可以在系统设置中管理这些权限。",
               ],
             ],
           },
@@ -2200,7 +2200,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "购买",
             paragraphs: [
               [
-                "ScreenCam Pro 订阅和购买由 Apple 通过 Mac App Store 处理。ScreenCam 会通过 StoreKit 读取购买和订阅状态，以解锁 Pro 功能。ScreenCam 不会接收或保存你的支付卡信息。",
+                "ScreenCam 购买由 Apple 通过 Mac App Store 或 Microsoft 通过 Microsoft Store 处理。ScreenCam 会从对应商店读取许可证状态以验证访问权限。ScreenCam 不会接收或保存你的支付卡信息。",
               ],
             ],
           },
@@ -2221,7 +2221,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       support: {
         eyebrow: "支持",
         title: "ScreenCam 支持",
-        updated: "获取 ScreenCam macOS 版帮助。",
+        updated: "获取 ScreenCam macOS 或 Windows 版帮助。",
         supportChannelsAria: "支持渠道",
         sections: [
           {
@@ -2233,25 +2233,25 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "请包含这些信息",
             paragraphs: [
               [
-                "报告问题时，请包含 macOS 版本、ScreenCam 版本、Mac 型号、录制设置、导出格式，以及简短的问题描述。如果是视觉问题，截图或短录屏会很有帮助。",
+                "报告问题时，请包含操作系统版本、ScreenCam 版本、设备型号、录制设置、导出格式，以及简短的问题描述。如果是视觉问题，截图或短录屏会很有帮助。",
               ],
             ],
           },
           {
-            title: "App Store 购买",
+            title: "商店购买",
             paragraphs: [
               [
-                "ScreenCam 通过 Mac App Store 分发。计费、订阅、续订、取消和退款由 Apple 通过你的 Apple ID 与 App Store 账户设置处理。",
+                "ScreenCam macOS 版通过 Mac App Store 分发；Windows 版将通过 Microsoft Store 分发。计费、订阅、续订、取消和退款由你购买 ScreenCam 的对应商店处理。",
               ],
             ],
           },
           {
             title: "系统要求",
-            paragraphs: [["ScreenCam 目前为 macOS 构建。没有 Windows 版本，短期内也没有 Windows 开发计划。"]],
+            paragraphs: [["ScreenCam 支持 macOS 15 或更高版本。Windows 版本正在准备中，将通过 Microsoft Store 发布。"]],
           },
           {
             title: "隐私",
-            paragraphs: [["录制内容和工作区文件会在你的 Mac 本地处理。更多详情请阅读", { href: "/privacy", text: "隐私政策" }, "。"]],
+            paragraphs: [["录制内容和工作区文件会在你的设备本地处理。更多详情请阅读", { href: "/privacy", text: "隐私政策" }, "。"]],
           },
         ],
       },
@@ -3020,7 +3020,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           {
             question: "Gibt es eine Windows-Version?",
             answer:
-              "Derzeit nicht. ScreenCam konzentriert sich auf macOS, und eine Windows-Version ist kurzfristig nicht geplant.",
+              "Eine Windows-Version wird vorbereitet und über den Microsoft Store veröffentlicht.",
           },
           {
             question: "Kann ich in verschiedene Formate exportieren?",
@@ -3132,7 +3132,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           },
           {
             title: "Anforderungen",
-            paragraphs: [["ScreenCam ist derzeit für macOS gebaut. Es gibt keine Windows-Version, und eine Windows-Entwicklung ist kurzfristig nicht geplant."]],
+            paragraphs: [["ScreenCam ist für macOS 15 oder neuer verfügbar. Eine Windows-Version wird für den Microsoft Store vorbereitet."]],
           },
           {
             title: "Datenschutz",
@@ -3885,7 +3885,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           },
           {
             question: "Windows 版はありますか？",
-            answer: "現在はありません。ScreenCam は macOS に集中しており、短期的に Windows 版を開発する予定はありません。",
+            answer: "Windows 版を準備中で、Microsoft Store からリリースする予定です。",
           },
           {
             question: "異なる形式で書き出せますか？",
@@ -3995,7 +3995,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           },
           {
             title: "要件",
-            paragraphs: [["ScreenCam は現在 macOS 向けに作られています。Windows 版はなく、短期的に Windows 版を開発する予定もありません。"]],
+            paragraphs: [["ScreenCam は macOS 15 以降で利用できます。Windows 版は Microsoft Store 向けに準備中です。"]],
           },
           {
             title: "プライバシー",
@@ -4748,7 +4748,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           },
           {
             question: "Windows 버전이 있나요?",
-            answer: "현재는 없습니다. ScreenCam은 macOS에 집중하고 있으며 단기적으로 Windows 버전을 개발할 계획은 없습니다.",
+            answer: "Windows 버전을 준비 중이며 Microsoft Store를 통해 출시할 예정입니다.",
           },
           {
             question: "다른 형식으로 내보낼 수 있나요?",
@@ -4858,7 +4858,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           },
           {
             title: "요구 사항",
-            paragraphs: [["ScreenCam은 현재 macOS용으로 제작되었습니다. Windows 버전은 없으며 단기적으로 Windows 개발 계획도 없습니다."]],
+            paragraphs: [["ScreenCam은 macOS 15 이상에서 사용할 수 있습니다. Windows 버전은 Microsoft Store 출시를 준비 중입니다."]],
           },
           {
             title: "개인정보",
@@ -5610,7 +5610,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           },
           {
             question: "有 Windows 版本嗎？",
-            answer: "目前沒有。ScreenCam 專注於 macOS，短期內沒有開發 Windows 版本的計劃。",
+            answer: "Windows 版本正在準備中，將透過 Microsoft Store 發布。",
           },
           {
             question: "可以匯出不同格式嗎？",
@@ -5720,7 +5720,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           },
           {
             title: "系統要求",
-            paragraphs: [["ScreenCam 目前為 macOS 構建。沒有 Windows 版本，短期內也沒有 Windows 開發計劃。"]],
+            paragraphs: [["ScreenCam 支援 macOS 15 或更新版本。Windows 版本正在準備中，將透過 Microsoft Store 發布。"]],
           },
           {
             title: "隱私",
@@ -6504,7 +6504,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           {
             question: "¿Existe una versión para Windows?",
             answer:
-              "No ahora mismo. ScreenCam se centra en macOS y no planeamos desarrollar una versión para Windows en el corto plazo.",
+              "Estamos preparando una versión para Windows que se publicará a través de Microsoft Store.",
           },
           {
             question: "¿Puedo exportar a diferentes formatos?",
@@ -6626,7 +6626,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "Requisitos",
             paragraphs: [
               [
-                "ScreenCam está actualmente diseñado para macOS. No existe una versión para Windows y el desarrollo de Windows no está previsto a corto plazo.",
+                "ScreenCam está disponible para macOS 15 o posterior. Se está preparando una versión para Windows para Microsoft Store.",
               ],
             ],
           },
@@ -7427,7 +7427,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           {
             question: "Existe-t-il une version Windows ?",
             answer:
-              "Pas maintenant. ScreenCam se concentre sur macOS, et nous ne prévoyons pas de développer une version Windows à court terme.",
+              "Une version Windows est en préparation et sera publiée sur le Microsoft Store.",
           },
           {
             question: "Puis-je exporter vers différents formats ?",
@@ -7549,7 +7549,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "Exigences",
             paragraphs: [
               [
-                "ScreenCam est actuellement construit pour macOS. Il n’existe pas de version Windows, et le développement de Windows n’est pas prévu à court terme.",
+                "ScreenCam est disponible pour macOS 15 ou version ultérieure. Une version Windows est en préparation pour le Microsoft Store.",
               ],
             ],
           },
@@ -8350,7 +8350,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           {
             question: "Existe uma versão para Windows?",
             answer:
-              "Agora não. ScreenCam está focado em macOS e não planejamos desenvolver uma versão para Windows no curto prazo.",
+              "Uma versão para Windows está em preparação e será publicada na Microsoft Store.",
           },
           {
             question: "Posso exportar para diferentes formatos?",
@@ -8472,7 +8472,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "Requisitos",
             paragraphs: [
               [
-                "ScreenCam é atualmente construído para macOS. Não existe uma versão para Windows e o desenvolvimento do Windows não está planejado no curto prazo.",
+                "ScreenCam está disponível para macOS 15 ou posterior. Uma versão para Windows está sendo preparada para a Microsoft Store.",
               ],
             ],
           },
@@ -9273,7 +9273,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           {
             question: "Esiste una versione per Windows?",
             answer:
-              "Non adesso. ScreenCam è focalizzato su macOS e non prevediamo di sviluppare una versione Windows a breve termine.",
+              "È in preparazione una versione per Windows che verrà pubblicata tramite Microsoft Store.",
           },
           {
             question: "Posso esportare in formati diversi?",
@@ -9395,7 +9395,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "Requisiti",
             paragraphs: [
               [
-                "ScreenCam è attualmente costruito per macOS. Non esiste una versione per Windows e lo sviluppo di Windows non è pianificato a breve termine.",
+                "ScreenCam è disponibile per macOS 15 o versioni successive. È in preparazione una versione per Windows per Microsoft Store.",
               ],
             ],
           },
