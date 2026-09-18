@@ -138,3 +138,9 @@ The generator writes:
 - `public/mockups/series/*.json`
 - `public/mockups/assets/**`
 - `src/data/generated/mockups.json`
+
+## Screen Resolution and Asset Coordinates
+
+`screenResolution` sets the content frame size in ScreenCam; it is not the size of the transparent opening in a scaled PNG. Keep it in full-resolution content pixels. `renderGeometry.canvasSize`, `screenRect`, and corner radii use the asset coordinate system, while `pixelWidth` and `pixelHeight` describe the actual image file. A half-size asset must not halve `screenResolution`, or selecting the mockup will crop full-resolution recordings.
+
+The iPhone 18 templates use content frames of 1206 × 2622 (Pro) and 1320 × 2868 (Pro Max), following the existing Pro templates, independently of their supplied PNG dimensions.

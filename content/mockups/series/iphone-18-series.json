@@ -1,0 +1,166 @@
+{
+  "id": "iphone-18-series",
+  "name": "iPhone 18 Series",
+  "kind": "phone",
+  "version": 5,
+  "defaultModelID": "iphone-18-pro-max",
+  "models": [
+    {
+      "id": "iphone-18-pro",
+      "name": "iPhone 18 Pro",
+      "screenResolution": {
+        "width": 1206,
+        "height": 2622
+      },
+      "renderGeometry": {
+        "canvasSize": {
+          "width": 662,
+          "height": 1361
+        },
+        "screenRect": {
+          "x": 29,
+          "y": 23,
+          "width": 604,
+          "height": 1316
+        },
+        "screenCornerRadius": 100,
+        "screenBottomCornerRadius": 100,
+        "clipShape": "roundedRect"
+      },
+      "defaultVariantID": "silver",
+      "variants": [
+        {
+          "id": "blue",
+          "name": "Glacier Blue",
+          "swatchHex": "#AEBFD0",
+          "assets": [
+            {
+              "role": "chrome",
+              "source": "iphone-18-series/iphone-18-pro/blue.png",
+              "pixelWidth": 662,
+              "pixelHeight": 1361
+            }
+          ]
+        },
+        {
+          "id": "black",
+          "name": "Black",
+          "swatchHex": "#454343",
+          "assets": [
+            {
+              "role": "chrome",
+              "source": "iphone-18-series/iphone-18-pro/black.png",
+              "pixelWidth": 662,
+              "pixelHeight": 1361
+            }
+          ]
+        },
+        {
+          "id": "rose",
+          "name": "Burgundy Red",
+          "swatchHex": "#B98590",
+          "assets": [
+            {
+              "role": "chrome",
+              "source": "iphone-18-series/iphone-18-pro/rose.png",
+              "pixelWidth": 662,
+              "pixelHeight": 1361
+            }
+          ]
+        },
+        {
+          "id": "silver",
+          "name": "Silver",
+          "swatchHex": "#DADBD9",
+          "assets": [
+            {
+              "role": "chrome",
+              "source": "iphone-18-series/iphone-18-pro/silver.png",
+              "pixelWidth": 662,
+              "pixelHeight": 1361
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "iphone-18-pro-max",
+      "name": "iPhone 18 Pro Max",
+      "screenResolution": {
+        "width": 1320,
+        "height": 2868
+      },
+      "renderGeometry": {
+        "canvasSize": {
+          "width": 718,
+          "height": 1485
+        },
+        "screenRect": {
+          "x": 28,
+          "y": 23,
+          "width": 662,
+          "height": 1439
+        },
+        "screenCornerRadius": 95,
+        "screenBottomCornerRadius": 95,
+        "clipShape": "roundedRect"
+      },
+      "defaultVariantID": "silver",
+      "variants": [
+        {
+          "id": "blue",
+          "name": "Blue",
+          "swatchHex": "#AEBFD0",
+          "assets": [
+            {
+              "role": "chrome",
+              "source": "iphone-18-series/iphone-18-pro-max/blue.png",
+              "pixelWidth": 718,
+              "pixelHeight": 1485
+            }
+          ]
+        },
+        {
+          "id": "black",
+          "name": "Black",
+          "swatchHex": "#454343",
+          "assets": [
+            {
+              "role": "chrome",
+              "source": "iphone-18-series/iphone-18-pro-max/black.png",
+              "pixelWidth": 718,
+              "pixelHeight": 1485
+            }
+          ]
+        },
+        {
+          "id": "rose",
+          "name": "Rose",
+          "swatchHex": "#B98590",
+          "assets": [
+            {
+              "role": "chrome",
+              "source": "iphone-18-series/iphone-18-pro-max/rose.png",
+              "pixelWidth": 718,
+              "pixelHeight": 1485
+            }
+          ]
+        },
+        {
+          "id": "silver",
+          "name": "Silver",
+          "swatchHex": "#DADBD9",
+          "assets": [
+            {
+              "role": "chrome",
+              "source": "iphone-18-series/iphone-18-pro-max/silver.png",
+              "pixelWidth": 718,
+              "pixelHeight": 1485
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "legacyAliases": []
+}

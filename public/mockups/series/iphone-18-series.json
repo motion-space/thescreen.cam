@@ -1,0 +1,200 @@
+{
+  "id": "iphone-18-series",
+  "name": "iPhone 18 Series",
+  "kind": "phone",
+  "version": 5,
+  "defaultModelID": "iphone-18-pro-max",
+  "models": [
+    {
+      "id": "iphone-18-pro",
+      "name": "iPhone 18 Pro",
+      "screenResolution": {
+        "width": 1206,
+        "height": 2622
+      },
+      "renderGeometry": {
+        "canvasSize": {
+          "width": 662,
+          "height": 1361
+        },
+        "screenRect": {
+          "x": 29,
+          "y": 23,
+          "width": 604,
+          "height": 1316
+        },
+        "screenCornerRadius": 100,
+        "screenBottomCornerRadius": 100,
+        "clipShape": "roundedRect"
+      },
+      "defaultVariantID": "silver",
+      "variants": [
+        {
+          "id": "blue",
+          "name": "Glacier Blue",
+          "swatchHex": "#AEBFD0",
+          "assets": [
+            {
+              "role": "chrome",
+              "pixelWidth": 662,
+              "pixelHeight": 1361,
+              "url": "/mockups/assets/iphone-18-series/iphone-18-pro/blue.png",
+              "downloadUrl": "/mockups/assets/iphone-18-series/iphone-18-pro/blue.png",
+              "contentType": "image/png",
+              "size": 139331,
+              "sha256": "be2ce19c641a542a8f7d0ca762115f22590b786e26d94413967fbf5ce472e105"
+            }
+          ]
+        },
+        {
+          "id": "black",
+          "name": "Black",
+          "swatchHex": "#454343",
+          "assets": [
+            {
+              "role": "chrome",
+              "pixelWidth": 662,
+              "pixelHeight": 1361,
+              "url": "/mockups/assets/iphone-18-series/iphone-18-pro/black.png",
+              "downloadUrl": "/mockups/assets/iphone-18-series/iphone-18-pro/black.png",
+              "contentType": "image/png",
+              "size": 119574,
+              "sha256": "0e1354010ff69075ce873aa6a6ea142df0f5d2c2af26e25dc57bd474ce7ee754"
+            }
+          ]
+        },
+        {
+          "id": "rose",
+          "name": "Burgundy Red",
+          "swatchHex": "#B98590",
+          "assets": [
+            {
+              "role": "chrome",
+              "pixelWidth": 662,
+              "pixelHeight": 1361,
+              "url": "/mockups/assets/iphone-18-series/iphone-18-pro/rose.png",
+              "downloadUrl": "/mockups/assets/iphone-18-series/iphone-18-pro/rose.png",
+              "contentType": "image/png",
+              "size": 135634,
+              "sha256": "7f1bc78ba3d3857ebb08498ed2bc681aa8f243b984696b28ddf9c46e6384c605"
+            }
+          ]
+        },
+        {
+          "id": "silver",
+          "name": "Silver",
+          "swatchHex": "#DADBD9",
+          "assets": [
+            {
+              "role": "chrome",
+              "pixelWidth": 662,
+              "pixelHeight": 1361,
+              "url": "/mockups/assets/iphone-18-series/iphone-18-pro/silver.png",
+              "downloadUrl": "/mockups/assets/iphone-18-series/iphone-18-pro/silver.png",
+              "contentType": "image/png",
+              "size": 105705,
+              "sha256": "920708117513c07cee4c9d28568de71e2eb5f4d5cb5f5aca2a1a2d96e2caa360"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "iphone-18-pro-max",
+      "name": "iPhone 18 Pro Max",
+      "screenResolution": {
+        "width": 1320,
+        "height": 2868
+      },
+      "renderGeometry": {
+        "canvasSize": {
+          "width": 718,
+          "height": 1485
+        },
+        "screenRect": {
+          "x": 28,
+          "y": 23,
+          "width": 662,
+          "height": 1439
+        },
+        "screenCornerRadius": 95,
+        "screenBottomCornerRadius": 95,
+        "clipShape": "roundedRect"
+      },
+      "defaultVariantID": "silver",
+      "variants": [
+        {
+          "id": "blue",
+          "name": "Blue",
+          "swatchHex": "#AEBFD0",
+          "assets": [
+            {
+              "role": "chrome",
+              "pixelWidth": 718,
+              "pixelHeight": 1485,
+              "url": "/mockups/assets/iphone-18-series/iphone-18-pro-max/blue.png",
+              "downloadUrl": "/mockups/assets/iphone-18-series/iphone-18-pro-max/blue.png",
+              "contentType": "image/png",
+              "size": 148436,
+              "sha256": "d3e2ec84f46360c7507d3e3d39406529645466d92ea3a1b682a5ff1ed077b4dc"
+            }
+          ]
+        },
+        {
+          "id": "black",
+          "name": "Black",
+          "swatchHex": "#454343",
+          "assets": [
+            {
+              "role": "chrome",
+              "pixelWidth": 718,
+              "pixelHeight": 1485,
+              "url": "/mockups/assets/iphone-18-series/iphone-18-pro-max/black.png",
+              "downloadUrl": "/mockups/assets/iphone-18-series/iphone-18-pro-max/black.png",
+              "contentType": "image/png",
+              "size": 128807,
+              "sha256": "0579591aba482439712ceae1a38b7af18560dc38dc3d7c8cde8dc43b9688f7cd"
+            }
+          ]
+        },
+        {
+          "id": "rose",
+          "name": "Rose",
+          "swatchHex": "#B98590",
+          "assets": [
+            {
+              "role": "chrome",
+              "pixelWidth": 718,
+              "pixelHeight": 1485,
+              "url": "/mockups/assets/iphone-18-series/iphone-18-pro-max/rose.png",
+              "downloadUrl": "/mockups/assets/iphone-18-series/iphone-18-pro-max/rose.png",
+              "contentType": "image/png",
+              "size": 149195,
+              "sha256": "0e8f2fcf8be8b963ddf7a372bee10111d0a35c14c317c5d776b2a5b10fd99347"
+            }
+          ]
+        },
+        {
+          "id": "silver",
+          "name": "Silver",
+          "swatchHex": "#DADBD9",
+          "assets": [
+            {
+              "role": "chrome",
+              "pixelWidth": 718,
+              "pixelHeight": 1485,
+              "url": "/mockups/assets/iphone-18-series/iphone-18-pro-max/silver.png",
+              "downloadUrl": "/mockups/assets/iphone-18-series/iphone-18-pro-max/silver.png",
+              "contentType": "image/png",
+              "size": 113804,
+              "sha256": "d8472c587734e628bbbd776ba1059af28f178f9c29f86c0c6cb7d0de119f64b8"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "legacyAliases": [],
+  "schemaVersion": 2,
+  "generatedAt": "2026-09-18T12:05:27.654Z"
+}
