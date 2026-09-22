@@ -1,6 +1,54 @@
+# 1.3.2
+
+- Preview iPhone capture before and during recording with resizable device frames, automatic orientation, model-matched Dynamic Island, and controls that switch in place and follow the app theme.
+- Choose from five metallic iPhone frame colors and hear device audio through the Mac during preview and recording.
+- Download error logs directly from recording failure alerts.
+- Recording and screenshot backgrounds now support editable mesh gradients, color copy/import, and shared color favorites.
+- Screen and Device backgrounds, including animated wallpapers and videos, can add noise textures with adjustable density, intensity, and size.
+- Background blur can be adjusted for recordings and screenshots.
+- Recording and screenshot shortcuts are grouped separately, with a link to system keyboard shortcut settings.
+- Selecting a capture target no longer brings editor or settings windows to the front.
+- Recording window selection follows the current window order and avoids selecting covered windows.
+- Choose and save custom theme colors with a color picker.
+- 3D Lens now has separate camera angle and lens groups, X/Y/Z rotation sliders, and aperture controls that follow depth of field.
+- Refreshed sliders and selection groups offer compact layouts, inline values, and smoother transitions.
+- Appearance and material selection highlights update immediately when the theme color changes.
+- Double-click an empty area of the editor title bar to maximize or restore the window.
+- MacBook keyboard overlays reproduce physical key proportions and legends.
+- Keyboard overlays show only shortcuts by default, support disabling key groups with Delete or Backspace, and snap to the preview center.
+- Edited recordings can be previewed directly in Finder with playback controls.
+- The recording toolbar remembers your quality selection after restarting the app.
+- Dragging a numeric input returns the pointer to its starting position when released.
+- 3D Lens focus and spring animation controls stay responsive in complex recordings.
+- Screenshot adjustments are smoother, and idle 3D previews use less memory while preserving sharpness.
+- Preview playback and export stay responsive when click sounds span many trimmed recording segments.
+- The recording toolbar can be dragged from any non-button area, even while another app is active.
+- Recordings preserve mono audio levels and correct quiet system audio on multichannel output devices.
+- Recording failures show clear error messages, and error reports exclude routine file panel and save activity.
+- Keyboard overlays match between preview and export, move and resize smoothly, and stay above the cursor.
+- Window screenshots preserve native rounded corners when shadows are enabled.
+- Reduced unnecessary processing during recording and while previews are hidden.
+- Cropped recordings fill phone mockups and export with the correct orientation; device selection highlights only the selected option.
+- Window selection works when the Dock has a transparent full-screen window.
+- Adjusting padding on an adaptive canvas no longer causes preview flicker.
+- Preview timing and zoom stay in sync when resizing zoom clips.
+
 # 1.3.1
 
-- Screenshot quick-action cards remain usable and can always be dismissed when a desktop wallpaper or temporary file is unavailable.
+- ScreenCam now supports the separately installed CLI for recording, workspace processing, MP4, GIF, and Live Photo export, safe update checks, and package-manager upgrades.
+- CLI agents can apply edits and export in one job or reuse a workspace session for faster iteration, with more reliable app connections and lower snapshot overhead.
+- Mockup catalogs can add and refresh compatible devices without an app update, and selected assets stay available inside saved projects.
+- 3D Lens zoom clips add draggable lens-ring controls for focal length and aperture, while previews keep focused text and fine details sharp.
+- 1080p exports preserve sharp screen details during heavily zoomed camera shots.
+- Screenshot quick-action cards remain available as the stack grows and usable when a desktop wallpaper or temporary file is unavailable.
+- Screenshots preserve native display resolution, window shadows, and HDR highlights.
+- Exports now finish saving to newly selected locations.
+- Image-processing cleanup, high-resolution mockup switching, and timeline zoom editing with high-resolution wallpaper backgrounds are more responsive and memory-efficient.
+- MacBook Pro, Studio Display, and mobile device mockups render correctly, with smooth silhouette shadows matching between preview and export.
+- Spatial zoom playback stays smooth with high-resolution video wallpapers.
+- Preview playback keeps normal camera motion when timeline zoom editing is inactive.
+- GIF export hides resolution presets larger than the recording and preserves the original size of small recordings.
+- iPhone previews rotate with the recording, and portrait-only recordings fit the device frame without extra rotation space.
 
 # 1.3.0
 

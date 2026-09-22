@@ -1,6 +1,54 @@
+# 1.3.2
+
+- Die iPhone-Aufnahme lässt sich vor und während der Aufnahme live ansehen, mit anpassbarer Rahmengröße, automatischer Ausrichtung und zum Modell passender Dynamic Island. Bedienelemente wechseln an derselben Stelle und passen sich dem App-Design an.
+- Wähle aus fünf metallischen iPhone-Rahmenfarben und höre den Geräteton während der Vorschau und Aufnahme über den Mac.
+- Fehlerprotokolle lassen sich direkt aus Meldungen zu fehlgeschlagenen Aufnahmen herunterladen.
+- Hintergründe für Aufnahmen und Screenshots unterstützen jetzt bearbeitbare Mesh-Verläufe, das Kopieren und Importieren von Farbkombinationen sowie gemeinsame Farbfavoriten.
+- Bildschirm- und Gerätehintergründe, einschließlich animierter Hintergrundbilder und Videos, können Rauschtexturen mit einstellbarer Dichte, Stärke und Größe verwenden.
+- Die Hintergrundunschärfe lässt sich für Aufnahmen und Screenshots anpassen.
+- Tastaturkurzbefehle für Aufnahmen und Screenshots sind getrennt gruppiert; ein Link führt zu den Kurzbefehleinstellungen des Systems.
+- Beim Auswählen eines Aufnahmeziels gelangen Editor- und Einstellungsfenster nicht mehr in den Vordergrund.
+- Die Fensterauswahl für Aufnahmen berücksichtigt die aktuelle Fensterreihenfolge und vermeidet verdeckte Fenster.
+- Eigene Designfarben lassen sich mit der Farbauswahl auswählen und speichern.
+- 3D Lens bietet getrennte Gruppen für Kamerawinkel und Objektiv, X/Y/Z-Rotationsregler und Blendensteuerung abhängig von der Schärfentiefe.
+- Überarbeitete Schieberegler und Auswahlgruppen bieten kompakte Layouts, integrierte Werte und flüssigere Übergänge.
+- Auswahlmarkierungen für Erscheinungsbild und Material werden beim Wechsel der Designfarbe sofort aktualisiert.
+- Ein Doppelklick auf einen freien Bereich der Editor-Titelleiste maximiert das Fenster oder stellt seine Größe wieder her.
+- Ein neuer MacBook-Tastaturstil bildet die Proportionen und Beschriftungen echter Tasten nach.
+- Tastatureinblendungen zeigen standardmäßig nur Kurzbefehle; Tastengruppen lassen sich mit Delete oder Backspace deaktivieren und an der Vorschaumitte ausrichten.
+- Bearbeitete Aufnahmen lassen sich direkt im Finder mit Wiedergabesteuerung ansehen.
+- Die Aufnahmeleiste behält die gewählte Qualität auch nach einem App-Neustart bei.
+- Nach dem Ziehen eines Zahlenfelds kehrt der Mauszeiger beim Loslassen zur Ausgangsposition zurück.
+- Die Steuerung von 3D-Objektivfokus und Federanimationen bleibt auch bei komplexen Aufnahmen reaktionsschnell.
+- Screenshot-Anpassungen laufen flüssiger; ruhende 3D-Vorschauen benötigen weniger Arbeitsspeicher und bleiben scharf.
+- Vorschauwiedergabe und Export bleiben reaktionsschnell, wenn Klickgeräusche viele zugeschnittene Aufnahmesegmente überbrücken.
+- Die Aufnahmeleiste lässt sich an allen Bereichen ohne Schaltflächen ziehen, auch wenn eine andere App aktiv ist.
+- Aufnahmen behalten die Lautstärke von Mono-Audio bei; zu leises Systemaudio bei Mehrkanal-Ausgabegeräten wurde korrigiert.
+- Bei Aufnahmefehlern erscheinen klare Fehlermeldungen; normale Dateidialog- und Speichervorgänge werden aus Fehlerberichten ausgeschlossen.
+- Tastatureinblendungen sehen in Vorschau und Export gleich aus, lassen sich flüssig verschieben und skalieren und bleiben vor dem Mauszeiger.
+- Fenster-Screenshots behalten ihre ursprünglichen abgerundeten Ecken auch bei aktiviertem Schatten.
+- Weniger unnötige Verarbeitung während der Aufnahme und bei ausgeblendeten Vorschauen.
+- Zugeschnittene Aufnahmen füllen Smartphone-Mockups aus und werden richtig ausgerichtet exportiert; bei der Geräteauswahl wird nur die gewählte Option hervorgehoben.
+- Die Fensterauswahl funktioniert auch bei einem transparenten Vollbildfenster des Docks.
+- Beim Anpassen der Ränder einer adaptiven Leinwand flackert die Vorschau nicht mehr.
+- Beim Ändern der Länge von Zoomclips bleiben Vorschauposition und Zoom synchron.
+
 # 1.3.1
 
-- Screenshot-Schnellaktionskarten bleiben nutzbar und können jederzeit geschlossen werden, wenn ein Schreibtischhintergrund oder eine temporäre Datei nicht verfügbar ist.
+- ScreenCam unterstützt jetzt die separat installierte CLI für Aufnahmen, Workspace-Verarbeitung, den Export als MP4, GIF und Live Photo, sichere Update-Prüfungen und Upgrades über Paketmanager.
+- CLI-Agenten können Bearbeitung und Export in einem Auftrag ausführen oder eine Workspace-Sitzung für schnellere Iterationen wiederverwenden; zugleich sind App-Verbindungen zuverlässiger und Snapshots effizienter.
+- Mockup-Kataloge können kompatible Geräte ohne App-Update hinzufügen und aktualisieren; ausgewählte Assets bleiben in gespeicherten Projekten verfügbar.
+- 3D-Objektiv-Zoomclips bieten verschiebbare Objektivring-Regler für Brennweite und Blende, während Vorschauen fokussierten Text und feine Details scharf halten.
+- 1080p-Exporte bewahren scharfe Bildschirmdetails auch bei stark herangezoomten Kamerafahrten.
+- Screenshot-Schnellaktionskarten bleiben auch bei wachsendem Stapel verfügbar und funktionieren weiterhin, wenn der Schreibtischhintergrund oder eine temporäre Datei fehlt.
+- Screenshots bewahren die native Bildschirmauflösung, Fensterschatten und HDR-Glanzlichter.
+- Exporte werden jetzt auch an neu ausgewählten Speicherorten zuverlässig abgeschlossen.
+- Bereinigungen bei der Bildverarbeitung, der Wechsel zu hochauflösenden Mockups und die Timeline-Zoombearbeitung mit hochauflösenden Hintergründen laufen schneller und benötigen weniger Arbeitsspeicher.
+- Mockups für MacBook Pro, Studio Display und Mobilgeräte werden korrekt dargestellt; weiche Silhouettenschatten stimmen in Vorschau und Export überein.
+- Die Wiedergabe räumlicher Zooms bleibt mit hochauflösenden Videohintergründen flüssig.
+- Die Vorschauwiedergabe behält die normale Kamerabewegung bei, wenn der Timeline-Zoom nicht bearbeitet wird.
+- Beim GIF-Export werden Auflösungen über der Aufnahmegröße ausgeblendet; kleine Aufnahmen behalten ihre Originalauflösung.
+- iPhone-Vorschauen drehen sich mit der Aufnahme; reine Hochformataufnahmen passen ohne zusätzlichen Platz für die Drehung in den Geräterahmen.
 
 # 1.3.0
 

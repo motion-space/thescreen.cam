@@ -1,6 +1,54 @@
+# 1.3.2
+
+- Pré-visualize a captura do iPhone antes e durante a gravação, com molduras redimensionáveis, orientação automática e Dynamic Island correspondente ao modelo. Os controles mudam no mesmo lugar e seguem o tema do app.
+- Escolha entre cinco cores metálicas para a moldura do iPhone e ouça o áudio do dispositivo no Mac durante a prévia e a gravação.
+- Baixe os registros de erros diretamente dos alertas de falha na gravação.
+- Os fundos de gravações e capturas agora oferecem gradientes de malha editáveis, cópia e importação de combinações de cores e cores favoritas compartilhadas.
+- Os fundos de tela e dispositivo, incluindo papéis de parede animados e vídeos, podem receber texturas de ruído com densidade, intensidade e tamanho ajustáveis.
+- É possível ajustar o desfoque do fundo de gravações e capturas de tela.
+- Os atalhos de gravação e captura aparecem em grupos separados, com um link para os ajustes de atalhos de teclado do sistema.
+- Selecionar o alvo de captura não traz mais as janelas do editor ou dos ajustes para a frente.
+- A seleção de janelas para gravação respeita a ordem atual e evita selecionar janelas encobertas.
+- Escolha e salve cores de tema personalizadas com o seletor de cores.
+- A lente 3D agora separa ângulo da câmera e lente, adiciona controles de rotação X/Y/Z e vincula a abertura à profundidade de campo.
+- Os controles deslizantes e grupos de seleção renovados oferecem layouts compactos, valores integrados e transições mais suaves.
+- Os destaques de seleção de aparência e material são atualizados imediatamente ao mudar a cor do tema.
+- Clique duas vezes em uma área vazia da barra de título do editor para maximizar ou restaurar a janela.
+- Um novo estilo de teclado MacBook reproduz as proporções e inscrições das teclas físicas.
+- As sobreposições de teclas mostram apenas atalhos por padrão, permitem desativar grupos com Delete ou Backspace e se alinham ao centro da prévia.
+- Gravações editadas podem ser visualizadas diretamente no Finder com controles de reprodução.
+- A barra de gravação mantém a qualidade selecionada após reiniciar o app.
+- Ao soltar um campo numérico após arrastá-lo, o ponteiro volta à posição inicial.
+- Os controles de foco da lente 3D e de animação de mola continuam responsivos em gravações complexas.
+- Os ajustes de capturas estão mais fluidos, e as prévias 3D em repouso usam menos memória sem perder nitidez.
+- A reprodução da prévia e a exportação continuam responsivas quando os sons de clique abrangem muitos segmentos de gravação recortados.
+- A barra de gravação pode ser arrastada por qualquer área sem botões, mesmo quando outro app está ativo.
+- As gravações preservam o volume do áudio mono e corrigem o áudio do sistema muito baixo em dispositivos de saída multicanal.
+- Falhas de gravação exibem mensagens claras, e os relatórios de erros excluem operações comuns de diálogos de arquivos e salvamento.
+- As sobreposições de teclas têm o mesmo visual na prévia e na exportação, movem-se e redimensionam-se com fluidez e permanecem acima do cursor.
+- Capturas de janelas preservam os cantos arredondados originais com as sombras ativadas.
+- Redução do processamento desnecessário durante a gravação e enquanto as prévias estão ocultas.
+- Gravações recortadas preenchem os mockups de celular e são exportadas na orientação correta; apenas o dispositivo selecionado fica destacado.
+- A seleção de janelas funciona mesmo quando o Dock tem uma janela transparente em tela cheia.
+- Ajustar as margens de uma tela adaptável não causa mais cintilação na prévia.
+- A posição de reprodução e o zoom da prévia permanecem sincronizados ao ajustar a duração dos clipes de zoom.
+
 # 1.3.1
 
-- Os cartões de ações rápidas de captura continuam funcionando e sempre podem ser fechados quando o papel de parede ou um arquivo temporário não está disponível.
+- O ScreenCam agora oferece suporte à CLI instalada separadamente para gravação, processamento de espaços de trabalho, exportação de MP4, GIF e Live Photo, verificação segura de atualizações e upgrades pelo gerenciador de pacotes.
+- Agentes de CLI podem editar e exportar em uma única tarefa ou reutilizar uma sessão de espaço de trabalho para iterar mais rápido, com conexões ao app mais confiáveis e menor custo de snapshots.
+- Os catálogos de mockups podem adicionar e atualizar dispositivos compatíveis sem atualizar o app, e os ativos selecionados permanecem disponíveis nos projetos salvos.
+- Os clipes de zoom com lente 3D agora têm controles arrastáveis do anel da lente para distância focal e abertura, enquanto as prévias mantêm nítidos o texto em foco e os detalhes finos.
+- As exportações em 1080p preservam detalhes nítidos da tela durante tomadas com muito zoom.
+- Os cartões de ações rápidas de captura continuam disponíveis conforme a pilha aumenta e funcionam mesmo quando o papel de parede da área de trabalho ou um arquivo temporário não está disponível.
+- As capturas preservam a resolução nativa da tela, as sombras das janelas e os realces HDR.
+- As exportações agora terminam de salvar corretamente em locais recém-selecionados.
+- A limpeza do processamento de imagens, a troca de mockups em alta resolução e a edição de zoom na linha do tempo com papéis de parede em alta resolução estão mais responsivas e usam menos memória.
+- Os mockups de MacBook Pro, Studio Display e dispositivos móveis são renderizados corretamente, com sombras de silhueta suaves e consistentes entre a prévia e a exportação.
+- A reprodução do zoom espacial permanece fluida com papéis de parede em vídeo de alta resolução.
+- A reprodução da prévia mantém o movimento normal da câmera quando o zoom da linha do tempo não está sendo editado.
+- A exportação de GIF oculta resoluções maiores que a gravação e preserva a resolução original de gravações pequenas.
+- As prévias do iPhone giram com a gravação, e gravações apenas na vertical se ajustam à moldura do dispositivo sem espaço extra para rotação.
 
 # 1.3.0
 

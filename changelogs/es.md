@@ -1,6 +1,54 @@
+# 1.3.2
+
+- Previsualiza la captura del iPhone antes y durante la grabación, con marcos redimensionables, orientación automática y Dynamic Island adaptada al modelo. Los controles cambian en el mismo lugar y siguen el tema de la app.
+- Elige entre cinco colores metálicos para el marco del iPhone y escucha su audio en el Mac durante la vista previa y la grabación.
+- Descarga los registros de errores directamente desde las alertas de grabación fallida.
+- Los fondos de grabaciones y capturas admiten degradados de malla editables, copiar e importar combinaciones de colores y favoritos de color compartidos.
+- Los fondos de pantalla y dispositivo, incluidos los fondos animados y vídeos, pueden incluir texturas de ruido con densidad, intensidad y tamaño ajustables.
+- Se puede ajustar el desenfoque del fondo en grabaciones y capturas.
+- Los atajos de grabación y captura se muestran en grupos separados, con un enlace a los ajustes de atajos de teclado del sistema.
+- Al seleccionar qué capturar, las ventanas del editor y de ajustes ya no pasan al primer plano.
+- La selección de ventanas para grabar respeta el orden actual y evita seleccionar ventanas ocultas.
+- Elige y guarda colores de tema personalizados con el selector de color.
+- Lente 3D ahora separa el ángulo de cámara y la lente, añade deslizadores de rotación X/Y/Z y vincula la apertura a la profundidad de campo.
+- Los deslizadores y grupos de selección renovados ofrecen diseños compactos, valores integrados y transiciones más fluidas.
+- Los indicadores de selección de apariencia y material se actualizan al instante al cambiar el color del tema.
+- Haz doble clic en una zona vacía de la barra de título del editor para maximizar o restaurar la ventana.
+- Un nuevo estilo de teclado MacBook reproduce las proporciones y leyendas de las teclas físicas.
+- Las superposiciones de teclas muestran solo atajos por defecto, permiten desactivar grupos con Delete o Backspace y se ajustan al centro de la vista previa.
+- Las grabaciones editadas se pueden previsualizar directamente en Finder con controles de reproducción.
+- La barra de grabación recuerda la calidad seleccionada después de reiniciar la app.
+- Al soltar un campo numérico tras arrastrarlo, el puntero vuelve a su posición inicial.
+- Los controles de enfoque de lente 3D y animación de resorte responden con fluidez en grabaciones complejas.
+- Los ajustes de capturas son más fluidos y las vistas previas 3D en reposo consumen menos memoria sin perder nitidez.
+- La reproducción de la vista previa y la exportación mantienen su capacidad de respuesta cuando los sonidos de clic abarcan muchos segmentos recortados.
+- La barra de grabación se puede arrastrar desde cualquier zona sin botones, incluso cuando otra app está activa.
+- Las grabaciones conservan el volumen del audio mono y corrigen el audio del sistema demasiado bajo en dispositivos de salida multicanal.
+- Los fallos de grabación muestran mensajes claros, y los informes de errores excluyen las operaciones habituales de los diálogos de archivos y de guardado.
+- Las superposiciones de teclas coinciden en la vista previa y la exportación, se mueven y redimensionan con fluidez y permanecen por encima del cursor.
+- Las capturas de ventanas conservan sus esquinas redondeadas originales al activar las sombras.
+- Se ha reducido el procesamiento innecesario durante la grabación y cuando las vistas previas están ocultas.
+- Las grabaciones recortadas llenan las maquetas de teléfono y se exportan con la orientación correcta; solo se resalta el dispositivo seleccionado.
+- La selección de ventanas funciona aunque el Dock tenga una ventana transparente a pantalla completa.
+- Ajustar los márgenes de un lienzo adaptable ya no provoca parpadeos en la vista previa.
+- Al ajustar la duración de los clips de zoom, la posición de reproducción y el zoom de la vista previa se mantienen sincronizados.
+
 # 1.3.1
 
-- Las tarjetas de acciones rápidas de capturas siguen funcionando y siempre se pueden cerrar cuando no está disponible el fondo de escritorio o un archivo temporal.
+- ScreenCam ahora admite la CLI instalada por separado para grabar, procesar espacios de trabajo, exportar MP4, GIF y Live Photo, comprobar actualizaciones de forma segura y actualizar mediante gestores de paquetes.
+- Los agentes de CLI pueden editar y exportar en una sola tarea o reutilizar una sesión de espacio de trabajo para iterar más rápido, con conexiones a la app más fiables y menor sobrecarga de instantáneas.
+- Los catálogos de mockups pueden añadir y actualizar dispositivos compatibles sin actualizar la app; los recursos seleccionados siguen disponibles en los proyectos guardados.
+- Los clips de zoom con lente 3D incorporan controles de anillo arrastrables para la distancia focal y la apertura, mientras las vistas previas mantienen nítidos el texto enfocado y los detalles finos.
+- Las exportaciones a 1080p conservan los detalles nítidos de la pantalla durante tomas con mucho zoom.
+- Las tarjetas de acciones rápidas de capturas siguen accesibles a medida que crece la pila y funcionan incluso si no está disponible el fondo de escritorio o un archivo temporal.
+- Las capturas conservan la resolución nativa de la pantalla, las sombras de las ventanas y las altas luces HDR.
+- Las exportaciones ahora terminan de guardarse correctamente en las ubicaciones recién seleccionadas.
+- La limpieza del procesamiento de imágenes, el cambio a mockups de alta resolución y la edición del zoom en la línea de tiempo con fondos de alta resolución ahora responden mejor y usan menos memoria.
+- Los mockups de MacBook Pro, Studio Display y dispositivos móviles se renderizan correctamente, con sombras de silueta fluidas que coinciden entre la vista previa y la exportación.
+- La reproducción del zoom espacial se mantiene fluida con fondos de vídeo de alta resolución.
+- La reproducción de la vista previa mantiene el movimiento normal de la cámara cuando no se edita el zoom de la línea de tiempo.
+- La exportación de GIF oculta las resoluciones superiores al tamaño de la grabación y conserva la resolución original de las grabaciones pequeñas.
+- Las vistas previas de iPhone giran con la grabación, y las grabaciones solo en vertical se ajustan al marco del dispositivo sin espacio adicional para la rotación.
 
 # 1.3.0
 

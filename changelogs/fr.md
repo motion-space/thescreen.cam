@@ -1,6 +1,54 @@
+# 1.3.2
+
+- Prévisualisez la capture de l’iPhone avant et pendant l’enregistrement, avec un cadre redimensionnable, une orientation automatique et une Dynamic Island adaptée au modèle. Les commandes changent sur place et suivent le thème de l’app.
+- Choisissez parmi cinq couleurs métalliques pour le cadre de l’iPhone et écoutez son audio sur le Mac pendant l’aperçu et l’enregistrement.
+- Téléchargez les journaux d’erreurs directement depuis les alertes d’échec d’enregistrement.
+- Les arrière-plans des enregistrements et captures prennent en charge les dégradés de maillage modifiables, la copie et l’importation de palettes ainsi que les couleurs favorites partagées.
+- Les arrière-plans d’écran et d’appareil, y compris les fonds animés et les vidéos, peuvent intégrer des textures de bruit dont la densité, l’intensité et la taille sont réglables.
+- Le flou d’arrière-plan est réglable pour les enregistrements et les captures d’écran.
+- Les raccourcis d’enregistrement et de capture sont regroupés séparément, avec un lien vers les réglages des raccourcis clavier du système.
+- La sélection d’une cible de capture ne fait plus passer les fenêtres de l’éditeur ou des réglages au premier plan.
+- La sélection des fenêtres à enregistrer respecte leur ordre actuel et évite les fenêtres masquées.
+- Choisissez et enregistrez des couleurs de thème personnalisées avec le sélecteur de couleur.
+- L’objectif 3D sépare désormais l’angle de caméra et l’objectif, avec des curseurs de rotation X/Y/Z et une ouverture liée à la profondeur de champ.
+- Les curseurs et groupes de sélection repensés offrent une disposition compacte, des valeurs intégrées et des transitions plus fluides.
+- Les surbrillances de sélection de l’apparence et des matériaux se mettent à jour dès que la couleur du thème change.
+- Double-cliquez sur une zone vide de la barre de titre de l’éditeur pour agrandir la fenêtre ou rétablir sa taille.
+- Un nouveau style de clavier MacBook reproduit les proportions et les inscriptions des touches physiques.
+- Les touches affichées se limitent par défaut aux raccourcis ; Delete ou Backspace désactive les groupes de touches, qui peuvent s’aligner sur le centre de l’aperçu.
+- Les enregistrements modifiés peuvent être prévisualisés directement dans le Finder avec des commandes de lecture.
+- La barre d’enregistrement mémorise la qualité sélectionnée après le redémarrage de l’app.
+- Après avoir fait glisser un champ numérique, le pointeur revient à sa position de départ au relâchement.
+- Les commandes de mise au point de l’objectif 3D et d’animation à ressort restent réactives dans les enregistrements complexes.
+- Les réglages des captures sont plus fluides et les aperçus 3D au repos consomment moins de mémoire tout en restant nets.
+- La lecture de l’aperçu et l’export restent réactifs lorsque les sons de clic couvrent de nombreux segments d’enregistrement découpés.
+- La barre d’enregistrement peut être déplacée depuis toute zone sans bouton, même lorsqu’une autre app est active.
+- Les enregistrements préservent le volume de l’audio mono et corrigent le son système trop faible sur les périphériques de sortie multicanaux.
+- Les échecs d’enregistrement affichent des messages clairs, et les rapports d’erreurs excluent les opérations courantes des boîtes de dialogue de fichiers et d’enregistrement.
+- Les touches superposées ont le même rendu dans l’aperçu et à l’export, se déplacent et se redimensionnent sans à-coups et restent au-dessus du curseur.
+- Les captures de fenêtres conservent leurs coins arrondis d’origine lorsque les ombres sont activées.
+- Réduction des traitements inutiles pendant l’enregistrement et lorsque les aperçus sont masqués.
+- Les enregistrements recadrés remplissent les maquettes de téléphone et sont exportés dans le bon sens ; seul l’appareil sélectionné est mis en évidence.
+- La sélection des fenêtres fonctionne même lorsque le Dock possède une fenêtre transparente en plein écran.
+- Le réglage des marges d’un canevas adaptatif ne fait plus scintiller l’aperçu.
+- La position de lecture et le zoom de l’aperçu restent synchronisés lorsque vous ajustez la durée des clips de zoom.
+
 # 1.3.1
 
-- Les cartes d’actions rapides de capture restent utilisables et peuvent toujours être fermées lorsqu’un fond d’écran ou un fichier temporaire est indisponible.
+- ScreenCam prend désormais en charge la CLI installée séparément pour l’enregistrement, le traitement des espaces de travail, l’export aux formats MP4, GIF et Live Photo, la vérification sécurisée des mises à jour et les mises à niveau via un gestionnaire de paquets.
+- Les agents CLI peuvent appliquer des modifications et exporter en une seule tâche, ou réutiliser une session d’espace de travail pour itérer plus vite, avec des connexions à l’app plus fiables et des instantanés moins coûteux.
+- Les catalogues de maquettes peuvent ajouter et actualiser les appareils compatibles sans mise à jour de l’app ; les ressources sélectionnées restent disponibles dans les projets enregistrés.
+- Les clips de zoom avec objectif 3D ajoutent des commandes d’anneau d’objectif déplaçables pour la distance focale et l’ouverture, tandis que les aperçus gardent nets le texte mis au point et les détails fins.
+- Les exports 1080p préservent les détails nets de l’écran lors des plans fortement zoomés.
+- Les cartes d’actions rapides de capture restent accessibles à mesure que la pile s’agrandit et utilisables lorsqu’un fond d’écran ou un fichier temporaire est indisponible.
+- Les captures conservent la résolution native de l’écran, les ombres des fenêtres et les hautes lumières HDR.
+- Les exports se terminent désormais correctement lors de l’enregistrement vers un nouvel emplacement.
+- Le nettoyage du traitement d’image, le changement de maquette haute résolution et le réglage du zoom dans la timeline avec des fonds d’écran haute résolution sont plus réactifs et économes en mémoire.
+- Les maquettes de MacBook Pro, de Studio Display et d’appareils mobiles s’affichent correctement, avec des ombres de silhouette fluides identiques dans l’aperçu et l’export.
+- La lecture du zoom spatial reste fluide avec des arrière-plans vidéo haute résolution.
+- La lecture de l’aperçu conserve les mouvements normaux de la caméra lorsque le zoom de la timeline n’est pas en cours de modification.
+- L’export GIF masque les résolutions supérieures à celles de l’enregistrement et préserve la résolution d’origine des petits enregistrements.
+- Les aperçus iPhone pivotent avec l’enregistrement ; les enregistrements uniquement en portrait s’ajustent au cadre de l’appareil sans espace supplémentaire pour la rotation.
 
 # 1.3.0
 

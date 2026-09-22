@@ -1,6 +1,54 @@
+# 1.3.2
+
+- Visualizza l’anteprima dell’iPhone prima e durante la registrazione, con cornici ridimensionabili, orientamento automatico e Dynamic Island adatta al modello. I controlli cambiano nella stessa posizione e seguono il tema dell’app.
+- Scegli tra cinque colori metallici per la cornice dell’iPhone e ascolta l’audio del dispositivo sul Mac durante l’anteprima e la registrazione.
+- Scarica i registri degli errori direttamente dagli avvisi di registrazione non riuscita.
+- Gli sfondi di registrazioni e screenshot supportano gradienti a maglia modificabili, copia e importazione delle combinazioni di colori e colori preferiti condivisi.
+- Gli sfondi di schermo e dispositivo, inclusi sfondi animati e video, possono includere texture di rumore con densità, intensità e dimensioni regolabili.
+- La sfocatura dello sfondo è regolabile per registrazioni e screenshot.
+- Le scorciatoie per registrazioni e screenshot sono raggruppate separatamente, con un collegamento alle impostazioni delle scorciatoie da tastiera di sistema.
+- La selezione di un elemento da acquisire non porta più in primo piano le finestre dell’editor o delle impostazioni.
+- La selezione delle finestre da registrare rispetta l’ordine attuale ed evita di selezionare finestre coperte.
+- Scegli e salva colori del tema personalizzati con il selettore di colori.
+- Lente 3D ora separa angolo della fotocamera e obiettivo, aggiunge cursori di rotazione X/Y/Z e collega i controlli di apertura alla profondità di campo.
+- Cursori e gruppi di selezione rinnovati offrono layout compatti, valori integrati e transizioni più fluide.
+- Le evidenziazioni delle opzioni di aspetto e materiale si aggiornano subito quando cambia il colore del tema.
+- Fai doppio clic in un’area vuota della barra del titolo dell’editor per ingrandire la finestra o ripristinarne le dimensioni.
+- Un nuovo stile di tastiera MacBook riproduce le proporzioni e le scritte dei tasti fisici.
+- Le sovrimpressioni dei tasti mostrano solo le scorciatoie per impostazione predefinita, consentono di disattivare i gruppi con Delete o Backspace e si allineano al centro dell’anteprima.
+- Le registrazioni modificate possono essere visualizzate direttamente nel Finder con i controlli di riproduzione.
+- La barra di registrazione ricorda la qualità selezionata dopo il riavvio dell’app.
+- Al rilascio dopo il trascinamento di un campo numerico, il puntatore torna alla posizione iniziale.
+- I controlli di messa a fuoco dell’obiettivo 3D e delle animazioni a molla restano reattivi nelle registrazioni complesse.
+- Le regolazioni degli screenshot sono più fluide e le anteprime 3D inattive usano meno memoria mantenendo la nitidezza.
+- La riproduzione dell’anteprima e l’esportazione restano reattive quando i suoni dei clic attraversano molti segmenti di registrazione ritagliati.
+- La barra di registrazione può essere trascinata da qualsiasi area senza pulsanti, anche quando è attiva un’altra app.
+- Le registrazioni mantengono il volume dell’audio mono e correggono l’audio di sistema troppo basso sui dispositivi di uscita multicanale.
+- Gli errori di registrazione mostrano messaggi chiari e i rapporti escludono le normali operazioni delle finestre dei file e di salvataggio.
+- Le sovrimpressioni dei tasti hanno lo stesso aspetto nell’anteprima e nell’esportazione, si spostano e ridimensionano fluidamente e restano sopra il cursore.
+- Gli screenshot delle finestre mantengono gli angoli arrotondati originali quando le ombre sono attive.
+- Ridotta l’elaborazione superflua durante la registrazione e quando le anteprime sono nascoste.
+- Le registrazioni ritagliate riempiono i mockup del telefono e vengono esportate con l’orientamento corretto; viene evidenziato solo il dispositivo selezionato.
+- La selezione delle finestre funziona anche quando il Dock ha una finestra trasparente a schermo intero.
+- La regolazione dei margini di una tela adattiva non causa più sfarfallii nell’anteprima.
+- La posizione di riproduzione e lo zoom dell’anteprima restano sincronizzati quando si modifica la durata delle clip di zoom.
+
 # 1.3.1
 
-- Le schede delle azioni rapide per gli screenshot restano utilizzabili e possono sempre essere chiuse quando lo sfondo della scrivania o un file temporaneo non è disponibile.
+- ScreenCam ora supporta la CLI installata separatamente per la registrazione, l’elaborazione degli spazi di lavoro, l’esportazione in MP4, GIF e Live Photo, la verifica sicura degli aggiornamenti e gli upgrade tramite gestori di pacchetti.
+- Gli agenti CLI possono applicare modifiche ed esportare in un’unica operazione oppure riutilizzare una sessione di lavoro per iterare più velocemente, con connessioni all’app più affidabili e snapshot meno onerosi.
+- I cataloghi di mockup possono aggiungere e aggiornare dispositivi compatibili senza aggiornare l’app; le risorse selezionate restano disponibili nei progetti salvati.
+- Le clip di zoom con obiettivo 3D aggiungono controlli ad anello trascinabili per lunghezza focale e apertura, mentre le anteprime mantengono nitidi il testo a fuoco e i dettagli più fini.
+- Le esportazioni a 1080p preservano i dettagli nitidi dello schermo durante le riprese con zoom elevato.
+- Le schede delle azioni rapide per gli screenshot restano accessibili man mano che la pila cresce e utilizzabili anche quando lo sfondo della scrivania o un file temporaneo non è disponibile.
+- Gli screenshot conservano la risoluzione nativa dello schermo, le ombre delle finestre e le alte luci HDR.
+- Le esportazioni ora completano correttamente il salvataggio nelle nuove posizioni selezionate.
+- La pulizia dell’elaborazione delle immagini, il passaggio a mockup ad alta risoluzione e la modifica dello zoom nella timeline con sfondi ad alta risoluzione ora sono più rapidi e richiedono meno memoria.
+- I mockup di MacBook Pro, Studio Display e dispositivi mobili vengono renderizzati correttamente, con ombre della silhouette fluide e coerenti tra anteprima ed esportazione.
+- La riproduzione dello zoom spaziale rimane fluida con sfondi video ad alta risoluzione.
+- La riproduzione dell’anteprima mantiene il normale movimento della videocamera quando lo zoom della timeline non è in fase di modifica.
+- L’esportazione GIF nasconde le risoluzioni superiori alle dimensioni della registrazione e mantiene la risoluzione originale delle registrazioni piccole.
+- Le anteprime di iPhone ruotano con la registrazione; le registrazioni solo in verticale si adattano alla cornice del dispositivo senza spazio aggiuntivo per la rotazione.
 
 # 1.3.0
 
