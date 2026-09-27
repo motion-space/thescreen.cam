@@ -13,10 +13,14 @@
     "cursors:check": "node scripts/build-cursors.mjs --check",
     "mockups:build": "node scripts/build-mockups.mjs",
     "dev": "NODE_ENV=development astro dev --mode development",
-    "build": "npm run cursors:check && astro build",
-    "build:with-bgm": "npm run bgm:build && npm run click-sounds:build && npm run cursors:build && npm run mockups:build && astro build",
+    "build": "npm run cursors:check && npm run transitions:check && astro build",
+    "build:with-bgm": "npm run bgm:build && npm run click-sounds:build && npm run cursors:build && npm run mockups:build && npm run transitions:check && astro build",
     "preview": "npm run build && wrangler dev",
-    "deploy": "npm run build && wrangler deploy"
+    "deploy": "npm run build && wrangler deploy",
+    "transitions:build": "node scripts/build-transitions.mjs",
+    "transitions:check": "node scripts/build-transitions.mjs --check",
+    "transitions:test": "node --test scripts/transitions/*.test.mjs",
+    "transitions:validate-sources": "node scripts/build-transitions.mjs --validate-sources"
   },
   "devDependencies": {
     "@astrojs/sitemap": "^3.2.1",

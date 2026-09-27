@@ -1,0 +1,54 @@
+{
+  "author": "Woohyun Kim / ScreenCam parameter adaptation",
+  "id": "gl-transitions.edge-transition",
+  "kind": "shader",
+  "license": "MIT License\n\nCopyright (c) 2017-present gl-transitions contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\nNote: Individual transitions in the transitions/ directory may have their own\nlicense specified in their file header comments. When no license is specified,\nthe transition is covered by this MIT license.\n",
+  "name": "Edge Transition",
+  "parameterDefinitions": [
+    {
+      "defaultValue": 0.001,
+      "key": "edge_thickness",
+      "maximum": 0.02,
+      "minimum": 0.0001,
+      "name": "Edge thickness",
+      "options": [],
+      "step": 0.0001
+    },
+    {
+      "defaultValue": 8,
+      "key": "edge_brightness",
+      "maximum": 16,
+      "minimum": 0,
+      "name": "Edge brightness",
+      "options": [],
+      "step": 0.1
+    },
+    {
+      "defaultValue": 1,
+      "key": "edgeMix",
+      "maximum": 1,
+      "minimum": 0,
+      "name": "Edge mix",
+      "options": [],
+      "step": 0.01
+    }
+  ],
+  "recipe": {
+    "blurMultiplier": 1,
+    "easing": "smoothstep",
+    "flashColorHex": "#FFFFFF",
+    "stages": [],
+    "zoomScale": 1.3
+  },
+  "requiredCapabilities": [
+    "transitions.shader.v1"
+  ],
+  "schemaVersion": 2,
+  "shader": {
+    "language": "glsl",
+    "maximumScale": 1,
+    "source": "// Author: Woohyun Kim\n// License: MIT\n\nuniform float edge_thickness; // = 0.001\nuniform float edge_brightness; // = 8.0\n\n// ScreenCam adaptation: explicit sample arguments keep GLSL/Metal ABI portable.\nuniform float edgeMix; // = 1.0\n\nvec4 detectEdgeColor(vec3 c0, vec3 c1, vec3 c2, vec3 c3, vec4 c4, vec3 c5, vec3 c6, vec3 c7, vec3 c8) {\n  /* adjacent texel array for texel c4\n    036\n    147\n    258\n  */\n  vec3 dx = 2.0 * abs(c7-c1) + abs(c2 - c6) + abs(c8 - c0);\n\tvec3 dy = 2.0 * abs(c3-c5) + abs(c6 - c8) + abs(c0 - c2);\n  float delta = length(0.25 * (dx + dy) * 0.5);\n\treturn vec4(clamp(edge_brightness * delta, 0.0, 1.0) * c4.rgb, c4.a);\n}\n\nvec4 getFromEdgeColor(vec2 uv) {\n    return detectEdgeColor(\n        getFromColor(uv + edge_thickness * vec2(-1.0, -1.0)).rgb,\n        getFromColor(uv + edge_thickness * vec2(-1.0, 0.0)).rgb,\n        getFromColor(uv + edge_thickness * vec2(-1.0, 1.0)).rgb,\n        getFromColor(uv + edge_thickness * vec2(0.0, -1.0)).rgb,\n        getFromColor(uv + edge_thickness * vec2(0.0, 0.0)),\n        getFromColor(uv + edge_thickness * vec2(0.0, 1.0)).rgb,\n        getFromColor(uv + edge_thickness * vec2(1.0, -1.0)).rgb,\n        getFromColor(uv + edge_thickness * vec2(1.0, 0.0)).rgb,\n        getFromColor(uv + edge_thickness * vec2(1.0, 1.0)).rgb\n    );\n}\n\nvec4 getToEdgeColor(vec2 uv) {\n    return detectEdgeColor(\n        getToColor(uv + edge_thickness * vec2(-1.0, -1.0)).rgb,\n        getToColor(uv + edge_thickness * vec2(-1.0, 0.0)).rgb,\n        getToColor(uv + edge_thickness * vec2(-1.0, 1.0)).rgb,\n        getToColor(uv + edge_thickness * vec2(0.0, -1.0)).rgb,\n        getToColor(uv + edge_thickness * vec2(0.0, 0.0)),\n        getToColor(uv + edge_thickness * vec2(0.0, 1.0)).rgb,\n        getToColor(uv + edge_thickness * vec2(1.0, -1.0)).rgb,\n        getToColor(uv + edge_thickness * vec2(1.0, 0.0)).rgb,\n        getToColor(uv + edge_thickness * vec2(1.0, 1.0)).rgb\n    );\n}\n\nvec4 transition(vec2 uv) {\n    vec4 fromColor = getFromColor(uv);\n    vec4 toColor = getToColor(uv);\n    vec4 crossfade = mix(fromColor, toColor, progress);\n    if (edgeMix <= 0.0) return crossfade;\n    vec4 start = mix(fromColor, getFromEdgeColor(uv), clamp(2.0 * progress, 0.0, 1.0));\n    vec4 end = mix(getToEdgeColor(uv), toColor, clamp(2.0 * (progress - 0.5), 0.0, 1.0));\n    return mix(crossfade, mix(start, end, progress), edgeMix);\n}\n"
+  },
+  "summary": "Turns both scenes into bright outlines before revealing the next scene.",
+  "version": "1.0.0"
+}

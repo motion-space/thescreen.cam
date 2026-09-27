@@ -1,0 +1,18 @@
+{
+  "effectID": "gl-transitions.coord-from-in",
+  "version": "1.0.0",
+  "upstreamProject": "gl-transitions/gl-transitions",
+  "upstreamURL": "https://github.com/gl-transitions/gl-transitions/blob/master/transitions/coord-from-in.glsl",
+  "downloadURL": "https://raw.githubusercontent.com/gl-transitions/gl-transitions/master/transitions/coord-from-in.glsl",
+  "retrievedAt": "2026-09-27",
+  "upstreamAuthor": "haiyoucuv",
+  "license": "MIT",
+  "licenseFile": "LICENSE",
+  "sourceFile": "coord-from-in.glsl",
+  "sourceSHA256": "874d3c2e9701dbeaa432c872abb0d9f3632441b715986f7d123e9abcf796ee72",
+  "adaptation": [
+    "Added distortionStrength blending between original UV and color-driven coordinates; default 1 preserves the original formula and 0 yields a crossfade.",
+    "Added scalar integer coordinateChannels choosing RG, RB or GB; RG is the upstream default.",
+    "Declared maximumScale 2 to reserve additional sampling detail for coordinate warping."
+  ]
+}

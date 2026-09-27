@@ -1,0 +1,15 @@
+{
+  "sourceURL": "https://raw.githubusercontent.com/gl-transitions/gl-transitions/master/transitions/ButterflyWaveScrawler.glsl",
+  "editorURL": "https://gl-transitions.com/editor/ButterflyWaveScrawler",
+  "sourceSHA256": "b21137cdba5613177e7cd40b89b7f7587eb89711e70fd077d599eac42ee29dea",
+  "retrievedAt": "2026-09-27",
+  "author": "mandubian",
+  "license": "MIT",
+  "manifest": "../../manifests/gl-transitions.butterfly-wave-scrawler.json",
+  "adaptations": [
+    "Original amplitude, waves and colorSeparation controls exposed; original defaults retained.",
+    "acos input clamped against floating-point drift.",
+    "Sample alpha retained instead of forcing the outgoing branch opaque.",
+    "Scene inputs request 2x resolution for nonlinear displacement sampling."
+  ]
+}

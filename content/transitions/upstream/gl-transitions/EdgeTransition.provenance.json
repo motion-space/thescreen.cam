@@ -1,0 +1,19 @@
+{
+  "effectID": "gl-transitions.edge-transition",
+  "version": "1.0.0",
+  "upstreamProject": "gl-transitions/gl-transitions",
+  "upstreamURL": "https://github.com/gl-transitions/gl-transitions/blob/master/transitions/EdgeTransition.glsl",
+  "downloadURL": "https://raw.githubusercontent.com/gl-transitions/gl-transitions/master/transitions/EdgeTransition.glsl",
+  "retrievedAt": "2026-09-27",
+  "upstreamAuthor": "Woohyun Kim",
+  "license": "MIT",
+  "licenseFile": "LICENSE",
+  "sourceFile": "EdgeTransition.glsl",
+  "sourceSHA256": "95b7e664b32453ef4a4f24a27b0896ef9098b326fc86c8866a2af2fea3719fe9",
+  "adaptation": [
+    "Expanded vec3[9] function argument and local sample arrays into nine explicit vec3 arguments; preserves sample ordering, offsets and edge math.",
+    "Added edgeMix between the original edge transition and an ordinary crossfade; default 1 preserves the upstream effect.",
+    "Kept original edge_thickness 0.001 and edge_brightness 8 defaults with safe editable ranges.",
+    "Preserved the center sample alpha in both edge branches instead of forcing alpha to 1, so transparent scenes remain transparent; opaque-scene output is unchanged."
+  ]
+}

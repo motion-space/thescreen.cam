@@ -1,0 +1,80 @@
+{
+  "author": "Eke Péter <peterekepeter@gmail.com>",
+  "id": "gl-transitions.crosswarp",
+  "kind": "shader",
+  "license": "MIT License\n\nCopyright (c) 2017-present gl-transitions contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\nNote: Individual transitions in the transitions/ directory may have their own\nlicense specified in their file header comments. When no license is specified,\nthe transition is covered by this MIT license.\n",
+  "name": "Crosswarp",
+  "parameterDefinitions": [
+    {
+      "defaultValue": 1,
+      "key": "warpStrength",
+      "maximum": 1,
+      "minimum": 0,
+      "name": "Warp strength",
+      "options": [],
+      "step": 0.01
+    },
+    {
+      "defaultValue": 0,
+      "key": "direction",
+      "maximum": 3,
+      "minimum": 0,
+      "name": "Direction",
+      "options": [
+        {
+          "label": "Right to left",
+          "value": 0
+        },
+        {
+          "label": "Left to right",
+          "value": 1
+        },
+        {
+          "label": "Top to bottom",
+          "value": 2
+        },
+        {
+          "label": "Bottom to top",
+          "value": 3
+        }
+      ],
+      "step": 1
+    },
+    {
+      "defaultValue": 0.5,
+      "key": "centerX",
+      "maximum": 1,
+      "minimum": 0,
+      "name": "Center X",
+      "options": [],
+      "step": 0.01
+    },
+    {
+      "defaultValue": 0.5,
+      "key": "centerY",
+      "maximum": 1,
+      "minimum": 0,
+      "name": "Center Y",
+      "options": [],
+      "step": 0.01
+    }
+  ],
+  "recipe": {
+    "blurMultiplier": 1,
+    "easing": "smoothstep",
+    "flashColorHex": "#FFFFFF",
+    "stages": [],
+    "zoomScale": 1
+  },
+  "requiredCapabilities": [
+    "transitions.shader.v1"
+  ],
+  "schemaVersion": 2,
+  "shader": {
+    "language": "glsl",
+    "maximumScale": 2,
+    "source": "// Author: Eke Péter <peterekepeter@gmail.com>\n// License: MIT\n// ScreenCam adaptation: adjustable sweep, center and warp; bound branch zoom to 2x.\nuniform float warpStrength; // = 1.0\nuniform float direction; // = 0.0\nuniform float centerX; // = 0.5\nuniform float centerY; // = 0.5\nvec4 transition(vec2 p) {\n    float axis = p.x;\n    if (direction > 0.5 && direction < 1.5) axis = 1.0 - p.x;\n    else if (direction >= 1.5 && direction < 2.5) axis = p.y;\n    else if (direction >= 2.5) axis = 1.0 - p.y;\n    float x = smoothstep(0.0, 1.0, progress * 2.0 + axis - 1.0);\n    vec2 center = vec2(centerX, centerY);\n    float oldScale = max(0.5, 1.0 - x * warpStrength);\n    float newScale = max(0.5, 1.0 - (1.0 - x) * warpStrength);\n    return mix(getFromColor((p - center) * oldScale + center),\n               getToColor((p - center) * newScale + center), x);\n}\n"
+  },
+  "summary": "A directional crossfade with opposing zoom warps around an adjustable center.",
+  "version": "1.0.0"
+}

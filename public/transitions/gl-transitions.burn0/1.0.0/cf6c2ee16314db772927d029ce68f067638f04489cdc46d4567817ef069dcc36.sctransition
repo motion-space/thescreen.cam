@@ -1,0 +1,63 @@
+{
+  "author": "liubailin2020@gmail.com / ScreenCam parameter adaptation",
+  "id": "gl-transitions.burn0",
+  "kind": "shader",
+  "license": "MIT License\n\nCopyright (c) 2017-present gl-transitions contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\nNote: Individual transitions in the transitions/ directory may have their own\nlicense specified in their file header comments. When no license is specified,\nthe transition is covered by this MIT license.\n",
+  "name": "Burn",
+  "parameterDefinitions": [
+    {
+      "defaultValue": 30,
+      "key": "burnHue",
+      "maximum": 360,
+      "minimum": 0,
+      "name": "Burn hue",
+      "options": [],
+      "step": 1
+    },
+    {
+      "defaultValue": 1,
+      "key": "burnIntensity",
+      "maximum": 2,
+      "minimum": 0,
+      "name": "Burn intensity",
+      "options": [],
+      "step": 0.01
+    },
+    {
+      "defaultValue": 4,
+      "key": "noiseScale",
+      "maximum": 16,
+      "minimum": 1,
+      "name": "Noise scale",
+      "options": [],
+      "step": 0.25
+    },
+    {
+      "defaultValue": 0.05,
+      "key": "edgeWidth",
+      "maximum": 0.2,
+      "minimum": 0.005,
+      "name": "Edge width",
+      "options": [],
+      "step": 0.005
+    }
+  ],
+  "recipe": {
+    "blurMultiplier": 1,
+    "easing": "smoothstep",
+    "flashColorHex": "#FFFFFF",
+    "stages": [],
+    "zoomScale": 1.3
+  },
+  "requiredCapabilities": [
+    "transitions.shader.v1"
+  ],
+  "schemaVersion": 2,
+  "shader": {
+    "language": "glsl",
+    "maximumScale": 1,
+    "source": "// Author: liubailin2020@gmail.com\n// License: MIT\n\n// ScreenCam adaptation: scalar controls preserve the upstream defaults.\nuniform float burnHue; // = 30.0\nuniform float burnIntensity; // = 1.0\nuniform float noiseScale; // = 4.0\nuniform float edgeWidth; // = 0.05\n\nvec3 selectedBurnColor() {\n    vec3 hue = abs(fract(vec3(burnHue / 360.0) + vec3(0.0, 2.0 / 3.0, 1.0 / 3.0)) * 6.0 - 3.0);\n    return clamp(hue - 1.0, 0.0, 1.0) * burnIntensity;\n}\n\nfloat random (in vec2 st) {\n    return fract(sin(dot(st.xy,\n                         vec2(12.9898,78.233)))*\n        43758.5453123);\n}\n\n// Based on Morgan McGuire @morgan3d\n// https://www.shadertoy.com/view/4dS3Wd\nfloat noise (in vec2 st) {\n    vec2 i = floor(st);\n    vec2 f = fract(st);\n\n    float a = random(i);\n    float b = random(i + vec2(1.0, 0.0));\n    float c = random(i + vec2(0.0, 1.0));\n    float d = random(i + vec2(1.0, 1.0));\n\n    vec2 u = f * f * (3.0 - 2.0 * f);\n\n    return mix(a, b, u.x) +\n            (c - a)* u.y * (1.0 - u.x) +\n            (d - b) * u.x * u.y;\n}\n\n#define OCTAVES 4\nfloat fbm (in vec2 st) {\n    float value = 0.0;\n    float amplitude = .5;\n    for (int i = 0; i < OCTAVES; i++) {\n        value += amplitude * noise(st);\n        st *= 2.;\n        amplitude *= .5;\n    }\n    return value;\n}\n\nvec4 transition (vec2 uv) {\n    if (progress <= 0.0) return getFromColor(uv);\n    if (progress >= 1.0) return getToColor(uv);\n    vec4 from = getFromColor(uv);\n    vec4 to = getToColor(uv);\n    float n = fbm(uv * noiseScale);\n    float l = smoothstep(progress, progress + edgeWidth, n);\n    float edge = (1.0 - l) * l * 5.0;\n    return mix(to, from, l) + vec4(selectedBurnColor(), 0.0) * edge;\n}\n"
+  },
+  "summary": "Fractal-noise burn with an adjustable glowing edge, burn hue and pattern scale.",
+  "version": "1.0.0"
+}

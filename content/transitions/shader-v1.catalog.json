@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "revision": "2026-09-27.shader-v1.2",
+  "signingKeyID": "screencam-transitions-2026-09",
+  "effects": [
+    "screencam.blur-slide.json",
+    "screencam.fade.json",
+    "screencam.slide.json",
+    "screencam.blur-zoom.json",
+    "screencam.slide-cover.json",
+    "screencam.parallax-push.json",
+    "screencam.glitch-v2.json",
+    "screencam.flash.json",
+    "gl-transitions.film-burn.json",
+    "gl-transitions.burn0.json",
+    "gl-transitions.edge-transition.json",
+    "gl-transitions.coord-from-in.json",
+    "gl-transitions.butterfly-wave-scrawler.json",
+    "gl-transitions.crosswarp.json"
+  ]
+}

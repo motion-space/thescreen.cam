@@ -88,6 +88,20 @@ npm run cursors:check
 See [`content/cursors/README.md`](content/cursors/README.md) for the API layout
 and pull request contribution workflow.
 
+## Transition Catalog
+
+Signed, immutable transition packages are served by `/api/transitions.json`. The publisher supports legacy recipes and schema 2 packages with embedded GLSL/Metal shader source.
+Source data and publisher workflow live in [`content/transitions/README.md`](content/transitions/README.md).
+
+```bash
+npm run transitions:check
+npm run transitions:test
+```
+
+The standalone `scripts/transitions/transition-pack.mjs` tool lets users author,
+validate, and pack self-contained `.sctransition` shader files for local import. Publishing an
+updated official catalog requires the externally stored Ed25519 signing key.
+
 ## Project Structure
 
 - `src/pages/`: Astro routes and API endpoints
@@ -95,6 +109,7 @@ and pull request contribution workflow.
 - `src/lib/`: i18n, translations, and shared site config
 - `content/bgm/`: BGM source workflow and metadata
 - `content/cursors/`: cursor pack sources, catalog order, and contribution guide
+- `content/transitions/`: signed transition sources, release locks, and publisher guide
 - `public/`: static assets served by the site
 - `scripts/`: build utilities
 

@@ -15,3 +15,6 @@ npm-debug.log*
 /.cursor-pack-backups/
 /GeneratedCursorPacks/
 /*.sccursor/
+
+# Disposable project-local authoring and signing material
+/tmp/

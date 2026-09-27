@@ -1,0 +1,58 @@
+{
+  "author": "haiyoucuv / ScreenCam parameter adaptation",
+  "id": "gl-transitions.coord-from-in",
+  "kind": "shader",
+  "license": "MIT License\n\nCopyright (c) 2017-present gl-transitions contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\nNote: Individual transitions in the transitions/ directory may have their own\nlicense specified in their file header comments. When no license is specified,\nthe transition is covered by this MIT license.\n",
+  "name": "Coordinate Distortion",
+  "parameterDefinitions": [
+    {
+      "defaultValue": 1,
+      "key": "distortionStrength",
+      "maximum": 1,
+      "minimum": 0,
+      "name": "Distortion strength",
+      "options": [],
+      "step": 0.01
+    },
+    {
+      "defaultValue": 0,
+      "key": "coordinateChannels",
+      "maximum": 2,
+      "minimum": 0,
+      "name": "Coordinate channels",
+      "options": [
+        {
+          "label": "Red / Green",
+          "value": 0
+        },
+        {
+          "label": "Red / Blue",
+          "value": 1
+        },
+        {
+          "label": "Green / Blue",
+          "value": 2
+        }
+      ],
+      "step": 1
+    }
+  ],
+  "recipe": {
+    "blurMultiplier": 1,
+    "easing": "smoothstep",
+    "flashColorHex": "#FFFFFF",
+    "stages": [],
+    "zoomScale": 1.3
+  },
+  "requiredCapabilities": [
+    "transitions.shader.v1"
+  ],
+  "schemaVersion": 2,
+  "shader": {
+    "language": "glsl",
+    "maximumScale": 2,
+    "source": "// Author: haiyoucuv\n// License: MIT\n\n// ScreenCam adaptation: adjustable strength and channel pairing.\nuniform float distortionStrength; // = 1.0\nuniform int coordinateChannels; // = 0\n\nvec2 chosenCoordinates(vec4 color) {\n    if (coordinateChannels == 1) return color.rb;\n    if (coordinateChannels == 2) return color.gb;\n    return color.rg;\n}\n\nvec4 transition (vec2 uv) {\n\n  vec4 coordTo = getToColor(uv);\n  vec4 coordFrom = getFromColor(uv);\n\n  return mix(\n    getFromColor(mix(uv, mix(uv, chosenCoordinates(coordTo), distortionStrength), progress)),\n    getToColor(mix(mix(uv, chosenCoordinates(coordFrom), distortionStrength), uv, progress)),\n    progress\n  );\n\n}\n"
+  },
+  "summary": "Uses scene color channels as coordinates to distort both scenes into one another.",
+  "version": "1.0.0"
+}

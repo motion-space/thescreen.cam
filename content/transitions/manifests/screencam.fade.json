@@ -1,0 +1,21 @@
+{
+  "author": "ScreenCam",
+  "id": "screencam.fade",
+  "kind": "fade",
+  "license": "CC0-1.0",
+  "name": "Fade",
+  "parameterDefinitions": [],
+  "recipe": {
+    "blurMultiplier": 1,
+    "easing": "smoothstep",
+    "flashColorHex": "#FFFFFF",
+    "stages": [],
+    "zoomScale": 1.3
+  },
+  "requiredCapabilities": [
+    "transitions.scene.v1"
+  ],
+  "schemaVersion": 1,
+  "summary": "",
+  "version": "1.0.0"
+}

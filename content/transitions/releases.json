@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "effects": {
+    "screencam.blur-slide@1.0.0": "a8304b7833681e74110e716563024b860d92a95d3bfd367e0524fc7202c5c4e2",
+    "screencam.fade@1.0.0": "96410a4d1801cd283e81c5ac6dfef683505f85c089846b1c95ae7fdf4cad2240",
+    "screencam.slide@1.0.0": "f24e9be9c1e4e6ffd589ca819b8000ae6c5c72298616a8decd3da1cfa30df839",
+    "screencam.blur-zoom@1.0.0": "cf9121e95609c371203d42540b91acd68cfe97284cb1684d54c4488fe443f0ab",
+    "screencam.slide-cover@1.0.0": "19619e72c57279ee11c3ef12dca979c768be8d60ce477dc968639f70e0085711",
+    "screencam.parallax-push@1.0.0": "22b9caac830d4a418c72da2f8b259252af8421b455ba692be4a92ff987a3b8ec",
+    "screencam.glitch@1.0.0": "b0e741153b6dca6295d94fee9988c0ff04ce53a0d10504169613d57d3e976443",
+    "screencam.flash@1.0.0": "c949cf0ebfa46ab2f56b91cb5021c2a82698197132db80282e38bf7daa02d3d8",
+    "gl-transitions.film-burn@1.0.0": "a7251bb012a1002e760edfcf0e0198701a0bf3195edb9304e5c1cba95ebb880c",
+    "gl-transitions.burn0@1.0.0": "cf6c2ee16314db772927d029ce68f067638f04489cdc46d4567817ef069dcc36",
+    "gl-transitions.edge-transition@1.0.0": "65c5e4faac0240886606c7631b1370f63bba74d68c25e8c3337a3d95b8d8d06d",
+    "gl-transitions.coord-from-in@1.0.0": "c87bba8abd4fca38553e3a9adc9714771617e29a9a5d66df8b669ebb76d30da5",
+    "gl-transitions.butterfly-wave-scrawler@1.0.0": "c332b89db449560b8cdf1ccb98b446cd4e652a4ec7263853b4678e64ab6ada37",
+    "gl-transitions.crosswarp@1.0.0": "1d1e62f74dba1ba93b7a489b7c5c85770b8cc9c46355f8c57147948169b9b2d8"
+  },
+  "catalogRevisions": {
+    "2026-09-26.1": "935f7956174a660b53d34f2fac0a047ae845e95841a3baebc13eaca999ed6c45",
+    "2026-09-26.2": "e42333039caf316f3113efab5ad4febc692efce5af60232140e151414d11a586",
+    "2026-09-27.1": "b0338fed92adc18848c8cf4775910342c977b3d677d0209f206c43e75f83eb00",
+    "2026-09-27.2": "bada4164af447cc227c9052b2f646a4e04acc55f4d6a0c61d25cde2645f58c88"
+  }
+}

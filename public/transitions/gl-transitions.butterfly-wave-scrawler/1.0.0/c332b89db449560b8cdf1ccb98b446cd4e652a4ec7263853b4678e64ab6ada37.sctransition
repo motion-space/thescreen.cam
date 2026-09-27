@@ -1,0 +1,54 @@
+{
+  "author": "mandubian",
+  "id": "gl-transitions.butterfly-wave-scrawler",
+  "kind": "shader",
+  "license": "MIT License\n\nCopyright (c) 2017-present gl-transitions contributors\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the \"Software\"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.\n\nNote: Individual transitions in the transitions/ directory may have their own\nlicense specified in their file header comments. When no license is specified,\nthe transition is covered by this MIT license.\n",
+  "name": "Butterfly Wave Scrawler",
+  "parameterDefinitions": [
+    {
+      "defaultValue": 1,
+      "key": "amplitude",
+      "maximum": 2,
+      "minimum": 0,
+      "name": "Wave amplitude",
+      "options": [],
+      "step": 0.01
+    },
+    {
+      "defaultValue": 30,
+      "key": "waves",
+      "maximum": 60,
+      "minimum": 1,
+      "name": "Wave density",
+      "options": [],
+      "step": 1
+    },
+    {
+      "defaultValue": 0.3,
+      "key": "colorSeparation",
+      "maximum": 1,
+      "minimum": 0,
+      "name": "Color separation",
+      "options": [],
+      "step": 0.01
+    }
+  ],
+  "recipe": {
+    "blurMultiplier": 1,
+    "easing": "smoothstep",
+    "flashColorHex": "#FFFFFF",
+    "stages": [],
+    "zoomScale": 1
+  },
+  "requiredCapabilities": [
+    "transitions.shader.v1"
+  ],
+  "schemaVersion": 2,
+  "shader": {
+    "language": "glsl",
+    "maximumScale": 2,
+    "source": "// Author: mandubian\n// License: MIT\n// ScreenCam adaptation: preserve sampled alpha and clamp acos against rounding.\nuniform float amplitude; // = 1.0\nuniform float waves; // = 30.0\nuniform float colorSeparation; // = 0.3\nconst float PI = 3.14159265358979323846264;\nfloat compute(vec2 p, float progress, vec2 center) {\nvec2 o = p*sin(progress * amplitude)-center;\n// horizontal vector\nvec2 h = vec2(1., 0.);\n// butterfly polar function (don't ask me why this one :))\nfloat theta = acos(clamp(dot(o, h), -1.0, 1.0)) * waves;\nfloat s = sin((2.*theta - PI) / 24.);\nfloat s2 = s * s;\nreturn (exp(cos(theta)) - 2.*cos(4.*theta) + s2 * s2 * s) / 10.;\n}\nvec4 transition(vec2 uv) {\n  if (progress <= 0.0) return getFromColor(uv);\n  if (progress >= 1.0) return getToColor(uv);\n  vec2 p = uv;\n  float inv = 1. - progress;\n  float disp = compute(p, progress, vec2(0.5, 0.5));\n  vec4 texTo = getToColor(p + inv*disp);\n  vec4 red = getFromColor(p + progress*disp*(1.0 - colorSeparation));\n  vec4 green = getFromColor(p + progress*disp);\n  vec4 blue = getFromColor(p + progress*disp*(1.0 + colorSeparation));\n  vec4 texFrom = vec4(red.r, green.g, blue.b, max(red.a, max(green.a, blue.a)));\n  return texTo*progress + texFrom*inv;\n}\n"
+  },
+  "summary": "Butterfly-shaped ripples distort the two scenes with adjustable RGB separation.",
+  "version": "1.0.0"
+}

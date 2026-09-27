@@ -1,0 +1,15 @@
+{
+  "sourceURL": "https://raw.githubusercontent.com/gl-transitions/gl-transitions/master/transitions/crosswarp.glsl",
+  "editorURL": "https://gl-transitions.com/editor/crosswarp",
+  "sourceSHA256": "f3bb6ddca7dcaa1b9ec7e6c8673969f4e19b61cae6a3daaccfe163c0ebd3637c",
+  "retrievedAt": "2026-09-27",
+  "author": "Eke Péter <peterekepeter@gmail.com>",
+  "license": "MIT",
+  "manifest": "../../manifests/gl-transitions.crosswarp.json",
+  "adaptations": [
+    "Added warp strength, four sweep directions and center X/Y controls.",
+    "Retained the original smooth horizontal sweep at the default direction and center.",
+    "Bound explicit branch zoom at 2x instead of the original unbounded magnification at vanishing blend weights; source scenes request 2x resolution.",
+    "Nonlinear coordinate deformation remains intentional; this is a native bounded adaptation, not byte-identical upstream output."
+  ]
+}

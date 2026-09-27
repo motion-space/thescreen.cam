@@ -1,0 +1,36 @@
+{
+  "author": "ScreenCam",
+  "id": "screencam.glitch",
+  "kind": "shader",
+  "license": "CC0-1.0",
+  "name": "Signal glitch",
+  "parameterDefinitions": [
+    {
+      "defaultValue": 0.5,
+      "key": "intensity",
+      "maximum": 1,
+      "minimum": 0,
+      "name": "Intensity",
+      "options": [],
+      "step": 0.01
+    }
+  ],
+  "recipe": {
+    "blurMultiplier": 1,
+    "easing": "smoothstep",
+    "flashColorHex": "#FFFFFF",
+    "stages": [],
+    "zoomScale": 1
+  },
+  "requiredCapabilities": [
+    "transitions.shader.v1"
+  ],
+  "schemaVersion": 2,
+  "shader": {
+    "language": "glsl",
+    "maximumScale": 1,
+    "source": "// ScreenCam signal glitch, CC0-1.0.\n// Horizontal lost-sync bands and RGB channel separation.\nuniform float intensity; // = 0.5\nfloat signalHash(vec2 position) {\n    vec3 p = fract(vec3(position.x, position.y, position.x) * vec3(0.1031, 0.1030, 0.0973));\n    p += dot(p, p.yzx + 33.33);\n    return fract((p.x + p.y) * p.z);\n}\nvec4 transition(vec2 uv) {\n    float amount = intensity * sin(3.141592653589793 * progress);\n    float line = floor(uv.y * min(900.0, resolution.y));\n    float tick = floor(progress * 48.0);\n    float band = uv.y * 27.0 + tick * 0.13;\n    float block = floor(band);\n    float coarse = mix(signalHash(vec2(block, tick) + seedVector),\n                       signalHash(vec2(block + 1.0, tick) + seedVector),\n                       smoothstep(0.0, 1.0, fract(band)));\n    float fine = signalHash(vec2(line + 31.0, tick + 17.0) + seedVector.yx);\n    float dropout = signalHash(vec2(line + 73.0, tick + 3.0) + seedVector);\n    float wave = sin(uv.y * 19.0 + tick * 0.37 + seedVector.x) * 0.018;\n    float longTear = step(0.94, dropout) * (fine * 2.0 - 1.0) * 0.10;\n    float shift = ((coarse * 2.0 - 1.0) * 0.11 + wave\n                   + (fine * 2.0 - 1.0) * 0.035 + longTear) * amount;\n    float split = (0.003 + 0.012 * fine + 0.003 * coarse) * amount;\n    vec2 center = uv + vec2(shift, 0.0);\n    vec2 redPoint = center + vec2(split, 0.0);\n    vec2 bluePoint = center - vec2(split * 0.85, 0.0);\n    float gate = smoothstep(0.30, 0.70, progress + (coarse - 0.5) * 0.48);\n    float blend = mix(progress, gate, amount);\n    vec4 red = mix(getFromColor(redPoint), getToColor(redPoint), blend);\n    vec4 green = mix(getFromColor(center), getToColor(center), blend);\n    vec4 blue = mix(getFromColor(bluePoint), getToColor(bluePoint), blend);\n    float alpha = max(red.a, max(green.a, blue.a));\n    vec3 rgb = vec3(red.r, green.g, blue.b);\n    float lineGain = 1.0 - amount * (0.10 * fine + 0.32 * step(0.975, dropout));\n    return vec4(rgb * lineGain, alpha);\n}\n"
+  },
+  "summary": "Lost-sync scan lines with horizontal tearing and RGB dispersion.",
+  "version": "2.0.0"
+}

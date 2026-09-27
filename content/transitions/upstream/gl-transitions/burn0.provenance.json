@@ -1,0 +1,18 @@
+{
+  "effectID": "gl-transitions.burn0",
+  "version": "1.0.0",
+  "upstreamProject": "gl-transitions/gl-transitions",
+  "upstreamURL": "https://github.com/gl-transitions/gl-transitions/blob/master/transitions/burn0.glsl",
+  "downloadURL": "https://raw.githubusercontent.com/gl-transitions/gl-transitions/master/transitions/burn0.glsl",
+  "retrievedAt": "2026-09-27",
+  "upstreamAuthor": "liubailin2020@gmail.com",
+  "license": "MIT",
+  "licenseFile": "LICENSE",
+  "sourceFile": "burn0.glsl",
+  "sourceSHA256": "ffe6733b78b82caa29fe9c22f01f8544e8bd7296d0892084aa457473636a06a0",
+  "adaptation": [
+    "Replaced vec3 burnColor uniform with scalar burnHue and burnIntensity; default HSV hue 30 degrees gives original RGB (1, 0.5, 0).",
+    "Exposed original noise scale 4 and smoothstep edge width 0.05 as scalar uniforms; edge width has a positive lower bound.",
+    "Preserved original four-octave noise and burn formula."
+  ]
+}

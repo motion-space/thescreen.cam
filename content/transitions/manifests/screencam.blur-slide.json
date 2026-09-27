@@ -1,0 +1,57 @@
+{
+  "author": "ScreenCam",
+  "id": "screencam.blur-slide",
+  "kind": "blurSlide",
+  "license": "CC0-1.0",
+  "name": "Blur slide",
+  "parameterDefinitions": [
+    {
+      "defaultValue": 0.5,
+      "key": "blurStrength",
+      "maximum": 1,
+      "minimum": 0,
+      "name": "Blur strength",
+      "options": [],
+      "step": 0.01
+    },
+    {
+      "defaultValue": 0,
+      "key": "direction",
+      "maximum": 3,
+      "minimum": 0,
+      "name": "Direction",
+      "options": [
+        {
+          "label": "Left",
+          "value": 0
+        },
+        {
+          "label": "Right",
+          "value": 1
+        },
+        {
+          "label": "Up",
+          "value": 2
+        },
+        {
+          "label": "Down",
+          "value": 3
+        }
+      ],
+      "step": 1
+    }
+  ],
+  "recipe": {
+    "blurMultiplier": 1,
+    "easing": "smoothstep",
+    "flashColorHex": "#FFFFFF",
+    "stages": [],
+    "zoomScale": 1.3
+  },
+  "requiredCapabilities": [
+    "transitions.scene.v1"
+  ],
+  "schemaVersion": 1,
+  "summary": "",
+  "version": "1.0.0"
+}
