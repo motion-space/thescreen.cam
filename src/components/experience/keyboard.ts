@@ -76,7 +76,7 @@ function pressProgress(key: Shown, time: number) {
 export type KeyOverlaySettings = { show: boolean; style: KeyStyle; position: number };
 
 /** Draws the overlay inside `comp` (world units) at `time`. */
-export function drawKeyOverlay(ctx: CanvasRenderingContext2D, comp: { x: number; y: number; w: number; h: number }, time: number, settings: KeyOverlaySettings) {
+export function drawKeyOverlay(ctx: CanvasRenderingContext2D, comp: { x: number; y: number; w: number; h: number }, time: number, settings: KeyOverlaySettings, captionTop?: number) {
   if (!settings.show) return;
   const frame = sampleKeyOverlay(time);
   if (!frame || frame.opacity <= 0) return;
@@ -92,8 +92,9 @@ export function drawKeyOverlay(ctx: CanvasRenderingContext2D, comp: { x: number;
   const total = widths.reduce((a, b) => a + b, 0) + gap * (widths.length - 1);
   const cx = comp.x + comp.w * [0.2, 0.5, 0.8][settings.position];
   let x = Math.max(comp.x, Math.min(comp.x + comp.w - total, cx - total / 2));
-  // Leave the bottom caption band clear, including room for the key shadows.
-  const y = comp.y + comp.h - keyH - comp.h * 0.24;
+  // Follow the actual caption edge, leaving a small gap for the key shadows.
+  const bottom = comp.y + comp.h - comp.h * 0.06;
+  const y = Math.max(comp.y, Math.min(bottom, captionTop === undefined ? bottom : captionTop - keyH * 0.25) - keyH);
   ctx.save();
   ctx.globalAlpha *= frame.opacity;
   frame.keys.forEach((key, i) => {
@@ -113,7 +114,7 @@ export function drawKeyOverlay(ctx: CanvasRenderingContext2D, comp: { x: number;
 }
 
 function legend(label: string) {
-  if (label === "Space") return "space";
+  if (label === "Space") return "␣";
   if (label === "Return") return "return";
   if (label === "⇧") return "⇧";
   return label;
@@ -231,7 +232,7 @@ function macBookKey(ctx: CanvasRenderingContext2D, r: { x: number; y: number; w:
   };
   switch (sp.layout) {
     case "centered":
-      draw(sp.text === "␣" ? "" : sp.text, cap, unit * 0.34, 0);
+      draw(sp.text, cap, unit * 0.34, 0);
       break;
     case "bottomLeft":
     case "bottomRight":

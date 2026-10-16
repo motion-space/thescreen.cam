@@ -436,8 +436,8 @@ export class Preview {
     // the camera overlay shrinks with the screen camera's zoom (2D scale, or the 3D push)
     const zoomScale = sp && z ? 1 + (z.clip.zoom - 1) * z.f : cam.s;
     drawCamera(ctx, comp, state.camera, time, performance.now(), reducedMotion, zoomScale);
-    drawKeyOverlay(ctx, comp, time, state.keys);
-    drawCaptions(ctx, state, comp);
+    const captionBounds = drawCaptions(ctx, state, comp);
+    drawKeyOverlay(ctx, comp, time, state.keys, state.captions.bottom ? captionBounds?.y : undefined);
     ctx.restore();
   }
 
@@ -563,7 +563,7 @@ const captionSprite = { canvas: null as HTMLCanvasElement | null, key: "", scale
 const captionSprites = new Map<string,HTMLCanvasElement>();
 let captionPixels = 0;
 
-export function drawCaptions(ctx: CanvasRenderingContext2D, state: EditorState, comp: Rect) {
+export function drawCaptions(ctx: CanvasRenderingContext2D, state: EditorState, comp: Rect): Rect | undefined {
   const time = state.time;
   const capStart = 9.6;
   const capEnd = 14.2;
@@ -589,6 +589,7 @@ export function drawCaptions(ctx: CanvasRenderingContext2D, state: EditorState, 
   const boxH = lines.length * lineH + fs * 0.9;
   const bx = comp.x + (comp.w - boxW) / 2;
   const by = state.captions.bottom ? comp.y + comp.h - boxH - comp.h * 0.06 : comp.y + comp.h * 0.06;
+  const bounds = { x: bx, y: by, w: boxW, h: boxH };
   const read = state.captions.readAlong ? Math.floor(progress*tokens.length+0.0001) : tokens.length;
   const matrix=ctx.getTransform();
   const scale=Math.max(captionSprite.scale,Math.ceil(Math.max(Math.hypot(matrix.a,matrix.b),Math.hypot(matrix.c,matrix.d))*2)/2);
@@ -596,7 +597,7 @@ export function drawCaptions(ctx: CanvasRenderingContext2D, state: EditorState, 
   const target=ctx, pad=12, x0=bx-pad, y0=by-pad;
   const present=()=>{target.globalAlpha=a;target.drawImage(captionSprite.canvas!,x0,y0,captionSprite.canvas!.width/scale,captionSprite.canvas!.height/scale);target.restore();};
   const cached=captionSprites.get(key);
-  if(cached){captionSprites.delete(key);captionSprites.set(key,cached);captionSprite.canvas=cached;present();return;}
+  if(cached){captionSprites.delete(key);captionSprites.set(key,cached);captionSprite.canvas=cached;present();return bounds;}
   captionSprite.canvas=document.createElement("canvas");
   const width=Math.ceil((boxW+pad*2)*scale),height=Math.ceil((boxH+pad*2)*scale);
   if(captionSprite.canvas.width!==width || captionSprite.canvas.height!==height){captionSprite.canvas.width=width;captionSprite.canvas.height=height;}
@@ -648,6 +649,7 @@ export function drawCaptions(ctx: CanvasRenderingContext2D, state: EditorState, 
     captionSprites.delete(oldest);captionPixels-=canvas.width*canvas.height;canvas.width=canvas.height=1;
   }
   present();
+  return bounds;
 }
 
 /** Prepare every read-along state so highlighting never rasterises new text during scroll. */
