@@ -27,6 +27,8 @@ export default defineConfig({
   ],
 
   vite: {
+    // A production build must not replace the running dev server's React prebundle.
+    cacheDir: `node_modules/.vite-${isDevServer ? "dev" : "build"}`,
     ...(isDevServer ? { optimizeDeps: { force: true } } : {}),
     plugins: [tailwindcss()],
     build: {

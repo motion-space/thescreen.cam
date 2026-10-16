@@ -1,11 +1,12 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { basicsDocsTimeline } from "../data/docs";
 import type { DocsCopy } from "../lib/translations";
 import { DocsFeatureDemo } from "./docs/interactive-docs";
 import type { DocsFeatureDemoCopy } from "./docs/interactive-docs";
+import { useRef } from "react";
+import { FillText, fillWords, useScene } from "./mg/scene";
 
 type DocsBasicsSectionCopy = DocsFeatureDemoCopy &
   Pick<DocsCopy, "eyebrow" | "title"> & {
@@ -19,51 +20,44 @@ export function DocsBasicsSection({
   copy: DocsBasicsSectionCopy;
   docsHref: string;
 }) {
-  const shouldReduceMotion = useReducedMotion();
+  const rootRef = useRef<HTMLElement>(null);
+
+  useScene(rootRef, ({ q, gsap, reduced }) => {
+    fillWords(q, q(".ds-head")[0], "top 85%", "top 45%");
+    if (reduced) return;
+    gsap.fromTo(q(".ds-player")[0], { clipPath: "inset(12% 18% 12% 18% round 16px)", scale: 0.94 }, {
+      clipPath: "inset(0% 0% 0% 0% round 16px)",
+      scale: 1,
+      ease: "power2.out",
+      scrollTrigger: { trigger: q(".ds-player")[0], start: "top 95%", end: "top 30%", scrub: 0.8 },
+    });
+  });
 
   return (
-    <section id="docs" className="relative overflow-hidden bg-background py-28 md:py-32">
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] bg-[size:80px_80px] opacity-[0.12]" />
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-
-      <div className="relative mx-auto w-full max-w-7xl px-6 md:px-12">
-        <motion.header
-          initial={shouldReduceMotion ? false : { opacity: 0, y: 36 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end"
-        >
-          <div className="max-w-3xl">
-            <p className="mb-4 text-sm uppercase text-accent">{copy.eyebrow}</p>
-            <h2 className="text-[clamp(2rem,5vw,4rem)] font-bold leading-[1.08] text-foreground text-balance">
-              {copy.title}
-            </h2>
+    <section ref={rootRef} id="docs" className="mg-scene">
+      <div className="mx-auto w-full max-w-[1240px] px-6 py-28 md:px-10 md:py-40">
+        <div className="ds-head mb-12 flex flex-col gap-6 md:mb-16 md:flex-row md:items-end md:justify-between">
+          <div>
+            <span className="mg-label mg-index mb-6 tabular-nums">06 — {copy.eyebrow}</span>
+            <h2 className="mg-h2 mt-4"><FillText text={copy.title} /></h2>
           </div>
-
           <a
             href={docsHref}
-            className="inline-flex w-fit items-center gap-1.5 text-sm font-medium leading-none text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-foreground/70 lg:justify-self-end"
+            className="group inline-flex w-fit shrink-0 items-center gap-2 border-b border-foreground pb-1 text-sm font-medium text-foreground transition-colors hover:border-[var(--mg-accent)] hover:text-[var(--mg-accent)]"
           >
             <span>view all docs</span>
-            <ArrowRight aria-hidden="true" className="h-3.5 w-3.5" strokeWidth={2} />
+            <ArrowRight aria-hidden="true" className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" strokeWidth={2} />
           </a>
-        </motion.header>
+        </div>
 
-        <motion.div
-          initial={shouldReduceMotion ? false : { opacity: 0, y: 32 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.75, ease: [0.16, 1, 0.3, 1], delay: 0.08 }}
-          className="mt-12"
-        >
+        <div className="ds-player">
           <DocsFeatureDemo
             copy={copy}
             deferMediaUntilVisible
             feature={copy.feature}
             timeline={basicsDocsTimeline}
           />
-        </motion.div>
+        </div>
       </div>
     </section>
   );

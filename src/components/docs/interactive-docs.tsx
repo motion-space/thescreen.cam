@@ -280,18 +280,19 @@ export function InteractiveDocs({
   );
 
   return (
-    <section className="min-h-screen pb-24 pt-32">
-      <div className="mx-auto w-full max-w-7xl px-6 md:px-12">
+    <section className="relative min-h-screen pt-16">
+      <div className="page-glow" aria-hidden="true" />
+      <div className="rails px-6 pb-28 pt-20 md:px-10 md:pt-28">
         <motion.header
           initial={shouldReduceMotion ? false : { opacity: 0, y: 22 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-3xl"
         >
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-muted-foreground">
+          <p className="section-eyebrow">
             {copy.eyebrow}
           </p>
-          <h1 className="text-[clamp(2.25rem,7vw,5.75rem)] font-bold leading-[0.96] tracking-tight text-foreground">
+          <h1 className="page-title">
             {copy.title}
           </h1>
           <p className="mt-6 max-w-2xl text-base leading-7 text-muted-foreground md:text-lg">
@@ -299,7 +300,7 @@ export function InteractiveDocs({
           </p>
         </motion.header>
 
-        <div className="mt-14 grid gap-8 lg:grid-cols-[max-content_minmax(0,1fr)] lg:gap-16 xl:gap-20">
+        <div className="mt-16 grid gap-8 border-t border-rule pt-10 lg:grid-cols-[max-content_minmax(0,1fr)] lg:gap-16 xl:gap-20">
           <nav aria-label={copy.featureListAria} className="relative min-w-0">
             <div
               aria-hidden="true"
@@ -368,8 +369,8 @@ export function InteractiveDocs({
                       }
                       className={`group block w-fit py-1.5 text-left text-base font-semibold transition-colors ${
                         isActive
-                          ? "text-red-400"
-                          : "text-foreground hover:text-white"
+                          ? "text-accent"
+                          : "text-foreground/75 hover:text-foreground"
                       }`}
                       whileTap={{ scale: 0.98 }}
                     >
@@ -378,8 +379,8 @@ export function InteractiveDocs({
                         <span
                           className={`absolute -bottom-1 left-0 h-px w-full origin-left transition-transform duration-300 ${
                             isActive
-                              ? "scale-x-100 bg-red-400"
-                              : "scale-x-0 bg-white group-hover:scale-x-100"
+                              ? "scale-x-100 bg-accent"
+                              : "scale-x-0 bg-foreground group-hover:scale-x-100"
                           }`}
                           aria-hidden="true"
                         />
@@ -413,11 +414,11 @@ export function InteractiveDocs({
                         >
                           <div className="relative pl-4 pt-4">
                             <span
-                              className="absolute bottom-0 left-0 top-4 w-px bg-white/15"
+                              className="absolute bottom-0 left-0 top-4 w-px bg-foreground/15"
                               aria-hidden="true"
                             />
                             <motion.span
-                              className="absolute bottom-0 left-0 top-4 w-px origin-top bg-white/50"
+                              className="absolute bottom-0 left-0 top-4 w-px origin-top bg-accent"
                               aria-hidden="true"
                               animate={{ scaleY: activeSidebarProgress }}
                               transition={{
@@ -445,8 +446,8 @@ export function InteractiveDocs({
                                     }
                                     className={`block w-full text-left text-xs font-medium leading-5 transition-colors focus:outline-none focus-visible:underline focus-visible:underline-offset-4 ${
                                       isSelected
-                                        ? "text-red-300"
-                                        : "text-white/50 hover:text-white/80"
+                                        ? "text-accent"
+                                        : "text-muted-foreground hover:text-foreground"
                                     } break-words`}
                                   >
                                     {chapter.title}
@@ -466,7 +467,7 @@ export function InteractiveDocs({
                 {visibleHoveredTimeline && (
                   <motion.div
                     key="feature-popover"
-                    className="pointer-events-none absolute left-[calc(100%+1.25rem)] top-0 z-30 hidden w-72 border border-white/10 bg-black p-5 shadow-[0_24px_70px_rgba(0,0,0,0.48)] lg:block"
+                    className="pointer-events-none absolute left-[calc(100%+1.25rem)] top-0 z-30 hidden w-72 rounded-[8px] border border-rule bg-popover p-5 shadow-elevated lg:block"
                     initial={
                       shouldReduceMotion
                         ? { opacity: 0 }
@@ -484,10 +485,10 @@ export function InteractiveDocs({
                     }
                     transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
                   >
-                    <p className="text-sm font-semibold text-white">
+                    <p className="text-sm font-semibold text-popover-foreground">
                       {copy.features[visibleHoveredTimeline.featureId].title}
                     </p>
-                    <p className="mt-3 text-sm leading-6 text-white/65">
+                    <p className="mt-3 text-sm leading-6 text-muted-foreground">
                       {copy.features[visibleHoveredTimeline.featureId].summary}
                     </p>
                   </motion.div>
@@ -748,8 +749,8 @@ function VideoDocPlayer({
 
   return (
     <article ref={playerRef} className="grid gap-5">
-      <div className="overflow-visible border border-border/70 bg-card">
-        <div className="relative aspect-video w-full bg-black">
+      <div className="overflow-visible rounded-[10px] border border-rule bg-background p-2 shadow-elevated">
+        <div className="theme-dark relative aspect-video w-full overflow-hidden rounded-[6px] bg-black">
           {hasVideo ? (
             <video
               ref={videoRef}
@@ -790,7 +791,7 @@ function VideoDocPlayer({
           )}
         </div>
 
-        <div className="border-t border-border/70 p-5">
+        <div className="px-3 pb-3 pt-5 md:px-4 md:pb-4">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <span>{formatTime(currentTime)}</span>
@@ -840,7 +841,7 @@ function VideoDocPlayer({
               aria-valuemax={Math.round(duration)}
               aria-valuemin={0}
               aria-valuenow={Math.round(currentTime)}
-              className="absolute left-0 right-0 top-1/2 h-1 -translate-y-1/2 bg-muted"
+              className="absolute left-0 right-0 top-1/2 h-1 -translate-y-1/2 overflow-hidden rounded-full bg-muted"
               role="progressbar"
             >
               <motion.div
@@ -872,7 +873,7 @@ function VideoDocPlayer({
                       "--docs-marker-expanded-x": `${getMarkerX(chapter, true)}px`,
                       "--docs-marker-x": `${getMarkerX(chapter, false)}px`,
                       "--docs-marker-color": isActive
-                        ? "rgb(248 113 113)"
+                        ? "var(--accent)"
                         : isPlayed
                           ? "var(--foreground)"
                           : "var(--muted-foreground)",
@@ -880,21 +881,21 @@ function VideoDocPlayer({
                   }
                 >
                   <span
-                    className="docs-marker-visual absolute left-0 top-0 block overflow-hidden text-left shadow-[0_18px_46px_rgba(0,0,0,0.42)]"
+                    className="docs-marker-visual absolute left-0 top-0 block overflow-hidden text-left shadow-elevated"
                     aria-hidden="true"
                   >
                     <span className="docs-marker-content block p-4">
-                      <span className="flex items-center justify-between gap-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-black/55">
+                      <span className="flex items-center justify-between gap-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                         <span>
                           {String(chapter.index + 1).padStart(2, "0")}
                         </span>
                         <span>{formatTime(chapter.start)}</span>
                       </span>
-                      <span className="mt-3 block text-sm font-semibold text-black">
+                      <span className="mt-3 block text-sm font-semibold text-popover-foreground">
                         {chapter.title}
                       </span>
                       <span
-                        className="mt-2 block text-xs leading-5 text-black/70 [&_strong]:font-semibold [&_strong]:text-black"
+                        className="mt-2 block text-xs leading-5 text-muted-foreground [&_strong]:font-semibold [&_strong]:text-popover-foreground"
                         dangerouslySetInnerHTML={{
                           __html: chapter.descriptionHtml,
                         }}
@@ -920,15 +921,15 @@ function VideoDocPlayer({
                   transition={{ duration: 0.26, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <div className="flex items-center gap-4">
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center bg-foreground text-xs font-semibold text-background">
+                    <span className="flex h-8 min-w-10 shrink-0 items-center justify-center rounded-[4px] border border-accent px-2 font-mono text-xs font-medium text-accent">
                       {String(currentChapter.index + 1).padStart(2, "0")}
                     </span>
-                    <h2 className="text-2xl font-semibold tracking-tight text-foreground">
+                    <h2 className="text-2xl font-medium tracking-[-0.03em] text-foreground">
                       {currentChapter.title}
                     </h2>
                   </div>
                   <div
-                    className="mt-3 max-w-3xl text-base leading-7 text-muted-foreground [&_a]:text-foreground [&_a]:underline [&_a]:underline-offset-4 [&_code]:bg-muted [&_code]:px-1 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-sm [&_code]:text-foreground [&_em]:text-foreground [&_strong]:font-semibold [&_strong]:text-foreground"
+                    className="mt-3 max-w-3xl text-base leading-7 text-muted-foreground [&_a]:text-foreground [&_a]:underline [&_a]:underline-offset-4 [&_code]:rounded-md [&_code]:bg-muted [&_code]:px-1 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-sm [&_code]:text-foreground [&_em]:text-foreground [&_strong]:font-semibold [&_strong]:text-foreground"
                     dangerouslySetInnerHTML={{
                       __html: currentChapter.descriptionHtml,
                     }}
@@ -961,7 +962,7 @@ function IconButton({
       title={label}
       disabled={disabled}
       onClick={onClick}
-      className="flex h-9 w-9 items-center justify-center border border-border/70 bg-background text-foreground transition-colors hover:border-foreground/40 disabled:cursor-not-allowed disabled:opacity-35"
+      className="flex h-9 w-9 items-center justify-center rounded-[6px] border border-rule bg-background text-foreground transition-colors hover:bg-foreground/[0.05] disabled:cursor-not-allowed disabled:opacity-35"
     >
       {children}
     </button>

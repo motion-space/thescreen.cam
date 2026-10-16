@@ -1,242 +1,218 @@
 "use client";
 
-import { motion, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
-import { useRef } from "react";
+import { Aperture, Film, Maximize2 } from "lucide-react";
+import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 import type { DeviceMockupsCopy } from "../lib/translations";
+import { renderExportFrame } from "./experience/export-frame";
+import { FRAMER_SPRING } from "./experience/spring";
+import { setAppTheme } from "./experience/recorded-app";
+import { getDocumentTheme, observeTheme } from "../lib/theme";
 
-export function DeviceMockupsSection({ copy }: { copy: DeviceMockupsCopy }) {
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
+/**
+ * Device geometry from /public/mockups/series/*.json (the same frames the
+ * app and the mockup maker use). All values are in each device's render
+ * canvas; the base artwork is drawn at canvas scale and the screen sits on
+ * `screen` with the given corner radii.
+ */
+const STUDIO = {
+  canvas: { w: 5361.57, h: 4123.36 },
+  screen: { x: 120.79, y: 120.79, w: 5120, h: 2880, r: 20, rb: 20 },
+  base: "/mockups/assets/studio-display/base.svg",
+};
+const MACBOOK = {
+  canvas: { w: 4203.05, h: 2576.77 },
+  scale: 4203.05 / 1761,
+  screen: { x: 369.94, y: 47.94, w: 3456, h: 2234, r: 57.28, rb: 0 },
+  base: "/mockups/assets/macbook-pro/macbook-pro-16-inch/base.svg",
+  notch: { src: "/mockups/assets/macbook-pro/macbook-pro-16-inch/notch.svg", x: 797, y: 8, w: 167, h: 40 },
+  bottom: { src: "/mockups/assets/macbook-pro/macbook-pro-16-inch/bottom-space-black.png", x: -10.566, y: 1005.586, w: 1782.132, h: 69.828 },
+};
+const IPHONE = {
+  canvas: { w: 662, h: 1361 },
+  screen: { x: 29, y: 23, w: 604, h: 1316, r: 100, rb: 100 },
+  chrome: "/mockups/assets/iphone-18-series/iphone-18-pro/black.png",
+};
 
-  // Scroll-based entry animations
-  const iPhoneX = useTransform(scrollYProgress, [0, 0.42], [-80, 0]);
-  const iPhoneOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
-  const iPhoneRotate = useTransform(scrollYProgress, [0, 0.42], [12, 0]);
+type Screen = { x: number; y: number; w: number; h: number; r: number; rb: number };
+const pct = (v: number, of: number) => `${(v / of) * 100}%`;
 
-  const studioY = useTransform(scrollYProgress, [0, 0.42], [90, 0]);
-  const studioScale = useTransform(scrollYProgress, [0, 0.42], [0.92, 1]);
-  const studioOpacity = useTransform(scrollYProgress, [0, 0.25], [0, 1]);
-
-  const macBookX = useTransform(scrollYProgress, [0, 0.42], [80, 0]);
-  const macBookOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
-  const macBookRotate = useTransform(scrollYProgress, [0, 0.42], [-12, 0]);
+/** A live export frame drawn into a device screen. */
+function ScreenCanvas({ screen, canvas, portrait, time }: { screen: Screen; canvas: { w: number; h: number }; portrait: boolean; time: number }) {
+  const ref = useRef<HTMLCanvasElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    let raf = 0;
+    let visible = false;
+    let start = performance.now();
+    const draw = () => {
+      const rect = el.getBoundingClientRect();
+      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      const w = Math.max(2, Math.round(rect.width * dpr));
+      const h = Math.max(2, Math.round(rect.height * dpr));
+      if (el.width !== w || el.height !== h) {
+        el.width = w;
+        el.height = h;
+      }
+      const ctx = el.getContext("2d");
+      if (!ctx) return;
+      // loop the playing preview inside the recorded app
+      const t = time + (((performance.now() - start) / 1000) % 5);
+      renderExportFrame(ctx, w, h, t, portrait);
+    };
+    const loop = () => {
+      draw();
+      if (visible) raf = requestAnimationFrame(loop);
+    };
+    const io = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      if (visible && !raf) {
+        start = performance.now() - 1;
+        raf = requestAnimationFrame(loop);
+      } else if (!visible) {
+        cancelAnimationFrame(raf);
+        raf = 0;
+      }
+    });
+    io.observe(el);
+    const stop = observeTheme((theme) => {
+      setAppTheme(theme === "dark");
+      draw();
+    });
+    setAppTheme(getDocumentTheme() === "dark");
+    draw();
+    return () => {
+      cancelAnimationFrame(raf);
+      io.disconnect();
+      stop();
+    };
+  }, [portrait, time]);
 
   return (
-    <section
-      id="export"
-      ref={sectionRef}
-      className="relative min-h-screen bg-background py-32 overflow-hidden"
-    >
-      {/* Radial gradient background */}
-      <div
-        className="absolute inset-0 opacity-40"
-        style={{
-          background: 'radial-gradient(ellipse 80% 50% at 50% 60%, rgba(180, 80, 60, 0.1), transparent)',
-        }}
-      />
-
-      <div className="relative max-w-7xl mx-auto px-6 md:px-12">
-        {/* Section header */}
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center mb-16 md:mb-24"
-        >
-          <p className="text-accent text-sm tracking-widest uppercase mb-4">
-            {copy.eyebrow}
-          </p>
-          <h2 className="text-[clamp(2rem,5vw,4rem)] font-bold leading-[1.1] tracking-tight text-foreground max-w-3xl mx-auto text-balance">
-            {copy.title}
-          </h2>
-          <p className="text-muted-foreground text-lg mt-6 max-w-xl mx-auto">
-            {copy.description}
-          </p>
-        </motion.div>
-
-        {/* Devices showcase - Horizontal layout with overlap */}
-        <div className="relative h-[330px] md:h-[430px] lg:h-[500px] mb-10 md:mb-14 flex items-center justify-center">
-
-          {/* iPhone - Left side */}
-          <motion.div
-            style={{
-              x: iPhoneX,
-              opacity: iPhoneOpacity,
-              rotate: iPhoneRotate,
-            }}
-            className="absolute z-30 left-[18%] bottom-[-6px] -translate-x-1/2 md:left-[22%] md:bottom-[-8px] lg:left-[23%] lg:bottom-[-10px]"
-          >
-            <DeviceCard>
-              <div className="relative">
-                <img
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/iPhone%2017%20Pro%20Max-kj34LciT8o3bTr44ashNVpOXqE7MwD.webp"
-                  alt={copy.imageAlt.iPhone}
-                  loading="lazy"
-                  decoding="async"
-                  className="w-[55px] md:w-[76px] lg:w-[92px] h-auto object-contain"
-                  style={{
-                    filter: 'drop-shadow(0 24px 46px rgba(0,0,0,0.48))',
-                  }}
-                />
-                {/* Edge glow */}
-                <div
-                  className="absolute inset-0 rounded-[24px] md:rounded-[36px] pointer-events-none"
-                  style={{
-                    boxShadow: 'inset 0 0 40px rgba(200, 100, 60, 0.15)',
-                  }}
-                />
-              </div>
-            </DeviceCard>
-          </motion.div>
-
-          {/* Studio Display - Center, behind */}
-          <motion.div
-            style={{
-              y: studioY,
-              scale: studioScale,
-              opacity: studioOpacity,
-            }}
-            className="absolute z-10 -translate-y-[3%]"
-          >
-            <DeviceCard>
-              <div className="relative">
-                <img
-                  src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Studio%20Display-6aWG7MxpqgCdzYGGF9nJRypUmyN1i4.webp"
-                  alt={copy.imageAlt.studioDisplay}
-                  loading="lazy"
-                  decoding="async"
-                  className="w-[360px] md:w-[560px] lg:w-[720px] h-auto object-contain"
-                  style={{
-                    filter: 'drop-shadow(0 42px 84px rgba(0,0,0,0.38))',
-                  }}
-                />
-                {/* Ambient glow */}
-                <div
-                  className="absolute inset-0 pointer-events-none opacity-40"
-                  style={{
-                    background: 'radial-gradient(ellipse at center, rgba(180, 80, 60, 0.15), transparent 60%)',
-                  }}
-                />
-              </div>
-            </DeviceCard>
-          </motion.div>
-
-          {/* MacBook - Right side */}
-          <motion.div
-            style={{
-              x: macBookX,
-              opacity: macBookOpacity,
-              rotate: macBookRotate,
-            }}
-            className="absolute z-20 left-[82%] bottom-[-2px] -translate-x-1/2 md:left-[73%] md:bottom-[-14px] lg:left-[75%] lg:bottom-[-22px]"
-          >
-            <DeviceCard>
-              <div className="relative">
-                <img
-                  src="/1447.webp"
-                  alt={copy.imageAlt.macBook}
-                  loading="lazy"
-                  decoding="async"
-                  className="device-mockup-macbook h-auto object-contain"
-                  style={{
-                    maxWidth: 'none',
-                    filter: 'drop-shadow(0 32px 64px rgba(0,0,0,0.42))',
-                  }}
-                />
-                {/* Subtle reflection */}
-                <div
-                  className="absolute -bottom-8 left-1/2 -translate-x-1/2 w-[70%] h-16 opacity-10"
-                  style={{
-                    background: 'linear-gradient(to bottom, rgba(255,255,255,0.15), transparent)',
-                    filter: 'blur(20px)',
-                  }}
-                />
-              </div>
-            </DeviceCard>
-          </motion.div>
-        </div>
-
-        {/* Export formats */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-          className="mt-0 flex flex-wrap items-center justify-center gap-3 md:gap-4 text-sm"
-        >
-          {copy.formats.map((format) => (
-            <motion.span
-              key={format}
-              whileHover={{ scale: 1.05, y: -2 }}
-              className="px-4 md:px-5 py-2 md:py-2.5 rounded-full border border-accent/50 bg-accent/10 text-accent transition-colors cursor-default"
-            >
-              {format}
-            </motion.span>
-          ))}
-        </motion.div>
-      </div>
-    </section>
+    <canvas
+      ref={ref}
+      aria-hidden="true"
+      className="absolute"
+      style={{
+        left: pct(screen.x, canvas.w),
+        top: pct(screen.y, canvas.h),
+        width: pct(screen.w, canvas.w),
+        height: pct(screen.h, canvas.h),
+        borderRadius: `${(screen.r / screen.w) * 100}% / ${(screen.r / screen.h) * 100}%`,
+        borderBottomLeftRadius: screen.rb ? undefined : 0,
+        borderBottomRightRadius: screen.rb ? undefined : 0,
+      }}
+    />
   );
 }
 
-function DeviceCard({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [10, -10]), {
-    stiffness: 150,
-    damping: 20,
-  });
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-10, 10]), {
-    stiffness: 150,
-    damping: 20,
-  });
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    mouseX.set(x);
-    mouseY.set(y);
-  };
-
-  const handleMouseLeave = () => {
-    mouseX.set(0);
-    mouseY.set(0);
-  };
-
+function StudioDisplay({ label }: { label: string }) {
   return (
-    <motion.div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        perspective: 1000,
-        transformStyle: "preserve-3d",
-      }}
-    >
-      <motion.div
-        style={{
-          rotateX,
-          rotateY,
-          rotateZ: 0,
-          transformStyle: "preserve-3d",
-        }}
-        whileHover={{ scale: 1.02 }}
-        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
-      >
-        {children}
-      </motion.div>
-    </motion.div>
+    <div role="img" aria-label={label} className="relative w-full" style={{ aspectRatio: `${STUDIO.canvas.w} / ${STUDIO.canvas.h}` }}>
+      <img src={STUDIO.base} alt="" className="absolute inset-0 h-full w-full" draggable={false} />
+      <ScreenCanvas screen={STUDIO.screen} canvas={STUDIO.canvas} portrait={false} time={17.2} />
+    </div>
+  );
+}
+
+function MacBook({ label }: { label: string }) {
+  const k = MACBOOK.scale;
+  const c = MACBOOK.canvas;
+  const n = MACBOOK.notch;
+  const b = MACBOOK.bottom;
+  return (
+    <div role="img" aria-label={label} className="relative w-full" style={{ aspectRatio: `${c.w} / ${c.h}` }}>
+      <img src={MACBOOK.base} alt="" className="absolute left-0 top-0 w-full" draggable={false} />
+      <ScreenCanvas screen={MACBOOK.screen} canvas={c} portrait={false} time={4.6} />
+      <img
+        src={n.src}
+        alt=""
+        className="absolute"
+        draggable={false}
+        style={{ left: pct(n.x * k, c.w), top: pct(n.y * k, c.h), width: pct(n.w * k, c.w), height: pct(n.h * k, c.h) }}
+      />
+      <img
+        src={b.src}
+        alt=""
+        className="absolute max-w-none"
+        draggable={false}
+        style={{ left: pct(b.x * k, c.w), top: pct(b.y * k, c.h), width: pct(b.w * k, c.w), height: pct(b.h * k, c.h) }}
+      />
+    </div>
+  );
+}
+
+function IPhone({ label }: { label: string }) {
+  return (
+    <div role="img" aria-label={label} className="relative w-full" style={{ aspectRatio: `${IPHONE.canvas.w} / ${IPHONE.canvas.h}` }}>
+      <ScreenCanvas screen={IPHONE.screen} canvas={IPHONE.canvas} portrait time={17.6} />
+      <img src={IPHONE.chrome} alt="" className="absolute inset-0 h-full w-full" draggable={false} />
+    </div>
+  );
+}
+
+const rise = (delay: number) => ({
+  initial: { opacity: 0, y: 48 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-12% 0px" },
+  transition: { ...FRAMER_SPRING, delay },
+});
+
+const FORMAT_ICONS = [Maximize2, Aperture, Film];
+
+/**
+ * Export options: the same recording, exported into real device frames
+ * (Studio Display, MacBook Pro, iPhone) with live screens.
+ */
+export function DeviceMockupsSection({ copy }: { copy: DeviceMockupsCopy }) {
+  return (
+    <section id="export" className="mg-scene relative z-30 bg-background py-28 md:py-40">
+      <div className="mx-auto w-full max-w-[1200px] px-6 md:px-10">
+        <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <motion.div {...rise(0)}>
+            <span className="mg-label mg-index tabular-nums">02 — {copy.eyebrow}</span>
+            <h2 className="mg-h2 mt-5 max-w-[14ch] !text-[clamp(2rem,4.4vw,3.75rem)]">{copy.title}</h2>
+          </motion.div>
+          <motion.p {...rise(0.08)} className="max-w-sm text-[15px] leading-relaxed text-muted-foreground">
+            {copy.description}
+          </motion.p>
+        </div>
+
+        {/* devices: a display at the back, a MacBook and an iPhone in front */}
+        <div className="relative mt-16 md:mt-24" style={{ aspectRatio: "1200 / 640" }}>
+          <motion.div {...rise(0.1)} className="absolute left-[16%] top-0 w-[60%] drop-shadow-[0_40px_60px_rgba(0,0,0,0.28)]">
+            <StudioDisplay label={copy.imageAlt.studioDisplay} />
+          </motion.div>
+          <motion.div {...rise(0.22)} className="absolute bottom-[2%] right-0 w-[44%] drop-shadow-[0_30px_50px_rgba(0,0,0,0.32)]">
+            <MacBook label={copy.imageAlt.macBook} />
+          </motion.div>
+          <motion.div {...rise(0.32)} className="absolute bottom-0 left-[4%] w-[13.5%] drop-shadow-[0_26px_40px_rgba(0,0,0,0.35)]">
+            <IPhone label={copy.imageAlt.iPhone} />
+          </motion.div>
+        </div>
+
+        {/* export formats */}
+        <motion.ul {...rise(0.1)} className="mt-14 grid grid-cols-1 border-t border-border sm:grid-cols-3 md:mt-20">
+          {copy.formats.map((format, i) => {
+            const Icon = FORMAT_ICONS[i % FORMAT_ICONS.length];
+            return (
+              <li
+                key={format}
+                className="flex items-center gap-4 border-b border-border py-6 sm:border-b-0 sm:px-6 sm:first:pl-0 sm:[&+li]:border-l"
+              >
+                <span className="flex h-10 w-10 flex-none items-center justify-center rounded-full border border-border text-foreground">
+                  <Icon className="h-[18px] w-[18px]" strokeWidth={1.6} />
+                </span>
+                <span className="flex flex-col gap-1">
+                  <span className="mg-label tabular-nums">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="text-[15px] font-medium text-foreground">{format}</span>
+                </span>
+              </li>
+            );
+          })}
+        </motion.ul>
+      </div>
+    </section>
   );
 }

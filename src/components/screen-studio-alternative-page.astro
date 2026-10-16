@@ -3,7 +3,7 @@ import "../styles/global.css";
 import { appStoreUrl, localizedPath, siteUrl } from "../lib/i18n";
 import type { Locale } from "../lib/i18n";
 import { getScreenStudioAlternativeCopy } from "../lib/screen-studio-alternative";
-import { getTranslation } from "../lib/translations";
+import { getTranslation, richTextToPlain } from "../lib/translations";
 import { FAQSection } from "./faq-section";
 import { Footer } from "./footer";
 import PageHead from "./page-head.astro";
@@ -83,7 +83,7 @@ const structuredData = {
         name: item.question,
         acceptedAnswer: {
           "@type": "Answer",
-          text: item.answer,
+          text: richTextToPlain(item.answer),
         },
       })),
     },
@@ -92,7 +92,7 @@ const structuredData = {
 ---
 
 <!doctype html>
-<html lang={locale} class="dark">
+<html lang={locale}>
   <head>
     <PageHead
       locale={locale}
@@ -115,118 +115,130 @@ const structuredData = {
       client:load
     />
 
-    <main id="main">
-      <section class="relative min-h-[82vh] overflow-hidden bg-background">
-        <img
-          src="/og.jpg"
-          alt={copy.imageAlt}
-          class="absolute inset-0 h-full w-full object-cover opacity-28"
-          loading="eager"
-        />
-        <div class="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,5,5,0.97)_0%,rgba(5,5,5,0.82)_46%,rgba(5,5,5,0.58)_100%)]"></div>
-        <div class="relative z-10 mx-auto flex min-h-[82vh] max-w-7xl flex-col justify-end px-6 pb-12 pt-32 md:px-12 md:pb-16">
-          <p class="mb-5 text-xs font-medium uppercase tracking-[0.2em] text-foreground/70">
-            {copy.hero.eyebrow}
-          </p>
-          <h1 class="max-w-4xl text-[clamp(3rem,7.2vw,6.25rem)] font-bold leading-[0.92] tracking-tight text-foreground text-balance">
-            {copy.hero.title}
-          </h1>
-          <p class="mt-7 max-w-2xl text-base leading-7 text-foreground/76 md:text-lg">
-            {copy.hero.description}
-          </p>
-          <div class="mt-8 grid max-w-4xl grid-cols-2 gap-x-6 gap-y-5 border-y border-foreground/14 py-5 md:grid-cols-4">
-            {copy.performanceHighlights.map((item) => (
-              <div>
-                <p class="text-2xl font-semibold tracking-tight text-foreground md:text-3xl">{item.value}</p>
-                <p class="mt-1 text-xs uppercase tracking-[0.14em] text-foreground/55">{item.label}</p>
+    <main id="main" class="pt-16">
+      <section class="relative bg-background">
+        <div class="rails overflow-hidden">
+          <img
+            src="/og.jpg"
+            alt={copy.imageAlt}
+            class="sr-only"
+            loading="eager"
+          />
+          <div class="grid-paper pointer-events-none absolute inset-0 [mask-image:linear-gradient(to_bottom,#000,transparent)]" aria-hidden="true"></div>
+          <div class="relative z-10 px-6 pb-16 pt-20 md:px-10 md:pb-20 md:pt-28">
+            <p class="section-eyebrow">
+              {copy.hero.eyebrow}
+            </p>
+            <h1 class="max-w-5xl text-[clamp(3rem,7.6vw,7rem)] font-medium leading-[0.92] tracking-[-0.05em] text-foreground text-balance">
+              {copy.hero.title}
+            </h1>
+            <div class="mt-12 grid gap-10 md:grid-cols-12 md:items-end">
+              <p class="lead max-w-xl md:col-span-6">
+                {copy.hero.description}
+              </p>
+              <div class="flex flex-col gap-3 sm:flex-row md:col-span-6 md:justify-end">
+                <a class="btn-primary w-fit" href={appStoreUrl} target="_blank" rel="noopener noreferrer">
+                  <span class="rec-dot" aria-hidden="true"></span>
+                  {copy.hero.appStoreCta}
+                </a>
+                <a class="btn-secondary w-fit" href={benchmarkUrl} target="_blank" rel="noopener noreferrer">
+                  {copy.hero.benchmarkCta}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="rails rule-top">
+          <div class="cells grid-cols-2 md:grid-cols-4">
+            {copy.performanceHighlights.map((item, index) => (
+              <div class="group p-6 transition-colors hover:!bg-card md:p-10">
+                <p class="kicker mb-8"><span class="kicker-index">{String(index + 1).padStart(2, "0")}</span></p>
+                <p class="text-[clamp(2.5rem,5vw,4.5rem)] font-medium leading-none tracking-[-0.05em] text-foreground transition-colors group-hover:text-accent">{item.value}</p>
+                <p class="kicker mt-4">{item.label}</p>
               </div>
             ))}
           </div>
-          <div class="mt-10 flex flex-col gap-3 sm:flex-row">
-            <a class="inline-flex w-fit items-center justify-center bg-foreground px-5 py-3 text-sm font-medium text-background transition-colors hover:bg-foreground/90" href={appStoreUrl} target="_blank" rel="noopener noreferrer">
-              {copy.hero.appStoreCta}
-            </a>
-            <a class="inline-flex w-fit items-center justify-center border border-foreground/30 px-5 py-3 text-sm font-medium text-foreground transition-colors hover:border-foreground/70" href={benchmarkUrl} target="_blank" rel="noopener noreferrer">
-              {copy.hero.benchmarkCta}
-            </a>
-          </div>
-          <p class="mt-8 text-xs text-foreground/50">{copy.hero.lastUpdatedLabel} {copy.lastUpdated}</p>
+        </div>
+        <div class="rails rule-top px-6 py-4 md:px-10">
+          <p class="kicker">{copy.hero.lastUpdatedLabel} {copy.lastUpdated}</p>
         </div>
       </section>
 
-      <section class="bg-background px-6 py-20 md:px-12" aria-labelledby="why-switch-title">
-        <div class="mx-auto max-w-7xl">
-          <div class="grid gap-10 md:grid-cols-[0.82fr_1.18fr] md:items-start">
-            <div>
-              <p class="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">{copy.whySwitch.eyebrow}</p>
-              <h2 id="why-switch-title" class="text-3xl font-semibold leading-tight tracking-tight text-foreground md:text-5xl">
+      <section class="bg-background" aria-labelledby="why-switch-title">
+        <div class="rails rule-top grid md:grid-cols-12">
+          <div class="px-6 pb-12 pt-16 md:col-span-5 md:px-10 md:pb-24 md:pt-24">
+            <div class="md:sticky md:top-28">
+              <p class="section-eyebrow">{copy.whySwitch.eyebrow}</p>
+              <h2 id="why-switch-title" class="display-sm">
                 {copy.whySwitch.title}
               </h2>
-              <p class="mt-5 text-base leading-7 text-muted-foreground">
+              <p class="lead mt-6">
                 {copy.whySwitch.description}
               </p>
             </div>
-            <div class="grid gap-3 sm:grid-cols-2">
-              {copy.performanceHighlights.map((item) => (
-                <article class="border border-border/70 bg-card/25 p-5">
-                  <div class="flex items-baseline justify-between gap-4">
-                    <h3 class="text-lg font-semibold tracking-tight text-foreground">{item.value}</h3>
-                    <p class="text-right text-xs uppercase tracking-[0.14em] text-muted-foreground">{item.label}</p>
-                  </div>
-                  <p class="mt-4 text-sm leading-6 text-muted-foreground">{item.detail}</p>
-                </article>
-              ))}
-            </div>
           </div>
-        </div>
-      </section>
-
-      <section class="bg-secondary/25 px-6 py-20 md:px-12" aria-labelledby="feature-title">
-        <div class="mx-auto max-w-7xl">
-          <div class="mb-12 max-w-4xl">
-            <p class="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">{copy.features.eyebrow}</p>
-            <h2 id="feature-title" class="text-3xl font-semibold leading-tight tracking-tight text-foreground md:text-5xl">
-              {copy.features.title}
-            </h2>
-          </div>
-          <div class="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
-            {copy.features.items.map((feature) => (
-              <article class="border border-border/70 bg-background/50 p-5">
-                <h3 class="text-lg font-semibold tracking-tight text-foreground">{feature.title}</h3>
-                <p class="mt-3 text-sm leading-6 text-muted-foreground">{feature.body}</p>
+          <div class="border-t border-rule md:col-span-7 md:border-l md:border-t-0">
+            {copy.performanceHighlights.map((item) => (
+              <article class="group border-b border-rule px-6 py-8 transition-colors last:border-b-0 hover:bg-card md:px-10 md:py-10">
+                <div class="flex items-baseline justify-between gap-4">
+                  <h3 class="text-3xl font-medium tracking-[-0.04em] text-foreground">{item.value}</h3>
+                  <p class="kicker text-right">{item.label}</p>
+                </div>
+                <p class="mt-4 max-w-xl text-[15px] leading-7 text-muted-foreground">{item.detail}</p>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      <section class="bg-background px-6 py-20 md:px-12" aria-labelledby="comparison-title">
-        <div class="mx-auto max-w-7xl">
-          <div class="mb-12 max-w-4xl">
-            <p class="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">{copy.comparison.eyebrow}</p>
-            <h2 id="comparison-title" class="text-3xl font-semibold leading-tight tracking-tight text-foreground md:text-5xl">
+      <section class="bg-background" aria-labelledby="feature-title">
+        <div class="rails rule-top">
+          <div class="px-6 pb-14 pt-16 md:px-10 md:pb-20 md:pt-24">
+            <p class="section-eyebrow">{copy.features.eyebrow}</p>
+            <h2 id="feature-title" class="display max-w-4xl">
+              {copy.features.title}
+            </h2>
+          </div>
+          <div class="cells border-t border-rule md:grid-cols-2 lg:grid-cols-3">
+            {copy.features.items.map((feature, index) => (
+              <article class="group relative p-6 transition-colors hover:!bg-card md:p-10">
+                <span class="absolute inset-x-0 top-0 h-px origin-left scale-x-0 bg-accent transition-transform duration-500 group-hover:scale-x-100" aria-hidden="true"></span>
+                <p class="kicker mb-10"><span class="kicker-index">{String(index + 1).padStart(2, "0")}</span></p>
+                <h3 class="text-xl font-medium tracking-[-0.02em] text-foreground">{feature.title}</h3>
+                <p class="mt-3 text-[15px] leading-7 text-muted-foreground">{feature.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="bg-background" aria-labelledby="comparison-title">
+        <div class="rails rule-top">
+          <div class="px-6 pb-14 pt-16 md:px-10 md:pb-20 md:pt-24">
+            <p class="section-eyebrow">{copy.comparison.eyebrow}</p>
+            <h2 id="comparison-title" class="display max-w-4xl">
               {copy.comparison.title}
             </h2>
-            <p class="mt-5 text-base leading-7 text-muted-foreground">
+            <p class="lead mt-6 max-w-2xl">
               {copy.comparison.description}
             </p>
           </div>
 
-          <div class="overflow-x-auto border border-border/70">
+          <div class="overflow-x-auto border-t border-rule">
             <table class="w-full min-w-[780px] border-collapse text-left text-sm">
-              <thead class="bg-secondary/40 text-xs uppercase tracking-[0.18em] text-muted-foreground">
+              <thead class="font-mono text-[11px] uppercase tracking-[0.14em] text-muted-foreground">
                 <tr>
-                  <th class="w-[20%] border-b border-border/70 px-5 py-4 font-medium">{copy.comparison.headers.feature}</th>
-                  <th class="w-[40%] border-b border-border/70 px-5 py-4 font-medium">{copy.comparison.headers.screenStudio}</th>
-                  <th class="w-[40%] border-b border-border/70 px-5 py-4 font-medium">{copy.comparison.headers.screenCam}</th>
+                  <th class="w-[20%] border-b border-rule px-6 py-4 font-medium md:px-10">{copy.comparison.headers.feature}</th>
+                  <th class="w-[40%] border-b border-l border-rule px-6 py-4 font-medium">{copy.comparison.headers.screenStudio}</th>
+                  <th class="w-[40%] border-b border-l border-rule px-6 py-4 font-medium text-foreground"><span class="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-accent align-middle"></span>{copy.comparison.headers.screenCam}</th>
                 </tr>
               </thead>
               <tbody>
                 {copy.comparison.rows.map((row) => (
-                  <tr class="border-b border-border/60 last:border-b-0">
-                    <th class="align-top px-5 py-4 text-sm font-semibold text-foreground">{row.feature}</th>
-                    <td class="align-top px-5 py-4 leading-6 text-muted-foreground">{row.screenStudio}</td>
-                    <td class="align-top px-5 py-4 leading-6 text-muted-foreground">{row.screenCam}</td>
+                  <tr class="border-b border-rule transition-colors last:border-b-0 hover:bg-card">
+                    <th class="align-top px-6 py-5 text-sm font-medium text-foreground md:px-10">{row.feature}</th>
+                    <td class="align-top border-l border-rule px-6 py-5 leading-6 text-muted-foreground">{row.screenStudio}</td>
+                    <td class="align-top border-l border-rule px-6 py-5 leading-6 text-foreground">{row.screenCam}</td>
                   </tr>
                 ))}
               </tbody>
@@ -235,30 +247,33 @@ const structuredData = {
         </div>
       </section>
 
-      <section class="bg-secondary/25 px-6 py-20 md:px-12" aria-labelledby="use-cases-title">
-        <div class="mx-auto grid max-w-7xl gap-4 md:grid-cols-2">
-          <div>
-            <p class="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">{copy.bestFit.eyebrow}</p>
-            <h2 id="use-cases-title" class="text-3xl font-semibold leading-tight tracking-tight text-foreground md:text-5xl">
+      <section class="bg-background" aria-labelledby="use-cases-title">
+        <div class="rails rule-top grid md:grid-cols-2">
+          <div class="px-6 pb-12 pt-16 md:px-10 md:pb-24 md:pt-24">
+            <p class="section-eyebrow">{copy.bestFit.eyebrow}</p>
+            <h2 id="use-cases-title" class="display-sm">
               {copy.bestFit.title}
             </h2>
-            <ul class="mt-8 grid gap-3">
-              {copy.bestFit.items.map((item) => (
-                <li class="border border-border/70 bg-background/70 p-4 text-sm leading-6 text-foreground">{item}</li>
+            <ul class="mt-10 border-t border-rule">
+              {copy.bestFit.items.map((item, index) => (
+                <li class="flex gap-5 border-b border-rule py-4 text-[15px] leading-6 text-foreground">
+                  <span class="pt-0.5 font-mono text-[11px] tracking-[0.1em] text-muted-foreground">{String(index + 1).padStart(2, "0")}</span>
+                  {item}
+                </li>
               ))}
             </ul>
           </div>
-          <div class="border border-border/70 bg-background/70 p-6 md:p-8">
-            <p class="mb-4 text-xs font-medium uppercase tracking-[0.2em] text-muted-foreground">{copy.bestFit.gapEyebrow}</p>
-            <h3 class="text-2xl font-semibold tracking-tight text-foreground">{copy.bestFit.gapTitle}</h3>
-            <p class="mt-5 text-sm leading-6 text-muted-foreground">
+          <div class="grid-paper border-t border-rule px-6 pb-16 pt-16 md:border-l md:border-t-0 md:px-10 md:pt-24">
+            <p class="section-eyebrow">{copy.bestFit.gapEyebrow}</p>
+            <h3 class="text-3xl font-medium tracking-[-0.04em] text-foreground">{copy.bestFit.gapTitle}</h3>
+            <p class="lead mt-5">
               {copy.bestFit.gapDescription}
             </p>
-            <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a class="inline-flex justify-center bg-foreground px-5 py-3 text-sm font-medium text-background transition-colors hover:bg-foreground/90" href={appStoreUrl} target="_blank" rel="noopener noreferrer">
+            <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+              <a class="btn-primary" href={appStoreUrl} target="_blank" rel="noopener noreferrer">
                 {copy.bestFit.pricingCta}
               </a>
-              <a class="inline-flex justify-center border border-border/80 px-5 py-3 text-sm font-medium text-foreground transition-colors hover:border-foreground/60" href={screenStudioUrl} target="_blank" rel="noopener noreferrer">
+              <a class="btn-secondary" href={screenStudioUrl} target="_blank" rel="noopener noreferrer">
                 {copy.bestFit.screenStudioCta}
               </a>
             </div>

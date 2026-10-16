@@ -19,6 +19,7 @@ import {
   Shapes,
 } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { FillText, useScene } from "./mg/scene";
 import type {
   KeyboardEvent as ReactKeyboardEvent,
   MouseEvent as ReactMouseEvent,
@@ -27,6 +28,20 @@ import type {
   ReactNode,
 } from "react";
 import type { FeatureCardsCopy } from "../lib/translations";
+
+function recordMediaWork(kind: string, details: Record<string, number | string>) {
+  const sink=(window as Window & {__xpMeasures?:Array<Record<string,unknown>>}).__xpMeasures;
+  sink?.push({kind,at:performance.now(),...details});
+}
+
+/** Prepare the first GPU frame once during loading, before scroll/pin entry. */
+function prepareFirstGlassFrame(target: Element, render: () => void) {
+  let stopped=false, idle=0, raf=0;
+  const run=()=>{if(!stopped){const start=performance.now();render();recordMediaWork("glass-warm",{ms:performance.now()-start,top:target.getBoundingClientRect().top});}};
+  if(typeof requestIdleCallback==="function")idle=requestIdleCallback(run,{timeout:1000});
+  else raf=requestAnimationFrame(run);
+  return()=>{stopped=true;if(idle)cancelIdleCallback(idle);if(raf)cancelAnimationFrame(raf);};
+}
 
 type FeatureVariant =
   | "dynamicIsland"
@@ -274,36 +289,69 @@ const dynamicIslandBaseGlassOptions = {
   specularOpacity: 0.18,
 };
 
+/**
+ * Scene 6. The view pins and the cards travel past on a horizontal track,
+ * like clips sliding through a viewer. Small screens get a plain stack.
+ */
 export function FeatureCardsSection({ copy }: { copy: FeatureCardsCopy }) {
+  const rootRef = useRef<HTMLElement>(null);
+
+  useScene(rootRef, ({ q, gsap, reduced }) => {
+    gsap.to(q(".fc-head .mg-word"), {
+      color: "var(--foreground)",
+      stagger: 0.08,
+      ease: "none",
+      scrollTrigger: { trigger: q(".fc-head")[0], start: "top 85%", end: "top 40%", scrub: 0.6 },
+    });
+    if (reduced || window.innerWidth < 1024) return;
+
+    const track = q(".fc-track")[0] as HTMLElement;
+    const stage = q(".fc-stage")[0] as HTMLElement;
+    const distance = () => Math.max(0, track.scrollWidth - window.innerWidth + 80);
+    const counter = q(".fc-counter")[0];
+
+    gsap.to(track, {
+      x: () => -distance(),
+      ease: "none",
+      scrollTrigger: {
+        trigger: stage,
+        start: "top top",
+        end: () => `+=${distance()}`,
+        scrub: 0.8,
+        pin: true,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          gsap.set(q(".fc-progress"), { scaleX: self.progress });
+          if (counter) {
+            const current = Math.min(copy.items.length, Math.floor(self.progress * copy.items.length) + 1);
+            counter.textContent = String(current).padStart(2, "0");
+          }
+        },
+      },
+    });
+  });
+
   return (
-    <section className="relative bg-background py-28 md:py-32 overflow-hidden">
-      <div
-        className="absolute inset-0 opacity-50"
-        style={{
-          background:
-            "linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.025) 42%, transparent 100%)",
-        }}
-      />
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:72px_72px] opacity-[0.16]" />
+    <section ref={rootRef} id="features" className="mg-scene">
+      <div className="fc-stage relative flex min-h-[100svh] flex-col justify-center overflow-hidden py-24 lg:h-[100svh] lg:py-0">
+        <div className="fc-head mx-auto mb-10 flex w-full max-w-[1240px] flex-col gap-6 px-6 md:px-10 lg:mb-12 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <span className="mg-label mg-index mb-6 tabular-nums">05 — {copy.eyebrow}</span>
+            <h2 className="mg-h2 mt-4 max-w-[16ch] !text-[clamp(2rem,4.4vw,4.25rem)]"><FillText text={copy.title} /></h2>
+          </div>
+          <div className="flex flex-col gap-5 lg:items-end">
+            <p className="max-w-sm text-[15px] leading-relaxed text-muted-foreground lg:text-right">{copy.subtitle}</p>
+            <div className="hidden items-center gap-4 lg:flex" aria-hidden="true">
+              <span className="mg-label tabular-nums !text-foreground"><span className="fc-counter">01</span> / {String(copy.items.length).padStart(2, "0")}</span>
+              <span className="relative h-px w-40 bg-border">
+                <span className="fc-progress absolute inset-0 origin-left scale-x-0 bg-[var(--mg-accent)]" />
+              </span>
+            </div>
+          </div>
+        </div>
 
-      <div className="relative max-w-7xl mx-auto px-6 md:px-12">
-        <motion.div
-          initial={false}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-12 md:mb-16 max-w-3xl"
-        >
-          <p className="text-accent text-sm uppercase mb-4">{copy.eyebrow}</p>
-          <h2 className="text-[clamp(2rem,5vw,4rem)] font-bold leading-[1.08] text-foreground text-balance">
-            {copy.title}
-          </h2>
-          <p className="mt-6 max-w-2xl text-base md:text-lg leading-relaxed text-muted-foreground">
-            {copy.subtitle}
-          </p>
-        </motion.div>
-
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,20rem),1fr))] gap-5 md:gap-6">
+        <div className="fc-track flex flex-col gap-5 px-6 md:px-10 lg:w-max lg:flex-row lg:gap-6 lg:pl-[max(2.5rem,calc((100vw-1240px)/2+2.5rem))]">
           {copy.items.map((item, index) => (
             <FeatureCard
               key={item.title}
@@ -342,14 +390,17 @@ function FeatureCard({
         ease: [0.16, 1, 0.3, 1],
         delay: index * 0.08,
       }}
-      className={`relative h-full ${index === 4 ? "md:col-span-2" : ""}`}
+      className={`relative w-full shrink-0 ${variant === "effectLayers" ? "lg:w-[760px]" : "lg:w-[420px]"}`}
     >
-      <article className="group flex h-full flex-col rounded-[8px] border border-border bg-card/40 p-3 shadow-[0_24px_80px_rgba(0,0,0,0.25)] transition-colors hover:border-accent/35 hover:bg-card/70 md:p-4">
-        <FeatureThumb copy={copy} variant={variant} />
+      <article className="group flex h-full flex-col rounded-[18px] border border-border bg-card p-3 transition-colors duration-300 hover:border-[var(--mg-accent)]">
+        <div className="theme-dark rounded-[10px]">
+          <FeatureThumb copy={copy} variant={variant} />
+        </div>
 
-        <div className="flex flex-1 flex-col px-1 pb-1 pt-5 md:px-2 md:pt-6">
+        <div className="flex flex-1 flex-col px-2 pb-4 pt-6 md:px-3 md:pb-5 md:pt-7">
+          <span className="mg-label mb-4 tabular-nums">{String(index + 1).padStart(2, "0")}</span>
           <div className="flex items-start justify-between gap-3">
-            <h3 className="text-xl font-semibold leading-tight text-foreground">
+            <h3 className="mg-h3">
               {item.title}
             </h3>
             {variant === "beauty" && (
@@ -357,7 +408,7 @@ function FeatureCard({
                 <button
                   type="button"
                   aria-label={copy.beautyThumb.disclosure}
-                  className="flex h-5 w-5 cursor-default items-center justify-center rounded-full text-muted-foreground/70 transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/70"
+                  className="flex h-5 w-5 cursor-default items-center justify-center rounded-full text-muted-foreground/70 transition-colors hover:text-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-foreground/70"
                   onBlur={() => setBeautyDisclosureVisible(false)}
                   onFocus={() => setBeautyDisclosureVisible(true)}
                   onPointerEnter={() => setBeautyDisclosureVisible(true)}
@@ -372,7 +423,7 @@ function FeatureCard({
                     scale: beautyDisclosureVisible ? 1 : 0.98,
                     y: beautyDisclosureVisible ? 0 : -3,
                   }}
-                  className="pointer-events-none absolute right-0 top-full z-50 mt-2 w-[230px] rounded-[8px] border border-white/10 bg-black px-3 py-2 text-left text-[11px] font-medium leading-snug text-white/80 shadow-[0_14px_34px_rgba(0,0,0,0.45)]"
+                  className="pointer-events-none absolute right-0 top-full z-50 mt-2 w-[230px] rounded-xl border border-border bg-popover px-3 py-2 text-left text-[11px] font-medium leading-snug text-popover-foreground/80 shadow-elevated"
                   initial={false}
                   transition={{
                     duration: 0.16,
@@ -840,12 +891,12 @@ function EffectLayersThumb({
     <div
       ref={rootRef}
       aria-label={copy.ariaLabel}
-      className="relative aspect-[4/3] overflow-visible rounded-[8px] outline-none md:aspect-[11/4] xl:aspect-[29/10]"
+      className="relative aspect-[4/3] overflow-visible rounded-[10px] outline-none md:aspect-[11/4] lg:aspect-[16/7]"
       data-screen-cam-drag-surface
       role="application"
       tabIndex={0}
     >
-      <div className="absolute inset-0 flex overflow-hidden rounded-[8px] border border-white/[0.08] bg-[rgba(255,255,255,0.08)] shadow-[0_28px_90px_rgba(0,0,0,0.48)]">
+      <div className="absolute inset-0 flex overflow-hidden rounded-[10px] border border-white/[0.08] bg-[#1d1d20]">
         <div className="relative z-10 flex min-h-0 flex-1 flex-col">
           <div className="flex h-[58px] shrink-0 items-center gap-1.5 px-3">
             {copy.effects.map((effect) => {
@@ -2259,7 +2310,7 @@ function DynamicIslandThumb({
     <div
       ref={thumbRef}
       aria-label={copy.ariaLabel}
-      className="relative aspect-[4/3] select-none overflow-hidden rounded-[8px] bg-slate-950 outline-none"
+      className="relative aspect-[4/3] select-none overflow-hidden rounded-[10px] bg-slate-950 outline-none"
       data-material={materialMode}
       data-screen-cam-drag-surface
       data-state={interactionState}
@@ -2460,6 +2511,7 @@ function DynamicIslandGlassCanvas({
     let isVisible = false;
     let resizeObserver: ResizeObserver | null = null;
     let visibilityObserver: IntersectionObserver | null = null;
+    let stopWarmup=()=>{};
 
     const renderFrame = () => {
       frameRef.current = 0;
@@ -2553,6 +2605,11 @@ function DynamicIslandGlassCanvas({
           { threshold: 0.01 },
         );
         visibilityObserver.observe(parent);
+        stopWarmup=prepareFirstGlassFrame(parent,()=>{
+          const handles=handlesRef.current;if(!handles||disposed)return;
+          resizeDynamicIslandGlassCanvas(handles,parent);
+          renderDynamicIslandGlass(handles,parent,animationRef.current.progress,wallpaperTransitionRef.current,materialModeRef.current);
+        });
         requestRender();
       } catch (error) {
         console.error("Dynamic Island glass renderer failed", error);
@@ -2568,6 +2625,7 @@ function DynamicIslandGlassCanvas({
       }
       resizeObserver?.disconnect();
       visibilityObserver?.disconnect();
+      stopWarmup();
       parent.removeEventListener("screen-cam-dynamic-island-frame", requestRender);
       parent.removeEventListener(
         "screen-cam-dynamic-island-wallpaper-frame",
@@ -3498,7 +3556,7 @@ function LiquidDomCanvasToolbarThumb({
   return (
     <div
       ref={thumbRef}
-      className="relative aspect-[4/3] cursor-grab select-none overflow-hidden rounded-[8px] bg-blue-950 active:cursor-grabbing"
+      className="relative aspect-[4/3] cursor-grab select-none overflow-hidden rounded-[10px] bg-blue-950 active:cursor-grabbing"
       data-screen-cam-drag-surface
       style={{ touchAction: "pan-y" }}
       onPointerCancel={(event) => finishWallpaperDrag(event, true)}
@@ -3778,6 +3836,7 @@ function LiquidCoreGlassCanvas({
     let isVisible = false;
     let resizeObserver: ResizeObserver | null = null;
     let visibilityObserver: IntersectionObserver | null = null;
+    let stopWarmup=()=>{};
 
     const renderFrame = (timestamp: number) => {
       frameRef.current = 0;
@@ -3917,6 +3976,11 @@ function LiquidCoreGlassCanvas({
           { threshold: 0.01 },
         );
         visibilityObserver.observe(parent);
+        stopWarmup=prepareFirstGlassFrame(parent,()=>{
+          const handles=handlesRef.current;if(!handles||disposed)return;
+          resizeLiquidCoreCanvas(handles,parent);
+          renderLiquidCoreGlass(handles,layoutRef.current,sizeRef.current,modeTransitionRef.current.progress,tooltipRef.current,wallpaperTransitionRef.current);
+        });
         requestRender();
       } catch (error) {
         console.error("Liquid glass core renderer failed", error);
@@ -3932,6 +3996,7 @@ function LiquidCoreGlassCanvas({
       }
       resizeObserver?.disconnect();
       visibilityObserver?.disconnect();
+      stopWarmup();
       parent.removeEventListener("screen-cam-wallpaper-change", requestRender);
       parent.removeEventListener("screen-cam-wallpaper-frame", requestRender);
       const handles = handlesRef.current;
@@ -3973,6 +4038,7 @@ function resizeLiquidCoreCanvas(
     return;
   }
 
+  recordMediaWork("glass-resize",{width:pixelWidth,height:pixelHeight,top:rect.top});
   handles.width = pixelWidth;
   handles.height = pixelHeight;
   handles.dpr = dpr;
@@ -4098,11 +4164,13 @@ function syncLiquidCoreBackdrop(
     handles.width,
     handles.height,
   );
+  const uploadStart=performance.now();
   handles.device.queue.copyExternalImageToTexture(
     { source: handles.backdropCanvas },
     { texture: handles.backdropTexture },
     { width: handles.width, height: handles.height },
   );
+  recordMediaWork("glass-upload",{width:handles.width,height:handles.height,ms:performance.now()-uploadStart});
   handles.wallpaperFrameKey = frameKey;
 }
 
@@ -4518,6 +4586,7 @@ function resizeDynamicIslandGlassCanvas(
     return;
   }
 
+  recordMediaWork("glass-resize",{width:pixelWidth,height:pixelHeight,top:rect.top});
   handles.width = pixelWidth;
   handles.height = pixelHeight;
   handles.dpr = dpr;
@@ -4609,11 +4678,13 @@ function syncDynamicIslandGlassBackdrop(
     handles.height,
     dynamicIslandWallpaperScale,
   );
+  const uploadStart=performance.now();
   handles.device.queue.copyExternalImageToTexture(
     { source: handles.backdropCanvas },
     { texture: handles.backdropTexture },
     { width: handles.width, height: handles.height },
   );
+  recordMediaWork("glass-upload",{width:handles.width,height:handles.height,ms:performance.now()-uploadStart});
   handles.wallpaperFrameKey = frameKey;
 }
 
@@ -6114,7 +6185,7 @@ function ShortcutsThumb() {
   }, []);
 
   return (
-    <div className="relative aspect-[4/3] overflow-hidden rounded-[8px] border border-white/10 bg-[linear-gradient(140deg,#030303_0%,#101010_48%,#050505_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
+    <div className="relative aspect-[4/3] overflow-hidden rounded-[10px] border border-white/10 bg-[linear-gradient(140deg,#030303_0%,#101010_48%,#050505_100%)] shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.075),transparent_38%,rgba(255,255,255,0.03))]" />
       <div className="absolute inset-0 bg-[linear-gradient(115deg,transparent_12%,rgba(255,255,255,0.055)_46%,transparent_62%)] opacity-45" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_42%,rgba(0,0,0,0.42)_100%)]" />
@@ -6216,7 +6287,7 @@ function KeyCap({
       <div
         className={`flex h-full w-full items-center ${
           align === "left" ? "justify-start pl-3.5 pr-2" : "justify-center"
-        } gap-1 rounded-[6px] text-xs font-semibold tracking-normal backdrop-blur-md transition-[background-color,box-shadow] duration-100 ${
+        } gap-1 rounded-[10px] text-xs font-semibold tracking-normal backdrop-blur-md transition-[background-color,box-shadow] duration-100 ${
           pressed
             ? "shadow-[inset_0_1px_0_rgba(255,255,255,0.18),inset_0_-2px_8px_rgba(0,0,0,0.22)]"
             : "shadow-[inset_0_1px_0_rgba(255,255,255,0.2),inset_0_-8px_18px_rgba(0,0,0,0.32)]"
@@ -6238,7 +6309,7 @@ function BeautyThumb({ copy }: { copy: FeatureCardsCopy["beautyThumb"] }) {
   const comparisonWindowRef = useRef<HTMLDivElement>(null);
   const activeComparisonTouchRef = useRef<number | null>(null);
   const beforeVideoRef = useRef<HTMLVideoElement>(null);
-  const afterVideoRef = useRef<HTMLVideoElement>(null);
+  const afterCanvasRef = useRef<HTMLCanvasElement>(null);
   const canLoadMediaRef = useRef(false);
   const dragFrameRef = useRef(0);
   const dragPointRef = useRef<{ clientX: number; clientY: number } | null>(
@@ -6446,110 +6517,80 @@ function BeautyThumb({ copy }: { copy: FeatureCardsCopy["beautyThumb"] }) {
   const setComparisonPlayback = (shouldPlay: boolean) => {
     shouldPlayRef.current = shouldPlay;
     setIsPlaying(shouldPlay);
-
-    const beforeVideo = beforeVideoRef.current;
-    const afterVideo = afterVideoRef.current;
-    if (!beforeVideo || !afterVideo) return;
-
-    if (
-      !shouldPlay ||
-      document.hidden ||
-      !isVisibleRef.current ||
-      !canLoadMediaRef.current
-    ) {
-      beforeVideo.pause();
-      afterVideo.pause();
-      return;
-    }
-
-    if (
-      afterVideo.readyState >= HTMLMediaElement.HAVE_METADATA &&
-      Math.abs(beforeVideo.currentTime - afterVideo.currentTime) > 0.08
-    ) {
-      afterVideo.currentTime = beforeVideo.currentTime;
-    }
-
-    void beforeVideo.play();
-    void afterVideo.play();
+    const video = beforeVideoRef.current;
+    if (!video) return;
+    if (!shouldPlay || document.hidden || !isVisibleRef.current || !canLoadMediaRef.current) video.pause();
+    else void video.play().catch(() => {});
   };
 
   useEffect(() => {
-    const beforeVideo = beforeVideoRef.current;
-    const afterVideo = afterVideoRef.current;
-    if (!beforeVideo || !afterVideo) return;
-
-    let syncInterval = 0;
-    let visibilityObserver: IntersectionObserver | null = null;
-
-    const syncAfterVideo = () => {
-      if (afterVideo.readyState < HTMLMediaElement.HAVE_METADATA) return;
-      if (Math.abs(beforeVideo.currentTime - afterVideo.currentTime) > 0.08) {
-        afterVideo.currentTime = beforeVideo.currentTime;
+    const video = beforeVideoRef.current;
+    const canvas = afterCanvasRef.current;
+    if (!video || !canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+    let frame = 0;
+    let raf = 0;
+    let lastTime = -1;
+    // Both halves come from a single decoded frame. Two playing <video>
+    // elements trigger Chromium's video-conference frame interval matcher.
+    const drawAfter = () => {
+      if (video.readyState < 2 || lastTime === video.currentTime) return;
+      if (canvas.width !== video.videoWidth || canvas.height !== video.videoHeight) {
+        canvas.width = video.videoWidth; canvas.height = video.videoHeight;
       }
+      ctx.drawImage(video, 0, 0);
+      lastTime = video.currentTime;
     };
-
-    const applyDesiredPlayback = () => {
-      syncAfterVideo();
-
-      if (
-        !shouldPlayRef.current ||
-        document.hidden ||
-        !isVisibleRef.current ||
-        !canLoadMediaRef.current
-      ) {
-        beforeVideo.pause();
-        afterVideo.pause();
-        return;
-      }
-
-      void beforeVideo.play();
-      void afterVideo.play();
+    const stopFrames = () => {
+      if (frame) video.cancelVideoFrameCallback(frame);
+      cancelAnimationFrame(raf); frame = 0; raf = 0;
     };
-
-    const handleVisibilityChange = () => {
-      if (document.hidden) {
-        beforeVideo.pause();
-        afterVideo.pause();
+    const scheduleFrame = () => {
+      if (video.paused || document.hidden || !isVisibleRef.current || frame || raf) return;
+      if (typeof video.requestVideoFrameCallback === "function") {
+        frame = video.requestVideoFrameCallback(() => { frame = 0; drawAfter(); scheduleFrame(); });
       } else {
-        applyDesiredPlayback();
+        raf = requestAnimationFrame(() => { raf = 0; drawAfter(); scheduleFrame(); });
       }
     };
-
-    beforeVideo.addEventListener("loadeddata", applyDesiredPlayback);
-    afterVideo.addEventListener("loadeddata", applyDesiredPlayback);
-    beforeVideo.addEventListener("seeked", syncAfterVideo);
-    beforeVideo.addEventListener("timeupdate", syncAfterVideo);
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    const visibilityTarget = comparisonWindowRef.current;
-    if (visibilityTarget) {
-      visibilityObserver = new IntersectionObserver(
-        ([entry]) => {
-          isVisibleRef.current = entry.isIntersecting;
-          if (entry.isIntersecting && !canLoadMediaRef.current) {
-            canLoadMediaRef.current = true;
-            setCanLoadMedia(true);
-          }
-          applyDesiredPlayback();
-        },
-        { threshold: 0.15 },
-      );
-      visibilityObserver.observe(visibilityTarget);
-    } else {
-      isVisibleRef.current = true;
-      canLoadMediaRef.current = true;
-      setCanLoadMedia(true);
-    }
+    const applyDesiredPlayback = () => {
+      if (!shouldPlayRef.current || document.hidden || !isVisibleRef.current || !canLoadMediaRef.current) {
+        video.pause(); stopFrames();
+      } else {
+        void video.play().then(scheduleFrame, () => {});
+      }
+      drawAfter();
+    };
+    video.addEventListener("loadeddata", applyDesiredPlayback);
+    video.addEventListener("play", scheduleFrame);
+    video.addEventListener("pause", stopFrames);
+    video.addEventListener("seeked", drawAfter);
+    document.addEventListener("visibilitychange", applyDesiredPlayback);
+    const target = comparisonWindowRef.current;
+    // Fetch, decode and allocate the comparison canvas before it scrolls into view.
+    const preloadObserver = target ? new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting || canLoadMediaRef.current) return;
+      canLoadMediaRef.current = true; setCanLoadMedia(true);
+      preloadObserver?.disconnect();
+    }, { rootMargin: "1200px 0px", threshold: 0 }) : null;
+    if (target) preloadObserver?.observe(target.closest("section") ?? target);
+    const observer = target ? new IntersectionObserver(([entry]) => {
+      isVisibleRef.current = entry.isIntersecting;
+      if (entry.isIntersecting && !canLoadMediaRef.current) {
+        canLoadMediaRef.current = true; setCanLoadMedia(true);
+      }
+      applyDesiredPlayback();
+    }, { threshold: 0.15 }) : null;
+    if (target) observer?.observe(target);
     applyDesiredPlayback();
-    syncInterval = window.setInterval(syncAfterVideo, 350);
-
     return () => {
-      window.clearInterval(syncInterval);
-      visibilityObserver?.disconnect();
-      beforeVideo.removeEventListener("loadeddata", applyDesiredPlayback);
-      afterVideo.removeEventListener("loadeddata", applyDesiredPlayback);
-      beforeVideo.removeEventListener("seeked", syncAfterVideo);
-      beforeVideo.removeEventListener("timeupdate", syncAfterVideo);
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      stopFrames(); video.pause(); observer?.disconnect(); preloadObserver?.disconnect();
+      video.removeEventListener("loadeddata", applyDesiredPlayback);
+      video.removeEventListener("play", scheduleFrame);
+      video.removeEventListener("pause", stopFrames);
+      video.removeEventListener("seeked", drawAfter);
+      document.removeEventListener("visibilitychange", applyDesiredPlayback);
     };
   }, []);
 
@@ -6561,7 +6602,7 @@ function BeautyThumb({ copy }: { copy: FeatureCardsCopy["beautyThumb"] }) {
 
   return (
     <div
-      className="relative aspect-[4/3] overflow-hidden rounded-[8px] border border-white/10 bg-black shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]"
+      className="relative aspect-[4/3] overflow-hidden rounded-[10px] border border-white/10 bg-black shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]"
     >
       <div
         aria-hidden="true"
@@ -6597,7 +6638,7 @@ function BeautyThumb({ copy }: { copy: FeatureCardsCopy["beautyThumb"] }) {
         aria-valuemax={100}
         aria-valuemin={0}
         aria-valuenow={Math.round(split)}
-        className="absolute z-10 cursor-ew-resize touch-none overflow-hidden border border-white/10 bg-black shadow-[0_18px_48px_rgba(0,0,0,0.36)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/70"
+        className="absolute z-10 cursor-ew-resize touch-none overflow-hidden border border-white/10 bg-black shadow-[0_18px_48px_rgba(0,0,0,0.36)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-foreground/70"
         data-screen-cam-drag-surface
         onKeyDown={handleKeyDown}
         onPointerCancel={handlePointerEnd}
@@ -6636,7 +6677,7 @@ function BeautyThumb({ copy }: { copy: FeatureCardsCopy["beautyThumb"] }) {
             canLoad={canLoadMedia}
             frame={mediaFrame}
             side="after"
-            videoRef={afterVideoRef}
+            canvasRef={afterCanvasRef}
           />
           <BeautyComparisonLabel side="right">
             {copy.afterLabel}
@@ -6675,7 +6716,7 @@ function BeautyThumb({ copy }: { copy: FeatureCardsCopy["beautyThumb"] }) {
       <button
         type="button"
         aria-label={isPlaying ? copy.pauseAria : copy.playAria}
-        className="absolute bottom-2 left-2 z-40 flex h-7 w-7 items-center justify-center rounded-[8px] bg-transparent text-white/60 transition-colors hover:bg-white/14 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/70"
+        className="absolute bottom-2 left-2 z-40 flex h-7 w-7 items-center justify-center rounded-[8px] bg-transparent text-white/60 transition-colors hover:bg-white/14 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-foreground/70"
         onClick={(event) => {
           event.stopPropagation();
           setComparisonPlayback(!shouldPlayRef.current);
@@ -6706,7 +6747,7 @@ function BeautyThumb({ copy }: { copy: FeatureCardsCopy["beautyThumb"] }) {
         type="button"
         aria-label={isFloating ? copy.exitFloatingAria : copy.enterFloatingAria}
         aria-pressed={isFloating}
-        className={`absolute bottom-2 left-11 z-40 flex h-7 w-7 items-center justify-center rounded-[8px] bg-transparent transition-colors hover:bg-white/14 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/70 ${
+        className={`absolute bottom-2 left-11 z-40 flex h-7 w-7 items-center justify-center rounded-[8px] bg-transparent transition-colors hover:bg-white/14 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-foreground/70 ${
           isFloating ? "text-white" : "text-white/60"
         }`}
         onClick={(event) => {
@@ -6734,7 +6775,7 @@ function BeautyThumb({ copy }: { copy: FeatureCardsCopy["beautyThumb"] }) {
         type="button"
         aria-hidden={!isFloating}
         aria-label={`${copy.shapeCycleAria}: ${copy.shapeLabels[floatingShape]}`}
-        className={`absolute bottom-2 left-20 z-40 flex h-7 w-7 items-center justify-center rounded-[8px] bg-transparent transition-[background-color,color] hover:bg-white/14 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-white/70 ${
+        className={`absolute bottom-2 left-20 z-40 flex h-7 w-7 items-center justify-center rounded-[8px] bg-transparent transition-[background-color,color] hover:bg-white/14 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-foreground/70 ${
           isFloating
             ? "pointer-events-auto text-white/60"
             : "pointer-events-none text-white/60"
@@ -6778,11 +6819,13 @@ function BeautyComparisonVideo({
   frame,
   side,
   videoRef,
+  canvasRef,
 }: {
   canLoad: boolean;
   frame: BeautyMediaFrame;
   side: "before" | "after";
-  videoRef: MutableRefObject<HTMLVideoElement | null>;
+  videoRef?: MutableRefObject<HTMLVideoElement | null>;
+  canvasRef?: MutableRefObject<HTMLCanvasElement | null>;
 }) {
   return (
     <div
@@ -6793,10 +6836,9 @@ function BeautyComparisonVideo({
         width: frame.width,
       }}
     >
-      <video
+      {side === "before" ? <video
         ref={videoRef}
         aria-hidden="true"
-        autoPlay={canLoad}
         className="absolute top-0 h-full w-[200%] max-w-none object-fill"
         disablePictureInPicture
         loop
@@ -6804,8 +6846,8 @@ function BeautyComparisonVideo({
         playsInline
         preload={canLoad ? "auto" : "none"}
         src={canLoad ? beautyComparisonVideoSource : undefined}
-        style={{ left: side === "before" ? "0%" : "-100%" }}
-      />
+        style={{ left: "0%" }}
+      /> : <canvas ref={canvasRef} aria-hidden="true" className="absolute top-0 h-full w-[200%] max-w-none" style={{ left: "-100%" }} />}
     </div>
   );
 }

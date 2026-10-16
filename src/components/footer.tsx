@@ -2,9 +2,13 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight, Mail } from "lucide-react";
-import { appStoreUrl, localizedPath } from "../lib/i18n";
+import { localizedPath } from "../lib/i18n";
+import { getStoreCopy } from "../lib/store-copy";
+import { AppleLogo, BetaTag, WindowsLogo, storeUrl, usePlatform } from "./store-buttons";
 import type { Locale } from "../lib/i18n";
 import type { FooterCopy } from "../lib/translations";
+import { useRef } from "react";
+import { FillText, fillWords, useScene } from "./mg/scene";
 
 const supportChannels = [
   { label: "X", href: "https://x.com/cats_juice", icon: "x" },
@@ -25,11 +29,12 @@ export function Footer({
   showProductLinks = true,
 }: FooterProps) {
   const homePath = localizedPath(locale, "/");
+  const platform = usePlatform();
   const footerLinks = {
     product: [
       { label: copy.productLinks.zoom, href: `${homePath}#zoom` },
       { label: copy.productLinks.export, href: `${homePath}#export` },
-      { label: copy.productLinks.controls, href: `${homePath}#controls` },
+      { label: copy.productLinks.controls, href: `${homePath}#features` },
       { label: copy.productLinks.faq, href: `${homePath}#faq` },
     ],
     resources: [
@@ -50,108 +55,96 @@ export function Footer({
     ],
   };
 
+  const rootRef = useRef<HTMLElement>(null);
+
+  useScene(rootRef, ({ q, gsap, reduced }) => {
+    fillWords(q, q(".ft-cta")[0], "top 85%", "top 45%");
+    if (reduced) return;
+    // Bookend: the wordmark that flew away at the very top drops back in.
+    gsap.fromTo(q(".ft-letter"), { yPercent: -110, opacity: 0, fontVariationSettings: "'wdth' 62, 'wght' 800" }, {
+      yPercent: 0,
+      opacity: 1,
+      fontVariationSettings: "'wdth' 125, 'wght' 800",
+      stagger: 0.06,
+      ease: "power2.out",
+      scrollTrigger: { trigger: q(".ft-wordmark")[0], start: "top 95%", end: "bottom 95%", scrub: 0.8 },
+    });
+  });
+
   return (
-    <footer className="relative bg-background border-t border-border/50">
-      {/* CTA Section */}
-      <div className="border-b border-border/50">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 py-24">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8"
-          >
-            <div>
-              <h2 className="text-[clamp(1.5rem,3vw,2.5rem)] font-bold leading-tight tracking-tight text-foreground mb-2">
-                {copy.ctaTitle}
-              </h2>
-              <p className="text-muted-foreground">
-                {copy.ctaText}
-              </p>
-            </div>
-            <motion.a
-              href={appStoreUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-center gap-3 bg-foreground text-background px-6 py-3 text-sm font-medium hover:bg-foreground/90 transition-colors shrink-0"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-              </svg>
-              <span>{copy.appStoreButton}</span>
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            </motion.a>
-          </motion.div>
+    <footer ref={rootRef} className="mg-scene">
+      {/* CTA */}
+      <div className="ft-cta mx-auto flex w-full max-w-[1240px] flex-col items-start gap-10 px-6 pb-20 pt-28 md:flex-row md:items-end md:justify-between md:px-10 md:pt-40">
+        <div>
+          <span className="mg-label mg-index mb-6">Rec</span>
+          <h2 className="mg-h2 mt-4 max-w-[14ch]"><FillText text={copy.ctaTitle} /></h2>
+          <p className="mt-5 max-w-md text-[15px] leading-relaxed text-muted-foreground md:text-base">{copy.ctaText}</p>
         </div>
+        <motion.a
+          href={storeUrl(platform)}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mg-cta store-beta-host group relative shrink-0"
+          whileTap={{ scale: 0.98 }}
+        >
+          {platform === "windows" ? <WindowsLogo className="h-[16px] w-[16px]" /> : <AppleLogo className="h-[18px] w-[18px]" />}
+          <span>{platform === "windows" ? getStoreCopy(locale).microsoftStoreButton : copy.appStoreButton}</span>
+          {platform === "windows" && <BetaTag locale={locale} side="top" />}
+          <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        </motion.a>
       </div>
 
-      {/* Links Section */}
-      <div className="max-w-7xl mx-auto px-6 md:px-12 py-16">
-        <div className={`grid grid-cols-2 gap-8 md:gap-12 ${showProductLinks ? "md:grid-cols-4" : "md:grid-cols-3"}`}>
-          {/* Brand */}
+      {/* Links */}
+      <div className="mx-auto w-full max-w-[1240px] px-6 md:px-10">
+        <div className={`grid grid-cols-2 gap-10 border-t border-foreground/20 py-14 ${showProductLinks ? "md:grid-cols-4" : "md:grid-cols-3"}`}>
           <div className="col-span-2 md:col-span-1">
-            <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <img
-                  src="/icon-192.png"
-                  alt=""
-                  className="w-9 h-9 rounded-lg"
-                />
-                <span className="font-semibold text-foreground">ScreenCam</span>
-              </div>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {copy.description}
-              </p>
-              <div className="mt-5 flex items-center gap-2" aria-label={copy.supportChannelsAria}>
-                {supportChannels.map((channel) => (
-                  <a
-                    key={channel.label}
-                    href={channel.href}
-                    target={channel.href.startsWith("mailto:") ? undefined : "_blank"}
-                    rel={channel.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-                    aria-label={channel.label}
-                    title={channel.label}
-                    className="flex h-8 w-8 items-center justify-center rounded-full border border-border/70 text-muted-foreground transition-colors hover:border-foreground/40 hover:text-foreground"
-                  >
-                    <SocialIcon icon={channel.icon} />
-                  </a>
-                ))}
-              </div>
-            </motion.div>
+            <div className="mb-5 flex items-center gap-3">
+              <img src="/icon-192.png" alt="" className="h-9 w-9 rounded-[9px]" />
+              <span className="font-semibold tracking-[-0.02em] text-foreground">ScreenCam</span>
+            </div>
+            <p className="max-w-xs text-sm leading-relaxed text-muted-foreground">{copy.description}</p>
+            <div className="mt-6 flex items-center gap-1" aria-label={copy.supportChannelsAria}>
+              {supportChannels.map((channel) => (
+                <a
+                  key={channel.label}
+                  href={channel.href}
+                  target={channel.href.startsWith("mailto:") ? undefined : "_blank"}
+                  rel={channel.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+                  aria-label={channel.label}
+                  title={channel.label}
+                  className="icon-button"
+                >
+                  <SocialIcon icon={channel.icon} />
+                </a>
+              ))}
+            </div>
           </div>
 
           {showProductLinks && (
             <FooterLinkGroup title={copy.groups.product} links={footerLinks.product} delay={0.1} />
           )}
-
-          {/* Resources Links */}
           <FooterLinkGroup title={copy.groups.resources} links={footerLinks.resources} delay={0.15} />
-
-          {/* Legal Links */}
           <FooterLinkGroup title={copy.groups.legal} links={footerLinks.legal} delay={0.2} />
-
         </div>
       </div>
 
+      {/* Wordmark bookend */}
+      <div className="ft-wordmark mg-wordmark flex justify-center overflow-hidden px-[2vw] pb-2 pt-6" aria-hidden="true">
+        {"SCREENCAM".split("").map((letter, index) => (
+          <span key={index} className="ft-letter mg-letter inline-block">{letter}</span>
+        ))}
+      </div>
+
       {/* Bottom bar */}
-      <div className="border-t border-border/50">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 py-6">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-            <p>&copy; {new Date().getFullYear()} ScreenCam. {copy.copyright}</p>
-            <span className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-              {copy.systemStatus}
-            </span>
-          </div>
-        </div>
+      <div className="mx-auto flex w-full max-w-[1240px] flex-col items-center justify-between gap-4 border-t border-foreground/20 px-6 py-5 md:flex-row md:px-10">
+        <p className="mg-label">&copy; {new Date().getFullYear()} ScreenCam. {copy.copyright}</p>
+        <span className="mg-label flex items-center gap-2">
+          <span className="relative flex h-2 w-2">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-green-500 opacity-60" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-green-500" />
+          </span>
+          {copy.systemStatus}
+        </span>
       </div>
     </footer>
   );
@@ -197,13 +190,14 @@ function FooterLinkGroup({
   delay: number;
 }) {
   return (
+    <div>
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay }}
     >
-      <h3 className="text-sm font-medium text-foreground mb-4">{title}</h3>
+      <h3 className="mg-label mb-6">{title}</h3>
       <ul className="space-y-3">
         {links.map((link) => (
           <li key={link.label}>
@@ -211,13 +205,15 @@ function FooterLinkGroup({
               href={link.href}
               target={link.external ? "_blank" : undefined}
               rel={link.external ? "noopener noreferrer" : undefined}
-              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+              className="group inline-flex items-center gap-2 text-sm text-foreground/80 transition-colors hover:text-foreground"
             >
+              <span className="h-px w-0 bg-accent transition-all duration-300 group-hover:w-3" aria-hidden="true" />
               {link.label}
             </a>
           </li>
         ))}
       </ul>
     </motion.div>
+    </div>
   );
 }
