@@ -13,14 +13,16 @@
     "cursors:check": "node scripts/build-cursors.mjs --check",
     "mockups:build": "node scripts/build-mockups.mjs",
     "dev": "NODE_ENV=development astro dev --mode development",
-    "build": "npm run cursors:check && npm run transitions:check && astro build",
+    "build": "npm run cursors:check && npm run transitions:check && npm run mesh-backgrounds:check && astro build",
     "build:with-bgm": "npm run bgm:build && npm run click-sounds:build && npm run cursors:build && npm run mockups:build && npm run transitions:check && astro build",
     "preview": "npm run build && wrangler dev",
     "deploy": "npm run build && wrangler deploy",
     "transitions:build": "node scripts/build-transitions.mjs",
     "transitions:check": "node scripts/build-transitions.mjs --check",
     "transitions:test": "node --test scripts/transitions/*.test.mjs",
-    "transitions:validate-sources": "node scripts/build-transitions.mjs --validate-sources"
+    "transitions:validate-sources": "node scripts/build-transitions.mjs --validate-sources",
+    "mesh-backgrounds:build": "node scripts/build-mesh-backgrounds.mjs",
+    "mesh-backgrounds:check": "node scripts/build-mesh-backgrounds.mjs --check"
   },
   "devDependencies": {
     "@astrojs/sitemap": "^3.2.1",
@@ -33,6 +35,7 @@
     "@liquid-dom/core": "^0.1.1",
     "@tailwindcss/vite": "^4.3.0",
     "framer-motion": "^12.40.0",
+    "gsap": "^3.13.0",
     "lenis": "^1.3.23",
     "lucide-react": "^1.17.0",
     "react": "^19.2.7",

@@ -82,7 +82,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
     lastUpdated: "June 13, 2026",
     hero: {
       eyebrow: "Screen Studio Alternative for Mac",
-      title: "A lighter Screen Studio alternative.",
+      title: "A lighter Screen Studio alternative",
       description:
         "ScreenCam keeps the polished Mac screen-recording workflow, then adds deeper manual zoom, richer layers, smaller footprint, and more export shapes.",
       appStoreCta: "View ScreenCam on the Mac App Store",
@@ -113,13 +113,13 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
     ],
     whySwitch: {
       eyebrow: "Why switch",
-      title: "Speed and control, without the heavy footprint.",
+      title: "Speed and control, without the heavy footprint",
       description:
         "Screen Studio covers the core automated recording workflow. ScreenCam goes further with a lighter native app, measured performance wins, and deeper automatic and manual control after recording.",
     },
     features: {
       eyebrow: "Creative control",
-      title: "The parts ScreenCam makes easier to direct.",
+      title: "The parts ScreenCam makes easier to direct",
       items: [
         {
           title: "Manual zoom anchors",
@@ -207,7 +207,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
     },
     bestFit: {
       eyebrow: "Best fit",
-      title: "Choose ScreenCam if...",
+      title: "Choose ScreenCam if",
       items: [
         "Product demos that need multiple directed zoom centers",
         "Mac app walkthroughs with device mockups and custom framing",
@@ -215,7 +215,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         "Exports that need GIF or Live Photo output",
       ],
       gapEyebrow: "Captions",
-      gapTitle: "Captions styled your way.",
+      gapTitle: "Captions styled your way",
       gapDescription:
         "Choose from multiple transcription providers with BYOK, fine-tune highly customizable read-along captions, and style them with reusable presets, including blur and Liquid Glass backgrounds.",
       pricingCta: "Check App Store pricing",
@@ -285,7 +285,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
     lastUpdated: "2026 年 6 月 13 日",
     hero: {
       eyebrow: "Mac 版 Screen Studio 替代方案",
-      title: "更轻量的 Screen Studio 替代方案。",
+      title: "更轻量的 Screen Studio 替代方案",
       description:
         "ScreenCam 保留精致的 Mac 录屏工作流，同时加入更深入的手动变焦、更丰富的图层、更小的体积和更多导出形态。",
       appStoreCta: "在 Mac App Store 查看 ScreenCam",
@@ -316,13 +316,13 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
     ],
     whySwitch: {
       eyebrow: "为什么切换",
-      title: "更快、更可控，同时没有沉重负担。",
+      title: "更快、更可控，同时没有沉重负担",
       description:
         "Screen Studio 覆盖基础自动化录制流程。ScreenCam 在此之上提供更轻的原生应用、可量化的性能优势，以及录制后更深入的自动与手动控制。",
     },
     features: {
       eyebrow: "创作控制",
-      title: "ScreenCam 让这些部分更容易被你掌控。",
+      title: "ScreenCam 让这些部分更容易被你掌控",
       items: [
         {
           title: "手动变焦锚点",
@@ -410,7 +410,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
     },
     bestFit: {
       eyebrow: "适合场景",
-      title: "如果你需要这些，选 ScreenCam...",
+      title: "如果你需要这些，选 ScreenCam",
       items: [
         "需要多个定向变焦中心的产品演示",
         "带设备样机和自定义画幅的 Mac app 演示",
@@ -418,7 +418,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         "需要 GIF 或 Live Photo 输出的导出流程",
       ],
       gapEyebrow: "字幕功能",
-      gapTitle: "字幕样式，由你定义。",
+      gapTitle: "字幕样式，由你定义",
       gapDescription:
         "可从多个转写 Provider 中选择并使用 BYOK，精细定制 Read Along 字幕，还能通过可复用预设设置模糊和 Liquid Glass 背景。",
       pricingCta: "查看 App Store 价格",
@@ -478,7 +478,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
     lastUpdated: "13. Juni 2026",
     hero: {
       eyebrow: "Screen-Studio-Alternative für Mac",
-      title: "Eine leichtere Screen-Studio-Alternative.",
+      title: "Eine leichtere Screen-Studio-Alternative",
       description:
         "ScreenCam behält den hochwertigen Mac-Screenrecording-Workflow bei und ergänzt ihn um mehr manuellen Zoom, reichere Ebenen, eine kleinere App und mehr Exportformen.",
       appStoreCta: "ScreenCam im Mac App Store ansehen",
@@ -509,13 +509,13 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
     ],
     whySwitch: {
       eyebrow: "Warum wechseln",
-      title: "Geschwindigkeit und Kontrolle, ohne schweres Gepäck.",
+      title: "Geschwindigkeit und Kontrolle, ohne schweres Gepäck",
       description:
         "Screen Studio deckt den grundlegenden automatisierten Aufnahme-Workflow ab. ScreenCam geht mit einer leichteren nativen App, messbaren Performance-Vorteilen und tieferer automatischer wie manueller Kontrolle weiter.",
     },
     features: {
       eyebrow: "Kreative Kontrolle",
-      title: "Die Bereiche, die ScreenCam leichter steuerbar macht.",
+      title: "Die Bereiche, die ScreenCam leichter steuerbar macht",
       items: [
         {
           title: "Manuelle Zoom-Anker",
@@ -603,7 +603,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
     },
     bestFit: {
       eyebrow: "Passt besonders gut",
-      title: "Wähle ScreenCam, wenn...",
+      title: "Wähle ScreenCam, wenn",
       items: [
         "Produktdemos mehrere gezielte Zoom-Zentren brauchen",
         "Mac-App-Walkthroughs Geräte-Mockups und eigenes Framing brauchen",
@@ -611,7 +611,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         "Exports GIF- oder Live-Photo-Ausgabe brauchen",
       ],
       gapEyebrow: "Untertitel",
-      gapTitle: "Untertitel in deinem Stil.",
+      gapTitle: "Untertitel in deinem Stil",
       gapDescription:
         "Wähle aus mehreren Transkriptionsanbietern mit BYOK, passe Read-along-Untertitel detailliert an und gestalte sie mit wiederverwendbaren Vorlagen sowie Unschärfe- oder Liquid-Glass-Hintergründen.",
       pricingCta: "App-Store-Preis prüfen",
@@ -671,7 +671,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
     lastUpdated: "2026 年 6 月 13 日",
     hero: {
       eyebrow: "Mac 向け Screen Studio 代替",
-      title: "より軽い Screen Studio 代替。",
+      title: "より軽い Screen Studio 代替",
       description:
         "ScreenCam は洗練された Mac 画面録画ワークフローを保ちながら、より深い手動ズーム、豊富なレイヤー、小さなアプリサイズ、より多様な書き出し形態を追加します。",
       appStoreCta: "Mac App Store で ScreenCam を見る",
@@ -702,13 +702,13 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
     ],
     whySwitch: {
       eyebrow: "切り替える理由",
-      title: "重さを抑えながら、速度とコントロールを。",
+      title: "重さを抑えながら、速度とコントロールを",
       description:
         "Screen Studio は基本的な自動収録ワークフローをカバーします。ScreenCam は、より軽いネイティブアプリ、測定可能な性能差、録画後の高度な自動・手動制御を追加します。",
     },
     features: {
       eyebrow: "クリエイティブ制御",
-      title: "ScreenCam で指示しやすくなる部分。",
+      title: "ScreenCam で指示しやすくなる部分",
       items: [
         {
           title: "手動ズームアンカー",
@@ -796,7 +796,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
     },
     bestFit: {
       eyebrow: "向いている用途",
-      title: "ScreenCam を選ぶなら...",
+      title: "ScreenCam を選ぶなら",
       items: [
         "複数のズーム中心が必要なプロダクトデモ",
         "デバイスモックアップとカスタムフレーミングを使う Mac アプリ紹介",
@@ -804,7 +804,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         "GIF または Live Photo として書き出したい録画",
       ],
       gapEyebrow: "字幕",
-      gapTitle: "字幕を思いどおりのスタイルに。",
+      gapTitle: "字幕を思いどおりのスタイルに",
       gapDescription:
         "複数の文字起こしプロバイダーと BYOK を選択でき、Read Along 字幕を細かくカスタマイズし、再利用可能なプリセットでぼかしや Liquid Glass 背景を設定できます。",
       pricingCta: "App Store 価格を確認",
@@ -864,7 +864,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
     lastUpdated: "2026년 6월 13일",
     hero: {
       eyebrow: "Mac용 Screen Studio 대안",
-      title: "더 가벼운 Screen Studio 대안.",
+      title: "더 가벼운 Screen Studio 대안",
       description:
         "ScreenCam은 세련된 Mac 화면 녹화 워크플로를 유지하면서 더 깊은 수동 줌, 풍부한 레이어, 작은 설치 크기, 더 다양한 내보내기 방식을 더합니다.",
       appStoreCta: "Mac App Store에서 ScreenCam 보기",
@@ -895,13 +895,13 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
     ],
     whySwitch: {
       eyebrow: "전환 이유",
-      title: "무거운 부담 없이 속도와 제어를.",
+      title: "무거운 부담 없이 속도와 제어를",
       description:
         "Screen Studio는 기본 자동 녹화 워크플로를 제공합니다. ScreenCam은 더 가벼운 네이티브 앱, 측정 가능한 성능 이점, 녹화 후 더 깊은 자동 및 수동 제어를 더합니다.",
     },
     features: {
       eyebrow: "창작 제어",
-      title: "ScreenCam이 더 쉽게 연출하게 해주는 부분.",
+      title: "ScreenCam이 더 쉽게 연출하게 해주는 부분",
       items: [
         {
           title: "수동 줌 앵커",
@@ -989,7 +989,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
     },
     bestFit: {
       eyebrow: "잘 맞는 경우",
-      title: "이런 경우 ScreenCam을 선택하세요...",
+      title: "이런 경우 ScreenCam을 선택하세요",
       items: [
         "여러 개의 지정된 줌 중심이 필요한 제품 데모",
         "기기 목업과 사용자 지정 프레이밍이 필요한 Mac 앱 워크스루",
@@ -997,7 +997,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         "GIF 또는 Live Photo 출력이 필요한 내보내기",
       ],
       gapEyebrow: "자막",
-      gapTitle: "원하는 방식으로 자막을 스타일링하세요.",
+      gapTitle: "원하는 방식으로 자막을 스타일링하세요",
       gapDescription:
         "여러 전사 제공자와 BYOK를 선택하고, Read Along 자막을 세밀하게 사용자 지정하며, 재사용 가능한 프리셋으로 블러 또는 Liquid Glass 배경을 적용할 수 있습니다.",
       pricingCta: "App Store 가격 확인",
@@ -1057,7 +1057,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
     lastUpdated: "2026 年 6 月 13 日",
     hero: {
       eyebrow: "Mac 版 Screen Studio 替代方案",
-      title: "更輕量的 Screen Studio 替代方案。",
+      title: "更輕量的 Screen Studio 替代方案",
       description:
         "ScreenCam 保留精緻的 Mac 錄屏工作流，同時加入更深入的手動變焦、更豐富的圖層、更小的體積和更多匯出形態。",
       appStoreCta: "在 Mac App Store 檢視 ScreenCam",
@@ -1088,13 +1088,13 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
     ],
     whySwitch: {
       eyebrow: "為什麼切換",
-      title: "更快、更可控，同時沒有沉重負擔。",
+      title: "更快、更可控，同時沒有沉重負擔",
       description:
         "Screen Studio 覆蓋基礎自動化錄製流程。ScreenCam 在此之上提供更輕的原生應用、可量化的效能優勢，以及錄製後更深入的自動與手動控制。",
     },
     features: {
       eyebrow: "創作控制",
-      title: "ScreenCam 讓這些部分更容易被你掌控。",
+      title: "ScreenCam 讓這些部分更容易被你掌控",
       items: [
         {
           title: "手動變焦錨點",
@@ -1182,7 +1182,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
     },
     bestFit: {
       eyebrow: "適合場景",
-      title: "如果你需要這些，選 ScreenCam...",
+      title: "如果你需要這些，選 ScreenCam",
       items: [
         "需要多個定向變焦中心的產品演示",
         "帶裝置樣機和自定義畫幅的 Mac app 演示",
@@ -1190,7 +1190,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         "需要 GIF 或 Live Photo 輸出的匯出流程",
       ],
       gapEyebrow: "字幕功能",
-      gapTitle: "字幕樣式，由你定義。",
+      gapTitle: "字幕樣式，由你定義",
       gapDescription:
         "可從多個轉寫 Provider 中選擇並使用 BYOK，精細自訂 Read Along 字幕，還能透過可重用預設設定模糊和 Liquid Glass 背景。",
       pricingCta: "檢視 App Store 價格",
@@ -1250,7 +1250,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
     lastUpdated: "13 de junio de 2026",
     hero: {
       eyebrow: "Screen Studio Alternativa para Mac",
-      title: "Una alternativa más ligera al Screen Studio.",
+      title: "Una alternativa más ligera al Screen Studio",
       description:
         "ScreenCam mantiene el pulido flujo de trabajo de grabación de pantalla Mac, luego agrega un zoom manual más profundo, capas más ricas, espacio más pequeño y más formas de exportación.",
       appStoreCta: "Ver ScreenCam en el Mac App Store",
@@ -1281,13 +1281,13 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
     ],
     whySwitch: {
       eyebrow: "¿Por qué cambiar?",
-      title: "Velocidad y control, sin pisar demasiado.",
+      title: "Velocidad y control, sin pisar demasiado",
       description:
         "Screen Studio cubre el flujo automatizado básico de grabación. ScreenCam va más allá con una app nativa más ligera, ventajas de rendimiento medibles y un control automático y manual más profundo tras grabar.",
     },
     features: {
       eyebrow: "control creativo",
-      title: "Las piezas ScreenCam facilitan el manejo.",
+      title: "Las piezas ScreenCam facilitan el manejo",
       items: [
         {
           title: "Anclajes de zoom manual",
@@ -1375,7 +1375,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
     },
     bestFit: {
       eyebrow: "Mejor ajuste",
-      title: "Elija ScreenCam si...",
+      title: "Elija ScreenCam si",
       items: [
         "ProDemostraciones de conductos que necesitan múltiples centros de zoom dirigidos",
         "Tutoriales de la aplicación Mac con maquetas de dispositivos y marcos personalizados",
@@ -1383,7 +1383,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         "Exportaciones que necesitan salida GIF o Live Photo",
       ],
       gapEyebrow: "Subtítulos",
-      gapTitle: "Subtítulos con tu propio estilo.",
+      gapTitle: "Subtítulos con tu propio estilo",
       gapDescription:
         "Elige entre varios proveedores de transcripción con BYOK, personaliza al detalle los subtítulos Read Along y aplica ajustes reutilizables con fondos desenfocados o Liquid Glass.",
       pricingCta: "Consultar precios de App Store",
@@ -1453,7 +1453,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
     lastUpdated: "13 juin 2026",
     hero: {
       eyebrow: "Screen Studio Alternative à Mac",
-      title: "Une alternative plus légère au Screen Studio.",
+      title: "Une alternative plus légère au Screen Studio",
       description:
         "ScreenCam conserve le flux de travail d'enregistrement d'écran raffiné du Mac, puis ajoute un zoom manuel plus profond, des calques plus riches, un encombrement réduit et davantage de formes d'exportation.",
       appStoreCta: "Voir ScreenCam sur le Mac App Store",
@@ -1484,13 +1484,13 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
     ],
     whySwitch: {
       eyebrow: "Pourquoi changer",
-      title: "Vitesse et contrôle, sans encombrement important.",
+      title: "Vitesse et contrôle, sans encombrement important",
       description:
         "Screen Studio couvre le flux automatisé de base pour l’enregistrement. ScreenCam va plus loin avec une app native plus légère, des gains de performance mesurables et un contrôle automatique et manuel plus poussé après l’enregistrement.",
     },
     features: {
       eyebrow: "Contrôle créatif",
-      title: "Les pièces ScreenCam facilitent la direction.",
+      title: "Les pièces ScreenCam facilitent la direction",
       items: [
         {
           title: "Ancres de zoom manuel",
@@ -1578,7 +1578,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
     },
     bestFit: {
       eyebrow: "Meilleur ajustement",
-      title: "Choisissez ScreenCam si...",
+      title: "Choisissez ScreenCam si",
       items: [
         "Démonstrations Product nécessitant plusieurs centres de zoom dirigés",
         "Procédures pas à pas de l'application Mac avec maquettes d'appareils et cadrage personnalisé",
@@ -1586,7 +1586,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         "Exportations nécessitant une sortie GIF ou Live Photo",
       ],
       gapEyebrow: "Sous-titres",
-      gapTitle: "Des sous-titres à votre image.",
+      gapTitle: "Des sous-titres à votre image",
       gapDescription:
         "Choisissez parmi plusieurs fournisseurs de transcription avec BYOK, personnalisez précisément les sous-titres Read Along et appliquez des préréglages réutilisables avec des arrière-plans flous ou Liquid Glass.",
       pricingCta: "Vérifiez les prix du App Store",
@@ -1656,7 +1656,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
     lastUpdated: "13 de junho de 2026",
     hero: {
       eyebrow: "Screen Studio Alternativa para Mac",
-      title: "Uma alternativa Screen Studio mais leve.",
+      title: "Uma alternativa Screen Studio mais leve",
       description:
         "ScreenCam mantém o fluxo de trabalho de gravação de tela Mac sofisticado e, em seguida, adiciona zoom manual mais profundo, camadas mais ricas, espaço menor e mais formas de exportação.",
       appStoreCta: "Veja ScreenCam no Mac App Store",
@@ -1687,13 +1687,13 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
     ],
     whySwitch: {
       eyebrow: "Por que mudar",
-      title: "Velocidade e controle, sem ocupar muito espaço.",
+      title: "Velocidade e controle, sem ocupar muito espaço",
       description:
         "Screen Studio cobre o fluxo automatizado básico de gravação. ScreenCam vai além com um app nativo mais leve, ganhos de desempenho mensuráveis e controles automáticos e manuais mais profundos após a gravação.",
     },
     features: {
       eyebrow: "Controle criativo",
-      title: "As peças ScreenCam facilitam o direcionamento.",
+      title: "As peças ScreenCam facilitam o direcionamento",
       items: [
         {
           title: "Âncoras de zoom manuais",
@@ -1781,7 +1781,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
     },
     bestFit: {
       eyebrow: "Melhor ajuste",
-      title: "Escolha ScreenCam se...",
+      title: "Escolha ScreenCam se",
       items: [
         "Demonstrações de dutos Pro que precisam de vários centros de zoom direcionados",
         "Passo a passo do aplicativo Mac com modelos de dispositivos e enquadramento personalizado",
@@ -1789,7 +1789,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         "Exportações que precisam de saída GIF ou Live Photo",
       ],
       gapEyebrow: "Legendas",
-      gapTitle: "Legendas com o seu estilo.",
+      gapTitle: "Legendas com o seu estilo",
       gapDescription:
         "Escolha entre vários provedores de transcrição com BYOK, personalize detalhadamente as legendas Read Along e aplique predefinições reutilizáveis com fundos desfocados ou Liquid Glass.",
       pricingCta: "Verifique o preço App Store",
@@ -1859,7 +1859,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
     lastUpdated: "13 giugno 2026",
     hero: {
       eyebrow: "Screen Studio Alternativa a Mac",
-      title: "Un'alternativa Screen Studio più leggera.",
+      title: "Un'alternativa Screen Studio più leggera",
       description:
         "ScreenCam mantiene il raffinato flusso di lavoro di registrazione dello schermo Mac, quindi aggiunge uno zoom manuale più profondo, livelli più ricchi, ingombro ridotto e più forme di esportazione.",
       appStoreCta: "Visualizza ScreenCam su Mac App Store",
@@ -1890,13 +1890,13 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
     ],
     whySwitch: {
       eyebrow: "Perché cambiare",
-      title: "Velocità e controllo, senza l'ingombro pesante.",
+      title: "Velocità e controllo, senza l'ingombro pesante",
       description:
         "Screen Studio copre il flusso automatizzato di base per la registrazione. ScreenCam va oltre con un’app nativa più leggera, vantaggi prestazionali misurabili e controlli automatici e manuali più profondi dopo la registrazione.",
     },
     features: {
       eyebrow: "Controllo creativo",
-      title: "Le parti ScreenCam facilitano la direzione.",
+      title: "Le parti ScreenCam facilitano la direzione",
       items: [
         {
           title: "Ancoraggi zoom manuali",
@@ -1984,7 +1984,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
     },
     bestFit: {
       eyebrow: "La migliore vestibilità",
-      title: "Scegli ScreenCam se...",
+      title: "Scegli ScreenCam se",
       items: [
         "Pro demo di condotti che richiedono più centri di zoom diretti",
         "Procedure dettagliate sull'app Mac con modelli di dispositivi e inquadrature personalizzate",
@@ -1992,7 +1992,7 @@ const screenStudioAlternativeCopies: Record<Locale, ScreenStudioAlternativePageC
         "Esportazioni che richiedono l'output GIF o Live Photo",
       ],
       gapEyebrow: "Sottotitoli",
-      gapTitle: "Sottotitoli con il tuo stile.",
+      gapTitle: "Sottotitoli con il tuo stile",
       gapDescription:
         "Scegli tra più provider di trascrizione con BYOK, personalizza nel dettaglio i sottotitoli Read Along e applica preset riutilizzabili con sfondi sfocati o Liquid Glass.",
       pricingCta: "Controlla i prezzi App Store",

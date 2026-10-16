@@ -54,7 +54,7 @@ const structuredData = {
 ---
 
 <!doctype html>
-<html lang={locale} class="dark">
+<html lang={locale}>
   <head>
     <PageHead
       locale={locale}
@@ -71,6 +71,7 @@ const structuredData = {
     <SiteHeader copy={t.header} currentPath={path} languageLabel={t.footer.language} locale={locale} client:load />
 
     <main id="main" class="cursor-page">
+      <div class="page-glow" aria-hidden="true"></div>
       <section class="cursor-hero">
         <div class="cursor-hero-copy">
           <p class="cursor-eyebrow">{copy.eyebrow}</p>
@@ -85,7 +86,7 @@ const structuredData = {
           <h2 id="cursor-create-title">{copy.createTitle}</h2>
           <p>{copy.createDescription}</p>
         </div>
-        <div class="cursor-create-terminal" aria-label={copy.command}>
+        <div class="cursor-create-terminal vf" aria-label={copy.command}>
           <div class="cursor-terminal-bar">
             <div class="cursor-terminal-dots" aria-hidden="true">
               <span></span>

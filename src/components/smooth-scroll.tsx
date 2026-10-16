@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import Lenis from "lenis";
 import "lenis/dist/lenis.css";
+import { setLenis } from "../lib/scroll";
 
 function isSafari() {
   return (
@@ -25,6 +26,7 @@ export function SmoothScroll() {
     const destroyLenis = () => {
       lenis?.destroy();
       lenis = null;
+      setLenis(null);
     };
 
     const startLenis = () => {
@@ -48,6 +50,7 @@ export function SmoothScroll() {
         syncTouch: false,
         wheelMultiplier: 0.9,
       });
+      setLenis(lenis);
     };
 
     const refreshScrollMode = () => {

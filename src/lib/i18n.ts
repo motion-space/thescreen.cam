@@ -1,6 +1,7 @@
 export const siteUrl = "https://thescreen.cam";
 export const appStoreUrl =
   "https://apps.apple.com/cn/app/screencam-screen-studio/id6770877568?l=en-GB&mt=12";
+export const microsoftStoreUrl = "https://apps.microsoft.com/detail/9p3zqtbf52kv?ocid=webpdpshare";
 
 export const defaultLocale = "en";
 export const supportedLocales = [

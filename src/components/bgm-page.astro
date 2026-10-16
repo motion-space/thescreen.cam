@@ -58,7 +58,7 @@ const structuredData = {
 ---
 
 <!doctype html>
-<html lang={locale} class="dark">
+<html lang={locale}>
   <head>
     <PageHead
       locale={locale}
@@ -75,6 +75,7 @@ const structuredData = {
     <SiteHeader copy={t.header} currentPath={path} languageLabel={t.footer.language} locale={locale} client:load />
 
     <main id="main" class="bgm-page">
+      <div class="page-glow" aria-hidden="true"></div>
       <section class="bgm-hero">
         <div class="bgm-hero-copy">
           <p class="bgm-eyebrow">{copy.eyebrow}</p>

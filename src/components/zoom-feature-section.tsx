@@ -1,57 +1,136 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { PointerEvent as ReactPointerEvent } from "react";
 import type { ZoomFeatureCopy } from "../lib/translations";
+import { FillText, fillWords, overlapPrevious, prepareStrokes, useScene } from "./mg/scene";
 
 type ZoomFeatureSectionProps = {
   copy: ZoomFeatureCopy;
 };
 
+const DEMO_TIMELINE_HEIGHT = 217;
+
+/** Width of the demo so preview (16:9) + timeline fit the pinned viewport. */
+function useDemoWidth() {
+  const [width, setWidth] = useState(1080);
+
+  useEffect(() => {
+    const update = () => {
+      const available = window.innerHeight - 64 - 190;
+      const byHeight = ((available - DEMO_TIMELINE_HEIGHT) * 16) / 9;
+      setWidth(Math.max(320, Math.min(1180, window.innerWidth - 48, byHeight)));
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  return width;
+}
+
+/**
+ * Scene 2. Picks up the editor timeline the opening ends on: the strip rises
+ * and unfolds into the frame of the live zoom demo, then hands over to it.
+ */
 export function ZoomFeatureSection({ copy }: ZoomFeatureSectionProps) {
+  const rootRef = useRef<HTMLElement>(null);
+  const demoWidth = useDemoWidth();
+
+  useScene(rootRef, ({ q, gsap, reduced }) => {
+    const stage = q(".zf-stage")[0] as HTMLElement;
+    const demo = q(".zf-demo")[0] as HTMLElement;
+    const morph = q(".zf-morph")[0] as HTMLElement;
+    prepareStrokes(q("[data-draw]"));
+
+    if (reduced) {
+      gsap.set(q(".mg-word"), { color: "var(--foreground)" });
+      gsap.set(q("[data-draw]"), { strokeDashoffset: 0 });
+      gsap.set(morph, { opacity: 0 });
+      return;
+    }
+
+    // Start geometry: same strip the opening's SVG timeline ends on.
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    const s = Math.min(vw / 1600, vh / 1000);
+    const ox = (vw - 1600 * s) / 2;
+    const oy = (vh - 1000 * s) / 2;
+    const from = { left: ox + 160 * s, top: oy + 820 * s, width: 1280 * s, height: 92 * s };
+
+    const stageRect = stage.getBoundingClientRect();
+    const demoRect = demo.getBoundingClientRect();
+    const to = {
+      left: demoRect.left - stageRect.left,
+      top: demoRect.top - stageRect.top,
+      width: demoRect.width,
+      height: demoRect.height,
+    };
+
+    gsap.set(morph, { ...from, opacity: 1 });
+    gsap.set(demo, { opacity: 0, clipPath: "inset(100% 0% 0% 0% round 10px)" });
+    gsap.set(q(".zf-bg, .zf-head"), { opacity: 0 });
+    const handoff = overlapPrevious(rootRef.current as HTMLElement, stage);
+
+    const tl = gsap.timeline({
+      defaults: { ease: "none" },
+      scrollTrigger: { trigger: stage, start: "top top", end: "+=200%", scrub: 0.8, pin: true, anticipatePin: 1, ...handoff },
+    });
+
+    tl.to(q(".zf-bg, .zf-head"), { opacity: 1, duration: 0.35 }, 0)
+      .to(q(".zf-head .mg-word"), { color: "var(--foreground)", stagger: 0.08, duration: 0.5 }, 0.2)
+      .to(morph, { ...to, borderRadius: 10, duration: 1.2, ease: "power3.inOut" }, 0.2)
+      .to(q(".zf-morph-clip"), { opacity: 0, duration: 0.2, stagger: 0.04 }, 0.2)
+      .set(demo, { opacity: 1 }, 1.2)
+      .to(demo, { clipPath: "inset(0% 0% 0% 0% round 10px)", duration: 0.8, ease: "power2.out" }, 1.2)
+      .to(morph, { opacity: 0, duration: 0.4 }, 1.7)
+      .to({}, { duration: 0.6 });
+
+    // Features: hairlines draw, words fill.
+    gsap.to(q(".zf-features [data-draw]"), {
+      strokeDashoffset: 0,
+      ease: "none",
+      stagger: 0.1,
+      scrollTrigger: { trigger: q(".zf-features")[0], start: "top 85%", end: "top 40%", scrub: 0.6 },
+    });
+    fillWords((sel) => q(`.zf-features ${sel}`), q(".zf-features")[0], "top 80%", "top 35%");
+  }, [demoWidth]);
+
   return (
-    <section id="zoom" className="relative min-h-screen bg-background py-32 overflow-hidden">
-      <div className="relative max-w-7xl mx-auto px-6 md:px-12">
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          className="mb-24"
-        >
-          <h2 className="text-[clamp(2rem,5vw,4rem)] font-bold leading-[1.1] tracking-tight text-foreground max-w-3xl text-balance">
-            {copy.title}
-            <br />
-            <span className="text-muted-foreground">{copy.subtitle}</span>
+    <section ref={rootRef} id="zoom" className="mg-scene relative z-20 !bg-transparent">
+      <div className="zf-stage relative z-20 flex h-[100svh] flex-col items-center overflow-hidden pt-20 md:pt-24">
+        <div className="zf-bg absolute inset-0 -z-10 bg-background" aria-hidden="true" />
+        <div className="zf-head mb-6 flex w-full max-w-[1240px] flex-col gap-3 px-6 md:mb-8 md:flex-row md:items-end md:justify-between md:px-10">
+          <h2 className="mg-h2 !text-[clamp(1.9rem,4.2vw,4rem)]">
+            <FillText text={copy.title} />{" "}
+            <FillText text={copy.subtitle} />
           </h2>
-        </motion.div>
+          <span className="mg-label mg-index shrink-0 tabular-nums">01</span>
+        </div>
 
-        <CanvasZoomDemo copy={copy} />
+        <div className="zf-demo relative" style={{ width: demoWidth }}>
+          <CanvasZoomDemo copy={copy} />
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-          className="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8"
-        >
-          {copy.features.map((feature, i) => (
-            <div key={feature.title} className="group">
-              <div className="flex items-start gap-4">
-                <span className="text-muted-foreground/40 text-sm font-mono">0{i + 1}</span>
-                <div>
-                  <h3 className="text-foreground font-medium mb-2 group-hover:text-accent transition-colors">
-                    {feature.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {feature.description}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </motion.div>
+        {/* The strip that travels from the opening's timeline into the demo frame */}
+        <div className="zf-morph pointer-events-none absolute left-0 top-0 rounded-[6px] border-[1.5px] border-foreground opacity-0" aria-hidden="true">
+          <span className="zf-morph-clip absolute left-[2%] right-[2%] top-[18%] h-[26%] origin-left rounded-[4px] border border-foreground/60" />
+          <span className="zf-morph-clip absolute left-[34%] top-[57%] h-[26%] w-[23%] origin-left rounded-[4px] bg-[var(--mg-accent)]" />
+          <span className="zf-morph-clip absolute left-[68%] top-[57%] h-[26%] w-[14%] origin-left rounded-[4px] bg-[var(--mg-accent)] opacity-60" />
+        </div>
+      </div>
+
+      <div className="zf-features relative z-20 mx-auto grid w-full max-w-[1240px] gap-10 px-6 pb-28 pt-16 md:grid-cols-3 md:gap-0 md:px-10 md:pb-40">
+        {copy.features.map((feature, i) => (
+          <div key={feature.title} className="relative md:px-8 md:first:pl-0">
+            <svg className="absolute left-0 top-0 hidden h-full w-px overflow-visible text-foreground/30 md:block" aria-hidden="true">
+              {i > 0 && <line data-draw pathLength="1" className="mg-stroke" x1="0" y1="0" x2="0" y2="100%" />}
+            </svg>
+            <span className="mg-label mb-8 block tabular-nums">0{i + 1}</span>
+            <h3 className="mg-h3 mb-4"><FillText text={feature.title} /></h3>
+            <p className="max-w-sm text-[15px] leading-relaxed text-muted-foreground">{feature.description}</p>
+          </div>
+        ))}
       </div>
     </section>
   );
@@ -724,13 +803,9 @@ function CanvasZoomDemo({ copy }: { copy: ZoomFeatureCopy }) {
   }, [render]);
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 60 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-    >
-      <div className="relative overflow-hidden rounded-2xl border border-border/50 bg-[#101010] shadow-2xl shadow-black/30">
+    <div>
+      <div>
+      <div className="theme-dark relative overflow-hidden rounded-[10px] bg-[#101010] shadow-elevated ring-1 ring-black/10">
         <div
           ref={previewRef}
           className="relative aspect-video overflow-hidden bg-[#141414]"
@@ -759,7 +834,8 @@ function CanvasZoomDemo({ copy }: { copy: ZoomFeatureCopy }) {
           />
         </div>
       </div>
-    </motion.div>
+      </div>
+    </div>
   );
 }
 

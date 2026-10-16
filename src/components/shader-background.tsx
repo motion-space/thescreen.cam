@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { getDocumentTheme, observeTheme } from "../lib/theme";
 
 const vertexShader = `
   attribute vec2 position;
@@ -15,6 +16,7 @@ const fragmentShader = `
   uniform float uTime;
   uniform vec2 uResolution;
   uniform vec2 uMouse;
+  uniform float uLight;
 
   // Noise function
   vec3 mod289(vec3 x) { return x - floor(x * (1.0 / 289.0)) * 289.0; }
@@ -89,6 +91,11 @@ const fragmentShader = `
     color.g -= intensity * 0.02;
     color.b -= intensity * 0.03;
 
+    // Light theme: same field, rendered as soft warm shading on paper white
+    vec3 paper = vec3(0.98, 0.98, 0.984);
+    vec3 lightColor = paper - vec3(intensity * 0.55, intensity * 0.75, intensity * 0.85);
+    color = mix(color + vec3(0.045, 0.045, 0.052), lightColor, uLight);
+
     gl_FragColor = vec4(color, 1.0);
   }
 `;
@@ -146,6 +153,11 @@ export function ShaderBackground() {
     const uTime = gl.getUniformLocation(program, "uTime");
     const uResolution = gl.getUniformLocation(program, "uResolution");
     const uMouse = gl.getUniformLocation(program, "uMouse");
+    const uLight = gl.getUniformLocation(program, "uLight");
+    let lightAmount = getDocumentTheme() === "light" ? 1 : 0;
+    const stopObservingTheme = observeTheme((theme) => {
+      lightAmount = theme === "light" ? 1 : 0;
+    });
 
     // Resize handler
     const resize = () => {
@@ -201,7 +213,9 @@ export function ShaderBackground() {
       gl.uniform1f(uTime, time);
       gl.uniform2f(uResolution, canvas.width, canvas.height);
       gl.uniform2f(uMouse, mouseRef.current.x, mouseRef.current.y);
+      gl.uniform1f(uLight, lightAmount);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      canvas.style.opacity = "0.9";
       scheduleNextFrame();
     };
 
@@ -237,6 +251,7 @@ export function ShaderBackground() {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
       resizeObserver.disconnect();
       observer.disconnect();
+      stopObservingTheme();
       stop();
       gl.deleteProgram(program);
       gl.deleteShader(vs);
@@ -248,7 +263,7 @@ export function ShaderBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 h-full w-full pointer-events-none"
+      className="absolute inset-0 h-full w-full pointer-events-none opacity-0 transition-opacity duration-700"
       style={{ zIndex: 0 }}
     />
   );

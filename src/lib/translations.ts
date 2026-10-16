@@ -1,10 +1,16 @@
-import type { Locale } from "./i18n";
+import { microsoftStoreUrl, type Locale } from "./i18n";
 
 export type RichTextSegment = string | { href: string; text: string };
+
+/** Rich text flattened to plain text (structured data, meta). */
+export function richTextToPlain(value: string | RichTextSegment[]) {
+  return typeof value === "string" ? value : value.map((segment) => (typeof segment === "string" ? segment : segment.text)).join("");
+}
 
 export type HeaderCopy = {
   appStore: string;
   backToMenuAria: string;
+  themeToggleAria: string;
   closeMenuAria: string;
   homeAria: string;
   logoAlt: string;
@@ -211,7 +217,8 @@ export type FeatureCardsCopy = {
 export type FAQCopy = {
   eyebrow: string;
   items: Array<{
-    answer: string;
+    /** plain text, or text with links */
+    answer: string | RichTextSegment[];
     question: string;
   }>;
   title: string;
@@ -594,6 +601,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
     header: {
       appStore: "App Store",
       backToMenuAria: "Back to menu",
+      themeToggleAria: "Toggle light and dark mode",
       closeMenuAria: "Close menu",
       homeAria: "ScreenCam home",
       logoAlt: "ScreenCam Logo",
@@ -612,7 +620,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       appStoreButton: "View on App Store",
       copyright: "All rights reserved.",
       ctaText: "Get ScreenCam from the Mac App Store.",
-      ctaTitle: "Ready to capture better?",
+      ctaTitle: "Ready to capture better",
       description: "Native screen recording for Mac. Fast, lightweight, powerful.",
       groups: {
         legal: "Legal",
@@ -695,7 +703,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         restart: "Restart",
       },
       progressLabel: "Progress",
-      title: "ScreenCam Guides.",
+      title: "ScreenCam Guides",
       videoAriaLabel: "Documentation demo video",
       features: {
         basics: {
@@ -991,7 +999,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
     home: {
       screenStudioAlternative: {
         eyebrow: "Screen Studio Alternative",
-        title: "Need a lighter Mac screen recorder with deeper manual control?",
+        title: "Need a lighter Mac screen recorder with deeper manual control",
         description:
           "Compare ScreenCam with Screen Studio across app size, CPU and memory use, export speed, manual zoom anchors, layers, device mockups, and export formats.",
         cta: "Screen Studio alternative for Mac",
@@ -1016,8 +1024,8 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         systemValue: "macOS 15+",
         tagline: "High-resolution recording with a camera you can shape after the take.",
         titleLines: [
-          ["Capture", "Sharp."],
-          ["Direct", "The Frame."],
+          ["Capture", "Sharp"],
+          ["Direct", "The Frame"],
         ],
       },
       zoom: {
@@ -1045,9 +1053,9 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             description: "Zoom, pan, and click states are sampled with shutter-style blur.",
           },
         ],
-        subtitle: "Zoom with motion blur.",
+        subtitle: "Zoom with motion blur",
         timelineAria: "Timeline preview tracks",
-        title: "Focus on what matters.",
+        title: "Focus on what matters",
       },
       deviceMockups: {
         description:
@@ -1059,7 +1067,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           macBook: "ScreenCam app running on MacBook Pro",
           studioDisplay: "ScreenCam running on Studio Display with MacBook",
         },
-        title: "Beautiful on every screen.",
+        title: "Beautiful on every screen",
       },
       controls: {
         body:
@@ -1079,7 +1087,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         playTitle: "Play",
         scaleAria: "Scale",
         scaleLabel: "Scale",
-        titleMuted: "every zoom point.",
+        titleMuted: "every zoom point",
         titleStart: "Total control over",
       },
       performance: {
@@ -1095,11 +1103,11 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           screenCam: "ScreenCam",
         },
         subtitle: "No Electron. No web views. Pure native performance.",
-        title: "Native means fast.",
+        title: "Native means fast",
       },
       featureCards: {
         eyebrow: "More Features",
-        title: "Small details, ready for real workflows.",
+        title: "Small details, ready for real workflows",
         subtitle: "Native touches that make recording feel fast, polished, and Mac-first.",
         beautyThumb: {
           beforeLabel: "Beauty Off",
@@ -1245,8 +1253,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           },
           {
             question: "Is there a Windows version?",
-            answer:
-              "A Windows version is in preparation and will be released through the Microsoft Store.",
+            answer: ["Yes. The Windows version is now in beta on the ", { href: microsoftStoreUrl, text: "Microsoft Store" }, ". It hasn't been officially released yet, so expect some rough edges while testing continues."],
           },
           {
             question: "Can I export to different formats?",
@@ -1360,7 +1367,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "Store purchases",
             paragraphs: [
               [
-                "ScreenCam for macOS is distributed through the Mac App Store. The Windows version will be distributed through the Microsoft Store. Billing, subscriptions, renewals, cancellations, and refunds are handled by the store where you purchased ScreenCam.",
+                "ScreenCam for macOS is distributed through the Mac App Store. The Windows version is in beta on the ", { href: microsoftStoreUrl, text: "Microsoft Store" }, ". Billing, subscriptions, renewals, cancellations, and refunds are handled by the store where you purchased ScreenCam.",
               ],
             ],
           },
@@ -1368,7 +1375,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "Requirements",
             paragraphs: [
               [
-                "ScreenCam is available for macOS 15 or later. A Windows version is in preparation for the Microsoft Store.",
+                "ScreenCam is available for macOS 15 or later. The Windows version is in beta on the ", { href: microsoftStoreUrl, text: "Microsoft Store" }, " and has not been officially released yet.",
               ],
             ],
           },
@@ -1403,7 +1410,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "Subscriptions and purchases",
             paragraphs: [
               [
-                "ScreenCam Pro subscriptions and purchases are processed by Apple through the Mac App Store. Subscription billing, renewal, cancellation, refunds, and account management are handled through your Apple ID and App Store account settings.",
+                "ScreenCam Pro subscriptions and purchases are processed by Apple through the Mac App Store. Subscription billing, renewal, cancellation, refunds, and account management are handled through your Apple ID and App Store account settings. The Windows version, currently in beta, is distributed through the ", { href: microsoftStoreUrl, text: "Microsoft Store" }, ", where purchases are processed by Microsoft and managed through your Microsoft account.",
               ],
             ],
           },
@@ -1517,6 +1524,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
     header: {
       appStore: "App Store",
       backToMenuAria: "返回菜单",
+      themeToggleAria: "切换浅色与深色模式",
       closeMenuAria: "关闭菜单",
       homeAria: "ScreenCam 首页",
       logoAlt: "ScreenCam 标志",
@@ -1535,7 +1543,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       appStoreButton: "在 App Store 查看",
       copyright: "保留所有权利。",
       ctaText: "从 Mac App Store 获取 ScreenCam。",
-      ctaTitle: "准备录得更好吗？",
+      ctaTitle: "准备录得更好吗",
       description: "Mac 原生屏幕录制。快速、轻量、强大。",
       groups: {
         legal: "法律",
@@ -1614,7 +1622,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         restart: "重新开始",
       },
       progressLabel: "进度",
-      title: "ScreenCam 指南。",
+      title: "ScreenCam 指南",
       videoAriaLabel: "文档演示视频",
       features: {
         basics: {
@@ -1907,7 +1915,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
     home: {
       screenStudioAlternative: {
         eyebrow: "Screen Studio 替代方案",
-        title: "想要更轻巧、手动控制更深入的 Mac 录屏工具吗？",
+        title: "想要更轻巧、手动控制更深入的 Mac 录屏工具吗",
         description:
           "从应用体积、CPU 与内存占用、导出速度、手动变焦锚点、图层、设备样机和导出格式等方面对比 ScreenCam 与 Screen Studio。",
         cta: "查看 Mac 版 Screen Studio 替代方案",
@@ -1921,8 +1929,8 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         systemValue: "macOS 15+",
         tagline: "原生 macOS 录屏，带手动变焦、运动模糊和精确导出。",
         titleLines: [
-          ["让每一帧", "都清晰。"],
-          ["让重点", "被看见。"],
+          ["让每一帧", "都清晰"],
+          ["让重点", "被看见"],
         ],
       },
       zoom: {
@@ -1950,9 +1958,9 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             description: "变焦、平移和点击状态都会按快门感采样模糊。",
           },
         ],
-        subtitle: "带运动模糊的变焦。",
+        subtitle: "带运动模糊的变焦",
         timelineAria: "时间线预览轨道",
-        title: "聚焦真正重要的画面。",
+        title: "聚焦真正重要的画面",
       },
       deviceMockups: {
         description: "用精致设备框导出内容。iPhone、Mac、Studio Display，让画面呈现得刚刚好。",
@@ -1977,7 +1985,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         playTitle: "播放",
         scaleAria: "缩放倍率",
         scaleLabel: "倍率",
-        titleMuted: "每个变焦点。",
+        titleMuted: "每个变焦点",
         titleStart: "完全掌控",
       },
       performance: {
@@ -1997,7 +2005,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       },
       featureCards: {
         eyebrow: "更多特色",
-        title: "每一处小细节，都认真打磨。",
+        title: "每一处小细节，都认真打磨",
         subtitle: "从录制、编辑到导出，围绕 Mac 原生体验，把常用流程做得更顺手。",
         beautyThumb: {
           beforeLabel: "美颜关闭",
@@ -2137,7 +2145,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           },
           {
             question: "有 Windows 版本吗？",
-            answer: "Windows 版本正在准备中，将通过 Microsoft Store 发布。",
+            answer: ["有。Windows 版目前正在内测，可在 ", { href: microsoftStoreUrl, text: "Microsoft Store" }, " 获取。它尚未正式发布，测试期间可能还有一些不完善之处。"],
           },
           {
             question: "可以导出不同格式吗？",
@@ -2241,13 +2249,13 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "商店购买",
             paragraphs: [
               [
-                "ScreenCam macOS 版通过 Mac App Store 分发；Windows 版将通过 Microsoft Store 分发。计费、订阅、续订、取消和退款由你购买 ScreenCam 的对应商店处理。",
+                "ScreenCam macOS 版通过 Mac App Store 分发；Windows 版目前正在内测，通过 ", { href: microsoftStoreUrl, text: "Microsoft Store" }, " 分发。计费、订阅、续订、取消和退款由你购买 ScreenCam 的对应商店处理。",
               ],
             ],
           },
           {
             title: "系统要求",
-            paragraphs: [["ScreenCam 支持 macOS 15 或更高版本。Windows 版本正在准备中，将通过 Microsoft Store 发布。"]],
+            paragraphs: [["ScreenCam 支持 macOS 15 或更高版本。Windows 版目前正在内测，可在 ", { href: microsoftStoreUrl, text: "Microsoft Store" }, " 获取，尚未正式发布。"]],
           },
           {
             title: "隐私",
@@ -2274,7 +2282,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "订阅和购买",
             paragraphs: [
               [
-                "ScreenCam Pro 订阅和购买由 Apple 通过 Mac App Store 处理。订阅计费、续订、取消、退款和账户管理均通过你的 Apple ID 与 App Store 账户设置完成。",
+                "ScreenCam Pro 订阅和购买由 Apple 通过 Mac App Store 处理。订阅计费、续订、取消、退款和账户管理均通过你的 Apple ID 与 App Store 账户设置完成。Windows 版目前处于内测阶段，通过 ", { href: microsoftStoreUrl, text: "Microsoft Store" }, " 分发，其购买由 Microsoft 处理，并通过你的 Microsoft 账户管理。",
               ],
             ],
           },
@@ -2379,6 +2387,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
     header: {
       appStore: "App Store",
       backToMenuAria: "Zurück zum Menü",
+      themeToggleAria: "Hell- und Dunkelmodus umschalten",
       closeMenuAria: "Menü schließen",
       homeAria: "ScreenCam Startseite",
       logoAlt: "ScreenCam Logo",
@@ -2397,7 +2406,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       appStoreButton: "Im App Store ansehen",
       copyright: "Alle Rechte vorbehalten.",
       ctaText: "Lade ScreenCam aus dem Mac App Store.",
-      ctaTitle: "Bereit, besser aufzunehmen?",
+      ctaTitle: "Bereit, besser aufzunehmen",
       description: "Native Bildschirmaufnahme für Mac. Schnell, leichtgewichtig, leistungsstark.",
       groups: {
         legal: "Rechtliches",
@@ -2480,7 +2489,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         restart: "Neu starten",
       },
       progressLabel: "Fortschritt",
-      title: "ScreenCam Guides.",
+      title: "ScreenCam Guides",
       videoAriaLabel: "Dokumentations-Demo-Video",
       features: {
         basics: {
@@ -2776,7 +2785,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
     home: {
       screenStudioAlternative: {
         eyebrow: "Screen-Studio-Alternative",
-        title: "Brauchst du einen leichteren Mac-Screenrecorder mit mehr manueller Kontrolle?",
+        title: "Brauchst du einen leichteren Mac-Screenrecorder mit mehr manueller Kontrolle",
         description:
           "Vergleiche ScreenCam mit Screen Studio bei App-Größe, CPU- und Speichernutzung, Exportgeschwindigkeit, manuellen Zoom-Ankern, Ebenen, Geräte-Mockups und Exportformaten.",
         cta: "Screen-Studio-Alternative für Mac",
@@ -2795,8 +2804,8 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         systemValue: "macOS 15+",
         tagline: "Hochauflösende Aufnahme mit einer Kamera, die du nach dem Take formen kannst.",
         titleLines: [
-          ["Scharf", "aufnehmen."],
-          ["Frame", "führen."],
+          ["Scharf", "aufnehmen"],
+          ["Frame", "führen"],
         ],
       },
       zoom: {
@@ -2824,9 +2833,9 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             description: "Zoom-, Schwenk- und Klickzustände werden mit shutter-artiger Unschärfe gesampelt.",
           },
         ],
-        subtitle: "Zoom mit Bewegungsunschärfe.",
+        subtitle: "Zoom mit Bewegungsunschärfe",
         timelineAria: "Timeline-Vorschauspuren",
-        title: "Fokussiere, worauf es ankommt.",
+        title: "Fokussiere, worauf es ankommt",
       },
       deviceMockups: {
         description:
@@ -2838,7 +2847,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           macBook: "ScreenCam-App auf einem MacBook Pro",
           studioDisplay: "ScreenCam auf Studio Display mit MacBook",
         },
-        title: "Schön auf jedem Bildschirm.",
+        title: "Schön auf jedem Bildschirm",
       },
       controls: {
         body:
@@ -2858,7 +2867,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         playTitle: "Play",
         scaleAria: "Skalierung",
         scaleLabel: "Skalierung",
-        titleMuted: "jeden Zoompunkt.",
+        titleMuted: "jeden Zoompunkt",
         titleStart: "Volle Kontrolle über",
       },
       performance: {
@@ -2874,11 +2883,11 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           screenCam: "ScreenCam",
         },
         subtitle: "Kein Electron. Keine Webviews. Reine native Performance.",
-        title: "Nativ heißt schnell.",
+        title: "Nativ heißt schnell",
       },
       featureCards: {
         eyebrow: "Weitere Features",
-        title: "Kleine Details, bereit für echte Workflows.",
+        title: "Kleine Details, bereit für echte Workflows",
         subtitle: "Native Feinheiten, damit Aufnahmen schnell, sauber und Mac-first wirken.",
         beautyThumb: {
           beforeLabel: "Beauty aus",
@@ -3019,8 +3028,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           },
           {
             question: "Gibt es eine Windows-Version?",
-            answer:
-              "Eine Windows-Version wird vorbereitet und über den Microsoft Store veröffentlicht.",
+            answer: ["Ja. Die Windows-Version ist jetzt als Beta im ", { href: microsoftStoreUrl, text: "Microsoft Store" }, " verfügbar. Sie ist noch nicht offiziell veröffentlicht, daher kann es während der Testphase noch Ecken und Kanten geben."],
           },
           {
             question: "Kann ich in verschiedene Formate exportieren?",
@@ -3126,13 +3134,13 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "App-Store-Käufe",
             paragraphs: [
               [
-                "ScreenCam wird über den Mac App Store verteilt. Abrechnung, Abonnements, Verlängerungen, Kündigungen und Rückerstattungen werden von Apple über deine Apple-ID und die App-Store-Account-Einstellungen abgewickelt.",
+                "ScreenCam wird über den Mac App Store verteilt. Abrechnung, Abonnements, Verlängerungen, Kündigungen und Rückerstattungen werden von Apple über deine Apple-ID und die App-Store-Account-Einstellungen abgewickelt. Die Windows-Version ist als Beta im ", { href: microsoftStoreUrl, text: "Microsoft Store" }, " erhältlich; Käufe dort werden von Microsoft abgewickelt.",
               ],
             ],
           },
           {
             title: "Anforderungen",
-            paragraphs: [["ScreenCam ist für macOS 15 oder neuer verfügbar. Eine Windows-Version wird für den Microsoft Store vorbereitet."]],
+            paragraphs: [["ScreenCam ist für macOS 15 oder neuer verfügbar. Die Windows-Version ist als Beta im ", { href: microsoftStoreUrl, text: "Microsoft Store" }, " erhältlich und noch nicht offiziell veröffentlicht."]],
           },
           {
             title: "Datenschutz",
@@ -3159,7 +3167,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "Abonnements und Käufe",
             paragraphs: [
               [
-                "ScreenCam Pro Abonnements und Käufe werden von Apple über den Mac App Store verarbeitet. Abonnementabrechnung, Verlängerung, Kündigung, Rückerstattung und Accountverwaltung erfolgen über deine Apple-ID und App-Store-Account-Einstellungen.",
+                "ScreenCam Pro Abonnements und Käufe werden von Apple über den Mac App Store verarbeitet. Abonnementabrechnung, Verlängerung, Kündigung, Rückerstattung und Accountverwaltung erfolgen über deine Apple-ID und App-Store-Account-Einstellungen. Die Windows-Version befindet sich derzeit in der Beta und wird über den ", { href: microsoftStoreUrl, text: "Microsoft Store" }, " vertrieben; Käufe dort werden von Microsoft verarbeitet und über dein Microsoft-Konto verwaltet.",
               ],
             ],
           },
@@ -3264,6 +3272,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
     header: {
       appStore: "App Store",
       backToMenuAria: "メニューに戻る",
+      themeToggleAria: "ライト/ダークモードを切り替え",
       closeMenuAria: "メニューを閉じる",
       homeAria: "ScreenCam ホーム",
       logoAlt: "ScreenCam ロゴ",
@@ -3282,7 +3291,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       appStoreButton: "App Store で見る",
       copyright: "All rights reserved.",
       ctaText: "Mac App Store から ScreenCam を入手。",
-      ctaTitle: "もっときれいに録画する準備はできましたか？",
+      ctaTitle: "もっときれいに録画する準備はできましたか",
       description: "Mac のためのネイティブ画面録画。高速、軽量、パワフル。",
       groups: {
         legal: "法務",
@@ -3361,7 +3370,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         restart: "最初から",
       },
       progressLabel: "進行状況",
-      title: "ScreenCam ガイド。",
+      title: "ScreenCam ガイド",
       videoAriaLabel: "ドキュメントのデモ動画",
       features: {
         basics: {
@@ -3655,7 +3664,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
     home: {
       screenStudioAlternative: {
         eyebrow: "Screen Studio の代替",
-        title: "より軽く、手動調整もしやすい Mac 画面録画ツールが必要ですか？",
+        title: "より軽く、手動調整もしやすい Mac 画面録画ツールが必要ですか",
         description:
           "アプリサイズ、CPU とメモリ使用量、書き出し速度、手動ズームアンカー、レイヤー、デバイスモックアップ、書き出し形式で ScreenCam と Screen Studio を比較できます。",
         cta: "Mac 向け Screen Studio 代替を見る",
@@ -3669,8 +3678,8 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         systemValue: "macOS 15+",
         tagline: "高解像度で録画し、撮影後にカメラワークを調整できます。",
         titleLines: [
-          ["鮮明に", "収録。"],
-          ["フレームを", "導く。"],
+          ["鮮明に", "収録"],
+          ["フレームを", "導く"],
         ],
       },
       zoom: {
@@ -3698,9 +3707,9 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             description: "ズーム、パン、クリック状態をシャッター風のブラーでサンプリングします。",
           },
         ],
-        subtitle: "モーションブラー付きズーム。",
+        subtitle: "モーションブラー付きズーム",
         timelineAria: "タイムラインプレビュートラック",
-        title: "大事な部分にフォーカス。",
+        title: "大事な部分にフォーカス",
       },
       deviceMockups: {
         description: "美しいデバイスフレームで書き出し。iPhone、Mac、Studio Display に、あなたのコンテンツをきれいに表示します。",
@@ -3711,7 +3720,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           macBook: "MacBook Pro 上で動作する ScreenCam アプリ",
           studioDisplay: "Studio Display と MacBook 上で動作する ScreenCam",
         },
-        title: "どの画面でも美しく。",
+        title: "どの画面でも美しく",
       },
       controls: {
         body: "手動モードでは創作の自由度が広がります。1 つのズームクリップに複数のアンカーを追加し、それぞれに倍率と中心点を設定できます。",
@@ -3725,7 +3734,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         playTitle: "再生",
         scaleAria: "倍率",
         scaleLabel: "倍率",
-        titleMuted: "すべてのズームポイント。",
+        titleMuted: "すべてのズームポイント",
         titleStart: "完全にコントロール",
       },
       performance: {
@@ -3741,11 +3750,11 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           screenCam: "ScreenCam",
         },
         subtitle: "Electron なし。WebView なし。純粋なネイティブ性能。",
-        title: "ネイティブだから速い。",
+        title: "ネイティブだから速い",
       },
       featureCards: {
         eyebrow: "その他の機能",
-        title: "録画の細部まで、実用向けに磨き込み。",
+        title: "録画の細部まで、実用向けに磨き込み",
         subtitle: "Mac らしいネイティブ体験で、日常の録画フローをもっと軽快にします。",
         beautyThumb: {
           beforeLabel: "美肌補正オフ",
@@ -3885,7 +3894,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           },
           {
             question: "Windows 版はありますか？",
-            answer: "Windows 版を準備中で、Microsoft Store からリリースする予定です。",
+            answer: ["はい。Windows 版は現在ベータ版として ", { href: microsoftStoreUrl, text: "Microsoft Store" }, " で公開しています。正式リリース前のため、テスト期間中は一部未完成の部分があります。"],
           },
           {
             question: "異なる形式で書き出せますか？",
@@ -3989,13 +3998,13 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "App Store 購入",
             paragraphs: [
               [
-                "ScreenCam は Mac App Store を通じて配布されます。請求、サブスクリプション、更新、キャンセル、返金は、Apple ID と App Store アカウント設定を通じて Apple が処理します。",
+                "ScreenCam は Mac App Store を通じて配布されます。請求、サブスクリプション、更新、キャンセル、返金は、Apple ID と App Store アカウント設定を通じて Apple が処理します。Windows 版は現在ベータ版として ", { href: microsoftStoreUrl, text: "Microsoft Store" }, " で配布しており、その購入は Microsoft が処理します。",
               ],
             ],
           },
           {
             title: "要件",
-            paragraphs: [["ScreenCam は macOS 15 以降で利用できます。Windows 版は Microsoft Store 向けに準備中です。"]],
+            paragraphs: [["ScreenCam は macOS 15 以降で利用できます。Windows 版は現在ベータ版として ", { href: microsoftStoreUrl, text: "Microsoft Store" }, " で公開しており、まだ正式リリース前です。"]],
           },
           {
             title: "プライバシー",
@@ -4022,7 +4031,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "サブスクリプションと購入",
             paragraphs: [
               [
-                "ScreenCam Pro のサブスクリプションと購入は、Apple が Mac App Store を通じて処理します。サブスクリプションの請求、更新、キャンセル、返金、アカウント管理は、Apple ID と App Store アカウント設定を通じて行われます。",
+                "ScreenCam Pro のサブスクリプションと購入は、Apple が Mac App Store を通じて処理します。サブスクリプションの請求、更新、キャンセル、返金、アカウント管理は、Apple ID と App Store アカウント設定を通じて行われます。Windows 版は現在ベータ版で、", { href: microsoftStoreUrl, text: "Microsoft Store" }, " を通じて配布されます。その購入は Microsoft が処理し、Microsoft アカウントで管理されます。",
               ],
             ],
           },
@@ -4127,6 +4136,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
     header: {
       appStore: "App Store",
       backToMenuAria: "메뉴로 돌아가기",
+      themeToggleAria: "라이트/다크 모드 전환",
       closeMenuAria: "메뉴 닫기",
       homeAria: "ScreenCam 홈",
       logoAlt: "ScreenCam 로고",
@@ -4145,7 +4155,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       appStoreButton: "App Store에서 보기",
       copyright: "All rights reserved.",
       ctaText: "Mac App Store에서 ScreenCam을 받으세요.",
-      ctaTitle: "더 좋은 캡처를 시작할까요?",
+      ctaTitle: "더 좋은 캡처를 시작할까요",
       description: "Mac용 네이티브 화면 녹화. 빠르고 가볍고 강력합니다.",
       groups: {
         legal: "법적 고지",
@@ -4224,7 +4234,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         restart: "처음부터",
       },
       progressLabel: "진행률",
-      title: "ScreenCam 가이드.",
+      title: "ScreenCam 가이드",
       videoAriaLabel: "문서 데모 동영상",
       features: {
         basics: {
@@ -4518,7 +4528,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
     home: {
       screenStudioAlternative: {
         eyebrow: "Screen Studio 대안",
-        title: "더 가볍고 수동 제어가 깊은 Mac 화면 녹화 도구가 필요하신가요?",
+        title: "더 가볍고 수동 제어가 깊은 Mac 화면 녹화 도구가 필요하신가요",
         description:
           "앱 크기, CPU 및 메모리 사용량, 내보내기 속도, 수동 줌 앵커, 레이어, 기기 목업, 내보내기 형식으로 ScreenCam과 Screen Studio를 비교하세요.",
         cta: "Mac용 Screen Studio 대안 보기",
@@ -4532,8 +4542,8 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         systemValue: "macOS 15+",
         tagline: "고해상도로 녹화하고, 촬영 후 카메라 움직임을 원하는 대로 다듬으세요.",
         titleLines: [
-          ["선명하게", "녹화."],
-          ["프레임을", "이끌기."],
+          ["선명하게", "녹화"],
+          ["프레임을", "이끌기"],
         ],
       },
       zoom: {
@@ -4561,9 +4571,9 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             description: "줌, 팬, 클릭 상태를 셔터 느낌의 블러로 샘플링합니다.",
           },
         ],
-        subtitle: "모션 블러가 있는 줌.",
+        subtitle: "모션 블러가 있는 줌",
         timelineAria: "타임라인 미리보기 트랙",
-        title: "중요한 부분에 집중하세요.",
+        title: "중요한 부분에 집중하세요",
       },
       deviceMockups: {
         description: "멋진 기기 프레임으로 내보내세요. iPhone, Mac, Studio Display에서 콘텐츠를 완성도 있게 보여줍니다.",
@@ -4574,7 +4584,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           macBook: "MacBook Pro에서 실행 중인 ScreenCam 앱",
           studioDisplay: "Studio Display와 MacBook에서 실행 중인 ScreenCam",
         },
-        title: "모든 화면에서 아름답게.",
+        title: "모든 화면에서 아름답게",
       },
       controls: {
         body: "수동 모드는 완전한 창작 자유를 제공합니다. 하나의 줌 클립에 여러 앵커를 추가하고, 각 앵커마다 배율과 중심점을 설정하세요.",
@@ -4588,7 +4598,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         playTitle: "재생",
         scaleAria: "배율",
         scaleLabel: "배율",
-        titleMuted: "모든 줌 포인트.",
+        titleMuted: "모든 줌 포인트",
         titleStart: "완전한 제어",
       },
       performance: {
@@ -4604,11 +4614,11 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           screenCam: "ScreenCam",
         },
         subtitle: "Electron 없음. WebView 없음. 순수 네이티브 성능.",
-        title: "네이티브라서 빠릅니다.",
+        title: "네이티브라서 빠릅니다",
       },
       featureCards: {
         eyebrow: "더 많은 기능",
-        title: "녹화의 작은 디테일까지 실전 흐름에 맞게.",
+        title: "녹화의 작은 디테일까지 실전 흐름에 맞게",
         subtitle: "Mac다운 네이티브 경험으로 자주 쓰는 녹화 흐름을 더 매끄럽게 만듭니다.",
         beautyThumb: {
           beforeLabel: "보정 끔",
@@ -4748,7 +4758,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           },
           {
             question: "Windows 버전이 있나요?",
-            answer: "Windows 버전을 준비 중이며 Microsoft Store를 통해 출시할 예정입니다.",
+            answer: ["네. Windows 버전은 현재 ", { href: microsoftStoreUrl, text: "Microsoft Store" }, "에서 베타로 제공됩니다. 아직 정식 출시 전이므로 테스트 기간 동안 다듬어지지 않은 부분이 있을 수 있습니다."],
           },
           {
             question: "다른 형식으로 내보낼 수 있나요?",
@@ -4852,13 +4862,13 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "App Store 구매",
             paragraphs: [
               [
-                "ScreenCam은 Mac App Store를 통해 배포됩니다. 결제, 구독, 갱신, 취소, 환불은 Apple ID 및 App Store 계정 설정을 통해 Apple이 처리합니다.",
+                "ScreenCam은 Mac App Store를 통해 배포됩니다. 결제, 구독, 갱신, 취소, 환불은 Apple ID 및 App Store 계정 설정을 통해 Apple이 처리합니다. Windows 버전은 현재 ", { href: microsoftStoreUrl, text: "Microsoft Store" }, "에서 베타로 제공되며, 해당 구매는 Microsoft가 처리합니다.",
               ],
             ],
           },
           {
             title: "요구 사항",
-            paragraphs: [["ScreenCam은 macOS 15 이상에서 사용할 수 있습니다. Windows 버전은 Microsoft Store 출시를 준비 중입니다."]],
+            paragraphs: [["ScreenCam은 macOS 15 이상에서 사용할 수 있습니다. Windows 버전은 현재 ", { href: microsoftStoreUrl, text: "Microsoft Store" }, "에서 베타로 제공되며 아직 정식 출시 전입니다."]],
           },
           {
             title: "개인정보",
@@ -4885,7 +4895,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "구독 및 구매",
             paragraphs: [
               [
-                "ScreenCam Pro 구독 및 구매는 Apple이 Mac App Store를 통해 처리합니다. 구독 결제, 갱신, 취소, 환불, 계정 관리는 Apple ID 및 App Store 계정 설정을 통해 처리됩니다.",
+                "ScreenCam Pro 구독 및 구매는 Apple이 Mac App Store를 통해 처리합니다. 구독 결제, 갱신, 취소, 환불, 계정 관리는 Apple ID 및 App Store 계정 설정을 통해 처리됩니다. 현재 베타인 Windows 버전은 ", { href: microsoftStoreUrl, text: "Microsoft Store" }, "를 통해 배포되며, 해당 구매는 Microsoft가 처리하고 Microsoft 계정을 통해 관리됩니다.",
               ],
             ],
           },
@@ -4990,6 +5000,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
     header: {
       appStore: "App Store",
       backToMenuAria: "返回選單",
+      themeToggleAria: "切換淺色與深色模式",
       closeMenuAria: "關閉選單",
       homeAria: "ScreenCam 首頁",
       logoAlt: "ScreenCam 標誌",
@@ -5008,7 +5019,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       appStoreButton: "在 App Store 檢視",
       copyright: "保留所有權利。",
       ctaText: "從 Mac App Store 獲取 ScreenCam。",
-      ctaTitle: "準備錄得更好嗎？",
+      ctaTitle: "準備錄得更好嗎",
       description: "Mac 原生螢幕錄製。快速、輕量、強大。",
       groups: {
         legal: "法律",
@@ -5087,7 +5098,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         restart: "重新開始",
       },
       progressLabel: "進度",
-      title: "ScreenCam 指南。",
+      title: "ScreenCam 指南",
       videoAriaLabel: "文件演示影片",
       features: {
         basics: {
@@ -5380,7 +5391,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
     home: {
       screenStudioAlternative: {
         eyebrow: "Screen Studio 替代方案",
-        title: "想要更輕巧、手動控制更深入的 Mac 錄屏工具嗎？",
+        title: "想要更輕巧、手動控制更深入的 Mac 錄屏工具嗎",
         description:
           "從應用體積、CPU 與記憶體佔用、匯出速度、手動變焦錨點、圖層、裝置樣機和匯出格式等方面對比 ScreenCam 與 Screen Studio。",
         cta: "檢視 Mac 版 Screen Studio 替代方案",
@@ -5394,8 +5405,8 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         systemValue: "macOS 15+",
         tagline: "原生 macOS 錄屏，帶手動變焦、運動模糊和精確匯出。",
         titleLines: [
-          ["讓每一幀", "都清晰。"],
-          ["讓重點", "被看見。"],
+          ["讓每一幀", "都清晰"],
+          ["讓重點", "被看見"],
         ],
       },
       zoom: {
@@ -5423,9 +5434,9 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             description: "變焦、平移和點選狀態都會按快門感取樣模糊。",
           },
         ],
-        subtitle: "帶運動模糊的變焦。",
+        subtitle: "帶運動模糊的變焦",
         timelineAria: "時間線預覽軌道",
-        title: "聚焦真正重要的畫面。",
+        title: "聚焦真正重要的畫面",
       },
       deviceMockups: {
         description: "用精緻裝置框匯出內容。iPhone、Mac、Studio Display，讓畫面呈現得剛剛好。",
@@ -5450,7 +5461,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         playTitle: "播放",
         scaleAria: "縮放倍率",
         scaleLabel: "倍率",
-        titleMuted: "每個變焦點。",
+        titleMuted: "每個變焦點",
         titleStart: "完全掌控",
       },
       performance: {
@@ -5470,7 +5481,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       },
       featureCards: {
         eyebrow: "更多特色",
-        title: "每一處小細節，都認真打磨。",
+        title: "每一處小細節，都認真打磨",
         subtitle: "從錄製、編輯到匯出，圍繞 Mac 原生體驗，把常用流程做得更順手。",
         beautyThumb: {
           beforeLabel: "美顏關閉",
@@ -5610,7 +5621,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           },
           {
             question: "有 Windows 版本嗎？",
-            answer: "Windows 版本正在準備中，將透過 Microsoft Store 發布。",
+            answer: ["有。Windows 版目前正在內測，可在 ", { href: microsoftStoreUrl, text: "Microsoft Store" }, " 取得。它尚未正式發布，測試期間可能仍有一些不完善之處。"],
           },
           {
             question: "可以匯出不同格式嗎？",
@@ -5714,13 +5725,13 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "App Store 購買",
             paragraphs: [
               [
-                "ScreenCam 透過 Mac App Store 分發。計費、訂閱、續訂、取消和退款由 Apple 透過你的 Apple ID 與 App Store 賬戶設定處理。",
+                "ScreenCam 透過 Mac App Store 分發。計費、訂閱、續訂、取消和退款由 Apple 透過你的 Apple ID 與 App Store 賬戶設定處理。Windows 版目前正在內測，透過 ", { href: microsoftStoreUrl, text: "Microsoft Store" }, " 分發，其購買由 Microsoft 處理。",
               ],
             ],
           },
           {
             title: "系統要求",
-            paragraphs: [["ScreenCam 支援 macOS 15 或更新版本。Windows 版本正在準備中，將透過 Microsoft Store 發布。"]],
+            paragraphs: [["ScreenCam 支援 macOS 15 或更新版本。Windows 版目前正在內測，可在 ", { href: microsoftStoreUrl, text: "Microsoft Store" }, " 取得，尚未正式發布。"]],
           },
           {
             title: "隱私",
@@ -5747,7 +5758,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "訂閱和購買",
             paragraphs: [
               [
-                "ScreenCam Pro 訂閱和購買由 Apple 透過 Mac App Store 處理。訂閱計費、續訂、取消、退款和賬戶管理均透過你的 Apple ID 與 App Store 賬戶設定完成。",
+                "ScreenCam Pro 訂閱和購買由 Apple 透過 Mac App Store 處理。訂閱計費、續訂、取消、退款和賬戶管理均透過你的 Apple ID 與 App Store 賬戶設定完成。Windows 版目前處於內測階段，透過 ", { href: microsoftStoreUrl, text: "Microsoft Store" }, " 分發，其購買由 Microsoft 處理，並透過你的 Microsoft 帳戶管理。",
               ],
             ],
           },
@@ -5852,6 +5863,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
     header: {
       appStore: "App Store",
       backToMenuAria: "Volver al menú",
+      themeToggleAria: "Cambiar entre modo claro y oscuro",
       closeMenuAria: "Cerrar menú",
       homeAria: "Inicio de ScreenCam",
       logoAlt: "Logotipo ScreenCam",
@@ -5870,7 +5882,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       appStoreButton: "Ver en App Store",
       copyright: "Todos los derechos reservados.",
       ctaText: "Obtenga ScreenCam del Mac App Store.",
-      ctaTitle: "¿Listo para capturar mejor?",
+      ctaTitle: "¿Listo para capturar mejor",
       description: "Grabación de pantalla nativa para Mac. Rápido, ligero, potente.",
       groups: {
         legal: "Legales",
@@ -5953,7 +5965,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         restart: "Reiniciar",
       },
       progressLabel: "Progreso",
-      title: "Guías ScreenCam.",
+      title: "Guías ScreenCam",
       videoAriaLabel: "Vídeo de demostración de documentación",
       features: {
         basics: {
@@ -6249,7 +6261,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
     home: {
       screenStudioAlternative: {
         eyebrow: "Alternativa Screen Studio",
-        title: "¿Necesita un grabador de pantalla Mac más ligero y con un control manual más profundo?",
+        title: "¿Necesita un grabador de pantalla Mac más ligero y con un control manual más profundo",
         description:
           "Compare ScreenCam con Screen Studio en términos de tamaño de aplicación, uso de CPU y memoria, velocidad de exportación, anclajes de zoom manual, capas, maquetas de dispositivos y formatos de exportación.",
         cta: "Screen Studio alternativa para Mac",
@@ -6274,8 +6286,8 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         systemValue: "macOS 15+",
         tagline: "Grabación en alta resolución con una cámara a la que puedes darle forma después de la toma.",
         titleLines: [
-          ["Capturar", "Afilado."],
-          ["directo", "El marco."],
+          ["Capturar", "Afilado"],
+          ["directo", "El marco"],
         ],
       },
       zoom: {
@@ -6303,9 +6315,9 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             description: "Los estados de zoom, panorámica y clic se muestran con un desenfoque estilo obturador.",
           },
         ],
-        subtitle: "Zoom con desenfoque de movimiento.",
+        subtitle: "Zoom con desenfoque de movimiento",
         timelineAria: "Pistas de vista previa de la línea de tiempo",
-        title: "Concéntrate en lo que importa.",
+        title: "Concéntrate en lo que importa",
       },
       deviceMockups: {
         description:
@@ -6317,7 +6329,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           macBook: "Aplicación ScreenCam ejecutándose en MacBook Pro",
           studioDisplay: "ScreenCam ejecutándose en Studio Display con MacBook",
         },
-        title: "Hermosa en cada pantalla.",
+        title: "Hermosa en cada pantalla",
       },
       controls: {
         body:
@@ -6337,7 +6349,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         playTitle: "Jugar",
         scaleAria: "Escala",
         scaleLabel: "Escala",
-        titleMuted: "cada punto de zoom.",
+        titleMuted: "cada punto de zoom",
         titleStart: "Control total sobre",
       },
       performance: {
@@ -6353,11 +6365,11 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           screenCam: "ScreenCam",
         },
         subtitle: "Sin electrón. Sin vistas web. Puro rendimiento nativo.",
-        title: "Nativo significa rápido.",
+        title: "Nativo significa rápido",
       },
       featureCards: {
         eyebrow: "Características More",
-        title: "Pequeños detalles, listos para flujos de trabajo reales.",
+        title: "Pequeños detalles, listos para flujos de trabajo reales",
         subtitle: "Toques nativos que hacen que la grabación se sienta rápida, pulida y Mac-primera.",
         beautyThumb: {
           beforeLabel: "Belleza apagada",
@@ -6503,8 +6515,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           },
           {
             question: "¿Existe una versión para Windows?",
-            answer:
-              "Estamos preparando una versión para Windows que se publicará a través de Microsoft Store.",
+            answer: ["Sí. La versión para Windows ya está disponible en beta en ", { href: microsoftStoreUrl, text: "Microsoft Store" }, ". Aún no se ha lanzado oficialmente, así que puede tener algunos detalles por pulir mientras continúan las pruebas."],
           },
           {
             question: "¿Puedo exportar a diferentes formatos?",
@@ -6539,7 +6550,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             ],
           },
           {
-            title: "Grabaciones y archivos locales.",
+            title: "Grabaciones y archivos locales",
             paragraphs: [
               [
                 "Las grabaciones de pantalla, el video de la cámara, el audio del micrófono, el audio del sistema, los datos del cursor, los videos exportados, los archivos del espacio de trabajo y los archivos de fondo de pantalla personalizados permanecen en su dispositivo o en las ubicaciones que elija. ScreenCam no carga este contenido a los servidores ScreenCam.",
@@ -6618,7 +6629,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "App Store compras",
             paragraphs: [
               [
-                "ScreenCam se distribuye a través de Mac App Store. Apple maneja la facturación, las suscripciones, las renovaciones, las cancelaciones y los reembolsos a través de su ID de Apple y la configuración de su cuenta App Store.",
+                "ScreenCam se distribuye a través de Mac App Store. Apple maneja la facturación, las suscripciones, las renovaciones, las cancelaciones y los reembolsos a través de su ID de Apple y la configuración de su cuenta App Store. La versión para Windows está en beta en ", { href: microsoftStoreUrl, text: "Microsoft Store" }, "; Microsoft gestiona las compras realizadas allí.",
               ],
             ],
           },
@@ -6626,7 +6637,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "Requisitos",
             paragraphs: [
               [
-                "ScreenCam está disponible para macOS 15 o posterior. Se está preparando una versión para Windows para Microsoft Store.",
+                "ScreenCam está disponible para macOS 15 o posterior. La versión para Windows está en beta en ", { href: microsoftStoreUrl, text: "Microsoft Store" }, " y aún no se ha lanzado oficialmente.",
               ],
             ],
           },
@@ -6661,7 +6672,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "Suscripciones y compras",
             paragraphs: [
               [
-                "Las suscripciones y compras ScreenCam Pro son procesadas por Apple a través de Mac App Store. La facturación de la suscripción, la renovación, la cancelación, los reembolsos y la administración de la cuenta se manejan a través de su ID Apple y la configuración de su cuenta App Store.",
+                "Las suscripciones y compras ScreenCam Pro son procesadas por Apple a través de Mac App Store. La facturación de la suscripción, la renovación, la cancelación, los reembolsos y la administración de la cuenta se manejan a través de su ID Apple y la configuración de su cuenta App Store. La versión para Windows, actualmente en beta, se distribuye a través de ", { href: microsoftStoreUrl, text: "Microsoft Store" }, "; Microsoft procesa esas compras y se gestionan a través de su cuenta de Microsoft.",
               ],
             ],
           },
@@ -6775,6 +6786,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
     header: {
       appStore: "App Store",
       backToMenuAria: "Retour au menu",
+      themeToggleAria: "Basculer entre mode clair et sombre",
       closeMenuAria: "Fermer le menu",
       homeAria: "Accueil ScreenCam",
       logoAlt: "Logo ScreenCam",
@@ -6793,7 +6805,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       appStoreButton: "Voir sur App Store",
       copyright: "Tous droits réservés.",
       ctaText: "Obtenez ScreenCam à partir du Mac App Store.",
-      ctaTitle: "Prêt à mieux capturer ?",
+      ctaTitle: "Prêt à mieux capturer",
       description: "Enregistrement d'écran natif pour Mac. Rapide, léger, puissant.",
       groups: {
         legal: "Juridique",
@@ -6876,7 +6888,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         restart: "Redémarrer",
       },
       progressLabel: "Progress",
-      title: "Guides ScreenCam.",
+      title: "Guides ScreenCam",
       videoAriaLabel: "Vidéo de démonstration de la documentation",
       features: {
         basics: {
@@ -7172,7 +7184,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
     home: {
       screenStudioAlternative: {
         eyebrow: "Screen Studio Alternative",
-        title: "Besoin d'un enregistreur d'écran Mac plus léger avec un contrôle manuel plus profond ?",
+        title: "Besoin d'un enregistreur d'écran Mac plus léger avec un contrôle manuel plus profond",
         description:
           "Comparez ScreenCam avec Screen Studio en termes de taille de l'application, d'utilisation du processeur et de la mémoire, de la vitesse d'exportation, des ancres de zoom manuel, des calques, des maquettes d'appareil et des formats d'exportation.",
         cta: "Alternative au Screen Studio pour le Mac",
@@ -7197,8 +7209,8 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         systemValue: "macOS 15+",
         tagline: "Enregistrement haute résolution avec une caméra que vous pouvez façonner après la prise.",
         titleLines: [
-          ["Capturer", "Sharp."],
-          ["Direct", "Le cadre."],
+          ["Capturer", "Sharp"],
+          ["Direct", "Le cadre"],
         ],
       },
       zoom: {
@@ -7226,9 +7238,9 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             description: "Les états de zoom, de panoramique et de clic sont échantillonnés avec un flou de type obturateur.",
           },
         ],
-        subtitle: "Zoomez avec le flou de mouvement.",
+        subtitle: "Zoomez avec le flou de mouvement",
         timelineAria: "Pistes d'aperçu de la chronologie",
-        title: "Concentrez-vous sur ce qui compte.",
+        title: "Concentrez-vous sur ce qui compte",
       },
       deviceMockups: {
         description:
@@ -7240,7 +7252,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           macBook: "Application ScreenCam exécutée sur MacBook Pro",
           studioDisplay: "ScreenCam exécuté sur Studio Display avec MacBook",
         },
-        title: "Magnifique sur tous les écrans.",
+        title: "Magnifique sur tous les écrans",
       },
       controls: {
         body:
@@ -7260,7 +7272,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         playTitle: "Jouer",
         scaleAria: "Échelle",
         scaleLabel: "Échelle",
-        titleMuted: "chaque point de zoom.",
+        titleMuted: "chaque point de zoom",
         titleStart: "Contrôle total sur",
       },
       performance: {
@@ -7276,11 +7288,11 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           screenCam: "ScreenCam",
         },
         subtitle: "Pas d'électron. Aucune vue Web. Performances natives pures.",
-        title: "Natif signifie rapide.",
+        title: "Natif signifie rapide",
       },
       featureCards: {
         eyebrow: "More Caractéristiques",
-        title: "Des petits détails, prêts pour de vrais flux de travail.",
+        title: "Des petits détails, prêts pour de vrais flux de travail",
         subtitle: "Des touches natives qui rendent l'enregistrement rapide, soigné et Mac-first.",
         beautyThumb: {
           beforeLabel: "Beauté Off",
@@ -7426,8 +7438,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           },
           {
             question: "Existe-t-il une version Windows ?",
-            answer:
-              "Une version Windows est en préparation et sera publiée sur le Microsoft Store.",
+            answer: ["Oui. La version Windows est désormais disponible en bêta sur le ", { href: microsoftStoreUrl, text: "Microsoft Store" }, ". Elle n'est pas encore officiellement sortie : quelques imperfections sont possibles pendant la phase de test."],
           },
           {
             question: "Puis-je exporter vers différents formats ?",
@@ -7541,7 +7552,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "App Store achats",
             paragraphs: [
               [
-                "ScreenCam est distribué via le Mac App Store. La facturation, les abonnements, les renouvellements, les annulations et les remboursements sont gérés par Apple via votre identifiant Apple et les paramètres de votre compte App Store.",
+                "ScreenCam est distribué via le Mac App Store. La facturation, les abonnements, les renouvellements, les annulations et les remboursements sont gérés par Apple via votre identifiant Apple et les paramètres de votre compte App Store. La version Windows est en bêta sur le ", { href: microsoftStoreUrl, text: "Microsoft Store" }, " ; les achats effectués via ce store sont gérés par Microsoft.",
               ],
             ],
           },
@@ -7549,7 +7560,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "Exigences",
             paragraphs: [
               [
-                "ScreenCam est disponible pour macOS 15 ou version ultérieure. Une version Windows est en préparation pour le Microsoft Store.",
+                "ScreenCam est disponible pour macOS 15 ou version ultérieure. La version Windows est en bêta sur le ", { href: microsoftStoreUrl, text: "Microsoft Store" }, " et n'est pas encore officiellement sortie.",
               ],
             ],
           },
@@ -7584,7 +7595,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "Abonnements et achats",
             paragraphs: [
               [
-                "Les abonnements et achats ScreenCam Pro sont traités par Apple via le Mac App Store. La facturation, le renouvellement, l'annulation, les remboursements et la gestion du compte des abonnements sont gérés via votre identifiant Apple et les paramètres de votre compte App Store.",
+                "Les abonnements et achats ScreenCam Pro sont traités par Apple via le Mac App Store. La facturation, le renouvellement, l'annulation, les remboursements et la gestion du compte des abonnements sont gérés via votre identifiant Apple et les paramètres de votre compte App Store. La version Windows, actuellement en bêta, est distribuée via le ", { href: microsoftStoreUrl, text: "Microsoft Store" }, " ; ces achats sont traités par Microsoft et gérés via votre compte Microsoft.",
               ],
             ],
           },
@@ -7698,6 +7709,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
     header: {
       appStore: "App Store",
       backToMenuAria: "Voltar ao cardápio",
+      themeToggleAria: "Alternar entre modo claro e escuro",
       closeMenuAria: "Fechar menu",
       homeAria: "Início do ScreenCam",
       logoAlt: "ScreenCam Logo",
@@ -7716,7 +7728,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       appStoreButton: "Ver em App Store",
       copyright: "Todos os direitos reservados.",
       ctaText: "Obtenha ScreenCam do Mac App Store.",
-      ctaTitle: "Pronto para capturar melhor?",
+      ctaTitle: "Pronto para capturar melhor",
       description: "Gravação de tela nativa para Mac. Rápido, leve, poderoso.",
       groups: {
         legal: "Jurídico",
@@ -7799,7 +7811,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         restart: "Reiniciar",
       },
       progressLabel: "Progresso",
-      title: "Guias ScreenCam.",
+      title: "Guias ScreenCam",
       videoAriaLabel: "Vídeo de demonstração da documentação",
       features: {
         basics: {
@@ -8095,7 +8107,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
     home: {
       screenStudioAlternative: {
         eyebrow: "Alternativa Screen Studio",
-        title: "Precisa de um gravador de tela Mac mais leve com controle manual mais profundo?",
+        title: "Precisa de um gravador de tela Mac mais leve com controle manual mais profundo",
         description:
           "Compare ScreenCam com Screen Studio em tamanho de aplicativo, uso de CPU e memória, velocidade de exportação, âncoras de zoom manual, camadas, modelos de dispositivos e formatos de exportação.",
         cta: "Alternativa Screen Studio para Mac",
@@ -8120,8 +8132,8 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         systemValue: "macOS 15+",
         tagline: "Gravação de alta resolução com uma câmera que você pode moldar após a captura.",
         titleLines: [
-          ["Capturar", "Afiado."],
-          ["Direto", "O quadro."],
+          ["Capturar", "Afiado"],
+          ["Direto", "O quadro"],
         ],
       },
       zoom: {
@@ -8149,9 +8161,9 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             description: "Os estados de zoom, panorâmica e clique são amostrados com desfoque estilo obturador.",
           },
         ],
-        subtitle: "Zoom com desfoque de movimento.",
+        subtitle: "Zoom com desfoque de movimento",
         timelineAria: "Faixas de visualização da linha do tempo",
-        title: "Concentre-se no que importa.",
+        title: "Concentre-se no que importa",
       },
       deviceMockups: {
         description:
@@ -8163,7 +8175,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           macBook: "Aplicativo ScreenCam em execução no MacBook Pro",
           studioDisplay: "ScreenCam em execução no Studio Display com MacBook",
         },
-        title: "Linda em todas as telas.",
+        title: "Linda em todas as telas",
       },
       controls: {
         body:
@@ -8183,7 +8195,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         playTitle: "Jogar",
         scaleAria: "Escala",
         scaleLabel: "Escala",
-        titleMuted: "cada ponto de zoom.",
+        titleMuted: "cada ponto de zoom",
         titleStart: "Controle total sobre",
       },
       performance: {
@@ -8199,11 +8211,11 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           screenCam: "ScreenCam",
         },
         subtitle: "Sem elétron. Sem visualizações na web. Desempenho nativo puro.",
-        title: "Nativo significa rápido.",
+        title: "Nativo significa rápido",
       },
       featureCards: {
         eyebrow: "Recursos do More",
-        title: "Pequenos detalhes, prontos para fluxos de trabalho reais.",
+        title: "Pequenos detalhes, prontos para fluxos de trabalho reais",
         subtitle: "Toques nativos que tornam a gravação rápida, refinada e Mac em primeiro lugar.",
         beautyThumb: {
           beforeLabel: "Beleza desligada",
@@ -8349,8 +8361,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           },
           {
             question: "Existe uma versão para Windows?",
-            answer:
-              "Uma versão para Windows está em preparação e será publicada na Microsoft Store.",
+            answer: ["Sim. A versão para Windows já está disponível em beta na ", { href: microsoftStoreUrl, text: "Microsoft Store" }, ". Ela ainda não foi lançada oficialmente, então pode haver alguns detalhes a ajustar durante os testes."],
           },
           {
             question: "Posso exportar para diferentes formatos?",
@@ -8464,7 +8475,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "Compras de App Store",
             paragraphs: [
               [
-                "ScreenCam é distribuído por meio do Mac App Store. Faturamento, assinaturas, renovações, cancelamentos e reembolsos são gerenciados por Apple por meio de seu ID Apple e configurações de conta App Store.",
+                "ScreenCam é distribuído por meio do Mac App Store. Faturamento, assinaturas, renovações, cancelamentos e reembolsos são gerenciados por Apple por meio de seu ID Apple e configurações de conta App Store. A versão para Windows está em beta na ", { href: microsoftStoreUrl, text: "Microsoft Store" }, "; as compras feitas lá são gerenciadas pela Microsoft.",
               ],
             ],
           },
@@ -8472,7 +8483,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "Requisitos",
             paragraphs: [
               [
-                "ScreenCam está disponível para macOS 15 ou posterior. Uma versão para Windows está sendo preparada para a Microsoft Store.",
+                "ScreenCam está disponível para macOS 15 ou posterior. A versão para Windows está em beta na ", { href: microsoftStoreUrl, text: "Microsoft Store" }, " e ainda não foi lançada oficialmente.",
               ],
             ],
           },
@@ -8507,7 +8518,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "Assinaturas e compras",
             paragraphs: [
               [
-                "Assinaturas e compras ScreenCam Pro são processadas por Apple por meio do Mac App Store. O faturamento, a renovação, o cancelamento, os reembolsos e o gerenciamento da conta da assinatura são feitos por meio do seu ID Apple e das configurações da conta App Store.",
+                "Assinaturas e compras ScreenCam Pro são processadas por Apple por meio do Mac App Store. O faturamento, a renovação, o cancelamento, os reembolsos e o gerenciamento da conta da assinatura são feitos por meio do seu ID Apple e das configurações da conta App Store. A versão para Windows, atualmente em beta, é distribuída pela ", { href: microsoftStoreUrl, text: "Microsoft Store" }, "; essas compras são processadas pela Microsoft e gerenciadas pela sua conta Microsoft.",
               ],
             ],
           },
@@ -8621,6 +8632,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
     header: {
       appStore: "App Store",
       backToMenuAria: "Torna al menù",
+      themeToggleAria: "Passa tra modalità chiara e scura",
       closeMenuAria: "Chiudi menù",
       homeAria: "Home ScreenCam",
       logoAlt: "Logo ScreenCam",
@@ -8639,7 +8651,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       appStoreButton: "Visualizza su App Store",
       copyright: "Tutti i diritti riservati.",
       ctaText: "Ottieni ScreenCam da Mac App Store.",
-      ctaTitle: "Pronti per catturare meglio?",
+      ctaTitle: "Pronti per catturare meglio",
       description: "Registrazione dello schermo nativa per Mac. Veloce, leggero, potente.",
       groups: {
         legal: "Legale",
@@ -8722,7 +8734,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         restart: "Ricominciare",
       },
       progressLabel: "Progresso",
-      title: "ScreenCam Guide.",
+      title: "ScreenCam Guide",
       videoAriaLabel: "Video dimostrativo della documentazione",
       features: {
         basics: {
@@ -9018,7 +9030,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
     home: {
       screenStudioAlternative: {
         eyebrow: "Screen Studio Alternativa",
-        title: "Hai bisogno di un registratore dello schermo Mac più leggero con un controllo manuale più approfondito?",
+        title: "Hai bisogno di un registratore dello schermo Mac più leggero con un controllo manuale più approfondito",
         description:
           "Confronta ScreenCam con Screen Studio in base alle dimensioni dell'app, all'utilizzo della CPU e della memoria, alla velocità di esportazione, agli ancoraggi dello zoom manuale, ai livelli, ai modelli di dispositivi e ai formati di esportazione.",
         cta: "Screen Studio alternativa a Mac",
@@ -9043,8 +9055,8 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         systemValue: "macOS 15+",
         tagline: "Registrazione ad alta risoluzione con una fotocamera che puoi modellare dopo la ripresa.",
         titleLines: [
-          ["Cattura", "Affilato."],
-          ["Diretto", "La cornice."],
+          ["Cattura", "Affilato"],
+          ["Diretto", "La cornice"],
         ],
       },
       zoom: {
@@ -9072,9 +9084,9 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             description: "Gli stati di zoom, panoramica e clic vengono campionati con sfocatura in stile otturatore.",
           },
         ],
-        subtitle: "Zoom con motion blur.",
+        subtitle: "Zoom con motion blur",
         timelineAria: "Tracce di anteprima della timeline",
-        title: "Concentrati su ciò che conta.",
+        title: "Concentrati su ciò che conta",
       },
       deviceMockups: {
         description:
@@ -9086,7 +9098,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           macBook: "Applicazione ScreenCam in esecuzione su MacBook Pro",
           studioDisplay: "ScreenCam in esecuzione su Studio Display con MacBook",
         },
-        title: "Bellissimo su ogni schermo.",
+        title: "Bellissimo su ogni schermo",
       },
       controls: {
         body:
@@ -9106,7 +9118,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         playTitle: "Gioca",
         scaleAria: "Scala",
         scaleLabel: "Scala",
-        titleMuted: "ogni punto di zoom.",
+        titleMuted: "ogni punto di zoom",
         titleStart: "Controllo totale su",
       },
       performance: {
@@ -9122,11 +9134,11 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           screenCam: "ScreenCam",
         },
         subtitle: "Nessun elettrone. Nessuna visualizzazione web. Pura prestazione nativa.",
-        title: "Nativo significa veloce.",
+        title: "Nativo significa veloce",
       },
       featureCards: {
         eyebrow: "Caratteristiche More",
-        title: "Piccoli dettagli, pronti per flussi di lavoro reali.",
+        title: "Piccoli dettagli, pronti per flussi di lavoro reali",
         subtitle: "Tocchi nativi che rendono la registrazione veloce, raffinata e Mac-first.",
         beautyThumb: {
           beforeLabel: "Bellezza spenta",
@@ -9272,8 +9284,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
           },
           {
             question: "Esiste una versione per Windows?",
-            answer:
-              "È in preparazione una versione per Windows che verrà pubblicata tramite Microsoft Store.",
+            answer: ["Sì. La versione per Windows è ora disponibile in beta su ", { href: microsoftStoreUrl, text: "Microsoft Store" }, ". Non è ancora stata rilasciata ufficialmente, quindi durante i test potrebbe presentare qualche imperfezione."],
           },
           {
             question: "Posso esportare in formati diversi?",
@@ -9387,7 +9398,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "Acquisti App Store",
             paragraphs: [
               [
-                "ScreenCam è distribuito tramite Mac App Store. Fatturazione, abbonamenti, rinnovi, cancellazioni e rimborsi vengono gestiti da Apple tramite l'ID Apple e le impostazioni dell'account App Store.",
+                "ScreenCam è distribuito tramite Mac App Store. Fatturazione, abbonamenti, rinnovi, cancellazioni e rimborsi vengono gestiti da Apple tramite l'ID Apple e le impostazioni dell'account App Store. La versione per Windows è in beta su ", { href: microsoftStoreUrl, text: "Microsoft Store" }, "; gli acquisti effettuati lì sono gestiti da Microsoft.",
               ],
             ],
           },
@@ -9395,7 +9406,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "Requisiti",
             paragraphs: [
               [
-                "ScreenCam è disponibile per macOS 15 o versioni successive. È in preparazione una versione per Windows per Microsoft Store.",
+                "ScreenCam è disponibile per macOS 15 o versioni successive. La versione per Windows è in beta su ", { href: microsoftStoreUrl, text: "Microsoft Store" }, " e non è ancora stata rilasciata ufficialmente.",
               ],
             ],
           },
@@ -9430,7 +9441,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
             title: "Abbonamenti e acquisti",
             paragraphs: [
               [
-                "Gli abbonamenti e gli acquisti ScreenCam Pro vengono elaborati da Apple tramite Mac App Store. La fatturazione, il rinnovo, l'annullamento, i rimborsi e la gestione dell'account dell'abbonamento vengono gestiti tramite l'ID Apple e le impostazioni dell'account App Store.",
+                "Gli abbonamenti e gli acquisti ScreenCam Pro vengono elaborati da Apple tramite Mac App Store. La fatturazione, il rinnovo, l'annullamento, i rimborsi e la gestione dell'account dell'abbonamento vengono gestiti tramite l'ID Apple e le impostazioni dell'account App Store. La versione per Windows, attualmente in beta, è distribuita tramite ", { href: microsoftStoreUrl, text: "Microsoft Store" }, "; tali acquisti sono elaborati da Microsoft e gestiti tramite il tuo account Microsoft.",
               ],
             ],
           },

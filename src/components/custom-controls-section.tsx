@@ -6,6 +6,7 @@ import type { PointerEvent as ReactPointerEvent } from "react";
 import { Hand, Pause, Play } from "lucide-react";
 import { Slider } from "./slider";
 import type { CustomControlsCopy } from "../lib/translations";
+import { FillText, fillWords, prepareStrokes, useScene } from "./mg/scene";
 
 interface ZoomAnchor {
   id: string;
@@ -33,61 +34,77 @@ const BASELINE_PREVIEW_FRAME: ZoomFrame = {
   centerY: 50,
 };
 
+/**
+ * Scene 4. A screen-sized rectangle opens up into the hands-on anchor editor;
+ * the feature list is drawn as a ruled list.
+ */
 export function CustomControlsSection({ copy }: { copy: CustomControlsCopy }) {
+  const rootRef = useRef<HTMLElement>(null);
+
+  useScene(rootRef, ({ q, gsap, reduced }) => {
+    prepareStrokes(q("[data-draw]"));
+    if (reduced) {
+      gsap.set(q("[data-draw]"), { strokeDashoffset: 0 });
+      gsap.set(q(".mg-word"), { color: "var(--foreground)" });
+      return;
+    }
+
+    const panel = q(".cc-panel")[0];
+    gsap.fromTo(panel, { clipPath: "inset(38% 30% 38% 30% round 12px)", scale: 0.92 }, {
+      clipPath: "inset(0% 0% 0% 0% round 12px)",
+      scale: 1,
+      ease: "power2.out",
+      scrollTrigger: { trigger: panel, start: "top 95%", end: "top 35%", scrub: 0.8 },
+    });
+    gsap.fromTo(q(".cc-panel-outline"), { opacity: 1 }, {
+      opacity: 0,
+      scrollTrigger: { trigger: panel, start: "top 50%", end: "top 35%", scrub: 0.8 },
+    });
+    fillWords((sel) => q(`.cc-head ${sel}`), q(".cc-head")[0], "top 85%", "top 45%");
+    gsap.to(q(".cc-list [data-draw]"), {
+      strokeDashoffset: 0,
+      stagger: 0.12,
+      ease: "none",
+      scrollTrigger: { trigger: q(".cc-list")[0], start: "top 85%", end: "bottom 60%", scrub: 0.6 },
+    });
+    gsap.from(q(".cc-item-text"), {
+      opacity: 0,
+      x: -16,
+      stagger: 0.12,
+      ease: "none",
+      scrollTrigger: { trigger: q(".cc-list")[0], start: "top 85%", end: "bottom 60%", scrub: 0.6 },
+    });
+  });
+
   return (
-    <section id="controls" className="relative min-h-screen bg-background py-32 overflow-hidden">
-      {/* Background accent */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.02)_0%,transparent_50%)]" />
+    <section ref={rootRef} id="controls" className="mg-scene overflow-x-clip">
+      <div className="mx-auto grid w-full max-w-[1240px] gap-14 px-6 py-28 md:px-10 md:py-40 lg:grid-cols-12 lg:gap-10">
+        <div className="cc-head flex flex-col lg:col-span-5">
+          <span className="mg-label mg-index mb-6 tabular-nums">03 — {copy.eyebrow}</span>
+          <h2 className="mg-h2 !text-[clamp(2rem,4.4vw,4.25rem)]">
+            <FillText text={copy.titleStart} />{" "}
+            <FillText text={copy.titleMuted} />
+          </h2>
+          <p className="mt-6 max-w-md text-[15px] leading-relaxed text-muted-foreground md:text-base">{copy.body}</p>
 
-      <div className="relative max-w-7xl mx-auto px-6 md:px-12">
-        {/* Two column layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
-          {/* Left: Text content */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <p className="text-muted-foreground text-sm tracking-widest uppercase mb-4">
-              {copy.eyebrow}
-            </p>
-            <h2 className="text-[clamp(2rem,4vw,3.5rem)] font-bold leading-[1.1] tracking-tight text-foreground mb-6">
-              {copy.titleStart}
-              <br />
-              <span className="text-muted-foreground">{copy.titleMuted}</span>
-            </h2>
-            <p className="text-muted-foreground text-base leading-relaxed mb-8 max-w-md">
-              {copy.body}
-            </p>
+          <ol className="cc-list mt-12">
+            {copy.features.map((feature, i) => (
+              <li key={i} className="relative flex items-center gap-5 py-4">
+                <svg className="absolute inset-x-0 bottom-0 h-px w-full overflow-visible text-foreground/25" aria-hidden="true">
+                  <line data-draw pathLength="1" className="mg-stroke" x1="0" y1="0" x2="100%" y2="0" />
+                </svg>
+                <span className="mg-label tabular-nums text-[var(--mg-accent)]">{String(i + 1).padStart(2, "0")}</span>
+                <span className="cc-item-text text-[15px] text-foreground">{feature}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
 
-            {/* Feature list */}
-            <div className="space-y-4">
-              {copy.features.map((feature, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.2 + i * 0.1 }}
-                  className="flex items-center gap-3"
-                >
-                  <div className="w-1.5 h-1.5 rounded-full bg-accent" />
-                  <span className="text-sm text-foreground/80">{feature}</span>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-
-          {/* Right: Interactive timeline */}
-          <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-          >
+        <div className="relative flex items-center lg:col-span-7">
+          <div className="cc-panel relative w-full">
             <InteractiveTimeline copy={copy} />
-          </motion.div>
+          </div>
+          <div className="cc-panel-outline pointer-events-none absolute inset-[38%_30%] rounded-[12px] border-[1.5px] border-foreground" aria-hidden="true" />
         </div>
       </div>
     </section>
@@ -525,11 +542,11 @@ function InteractiveTimeline({ copy }: { copy: CustomControlsCopy }) {
   const playheadLeft = timelinePositionStyle(playheadPosition);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-2 rounded-[10px] border border-rule bg-background p-2 shadow-elevated">
       {/* Preview window */}
       <div
         ref={previewRef}
-        className="relative aspect-video rounded-xl bg-card border border-border/50 overflow-hidden select-none touch-none"
+        className="theme-dark relative aspect-video rounded-[6px] bg-card overflow-hidden select-none touch-none"
         data-screen-cam-drag-surface
         onPointerDown={handlePreviewPointerDown}
         onPointerMove={handlePreviewPointerMove}
@@ -572,7 +589,7 @@ function InteractiveTimeline({ copy }: { copy: CustomControlsCopy }) {
 
       </div>
 
-      <div className="relative h-28 rounded-xl bg-card/50 border border-border/50 overflow-hidden">
+      <div className="relative h-28 overflow-hidden rounded-[6px] border border-rule bg-surface">
         <motion.button
           type="button"
           aria-label={isPlaying ? copy.pauseAria : copy.playAria}
@@ -606,7 +623,7 @@ function InteractiveTimeline({ copy }: { copy: CustomControlsCopy }) {
           </div>
 
           {/* Track background */}
-          <div className="absolute top-10 left-4 right-4 h-10 rounded-lg bg-secondary/30 border border-border/30">
+          <div className="absolute top-10 left-4 right-4 h-10 rounded-lg bg-secondary/60 border border-border">
             {/* Zoom clip */}
             <div className="absolute inset-y-1 -left-px -right-px rounded-md bg-accent/20 border border-accent/30">
               {/* Anchors */}
@@ -680,7 +697,7 @@ function InteractiveTimeline({ copy }: { copy: CustomControlsCopy }) {
         aria-disabled={!hasSelectedAnchor}
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: hasSelectedAnchor ? 1 : 0.42, y: 0 }}
-        className="flex items-center gap-6 p-4 rounded-xl bg-card/50 border border-border/50"
+        className="flex items-center gap-6 rounded-[6px] border border-rule bg-surface p-4"
       >
         <div className="flex-1">
           <label className="text-xs text-muted-foreground mb-2 block">{copy.scaleLabel}</label>

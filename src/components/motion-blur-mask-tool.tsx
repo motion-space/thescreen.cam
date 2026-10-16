@@ -434,13 +434,13 @@ export function MotionBlurMaskTool({ copy }: { copy: MotionBlurMaskToolCopy }) {
   );
 
   return (
-    <section className="min-h-screen bg-background px-4 pb-10 pt-24 text-foreground sm:px-6 lg:px-8">
+    <section className="min-h-screen bg-background rails px-4 pb-10 pt-28 text-foreground sm:px-6 lg:px-10">
       <div className="mx-auto flex w-full max-w-[96rem] flex-col gap-5">
-        <div className="flex flex-col gap-4 border-b border-border/60 pb-5 md:flex-row md:items-end md:justify-between">
+        <div className="flex flex-col gap-4 border-b border-rule pb-8 md:flex-row md:items-end md:justify-between">
           <div className="space-y-3">
-            <p className="text-xs font-medium uppercase tracking-[0.28em] text-accent">{copy.toolEyebrow}</p>
+            <p className="kicker"><span className="kicker-dot" aria-hidden="true" />{copy.toolEyebrow}</p>
             <div>
-              <h1 className="text-3xl font-semibold tracking-tight text-foreground md:text-5xl">
+              <h1 className="text-4xl font-medium tracking-[-0.045em] text-foreground md:text-6xl">
                 {copy.title}
               </h1>
               <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">
@@ -451,7 +451,7 @@ export function MotionBlurMaskTool({ copy }: { copy: MotionBlurMaskToolCopy }) {
 
           <div className="flex flex-wrap items-center gap-2">
             <button
-              className="inline-flex h-10 items-center gap-2 border border-border/70 bg-foreground/[0.04] px-4 text-sm font-medium text-foreground transition-colors hover:border-foreground/40 hover:bg-foreground/[0.08] disabled:cursor-not-allowed disabled:opacity-40"
+              className="inline-flex h-10 rounded-[6px] items-center gap-2 border border-border/70 bg-foreground/[0.04] px-4 text-sm font-medium text-foreground transition-colors hover:border-foreground/40 hover:bg-foreground/[0.08] disabled:cursor-not-allowed disabled:opacity-40"
               disabled={!sourceImage}
               type="button"
               onClick={addMask}
@@ -460,7 +460,7 @@ export function MotionBlurMaskTool({ copy }: { copy: MotionBlurMaskToolCopy }) {
               <span>{copy.maskButton}</span>
             </button>
             <button
-              className="inline-flex h-10 items-center gap-2 bg-foreground px-4 text-sm font-medium text-background transition-colors hover:bg-foreground/90 disabled:cursor-not-allowed disabled:bg-foreground/20 disabled:text-background/50"
+              className="inline-flex h-10 rounded-[6px] items-center gap-2 bg-foreground px-4 text-sm font-medium text-background transition-colors hover:bg-foreground/90 disabled:cursor-not-allowed disabled:bg-foreground/20 disabled:text-background/50"
               disabled={!canExport}
               type="button"
               onClick={exportComposite}
@@ -474,7 +474,7 @@ export function MotionBlurMaskTool({ copy }: { copy: MotionBlurMaskToolCopy }) {
         <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_23rem]">
           <div
             ref={workspaceRef}
-            className="relative flex min-h-[26rem] items-center justify-center overflow-hidden border border-border/70 bg-[#070707] p-3 shadow-2xl shadow-black/25 lg:min-h-[calc(100vh-14rem)]"
+            className="theme-dark relative flex min-h-[26rem] items-center justify-center overflow-hidden vf rounded-[8px] bg-[#0b0b0d] p-3 shadow-elevated [--vf-color:var(--accent)] [--vf-gap:-8px] lg:min-h-[calc(100vh-14rem)]"
           >
             {sourceImage ? (
               <div
@@ -545,7 +545,7 @@ export function MotionBlurMaskTool({ copy }: { copy: MotionBlurMaskToolCopy }) {
               </div>
             ) : (
               <div
-                className={`flex h-full min-h-[22rem] w-full flex-col items-center justify-center border border-dashed p-8 text-center transition-colors ${
+                className={`flex h-full min-h-[22rem] w-full flex-col items-center justify-center rounded-2xl border border-dashed p-8 text-center transition-colors ${
                   isDraggingFile
                     ? "border-accent bg-accent/10"
                     : "border-border/80 bg-foreground/[0.025]"
@@ -561,7 +561,7 @@ export function MotionBlurMaskTool({ copy }: { copy: MotionBlurMaskToolCopy }) {
                 onDragOver={(event) => event.preventDefault()}
                 onDrop={handleDrop}
               >
-                <div className="mb-5 flex h-14 w-14 items-center justify-center border border-border/80 bg-background">
+                <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-[6px] border border-white/10 bg-background">
                   <ImagePlus className="h-7 w-7 text-accent" />
                 </div>
                 <h2 className="text-xl font-semibold text-foreground">{copy.uploadTitle}</h2>
@@ -569,7 +569,7 @@ export function MotionBlurMaskTool({ copy }: { copy: MotionBlurMaskToolCopy }) {
                   {copy.uploadDescription}
                 </p>
                 <button
-                  className="mt-6 inline-flex h-10 items-center gap-2 bg-foreground px-4 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
+                  className="mt-6 inline-flex h-10 rounded-[6px] items-center gap-2 bg-foreground px-4 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
                 >
@@ -589,7 +589,7 @@ export function MotionBlurMaskTool({ copy }: { copy: MotionBlurMaskToolCopy }) {
               onChange={handleFileInputChange}
             />
 
-            <div className="border border-border/70 bg-foreground/[0.035] p-4">
+            <div className="rounded-[8px] border border-rule bg-card p-4">
               <div className="mb-4 flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2">
                   <Upload className="h-4 w-4 text-accent" />
@@ -598,7 +598,7 @@ export function MotionBlurMaskTool({ copy }: { copy: MotionBlurMaskToolCopy }) {
                 {sourceImage ? (
                   <button
                     aria-label={copy.replaceImageAria}
-                    className="inline-flex h-8 w-8 items-center justify-center border border-border/70 text-muted-foreground transition-colors hover:border-foreground/40 hover:text-foreground"
+                    className="inline-flex h-8 w-8 rounded-[6px] items-center justify-center border border-border/70 text-muted-foreground transition-colors hover:border-foreground/40 hover:text-foreground"
                     title={copy.replaceImageAria}
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
@@ -612,17 +612,17 @@ export function MotionBlurMaskTool({ copy }: { copy: MotionBlurMaskToolCopy }) {
                 <div className="space-y-3">
                   <div className="truncate text-sm text-foreground">{sourceImage.name}</div>
                   <div className="grid grid-cols-2 gap-2 text-xs text-muted-foreground">
-                    <div className="border border-border/60 bg-background/70 p-3">
+                    <div className="rounded-[6px] border border-rule bg-background p-3">
                       <div className="mb-1 uppercase tracking-[0.16em]">{copy.widthLabel}</div>
                       <div className="font-mono text-sm text-foreground">{sourceImage.width}px</div>
                     </div>
-                    <div className="border border-border/60 bg-background/70 p-3">
+                    <div className="rounded-[6px] border border-rule bg-background p-3">
                       <div className="mb-1 uppercase tracking-[0.16em]">{copy.heightLabel}</div>
                       <div className="font-mono text-sm text-foreground">{sourceImage.height}px</div>
                     </div>
                   </div>
                   <button
-                    className="inline-flex h-9 w-full items-center justify-center gap-2 border border-border/70 text-sm text-muted-foreground transition-colors hover:border-foreground/40 hover:text-foreground"
+                    className="inline-flex h-9 w-full rounded-[6px] items-center justify-center gap-2 border border-border/70 text-sm text-muted-foreground transition-colors hover:border-foreground/40 hover:text-foreground"
                     type="button"
                     onClick={resetImage}
                   >
@@ -632,7 +632,7 @@ export function MotionBlurMaskTool({ copy }: { copy: MotionBlurMaskToolCopy }) {
                 </div>
               ) : (
                 <button
-                  className="inline-flex h-10 w-full items-center justify-center gap-2 bg-foreground px-4 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
+                  className="inline-flex h-10 rounded-[6px] w-full items-center justify-center gap-2 bg-foreground px-4 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
                   type="button"
                   onClick={() => fileInputRef.current?.click()}
                 >
@@ -642,7 +642,7 @@ export function MotionBlurMaskTool({ copy }: { copy: MotionBlurMaskToolCopy }) {
               )}
             </div>
 
-            <div className="border border-border/70 bg-foreground/[0.035] p-4">
+            <div className="rounded-[8px] border border-rule bg-card p-4">
               <div className="mb-4 flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2">
                   <Layers className="h-4 w-4 text-accent" />
@@ -650,7 +650,7 @@ export function MotionBlurMaskTool({ copy }: { copy: MotionBlurMaskToolCopy }) {
                 </div>
                 <button
                   aria-label={copy.addMaskAria}
-                  className="inline-flex h-8 w-8 items-center justify-center border border-border/70 text-muted-foreground transition-colors hover:border-foreground/40 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-40"
+                  className="inline-flex h-8 w-8 rounded-[6px] items-center justify-center border border-border/70 text-muted-foreground transition-colors hover:border-foreground/40 hover:text-foreground disabled:cursor-not-allowed disabled:opacity-40"
                   disabled={!sourceImage}
                   title={copy.addMaskAria}
                   type="button"
@@ -664,7 +664,7 @@ export function MotionBlurMaskTool({ copy }: { copy: MotionBlurMaskToolCopy }) {
                 <div className="space-y-2">
                   {masks.map((mask) => (
                     <button
-                      className={`flex h-10 w-full items-center justify-between gap-3 border px-3 text-left text-sm transition-colors ${
+                      className={`flex h-10 w-full items-center justify-between gap-3 rounded-xl border px-3 text-left text-sm transition-colors ${
                         mask.id === selectedMaskId
                           ? "border-accent bg-accent/10 text-foreground"
                           : "border-border/60 bg-background/60 text-muted-foreground hover:border-foreground/30 hover:text-foreground"
@@ -685,7 +685,7 @@ export function MotionBlurMaskTool({ copy }: { copy: MotionBlurMaskToolCopy }) {
               )}
             </div>
 
-            <div className="border border-border/70 bg-foreground/[0.035] p-4">
+            <div className="rounded-[8px] border border-rule bg-card p-4">
               <div className="mb-4 flex items-center justify-between gap-3">
                 <div className="flex items-center gap-2">
                   <SlidersHorizontal className="h-4 w-4 text-accent" />
@@ -693,7 +693,7 @@ export function MotionBlurMaskTool({ copy }: { copy: MotionBlurMaskToolCopy }) {
                 </div>
                 <button
                   aria-label={copy.deleteSelectedMaskAria}
-                  className="inline-flex h-8 w-8 items-center justify-center border border-border/70 text-muted-foreground transition-colors hover:border-destructive/60 hover:text-destructive disabled:cursor-not-allowed disabled:opacity-35"
+                  className="inline-flex h-8 w-8 rounded-[6px] items-center justify-center border border-border/70 text-muted-foreground transition-colors hover:border-destructive/60 hover:text-destructive disabled:cursor-not-allowed disabled:opacity-35"
                   disabled={!selectedMask}
                   title={copy.deleteSelectedMaskAria}
                   type="button"
@@ -710,7 +710,7 @@ export function MotionBlurMaskTool({ copy }: { copy: MotionBlurMaskToolCopy }) {
                       {copy.nameLabel}
                     </span>
                     <input
-                      className="h-10 w-full border border-border/70 bg-background px-3 text-sm text-foreground outline-none transition-colors focus:border-accent"
+                      className="h-10 w-full rounded-[6px] border border-rule bg-background px-3 text-sm text-foreground outline-none transition-colors focus:border-accent"
                       type="text"
                       value={selectedMask.name}
                       onChange={(event) => updateSelectedMask({ name: event.currentTarget.value })}
