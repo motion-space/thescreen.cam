@@ -426,6 +426,7 @@ export class ShadowPads {
     commit: (style: PadStyle, p: PadPoint) => void,
     touch: () => void,
     scale: number,
+    idPrefix = "shot-pad",
   ) {
     const now = performance.now() / 1000;
     this.flush(now, commit);
@@ -444,7 +445,7 @@ export class ShadowPads {
         touch();
       };
       hits.add({
-        id: `shot-pad-${style}`,
+        id: `${idPrefix}-${style}`,
         x: r.x,
         y: r.y,
         w: r.size,

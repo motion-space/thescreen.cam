@@ -300,6 +300,9 @@ export class Anim {
 /* ---------- controls ---------- */
 
 export type UI = {
+  timelineScale?: number;
+  timelineOffset?: number;
+  timelineLabelsHidden?: boolean;
   ctx: CanvasRenderingContext2D;
   t: Theme;
   hits: HitRegistry;

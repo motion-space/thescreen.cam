@@ -28,7 +28,7 @@ import {
 } from "./kit";
 import { CH, CW, KEY_CLIPS, LENS_STOPS, TARGETS, drawRecordedApp } from "./recorded-app";
 import { type KeyOverlaySettings, type KeyStyle, KEY_STYLES } from "./keyboard";
-import { type CameraSettings, cameraClips } from "./camera";
+import { type CameraSettings, cameraClips, setCameraVolume } from "./camera";
 import { SPRINGS, scaledSpring, springEase, springSettle, springStep } from "./spring";
 import { type FrameBackground, GRADIENT_PRESETS, MESH_PALETTES, gradientFill, meshTexture } from "./background-presets";
 
@@ -45,7 +45,12 @@ export const RULER_H = 28;
 export const LANE_Y = TIMELINE_Y + RULER_H + 4;
 export const LANE_PITCH = 34;
 export const TL_X0 = 92;
-export const TL_X1 = 1400;
+export const TL_X1 = EW;
+export const TL_INSET = 10;
+// A fixed trailing spacer belongs to the scroll content, not the viewport.
+// It is visible at 100%, or after panning a zoomed timeline to its end.
+export const TL_END_SPACE = 40;
+const TL_CONTENT_WIDTH = TL_X1 - TL_X0 - TL_INSET - TL_END_SPACE;
 export const DURATION = 24;
 
 const COMP_H = PREVIEW.h - 24;
@@ -76,8 +81,8 @@ export function shotShadow(frame: EditorState["shotFrame"], k: number) {
 
 export const LANES = ["Recording", "Keyboard", "Camera", "System", "Microphone", "Zoom", "Captions"] as const;
 export const laneY = (i: number) => LANE_Y + i * LANE_PITCH;
-export const timeToX = (t: number) => TL_X0 + (t / DURATION) * (TL_X1 - TL_X0);
-export const xToTime = (x: number) => Math.max(0, Math.min(DURATION, ((x - TL_X0) / (TL_X1 - TL_X0)) * DURATION));
+export const timeToX = (t: number, scale = 1, offset = 0) => TL_X0 + TL_INSET + (t / DURATION) * TL_CONTENT_WIDTH * scale - offset;
+export const xToTime = (x: number, scale = 1, offset = 0) => Math.max(0, Math.min(DURATION, ((x - TL_X0 - TL_INSET + offset) / (TL_CONTENT_WIDTH * scale)) * DURATION));
 
 /* Clip palette from TimelineTrackClipPalette.swift */
 const PALETTE = {
@@ -124,6 +129,9 @@ export type Tab = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 export type EditorState = {
   time: number;
   playing: boolean;
+  volume: number;
+  timelineScale: number;
+  timelineOffset: number;
   selection: Selection;
   tab: Tab;
   zoomClips: ZoomClip[];
@@ -151,6 +159,9 @@ export function createState(dark: boolean, captionText: string): EditorState {
   return {
     time: 0.5,
     playing: true,
+    volume: 0.75,
+    timelineScale: 1,
+    timelineOffset: 0,
     selection: { kind: "none" },
     tab: 0,
     zoomClips: [
@@ -409,8 +420,8 @@ function clipShape(
 ) {
   const { ctx, t } = ui;
   const p = PALETTE[kind];
-  const x0 = timeToX(start);
-  const x1 = timeToX(end);
+  const x0 = timeToX(start, ui.timelineScale, ui.timelineOffset);
+  const x1 = timeToX(end, ui.timelineScale, ui.timelineOffset);
   const reveal = opts.reveal ?? 1;
   if (reveal <= 0.001) return;
   const w = Math.max(8, (x1 - x0) * reveal);
@@ -512,19 +523,19 @@ function clipShape(
     edgeHandle(ctx, x0, y, w, h, radius, "end", progress);
     ctx.globalAlpha = 1;
   }
-  ui.hits.add({ id, x: x0 - 4, y, w: w + 8, h, cursor: "pointer", onDown: opts.onDown });
+  const hitX = Math.max(0, x0 - 4);
+  const hitEnd = Math.min(TL_X1, x0 + w + 4);
+  if (hitEnd > hitX) ui.hits.add({ id, x: hitX, y, w: hitEnd - hitX, h, cursor: "pointer", onDown: opts.onDown });
 }
 
 const waveCache = new Map<string, number[]>();
 function waveform(ui: UI, start: number, end: number, lane: number, color: string, seed: number) {
   const { ctx } = ui;
-  const x0 = timeToX(start);
-  const x1 = timeToX(end);
   const key = `${start}-${end}-${seed}`;
   let bars = waveCache.get(key);
   if (!bars) {
     bars = [];
-    for (let x = x0 + 10; x < x1 - 8; x += 3.2) {
+    for (let x = timeToX(start) + 10; x < timeToX(end) - 8; x += 3.2) {
       const v = Math.abs(Math.sin(x * 0.045 + seed) * Math.cos(x * 0.013 + seed * 1.7)) * (0.35 + 0.65 * Math.abs(Math.sin(x * 0.006 + seed)));
       bars.push(x, v);
     }
@@ -538,8 +549,9 @@ function waveform(ui: UI, start: number, end: number, lane: number, color: strin
   ctx.beginPath();
   for (let i = 0; i < bars.length; i += 2) {
     const h = 1 + bars[i + 1] * 7;
-    ctx.moveTo(bars[i], cy - h);
-    ctx.lineTo(bars[i], cy + h);
+    const x = TL_X0 + TL_INSET + (bars[i] - TL_X0 - TL_INSET) * (ui.timelineScale ?? 1) - (ui.timelineOffset ?? 0);
+    ctx.moveTo(x, cy - h);
+    ctx.lineTo(x, cy + h);
   }
   ctx.stroke();
   ctx.globalAlpha = 1;
@@ -551,10 +563,12 @@ function fmt(t: number) {
 }
 
 export type EditorHandlers = {
+  scrollControlled?: boolean;
   touch: () => void;
 };
 
 export function drawEditor(ui: UI, state: EditorState, h: EditorHandlers, staticOnly = false, inspector = drawInspector, slice?: (name: "header" | "transport" | "ruler") => void) {
+  ui = { ...ui, timelineScale: state.timelineScale, timelineOffset: state.timelineOffset };
   const { ctx, t } = ui;
   const c = state.chrome;
   const part = (from: number, to: number) => ease(clamp((c - from) / (to - from)));
@@ -664,7 +678,8 @@ export function drawEditor(ui: UI, state: EditorState, h: EditorHandlers, static
     icon(ctx, "chevron-down", 188, cy, 11, t.text2, 2.2);
     // centre transport
     const btn = (id: string, cx: number, name: string, size: number, r: number, onDown?: () => void) => {
-      const hov = ui.hover === id;
+      const disabled = !!h.scrollControlled;
+      const hov = !disabled && ui.hover === id;
       ctx.beginPath();
       ctx.arc(cx, cy, r, 0, Math.PI * 2);
       ctx.fillStyle = hov ? t.controlHover : r > 17 ? t.control : "transparent";
@@ -672,8 +687,8 @@ export function drawEditor(ui: UI, state: EditorState, h: EditorHandlers, static
       ctx.strokeStyle = t.separator;
       ctx.lineWidth = 1;
       ctx.stroke();
-      if (!staticOnly || id !== "tp-play") icon(ctx, name, cx + (name === "play" ? 1 : 0), cy, size, t.text, 2);
-      ui.hits.add({ id, x: cx - r, y: cy - r, w: r * 2, h: r * 2, cursor: "pointer", onDown });
+      if (!staticOnly || id !== "tp-play") icon(ctx, name, cx + (name === "play" ? 1 : 0), cy, size, disabled ? t.text3 : t.text, 2);
+      if (!disabled) ui.hits.add({ id, x: cx - r, y: cy - r, w: r * 2, h: r * 2, cursor: "pointer", onDown });
     };
     btn("tp-back", 674, "rotate-ccw", 14, 16, () => {
       state.time = Math.max(0, state.time - 5);
@@ -689,29 +704,7 @@ export function drawEditor(ui: UI, state: EditorState, h: EditorHandlers, static
     });
     // right side
     icon(ctx, "scissors", 1010, cy, 14, t.text2);
-    icon(ctx, "volume-2", 1048, cy, 14, "#30d158");
-    rr(ctx, 1064, cy - 3, 94, 6, 3);
-    ctx.fillStyle = t.fillStrong;
-    ctx.fill();
-    rr(ctx, 1064, cy - 3, 70, 6, 3);
-    ctx.fillStyle = "#30d158";
-    ctx.fill();
-    ctx.beginPath();
-    ctx.arc(1134, cy, 4.5, 0, Math.PI * 2);
-    ctx.fillStyle = "#fff";
-    ctx.fill();
-    icon(ctx, "zoom-out", 1186, cy, 14, t.text2);
-    rr(ctx, 1202, cy - 3, 128, 6, 3);
-    ctx.fillStyle = t.fillStrong;
-    ctx.fill();
-    rr(ctx, 1202, cy - 3, 20, 6, 3);
-    ctx.fillStyle = t.accent;
-    ctx.fill();
-    ctx.beginPath();
-    ctx.arc(1222, cy, 4.5, 0, Math.PI * 2);
-    ctx.fillStyle = "#fff";
-    ctx.fill();
-    text(ctx, "100%", 1422, cy + 0.5, { size: 12, color: t.text2, align: "right" });
+    if (!staticOnly) drawTransportControls(ui, state, h);
     }
     ctx.restore();
   }
@@ -725,38 +718,36 @@ export function drawEditor(ui: UI, state: EditorState, h: EditorHandlers, static
     ctx.fillRect(0, TIMELINE_Y + 1, EW, EH - TIMELINE_Y);
     if (slice) slice("ruler"); else {
     // ruler
-    iconButton(ui, "tl-layout", 36, TIMELINE_Y + 15, "layout-grid", { box: 24, size: 13 });
+    if (!ui.timelineLabelsHidden) iconButton(ui, "tl-layout", 36, TIMELINE_Y + 15, "layout-grid", { box: 24, size: 13 });
     ctx.strokeStyle = t.text3;
     ctx.lineWidth = 1;
     ctx.beginPath();
     for (let s = 0; s <= DURATION; s += 0.5) {
-      const x = Math.round(timeToX(s)) + 0.5;
+      const x = Math.round(timeToX(s, state.timelineScale, state.timelineOffset)) + 0.5;
+      if (x > TL_X1) break;
+      if (x < 0) continue;
       const major = s % 2 === 0;
       ctx.moveTo(x, TIMELINE_Y + RULER_H);
       ctx.lineTo(x, TIMELINE_Y + RULER_H - (major ? 7 : 3));
     }
     ctx.stroke();
     for (let s = 0; s <= DURATION; s += 2) {
-      text(ctx, fmt(s), timeToX(s) + 4, TIMELINE_Y + 12, { size: 10, color: t.text3, family: MONO });
+      if (timeToX(s, state.timelineScale, state.timelineOffset) > TL_X1 - 28) break;
+      if (timeToX(s, state.timelineScale, state.timelineOffset) < 0) continue;
+      text(ctx, fmt(s), timeToX(s, state.timelineScale, state.timelineOffset) + 4, TIMELINE_Y + 12, { size: 10, color: t.text3, family: MONO });
     }
-    // lane labels
-    LANES.forEach((label, i) => {
-      if (staticOnly && i === 6) return;
-      const a = i === 6 ? 0.35 + 0.65 * state.captionsShown : 1;
-      ctx.globalAlpha = lA * a;
-      text(ctx, label, 16, laneY(i) + 17.5, { size: 11, color: t.text2 });
-    });
     }
     ctx.globalAlpha = lA;
 
     // scrub surface
     const scrub = (p: { x: number }) => {
-      state.time = xToTime(p.x);
+      state.time = xToTime(p.x, state.timelineScale, state.timelineOffset);
       state.playing = false;
       h.touch();
     };
-    ui.hits.add({ id: "tl-scrub", x: TL_X0 - 8, y: TIMELINE_Y, w: TL_X1 - TL_X0 + 16, h: EH - TIMELINE_Y, cursor: "text", onDown: scrub, onDrag: scrub });
+    if (!h.scrollControlled) ui.hits.add({ id: "tl-scrub", x: TL_X0 - 8, y: TIMELINE_Y, w: TL_X1 - TL_X0 + 16, h: EH - TIMELINE_Y, cursor: "text", onDown: scrub, onDrag: scrub });
 
+    ctx.save(); ctx.beginPath(); ctx.rect(0, TIMELINE_Y + RULER_H, EW, EH - TIMELINE_Y); ctx.clip();
     const lane = (i: number) => ease(clamp((c - 0.5 - i * 0.05) / 0.3));
     const sel = state.selection;
     clipShape(ui, "clip-rec", "recording", 0, DURATION, 0, "Recording · 1.00x", { iconName: "monitor", reveal: lane(0) });
@@ -780,6 +771,7 @@ export function drawEditor(ui: UI, state: EditorState, h: EditorHandlers, static
     if (!staticOnly) drawZoomLane(ui, state, h, lane(5));
     if (!staticOnly) drawCaptionLane(ui, state, h, lane(6));
 
+    ctx.restore();
     if (!staticOnly) drawPlayhead(ui, state);
     ctx.restore();
   }
@@ -788,8 +780,67 @@ export function drawEditor(ui: UI, state: EditorState, h: EditorHandlers, static
 }
 
 
+/** Offset is expressed in editor units, independent of Retina or the page camera. */
+export const timelineMaxOffset = (state: EditorState) => TL_CONTENT_WIDTH * Math.max(0, state.timelineScale - 1);
+export function followTimeline(state: EditorState, follow: boolean) {
+  const span = TL_X1 - TL_X0;
+  state.timelineOffset = clamp(state.timelineOffset, 0, timelineMaxOffset(state));
+  if (!follow) return;
+  const x = timeToX(state.time, state.timelineScale, state.timelineOffset) - TL_X0;
+  if (x > span * 0.8) state.timelineOffset += x - span * 0.8;
+  else if (x < span * 0.05) state.timelineOffset += x - span * 0.05;
+  state.timelineOffset = clamp(state.timelineOffset, 0, timelineMaxOffset(state));
+}
+const timelineGrabs = new WeakMap<EditorState, number>();
+function drawTimelineScrollbar(ui: UI, state: EditorState, h: EditorHandlers) {
+  const max = timelineMaxOffset(state);
+  if (!max) return;
+  const span = TL_X1 - TL_X0, width = span * span / (span + max);
+  const x = TL_X0 + state.timelineOffset / max * (span - width), y = EH - 12;
+  rr(ui.ctx, TL_X0, y, span, 6, 3); ui.ctx.fillStyle = ui.t.fillStrong; ui.ctx.fill();
+  rr(ui.ctx, x, y, width, 6, 3); ui.ctx.fillStyle = ui.hover === "tl-scrollbar" || ui.active === "tl-scrollbar" ? ui.t.text2 : ui.t.text3; ui.ctx.fill();
+  const move = (p: { x: number }) => {
+    state.timelineOffset = clamp((p.x - TL_X0 - (timelineGrabs.get(state) ?? width / 2)) / (span - width)) * max;
+    h.touch();
+  };
+  ui.hits.add({ id: "tl-scrollbar", x: TL_X0, y: y - 5, w: span, h: 16, cursor: "ew-resize",
+    onDown: p => { timelineGrabs.set(state, p.x >= x && p.x <= x + width ? p.x - x : width / 2); move(p); },
+    onDrag: move, onUp: () => { timelineGrabs.delete(state); },
+  });
+}
+
+/** Live controls share the inspector slider geometry and hit testing. */
+function drawTransportControls(ui: UI, state: EditorState, h: EditorHandlers) {
+  const cy = TRANSPORT_Y + 28;
+  const green = "#30d158";
+  iconButton(ui, "transport-mute", 1048, cy, state.volume > 0 ? "volume-2" : "volume-x", {
+    box: 24, size: 14, color: state.volume > 0 ? green : ui.t.text3,
+    onDown: () => {
+      state.volume = state.volume > 0 ? 0 : 0.75;
+      setCameraVolume(state.volume);
+      h.touch();
+    },
+  });
+  slider({ ...ui, t: { ...ui.t, accent: green } }, "transport-volume", 1064, cy - 12, 94, state.volume, v => {
+    state.volume = v;
+    setCameraVolume(v);
+    h.touch();
+  }, `${Math.round(state.volume * 100)}%`);
+  iconButton(ui, "transport-scale-reset", 1186, cy, "zoom-out", {
+    box: 24, size: 14,
+    onDown: () => { state.timelineScale = 1; state.timelineOffset = 0; h.touch(); },
+  });
+  slider(ui, "transport-scale", 1202, cy - 12, 128, state.timelineScale - 1, v => {
+    state.timelineScale = Math.round((1 + v) * 100) / 100;
+    state.timelineOffset = clamp(state.timelineOffset, 0, timelineMaxOffset(state));
+    h.touch();
+  }, `${Math.round(state.timelineScale * 100)}%`);
+  text(ui.ctx, `${Math.round(state.timelineScale * 100)}%`, 1422, cy + 0.5, { size: 12, color: ui.t.text2, align: "right" });
+}
+
 /** Parts whose pixels actually change with playback, drawn above the cached shell. */
 export function drawEditorDynamic(ui: UI, state: EditorState, h: EditorHandlers, inspector = drawInspector) {
+  ui = { ...ui, timelineScale: state.timelineScale, timelineOffset: state.timelineOffset };
   const { ctx, t } = ui;
   const part = (from: number, to: number) => ease(clamp((state.chrome - from) / (to - from)));
   ctx.save();
@@ -805,7 +856,8 @@ export function drawEditorDynamic(ui: UI, state: EditorState, h: EditorHandlers,
   const tA = part(0.35, 0.75);
   if (tA > 0) {
     ctx.save(); ctx.globalAlpha = tA; ctx.translate(0, (1 - tA) * 20);
-    icon(ctx, state.playing ? "pause" : "play", state.playing ? 720 : 721, TRANSPORT_Y + 28, 16, t.text, 2);
+    drawTransportControls(ui, state, h);
+    icon(ctx, state.playing ? "pause" : "play", state.playing ? 720 : 721, TRANSPORT_Y + 28, 16, h.scrollControlled ? t.text3 : t.text, 2);
     text(ctx, `${fmt(state.time)} / ${fmt(DURATION)}`, 18, TRANSPORT_Y + 28.5, { size: 12, weight: 600, color: t.accent, family: MONO });
     ctx.restore();
   }
@@ -813,12 +865,25 @@ export function drawEditorDynamic(ui: UI, state: EditorState, h: EditorHandlers,
   if (lA > 0) {
     ctx.save(); ctx.globalAlpha = lA;
     const lane = (i: number) => ease(clamp((state.chrome - 0.5 - i * 0.05) / 0.3));
+    ctx.save(); ctx.beginPath(); ctx.rect(0, TIMELINE_Y + RULER_H, EW, EH - TIMELINE_Y); ctx.clip();
     drawCameraLane(ui, state, h, lane(2)); drawZoomLane(ui, state, h, lane(5));
-    ctx.globalAlpha = lA * (0.35 + 0.65 * state.captionsShown);
-    text(ctx, LANES[6], 16, laneY(6) + 17.5, { size: 11, color: t.text2 });
-    ctx.globalAlpha = lA; drawCaptionLane(ui, state, h, lane(6)); drawPlayhead(ui, state);
+    drawCaptionLane(ui, state, h, lane(6)); ctx.restore(); drawPlayhead(ui, state);
+    drawTimelineScrollbar(ui, state, h);
+    if (!ui.timelineLabelsHidden) drawTimelineLabels(ui, state);
     ctx.restore();
   }
+  ctx.restore();
+}
+
+/** Fixed lane titles are composited above the scrolling, blurred tracks. */
+export function drawTimelineLabels(ui: UI, state: EditorState) {
+  const {ctx, t} = ui;
+  ctx.save();
+  icon(ui.ctx, "layout-grid", 36, TIMELINE_Y + 15, 13, t.text2);
+  LANES.forEach((label, i) => {
+    ctx.globalAlpha *= i === 6 ? 0.35 + 0.65 * state.captionsShown : 1;
+    text(ctx, label, 16, laneY(i) + 17.5, { size: 11, color: t.text2 });
+  });
   ctx.restore();
 }
 
@@ -885,7 +950,8 @@ function drawCaptionLane(ui: UI, state: EditorState, h: EditorHandlers, reveal: 
 
 function drawPlayhead(ui: UI, state: EditorState) {
   const { ctx, t } = ui;
-  const px = timeToX(state.time);
+  const px = timeToX(state.time, state.timelineScale, state.timelineOffset);
+  if (px < TL_X0 || px > TL_X1) return;
   ctx.fillStyle = t.accent;
   ctx.fillRect(Math.round(px), TIMELINE_Y + 6, 1, EH - TIMELINE_Y - 6);
   rr(ctx, px - 22, TIMELINE_Y + 4, 44, 18, 9);
@@ -1010,7 +1076,7 @@ function presetGrid(ui: UI, id: string, y: number, count: number, selected: numb
 function backgroundPanel(ui: UI, state: EditorState, h: EditorHandlers) {
   const { ctx, t } = ui;
   const bg = state.background.frame;
-  let y = HEADER + 76;
+  let y = HEADER + 60;
   sectionTitle(ui, "Background", IX, y);
   y += 34;
   row(ui, "Type", y);
@@ -1079,14 +1145,14 @@ function backgroundPanel(ui: UI, state: EditorState, h: EditorHandlers) {
     });
     y += 28;
   }
-  y += 18;
+  y += 12;
   const sliderRow = (id: string, label: string, key: "padding" | "radius", fmtV: (v: number) => string) => {
     row(ui, label, y + 12);
     slider(ui, id, SL_X, y, SL_W, state.background[key], (v) => {
       state.background[key] = v;
       h.touch();
     }, fmtV(state.background[key]));
-    y += 34;
+    y += 30;
   };
   sliderRow("bg-pad", "Padding", "padding", (v) => `${Math.round(v * 100)}`);
   sliderRow("bg-rad", "Corner Radius", "radius", (v) => `${Math.round(4 + v * 22)}`);
@@ -1096,9 +1162,8 @@ function backgroundPanel(ui: UI, state: EditorState, h: EditorHandlers) {
   text(ctx, "Shadow", IX, y + 6, { size: 12, weight: 600, color: t.text2 });
   y += 22;
   const gap = 10;
-  const size = Math.min((IR - IX - gap) / 2, HEADER + PREVIEW.h - 26 - (y + 14));
+  const size = (IR - IX - gap) / 2;
   (["angle", "strength"] as const).forEach((style, i) => {
-    // height-limited here, so the pair spans the panel edge to edge
     const x = i === 0 ? IX : IR - size;
     text(ctx, style === "angle" ? "Angle" : "Strength", x, y, { size: 11, color: t.text2 });
     BG_PADS[style] = { x, y: y + 12, size };
@@ -1259,7 +1324,7 @@ export function drawInspectorDynamic(ui: UI, state: EditorState, h: EditorHandle
           if (style === "angle") state.background.shadowAngle = q;
           else state.background.shadowStrength = q;
         },
-        h.touch, scale,
+        h.touch, scale, "bg-shadow",
       );
     }
     return;

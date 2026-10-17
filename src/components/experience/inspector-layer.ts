@@ -15,7 +15,7 @@ export class InspectorLayer {
 
   draw(ui: UI, state: EditorState, handlers: EditorHandlers, pixelsPerUnit: number, gpu: boolean) {
     this.gpuLayer = null;
-    const { time, chrome, captionsShown, shot, flash, annotate, camera, playing, ...settings } = state;
+    const { time, chrome, captionsShown, shot, flash, annotate, camera, playing, volume, timelineScale, timelineOffset, ...settings } = state;
     const scale = Math.max(this.scale, Math.ceil(pixelsPerUnit * 2) / 2, 1);
     const key = JSON.stringify([scale, meshTextureVersion(), settings, camera.show, camera.remove, camera.sticker, camera.size, ui.t.dark, ui.t.accent, ui.hover]);
     if (key !== this.key || this.moving) {

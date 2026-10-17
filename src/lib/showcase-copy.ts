@@ -3,7 +3,7 @@ import type { Locale } from "./i18n";
 export type ShowcaseFeatureKey = "zoom" | "zoom3d" | "lens" | "captions" | "keyboard" | "camera" | "screenshot";
 
 export type ShowcaseCopy = {
-  holdToZoom: string;
+  toggleZoom: string;
   replay: string;
   removeBackground: string;
   sticker: string;
@@ -17,7 +17,7 @@ export type ShowcaseCopy = {
 export const showcaseFeatureOrder: ShowcaseFeatureKey[] = ["zoom", "zoom3d", "lens", "captions", "keyboard", "camera", "screenshot"];
 
 const en: ShowcaseCopy = {
-  holdToZoom: "Hold to zoom",
+  toggleZoom: "Press to zoom · press again or leave to exit",
   replay: "Replay typing",
   removeBackground: "Remove background",
   sticker: "Sticker",
@@ -56,7 +56,7 @@ const en: ShowcaseCopy = {
 };
 
 const zhHans: ShowcaseCopy = {
-  holdToZoom: "按住以放大",
+  toggleZoom: "按一下放大，再按一下缩小 · 离开自动缩小",
   replay: "重播输入",
   removeBackground: "移除背景",
   sticker: "贴纸效果",
@@ -75,7 +75,7 @@ const zhHans: ShowcaseCopy = {
 };
 
 const zhHant: ShowcaseCopy = {
-  holdToZoom: "按住以放大",
+  toggleZoom: "按一下放大，再按一下縮小 · 離開自動縮小",
   replay: "重播輸入",
   removeBackground: "移除背景",
   sticker: "貼紙效果",
@@ -94,7 +94,7 @@ const zhHant: ShowcaseCopy = {
 };
 
 const de: ShowcaseCopy = {
-  holdToZoom: "Zum Vergrößern gedrückt halten",
+  toggleZoom: "Drücken zum Vergrößern · erneut drücken oder verlassen zum Verkleinern",
   replay: "Eingabe wiederholen",
   removeBackground: "Hintergrund entfernen",
   sticker: "Sticker",
@@ -113,7 +113,7 @@ const de: ShowcaseCopy = {
 };
 
 const ja: ShowcaseCopy = {
-  holdToZoom: "長押しで拡大",
+  toggleZoom: "押して拡大 · 再度押すか離れると縮小",
   replay: "入力を再生",
   removeBackground: "背景を削除",
   sticker: "ステッカー",
@@ -132,7 +132,7 @@ const ja: ShowcaseCopy = {
 };
 
 const ko: ShowcaseCopy = {
-  holdToZoom: "길게 눌러 확대",
+  toggleZoom: "눌러 확대 · 다시 누르거나 벗어나면 축소",
   replay: "입력 다시 재생",
   removeBackground: "배경 제거",
   sticker: "스티커",
@@ -151,7 +151,7 @@ const ko: ShowcaseCopy = {
 };
 
 const es: ShowcaseCopy = {
-  holdToZoom: "Mantén pulsado para ampliar",
+  toggleZoom: "Pulsa para ampliar · pulsa otra vez o sal para reducir",
   replay: "Repetir escritura",
   removeBackground: "Quitar fondo",
   sticker: "Pegatina",
@@ -170,7 +170,7 @@ const es: ShowcaseCopy = {
 };
 
 const fr: ShowcaseCopy = {
-  holdToZoom: "Maintenir pour agrandir",
+  toggleZoom: "Appuyer pour agrandir · rappuyer ou quitter pour réduire",
   replay: "Rejouer la saisie",
   removeBackground: "Retirer le fond",
   sticker: "Autocollant",
@@ -189,7 +189,7 @@ const fr: ShowcaseCopy = {
 };
 
 const ptBR: ShowcaseCopy = {
-  holdToZoom: "Segure para ampliar",
+  toggleZoom: "Pressione para ampliar · pressione novamente ou saia para reduzir",
   replay: "Repetir digitação",
   removeBackground: "Remover fundo",
   sticker: "Adesivo",
@@ -208,7 +208,7 @@ const ptBR: ShowcaseCopy = {
 };
 
 const it: ShowcaseCopy = {
-  holdToZoom: "Tieni premuto per ingrandire",
+  toggleZoom: "Premi per ingrandire · premi ancora o esci per ridurre",
   replay: "Ripeti digitazione",
   removeBackground: "Rimuovi sfondo",
   sticker: "Adesivo",

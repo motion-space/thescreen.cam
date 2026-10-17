@@ -24,6 +24,8 @@ uniform vec2 uBaseStorage;
 uniform vec2 uOpticalStorage;
 uniform vec2 uOpticalSize;
 uniform float uPixelScale;
+uniform vec4 uCaption; // local preview pixels: x, y, width, height
+uniform vec2 uCaptionStyle; // corner radius, reveal opacity
 
 uniform float uMotionA;
 uniform vec2 uMotionB;
@@ -197,15 +199,46 @@ vec4 loupe(vec2 p, vec4 backdrop) {
   return mix(outside, vec4(color, 1.0), coverage);
 }
 
+// Rounded glass slab: a flat optical centre and a curved refracting rim.
+// Run only under the caption; reuse the scene texture without CPU readback.
+vec4 captionGlass(vec2 p, vec4 backdrop) {
+  if (uCaption.z <= 0.0) return backdrop;
+  vec2 halfSize = uCaption.zw * 0.5;
+  vec2 local = p - (uCaption.xy + halfSize);
+  float radius = uCaptionStyle.x;
+  vec2 q = abs(local) - (halfSize - radius);
+  float sdf = length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - radius;
+  float aa = max(0.75, uPixelScale);
+  if (sdf > aa) return backdrop;
+  vec2 normal = normalize(sign(local) * max(q, vec2(0.001)));
+  float rim = 1.0 - smoothstep(0.0, radius * 0.75, -sdf);
+  vec2 uv = p - normal * rim * rim * radius * 0.22;
+  float spread = max(1.0, radius * 0.14);
+  vec3 color = scene(uv).rgb * 0.2;
+  for (int i = 0; i < 8; i++) {
+    float angle = float(i) * 0.78539816;
+    color += scene(uv + vec2(cos(angle), sin(angle)) * spread).rgb * 0.1;
+  }
+  // Smoked clear glass keeps white read-along text readable on bright footage.
+  color = mix(color, vec3(0.055, 0.065, 0.085), 0.46);
+  float light = dot(normal, normalize(vec2(-0.45, -0.9)));
+  float edge = exp(-abs(sdf + aa * 0.65) / aa);
+  color += vec3(0.90, 0.96, 1.0) * (edge * (0.12 + 0.36 * pow(max(light, 0.0), 3.0)) + rim * rim * 0.045);
+  color += vec3(0.05, 0.065, 0.08) * (0.5 - local.y / uCaption.w);
+  float cover = (1.0 - smoothstep(-aa, aa, sdf)) * uCaptionStyle.y;
+  return mix(backdrop, vec4(color, 1.0), cover);
+}
+
 void main() {
   vec2 p = vec2(gl_FragCoord.x, uSize.y - gl_FragCoord.y);
   vec4 c = sceneWithWaves(p);
   if (uLens.w > 0.001) c = loupe(p, c);
-  outColor = c;
+  outColor = captionGlass(p, c);
 }
 `;
 
 export type PreviewEffects = {
+  caption?: { x: number; y: number; w: number; h: number; radius: number; alpha: number } | null;
   base: HTMLCanvasElement;
   width: number;
   height: number;
@@ -283,7 +316,7 @@ export class PreviewGL {
       this.textureSizes[unit] = { w, h };
       return t;
     });
-    for (const name of ["uBase", "uOptical", "uScreen", "uSize", "uBaseStorage", "uOpticalStorage", "uOpticalSize", "uPixelScale", "uMotionA", "uMotionB", "uBlur", "uWave", "uLens", "uOptBox", "uPlaneOn", "uInv", "uDepth", "uFocus", "uPlaneRadius"]) {
+    for (const name of ["uCaption", "uCaptionStyle", "uBase", "uOptical", "uScreen", "uSize", "uBaseStorage", "uOpticalStorage", "uOpticalSize", "uPixelScale", "uMotionA", "uMotionB", "uBlur", "uWave", "uLens", "uOptBox", "uPlaneOn", "uInv", "uDepth", "uFocus", "uPlaneRadius"]) {
       this.loc[name] = gl.getUniformLocation(program, name);
     }
     gl.uniform1i(this.loc.uBase, 0);
@@ -332,6 +365,9 @@ export class PreviewGL {
     gl.useProgram(this.program);
     this.upload(0, e.base);
     const L = this.loc;
+    const caption = e.caption;
+    gl.uniform4f(L.uCaption, caption?.x ?? 0, caption?.y ?? 0, caption?.w ?? 0, caption?.h ?? 0);
+    gl.uniform2f(L.uCaptionStyle, caption?.radius ?? 0, caption?.alpha ?? 0);
     gl.uniform2f(L.uSize, e.width, e.height);
     gl.uniform2f(L.uBaseStorage, this.textureSizes[0].w, this.textureSizes[0].h);
     gl.uniform1f(L.uPixelScale, Math.max(0.2, e.pixelScale));
@@ -494,6 +530,12 @@ uniform float uMax;
 uniform vec4 uVeil;      // mode (1 left, 2 bottom), unused, max radius px, strength
 uniform vec2 uVeilBand;  // distance from the edge where the band starts / is at full strength
 uniform vec4 uVeilColor; // page background (rgb), max tint
+uniform vec4 uTimelineRect; // screen pixels: left, top, right, bottom
+uniform vec4 uTimelineEdges; // left strength, right strength, left band width, unused
+uniform vec3 uTimelineColor;
+uniform float uTimelineRightBand;
+uniform sampler2D uTimelineLabels;
+uniform vec4 uTimelineLabelRect;
 
 vec4 src(vec2 p) {
   return texture(uSrc, clamp(p, vec2(0.5), uSize - 0.5) / uSize);
@@ -574,6 +616,19 @@ void main() {
       color /= wsum;
     }
   }
+  // Fade overflowing tracks into the editor background without resampling.
+  if (p.x >= uTimelineRect.x && p.x <= uTimelineRect.z && p.y >= uTimelineRect.y && p.y <= uTimelineRect.w) {
+    float left = 1.0 - smoothstep(0.0, uTimelineEdges.z, p.x - uTimelineRect.x);
+    float right = 1.0 - smoothstep(0.0, uTimelineRightBand, uTimelineRect.z - p.x);
+    float edge = max(left * uTimelineEdges.x, right * uTimelineEdges.y);
+    color = mix(color, vec4(uTimelineColor, 1.0), edge);
+  }
+  // Lane labels sit above the fading content and stay fixed and sharp.
+  vec2 labelUV = (p - uTimelineLabelRect.xy) / max(uTimelineLabelRect.zw, vec2(1.0));
+  if (all(greaterThanEqual(labelUV, vec2(0.0))) && all(lessThanEqual(labelUV, vec2(1.0)))) {
+    vec4 label = texture(uTimelineLabels, labelUV);
+    color = label + color * (1.0 - label.a);
+  }
   // Settle the band into the page colour along the same continuous ramp,
   // rising faster than the blur so the footage under the text is already a
   // soft, light field (no shapes, no edges).
@@ -608,6 +663,8 @@ export class FrameBlurGL {
   private composeLoc: Record<string, WebGLUniformLocation | null> = {};
   private editorTex: WebGLTexture | null = null;
   private editorKey = "";
+  private timelineLabelTex: WebGLTexture | null = null;
+  private timelineLabelKey = "";
   private inspectorTex: WebGLTexture | null = null;
   private inspectorKey = "";
   private shared: boolean;
@@ -653,10 +710,11 @@ export class FrameBlurGL {
     this.src = this.makeTexture();
     gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
     gl.useProgram(this.blur);
-    for (const name of ["uSrc", "uL1", "uL2", "uL3", "uL4", "uL5", "uL6", "uL7", "uSize", "uA", "uB", "uMax", "uVeil", "uVeilBand", "uVeilColor"]) {
+    for (const name of ["uSrc", "uL1", "uL2", "uL3", "uL4", "uL5", "uL6", "uL7", "uSize", "uA", "uB", "uMax", "uVeil", "uVeilBand", "uVeilColor", "uTimelineRect", "uTimelineEdges", "uTimelineColor", "uTimelineRightBand", "uTimelineLabels", "uTimelineLabelRect"]) {
       this.loc[name] = gl.getUniformLocation(this.blur, name);
     }
     gl.uniform1i(this.loc.uSrc, 0);
+    gl.uniform1i(this.loc.uTimelineLabels, 8);
     for (let i = 1; i <= LEVELS; i += 1) gl.uniform1i(this.loc[`uL${i}`], i);
     gl.useProgram(this.down);
     for (const name of ["uTex", "uTexel", "uOutSize"]) this.downLoc[name] = gl.getUniformLocation(this.down, name);
@@ -730,6 +788,7 @@ export class FrameBlurGL {
     grid?: GridLayer,
     inspector?: (EditorGpuLayer & { alpha: number }) | null,
     cursor?: CursorLayer | null,
+    timeline?: { rect: [number, number, number, number]; left: number; right: number; band: number; rightBand: number; color: [number, number, number]; labels?: EditorGpuLayer | null },
   ) {
     const gl = this.gl;
     const { width, height } = source;
@@ -851,6 +910,20 @@ export class FrameBlurGL {
       gl.bindTexture(gl.TEXTURE_2D, this.levels[i]?.tex ?? scene);
     }
     gl.uniform4f(this.loc.uVeil, veilOn ? veil.mode : 0, 0, veil.radius, veil.strength);
+    gl.activeTexture(gl.TEXTURE8);
+    if (!this.timelineLabelTex) this.timelineLabelTex = this.makeTexture();
+    gl.bindTexture(gl.TEXTURE_2D, this.timelineLabelTex);
+    const labels = timeline?.labels;
+    if (labels && this.timelineLabelKey !== labels.key) {
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, labels.canvas); this.timelineLabelKey = labels.key;
+    } else if (!this.timelineLabelKey) {
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array(4)); this.timelineLabelKey = "empty";
+    }
+    gl.uniform4f(this.loc.uTimelineLabelRect, labels?.x ?? 0, labels?.y ?? 0, labels?.w ?? 0, labels?.h ?? 0);
+    gl.uniform1f(this.loc.uTimelineRightBand, timeline?.rightBand ?? 1);
+    gl.uniform3fv(this.loc.uTimelineColor, timeline?.color ?? [1, 1, 1]);
+    gl.uniform4fv(this.loc.uTimelineRect, timeline?.rect ?? [0, 0, 0, 0]);
+    gl.uniform4f(this.loc.uTimelineEdges, timeline?.left ?? 0, timeline?.right ?? 0, timeline?.band ?? 1, 0);
     gl.uniform2f(this.loc.uVeilBand, veil.start, veil.full);
     gl.uniform4f(this.loc.uVeilColor, veil.color[0], veil.color[1], veil.color[2], veil.tint);
     gl.uniform2f(this.loc.uSize, width, height);
@@ -864,7 +937,7 @@ export class FrameBlurGL {
   }
   dispose() {
     const gl = this.gl;
-    gl.deleteTexture(this.src); if (this.editorTex) gl.deleteTexture(this.editorTex); if (this.inspectorTex) gl.deleteTexture(this.inspectorTex);
+    gl.deleteTexture(this.src); if (this.timelineLabelTex) gl.deleteTexture(this.timelineLabelTex); if (this.editorTex) gl.deleteTexture(this.editorTex); if (this.inspectorTex) gl.deleteTexture(this.inspectorTex);
     this.levels.forEach((level) => { gl.deleteTexture(level.tex); gl.deleteFramebuffer(level.fbo); });
     gl.deleteProgram(this.blur); gl.deleteProgram(this.down); gl.deleteProgram(this.compose);
     if (this.composed) { gl.deleteTexture(this.composed.tex); gl.deleteFramebuffer(this.composed.fbo); }

@@ -26,7 +26,9 @@ export function DocsBasicsSection({
     fillWords(q, q(".ds-head")[0], "top 85%", "top 45%");
     if (reduced) return;
     gsap.fromTo(q(".ds-player")[0], { clipPath: "inset(12% 18% 12% 18% round 16px)", scale: 0.94 }, {
-      clipPath: "inset(0% 0% 0% 0% round 16px)",
+      // The demo frame has a 10px radius. Keep the reveal mask just
+      // outside its border so the corner stroke is not cut away.
+      clipPath: "inset(-1px -1px -1px -1px round 10px)",
       scale: 1,
       ease: "power2.out",
       scrollTrigger: { trigger: q(".ds-player")[0], start: "top 95%", end: "top 30%", scrub: 0.8 },

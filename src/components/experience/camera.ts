@@ -95,20 +95,50 @@ let decodedFrame = -1;
 let maskRenderer: CameraMaskGL | null | undefined;
 let dissolveKey = "";
 let playbackVisible = true;
+let scrollControlled = false;
+let requestedTime = 0;
+
+/** Switch clocks when entering or leaving the scroll-driven feature chapters. */
+export function setCameraScrollControlled(controlled: boolean) {
+  if (scrollControlled === controlled) return;
+  scrollControlled = controlled;
+  if (video) {
+    video.autoplay = !controlled;
+    if (controlled && !video.paused) video.pause();
+  }
+}
+
+/** Seek the portrait to the same deterministic clock as the editor preview. */
+export function setCameraPlaybackTime(time: number) {
+  requestedTime = time;
+  if (!scrollControlled || !video || video.seeking || !Number.isFinite(video.duration) || video.duration <= 0) return;
+  const wrapped = ((time % video.duration) + video.duration) % video.duration;
+  const target = Math.min(video.duration - 1 / 24, Math.floor(wrapped * 24 + 1e-6) / 24);
+  if (Math.abs(video.currentTime - target) >= 1 / 48) video.currentTime = Math.max(0, target);
+}
+
+/** Only explicit volume interaction unmutes the otherwise silent autoplay preview. */
+export function setCameraVolume(volume: number) {
+  if (!video) return;
+  video.volume = Math.max(0, Math.min(1, volume));
+  video.muted = volume === 0;
+}
 
 export function setCameraPlaybackVisible(visible: boolean) {
   playbackVisible = visible;
   if (!video) return;
-  if (visible && !document.hidden) { if (video.paused) void video.play().catch(() => {}); }
+  if (!scrollControlled && visible && !document.hidden) { if (video.paused) void video.play().catch(() => {}); }
   else if (!video.paused) video.pause();
 }
 
-export function startCameraPlayback() {
+export function startCameraPlayback(scrub = false) {
+  scrollControlled = scrub;
+  requestedTime = 0;
   const media = document.createElement("video");
   media.src = "/feature-media/camera-portrait-loop.mp4";
   media.muted = true;
   media.loop = true;
-  media.autoplay = true;
+  media.autoplay = !scrub;
   media.playsInline = true;
   media.preload = "auto";
   media.setAttribute("aria-hidden", "true");
@@ -117,24 +147,32 @@ export function startCameraPlayback() {
   document.body.appendChild(media);
   video = media;
   decodedFrame = -1;
-  const play = () => { if (playbackVisible && !document.hidden && media.paused) void media.play().catch(() => {}); };
+  const play = () => { if (!scrollControlled && playbackVisible && !document.hidden && media.paused) void media.play().catch(() => {}); };
+  const ready = () => window.dispatchEvent(new Event("xp-camera-frame-ready"));
+  const metadata = () => setCameraPlaybackTime(requestedTime);
+  media.addEventListener("loadedmetadata", metadata);
+  media.addEventListener("loadeddata", ready);
+  media.addEventListener("seeked", ready);
   play();
   document.addEventListener("pointerdown", play);
   return () => {
     document.removeEventListener("pointerdown", play);
+    media.removeEventListener("loadedmetadata", metadata);
+    media.removeEventListener("loadeddata", ready);
+    media.removeEventListener("seeked", ready);
     media.pause();
     media.removeAttribute("src");
     media.load();
     media.remove();
     if(bubbleShadow)bubbleShadow.width=bubbleShadow.height=1;bubbleShadow=null;bubbleShadowKey="";
     if(shadowSprite)shadowSprite.width=shadowSprite.height=1;shadowSprite=null;shadowKey="";shadowSource=null;
-    if (video === media) { video = null; maskRenderer?.dispose(); maskRenderer = undefined; }
+    if (video === media) { video = null; scrollControlled = false; maskRenderer?.dispose(); maskRenderer = undefined; }
   };
 }
 
 function updateVideoFrame() {
   if (!video || video.readyState < 2 || video.seeking) return;
-  const frame = Math.floor(video.currentTime * 24);
+  const frame = Math.floor(video.currentTime * 24 + 1e-4);
   if (decodedFrame === frame) return;
   const width = video.videoWidth / 2;
   const height = video.videoHeight;

@@ -7,8 +7,8 @@ import { drawPanel, warmPanel, warmShadow, disposePanelShadows } from "./panel-s
  * scroll keyframes, frames different parts of that world: the hero is a tight
  * shot on the preview "video"; pulling back reveals the editor around it, then
  * the camera dives into the timeline, inspector and preview for each feature.
- * Every control stays interactive — pointer events are mapped back through the
- * camera via the hit registry.
+ * Style and effect controls stay interactive through the hit registry;
+ * playback follows page scroll inside the feature chapters and runs normally outside.
  */
 import { ArrowRight } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -37,10 +37,13 @@ import {
   screenRectIn,
   laneY,
   timeToX,
+  timelineMaxOffset,
+  followTimeline,
+  TL_X0, TL_X1, TIMELINE_Y,
 } from "./editor";
 import { Anim, HitRegistry, type Hit, type Theme, type UI, makeTheme, squircle } from "./kit";
 import { KEY_STYLES, type KeyStyle } from "./keyboard";
-import { startCameraPlayback, setCameraPlaybackVisible } from "./camera";
+import { startCameraPlayback, setCameraPlaybackVisible, setCameraPlaybackTime, setCameraScrollControlled } from "./camera";
 import { Preview, warmCaptions } from "./preview";
 import { ATTACHMENT, CH, CW, setAppTheme, warmRecordedApp, disposeRecordedAppCaches } from "./recorded-app";
 import { FrameBlurGL } from "./preview-gl";
@@ -122,17 +125,16 @@ const KEYS: Key[] = [
 /** Chapters: scroll span, mapped playback range, and autopilot selection. */
 const CHAPTERS = [
   { key: "zoom", from: 0.16, to: 0.28, scrub: [0.1825, 0.28], time: [2.6, 8.9] },
-  { key: "zoom3d", from: 0.28, to: 0.385, scrub: [0.3025, 0.385], time: [14.0, 18.5] },
-  { key: "lens", from: 0.385, to: 0.475, scrub: [0.4075, 0.475], time: [18.3, 23.7] },
+  { key: "zoom3d", from: 0.28, to: 0.385, scrub: [0.3025, 0.385], time: [14.0, 17.8] },
+  { key: "lens", from: 0.385, to: 0.475, scrub: [0.4075, 0.475], time: [18.3, 23.4] },
   { key: "captions", from: 0.475, to: 0.58, scrub: [0.4975, 0.58], time: [9.2, 14.5] },
-  { key: "keyboard", from: 0.58, to: 0.69, scrub: [0.6, 0.676], time: [11.4, 15.15] },
+  { key: "keyboard", from: 0.58, to: 0.69, scrub: [0.6, 0.676], time: [11.4, 14.45] },
   { key: "camera", from: 0.69, to: 0.8, scrub: [0.715, 0.78], time: [14.6, 17.6] },
   { key: "screenshot", from: 0.8, to: 0.95, scrub: [0.8, 0.815], time: [16.8, 16.8] },
 ] as const;
 
-// One destination per chapter, shared by snapping, rail geometry and clicks.
+// Chapter entry points shared by the rail and navigation buttons.
 const CHAPTER_STOPS = CHAPTERS.map(ch => ch.key === "screenshot" ? .89 : ch.scrub[0] + .004);
-const TOUR_STOPS = [0, .13, ...CHAPTER_STOPS, 1];
 
 const clamp = (v: number, a = 0, b = 1) => Math.max(a, Math.min(b, v));
 
@@ -228,6 +230,7 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
   const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
   const railRef = useRef<HTMLDivElement>(null);
   const railIndicatorRef = useRef<HTMLDivElement>(null);
+  const railIndicatorFillRef = useRef<HTMLDivElement>(null);
   const editorRef = useRef<EditorState | null>(null);
   const [demo, setDemo] = useState({ style: 0 as KeyStyle, remove: false, sticker: false });
   const demoRef = useRef(demo);
@@ -261,7 +264,8 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
     const ui: UI = { ctx, t: theme, hits, anim, hover: null, active: null };
     let dirtyUntil = performance.now() + 500;
     const invalidate = () => { dirtyUntil = performance.now() + 500; };
-    const handlers = { touch: invalidate };
+    let timelinePanUntil = 0;
+    const handlers = { scrollControlled: false, touch: invalidate };
     const stopCameraPlayback = startCameraPlayback();
     let blurGL: FrameBlurGL | null = null;
     try {
@@ -303,17 +307,28 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
     let canvasBounds = canvas.getBoundingClientRect();
     let editorDensity = 1;
     let progress = 0;
+    let overviewSettle: { from: number; to: number; started: number } | null = null;
+    let overviewSettleAt = 0;
+    let overviewDirection = 1;
+    let overviewTouching = false;
+    const interruptOverviewSettle = () => { overviewSettle = null; overviewSettleAt = performance.now() + 200; };
+    const onSettleKey = (e: KeyboardEvent) => {
+      if (["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Home", "End", " "].includes(e.key)) interruptOverviewSettle();
+    };
+    const onSettleTouchStart = () => { overviewTouching = true; interruptOverviewSettle(); };
+    const onSettleTouchEnd = () => { overviewTouching = false; interruptOverviewSettle(); };
+
     const desktopZoom = window.matchMedia("(min-width: 900px) and (hover: hover) and (pointer: fine)");
     const mac = /Mac|iPhone|iPad/.test(navigator.platform);
     if (zoomKeyRef.current) zoomKeyRef.current.textContent = mac ? "⌘" : "Ctrl";
-    let modifierHeld = false;
-    let zoomUsed = false;
+    let zoomToggled = false;
+    const zoomAnchor = { x: 0, y: 0 };
     let pointer: { x: number; y: number } | null = null;
     const holdScale = new SpringValue(1, SPRINGS.camera);
     const holdX = new SpringValue(0, SPRINGS.camera);
     const holdY = new SpringValue(0, SPRINGS.camera);
     let holdActive = false;
-    const isOverview = () => (progress >= .12 && progress <= .158) || progress >= .99062;
+    const isOverview = () => (progress >= .12 && progress <= .16) || progress >= .99062;
     // Use the same camera spring and final motion-blur pass as the scroll zoom.
     const updateMagnify = (now = performance.now()) => {
       const base = cameraAt(progress, W, H);
@@ -322,11 +337,16 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
       const right = left + EW * base.z;
       const bottom = top + EH * base.z;
       const eligible = desktopZoom.matches && isOverview() && visible && !document.hidden;
-      const inside = pointer && pointer.x >= left && pointer.x <= right && pointer.y >= top && pointer.y <= bottom;
-      if (!eligible) modifierHeld = false;
-      holdActive = !!(eligible && modifierHeld && pointer && (inside || holdActive));
-      const x = pointer ? Math.max(left, Math.min(right, pointer.x)) : 0;
-      const y = pointer ? Math.max(top, Math.min(bottom, pointer.y)) : 0;
+      if (!eligible) zoomToggled = false;
+      zoomAnchor.x = clamp(zoomAnchor.x, left, right);
+      zoomAnchor.y = clamp(zoomAnchor.y, top, bottom);
+      if (zoomToggled && pointer && (pointer.x < Math.max(0, left * 2 - zoomAnchor.x) ||
+          pointer.x > Math.min(W, right * 2 - zoomAnchor.x) ||
+          pointer.y < Math.max(0, top * 2 - zoomAnchor.y) ||
+          pointer.y > Math.min(H, bottom * 2 - zoomAnchor.y))) zoomToggled = false;
+      holdActive = eligible && zoomToggled;
+      const x = zoomAnchor.x;
+      const y = zoomAnchor.y;
       let changed = false;
       for (const [spring, target] of [[holdScale, holdActive ? 2 : 1], [holdX, holdActive ? -x : 0], [holdY, holdActive ? -y : 0]] as const) {
         const before = spring.value;
@@ -340,25 +360,19 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
         overviewRef.current.style.opacity = String(opacity);
         overviewRef.current.style.visibility = opacity > 0 ? "visible" : "hidden";
       }
-      if (holdActive) zoomUsed = true;
       if (zoomHintRef.current) {
-        zoomHintRef.current.style.visibility = eligible && !zoomUsed ? "visible" : "hidden";
+        zoomHintRef.current.style.visibility = eligible && !holdActive ? "visible" : "hidden";
         zoomHintRef.current.style.top = `${bottom + 16}px`;
       }
       return changed;
     };
     let lastProgress = -1;
-    let lastScrollAt = Number.NEGATIVE_INFINITY;
-    let resumePending = false;
-    const SCROLL_SETTLE_MS = 250;
-    const SNAP_IDLE_MS = 120;
-    const SNAP_DURATION_MS = 260;
-    let scrollDirection = 0;
-    let touching = false;
-    let pointerHeld = false;
-    let snap: { from: number; to: number; started: number } | null = null;
     let railMetrics: Array<{ x: number; width: number }> = [];
-    let railWidth = 0;
+    let railPill = { x: 0, width: 0 };
+    let railDrag: { pointerId: number; fraction: number; left: number; pageTop: number; span: number } | null = null;
+    let railSuppressClick = false;
+    let railForeground: HTMLElement[] = [];
+
     const updateRail = (p: number) => {
       const indicator = railIndicatorRef.current;
       if (!indicator || railMetrics.length !== CHAPTERS.length) return;
@@ -371,22 +385,24 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
       const a = railMetrics[i], b = railMetrics[i + 1];
       const x = lerp(a.x, b.x, t), width = lerp(a.width, b.width, t);
       indicator.style.transform = `translate3d(${x}px,0,0)`;
-      indicator.style.clipPath = `inset(0 ${Math.max(0, railWidth - width)}px 0 0 round 999px)`;
+      railPill = { x, width };
+      const fill = railIndicatorFillRef.current;
+      if (fill) {
+        fill.style.width = `${width}px`;
+        fill.style.transformOrigin = `${width / 2}px 15px`;
+      }
+      if (railDrag) railForeground.forEach((label, i) => {
+        const item = railMetrics[i];
+        const left = clamp(x - width * .05 - item.x, 0, item.width);
+        const right = clamp(item.x + item.width - x - width * 1.05, 0, item.width);
+        label.style.clipPath = `inset(0 ${right}px 0 ${left}px)`;
+      });
     };
     let chapter = -2;
-    let loop: [number, number] = [0, DURATION];
-    // At the end of a chapter's range the playhead holds for a moment, then
-    // rewinds on a spring instead of jumping back to the start.
-    const LOOP_HOLD = 1;
-    const LOOP_REWIND = 1;
-    const rewindEase = springEase(SPRINGS.effect);
-    let loopPhase: "play" | "hold" | "rewind" = "play";
-    let loopPhaseTime = 0;
-    let rewindFrom = 0;
+    let playingBeforeTour = state.playing;
+    let lastFrameAt = performance.now();
     let visible = true;
     let raf = 0;
-    let last = performance.now();
-    let lastCameraTick = -1;
     let drag: Hit | null = null;
 
     const resize = () => {
@@ -428,10 +444,19 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
       return clamp(-rect.top / Math.max(1, span));
     };
 
-    /** Select while scrolling; seek to the mapped playhead only after arrival. */
-    const applyScroll = (p: number, seek = true) => {
+    /** The scroll position is the only playback clock; chapters map their own demos. */
+    const applyScroll = (p: number) => {
       const index = CHAPTERS.findIndex((c) => p >= c.from && p < c.to);
       const next = p < CHAPTERS[0].from ? -1 : index === -1 ? CHAPTERS.length : index;
+      // The overview is still visible at the first chapter's fade-in boundary.
+      // Take over playback only once its camera framing has actually arrived.
+      const controlled = index >= 0 && p >= CHAPTERS[0].scrub[0];
+      if (controlled !== handlers.scrollControlled) {
+        if (controlled) playingBeforeTour = state.playing;
+        else state.playing = playingBeforeTour;
+        handlers.scrollControlled = controlled;
+      }
+      if (controlled) state.playing = false;
       if (next !== chapter) {
         chapter = next;
         setActive(next >= 0 && next < CHAPTERS.length ? next : -1);
@@ -452,48 +477,11 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
           state.selection = { kind: "none" };
           state.tab = 0;
         }
-        const ch = CHAPTERS[next];
-        loop = ch ? [ch.time[0], Math.max(ch.time[1], ch.time[0] + 0.01)] : [0, DURATION];
-        loopPhase = "play";
-
       }
       const ch = CHAPTERS[chapter];
-      if (ch && seek) {
+      if (ch && controlled) {
         const k = clamp((p - ch.scrub[0]) / (ch.scrub[1] - ch.scrub[0]));
-        state.time = reduceMotion && ch.key === "keyboard" ? 13.5 : lerp(ch.time[0], ch.time[1], k);
-      }
-    };
-
-    /** Plays the chapter's range, holds at its end, then rewinds to its start. */
-    const advancePlayback = (dt: number) => {
-      const len = loop[1] - loop[0];
-      if (len < 0.05) {
-        state.time = loop[0];
-      } else if (loopPhase === "play") {
-        state.time += dt;
-        if (state.time < loop[0] || state.time > loop[1] + 0.5) {
-          // landed outside the range (a jump, a new chapter): start over
-          state.time = loop[0];
-        } else if (state.time >= loop[1]) {
-          state.time = loop[1];
-          loopPhase = "hold";
-          loopPhaseTime = 0;
-        }
-      } else if (loopPhase === "hold") {
-        loopPhaseTime += dt;
-        if (loopPhaseTime >= LOOP_HOLD) {
-          loopPhase = "rewind";
-          loopPhaseTime = 0;
-          rewindFrom = state.time;
-        }
-      } else {
-        loopPhaseTime += dt;
-        const k = Math.min(1, loopPhaseTime / LOOP_REWIND);
-        state.time = lerp(rewindFrom, loop[0], rewindEase(k));
-        if (k >= 1) {
-          state.time = loop[0];
-          loopPhase = "play";
-        }
+        state.time = lerp(ch.time[0], ch.time[1], k);
       }
     };
 
@@ -542,10 +530,58 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
     const measureRail = () => {
       const rail = railRef.current;
       if (!rail) return;
-      railWidth = rail.clientWidth;
+      railForeground = Array.from(rail.querySelectorAll<HTMLElement>(".xp-rail-item-drag-label"));
       railMetrics = Array.from(rail.querySelectorAll<HTMLButtonElement>(".xp-rail-item"), button => ({ x: button.offsetLeft, width: button.offsetWidth }));
       updateRail(progress);
     };
+    const rail = railRef.current;
+    const onRailDown = (e: PointerEvent) => {
+      railSuppressClick = false;
+      if (e.button !== 0 || !rail || !railPill.width) return;
+      const rect = rail.getBoundingClientRect(), x = e.clientX - rect.left;
+      if (x < railPill.x || x > railPill.x + railPill.width) return;
+      e.preventDefault(); e.stopPropagation();
+      const bounds = root.getBoundingClientRect();
+      railDrag = { pointerId: e.pointerId, fraction: clamp((x - railPill.x) / railPill.width), left: rect.left, pageTop: scrollY + bounds.top, span: bounds.height - innerHeight };
+      railSuppressClick = true;
+      overviewSettle = null; overviewSettleAt = 0;
+      rail.dataset.dragging = "true";
+      document.documentElement.dataset.xpRailDragging = "true";
+      rail.setPointerCapture(e.pointerId);
+      updateRail(progress);
+    };
+    const onRailMove = (e: PointerEvent) => {
+      if (!railDrag || e.pointerId !== railDrag.pointerId) return;
+      e.preventDefault();
+      const x = e.clientX - railDrag.left, f = railDrag.fraction;
+      const anchor = (i: number) => railMetrics[i].x + railMetrics[i].width * f;
+      let i = 0;
+      while (i < railMetrics.length - 2 && x > anchor(i + 1)) i++;
+      const k = clamp((x - anchor(i)) / Math.max(1, anchor(i + 1) - anchor(i)));
+      const p = lerp(CHAPTER_STOPS[i], CHAPTER_STOPS[i + 1], k);
+      window.scrollTo({ top: railDrag.pageTop + railDrag.span * p, behavior: "instant" });
+      updateRail(p); invalidate();
+    };
+    const onRailEnd = (e?: PointerEvent) => {
+      if (!railDrag || (e && e.pointerId !== railDrag.pointerId)) return;
+      const id = railDrag.pointerId;
+      railDrag = null;
+      delete rail?.dataset.dragging;
+      delete document.documentElement.dataset.xpRailDragging;
+      if (rail?.hasPointerCapture(id)) rail.releasePointerCapture(id);
+      invalidate();
+    };
+    const onRailClick = (e: MouseEvent) => {
+      if (railSuppressClick) { e.preventDefault(); e.stopPropagation(); railSuppressClick = false; }
+    };
+    rail?.addEventListener("pointerdown", onRailDown, true);
+    rail?.addEventListener("pointermove", onRailMove);
+    rail?.addEventListener("pointerup", onRailEnd);
+    rail?.addEventListener("pointercancel", onRailEnd);
+    rail?.addEventListener("lostpointercapture", onRailEnd);
+    rail?.addEventListener("click", onRailClick, true);
+    const onRailBlur = () => onRailEnd();
+    window.addEventListener("blur", onRailBlur);
     const railObserver = new ResizeObserver(measureRail);
     if (railRef.current) railObserver.observe(railRef.current);
     measureRail();
@@ -565,20 +601,14 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
       raf = 0;
       // IntersectionObserver arrives after animation callbacks. Cull a newly
       // offscreen tour before recording another large Canvas frame on a fast scroll.
-      const snappingThisFrame = !!snap;
-      if (snap) {
-        const t = reduceMotion ? 1 : clamp((now - snap.started) / SNAP_DURATION_MS);
-        window.scrollTo({ top: lerp(snap.from, snap.to, cameraEase(t)), behavior: "instant" });
-        if (t >= 1) snap = null;
-      }
       const bounds = root.getBoundingClientRect();
       if (bounds.bottom <= 0 || bounds.top >= window.innerHeight) {
         visible = false;
         setCameraPlaybackVisible(false);
         return;
       }
-      const dt = Math.min(0.1, (now - last) / 1000);
-      last = now;
+      const dt = Math.min(.1, (now - lastFrameAt) / 1000);
+      lastFrameAt = now;
       progress = readProgress(bounds);
       canvasBounds = canvas.getBoundingClientRect();
       // Read layout before overlay and hit-region writes. Reading chapter
@@ -589,13 +619,32 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
         const rect = card.getBoundingClientRect();
         if (rect.width > 0) textEdge = W < 900 ? H - rect.top : rect.right;
       }
+      // Finish only the overview assembly/exit. Chapter playback remains fully
+      // scroll-driven; user input interrupts immediately without locking scroll.
+      const positionChanged = Math.abs(progress - lastProgress) > 1e-5;
+      if (positionChanged && !overviewSettle) {
+        overviewDirection = progress > lastProgress ? 1 : -1;
+        overviewSettleAt = now + 200;
+      }
+      if (!overviewSettle && !overviewTouching && !drag && overviewSettleAt && now >= overviewSettleAt) {
+        const range = progress > .03 && progress < .12 ? [.028, .122]
+          : progress > .95 && progress < .99062 ? [.948, .993] : null;
+        overviewSettleAt = 0;
+        if (range) overviewSettle = { from: progress, to: range[overviewDirection > 0 ? 1 : 0], started: now };
+      }
+      if (overviewSettle) {
+        const t = reduceMotion ? 1 : clamp((now - overviewSettle.started) / 800);
+        const p = lerp(overviewSettle.from, overviewSettle.to, t * t * t * (t * (t * 6 - 15) + 10));
+        const top = window.scrollY + bounds.top;
+        window.scrollTo({ top: top + (bounds.height - window.innerHeight) * p, behavior: "instant" });
+        progress = p;
+        if (t === 1) { overviewSettle = null; overviewSettleAt = 0; }
+      }
       const scrolled = Math.abs(progress - lastProgress) > 1e-5;
+      applyScroll(progress);
+      if (!handlers.scrollControlled && state.playing && !drag) state.time = (state.time + dt) % DURATION;
+      followTimeline(state, !drag && now > timelinePanUntil && (state.playing || handlers.scrollControlled));
       if (scrolled) {
-        if (!snappingThisFrame && lastProgress >= 0) scrollDirection = Math.sign(progress - lastProgress);
-        lastScrollAt = now;
-        resumePending = true;
-        state.playing = false;
-        applyScroll(progress, false);
         updateOverlay(progress);
         lastProgress = progress;
       }
@@ -607,49 +656,11 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
         setDemo(demoRef.current);
         invalidate();
       }
-      if (resumePending && !snap && !snappingThisFrame && !touching && !pointerHeld && !drag &&
-          now - lastScrollAt >= SNAP_IDLE_MS && bounds.top <= 0 && bounds.bottom >= window.innerHeight) {
-        let i = 0;
-        while (i < TOUR_STOPS.length - 2 && progress > TOUR_STOPS[i + 1]) i += 1;
-        const a = TOUR_STOPS[i], b = TOUR_STOPS[i + 1];
-        const t = clamp((progress - a) / (b - a));
-        // A deliberate nudge carries forward; a tiny nudge returns to the
-        // current chapter. Reverse input uses the same threshold symmetrically.
-        const target = scrollDirection > 0 ? (t > .12 ? b : a)
-          : scrollDirection < 0 ? (t < .88 ? a : b) : (t < .5 ? a : b);
-        const y = Math.round(window.scrollY + bounds.top + target * (bounds.height - window.innerHeight));
-        if (Math.abs(y - window.scrollY) >= 1) {
-          snap = { from: window.scrollY, to: y, started: now };
-        }
-      }
-      let resumed = false;
-      if (resumePending && !snap && !touching && !pointerHeld && !drag && now - lastScrollAt >= SCROLL_SETTLE_MS) {
-        // Never restart in the middle of a camera move or a fading chapter.
-        // Snapping owns the scroll until arrival; playback then waits for
-        // the settle delay and seeks once, with no intermediate scrubbing.
-        let i = 0;
-        while (i < KEYS.length - 2 && progress >= KEYS[i + 1].p) i += 1;
-        const a = KEYS[i], b = KEYS[i + 1], ch = CHAPTERS[chapter];
-        const landed = a.rect === b.rect && a.area === b.area &&
-          (!ch || (progress >= ch.from + .018 && progress <= ch.to - .014));
-        if (landed) {
-          applyScroll(progress);
-          loopPhase = "play";
-          resumePending = false;
-          state.playing = !reduceMotion && ch?.key !== "screenshot";
-          resumed = true;
-          invalidate();
-        }
-      }
-      if (state.playing && !drag && !resumePending && !resumed) advancePlayback(dt);
-
-      const liveCamera = state.camera.show && (state.shot < 0.99 || chapter === CHAPTERS.length);
-      const cameraTick = Math.floor(now * 24 / 1000);
-      const cameraChanged = liveCamera && cameraTick !== lastCameraTick;
-      setCameraPlaybackVisible(visible && liveCamera && state.playing);
-      if (magnifying || scrolled || scrollCameraBlurred || state.playing || drag || now < dirtyUntil || cameraChanged || now - state.camera.changedAt < 1800) try {
+      setCameraScrollControlled(handlers.scrollControlled);
+      setCameraPlaybackVisible(visible && state.camera.show && state.playing);
+      setCameraPlaybackTime(state.time);
+      if (magnifying || scrolled || scrollCameraBlurred || state.playing || drag || now < dirtyUntil) try {
         render();
-        lastCameraTick = cameraTick;
       } catch (error) {
         console.error(error);
         (ctx as CanvasRenderingContext2D & { reset?: () => void }).reset?.();
@@ -694,17 +705,18 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
         ctx.restore();
       }
 
+      hits.add({ id: "tl-pan", x: 0, y: TIMELINE_Y, w: EW, h: EH - TIMELINE_Y });
       editorLayer.draw(ui, state, handlers, editorDensity, preview.canCompose);
       hits.add({
         id: "preview",
         ...COMP,
-        cursor: "pointer",
-        onDown: () => {
-          state.playing = !state.playing;
-        },
+        cursor: handlers.scrollControlled ? "default" : "pointer",
+        onDown: handlers.scrollControlled ? undefined : () => { state.playing = !state.playing; invalidate(); },
       });
       // Paint every changed animation frame at the display's cadence.
-      preview.draw(ctx, state, base.z * dpr, radius, reduceMotion);
+      // Retain full magnified density through both the entrance and exit.
+      const previewScale = holdActive || holdScale.value !== 1 ? 2 : 1;
+      preview.draw(ctx, state, base.z * dpr * previewScale, radius, reduceMotion);
       // a faint 1 px hairline so the frame keeps its edge against the page
       ctx.save();
       squircle(ctx, COMP.x, COMP.y, COMP.w, COMP.h, radius);
@@ -755,7 +767,20 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
           }, preview.gpuLayer, editorLayer.gpuLayer, (() => {
             let step = 40 * cam.z; while (step < 14) step *= 2;
             return { step: step*dpr, x: (cam.sx-cam.wx*cam.z)%step*dpr, y: (cam.sy-cam.wy*cam.z)%step*dpr, dpr, dark: theme.dark };
-          })(), editorLayer.inspector.gpuLayer, preview.cursorLayer);
+          })(), editorLayer.inspector.gpuLayer, preview.cursorLayer, state.chrome === 1 ? {
+            rect: [
+              (cam.sx - cam.wx * cam.z) * dpr,
+              (cam.sy + (TIMELINE_Y - cam.wy) * cam.z) * dpr,
+              (cam.sx + (TL_X1 - cam.wx) * cam.z) * dpr,
+              (cam.sy + (EH - 20 - cam.wy) * cam.z) * dpr,
+            ],
+            left: Math.min(1, state.timelineOffset / 12),
+            right: Math.min(1, (timelineMaxOffset(state) - state.timelineOffset) / 12),
+            band: 132 * cam.z * dpr,
+            rightBand: 56 * cam.z * dpr,
+            color: [0, 2, 4].map(i => parseInt(theme.window.slice(i + 1, i + 3), 16) / 255) as [number, number, number],
+            labels: editorLayer.timelineLabels,
+          } : undefined);
           // Present this GPU canvas directly. Copying it back into the 2D
           // source forces another cross-context synchronization every frame.
           useProcessed = true;
@@ -766,11 +791,7 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
     };
 
     if (import.meta.env.DEV) {
-      // review hook: render a frame even when the page is backgrounded
-      (window as Window & { __xpAdvance?: (dt: number) => number }).__xpAdvance = (dt) => {
-        advancePlayback(dt);
-        return state.time;
-      };
+      // Review hook: render the deterministic scroll frame.
       (window as Window & { __xpFrame?: (keepTime?: boolean) => void }).__xpFrame = (keepTime = false) => {
         progress = readProgress();
         if (!keepTime) applyScroll(progress);
@@ -788,22 +809,23 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
 
     const start = () => {
       if (!raf && visible && !document.hidden) {
-        last = performance.now();
+        lastFrameAt = performance.now();
         raf = requestAnimationFrame(frame);
       }
     };
     const io = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;
-      setCameraPlaybackVisible(visible && state.shot < 0.99);
+      setCameraPlaybackVisible(visible && state.camera.show && state.playing);
       if (visible) start();
       else { cancelAnimationFrame(raf); raf = 0; }
     });
     const onVisibility = () => {
-      setCameraPlaybackVisible(visible && !document.hidden && state.shot < 0.99);
-      if (document.hidden) { modifierHeld = false; updateMagnify(); cancelAnimationFrame(raf); raf = 0; }
+      setCameraPlaybackVisible(visible && !document.hidden && state.camera.show && state.playing);
+      if (document.hidden) { zoomToggled = false; updateMagnify(); cancelAnimationFrame(raf); raf = 0; }
       else { invalidate(); start(); }
     };
     window.addEventListener("xp-background-ready", invalidate);
+    window.addEventListener("xp-camera-frame-ready", invalidate);
     document.addEventListener("visibilitychange", onVisibility);
     io.observe(root);
     start();
@@ -824,13 +846,26 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
       ui.hover = hit?.id ?? null;
       interaction.style.cursor = hit?.cursor ?? "default";
     };
+    const onTimelineWheel = (e: WheelEvent) => {
+      if (e.ctrlKey || e.metaKey || !timelineMaxOffset(state)) return;
+      const delta = e.shiftKey && !e.deltaX ? e.deltaY : Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : 0;
+      if (!delta) return;
+      const region = hits.hits.find(hit => hit.id === "tl-pan");
+      if (!region) return;
+      const p = point(e as unknown as PointerEvent), local = hits.local(region, p);
+      if (local.x < 0 || local.x > EW || local.y < TIMELINE_Y || local.y > EH) return;
+      e.preventDefault();
+      const units = e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? W : 1;
+      const next = hits.local(region, { x: p.x + delta * units * dpr, y: p.y });
+      state.timelineOffset = Math.max(0, Math.min(timelineMaxOffset(state), state.timelineOffset + next.x - local.x));
+      timelinePanUntil = performance.now() + 1200;
+      invalidate();
+    };
     const onDown = (e: PointerEvent) => {
       if (e.button !== 0) return;
       const p = point(e);
       const hit = hits.find(p);
       if (!hit) return;
-      snap = null;
-      resumePending = false;
       hit.onDown?.(hits.local(hit, p));
       invalidate();
       if (hit.onDrag) {
@@ -841,6 +876,7 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
       }
     };
     const onUp = () => {
+      if (drag?.id === "tl-scrollbar") timelinePanUntil = performance.now() + 1200;
       drag?.onUp?.();
       drag = null;
       ui.active = null;
@@ -851,88 +887,88 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
     const trackPointer = (e: PointerEvent) => {
       if (e.pointerType !== "mouse") return;
       const rect = canvasBounds;
-      if (rect) pointer = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+      if (!rect) return;
+      const next = { x: e.clientX - rect.left, y: e.clientY - rect.top };
+      if (e.target instanceof Element && e.target.closest(".site-bar")) zoomToggled = false;
+      if (zoomToggled && pointer) {
+        const base = cameraAt(progress, W, H);
+        const left = base.sx - base.wx * base.z, top = base.sy - base.wy * base.z;
+        const right = left + EW * base.z, bottom = top + EH * base.z;
+        const dx = next.x - pointer.x, dy = next.y - pointer.y;
+        const edge = 32;
+        // Pan only on outward movement in the visible editor's edge band.
+        // Interior movement and a stationary pointer never move the camera.
+        const innerLeft = Math.max(0, left * 2 - zoomAnchor.x) + edge;
+        const innerRight = Math.min(W, right * 2 - zoomAnchor.x) - edge;
+        const innerTop = Math.max(0, top * 2 - zoomAnchor.y) + edge;
+        const innerBottom = Math.min(H, bottom * 2 - zoomAnchor.y) - edge;
+        const panX = dx > 0 ? Math.max(0, next.x - Math.max(pointer.x, innerRight))
+          : dx < 0 ? Math.min(0, next.x - Math.min(pointer.x, innerLeft)) : 0;
+        const panY = dy > 0 ? Math.max(0, next.y - Math.max(pointer.y, innerBottom))
+          : dy < 0 ? Math.min(0, next.y - Math.min(pointer.y, innerTop)) : 0;
+        zoomAnchor.x = clamp(zoomAnchor.x + panX * 2, left, right);
+        zoomAnchor.y = clamp(zoomAnchor.y + panY * 2, top, bottom);
+      }
+      pointer = next;
     };
-    const releaseZoom = () => { modifierHeld = false; updateMagnify(); };
+    const releaseZoom = () => { zoomToggled = false; updateMagnify(); };
+    const onWindowLeave = (event: PointerEvent) => { if (!event.relatedTarget) { releaseZoom(); pointer = null; } };
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key !== (mac ? "Meta" : "Control") || e.altKey || e.shiftKey || (mac ? e.ctrlKey : e.metaKey)) return;
+      if (e.repeat || e.key !== (mac ? "Meta" : "Control") || e.altKey || e.shiftKey || (mac ? e.ctrlKey : e.metaKey)) return;
       if (e.target instanceof Element && e.target.closest("input,textarea,select,[contenteditable]:not([contenteditable=false])")) return;
-      modifierHeld = true;
+      if (zoomToggled) { releaseZoom(); return; }
+      if (!desktopZoom.matches || !isOverview() || !visible || document.hidden) return;
+      const base = cameraAt(progress, W, H);
+      const left = base.sx - base.wx * base.z, top = base.sy - base.wy * base.z;
+      const right = left + EW * base.z, bottom = top + EH * base.z;
+      const origin = pointer ?? { x: (left + right) / 2, y: (top + bottom) / 2 };
+      if (origin.x < left || origin.x > right || origin.y < top || origin.y > bottom) return;
+      pointer = origin;
+      zoomAnchor.x = origin.x;
+      zoomAnchor.y = origin.y;
+      zoomToggled = true;
+      updateMagnify();
     };
-    const onKeyUp = (e: KeyboardEvent) => { if (e.key === (mac ? "Meta" : "Control")) releaseZoom(); };
+    window.addEventListener("wheel", interruptOverviewSettle, { passive: true });
+    window.addEventListener("touchstart", onSettleTouchStart, { passive: true });
+    window.addEventListener("touchend", onSettleTouchEnd, { passive: true });
+    window.addEventListener("touchcancel", onSettleTouchEnd, { passive: true });
+    window.addEventListener("keydown", onSettleKey);
     window.addEventListener("pointermove", trackPointer, { passive: true });
     window.addEventListener("keydown", onKeyDown);
-    window.addEventListener("keyup", onKeyUp);
+    window.addEventListener("pointerout", onWindowLeave);
     window.addEventListener("blur", releaseZoom);
     desktopZoom.addEventListener("change", releaseZoom);
+    interaction.addEventListener("wheel", onTimelineWheel, { passive: false });
     interaction.addEventListener("pointermove", onMove);
     interaction.addEventListener("pointerdown", onDown);
     interaction.addEventListener("pointerup", onUp);
     interaction.addEventListener("pointercancel", onUp);
     interaction.addEventListener("pointerleave", onLeave);
 
-    const interruptSnap = () => {
-      if (!snap) return;
-      snap = null;
-      lastScrollAt = performance.now();
-      resumePending = true;
-      state.playing = false;
-    };
-    const onPointerStart = () => { pointerHeld = true; interruptSnap(); };
-    const onPointerEnd = () => { pointerHeld = false; lastScrollAt = performance.now(); };
-    const onWheel = (event: WheelEvent) => {
-      if (event.ctrlKey || !event.deltaY) return;
-      interruptSnap();
-      scrollDirection = Math.sign(event.deltaY);
-      lastScrollAt = performance.now();
-      resumePending = true;
-      state.playing = false;
-    };
-    const onTouchStart = () => {
-      interruptSnap();
-      touching = true;
-      state.playing = false;
-      resumePending = true;
-    };
-    const onTouchEnd = () => {
-      touching = false;
-      lastScrollAt = performance.now();
-    };
-    const onScrollKey = (event: KeyboardEvent) => {
-      if (!["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Home", "End", " "].includes(event.key)) return;
-      if (event.target instanceof Element && event.target.closest("input,textarea,select,button,a,[contenteditable]:not([contenteditable=false])")) return;
-      interruptSnap();
-    };
-    window.addEventListener("wheel", onWheel, { passive: true });
-    window.addEventListener("pointerdown", onPointerStart, { passive: true });
-    window.addEventListener("pointerup", onPointerEnd, { passive: true });
-    window.addEventListener("pointercancel", onPointerEnd, { passive: true });
-    window.addEventListener("click", interruptSnap);
-    window.addEventListener("touchstart", onTouchStart, { passive: true });
-    window.addEventListener("touchend", onTouchEnd, { passive: true });
-    window.addEventListener("touchcancel", onTouchEnd, { passive: true });
-    window.addEventListener("keydown", onScrollKey);
-
     return () => {
-      snap = null;
-      window.removeEventListener("wheel", onWheel);
-      window.removeEventListener("pointerdown", onPointerStart);
-      window.removeEventListener("pointerup", onPointerEnd);
-      window.removeEventListener("pointercancel", onPointerEnd);
-      window.removeEventListener("click", interruptSnap);
-      window.removeEventListener("touchstart", onTouchStart);
-      window.removeEventListener("touchend", onTouchEnd);
-      window.removeEventListener("touchcancel", onTouchEnd);
-      window.removeEventListener("keydown", onScrollKey);
+      window.removeEventListener("wheel", interruptOverviewSettle);
+      window.removeEventListener("touchstart", onSettleTouchStart);
+      window.removeEventListener("touchend", onSettleTouchEnd);
+      window.removeEventListener("touchcancel", onSettleTouchEnd);
+      window.removeEventListener("keydown", onSettleKey);
       window.removeEventListener("pointermove", trackPointer);
       window.removeEventListener("keydown", onKeyDown);
-      window.removeEventListener("keyup", onKeyUp);
+      window.removeEventListener("pointerout", onWindowLeave);
       window.removeEventListener("blur", releaseZoom);
       desktopZoom.removeEventListener("change", releaseZoom);
       cancelAnimationFrame(raf);
       io.disconnect();
       ro.disconnect();
       railObserver.disconnect();
+      onRailEnd();
+      rail?.removeEventListener("pointerdown", onRailDown, true);
+      rail?.removeEventListener("pointermove", onRailMove);
+      rail?.removeEventListener("pointerup", onRailEnd);
+      rail?.removeEventListener("pointercancel", onRailEnd);
+      rail?.removeEventListener("lostpointercapture", onRailEnd);
+      rail?.removeEventListener("click", onRailClick, true);
+      window.removeEventListener("blur", onRailBlur);
       stopTheme();
       stopCameraPlayback();
       blurGL?.canvas.remove();
@@ -948,8 +984,10 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
 
       canvas.style.opacity = "1";
       window.removeEventListener("xp-background-ready", invalidate);
+      window.removeEventListener("xp-camera-frame-ready", invalidate);
       document.removeEventListener("visibilitychange", onVisibility);
       editorRef.current = null;
+      interaction.removeEventListener("wheel", onTimelineWheel);
       interaction.removeEventListener("pointermove", onMove);
       interaction.removeEventListener("pointerdown", onDown);
       interaction.removeEventListener("pointerup", onUp);
@@ -982,7 +1020,7 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
           <div ref={shotHitRef} className="pointer-events-auto absolute" style={{ display: "none" }} />
         </div>
         <div ref={zoomHintRef} className="xp-zoom-hint pointer-events-none absolute inset-x-0 flex items-center justify-center gap-2 text-sm text-muted-foreground" style={{ visibility: "hidden" }}>
-          <kbd ref={zoomKeyRef}>⌘</kbd><span>{showcase.holdToZoom}</span>
+          <kbd ref={zoomKeyRef}>⌘</kbd><span>{showcase.toggleZoom}</span>
         </div>
 
         {/* Hero */}
@@ -1045,8 +1083,7 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
                     </button>
                   ))}
                   <button type="button" className="xp-demo-button" onClick={() => {
-                    const state = editorRef.current;
-                    if (state) { state.time = 11.4; state.playing = true; }
+                    jumpTo(i);
                   }}>{showcase.replay}</button>
                 </div>
               )}
@@ -1057,9 +1094,6 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
                     if (state) {
                       state.camera.remove = !state.camera.remove;
                       state.camera.changedAt = -1e9;
-                      // removal lives on the second camera clip: replay the cut into it
-                      state.time = state.camera.split - 0.6;
-                      state.playing = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
                     }
                   }}>{showcase.removeBackground}</button>
                   <button type="button" className="xp-demo-button" aria-pressed={demo.sticker} disabled={!demo.remove} onClick={() => {
@@ -1073,7 +1107,7 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
 
         {/* Chapter rail */}
         <div ref={railRef} className="absolute bottom-8 left-[5vw] hidden gap-1 min-[900px]:flex" style={{ opacity: 0, visibility: "hidden" }}>
-          <div ref={railIndicatorRef} className="xp-rail-indicator" aria-hidden="true" />
+          <div ref={railIndicatorRef} className="xp-rail-indicator" aria-hidden="true"><div ref={railIndicatorFillRef} className="xp-rail-indicator-fill" /></div>
           {showcaseFeatureOrder.map((key, i) => (
             <button
               key={key}
@@ -1082,7 +1116,8 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
               className={`xp-rail-item ${active === i ? "is-active" : ""}`}
               aria-current={active === i ? "step" : undefined}
             >
-              {showcase.items[key].label}
+              <span>{showcase.items[key].label}</span>
+              <span className="xp-rail-item-drag-label" aria-hidden="true">{showcase.items[key].label}</span>
             </button>
           ))}
         </div>

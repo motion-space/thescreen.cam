@@ -261,7 +261,7 @@ export class Preview {
     const time = state.time;
     // Reuse only an identical source frame (e.g. a paused preview while the
     // outer camera moves). Advancing time always paints; there is no rate cap.
-    const settings = JSON.stringify([state.background, state.zoomClips, state.motionBlur, appThemeKey(), meshTextureVersion()]);
+    const settings = JSON.stringify([state.background, state.zoomClips, state.motionBlur, state.captions, state.captionsShown, state.captionText, appThemeKey(), meshTextureVersion()]);
     renderSource = time !== this.sourceTime || settings !== this.sourceSettings || !this.gl?.texture;
     // Resolution steps in quarter octaves, so the buffers are not reallocated
     // (and the content re-quantised) on every frame of a camera zoom; the
@@ -273,6 +273,7 @@ export class Preview {
     const ph = Math.max(2, Math.ceil(comp.h * kq));
     const k = pw / comp.w;
     const ky = ph / comp.h;
+    const caption = state.captions.background === 2 ? captionLayout(ctx, state, comp) : undefined;
     const screen = screenRectIn(comp, state.background.padding);
     const cam = camera2D(state, time, screen);
     const prev = camera2D(state, time - FRAME, screen);
@@ -376,11 +377,12 @@ export class Preview {
       // The shader is exactly an identity operation without motion, waves,
       // a loupe or a projected plane. Present the already-rendered base directly.
       const blurOn = state.motionBlur && (Math.abs(motion.a - 1) > 1e-7 || Math.abs(motion.bx) > 1e-5 || Math.abs(motion.by) > 1e-5);
-      if (this.shared || blurOn || waves.length > 0 || lens || plane) output = this.gl.render({
+      if (this.shared || blurOn || waves.length > 0 || lens || plane || caption) output = this.gl.render({
         base: this.base,
         width: pw,
         height: ph,
         pixelScale: Math.min(pw, ph) / 1080,
+        caption: caption ? { x: (caption.bx - comp.x) * k, y: (caption.by - comp.y) * ky, w: caption.boxW * k, h: caption.boxH * ky, radius: caption.fs * 0.7 * k, alpha: caption.a } : null,
         motion: state.motionBlur ? motion : { a: 1, bx: 0, by: 0 },
         blur: 0.5,
         waves,
@@ -449,7 +451,7 @@ export class Preview {
     // the camera overlay shrinks with the screen camera's zoom (2D scale, or the 3D push)
     const zoomScale = sp && z ? 1 + (z.clip.zoom - 1) * z.f : cam.s;
     drawCamera(ctx, comp, state.camera, time, performance.now(), reducedMotion, zoomScale);
-    const captionBounds = drawCaptions(ctx, state, comp);
+    const captionBounds = drawCaptions(ctx, state, comp, !!this.gl);
     drawKeyOverlay(ctx, comp, time, state.keys, state.captions.bottom ? captionBounds?.y : undefined);
     ctx.restore();
   }
@@ -585,7 +587,7 @@ const captionSprite = { canvas: null as HTMLCanvasElement | null, key: "", scale
 const captionSprites = new Map<string,HTMLCanvasElement>();
 let captionPixels = 0;
 
-export function drawCaptions(ctx: CanvasRenderingContext2D, state: EditorState, comp: Rect): Rect | undefined {
+function captionLayout(ctx: CanvasRenderingContext2D, state: EditorState, comp: Rect) {
   const time = state.time;
   const capStart = 9.6;
   const capEnd = 14.2;
@@ -594,7 +596,6 @@ export function drawCaptions(ctx: CanvasRenderingContext2D, state: EditorState, 
   const tokens = captionTokens(state.captionText);
   const progress = clamp((time - capStart) / (capEnd - capStart - 0.6));
   const fs = Math.round(lerp(14, 22, state.captions.size));
-  ctx.save();
   ctx.font = font(fs, 650);
   const joiner = /\s/.test(state.captionText) ? " " : "";
   const full = tokens.join(joiner);
@@ -612,10 +613,18 @@ export function drawCaptions(ctx: CanvasRenderingContext2D, state: EditorState, 
   const bx = comp.x + (comp.w - boxW) / 2;
   const by = state.captions.bottom ? comp.y + comp.h - boxH - comp.h * 0.06 : comp.y + comp.h * 0.06;
   const bounds = { x: bx, y: by, w: boxW, h: boxH };
+  return { a, tokens, progress, fs, joiner, lines, lineH, boxW, boxH, bx, by, bounds };
+}
+
+export function drawCaptions(ctx: CanvasRenderingContext2D, state: EditorState, comp: Rect, glassRendered = false): Rect | undefined {
+  const layout = captionLayout(ctx, state, comp);
+  if (!layout) return;
+  const { a, tokens, progress, fs, joiner, lines, lineH, boxW, boxH, bx, by, bounds } = layout;
+  ctx.save();
   const read = state.captions.readAlong ? Math.floor(progress*tokens.length+0.0001) : tokens.length;
   const matrix=ctx.getTransform();
   const scale=Math.max(captionSprite.scale,Math.ceil(Math.max(Math.hypot(matrix.a,matrix.b),Math.hypot(matrix.c,matrix.d))*2)/2);
-  const key=JSON.stringify([scale,state.captionText,state.captions,read,comp.w,comp.h]);
+  const key=JSON.stringify([scale,state.captionText,state.captions,read,comp.w,comp.h,glassRendered]);
   const target=ctx, pad=12, x0=bx-pad, y0=by-pad;
   const present=()=>{target.globalAlpha=a;target.drawImage(captionSprite.canvas!,x0,y0,captionSprite.canvas!.width/scale,captionSprite.canvas!.height/scale);target.restore();};
   const cached=captionSprites.get(key);
@@ -627,7 +636,7 @@ export function drawCaptions(ctx: CanvasRenderingContext2D, state: EditorState, 
   ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,width,height);ctx.save();ctx.setTransform(scale,0,0,scale,-x0*scale,-y0*scale);
   ctx.globalAlpha = 1;
   const mode = state.captions.background;
-  if (mode > 0) {
+  if (mode > 0 && !(mode === 2 && glassRendered)) {
     rr(ctx, bx, by, boxW, boxH, fs * 0.7);
     ctx.fillStyle = mode === 2 ? "rgba(36,36,40,0.5)" : "rgba(10,10,12,0.68)";
     ctx.fill();
@@ -685,7 +694,7 @@ export function warmCaptions(state: EditorState,density: number) {
     idle=requestIdleCallback(async()=>{
       if(stopped)return;
       const time=state.time,shown=state.captionsShown;
-      try{state.time=9.6+4*(index+0.001)/Math.max(1,count);state.captionsShown=1;drawCaptions(ctx,state,COMP);}
+      try{state.time=9.6+4*(index+0.001)/Math.max(1,count);state.captionsShown=1;drawCaptions(ctx,state,COMP,true);}
       finally{state.time=time;state.captionsShown=shown;}
       index++;
       if(captionSprite.canvas)try{const bitmap=await createImageBitmap(captionSprite.canvas);bitmap.close();}catch{}
