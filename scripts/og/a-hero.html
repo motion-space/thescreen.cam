@@ -1,0 +1,35 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css"><style>
+.glow{position:absolute;left:50%;top:330px;width:1200px;height:500px;transform:translateX(-50%);background:radial-gradient(closest-side,oklch(0.55 0.2 270/.32),transparent 72%);filter:blur(10px)}
+.top{position:absolute;left:56px;right:56px;top:44px;display:flex;justify-content:space-between;align-items:center}
+.center{position:absolute;left:0;right:0;top:116px;text-align:center}
+h1{font-size:90px;margin-top:18px}
+/* MacBook Pro 16" from public/mockups/series/macbook-pro.json, in base units (1761×1075). */
+.mac{position:absolute;left:50%;top:356px;width:1761px;height:1075px;transform:translateX(-50%) scale(.64);transform-origin:50% 0}
+.mac .lid{position:absolute;inset:0;width:1761px;height:1075px}
+/* the lid's own screen clip (clip0 in base.svg), so the panel covers its grey placeholder exactly */
+.screen{position:absolute;left:155px;top:20px;width:1448px;height:932px;overflow:hidden;
+  clip-path:path("M0 32C0 20.799 0 15.198 2.18 10.92C4.097 7.157 7.157 4.097 10.92 2.18C15.198 0 20.799 0 32 0H1416C1427.2 0 1432.8 0 1437.08 2.18C1440.84 4.097 1443.9 7.157 1445.82 10.92C1448 15.198 1448 20.799 1448 32V932H0V32Z");
+  background:url(assets/wallpaper.jpg) 30% 100%/150% auto}
+.menubar{position:absolute;left:0;right:0;top:0;height:31px;display:flex;align-items:center;gap:22px;padding:0 20px;
+  background:rgba(0,0,0,.18);backdrop-filter:blur(20px);color:rgba(255,255,255,.92);font-size:15.5px;font-weight:600}
+.menubar span{font-weight:400}.menubar .r{margin-left:auto;font-weight:500}
+.menubar svg{width:14px;height:17px}
+.screen .win{position:absolute;left:96px;top:84px;width:1000px;border-radius:12px;
+  box-shadow:0 0 0 1px rgba(255,255,255,.16),0 40px 100px -10px rgba(0,0,0,.7),0 10px 30px rgba(0,0,0,.4)}
+.notch{position:absolute;left:797px;top:14px;width:167px;height:34px}
+.fade{position:absolute;left:0;right:0;bottom:0;height:60px;background:linear-gradient(transparent,var(--bg))}
+</style></head><body><div class="canvas grain">
+<div class="glow"></div>
+<div class="top"><div class="brand"><img src="../../public/app-icon-512.png">ScreenCam</div><div class="pill"><svg viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg> App Store</div></div>
+<div class="center"><div class="kicker">Built with <b>100% native</b> · System <b>macOS 15+</b></div>
+<h1 class="display">Capture sharp<br>Direct the frame</h1></div>
+<div class="mac">
+ <img class="lid" src="../../public/mockups/assets/macbook-pro/macbook-pro-16-inch/base.svg">
+ <div class="screen">
+  <div class="menubar"><svg viewBox="0 0 384 512" fill="currentColor"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>ScreenCam<span>File</span><span>Edit</span><span>View</span><span>Window</span><span>Help</span><span class="r">Sat Oct 17&nbsp;&nbsp;9:41</span></div>
+  <img class="win" src="assets/editor-window.png">
+ </div>
+ <img class="notch" src="../../public/mockups/assets/macbook-pro/macbook-pro-16-inch/notch.svg">
+</div>
+<div class="fade"></div>
+</div></body></html>

@@ -18,3 +18,4 @@ npm-debug.log*
 
 # Disposable project-local authoring and signing material
 /tmp/
+scripts/og/out
