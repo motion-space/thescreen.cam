@@ -43,48 +43,65 @@ function ScreenCanvas({ screen, canvas, portrait, time }: { screen: Screen; canv
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    const ctx = el.getContext("2d");
+    if (!ctx) return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     let raf = 0;
     let visible = false;
-    let start = performance.now();
-    const draw = () => {
-      const rect = el.getBoundingClientRect();
-      const dpr = Math.min(2, window.devicePixelRatio || 1);
-      const w = Math.max(2, Math.round(rect.width * dpr));
-      const h = Math.max(2, Math.round(rect.height * dpr));
-      if (el.width !== w || el.height !== h) {
-        el.width = w;
-        el.height = h;
+    let started = performance.now();
+    let width = 0;
+    let height = 0;
+    const draw = (now: number) => {
+      if (!width || !height) return;
+      const t = reduced.matches ? time : time + ((now - started) / 1000) % 5;
+      renderExportFrame(ctx, width, height, t, portrait);
+    };
+    const loop = (now: number) => {
+      raf = 0;
+      if (!visible || document.hidden) return;
+      // Draw on every display frame while visible; cache only static artwork.
+      draw(now);
+      if (!reduced.matches) raf = requestAnimationFrame(loop);
+    };
+    const sync = () => {
+      cancelAnimationFrame(raf);
+      raf = 0;
+      if (visible && !document.hidden) {
+        raf = requestAnimationFrame(loop);
       }
-      const ctx = el.getContext("2d");
-      if (!ctx) return;
-      // loop the playing preview inside the recorded app
-      const t = time + (((performance.now() - start) / 1000) % 5);
-      renderExportFrame(ctx, w, h, t, portrait);
     };
-    const loop = () => {
-      draw();
-      if (visible) raf = requestAnimationFrame(loop);
+    const resize = () => {
+      const dpr = Math.min(2, window.devicePixelRatio || 1);
+      // CSS transforms on the entrance must not change the backing-store size.
+      const w = Math.max(2, Math.round(el.clientWidth * dpr));
+      const h = Math.max(2, Math.round(el.clientHeight * dpr));
+      if (w === width && h === height) return;
+      width = el.width = w;
+      height = el.height = h;
+      if (visible) draw(performance.now());
     };
+    const ro = new ResizeObserver(resize);
+    ro.observe(el);
+    resize();
     const io = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;
-      if (visible && !raf) {
-        start = performance.now() - 1;
-        raf = requestAnimationFrame(loop);
-      } else if (!visible) {
-        cancelAnimationFrame(raf);
-        raf = 0;
-      }
+      if (visible) started = performance.now();
+      sync();
     });
     io.observe(el);
     const stop = observeTheme((theme) => {
       setAppTheme(theme === "dark");
-      draw();
+      sync();
     });
     setAppTheme(getDocumentTheme() === "dark");
-    draw();
+    document.addEventListener("visibilitychange", sync);
+    reduced.addEventListener("change", sync);
     return () => {
       cancelAnimationFrame(raf);
       io.disconnect();
+      ro.disconnect();
+      document.removeEventListener("visibilitychange", sync);
+      reduced.removeEventListener("change", sync);
       stop();
     };
   }, [portrait, time]);
@@ -110,7 +127,7 @@ function ScreenCanvas({ screen, canvas, portrait, time }: { screen: Screen; canv
 function StudioDisplay({ label }: { label: string }) {
   return (
     <div role="img" aria-label={label} className="relative w-full" style={{ aspectRatio: `${STUDIO.canvas.w} / ${STUDIO.canvas.h}` }}>
-      <img src={STUDIO.base} alt="" className="absolute inset-0 h-full w-full" draggable={false} />
+      <img src={STUDIO.base} alt="" className="absolute inset-0 h-full w-full drop-shadow-[0_40px_60px_rgba(0,0,0,0.28)]" draggable={false} />
       <ScreenCanvas screen={STUDIO.screen} canvas={STUDIO.canvas} portrait={false} time={17.2} />
     </div>
   );
@@ -123,7 +140,19 @@ function MacBook({ label }: { label: string }) {
   const b = MACBOOK.bottom;
   return (
     <div role="img" aria-label={label} className="relative w-full" style={{ aspectRatio: `${c.w} / ${c.h}` }}>
-      <img src={MACBOOK.base} alt="" className="absolute left-0 top-0 w-full" draggable={false} />
+      {/* The opaque shell already contains the screen's alpha silhouette.
+          Keep its identical shadow separate from the live screen so a new
+          canvas frame does not invalidate a large drop-shadow filter. */}
+      <div className="pointer-events-none absolute inset-0 drop-shadow-[0_30px_50px_rgba(0,0,0,0.32)]" data-device-shell>
+        <img src={MACBOOK.base} alt="" className="absolute left-0 top-0 w-full" draggable={false} />
+        <img
+          src={b.src}
+          alt=""
+          className="absolute max-w-none"
+          draggable={false}
+          style={{ left: pct(b.x * k, c.w), top: pct(b.y * k, c.h), width: pct(b.w * k, c.w), height: pct(b.h * k, c.h) }}
+        />
+      </div>
       <ScreenCanvas screen={MACBOOK.screen} canvas={c} portrait={false} time={4.6} />
       <img
         src={n.src}
@@ -131,13 +160,6 @@ function MacBook({ label }: { label: string }) {
         className="absolute"
         draggable={false}
         style={{ left: pct(n.x * k, c.w), top: pct(n.y * k, c.h), width: pct(n.w * k, c.w), height: pct(n.h * k, c.h) }}
-      />
-      <img
-        src={b.src}
-        alt=""
-        className="absolute max-w-none"
-        draggable={false}
-        style={{ left: pct(b.x * k, c.w), top: pct(b.y * k, c.h), width: pct(b.w * k, c.w), height: pct(b.h * k, c.h) }}
       />
     </div>
   );
@@ -181,10 +203,10 @@ export function DeviceMockupsSection({ copy }: { copy: DeviceMockupsCopy }) {
 
         {/* devices: a display at the back, a MacBook and an iPhone in front */}
         <div className="relative mt-16 md:mt-24" style={{ aspectRatio: "1200 / 640" }}>
-          <motion.div {...rise(0.1)} className="absolute left-[16%] top-0 w-[60%] drop-shadow-[0_40px_60px_rgba(0,0,0,0.28)]">
+          <motion.div {...rise(0.1)} className="absolute left-[16%] top-0 w-[60%]">
             <StudioDisplay label={copy.imageAlt.studioDisplay} />
           </motion.div>
-          <motion.div {...rise(0.22)} className="absolute bottom-[2%] right-0 w-[44%] drop-shadow-[0_30px_50px_rgba(0,0,0,0.32)]">
+          <motion.div {...rise(0.22)} className="absolute bottom-[2%] right-0 w-[44%]">
             <MacBook label={copy.imageAlt.macBook} />
           </motion.div>
           <motion.div {...rise(0.32)} className="absolute bottom-0 left-[4%] w-[13.5%] drop-shadow-[0_26px_40px_rgba(0,0,0,0.35)]">

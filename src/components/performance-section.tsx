@@ -44,8 +44,7 @@ export function PerformanceSection({ copy }: { copy: PerformanceCopy }) {
       scrollTrigger: { trigger: q(".pf-stage")[0], start: "top top", end: "+=170%", scrub: 0.8, pin: true, anticipatePin: 1 },
     });
 
-    tl.to(q(".pf-head .mg-word"), { color: "var(--foreground)", stagger: 0.06, duration: 0.5 }, 0)
-      .to(q(".pf-ruler [data-draw]"), { strokeDashoffset: 0, stagger: 0.008, duration: 0.6 }, 0.2)
+    tl.to(q(".pf-ruler [data-draw]"), { strokeDashoffset: 0, stagger: 0.008, duration: 0.6 }, 0.2)
       .fromTo(q(".pf-playhead"), { left: 0, x: 0, opacity: 1 }, { x: () => (q(".pf-playhead")[0] as HTMLElement).parentElement?.clientWidth ?? 0, duration: 2.2 }, 0.8)
       .to(q(".pf-clip-us"), { scaleX: 1, stagger: 0.35, duration: 0.8, ease: "power2.out" }, 0.9)
       .to(q(".pf-clip-them"), { scaleX: 1, stagger: 0.35, duration: 1.1, ease: "power1.out" }, 1)

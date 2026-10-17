@@ -27,7 +27,7 @@ import { CH, CURSOR_KEYS, CURSOR_SIZE, CW, appThemeKey, cursorAt, cursorPressSca
 import { drawKeyOverlay } from "./keyboard";
 import { drawCamera } from "./camera";
 import { drawShadow } from "./panel-shadow";
-import { FrameBlurGL, PreviewGL, type PreviewLayer } from "./preview-gl";
+import { FrameBlurGL, PreviewGL, type PreviewLayer, type CursorLayer } from "./preview-gl";
 
 const WAVE_MS = 0.6;
 const FRAME = 1 / 60; // motion is measured over one 60 fps frame, as in the client
@@ -221,12 +221,15 @@ export class Preview {
   private sprite = document.createElement("canvas");
   private backdrop = document.createElement("canvas");
   private backdropKey = "";
+  private sourceSettings = "";
+  private sourceTime = Number.NaN;
   private gl: PreviewGL | null;
   private cursorGL: FrameBlurGL | null = null;
 
   get canCompose() { return this.shared && !!this.gl; }
   private shared = false;
   gpuLayer: PreviewLayer | null = null;
+  cursorLayer: CursorLayer | null = null;
 
   constructor(shared?: WebGL2RenderingContext) {
     this.shared = !!shared;
@@ -238,7 +241,7 @@ export class Preview {
     }
     this.gl = gl;
     try {
-      this.cursorGL = new FrameBlurGL();
+      this.cursorGL = new FrameBlurGL(false, this.canCompose ? shared : undefined);
     } catch {
       this.cursorGL = null;
     }
@@ -253,8 +256,13 @@ export class Preview {
    */
   draw(ctx: CanvasRenderingContext2D, state: EditorState, pixelsPerUnit: number, radius: number, reducedMotion = false, renderSource = true) {
     this.gpuLayer = null;
+    this.cursorLayer = null;
     const comp = COMP;
     const time = state.time;
+    // Reuse only an identical source frame (e.g. a paused preview while the
+    // outer camera moves). Advancing time always paints; there is no rate cap.
+    const settings = JSON.stringify([state.background, state.zoomClips, state.motionBlur, appThemeKey(), meshTextureVersion()]);
+    renderSource = time !== this.sourceTime || settings !== this.sourceSettings || !this.gl?.texture;
     // Resolution steps in quarter octaves, so the buffers are not reallocated
     // (and the content re-quantised) on every frame of a camera zoom; the
     // drawing scale is derived from the integer buffer size so it maps exactly.
@@ -321,7 +329,7 @@ export class Preview {
         this.optical.height = ow;
       }
       const o = this.optical.getContext("2d");
-      if (o) {
+      if (o && renderSource) {
         o.setTransform(1, 0, 0, 1, 0, 0);
         o.clearRect(0, 0, ow, ow);
         // world q → ((q - c) * mag + c - box) * k
@@ -388,6 +396,11 @@ export class Preview {
           : null,
         plane,
       });
+    }
+
+    if (renderSource) {
+      this.sourceTime = time;
+      this.sourceSettings = settings;
     }
 
     ctx.save();
@@ -476,7 +489,16 @@ export class Preview {
       color: [0, 0, 0],
       tint: 0,
     });
-    ctx.drawImage(out, x0, y0, pw / k, ph / k);
+    if (this.canCompose && this.cursorGL.texture) {
+      // Keep the original 25-tap blur on the same GPU as the final compositor.
+      // No WebGL canvas readback into 2D and subsequent re-upload is needed.
+      const m = ctx.getTransform(), target = this.cursorGL.targetSize!;
+      this.cursorLayer = {
+        texture: this.cursorGL.texture, u: pw / target.w, v: ph / target.h,
+        x: m.e + x0 * m.a, y: m.f + y0 * m.d, w: pw / k * m.a, h: ph / k * m.d,
+        alpha: ctx.globalAlpha,
+      };
+    } else ctx.drawImage(out, x0, y0, pw / k, ph / k);
   }
 
   private drawScene(

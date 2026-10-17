@@ -4,8 +4,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { Plus } from "lucide-react";
 import type { FAQCopy, RichTextSegment } from "../lib/translations";
-import { useRef } from "react";
-import { FillText, fillWords, useScene } from "./mg/scene";
+import { FillText } from "./mg/scene";
 
 interface FAQItem {
   question: string;
@@ -14,14 +13,9 @@ interface FAQItem {
 
 export function FAQSection({ copy, sectionIndex }: { copy: FAQCopy; sectionIndex?: number }) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
-  const rootRef = useRef<HTMLElement>(null);
-
-  useScene(rootRef, ({ q }) => {
-    fillWords(q, q(".faq-head")[0], "top 85%", "top 45%");
-  });
 
   return (
-    <section ref={rootRef} id="faq" className="mg-scene">
+    <section id="faq" className="mg-scene">
       <div className="mx-auto grid w-full max-w-[1240px] gap-12 px-6 py-28 md:px-10 md:py-40 lg:grid-cols-12">
         <div className="faq-head lg:col-span-5">
           <div className="lg:sticky lg:top-28">

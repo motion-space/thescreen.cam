@@ -1977,6 +1977,17 @@ html.vt-theme::view-transition-new(root) {
   }
 }
 
+.xp-rail-indicator {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 100%;
+  height: 30px;
+  pointer-events: none;
+  background: color-mix(in oklab, var(--foreground) 8%, transparent);
+  clip-path: inset(0 100% 0 0 round 999px);
+  will-change: transform, clip-path;
+}
+
 .xp-rail-item {
   position: relative;
   height: 30px;
@@ -1987,7 +1998,7 @@ html.vt-theme::view-transition-new(root) {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--muted-foreground);
-  transition: color 0.25s, background-color 0.25s;
+  transition: color 0.25s;
   transition-timing-function: var(--ease-spring);
 }
 
@@ -1997,7 +2008,6 @@ html.vt-theme::view-transition-new(root) {
 
 .xp-rail-item.is-active {
   color: var(--foreground);
-  background: color-mix(in oklab, var(--foreground) 8%, transparent);
 }
 
 @media (prefers-reduced-motion: reduce) {

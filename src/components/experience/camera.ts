@@ -226,6 +226,12 @@ type Particles = {
   lifetimes: Float32Array;
   swayA: Float32Array;
   swayF: Float32Array;
+  launch: Float64Array;
+  moveDuration: Float64Array;
+  cosDir: Float64Array;
+  sinDir: Float64Array;
+  vx: Float64Array;
+  vy: Float64Array;
 };
 
 let particles: Particles | null = null;
@@ -236,6 +242,7 @@ let canvasH = 0;
 let marginX = 0;
 let marginY = 0;
 let dissolveCanvas: HTMLCanvasElement | null = null;
+let dissolvePixels: ImageData | null = null;
 
 function rgbaOf(img: HTMLImageElement | HTMLCanvasElement, w: number, h: number) {
   const c = document.createElement("canvas");
@@ -275,6 +282,12 @@ function prepareDissolve() {
     lifetimes: new Float32Array(count),
     swayA: new Float32Array(count),
     swayF: new Float32Array(count),
+    launch: new Float64Array(count),
+    moveDuration: new Float64Array(count),
+    cosDir: new Float64Array(count),
+    sinDir: new Float64Array(count),
+    vx: new Float64Array(count),
+    vy: new Float64Array(count),
   };
   let n = 0;
   const maxX = Math.max(1, dissolveW - 1);
@@ -297,6 +310,15 @@ function prepareDissolve() {
       p.lifetimes[n] = SETTINGS.durationMin + pixelNoise(x, y, 6) * (SETTINGS.durationMax - SETTINGS.durationMin);
       p.swayA[n] = 0.65 + pixelNoise(x, y, 7) * 0.7;
       p.swayF[n] = 0.72 + pixelNoise(x, y, 8) * 0.68;
+      // Retain double precision and the original Float32 inputs so trajectories
+      // stay identical; these terms depend on the particle, never on elapsed time.
+      p.launch[n] = Math.min(p.delays[n] * LAUNCH_WINDOW, p.lifetimes[n] * 0.35);
+      p.moveDuration[n] = Math.max(1, p.lifetimes[n] - p.launch[n]);
+      const dir = BASE_DIRECTION + p.dirs[n] * 1.1 * SETTINGS.chaos;
+      p.cosDir[n] = Math.cos(dir);
+      p.sinDir[n] = Math.sin(dir);
+      p.vx[n] = p.cosDir[n] * p.travels[n] * SETTINGS.spread * p.speeds[n];
+      p.vy[n] = (p.sinDir[n] * p.travels[n] - 18) * SETTINGS.spread * p.speeds[n];
       n += 1;
     }
   }
@@ -304,6 +326,7 @@ function prepareDissolve() {
   dissolveCanvas = document.createElement("canvas");
   dissolveCanvas.width = canvasW;
   dissolveCanvas.height = canvasH;
+  dissolvePixels = null;
 }
 
 export const DISSOLVE_MS = SETTINGS.durationMax + 100;
@@ -313,8 +336,9 @@ function renderDissolve(elapsed: number) {
   if (!particles || !dissolveCanvas) return null;
   const g = dissolveCanvas.getContext("2d");
   if (!g) return null;
-  const img = g.createImageData(canvasW, canvasH);
+  const img = dissolvePixels ??= g.createImageData(canvasW, canvasH);
   const out = img.data;
+  out.fill(0);
   const p = particles;
   const denom = 1 - Math.exp(-8);
   const terminalDrift = 0.08;
@@ -329,8 +353,7 @@ function renderDissolve(elapsed: number) {
   for (let i = 0; i < p.count; i += 1) {
     const life = p.lifetimes[i];
     if (elapsed >= life) continue;
-    const launch = Math.min(p.delays[i] * LAUNCH_WINDOW, life * 0.35);
-    const move = Math.min(1, Math.max(0, elapsed - launch) / Math.max(1, life - launch));
+    const move = Math.min(1, Math.max(0, elapsed - p.launch[i]) / p.moveDuration[i]);
     let x: number;
     let y: number;
     if (move === 0) {
@@ -339,16 +362,11 @@ function renderDissolve(elapsed: number) {
     } else {
       const travelP = ((1 - Math.exp(-8 * move * move)) / denom) * (1 - terminalDrift) + move * move * move * terminalDrift;
       const env = Math.min(1, move * 2.4);
-      const dir = BASE_DIRECTION + p.dirs[i] * 1.1 * SETTINGS.chaos;
-      const dc = Math.cos(dir);
-      const ds = Math.sin(dir);
-      const raw = p.travels[i];
-      const speed = p.speeds[i];
-      const vx = dc * raw * SETTINGS.spread * speed;
-      const vy = (ds * raw - 18) * SETTINGS.spread * speed;
+      const dc = p.cosDir[i];
+      const ds = p.sinDir[i];
       const sway = Math.sin(p.phases[i] + travelP * SETTINGS.swaySpeed * p.swayF[i] * Math.PI) * SETTINGS.swayAmplitude * p.swayA[i] * env;
-      x = Math.round(p.sx[i] + vx * travelP - ds * sway);
-      y = Math.round(p.sy[i] + vy * travelP + dc * sway + vDrift * travelP);
+      x = Math.round(p.sx[i] + p.vx[i] * travelP - ds * sway);
+      y = Math.round(p.sy[i] + p.vy[i] * travelP + dc * sway + vDrift * travelP);
     }
     if (x < 0 || x >= canvasW || y < 0 || y >= canvasH) continue;
     const shrinkDur = Math.min(SETTINGS.shrinkDuration, Math.max(50, life - SETTINGS.shrinkDelay - 10));

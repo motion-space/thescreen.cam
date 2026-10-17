@@ -89,7 +89,7 @@ const structuredData = {
         locale={locale}
         client:load
       />
-      <DeviceMockupsSection copy={t.home.deviceMockups} client:load />
+      <DeviceMockupsSection copy={t.home.deviceMockups} client:visible={{ rootMargin: "1200px" }} />
       <PerformanceSection copy={t.home.performance} client:load />
       <FeatureCardsSection copy={t.home.featureCards} client:load />
       <StatementLink
@@ -100,7 +100,7 @@ const structuredData = {
         href={localizedPath(locale, "/screen-studio-alternative")}
         client:load
       />
-      <DocsBasicsSection copy={docsBasicsCopy} docsHref={localizedPath(locale, "/docs")} client:load />
+      <DocsBasicsSection copy={docsBasicsCopy} docsHref={localizedPath(locale, "/docs")} client:visible={{ rootMargin: "1200px" }} />
       <FAQSection copy={t.home.faq} sectionIndex={7} client:load />
       <Footer copy={t.footer} locale={locale} client:load />
     </main>

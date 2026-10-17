@@ -297,18 +297,13 @@ export function FeatureCardsSection({ copy }: { copy: FeatureCardsCopy }) {
   const rootRef = useRef<HTMLElement>(null);
 
   useScene(rootRef, ({ q, gsap, reduced }) => {
-    gsap.to(q(".fc-head .mg-word"), {
-      color: "var(--foreground)",
-      stagger: 0.08,
-      ease: "none",
-      scrollTrigger: { trigger: q(".fc-head")[0], start: "top 85%", end: "top 40%", scrub: 0.6 },
-    });
     if (reduced || window.innerWidth < 1024) return;
 
     const track = q(".fc-track")[0] as HTMLElement;
     const stage = q(".fc-stage")[0] as HTMLElement;
     const distance = () => Math.max(0, track.scrollWidth - window.innerWidth + 80);
     const counter = q(".fc-counter")[0];
+    const setProgress = gsap.quickSetter(q(".fc-progress")[0], "scaleX");
 
     gsap.to(track, {
       x: () => -distance(),
@@ -322,10 +317,11 @@ export function FeatureCardsSection({ copy }: { copy: FeatureCardsCopy }) {
         anticipatePin: 1,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
-          gsap.set(q(".fc-progress"), { scaleX: self.progress });
+          setProgress(self.progress);
           if (counter) {
             const current = Math.min(copy.items.length, Math.floor(self.progress * copy.items.length) + 1);
-            counter.textContent = String(current).padStart(2, "0");
+            const label = String(current).padStart(2, "0");
+            if (counter.textContent !== label) counter.textContent = label;
           }
         },
       },

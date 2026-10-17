@@ -8,6 +8,8 @@ import { resolve, join } from 'node:path';
 const label = process.argv[2] ?? 'profile';
 const url = process.argv[3] ?? 'http://localhost:4399';
 const scale = Number(process.argv[4] ?? 2);
+const viewportWidth = Number(process.env.PROFILE_WIDTH ?? 1280);
+const viewportHeight = Number(process.env.PROFILE_HEIGHT ?? 900);
 const cpuRate = Number(process.env.PROFILE_CPU_RATE ?? process.argv[5] ?? 1);
 const samplingUs = Number(process.env.PROFILE_SAMPLING_US ?? (process.argv.includes("--low-overhead") ? 10000 : 1000));
 const extended = process.env.PROFILE_EXTENDED === '1';
@@ -21,7 +23,7 @@ const chrome = process.env.PROFILE_CHROME ?? (existsSync(installedChrome) ? inst
 if (!chrome) throw new Error('Set PROFILE_CHROME to a local Chromium executable');
 let staticServer;
 if(new URL(url).port==='4400') {
- const root=resolve('dist');
+ const root=resolve(process.env.PROFILE_DIST ?? 'dist');
  staticServer=createServer((req,res)=>{
   let file=resolve(root,'.'+decodeURIComponent(new URL(req.url,'http://127.0.0.1').pathname));
   if(!file.startsWith(root+'/')){res.writeHead(403).end();return;}
@@ -37,7 +39,7 @@ if(new URL(url).port==='4400') {
  await new Promise((resolve,reject)=>{staticServer.once('error',reject);staticServer.listen(4400,'127.0.0.1',resolve);});
 }
 const port = 20000 + Math.floor(Math.random()*30000);
-const child = spawn(chrome, ['--headless=new', '--enable-gpu', '--use-angle=metal', '--no-first-run', '--no-default-browser-check', '--remote-debugging-port='+port, '--user-data-dir='+resolve(out, (cold ? 'chromium-cold-' : 'chromium-warm-')+label), 'about:blank'], {stdio:'ignore'});
+const child = spawn(chrome, ['--headless=new', '--disable-background-timer-throttling', '--disable-renderer-backgrounding', '--disable-backgrounding-occluded-windows', '--enable-gpu', '--use-angle=metal', '--no-first-run', '--no-default-browser-check', '--remote-debugging-port='+port, '--user-data-dir='+resolve(out, (cold ? 'chromium-cold-' : 'chromium-warm-')+label), 'about:blank'], {stdio:'ignore'});
 const sleep = ms => new Promise(r=>setTimeout(r,ms));
 let socket;
 const runtimeErrors=[];
@@ -55,15 +57,27 @@ try {
  const send=(m,p)=>call(m,p,sessionId);
  const evaluate=async(expression)=>{const r=await send('Runtime.evaluate',{expression,awaitPromise:true,returnByValue:true});if(r.exceptionDetails)throw new Error(JSON.stringify(r.exceptionDetails));return r.result.value;};
  await send('Page.enable'); await send('Runtime.enable'); await send('Performance.enable');
- await send('Emulation.setDeviceMetricsOverride',{width:1280,height:900,deviceScaleFactor:scale,mobile:false});
+ await send('Emulation.setDeviceMetricsOverride',{width:viewportWidth,height:viewportHeight,deviceScaleFactor:scale,mobile:false});
  if(cpuRate !== 1) await send('Emulation.setCPUThrottlingRate',{rate:cpuRate});
  if(process.env.PROFILE_DISABLE_WEBGPU==='1') await send('Page.addScriptToEvaluateOnNewDocument',{source:"Object.defineProperty(Navigator.prototype,'gpu',{get:()=>undefined})"});
  if(process.env.PROFILE_DISABLE_VIDEO==='1') await send('Page.addScriptToEvaluateOnNewDocument',{source:"HTMLMediaElement.prototype.play=function(){return Promise.resolve()}"});
- await send('Page.addScriptToEvaluateOnNewDocument',{source:'window.__xpMeasures=[]'});
+ // Count actual canvas paints separately from rAF callbacks: a 30 fps demo
+ // can still run inside a 60/120 Hz rAF loop and must not be reported as full-rate.
+ await send('Page.addScriptToEvaluateOnNewDocument',{source:`
+  window.__xpMeasures=[];window.__xpDraws={hero:0,devices:0};
+  const originalClear=CanvasRenderingContext2D.prototype.clearRect,scopes=new WeakMap();
+  CanvasRenderingContext2D.prototype.clearRect=function(...args){
+   let scope=scopes.get(this);
+   if(scope===undefined){scope=this.canvas.closest('.xp')?'hero':this.canvas.closest('#export')?'devices':'';scopes.set(this,scope)}
+   if(scope)window.__xpDraws[scope]++;
+   return originalClear.apply(this,args);
+  };
+ `});
  if(cold) { await send('Network.enable'); await send('Network.setCacheDisabled',{cacheDisabled:true}); }
  if(process.argv.includes('--block-fonts')) {await send('Network.enable');await send('Network.setBlockedURLs',{urls:['*fonts.googleapis.com*','*fonts.gstatic.com*']});}
  const navigation=await send('Page.navigate',{url});
  if(navigation.errorText)throw Error('Navigation failed: '+navigation.errorText);
+ await send('Page.bringToFront');
  for(let i=0;i<100;i++){if(await evaluate('!!document.querySelector(".xp-canvas") && (!!window.__xp || !!document.querySelector(".xp canvas + canvas"))'))break;await sleep(100);}
  if(!await evaluate('!!document.querySelector(".xp-canvas")'))throw Error(JSON.stringify({message:"Experience did not load",page:await evaluate("({url:location.href,title:document.title,body:document.body?.innerText.slice(0,300)})"),runtimeErrors}));
  await sleep(2500);
@@ -82,12 +96,26 @@ try {
  if(${process.env.PROFILE_REST_ONLY==='1'}) { stages.length=0; for(const id of ['export','performance','features','docs']){const el=document.getElementById(id);if(!el)continue;const box=el.getBoundingClientRect(),top=box.top+scrollY;stages.push([id+'-section',top/span,Math.max(top,top+box.height-innerHeight*.4)/span]);} stages.push(['footer-section',(document.querySelector('footer').getBoundingClientRect().top+scrollY-innerHeight*.5)/span,(document.documentElement.scrollHeight-innerHeight)/span]); }
  if(${cold}) { const a=document.getElementById('features'),b=document.getElementById('docs'); stages.length=0; stages.push(['cold-media',(a.getBoundingClientRect().top+scrollY-innerHeight*1.5)/span,(b.getBoundingClientRect().bottom+scrollY-innerHeight*.3)/span]); }
  if(${extended} && !${cold}) { stages.push(['idle-keyboard',.65,.65],['idle-camera',.76,.76],['idle-screenshot',.9,.9],['rest-of-page',1,(document.documentElement.scrollHeight-innerHeight)/span]); }
- for(const [name,from,to] of stages){
+ for(const [name,initialFrom,initialTo] of stages){
+  let from=initialFrom,to=initialTo;
+  if(${process.env.PROFILE_REST_ONLY==='1'}) {
+   const section=name==='footer-section'?document.querySelector('footer'):document.getElementById(name.replace('-section',''));
+   if(section) {
+    window.scrollTo({top:section.getBoundingClientRect().top+scrollY-innerHeight,behavior:'instant'});
+    // Visible islands may add a pin spacer after hydration. Measure their
+    // final geometry, rather than benchmarking only the pre-hydration shell.
+    await new Promise(r=>setTimeout(r,1200));
+    const rect=section.getBoundingClientRect(),top=rect.top+scrollY;
+    from=(name==='footer-section'?top-innerHeight*.5:top)/span;
+    to=(name==='footer-section'?document.documentElement.scrollHeight-innerHeight:Math.max(top,top+rect.height-innerHeight*.4))/span;
+   }
+  }
   window.scrollTo({top:span*from,behavior:'instant'});await new Promise(r=>setTimeout(r,${cold}?0:500));
+  const drawStart={...window.__xpDraws};
   const gaps=[],slowFrames=[];let prev; window.__profileStage=name;const start=performance.now();const duration=(name==='rest-of-page'||name==='cold-media')?10000:2200;
   await new Promise(resolve=>{const tick=now=>{if(prev){gaps.push(now-prev);if(now-prev>25)slowFrames.push({ms:now-prev,y:scrollY,at:now});}prev=now;const p=Math.min(1,(now-start)/duration);window.scrollTo({top:span*(from+(to-from)*p),behavior:'instant'});if(p<1)requestAnimationFrame(tick);else resolve();};requestAnimationFrame(tick);});
   const sorted=[...gaps].sort((a,b)=>a-b),sum=gaps.reduce((a,b)=>a+b,0);
-  stats.push({name,slowFrames,visibility:document.visibilityState,focused:document.hasFocus(),frames:gaps.length,fps:1000*gaps.length/sum,p50:sorted[Math.floor(sorted.length*.5)],p95:sorted[Math.floor(sorted.length*.95)],worst:Math.max(...gaps),over33ms:gaps.filter(x=>x>33.5).length});
+  stats.push({name,renderedFrames:{hero:window.__xpDraws.hero-drawStart.hero,devices:window.__xpDraws.devices-drawStart.devices},slowFrames,visibility:document.visibilityState,focused:document.hasFocus(),frames:gaps.length,fps:1000*gaps.length/sum,p50:sorted[Math.floor(sorted.length*.5)],p95:sorted[Math.floor(sorted.length*.95)],worst:Math.max(...gaps),over33ms:gaps.filter(x=>x>33.5).length});
  }
  await new Promise(r=>setTimeout(r,20));
  observer.disconnect();return {startedAt,stats,longTasks,longTaskMs,longTaskRecords,renderCosts:window.__xpMeasures};
@@ -151,5 +179,5 @@ try {
    }
  }
  writeFileSync(resolve(out,label+'.json'),JSON.stringify(summary,null,2));
- console.log(JSON.stringify({label, cpuRate, samplingUs, busy:summary.rendererMainThreadBusyPercent,longTasks:measurements.longTasks,stages:measurements.stats.map(s=>({name:s.name,fps:s.fps,p95:s.p95,worst:s.worst}))},null,2));
+ console.log(JSON.stringify({label, cpuRate, samplingUs, busy:summary.rendererMainThreadBusyPercent,longTasks:measurements.longTasks,stages:measurements.stats.map(s=>({name:s.name,fps:s.fps,renderedFrames:s.renderedFrames,p95:s.p95,worst:s.worst}))},null,2));
 } finally {socket?.close();child.kill('SIGTERM');staticServer?.close();}

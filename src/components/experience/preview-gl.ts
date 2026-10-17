@@ -386,6 +386,7 @@ export type EditorGpuLayer = { canvas: HTMLCanvasElement; key: string; x: number
 export type GridLayer = { step: number; x: number; y: number; dpr: number; dark: boolean };
 
 export type PreviewLayer = { u: number; v: number; texture: WebGLTexture; x: number; y: number; w: number; h: number; radius: number };
+export type CursorLayer = Omit<PreviewLayer, "radius"> & { alpha: number };
 
 const COMPOSE_FRAG = `#version 300 es
 precision highp float;
@@ -394,6 +395,11 @@ uniform sampler2D uUi;
 uniform sampler2D uPreview;
 uniform sampler2D uEditor;
 uniform sampler2D uInspector;
+uniform sampler2D uCursor;
+uniform vec4 uCursorRect;
+uniform vec2 uCursorScale;
+uniform float uCursorAlpha;
+uniform int uCursorOn;
 uniform vec4 uInspectorRect;
 uniform float uInspectorAlpha;
 uniform vec4 uEditorRect;
@@ -432,6 +438,15 @@ void main() {
   float iCover = step(0.0,iUv.x)*step(0.0,iUv.y)*step(iUv.x,1.0)*step(iUv.y,1.0);
   vec4 inspector = texture(uInspector,clamp(iUv,0.0,1.0))*iCover*uInspectorAlpha;
   scene = inspector + scene*(1.0-inspector.a);
+  if (uCursorOn == 1) {
+    vec2 cUv = (p-uCursorRect.xy)/uCursorRect.zw;
+    if (cUv.x >= 0.0 && cUv.y >= 0.0 && cUv.x <= 1.0 && cUv.y <= 1.0) {
+      vec2 size = vec2(textureSize(uCursor, 0));
+      vec2 uv = clamp(vec2(cUv.x,1.0-cUv.y)*uCursorScale,0.5/size,uCursorScale-0.5/size);
+      vec4 cursor = texture(uCursor,uv)*coverage*uCursorAlpha;
+      scene = cursor + scene*(1.0-cursor.a);
+    }
+  }
   outColor = ui + scene*(1.0-ui.a);
 }
 `;
@@ -595,10 +610,15 @@ export class FrameBlurGL {
   private editorKey = "";
   private inspectorTex: WebGLTexture | null = null;
   private inspectorKey = "";
+  private shared: boolean;
+  private target: Level | null = null;
   get context() { return this.gl; }
+  get texture() { return this.target?.tex ?? null; }
+  get targetSize() { return this.target; }
 
-  constructor(presented = false) {
-    const gl = this.canvas.getContext("webgl2", { premultipliedAlpha: true, preserveDrawingBuffer: !presented, antialias: false });
+  constructor(presented = false, shared?: WebGL2RenderingContext) {
+    this.shared = !!shared;
+    const gl = shared ?? this.canvas.getContext("webgl2", { premultipliedAlpha: true, preserveDrawingBuffer: !presented, antialias: false });
     if (!gl) throw new Error("webgl2 unavailable");
     this.gl = gl;
     const compile = (type: number, source: string) => {
@@ -623,8 +643,8 @@ export class FrameBlurGL {
     this.down = link(DOWN_FRAG);
     this.compose = link(COMPOSE_FRAG);
     gl.useProgram(this.compose);
-    for (const name of ["uUi", "uPreview", "uSize", "uRect", "uRadius", "uPreviewScale", "uEditor", "uEditorOn", "uEditorRect", "uGrid", "uGridColor", "uInspector", "uInspectorRect", "uInspectorAlpha"]) this.composeLoc[name] = gl.getUniformLocation(this.compose, name);
-    gl.uniform1i(this.composeLoc.uUi, 0); gl.uniform1i(this.composeLoc.uPreview, 1); gl.uniform1i(this.composeLoc.uEditor, 2); gl.uniform1i(this.composeLoc.uInspector, 3);
+    for (const name of ["uUi", "uPreview", "uSize", "uRect", "uRadius", "uPreviewScale", "uEditor", "uEditorOn", "uEditorRect", "uGrid", "uGridColor", "uInspector", "uInspectorRect", "uInspectorAlpha", "uCursor", "uCursorRect", "uCursorScale", "uCursorAlpha", "uCursorOn"]) this.composeLoc[name] = gl.getUniformLocation(this.compose, name);
+    gl.uniform1i(this.composeLoc.uUi, 0); gl.uniform1i(this.composeLoc.uPreview, 1); gl.uniform1i(this.composeLoc.uEditor, 2); gl.uniform1i(this.composeLoc.uInspector, 3); gl.uniform1i(this.composeLoc.uCursor, 4);
     const buf = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, buf);
     gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]), gl.STATIC_DRAW);
@@ -709,10 +729,11 @@ export class FrameBlurGL {
     editor?: EditorGpuLayer | null,
     grid?: GridLayer,
     inspector?: (EditorGpuLayer & { alpha: number }) | null,
+    cursor?: CursorLayer | null,
   ) {
     const gl = this.gl;
     const { width, height } = source;
-    if (this.canvas.width !== width || this.canvas.height !== height) {
+    if (!this.shared && (this.canvas.width !== width || this.canvas.height !== height)) {
       this.canvas.width = width;
       this.canvas.height = height;
     }
@@ -764,6 +785,12 @@ export class FrameBlurGL {
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array(4));
         this.inspectorKey = "empty";
       }
+      gl.activeTexture(gl.TEXTURE4);
+      gl.bindTexture(gl.TEXTURE_2D, cursor?.texture ?? this.src);
+      gl.uniform1i(this.composeLoc.uCursorOn, cursor ? 1 : 0);
+      gl.uniform4f(this.composeLoc.uCursorRect, cursor?.x ?? 0, cursor?.y ?? 0, cursor?.w ?? 1, cursor?.h ?? 1);
+      gl.uniform2f(this.composeLoc.uCursorScale, cursor?.u ?? 1, cursor?.v ?? 1);
+      gl.uniform1f(this.composeLoc.uCursorAlpha, cursor?.alpha ?? 0);
       gl.uniform1f(this.composeLoc.uInspectorAlpha, inspector?.alpha ?? 0);
       gl.uniform4f(this.composeLoc.uInspectorRect, inspector?.x ?? 0, inspector?.y ?? 0, inspector?.w ?? 1, inspector?.h ?? 1);
       gl.uniform1i(this.composeLoc.uEditorOn, editor ? 1 : 0);
@@ -799,15 +826,30 @@ export class FrameBlurGL {
       gl.bindFramebuffer(gl.FRAMEBUFFER, null);
     }
 
-    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+    if (this.shared && (!this.target || this.target.w < width || this.target.h < height)) {
+      const w = Math.max(this.target?.w ?? 64, 2 ** Math.ceil(Math.log2(width)));
+      const h = Math.max(this.target?.h ?? 64, 2 ** Math.ceil(Math.log2(height)));
+      if (this.target) { gl.deleteTexture(this.target.tex); gl.deleteFramebuffer(this.target.fbo); }
+      gl.activeTexture(gl.TEXTURE0);
+      const tex = this.makeTexture(), fbo = gl.createFramebuffer()!;
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA8, w, h, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
+      gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
+      gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, tex, 0);
+      this.target = { tex, fbo, w, h };
+    }
+    gl.bindFramebuffer(gl.FRAMEBUFFER, this.shared ? this.target!.fbo : null);
     gl.useProgram(this.blur);
     gl.viewport(0, 0, width, height);
     gl.activeTexture(gl.TEXTURE0);
     gl.bindTexture(gl.TEXTURE_2D, scene);
-    this.levels.forEach((l, i) => {
+    // All sampler bindings belong to this pass, even when the veil branch is
+    // disabled. A shared context may still have our output texture bound by
+    // the compositor; leaving it on an unused level creates a feedback loop
+    // and makes WebGL reject the draw (notably on repeated, retained frames).
+    for (let i = 0; i < LEVELS; i += 1) {
       gl.activeTexture(gl.TEXTURE1 + i);
-      gl.bindTexture(gl.TEXTURE_2D, l.tex);
-    });
+      gl.bindTexture(gl.TEXTURE_2D, this.levels[i]?.tex ?? scene);
+    }
     gl.uniform4f(this.loc.uVeil, veilOn ? veil.mode : 0, 0, veil.radius, veil.strength);
     gl.uniform2f(this.loc.uVeilBand, veil.start, veil.full);
     gl.uniform4f(this.loc.uVeilColor, veil.color[0], veil.color[1], veil.color[2], veil.tint);
@@ -826,7 +868,8 @@ export class FrameBlurGL {
     this.levels.forEach((level) => { gl.deleteTexture(level.tex); gl.deleteFramebuffer(level.fbo); });
     gl.deleteProgram(this.blur); gl.deleteProgram(this.down); gl.deleteProgram(this.compose);
     if (this.composed) { gl.deleteTexture(this.composed.tex); gl.deleteFramebuffer(this.composed.fbo); }
-    gl.getExtension("WEBGL_lose_context")?.loseContext();
+    if (this.target) { gl.deleteTexture(this.target.tex); gl.deleteFramebuffer(this.target.fbo); }
+    if (!this.shared) gl.getExtension("WEBGL_lose_context")?.loseContext();
   }
 
 }

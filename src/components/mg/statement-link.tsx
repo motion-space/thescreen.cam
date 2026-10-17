@@ -27,12 +27,6 @@ export function StatementLink({
       return;
     }
     const trigger = q(".sl-title")[0];
-    gsap.to(q(".mg-word"), {
-      color: "var(--foreground)",
-      stagger: 0.1,
-      ease: "none",
-      scrollTrigger: { trigger, start: "top 85%", end: "bottom 45%", scrub: 0.6 },
-    });
     gsap.to(q("[data-draw]"), {
       strokeDashoffset: 0,
       ease: "none",

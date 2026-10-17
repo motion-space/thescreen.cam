@@ -119,7 +119,7 @@ const KEYS: Key[] = [
   { p: 1, rect: R.world, area: "overview" },
 ];
 
-/** Chapters: scroll span, timeline range scrubbed by scroll, autopilot selection. */
+/** Chapters: scroll span, mapped playback range, and autopilot selection. */
 const CHAPTERS = [
   { key: "zoom", from: 0.16, to: 0.28, scrub: [0.1825, 0.28], time: [2.6, 8.9] },
   { key: "zoom3d", from: 0.28, to: 0.385, scrub: [0.3025, 0.385], time: [14.0, 18.5] },
@@ -129,6 +129,10 @@ const CHAPTERS = [
   { key: "camera", from: 0.69, to: 0.8, scrub: [0.715, 0.78], time: [14.6, 17.6] },
   { key: "screenshot", from: 0.8, to: 0.95, scrub: [0.8, 0.815], time: [16.8, 16.8] },
 ] as const;
+
+// One destination per chapter, shared by snapping, rail geometry and clicks.
+const CHAPTER_STOPS = CHAPTERS.map(ch => ch.key === "screenshot" ? .89 : ch.scrub[0] + .004);
+const TOUR_STOPS = [0, .13, ...CHAPTER_STOPS, 1];
 
 const clamp = (v: number, a = 0, b = 1) => Math.max(a, Math.min(b, v));
 
@@ -223,6 +227,7 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
   const overviewRef = useRef<HTMLDivElement>(null);
   const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
   const railRef = useRef<HTMLDivElement>(null);
+  const railIndicatorRef = useRef<HTMLDivElement>(null);
   const editorRef = useRef<EditorState | null>(null);
   const [demo, setDemo] = useState({ style: 0 as KeyStyle, remove: false, sticker: false });
   const demoRef = useRef(demo);
@@ -343,6 +348,31 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
       return changed;
     };
     let lastProgress = -1;
+    let lastScrollAt = Number.NEGATIVE_INFINITY;
+    let resumePending = false;
+    const SCROLL_SETTLE_MS = 250;
+    const SNAP_IDLE_MS = 120;
+    const SNAP_DURATION_MS = 260;
+    let scrollDirection = 0;
+    let touching = false;
+    let pointerHeld = false;
+    let snap: { from: number; to: number; started: number } | null = null;
+    let railMetrics: Array<{ x: number; width: number }> = [];
+    let railWidth = 0;
+    const updateRail = (p: number) => {
+      const indicator = railIndicatorRef.current;
+      if (!indicator || railMetrics.length !== CHAPTERS.length) return;
+      // Arrival points match the completed camera framing, not a timer or
+      // the currently playing video. Reversing scroll reverses this exactly.
+      const stops = CHAPTER_STOPS;
+      let i = 0;
+      while (i < stops.length - 2 && p > stops[i + 1]) i += 1;
+      const t = clamp((p - stops[i]) / (stops[i + 1] - stops[i]));
+      const a = railMetrics[i], b = railMetrics[i + 1];
+      const x = lerp(a.x, b.x, t), width = lerp(a.width, b.width, t);
+      indicator.style.transform = `translate3d(${x}px,0,0)`;
+      indicator.style.clipPath = `inset(0 ${Math.max(0, railWidth - width)}px 0 0 round 999px)`;
+    };
     let chapter = -2;
     let loop: [number, number] = [0, DURATION];
     // At the end of a chapter's range the playhead holds for a moment, then
@@ -357,7 +387,6 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
     let raf = 0;
     let last = performance.now();
     let lastCameraTick = -1;
-    let lastHoldPreviewTick = -1;
     let drag: Hit | null = null;
 
     const resize = () => {
@@ -365,10 +394,9 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
       canvasBounds = rect;
       W = rect.width;
       H = rect.height;
-      // Bound full-screen uploads and post-processing independently of Retina
-      // resolution. Keep this stable while scrolling to avoid reallocating all
-      // scene textures whenever input starts or stops.
-      dpr = Math.min(1.5, window.devicePixelRatio || 1, Math.sqrt(2_400_000 / Math.max(1, W * H)));
+      // Preserve the original Retina resolution, including during scrolling
+      // and modifier-key zoom. Performance work must not reduce sharpness.
+      dpr = Math.min(2, window.devicePixelRatio || 1);
       // The closest framings mostly show the preview; cap the editor cache separately.
       editorDensity = Math.max(...KEYS.map(key => Math.min(1.6, fit(key.rect, areaRect(key.area, W, H)).z))) * dpr;
       canvas.width = Math.round(W * dpr);
@@ -400,8 +428,8 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
       return clamp(-rect.top / Math.max(1, span));
     };
 
-    /** Autopilot: scroll decides the chapter, selection and (while scrubbing) the playhead. */
-    const applyScroll = (p: number) => {
+    /** Select while scrolling; seek to the mapped playhead only after arrival. */
+    const applyScroll = (p: number, seek = true) => {
       const index = CHAPTERS.findIndex((c) => p >= c.from && p < c.to);
       const next = p < CHAPTERS[0].from ? -1 : index === -1 ? CHAPTERS.length : index;
       if (next !== chapter) {
@@ -427,10 +455,10 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
         const ch = CHAPTERS[next];
         loop = ch ? [ch.time[0], Math.max(ch.time[1], ch.time[0] + 0.01)] : [0, DURATION];
         loopPhase = "play";
-        if (ch) state.playing = ch.key !== "screenshot" && !reduceMotion;
+
       }
       const ch = CHAPTERS[chapter];
-      if (ch) {
+      if (ch && seek) {
         const k = clamp((p - ch.scrub[0]) / (ch.scrub[1] - ch.scrub[0]));
         state.time = reduceMotion && ch.key === "keyboard" ? 13.5 : lerp(ch.time[0], ch.time[1], k);
       }
@@ -507,8 +535,20 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
         const k = Math.min(clamp((p - 0.16) / 0.02), 1 - clamp((p - 0.94625) / 0.0125));
         rail.style.opacity = String(k);
         rail.style.visibility = k <= 0 ? "hidden" : "visible";
+        updateRail(p);
       }
     };
+
+    const measureRail = () => {
+      const rail = railRef.current;
+      if (!rail) return;
+      railWidth = rail.clientWidth;
+      railMetrics = Array.from(rail.querySelectorAll<HTMLButtonElement>(".xp-rail-item"), button => ({ x: button.offsetLeft, width: button.offsetWidth }));
+      updateRail(progress);
+    };
+    const railObserver = new ResizeObserver(measureRail);
+    if (railRef.current) railObserver.observe(railRef.current);
+    measureRail();
 
     const drawGrid = (cam: Cam) => {
       let step = 40 * cam.z;
@@ -525,6 +565,12 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
       raf = 0;
       // IntersectionObserver arrives after animation callbacks. Cull a newly
       // offscreen tour before recording another large Canvas frame on a fast scroll.
+      const snappingThisFrame = !!snap;
+      if (snap) {
+        const t = reduceMotion ? 1 : clamp((now - snap.started) / SNAP_DURATION_MS);
+        window.scrollTo({ top: lerp(snap.from, snap.to, cameraEase(t)), behavior: "instant" });
+        if (t >= 1) snap = null;
+      }
       const bounds = root.getBoundingClientRect();
       if (bounds.bottom <= 0 || bounds.top >= window.innerHeight) {
         visible = false;
@@ -545,7 +591,11 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
       }
       const scrolled = Math.abs(progress - lastProgress) > 1e-5;
       if (scrolled) {
-        applyScroll(progress);
+        if (!snappingThisFrame && lastProgress >= 0) scrollDirection = Math.sign(progress - lastProgress);
+        lastScrollAt = now;
+        resumePending = true;
+        state.playing = false;
+        applyScroll(progress, false);
         updateOverlay(progress);
         lastProgress = progress;
       }
@@ -557,13 +607,46 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
         setDemo(demoRef.current);
         invalidate();
       }
-      if (scrolled) loopPhase = "play"; // scrolling scrubs the playhead itself
-      if (state.playing && !drag) advancePlayback(dt);
+      if (resumePending && !snap && !snappingThisFrame && !touching && !pointerHeld && !drag &&
+          now - lastScrollAt >= SNAP_IDLE_MS && bounds.top <= 0 && bounds.bottom >= window.innerHeight) {
+        let i = 0;
+        while (i < TOUR_STOPS.length - 2 && progress > TOUR_STOPS[i + 1]) i += 1;
+        const a = TOUR_STOPS[i], b = TOUR_STOPS[i + 1];
+        const t = clamp((progress - a) / (b - a));
+        // A deliberate nudge carries forward; a tiny nudge returns to the
+        // current chapter. Reverse input uses the same threshold symmetrically.
+        const target = scrollDirection > 0 ? (t > .12 ? b : a)
+          : scrollDirection < 0 ? (t < .88 ? a : b) : (t < .5 ? a : b);
+        const y = Math.round(window.scrollY + bounds.top + target * (bounds.height - window.innerHeight));
+        if (Math.abs(y - window.scrollY) >= 1) {
+          snap = { from: window.scrollY, to: y, started: now };
+        }
+      }
+      let resumed = false;
+      if (resumePending && !snap && !touching && !pointerHeld && !drag && now - lastScrollAt >= SCROLL_SETTLE_MS) {
+        // Never restart in the middle of a camera move or a fading chapter.
+        // Snapping owns the scroll until arrival; playback then waits for
+        // the settle delay and seeks once, with no intermediate scrubbing.
+        let i = 0;
+        while (i < KEYS.length - 2 && progress >= KEYS[i + 1].p) i += 1;
+        const a = KEYS[i], b = KEYS[i + 1], ch = CHAPTERS[chapter];
+        const landed = a.rect === b.rect && a.area === b.area &&
+          (!ch || (progress >= ch.from + .018 && progress <= ch.to - .014));
+        if (landed) {
+          applyScroll(progress);
+          loopPhase = "play";
+          resumePending = false;
+          state.playing = !reduceMotion && ch?.key !== "screenshot";
+          resumed = true;
+          invalidate();
+        }
+      }
+      if (state.playing && !drag && !resumePending && !resumed) advancePlayback(dt);
 
       const liveCamera = state.camera.show && (state.shot < 0.99 || chapter === CHAPTERS.length);
       const cameraTick = Math.floor(now * 24 / 1000);
       const cameraChanged = liveCamera && cameraTick !== lastCameraTick;
-      setCameraPlaybackVisible(visible && liveCamera);
+      setCameraPlaybackVisible(visible && liveCamera && state.playing);
       if (magnifying || scrolled || scrollCameraBlurred || state.playing || drag || now < dirtyUntil || cameraChanged || now - state.camera.changedAt < 1800) try {
         render();
         lastCameraTick = cameraTick;
@@ -620,12 +703,8 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
           state.playing = !state.playing;
         },
       });
-      // Keep the retained preview at its overview sampling density while the
-      // interactive camera moves; the compositor applies the zoom and blur.
-      const holdPreviewTick = Math.floor(performance.now() * 30 / 1000);
-      const reusePreview = preview.canCompose && (holdActive || holdScale.value !== 1) && lastHoldPreviewTick === holdPreviewTick;
-      preview.draw(ctx, state, base.z * dpr, radius, reduceMotion, !reusePreview);
-      lastHoldPreviewTick = holdPreviewTick;
+      // Paint every changed animation frame at the display's cadence.
+      preview.draw(ctx, state, base.z * dpr, radius, reduceMotion);
       // a faint 1 px hairline so the frame keeps its edge against the page
       ctx.save();
       squircle(ctx, COMP.x, COMP.y, COMP.w, COMP.h, radius);
@@ -676,7 +755,7 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
           }, preview.gpuLayer, editorLayer.gpuLayer, (() => {
             let step = 40 * cam.z; while (step < 14) step *= 2;
             return { step: step*dpr, x: (cam.sx-cam.wx*cam.z)%step*dpr, y: (cam.sy-cam.wy*cam.z)%step*dpr, dpr, dark: theme.dark };
-          })(), editorLayer.inspector.gpuLayer);
+          })(), editorLayer.inspector.gpuLayer, preview.cursorLayer);
           // Present this GPU canvas directly. Copying it back into the 2D
           // source forces another cross-context synchronization every frame.
           useProcessed = true;
@@ -750,6 +829,8 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
       const p = point(e);
       const hit = hits.find(p);
       if (!hit) return;
+      snap = null;
+      resumePending = false;
       hit.onDown?.(hits.local(hit, p));
       invalidate();
       if (hit.onDrag) {
@@ -790,7 +871,59 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
     interaction.addEventListener("pointercancel", onUp);
     interaction.addEventListener("pointerleave", onLeave);
 
+    const interruptSnap = () => {
+      if (!snap) return;
+      snap = null;
+      lastScrollAt = performance.now();
+      resumePending = true;
+      state.playing = false;
+    };
+    const onPointerStart = () => { pointerHeld = true; interruptSnap(); };
+    const onPointerEnd = () => { pointerHeld = false; lastScrollAt = performance.now(); };
+    const onWheel = (event: WheelEvent) => {
+      if (event.ctrlKey || !event.deltaY) return;
+      interruptSnap();
+      scrollDirection = Math.sign(event.deltaY);
+      lastScrollAt = performance.now();
+      resumePending = true;
+      state.playing = false;
+    };
+    const onTouchStart = () => {
+      interruptSnap();
+      touching = true;
+      state.playing = false;
+      resumePending = true;
+    };
+    const onTouchEnd = () => {
+      touching = false;
+      lastScrollAt = performance.now();
+    };
+    const onScrollKey = (event: KeyboardEvent) => {
+      if (!["ArrowUp", "ArrowDown", "PageUp", "PageDown", "Home", "End", " "].includes(event.key)) return;
+      if (event.target instanceof Element && event.target.closest("input,textarea,select,button,a,[contenteditable]:not([contenteditable=false])")) return;
+      interruptSnap();
+    };
+    window.addEventListener("wheel", onWheel, { passive: true });
+    window.addEventListener("pointerdown", onPointerStart, { passive: true });
+    window.addEventListener("pointerup", onPointerEnd, { passive: true });
+    window.addEventListener("pointercancel", onPointerEnd, { passive: true });
+    window.addEventListener("click", interruptSnap);
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchend", onTouchEnd, { passive: true });
+    window.addEventListener("touchcancel", onTouchEnd, { passive: true });
+    window.addEventListener("keydown", onScrollKey);
+
     return () => {
+      snap = null;
+      window.removeEventListener("wheel", onWheel);
+      window.removeEventListener("pointerdown", onPointerStart);
+      window.removeEventListener("pointerup", onPointerEnd);
+      window.removeEventListener("pointercancel", onPointerEnd);
+      window.removeEventListener("click", interruptSnap);
+      window.removeEventListener("touchstart", onTouchStart);
+      window.removeEventListener("touchend", onTouchEnd);
+      window.removeEventListener("touchcancel", onTouchEnd);
+      window.removeEventListener("keydown", onScrollKey);
       window.removeEventListener("pointermove", trackPointer);
       window.removeEventListener("keydown", onKeyDown);
       window.removeEventListener("keyup", onKeyUp);
@@ -799,6 +932,7 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
       cancelAnimationFrame(raf);
       io.disconnect();
       ro.disconnect();
+      railObserver.disconnect();
       stopTheme();
       stopCameraPlayback();
       blurGL?.canvas.remove();
@@ -834,7 +968,7 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
     }
     const top = root.getBoundingClientRect().top + window.scrollY;
     const span = root.offsetHeight - window.innerHeight;
-    const p = ch.key === "screenshot" ? 0.89 : ch.scrub[0] + 0.004;
+    const p = CHAPTER_STOPS[index];
     window.scrollTo({ top: top + span * p, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
   };
 
@@ -939,6 +1073,7 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
 
         {/* Chapter rail */}
         <div ref={railRef} className="absolute bottom-8 left-[5vw] hidden gap-1 min-[900px]:flex" style={{ opacity: 0, visibility: "hidden" }}>
+          <div ref={railIndicatorRef} className="xp-rail-indicator" aria-hidden="true" />
           {showcaseFeatureOrder.map((key, i) => (
             <button
               key={key}
