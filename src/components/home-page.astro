@@ -12,7 +12,6 @@ import { Experience } from "./experience/experience";
 import { StatementLink } from "./mg/statement-link";
 import PageHead from "./page-head.astro";
 import { PerformanceSection } from "./performance-section";
-import { SmoothScroll } from "./smooth-scroll";
 
 interface Props {
   locale: Locale;
@@ -81,7 +80,6 @@ const structuredData = {
     />
   </head>
   <body class="font-sans antialiased bg-background">
-    <SmoothScroll client:media="(hover: hover) and (pointer: fine)" />
     <main>
       <Experience
         copy={t.home.hero}

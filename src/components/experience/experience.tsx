@@ -14,7 +14,6 @@ import { ArrowRight } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { appStoreUrl, microsoftStoreUrl } from "../../lib/i18n";
 import { getStoreCopy } from "../../lib/store-copy";
-import { scrollPageTo } from "../../lib/scroll";
 import { AppleLogo, BetaTag, WindowsLogo } from "../store-buttons";
 import type { Locale } from "../../lib/i18n";
 import { getShowcaseCopy, showcaseFeatureOrder } from "../../lib/showcase-copy";
@@ -133,50 +132,6 @@ const CHAPTERS = [
 
 const clamp = (v: number, a = 0, b = 1) => Math.max(a, Math.min(b, v));
 
-/**
- * Scroll spans where something is mid-transition: the camera moving between
- * framings, copy fading in or out, the capture flash. Scrolling never comes to
- * rest inside one. Scrubbed content (the timeline playing, the annotation
- * being drawn) is not a transition, so it can rest anywhere.
- */
-const MOTION: Array<[number, number]> = (() => {
-  const spans: Array<[number, number]> = [];
-  for (let i = 0; i < KEYS.length - 1; i += 1) {
-    const a = KEYS[i];
-    const b = KEYS[i + 1];
-    if (a.rect !== b.rect || a.area !== b.area) spans.push([a.p, b.p]);
-  }
-  spans.push([0.012, 0.062]); // hero copy
-  spans.push([0.035, 0.12]); // editor chrome
-  spans.push([0.085, 0.115], [0.158, 0.173], [0.96875, 0.984375]); // overview title
-  spans.push([0.16, 0.18], [0.94625, 0.95875]); // chapter rail
-  for (const ch of CHAPTERS) spans.push([ch.from, ch.from + 0.018], [ch.to - 0.014, ch.to]); // chapter cards
-  spans.push([0.49, 0.5125], [0.58, 0.595]); // captions panel
-  spans.push([0.80975, 0.82775], [0.824, 0.85025]); // capture flash, screenshot window
-  spans.sort((x, y) => x[0] - y[0]);
-  const merged: Array<[number, number]> = [];
-  for (const [a, b] of spans) {
-    const last = merged[merged.length - 1];
-    if (last && a <= last[1] + 1e-6) last[1] = Math.max(last[1], b);
-    else merged.push([a, b]);
-  }
-  return merged;
-})();
-
-/** How far into a transition the scroll must get before it settles forward instead of back. */
-const SETTLE_THRESHOLD = 0.12;
-/** Idle time after the last scroll event before settling (ms). */
-const SETTLE_DELAY = 90;
-
-/** Where scrolling should settle from `p`: the nearer end of a transition, leaning the way it was going. */
-function restingProgress(p: number, direction: number) {
-  const span = MOTION.find(([a, b]) => p > a + 1e-4 && p < b - 1e-4);
-  if (!span) return null;
-  const [a, b] = span;
-  const f = (p - a) / (b - a);
-  // a small nudge is enough to carry on in the direction of travel
-  return direction > 0 ? (f > SETTLE_THRESHOLD ? b : a) : direction < 0 ? (f < 1 - SETTLE_THRESHOLD ? a : b) : f < 0.5 ? a : b;
-}
 /** Scroll camera moves follow the client's camera spring, used as a curve over the scroll span. */
 const cameraEase = springEase(SPRINGS.camera);
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
@@ -410,11 +365,15 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
       canvasBounds = rect;
       W = rect.width;
       H = rect.height;
-      dpr = Math.min(2, window.devicePixelRatio || 1);
-      // the editor chrome is mostly off-screen in the closest framings: keep its cache at the old cap
+      // Bound full-screen uploads and post-processing independently of Retina
+      // resolution. Keep this stable while scrolling to avoid reallocating all
+      // scene textures whenever input starts or stops.
+      dpr = Math.min(1.5, window.devicePixelRatio || 1, Math.sqrt(2_400_000 / Math.max(1, W * H)));
+      // The closest framings mostly show the preview; cap the editor cache separately.
       editorDensity = Math.max(...KEYS.map(key => Math.min(1.6, fit(key.rect, areaRect(key.area, W, H)).z))) * dpr;
       canvas.width = Math.round(W * dpr);
       canvas.height = Math.round(H * dpr);
+      lastCam = null;
       invalidate();
     };
     resize();
@@ -436,8 +395,7 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
       }, 420);
     });
 
-    const readProgress = () => {
-      const rect = root.getBoundingClientRect();
+    const readProgress = (rect = root.getBoundingClientRect()) => {
       const span = rect.height - window.innerHeight;
       return clamp(-rect.top / Math.max(1, span));
     };
@@ -575,14 +533,22 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
       }
       const dt = Math.min(0.1, (now - last) / 1000);
       last = now;
-      progress = readProgress();
+      progress = readProgress(bounds);
+      canvasBounds = canvas.getBoundingClientRect();
+      // Read layout before overlay and hit-region writes. Reading chapter
+      // bounds in render() forced style/layout after those writes every frame.
+      const cardIndex = CHAPTERS.findIndex(ch => progress >= ch.from && progress < ch.to);
+      const card = cardRefs.current[cardIndex >= 0 ? cardIndex : progress >= CHAPTERS[CHAPTERS.length - 1].to ? CHAPTERS.length - 1 : 0];
+      if (card) {
+        const rect = card.getBoundingClientRect();
+        if (rect.width > 0) textEdge = W < 900 ? H - rect.top : rect.right;
+      }
       const scrolled = Math.abs(progress - lastProgress) > 1e-5;
       if (scrolled) {
         applyScroll(progress);
         updateOverlay(progress);
         lastProgress = progress;
       }
-      canvasBounds = canvas.getBoundingClientRect();
       derived(progress);
       const magnifying = updateMagnify(now);
       const previous = demoRef.current;
@@ -610,14 +576,6 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
 
     const render = () => {
       const base = cameraAt(progress, W, H);
-      // Bound full-frame texture transfers during continuous interactive panning.
-      const wantedDpr = Math.min(holdActive || holdScale.value !== 1 ? 1.25 : 2, window.devicePixelRatio || 1);
-      if (dpr !== wantedDpr) {
-        dpr = wantedDpr;
-        canvas.width = Math.round(W * dpr);
-        canvas.height = Math.round(H * dpr);
-        lastCam = null;
-      }
       const cam = { ...base, z: base.z * holdScale.value,
         sx: base.sx * holdScale.value + holdX.value,
         sy: base.sy * holdScale.value + holdY.value };
@@ -705,13 +663,6 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
           const narrow = W < 900;
           // the band hugs the chapter text: full strength under the text,
           // fading out over a short distance past its edge
-          const card = cardRefs.current[Math.max(0, Math.min(CHAPTERS.length - 1, chapter))];
-          if (card) {
-            const r = card.getBoundingClientRect();
-            if (r.width > 0) {
-              textEdge = narrow ? H - r.top : r.right;
-            }
-          }
           const edge = textEdge || (narrow ? H * 0.45 : W * 0.33);
           blurGL.render(canvas, A, bx, by, 64 * dpr, {
             mode: narrow ? 2 : 1,
@@ -839,61 +790,12 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
     interaction.addEventListener("pointercancel", onUp);
     interaction.addEventListener("pointerleave", onLeave);
 
-    // Settle scrolling: once the page stops inside a transition, a spring scroll
-    // carries it to the nearer resting state, so no frame is left half faded.
-    const settleEase = springEase(SPRINGS.effect);
-    let settleTimer = 0;
-    let touching = false;
-    let lastY = window.scrollY;
-    let direction = 0;
-    const settle = () => {
-      settleTimer = 0;
-      if (touching) return;
-      const rect = root.getBoundingClientRect();
-      if (rect.top > 0 || rect.bottom < window.innerHeight) return;
-      const span = rect.height - window.innerHeight;
-      const p = readProgress();
-      const target = restingProgress(p, direction);
-      if (target === null) return;
-      const y = window.scrollY + rect.top + target * span;
-      const distance = Math.abs(y - window.scrollY);
-      if (distance < 1) return;
-      scrollPageTo(y, { duration: clamp(0.32 + distance / 2600, 0.36, 0.8), easing: settleEase, immediate: reduceMotion });
-    };
-    const scheduleSettle = () => {
-      window.clearTimeout(settleTimer);
-      settleTimer = window.setTimeout(settle, SETTLE_DELAY);
-    };
-    const onPageScroll = () => {
-      const y = window.scrollY;
-      if (Math.abs(y - lastY) > 0.5) direction = Math.sign(y - lastY);
-      lastY = y;
-      scheduleSettle();
-    };
-    const onTouchStart = () => {
-      touching = true;
-      window.clearTimeout(settleTimer);
-    };
-    const onTouchEnd = () => {
-      touching = false;
-      scheduleSettle();
-    };
-    window.addEventListener("scroll", onPageScroll, { passive: true });
-    window.addEventListener("touchstart", onTouchStart, { passive: true });
-    window.addEventListener("touchend", onTouchEnd, { passive: true });
-    window.addEventListener("touchcancel", onTouchEnd, { passive: true });
-
     return () => {
       window.removeEventListener("pointermove", trackPointer);
       window.removeEventListener("keydown", onKeyDown);
       window.removeEventListener("keyup", onKeyUp);
       window.removeEventListener("blur", releaseZoom);
       desktopZoom.removeEventListener("change", releaseZoom);
-      window.clearTimeout(settleTimer);
-      window.removeEventListener("scroll", onPageScroll);
-      window.removeEventListener("touchstart", onTouchStart);
-      window.removeEventListener("touchend", onTouchEnd);
-      window.removeEventListener("touchcancel", onTouchEnd);
       cancelAnimationFrame(raf);
       io.disconnect();
       ro.disconnect();
@@ -932,14 +834,12 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
     }
     const top = root.getBoundingClientRect().top + window.scrollY;
     const span = root.offsetHeight - window.innerHeight;
-    const wanted = ch.key === "screenshot" ? 0.89 : ch.scrub[0] + 0.004;
-    // land on a resting state, never mid-transition
-    const p = restingProgress(wanted, 0) ?? wanted;
+    const p = ch.key === "screenshot" ? 0.89 : ch.scrub[0] + 0.004;
     window.scrollTo({ top: top + span * p, behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
   };
 
   return (
-    <section ref={rootRef} className="xp relative bg-background" id="zoom" style={{ height: "1450vh" }}>
+    <section ref={rootRef} className="xp relative bg-background" id="zoom" style={{ height: "1000svh" }}>
       <SiteHeader copy={headerCopy} currentPath={currentPath} languageLabel={languageLabel} locale={locale} />
       <div className="sticky top-0 h-[100svh] overflow-hidden">
         <canvas ref={canvasRef} className="xp-canvas pointer-events-none absolute inset-0 h-full w-full" aria-label={showcase.title} />
