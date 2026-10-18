@@ -1,6 +1,6 @@
 import type { Locale } from "./i18n";
 
-export type ShowcaseFeatureKey = "zoom" | "zoom3d" | "lens" | "captions" | "keyboard" | "camera" | "screenshot";
+export type ShowcaseFeatureKey = "zoom" | "zoom3d" | "lens" | "captions" | "keyboard" | "camera" | "media" | "screenshot";
 
 export type ShowcaseCopy = {
   toggleZoom: string;
@@ -14,7 +14,7 @@ export type ShowcaseCopy = {
   items: Record<ShowcaseFeatureKey, { label: string; title: string; body: string }>;
 };
 
-export const showcaseFeatureOrder: ShowcaseFeatureKey[] = ["zoom", "zoom3d", "lens", "captions", "keyboard", "camera", "screenshot"];
+export const showcaseFeatureOrder: ShowcaseFeatureKey[] = ["zoom", "zoom3d", "lens", "captions", "keyboard", "camera", "media", "screenshot"];
 
 const en: ShowcaseCopy = {
   toggleZoom: "Press to zoom · press again or leave to exit",
@@ -47,6 +47,7 @@ const en: ShowcaseCopy = {
     },
     keyboard: { label: "Keystrokes", title: "Every keystroke, made visible", body: "Watch a comment appear letter by letter, then send it with ⌘ Return. Try MacBook keycaps, flat or raised styles." },
     camera: { label: "Camera", title: "Make your camera part of the edit", body: "Remove your camera background in one click and add a sticker outline to help you stand out in the recording." },
+    media: { label: "Media", title: "One story, multiple sources", body: "Bring recordings, video and audio together in one media library. Keep every take close as you assemble your story." },
     screenshot: {
       label: "Screenshot",
       title: "Screenshots, framed and marked up",
@@ -70,6 +71,7 @@ const zhHans: ShowcaseCopy = {
     captions: { label: "字幕", title: "逐词跟读的字幕", body: "从你的语音生成字幕，每个词在说出时点亮，可选模糊或玻璃背景。" },
     keyboard: { label: "按键", title: "每一次输入，都看得见", body: "逐字输入评论，再用 ⌘ Return 发送。默认 MacBook 键帽，也可以切换平面、立体样式。" },
     camera: { label: "人像", title: "让人像融入画面", body: "一键移除摄像头背景，加上贴纸描边，让你在录屏中更醒目。" },
+    media: { label: "多素材剪辑", title: "多段素材，剪成一个故事", body: "录屏、视频和音频集中在素材库中，多段素材一起编排，让每一个片段各就其位。" },
     screenshot: { label: "截图", title: "截图，带背景也带标注", body: "截取窗口，放到背景上，再用箭头、序号、聚光灯和马赛克标注。" },
   },
 };
@@ -89,6 +91,7 @@ const zhHant: ShowcaseCopy = {
     captions: { label: "字幕", title: "逐字跟讀的字幕", body: "從你的語音產生字幕，每個詞在說出時亮起，可選模糊或玻璃背景。" },
     keyboard: { label: "按鍵", title: "每一次輸入，都看得見", body: "逐字輸入留言，再用 ⌘ Return 送出。預設 MacBook 鍵帽，也可以切換平面、立體樣式。" },
     camera: { label: "人像", title: "讓人像融入畫面", body: "一鍵移除攝影機背景，加上貼紙描邊，讓你在螢幕錄影中更醒目。" },
+    media: { label: "多素材剪輯", title: "多段素材，剪成一個故事", body: "將螢幕錄影、影片與音訊集中在素材庫中，多段素材一起編排，讓每個片段各就其位。" },
     screenshot: { label: "截圖", title: "截圖，加背景也加標註", body: "擷取視窗，放到背景上，再用箭頭、序號、聚光燈與馬賽克標註。" },
   },
 };
@@ -108,6 +111,7 @@ const de: ShowcaseCopy = {
     captions: { label: "Untertitel", title: "Untertitel, die mitlesen", body: "Erzeuge Untertitel aus deiner Stimme und lass jedes Wort beim Sprechen aufleuchten, auf Blur- oder Glas-Hintergrund." },
     keyboard: { label: "Tastendrücke", title: "Jeder Tastendruck wird sichtbar", body: "Ein Kommentar erscheint Buchstabe für Buchstabe und wird mit ⌘ Return gesendet. Wähle MacBook, flache oder erhöhte Tasten." },
     camera: { label: "Kamera", title: "Du, ohne Hintergrund", body: "Entferne den Hintergrund desselben Porträts mit einem Klick. Vergleiche das Original, den Freisteller und die Sticker-Kontur." },
+    media: { label: "Medien", title: "Mehrere Quellen, eine Geschichte", body: "Aufnahmen, Videos und Audio in einer Mediathek sammeln und zu einer Geschichte zusammenstellen." },
     screenshot: { label: "Screenshot", title: "Screenshots mit Rahmen und Markierungen", body: "Fenster aufnehmen, auf einen Hintergrund setzen und mit Pfeilen, Zählern, Spotlight und Mosaik markieren." },
   },
 };
@@ -127,6 +131,7 @@ const ja: ShowcaseCopy = {
     captions: { label: "字幕", title: "読み上げに合わせて光る字幕", body: "音声から字幕を生成し、話した単語から順に光らせます。背景はブラーかガラスを選べます。" },
     keyboard: { label: "キー入力", title: "一つひとつの入力を見せる", body: "コメントを一文字ずつ入力し、⌘ Return で送信。MacBook、フラット、立体のキー表示を切り替えられます。" },
     camera: { label: "カメラ", title: "背景を消して、あなたを残す", body: "同じポートレートの背景をワンクリックで削除。元画像に戻したり、ステッカーの縁取りを追加できます。" },
+    media: { label: "複数素材", title: "いくつもの素材を、ひとつの作品に", body: "録画、動画、音声をメディアライブラリにまとめ、複数の素材からストーリーを組み立てます。" },
     screenshot: { label: "スクリーンショット", title: "背景も注釈もつくスクリーンショット", body: "ウィンドウを撮影して背景に配置し、矢印、番号、スポットライト、モザイクで注釈できます。" },
   },
 };
@@ -146,6 +151,7 @@ const ko: ShowcaseCopy = {
     captions: { label: "자막", title: "따라 읽는 자막", body: "목소리로 자막을 만들고 말하는 순간 단어가 하나씩 밝아집니다. 블러나 글래스 배경을 고를 수 있습니다." },
     keyboard: { label: "키 입력", title: "모든 키 입력을 선명하게", body: "댓글을 한 글자씩 입력하고 ⌘ Return으로 전송합니다. MacBook, 평면, 입체 키 스타일을 선택하세요." },
     camera: { label: "카메라", title: "배경 없이, 당신만", body: "같은 인물 사진의 배경을 클릭 한 번으로 제거하세요. 원본으로 돌아가거나 스티커 테두리를 더할 수 있습니다." },
+    media: { label: "여러 미디어", title: "여러 소스로 하나의 이야기", body: "녹화, 동영상, 오디오를 미디어 라이브러리에 모아 여러 클립으로 이야기를 구성하세요." },
     screenshot: { label: "스크린샷", title: "배경과 주석까지 갖춘 스크린샷", body: "창을 캡처해 배경 위에 놓고 화살표, 번호, 스포트라이트, 모자이크로 주석을 다세요." },
   },
 };
@@ -165,6 +171,7 @@ const es: ShowcaseCopy = {
     captions: { label: "Subtítulos", title: "Subtítulos que leen contigo", body: "Genera subtítulos desde tu voz y haz que cada palabra se ilumine al decirla, sobre fondo desenfocado o de cristal." },
     keyboard: { label: "Teclas", title: "Cada pulsación, a la vista", body: "Mira cómo se escribe un comentario y se envía con ⌘ Return. Prueba teclas MacBook, planas o con relieve." },
     camera: { label: "Cámara", title: "Tú, sin el fondo", body: "Quita el fondo del mismo retrato con un clic. Compara el original, el recorte y el contorno de pegatina." },
+    media: { label: "Multimedia", title: "Varias fuentes, una historia", body: "Reúne grabaciones, vídeo y audio en una biblioteca y combina tus clips en una historia." },
     screenshot: { label: "Captura", title: "Capturas con marco y anotaciones", body: "Captura una ventana, colócala sobre un fondo y anótala con flechas, contadores, foco y mosaico." },
   },
 };
@@ -184,6 +191,7 @@ const fr: ShowcaseCopy = {
     captions: { label: "Sous-titres", title: "Des sous-titres qui suivent la voix", body: "Générez des sous-titres depuis votre voix et faites s'allumer chaque mot au moment où il est dit, sur fond flou ou verre." },
     keyboard: { label: "Touches", title: "Chaque touche devient visible", body: "Un commentaire apparaît lettre par lettre, puis part avec ⌘ Return. Essayez les styles MacBook, plat ou en relief." },
     camera: { label: "Caméra", title: "Vous, sans le fond", body: "Retirez le fond du même portrait en un clic. Comparez l’original, le détourage et le contour autocollant." },
+    media: { label: "Médias", title: "Plusieurs sources, une histoire", body: "Rassemblez enregistrements, vidéos et audio dans une médiathèque pour composer votre histoire." },
     screenshot: { label: "Capture", title: "Des captures encadrées et annotées", body: "Capturez une fenêtre, posez-la sur un fond et annotez-la avec flèches, compteurs, projecteur et mosaïque." },
   },
 };
@@ -203,6 +211,7 @@ const ptBR: ShowcaseCopy = {
     captions: { label: "Legendas", title: "Legendas que acompanham a fala", body: "Gere legendas a partir da sua voz e faça cada palavra acender ao ser dita, sobre fundo desfocado ou de vidro." },
     keyboard: { label: "Teclas", title: "Cada tecla fica visível", body: "Veja um comentário ser digitado e enviado com ⌘ Return. Experimente teclas MacBook, planas ou em relevo." },
     camera: { label: "Câmera", title: "Você, sem o fundo", body: "Remova o fundo do mesmo retrato com um clique. Compare o original, o recorte e o contorno de adesivo." },
+    media: { label: "Mídia", title: "Várias fontes, uma história", body: "Reúna gravações, vídeo e áudio em uma biblioteca e combine seus clipes em uma história." },
     screenshot: { label: "Captura", title: "Capturas com moldura e anotações", body: "Capture uma janela, coloque-a sobre um fundo e anote com setas, contadores, holofote e mosaico." },
   },
 };
@@ -222,6 +231,7 @@ const it: ShowcaseCopy = {
     captions: { label: "Sottotitoli", title: "Sottotitoli che seguono la voce", body: "Genera sottotitoli dalla tua voce e fai illuminare ogni parola mentre viene pronunciata, su sfondo sfocato o vetro." },
     keyboard: { label: "Tasti", title: "Ogni tasto diventa visibile", body: "Un commento appare lettera per lettera e viene inviato con ⌘ Return. Prova i tasti MacBook, piatti o in rilievo." },
     camera: { label: "Fotocamera", title: "Tu, senza lo sfondo", body: "Rimuovi lo sfondo dello stesso ritratto con un clic. Confronta originale, ritaglio e contorno adesivo." },
+    media: { label: "Media", title: "Più sorgenti, una storia", body: "Riunisci registrazioni, video e audio in una libreria e componi la tua storia con più clip." },
     screenshot: { label: "Screenshot", title: "Screenshot con cornice e annotazioni", body: "Cattura una finestra, mettila su uno sfondo e annotala con frecce, contatori, spotlight e mosaico." },
   },
 };

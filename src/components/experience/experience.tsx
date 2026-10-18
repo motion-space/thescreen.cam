@@ -1,4 +1,6 @@
 import { CHAPTERS, tourTimeAt } from "./story-timing";
+import { previewPlacement } from "./preview-layout";
+import { MediaLibraryLayer } from "./media-library";
 import { ScreenshotLayer } from "./screenshot-layer";
 import { drawPanel, warmPanel, warmShadow, disposePanelShadows } from "./panel-shadow";
 /**
@@ -48,7 +50,7 @@ import { startCameraPlayback, setCameraPlaybackVisible, setCameraPlaybackTime, s
 import { Preview, warmCaptions } from "./preview";
 import { ATTACHMENT, CH, CW, setAppTheme, warmRecordedApp, disposeRecordedAppCaches } from "./recorded-app";
 import { FrameBlurGL } from "./preview-gl";
-import { SPRINGS, springEase, SpringValue } from "./spring";
+import { SPRINGS, springEase, springSettle, SpringValue } from "./spring";
 import { EditorLayer } from "./editor-layer";
 
 type Rect = { x: number; y: number; w: number; h: number };
@@ -84,6 +86,7 @@ const R = {
   captions: { x: COMP.x + COMP.w * 0.2, y: COMP.y + COMP.h * 0.55, w: COMP.w * 0.6, h: COMP.h * 0.45 + 6 },
   keys: { x: COMP.x + COMP.w * 0.2, y: COMP.y + COMP.h * 0.3, w: COMP.w * 0.6, h: COMP.h * 0.7 + 6 },
   portrait: { x: COMP.x + COMP.w * 0.5 + 6, y: COMP.y + COMP.h * 0.5, w: COMP.w * 0.5, h: COMP.h * 0.5 + 6 },
+  media: { x: -16, y: 20, w: 900, h: 558 },
   shot: pad(SHOT, 24),
   world: { x: -40, y: -40, w: SHOT.x + SHOT.w + 80, h: EH + 80 },
 };
@@ -114,17 +117,20 @@ const KEYS: Key[] = [
   { p: 0.715, rect: R.portrait, area: "card" },
   { p: 0.78, rect: R.portrait, area: "card" },
   { p: 0.8, rect: R.comp, area: "card" },
-  // screenshot
-  { p: 0.8225, rect: R.comp, area: "card" },
-  { p: 0.86, rect: R.shot, area: "card" },
-  { p: 0.95, rect: R.shot, area: "card" },
+  // media library, then capture
+  { p: 0.82, rect: R.media, area: "card" },
+  { p: 0.865, rect: R.media, area: "card" },
+  { p: 0.88, rect: R.comp, area: "card" },
+  { p: 0.9025, rect: R.comp, area: "card" },
+  { p: 0.936, rect: R.shot, area: "card" },
+  { p: 0.985, rect: R.shot, area: "card" },
   // outro
   { p: 0.99062, rect: R.world, area: "overview" },
   { p: 1, rect: R.world, area: "overview" },
 ];
 
 // Chapter entry points shared by the rail and navigation buttons.
-const CHAPTER_STOPS = CHAPTERS.map(ch => ch.key === "screenshot" ? .89 : ch.scrub[0] + .004);
+const CHAPTER_STOPS = CHAPTERS.map(ch => ch.key === "screenshot" ? .956 : ch.scrub[0] + .004);
 
 const clamp = (v: number, a = 0, b = 1) => Math.max(a, Math.min(b, v));
 
@@ -153,14 +159,20 @@ function fit(rect: Rect, area: Rect, top = false): Cam {
   return { wx: rect.x + rect.w / 2, wy: rect.y + rect.h / 2, sx: area.x + area.w / 2, sy, z, card: 0 };
 }
 
-function cameraAt(p: number, W: number, H: number): Cam {
+function cameraAt(p: number, W: number, H: number, libraryWidth = 0): Cam {
   let i = 0;
   while (i < KEYS.length - 2 && p > KEYS[i + 1].p) i += 1;
   const a = KEYS[i];
   const b = KEYS[i + 1];
   const t = cameraEase(clamp((p - a.p) / Math.max(1e-6, b.p - a.p)));
-  const ca = fit(a.rect, areaRect(a.area, W, H), a.area === "hero");
-  const cb = fit(b.rect, areaRect(b.area, W, H), b.area === "hero");
+  const placement = previewPlacement(libraryWidth, clamp((p - .035) / .085));
+  const previewRects = [R.comp, R.zoom, R.zoom3d, R.lens, R.captions, R.keys, R.portrait];
+  const frame = (rect: Rect) => previewRects.includes(rect) ? {
+    x: rect.x * placement.scale + placement.dx, y: rect.y * placement.scale + placement.dy,
+    w: rect.w * placement.scale, h: rect.h * placement.scale,
+  } : rect;
+  const ca = fit(frame(a.rect), areaRect(a.area, W, H), a.area === "hero");
+  const cb = fit(frame(b.rect), areaRect(b.area, W, H), b.area === "hero");
   let z = Math.exp(lerp(Math.log(ca.z), Math.log(cb.z), t));
   // long pans dip out a little, like a real camera move
   const travel = Math.hypot(cb.wx - ca.wx, cb.wy - ca.wy) * Math.min(ca.z, cb.z) / W;
@@ -245,6 +257,10 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
     const shotPadding=state.shotFrame.padding*320;
     const shotScale=Math.min((SHOT.w-320-72)/(1280+shotPadding*2),(SHOT.h-104-72)/(800+shotPadding*2));
     { const shade=shotShadow(state.shotFrame,shotScale); warmShadow(state.shotFrame.radius*120*shotScale,shade.blur,CW*shotScale,CH*shotScale); }
+    const libraryReveal = new SpringValue(state.mediaLibraryReveal, SPRINGS.effect);
+    // Keep the shared effect spring's shape, with a 250ms settling time.
+    const libraryClockRate = springSettle(SPRINGS.effect) / .25;
+    const sceneCameraAt = (p: number, width: number, height: number) => cameraAt(p, width, height, state.mediaLibraryWidth * state.mediaLibraryReveal);
     editorRef.current = state;
     state.time = 1.2;
     state.playing = !reduceMotion;
@@ -270,6 +286,7 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
     const preview = new Preview(blurGL?.context);
     const editorLayer = new EditorLayer();
     const screenshotLayer = new ScreenshotLayer();
+    const mediaLibrary = new MediaLibraryLayer();
     const stopWarmup = warmRecordedApp();
 
 
@@ -321,7 +338,7 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
     const isOverview = () => (progress >= .12 && progress <= .16) || progress >= .99062;
     // Use the same camera spring and final motion-blur pass as the scroll zoom.
     const updateMagnify = (now = performance.now()) => {
-      const base = cameraAt(progress, W, H);
+      const base = sceneCameraAt(progress, W, H);
       const left = base.sx - base.wx * base.z;
       const top = base.sy - base.wy * base.z;
       const right = left + EW * base.z;
@@ -413,9 +430,9 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
     resize();
     if (preview.canCompose) blurGL?.prepareEditor(editorLayer.prepare(ui, state, handlers, editorDensity));
     screenshotLayer.draw(ui,state,handlers,editorDensity,true);
-    const captionDensity=Math.max(...[.49,.58,...KEYS.filter(k=>k.p>=.49&&k.p<=.58).map(k=>k.p)].map(p=>cameraAt(p,W,H).z*dpr));
+    const captionDensity=Math.max(...[.49,.58,...KEYS.filter(k=>k.p>=.49&&k.p<=.58).map(k=>k.p)].map(p=>sceneCameraAt(p,W,H).z*dpr));
     const stopCaptionWarmup=warmCaptions(state,captionDensity);
-    const keyDensity=Math.max(...[.6,.685,...KEYS.filter(k=>k.p>=.6&&k.p<=.685).map(k=>k.p)].map(p=>cameraAt(p,W,H).z*dpr));
+    const keyDensity=Math.max(...[.6,.685,...KEYS.filter(k=>k.p>=.6&&k.p<=.685).map(k=>k.p)].map(p=>sceneCameraAt(p,W,H).z*dpr));
     const stopKeyWarmup=warmKeySprites(COMP,keyDensity);
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
@@ -466,6 +483,7 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
             state.camera.changedAt = -1e9;
           }
         } else {
+          if (CHAPTERS[next]?.key === "media") state.mediaLibraryOpen = true;
           state.selection = { kind: "none" };
           state.tab = 0;
         }
@@ -475,9 +493,9 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
 
     const derived = (p: number) => {
       state.chrome = clamp((p - 0.035) / 0.085);
-      state.flash = clamp(1 - Math.abs(p - 0.81875) / 0.009);
-      state.shot = clamp((p - 0.824) / 0.02625);
-      state.annotate = clamp((p - 0.86) / 0.075);
+      state.flash = clamp(1 - Math.abs(p - 0.89875) / 0.009);
+      state.shot = clamp((p - 0.904) / 0.025);
+      state.annotate = clamp((p - 0.936) / 0.045);
     };
 
     const updateOverlay = (p: number) => {
@@ -491,7 +509,7 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
       const overview = overviewRef.current;
       if (overview) {
         const a = Math.min(clamp((p - 0.085) / 0.03), 1 - clamp((p - 0.158) / 0.015));
-        const b = Math.min(clamp((p - 0.96875) / 0.015625), 1);
+        const b = Math.min(clamp((p - 0.985) / 0.015), 1);
         const k = Math.max(a, b);
         overview.style.opacity = String(k);
         overview.style.transform = `translate3d(0, ${(1 - k) * 3}vh, 0)`;
@@ -507,7 +525,7 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
       });
       const rail = railRef.current;
       if (rail) {
-        const k = Math.min(clamp((p - 0.16) / 0.02), 1 - clamp((p - 0.94625) / 0.0125));
+        const k = Math.min(clamp((p - 0.16) / 0.02), 1 - clamp((p - 0.97375) / 0.0125));
         rail.style.opacity = String(k);
         rail.style.visibility = k <= 0 ? "hidden" : "visible";
         updateRail(p);
@@ -636,6 +654,9 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
         lastProgress = progress;
       }
       derived(progress);
+      const libraryTarget = state.mediaLibraryOpen ? 1 : 0;
+      state.mediaLibraryReveal = reduceMotion ? libraryTarget : clamp(libraryReveal.update(libraryTarget, now * libraryClockRate));
+      const libraryMoving = !reduceMotion && !libraryReveal.settled(libraryTarget);
       const magnifying = updateMagnify(now);
       const previous = demoRef.current;
       if (previous.style !== state.keys.style || previous.remove !== state.camera.remove || previous.sticker !== state.camera.sticker) {
@@ -646,7 +667,7 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
       setCameraScrollControlled(handlers.scrollControlled);
       setCameraPlaybackVisible(visible && state.camera.show && state.playing);
       setCameraPlaybackTime(state.time);
-      if (magnifying || scrolled || scrollCameraBlurred || state.playing || drag || now < dirtyUntil) try {
+      if (libraryMoving || magnifying || scrolled || scrollCameraBlurred || state.playing || drag || now < dirtyUntil) try {
         render();
       } catch (error) {
         console.error(error);
@@ -656,7 +677,7 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
     };
 
     const render = () => {
-      const base = cameraAt(progress, W, H);
+      const base = sceneCameraAt(progress, W, H);
       const cam = { ...base, z: base.z * holdScale.value,
         sx: base.sx * holdScale.value + holdX.value,
         sy: base.sy * holdScale.value + holdY.value };
@@ -671,7 +692,7 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
         el.style.width = `${rect.w * cam.z}px`;
         el.style.height = `${rect.h * cam.z}px`;
       };
-      placeHitRegion(editorHitRef.current, state.chrome < 1 ? COMP : { x: 0, y: 0, w: EW, h: EH }, true);
+      placeHitRegion(editorHitRef.current, state.chrome < 1 ? previewPlacement(state.mediaLibraryWidth * state.mediaLibraryReveal, state.chrome).rect : { x: 0, y: 0, w: EW, h: EH }, true);
       placeHitRegion(shotHitRef.current, SHOT, state.shot > .001);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       ctx.clearRect(0, 0, W, H);
@@ -680,6 +701,8 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
       ctx.setTransform(dpr * cam.z, 0, 0, dpr * cam.z, dpr * (cam.sx - cam.wx * cam.z), dpr * (cam.sy - cam.wy * cam.z));
       hits.clear();
       hits.ctx = ctx;
+
+      const placement = previewPlacement(state.mediaLibraryWidth * state.mediaLibraryReveal, state.chrome);
 
       // the preview floats on a large, soft shadow before the editor assembles around it
       const lift = 1 - state.chrome;
@@ -696,14 +719,17 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
       editorLayer.draw(ui, state, handlers, editorDensity, preview.canCompose);
       hits.add({
         id: "preview",
-        ...COMP,
+        ...placement.rect,
         cursor: handlers.scrollControlled ? "default" : "pointer",
         onDown: handlers.scrollControlled ? undefined : () => { state.playing = !state.playing; invalidate(); },
       });
       // Paint every changed animation frame at the display's cadence.
       // Retain full magnified density through both the entrance and exit.
       const previewScale = holdActive || holdScale.value !== 1 ? 2 : 1;
-      preview.draw(ctx, state, base.z * dpr * previewScale, radius, reduceMotion);
+      ctx.save();
+      ctx.translate(placement.dx, placement.dy);
+      ctx.scale(placement.scale, placement.scale);
+      preview.draw(ctx, state, base.z * dpr * previewScale * placement.scale, radius, reduceMotion);
       // a faint 1 px hairline so the frame keeps its edge against the page
       ctx.save();
       squircle(ctx, COMP.x, COMP.y, COMP.w, COMP.h, radius);
@@ -712,6 +738,8 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
       ctx.stroke();
       ctx.restore();
       drawFlash(ctx, state);
+      ctx.restore();
+      mediaLibrary.draw(ui, state, handlers);
       screenshotLayer.draw(ui, state, handlers, editorDensity);
 
       // final frame pass: scroll-camera motion blur + progressive blur behind
@@ -745,7 +773,7 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
           blurGL.render(canvas, A, bx, by, 64 * dpr, {
             mode: narrow ? 2 : 1,
             // ramps from just past the text all the way to the screen edge
-            start: (edge + (narrow ? 140 : Math.max(260, W * 0.18))) * dpr,
+            start: (edge + (narrow ? 140 : CHAPTERS[chapter]?.key === "media" ? 48 : Math.max(260, W * 0.18))) * dpr,
             full: 0,
             radius: 64 * dpr,
             strength: cam.card,
@@ -834,7 +862,15 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
       interaction.style.cursor = hit?.cursor ?? "default";
     };
     const onTimelineWheel = (e: WheelEvent) => {
-      if (e.ctrlKey || e.metaKey || !timelineMaxOffset(state)) return;
+      if (e.ctrlKey || e.metaKey) return;
+      const hit = hits.find(point(e as unknown as PointerEvent));
+      if (hit?.id === "media-library" && e.deltaY) {
+        e.preventDefault();
+        mediaLibrary.scrollBy(e.deltaY * (e.deltaMode === 1 ? 16 : e.deltaMode === 2 ? PREVIEW.h : 1));
+        invalidate();
+        return;
+      }
+      if (!timelineMaxOffset(state)) return;
       const delta = e.shiftKey && !e.deltaX ? e.deltaY : Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : 0;
       if (!delta) return;
       const region = hits.hits.find(hit => hit.id === "tl-pan");
@@ -878,7 +914,7 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
       const next = { x: e.clientX - rect.left, y: e.clientY - rect.top };
       if (e.target instanceof Element && e.target.closest(".site-bar")) zoomToggled = false;
       if (zoomToggled && pointer) {
-        const base = cameraAt(progress, W, H);
+        const base = sceneCameraAt(progress, W, H);
         const left = base.sx - base.wx * base.z, top = base.sy - base.wy * base.z;
         const right = left + EW * base.z, bottom = top + EH * base.z;
         const dx = next.x - pointer.x, dy = next.y - pointer.y;
@@ -905,7 +941,7 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
       if (e.target instanceof Element && e.target.closest("input,textarea,select,[contenteditable]:not([contenteditable=false])")) return;
       if (zoomToggled) { releaseZoom(); return; }
       if (!desktopZoom.matches || !isOverview() || !visible || document.hidden) return;
-      const base = cameraAt(progress, W, H);
+      const base = sceneCameraAt(progress, W, H);
       const left = base.sx - base.wx * base.z, top = base.sy - base.wy * base.z;
       const right = left + EW * base.z, bottom = top + EH * base.z;
       const origin = pointer ?? { x: (left + right) / 2, y: (top + bottom) / 2 };
@@ -964,6 +1000,7 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
       blurGL?.dispose();
       editorLayer.dispose();
       screenshotLayer.dispose();
+      mediaLibrary.dispose();
       stopWarmup();
       disposeRecordedAppCaches();
       stopKeyWarmup();
@@ -1095,7 +1132,8 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
         })}
 
         {/* Chapter rail */}
-        <div ref={railRef} className="absolute bottom-8 left-[5vw] hidden gap-1 min-[900px]:flex" style={{ opacity: 0, visibility: "hidden" }}>
+        <div ref={railRef} className="xp-rail absolute bottom-8 left-[5vw] hidden gap-1 min-[900px]:flex" style={{ opacity: 0, visibility: "hidden" }}>
+          <div className="xp-rail-backdrop" aria-hidden="true"><span /><span /><span /></div>
           <div ref={railIndicatorRef} className="xp-rail-indicator" aria-hidden="true"><div ref={railIndicatorFillRef} className="xp-rail-indicator-fill" /></div>
           {showcaseFeatureOrder.map((key, i) => (
             <button

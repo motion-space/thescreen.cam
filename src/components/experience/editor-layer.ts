@@ -32,7 +32,7 @@ export class EditorLayer {
     const pad = 120;
     const scale = Math.max(1, Math.ceil(pixelsPerUnit * 2) / 2, this.scale);
     const staticHover = ui.hover && /^(hdr-|tp-|tl-layout$|clip-(rec$|key-|sys$|mic$))/.test(ui.hover) ? ui.hover : null;
-    const key = [scale, ui.t.dark, ui.t.accent, staticHover, state.timelineScale, !!handlers.scrollControlled].join(":");
+    const key = [scale, ui.t.dark, ui.t.accent, staticHover, state.mediaLibraryOpen, state.timelineScale, !!handlers.scrollControlled].join(":");
     if (key !== this.key) {
       const started = performance.now();
       const ctx = this.canvas.getContext("2d")!;

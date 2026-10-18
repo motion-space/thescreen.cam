@@ -130,6 +130,10 @@ export type Tab = 0 | 1 | 2 | 3 | 4 | 5 | 6;
 export type EditorState = {
   time: number;
   playing: boolean;
+  mediaLibraryOpen: boolean;
+  /** Animated presentation; the toolbar boolean remains the requested state. */
+  mediaLibraryReveal: number;
+  mediaLibraryWidth: number;
   volume: number;
   timelineScale: number;
   timelineOffset: number;
@@ -159,6 +163,9 @@ export function createState(dark: boolean, captionText: string): EditorState {
   return {
     time: 0.5,
     playing: true,
+    mediaLibraryOpen: true,
+    mediaLibraryReveal: 1,
+    mediaLibraryWidth: 136,
     volume: 0.75,
     timelineScale: 1,
     timelineOffset: 0,
@@ -660,11 +667,12 @@ export function drawEditor(ui: UI, state: EditorState, h: EditorHandlers, static
       ctx.fillStyle = col;
       ctx.fill();
     });
-    iconButton(ui, "hdr-undo", 98, 20, "undo-2", { box: 26 });
-    iconButton(ui, "hdr-redo", 126, 20, "redo-2", { box: 26 });
-    text(ctx, "Product walkthrough", 148, 20.5, { size: 12, weight: 500, color: t.text });
+    iconButton(ui, "hdr-library", 98, 20, "panel-left", { box: 26, active: state.mediaLibraryOpen, onDown: () => { state.mediaLibraryOpen = !state.mediaLibraryOpen; h.touch(); } });
+    iconButton(ui, "hdr-undo", 130, 20, "undo-2", { box: 26 });
+    iconButton(ui, "hdr-redo", 158, 20, "redo-2", { box: 26 });
+    text(ctx, "Product walkthrough", 180, 20.5, { size: 12, weight: 500, color: t.text });
     const tw = measure(ctx, "Product walkthrough", 12, 500);
-    text(ctx, `${fmt(DURATION)} · 2,880×1,800`, 156 + tw, 20.5, { size: 12, color: t.text2 });
+    text(ctx, `${fmt(DURATION)} · 2,880×1,800`, 188 + tw, 20.5, { size: 12, color: t.text2 });
     // centre
     icon(ctx, "proportions", 650, 20, 14, t.text2);
     text(ctx, "Auto", 663, 20.5, { size: 12, weight: 500, color: t.text });

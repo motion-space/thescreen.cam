@@ -30,7 +30,8 @@ export const CHAPTERS = [
   { key: "captions", from: 0.475, to: 0.58, scrub: [0.4975, 0.58], time: [11.6, 15.4] },
   { key: "keyboard", from: 0.58, to: 0.69, scrub: [0.6, 0.676], time: [15.5, 19.1] },
   { key: "camera", from: 0.69, to: 0.8, scrub: [0.715, 0.78], time: [19.4, 22.0] },
-  { key: "screenshot", from: 0.8, to: 0.95, scrub: [0.8, 0.815], time: [SCREENSHOT_TIME, SCREENSHOT_TIME] },
+  { key: "media", from: 0.8, to: 0.88, scrub: [0.82, 0.865], time: [22.0, 22.2] },
+  { key: "screenshot", from: 0.88, to: 0.985, scrub: [0.88, 0.895], time: [SCREENSHOT_TIME, SCREENSHOT_TIME] },
 ] as const;
 
 /** Pure sampling makes reverse scrolling and direct chapter navigation agree. */
