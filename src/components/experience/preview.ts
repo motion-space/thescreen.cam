@@ -302,28 +302,32 @@ export class Preview {
     }
 
     // ---- optical source for the loupe: the scene magnified about the lens ----
-    let lens: { x: number; y: number; r: number; presence: number; box: Rect; mag: number } | null = null;
+    let lens: { x: number; y: number; r: number; presence: number; box: Rect; mag: number; samplingRatio: number } | null = null;
     const cursor = cursorAt(time);
     const curWorld = sp
       ? sp.project(cursor.x / CW, cursor.y / CH)
       : { x: (screen.x + cursor.x * screen.s) * cam.s + cam.ox, y: (screen.y + cursor.y * screen.s) * cam.s + cam.oy, d: 0 };
     if (lensOn && z) {
-      // GlassLoupe (client): the aperture opens with the spring progress while
-      // magnification stays at the clip's value; a lens that starts while
-      // another is open carries its centre, size and magnification across
+      // Match EvaluatedGlassLoupe: grow the content from its native 1x size
+      // and scale the aperture with it, retaining the same source footprint.
       const zz = zoomAt(state, time);
       const morph = zz?.from && zz.to ? zz : null;
       const size = morph ? lerp(morph.from!.lensSize, morph.to!.lensSize, morph.u) : z.clip.lensSize;
       const target = morph ? lerp(morph.from!.zoom, morph.to!.zoom, morph.u) : z.clip.zoom;
       const presence = morph ? lerp(morph.fromF ?? 1, 1, morph.u) : z.f;
-      const r = comp.w * (0.05 + size * 0.2) * presence;
-      const mag = target;
+      const mag = 1 + (target - 1) * presence;
+      const r = comp.w * (0.05 + size * 0.2) * (mag / target);
+      // Keep full-resolution backing through entry/exit and joined clips;
+      // the shader resolves the animated magnification via sampling coordinates.
+      const backingMag = morph ? Math.max(morph.from!.zoom, morph.to!.zoom) : target;
+      const samplingRatio = backingMag / mag;
       // optical buffer sized for the lens's full radius and rounded up, so it
       // keeps its size while the lens opens and closes
-      const full = comp.w * (0.05 + Math.max(size, 0.62) * 0.2) * 2.6;
+      const backingRatio = morph ? backingMag / Math.min(morph.from!.zoom, morph.to!.zoom) : 1;
+      const full = comp.w * (0.05 + Math.max(size, 0.62) * 0.2) * 2.6 * backingRatio;
       const side = Math.ceil((full * k) / 128) * 128 / k;
       const box = { x: curWorld.x - side / 2, y: curWorld.y - side / 2, w: side, h: side };
-      lens = { x: curWorld.x, y: curWorld.y, r, presence, box, mag };
+      lens = { x: curWorld.x, y: curWorld.y, r, presence, box, mag, samplingRatio };
       const ow = Math.max(2, Math.round(box.w * k));
       if (this.optical.width !== ow || this.optical.height !== ow) {
         this.optical.width = ow;
@@ -333,8 +337,8 @@ export class Preview {
       if (o && renderSource) {
         o.setTransform(1, 0, 0, 1, 0, 0);
         o.clearRect(0, 0, ow, ow);
-        // world q → ((q - c) * mag + c - box) * k
-        o.setTransform(k * mag, 0, 0, k * mag, (curWorld.x * (1 - mag) - box.x) * k, (curWorld.y * (1 - mag) - box.y) * k);
+        // world q → ((q - c) * backingMag + c - box) * k
+        o.setTransform(k * backingMag, 0, 0, k * backingMag, (curWorld.x * (1 - backingMag) - box.x) * k, (curWorld.y * (1 - backingMag) - box.y) * k);
         this.drawScene(o, state, screen, cam, false, screenRadius, null);
       }
     }
@@ -392,6 +396,7 @@ export class Preview {
               y: (lens.y - comp.y) * k,
               r: lens.r * k,
               presence: lens.presence,
+              samplingRatio: lens.samplingRatio,
               box: [(lens.box.x - comp.x) * k, (lens.box.y - comp.y) * k, lens.box.w * k, lens.box.h * k],
               optical: this.optical,
             }

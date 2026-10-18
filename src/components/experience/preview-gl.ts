@@ -35,6 +35,7 @@ uniform vec4 uWave[4];
 
 uniform vec4 uLens;     // x, y, radius, presence (0 = off)
 uniform vec4 uOptBox;   // x, y, w, h
+uniform float uLensSamplingRatio; // backing magnification / animated magnification
 
 uniform int uPlaneOn;
 uniform mat3 uInv;      // pixel -> plane uv (homogeneous)
@@ -144,6 +145,7 @@ vec4 sceneWithWaves(vec2 p) {
 }
 
 vec4 optical(vec2 q) {
+  q = uLens.xy + (q - uLens.xy) * uLensSamplingRatio;
   vec2 uv = (q - uOptBox.xy) / uOptBox.zw;
   return texture(uOptical, clamp(uv, 0.5/uOpticalSize, 1.0-0.5/uOpticalSize)*uOpticalSize/uOpticalStorage);
 }
@@ -246,7 +248,7 @@ export type PreviewEffects = {
   motion: { a: number; bx: number; by: number };
   blur: number;
   waves: Array<{ x: number; y: number; progress: number }>;
-  lens: { x: number; y: number; r: number; presence: number; box: number[]; optical: HTMLCanvasElement } | null;
+  lens: { x: number; y: number; r: number; presence: number; samplingRatio: number; box: number[]; optical: HTMLCanvasElement } | null;
   plane: {
     inverse: number[];
     depths: number[];
@@ -316,7 +318,7 @@ export class PreviewGL {
       this.textureSizes[unit] = { w, h };
       return t;
     });
-    for (const name of ["uCaption", "uCaptionStyle", "uBase", "uOptical", "uScreen", "uSize", "uBaseStorage", "uOpticalStorage", "uOpticalSize", "uPixelScale", "uMotionA", "uMotionB", "uBlur", "uWave", "uLens", "uOptBox", "uPlaneOn", "uInv", "uDepth", "uFocus", "uPlaneRadius"]) {
+    for (const name of ["uCaption", "uCaptionStyle", "uBase", "uOptical", "uScreen", "uSize", "uBaseStorage", "uOpticalStorage", "uOpticalSize", "uPixelScale", "uMotionA", "uMotionB", "uBlur", "uWave", "uLens", "uOptBox", "uLensSamplingRatio", "uPlaneOn", "uInv", "uDepth", "uFocus", "uPlaneRadius"]) {
       this.loc[name] = gl.getUniformLocation(program, name);
     }
     gl.uniform1i(this.loc.uBase, 0);
@@ -383,6 +385,7 @@ export class PreviewGL {
       gl.uniform2f(L.uOpticalStorage, this.textureSizes[1].w, this.textureSizes[1].h);
       gl.uniform2f(L.uOpticalSize, e.lens.optical.width, e.lens.optical.height);
       gl.uniform4f(L.uLens, e.lens.x, e.lens.y, e.lens.r, e.lens.presence);
+      gl.uniform1f(L.uLensSamplingRatio, e.lens.samplingRatio);
       gl.uniform4f(L.uOptBox, e.lens.box[0], e.lens.box[1], e.lens.box[2], e.lens.box[3]);
     } else {
       gl.uniform4f(L.uLens, 0, 0, 0, 0);
