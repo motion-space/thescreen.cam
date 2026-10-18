@@ -15,8 +15,8 @@ type Metric = {
 const RULER_TICKS = Array.from({ length: 41 }, (_, index) => index);
 
 /**
- * Scene 5. Benchmarks drawn as editor tracks: the ruler draws, the playhead
- * sweeps and every clip grows to its measured cost while the view is pinned.
+ * Benchmarks drawn as editor tracks: ruler and measured costs appear together,
+ * while the playhead sweeps across the pinned comparison.
  */
 export function PerformanceSection({ copy }: { copy: PerformanceCopy }) {
   const rootRef = useRef<HTMLElement>(null);
@@ -41,14 +41,15 @@ export function PerformanceSection({ copy }: { copy: PerformanceCopy }) {
 
     const tl = gsap.timeline({
       defaults: { ease: "none" },
-      scrollTrigger: { trigger: q(".pf-stage")[0], start: "top top", end: "+=170%", scrub: 0.8, pin: true, anticipatePin: 1 },
+      scrollTrigger: { trigger: q(".pf-stage")[0], start: "top top", end: "+=110%", scrub: 0.25, pin: true, anticipatePin: 1 },
     });
 
-    tl.to(q(".pf-ruler [data-draw]"), { strokeDashoffset: 0, stagger: 0.008, duration: 0.6 }, 0.2)
-      .fromTo(q(".pf-playhead"), { left: 0, x: 0, opacity: 1 }, { x: () => (q(".pf-playhead")[0] as HTMLElement).parentElement?.clientWidth ?? 0, duration: 2.2 }, 0.8)
-      .to(q(".pf-clip-us"), { scaleX: 1, stagger: 0.35, duration: 0.8, ease: "power2.out" }, 0.9)
-      .to(q(".pf-clip-them"), { scaleX: 1, stagger: 0.35, duration: 1.1, ease: "power1.out" }, 1)
-      .to({}, { duration: 0.5 });
+    // Start the data with the ruler rather than spending an empty scroll beat on ticks.
+    tl.to(q(".pf-ruler [data-draw]"), { strokeDashoffset: 0, stagger: 0.002, duration: 0.25 }, 0)
+      .fromTo(q(".pf-playhead"), { left: 0, x: 0, opacity: 1 }, { x: () => (q(".pf-playhead")[0] as HTMLElement).parentElement?.clientWidth ?? 0, duration: 1.7 }, 0.04)
+      .to(q(".pf-clip-us"), { scaleX: 1, stagger: 0.18, duration: 0.7, ease: "power2.out" }, 0.08)
+      .to(q(".pf-clip-them"), { scaleX: 1, stagger: 0.18, duration: 0.9, ease: "power1.out" }, 0.12)
+      .to({}, { duration: 0.3 });
   });
 
   return (
@@ -61,7 +62,7 @@ export function PerformanceSection({ copy }: { copy: PerformanceCopy }) {
               <h2 className="mg-h2 mt-4"><FillText text={copy.title} /></h2>
               <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-muted-foreground md:text-base">{copy.subtitle}</p>
             </div>
-            <a href="https://benchmark.thescreen.cam" className="group inline-flex shrink-0 items-center gap-2 border-b border-foreground pb-1 text-sm font-medium text-foreground transition-colors hover:border-[var(--mg-accent)] hover:text-[var(--mg-accent)]">
+            <a href="https://recorder.select" className="group inline-flex shrink-0 items-center gap-2 border-b border-foreground pb-1 text-sm font-medium text-foreground transition-colors hover:border-[var(--mg-accent)] hover:text-[var(--mg-accent)]">
               {copy.cta}
               <ArrowUpRight className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
             </a>

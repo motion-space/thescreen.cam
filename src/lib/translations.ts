@@ -1091,7 +1091,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         titleStart: "Total control over",
       },
       performance: {
-        cta: "View full benchmark data",
+        cta: "View more comparison data",
         metrics: {
           appSize: "App Size",
           appSizeNote: "about 20MB vs 600MB",
@@ -1989,7 +1989,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         titleStart: "完全掌控",
       },
       performance: {
-        cta: "查看完整基准数据",
+        cta: "查看更多对比数据",
         metrics: {
           appSize: "App 体积",
           appSizeNote: "约 20MB vs 600MB",
@@ -2871,7 +2871,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         titleStart: "Volle Kontrolle über",
       },
       performance: {
-        cta: "Vollständige Benchmark-Daten ansehen",
+        cta: "Weitere Vergleichsdaten ansehen",
         metrics: {
           appSize: "App-Größe",
           appSizeNote: "ca. 20MB vs. 600MB",
@@ -3738,7 +3738,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         titleStart: "完全にコントロール",
       },
       performance: {
-        cta: "ベンチマークデータを見る",
+        cta: "比較データをもっと見る",
         metrics: {
           appSize: "アプリサイズ",
           appSizeNote: "約 20MB vs 600MB",
@@ -4602,7 +4602,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         titleStart: "완전한 제어",
       },
       performance: {
-        cta: "전체 벤치마크 데이터 보기",
+        cta: "더 많은 비교 데이터 보기",
         metrics: {
           appSize: "앱 크기",
           appSizeNote: "약 20MB vs 600MB",
@@ -5465,7 +5465,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         titleStart: "完全掌控",
       },
       performance: {
-        cta: "檢視完整基準資料",
+        cta: "查看更多比較資料",
         metrics: {
           appSize: "App 體積",
           appSizeNote: "約 20MB vs 600MB",
@@ -6353,7 +6353,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         titleStart: "Control total sobre",
       },
       performance: {
-        cta: "Ver datos de referencia completos",
+        cta: "Ver más datos comparativos",
         metrics: {
           appSize: "Tamaño de la aplicación",
           appSizeNote: "alrededor de 20 MB frente a 600 MB",
@@ -7276,7 +7276,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         titleStart: "Contrôle total sur",
       },
       performance: {
-        cta: "Afficher les données de référence complètes",
+        cta: "Voir plus de données comparatives",
         metrics: {
           appSize: "Taille de l'application",
           appSizeNote: "environ 20 Mo contre 600 Mo",
@@ -8199,7 +8199,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         titleStart: "Controle total sobre",
       },
       performance: {
-        cta: "Veja dados completos de benchmark",
+        cta: "Veja mais dados comparativos",
         metrics: {
           appSize: "Tamanho do aplicativo",
           appSizeNote: "cerca de 20 MB contra 600 MB",
@@ -9122,7 +9122,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
         titleStart: "Controllo totale su",
       },
       performance: {
-        cta: "Visualizza i dati benchmark completi",
+        cta: "Visualizza altri dati comparativi",
         metrics: {
           appSize: "Dimensioni dell'app",
           appSizeNote: "circa 20 MB contro 600 MB",
