@@ -46,7 +46,7 @@ const en: ShowcaseCopy = {
       body: "Generate captions from your voice and let each word light up as it is spoken, on a blur or glass background.",
     },
     keyboard: { label: "Keystrokes", title: "Every keystroke, made visible", body: "Watch a comment appear letter by letter, then send it with ⌘ Return. Try MacBook keycaps, flat or raised styles." },
-    camera: { label: "Camera", title: "You, without the background", body: "Keep the same portrait and remove its background in one click. Try the cutout, restore the original or add a sticker outline." },
+    camera: { label: "Camera", title: "Make your camera part of the edit", body: "Remove your camera background in one click and add a sticker outline to help you stand out in the recording." },
     screenshot: {
       label: "Screenshot",
       title: "Screenshots, framed and marked up",
@@ -66,10 +66,10 @@ const zhHans: ShowcaseCopy = {
   items: {
     zoom: { label: "变焦", title: "跟着操作走的变焦", body: "点击和输入会自动变成平滑的变焦片段。可以让自动模式跟随光标，也可以手动放置每个目标。" },
     zoom3d: { label: "3D 变焦", title: "让变焦变成运镜", body: "在真实的 3D 空间里环绕录屏画面：偏航、俯仰、带纵深地推进，再平滑拉回。" },
-    lens: { label: "透镜", title: "是放大镜，不是裁剪", body: "玻璃透镜跟随光标放大细节，屏幕的其余部分依然完整可见。" },
+    lens: { label: "透镜", title: "放大细节，保留全貌", body: "透镜随光标移动，放大当前操作区域，周围画面始终可见。" },
     captions: { label: "字幕", title: "逐词跟读的字幕", body: "从你的语音生成字幕，每个词在说出时点亮，可选模糊或玻璃背景。" },
     keyboard: { label: "按键", title: "每一次输入，都看得见", body: "逐字输入评论，再用 ⌘ Return 发送。默认 MacBook 键帽，也可以切换平面、立体样式。" },
-    camera: { label: "人像", title: "留下你，移除背景", body: "同一个人像，一键移除背景。可以切换抠图前后，还能加上贴纸描边。" },
+    camera: { label: "人像", title: "让人像融入画面", body: "一键移除摄像头背景，加上贴纸描边，让你在录屏中更醒目。" },
     screenshot: { label: "截图", title: "截图，带背景也带标注", body: "截取窗口，放到背景上，再用箭头、序号、聚光灯和马赛克标注。" },
   },
 };
@@ -85,10 +85,10 @@ const zhHant: ShowcaseCopy = {
   items: {
     zoom: { label: "縮放", title: "跟著操作走的縮放", body: "點擊與輸入會自動變成平滑的縮放片段。可以讓自動模式跟隨游標，也可以手動放置每個目標。" },
     zoom3d: { label: "3D 縮放", title: "讓縮放變成運鏡", body: "在真實的 3D 空間中環繞錄影畫面：偏航、俯仰、帶縱深地推進，再平滑拉回。" },
-    lens: { label: "透鏡", title: "是放大鏡，不是裁切", body: "玻璃透鏡跟隨游標放大細節，螢幕的其餘部分依然完整可見。" },
+    lens: { label: "透鏡", title: "放大細節，保留全貌", body: "透鏡隨游標移動，放大目前操作區域，周圍畫面始終可見。" },
     captions: { label: "字幕", title: "逐字跟讀的字幕", body: "從你的語音產生字幕，每個詞在說出時亮起，可選模糊或玻璃背景。" },
     keyboard: { label: "按鍵", title: "每一次輸入，都看得見", body: "逐字輸入留言，再用 ⌘ Return 送出。預設 MacBook 鍵帽，也可以切換平面、立體樣式。" },
-    camera: { label: "人像", title: "留下你，移除背景", body: "同一個人像，一鍵移除背景。可以切換去背前後，還能加上貼紙描邊。" },
+    camera: { label: "人像", title: "讓人像融入畫面", body: "一鍵移除攝影機背景，加上貼紙描邊，讓你在螢幕錄影中更醒目。" },
     screenshot: { label: "截圖", title: "截圖，加背景也加標註", body: "擷取視窗，放到背景上，再用箭頭、序號、聚光燈與馬賽克標註。" },
   },
 };
