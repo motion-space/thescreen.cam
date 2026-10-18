@@ -1,3 +1,4 @@
+import { CAPTION_CLIPS, RECORDING_DURATION, SCREENSHOT_TIME, STORY } from "./story-timing";
 import { drawPanel, drawShadow } from "./panel-shadow";
 import { DEFAULT_ANGLE, DEFAULT_STRENGTH, type PadPoint, type PadRects, ShadowPads, padValueText, shadowOffset, shadowStrength } from "./shadow-pad";
 /**
@@ -51,7 +52,7 @@ export const TL_INSET = 10;
 // It is visible at 100%, or after panning a zoomed timeline to its end.
 export const TL_END_SPACE = 40;
 const TL_CONTENT_WIDTH = TL_X1 - TL_X0 - TL_INSET - TL_END_SPACE;
-export const DURATION = 24;
+export const DURATION = RECORDING_DURATION;
 
 const COMP_H = PREVIEW.h - 24;
 const COMP_W = (COMP_H * 16) / 9;
@@ -136,7 +137,6 @@ export type EditorState = {
   tab: Tab;
   zoomClips: ZoomClip[];
   captions: { enabled: boolean; readAlong: boolean; unread: number; background: 0 | 1 | 2; size: number; bottom: boolean };
-  captionsShown: number; // 0..1 reveal of the caption track
   /** shadowAngle / shadowStrength: the Shadow pads' selections (0..1, y down), as in the client */
   background: { frame: FrameBackground; padding: number; radius: number; shadowAngle: PadPoint; shadowStrength: PadPoint };
   bgMenuOpen: boolean;
@@ -167,12 +167,12 @@ export function createState(dark: boolean, captionText: string): EditorState {
     zoomClips: [
       // one joined 2D chain: every clip has a fixed target, so each move
       // between them is a single straight line and the camera never backs out
-      { start: 0.4, end: 3.3, mode: 0, zoom: 1.5, moveSpeed: 0.5, enabled: true, manual: true, focus: { ...TARGETS.statusIcon }, focal: 0.3, lensSize: 0.4 },
-      { start: 3.3, end: 6.0, mode: 0, zoom: 2.2, moveSpeed: 0.5, enabled: true, manual: true, focus: { ...TARGETS.statusMenu }, focal: 0.3, lensSize: 0.4 },
-      { start: 6.0, end: 8.7, mode: 0, zoom: 1.9, moveSpeed: 0.45, enabled: true, manual: true, focus: { ...TARGETS.toast }, focal: 0.3, lensSize: 0.4 },
-      { start: 8.7, end: 11.1, mode: 0, zoom: 1.6, moveSpeed: 0.5, enabled: true, manual: true, focus: { ...TARGETS.openRow }, focal: 0.3, lensSize: 0.4 },
-      { start: 11.1, end: 12.9, mode: 0, zoom: 1.8, moveSpeed: 0.5, enabled: true, manual: true, focus: { ...TARGETS.comment }, focal: 0.3, lensSize: 0.4 },
-      { start: 14.2, end: 17.2, mode: 1, zoom: 1.6, moveSpeed: 0.45, enabled: true, manual: false, focus: { x: 700, y: 360 }, focal: 0.3, lensSize: 0.4 },
+      { start: 0.4, end: 1.6, mode: 0, zoom: 1.5, moveSpeed: 0.5, enabled: true, manual: true, focus: { ...TARGETS.statusIcon }, focal: 0.3, lensSize: 0.4 },
+      { start: 1.6, end: 2.8, mode: 0, zoom: 2.2, moveSpeed: 0.5, enabled: true, manual: true, focus: { ...TARGETS.statusMenu }, focal: 0.3, lensSize: 0.4 },
+      { start: 2.8, end: 4.1, mode: 0, zoom: 1.9, moveSpeed: 0.45, enabled: true, manual: true, focus: { ...TARGETS.toast }, focal: 0.3, lensSize: 0.4 },
+      { start: 4.1, end: 5.1, mode: 0, zoom: 1.6, moveSpeed: 0.5, enabled: true, manual: true, focus: { ...TARGETS.openRow }, focal: 0.3, lensSize: 0.4 },
+      { start: 5.1, end: 5.8, mode: 0, zoom: 1.8, moveSpeed: 0.5, enabled: true, manual: true, focus: { ...TARGETS.detailStatus }, focal: 0.3, lensSize: 0.4 },
+      { start: 5.8, end: 8.1, mode: 1, zoom: 1.6, moveSpeed: 0.45, enabled: true, manual: false, focus: { x: 700, y: 360 }, focal: 0.3, lensSize: 0.4 },
       // three joined lens clips, each with its own size and magnification
       ...LENS_STOPS.map(([start, end, size, mag]) => ({
         start,
@@ -186,15 +186,20 @@ export function createState(dark: boolean, captionText: string): EditorState {
         focal: 0.3,
         lensSize: size,
       })),
+      // Narration keeps the attachment in view, then the camera follows the comment.
+      { start: 11.6, end: 14.9, mode: 0, zoom: 1.45, moveSpeed: 0.65, enabled: true, manual: true, focus: { ...TARGETS.play }, focal: 0.3, lensSize: 0.4 },
+      { start: 14.9, end: STORY.submit, mode: 0, zoom: 1.8, moveSpeed: 0.65, enabled: true, manual: true, focus: { ...TARGETS.comment }, focal: 0.3, lensSize: 0.4 },
+      { start: STORY.submit, end: 19.2, mode: 0, zoom: 1.65, moveSpeed: 0.65, enabled: true, manual: true, focus: { ...TARGETS.activity }, focal: 0.3, lensSize: 0.4 },
+      // This clip animates the joined chain back to the full frame for camera and capture.
+      { start: 19.2, end: SCREENSHOT_TIME, mode: 0, zoom: 1, moveSpeed: 0.65, enabled: true, manual: true, focus: { x: CW / 2, y: CH / 2 }, focal: 0.3, lensSize: 0.4 },
     ],
-    captions: { enabled: true, readAlong: true, unread: 0.35, background: 2, size: 0.45, bottom: true },
-    captionsShown: 0,
+    captions: { enabled: true, readAlong: true, unread: 0.35, background: 1, size: 0.45, bottom: true },
     // default: the first mesh gradient palette
     background: { frame: { kind: "mesh", gradient: 0, mesh: 0, color: "#F5F5F7" }, padding: 0.36, radius: 0.4, shadowAngle: { ...DEFAULT_ANGLE }, shadowStrength: { ...DEFAULT_STRENGTH } },
     bgMenuOpen: false,
     keys: { show: true, style: 0, position: 1 },
-    // two camera clips: the second one removes the background
-    camera: { show: true, remove: true, sticker: false, size: 0.3, changedAt: -1e9, split: 15.6, cuts: [5.0, 10.2] },
+    // Camera cuts alternate sides; the final clip removes the background.
+    camera: { show: true, remove: true, sticker: false, size: 0.3, changedAt: -1e9, split: STORY.cameraSplit, cuts: [2.8, 4.8] },
     motionBlur: true,
     sizeMode: 0,
     chrome: 0,
@@ -222,7 +227,10 @@ export const zoomSpring = (clip: ZoomClip) => scaledSpring(SPRINGS.camera, clip.
 /** How long the zoom spring takes to settle (the visible in/out ramp). */
 const rampOf = (clip: ZoomClip) => springSettle(zoomSpring(clip));
 /** SpringSettings.estimatedFullResponseDurationMs: the horizon a zoom-in/out is fitted to. */
-export const horizonOf = (clip: ZoomClip) => Math.max(0.18, rampOf(clip)) * 1.6;
+export const horizonOf = (clip: ZoomClip) => Math.min(
+  Math.max(0.18, rampOf(clip)) * 1.6,
+  Math.max(0.001, (clip.end - clip.start) / 2),
+);
 
 /**
  * CameraSpringTimeline.springProgress: the spring's step response, normalised
@@ -237,8 +245,12 @@ export function zoomProgress(clip: ZoomClip, elapsed: number) {
   return clamp(springStep(spring, elapsed) / Math.min(1, springStep(spring, horizon)));
 }
 
+function compatibleCameraModes(a: ZoomClip, b: ZoomClip) {
+  return a.mode === b.mode || (a.mode !== 2 && b.mode !== 2);
+}
+
 function joined(a: ZoomClip, b: ZoomClip) {
-  return a.enabled && b.enabled && a.mode === b.mode && Math.abs(b.start - a.end) <= JOIN_GAP;
+  return a.enabled && b.enabled && compatibleCameraModes(a, b) && Math.abs(b.start - a.end) <= JOIN_GAP;
 }
 
 export type ZoomAt = {
@@ -253,10 +265,17 @@ export type ZoomAt = {
   u: number;
 };
 
+/** Loupe boundaries settle the backdrop; adjacent 2D/3D clips carry their camera state. */
+function exitsBeforeModeChange(clips: ZoomClip[], clip: ZoomClip) {
+  const next = clips.filter(c => c !== clip && c.enabled && c.start >= clip.end - 1e-8)
+    .sort((a, b) => a.start - b.start)[0];
+  return !!next && !compatibleCameraModes(next, clip) && next.start - clip.end <= horizonOf(clip) + JOIN_GAP;
+}
+
 /** How engaged a clip still is `time` after it ended (its exit, unless a joined clip takes over). */
 function exitEngagement(clips: ZoomClip[], clip: ZoomClip, time: number) {
   if (!clip.enabled || time < clip.end) return 0;
-  if (clips.some((n) => n !== clip && joined(clip, n))) return 0;
+  if (clips.some((n) => n !== clip && joined(clip, n)) || exitsBeforeModeChange(clips, clip)) return 0;
   return 1 - zoomProgress(clip, time - clip.end);
 }
 
@@ -266,7 +285,7 @@ function exitEngagement(clips: ZoomClip[], clip: ZoomClip, time: number) {
  * clip starts while another is still engaged (joined, or still zooming out)
  * the camera transitions straight from that frame to the new clip's.
  */
-export function zoomAt(state: EditorState, time: number): ZoomAt | null {
+export function zoomAt(state: Pick<EditorState, "zoomClips">, time: number): ZoomAt | null {
   const clips = state.zoomClips;
   const index = clips.findIndex((c) => c.enabled && time >= c.start && time < c.end);
   if (index >= 0) {
@@ -274,12 +293,15 @@ export function zoomAt(state: EditorState, time: number): ZoomAt | null {
     const u = zoomProgress(clip, time - clip.start);
     // the frame this clip starts from: a joined neighbour, or one still on its way out
     const prev = clips
-      .filter((c) => c !== clip && c.enabled && c.mode === clip.mode && c.end <= clip.start + JOIN_GAP)
+      .filter((c) => c !== clip && c.enabled && compatibleCameraModes(c, clip) && c.end <= clip.start + JOIN_GAP)
       .map((c) => ({ c, f: joined(c, clip) ? 1 : exitEngagement(clips, c, clip.start) }))
       .filter((x) => x.f > 0.001)
       .sort((x, y) => y.c.end - x.c.end)[0];
     if (prev && u < 1) return { clip, index, f: 1, from: prev.c, fromF: prev.f, to: clip, u };
-    return { clip, index, f: u, u: 0 };
+    const exit = exitsBeforeModeChange(clips, clip)
+      ? 1 - zoomProgress(clip, time - (clip.end - horizonOf(clip)))
+      : 1;
+    return { clip, index, f: u * exit, u: 0 };
   }
   let best: ZoomAt | null = null;
   clips.forEach((clip, i) => {
@@ -296,11 +318,44 @@ export function zoomAt(state: EditorState, time: number): ZoomAt | null {
  */
 export function zoomEntryLevel(clips: ZoomClip[], clip: ZoomClip) {
   const prev = clips
-    .filter((c) => c !== clip && c.enabled && c.mode === clip.mode && c.end <= clip.start + JOIN_GAP)
+    .filter((c) => c !== clip && c.enabled && compatibleCameraModes(c, clip) && c.end <= clip.start + JOIN_GAP)
     .sort((x, y) => y.end - x.end)[0];
   if (!prev || !clip.enabled) return 1;
   const f = joined(prev, clip) ? 1 : exitEngagement(clips, prev, clip.start);
   return 1 + (prev.zoom - 1) * f;
+}
+
+/** Shared camera/lens scale for preview and the timeline's sampled waveform. */
+export function zoomScaleAt(state: Pick<EditorState, "zoomClips">, time: number) {
+  const z = zoomAt(state, time);
+  if (!z) return 1;
+  if (z.from && z.to) return lerp(1 + (z.from.zoom - 1) * (z.fromF ?? 1), z.to.zoom, z.u);
+  return 1 + (z.clip.zoom - 1) * z.f;
+}
+
+type ZoomWaveform = { scales: number[]; entryScale: number };
+const zoomWaveformCaches = new WeakMap<ZoomClip[], { signature: string; clips: WeakMap<ZoomClip, Map<number, ZoomWaveform>> }>();
+
+/** Static authored curves retain the exact preview samples until camera settings change. */
+export function zoomWaveform(clips: ZoomClip[], clip: ZoomClip, samples: number): ZoomWaveform {
+  const signature = clips.map(c => `${c.start},${c.end},${c.mode},${c.zoom},${c.moveSpeed},${c.enabled}`).join(";");
+  let cache = zoomWaveformCaches.get(clips);
+  if (!cache || cache.signature !== signature) {
+    cache = { signature, clips: new WeakMap() };
+    zoomWaveformCaches.set(clips, cache);
+  }
+  let counts = cache.clips.get(clip);
+  if (!counts) { counts = new Map(); cache.clips.set(clip, counts); }
+  let waveform = counts.get(samples);
+  if (!waveform) {
+    const state = { zoomClips: clips };
+    waveform = {
+      scales: Array.from({ length: samples + 1 }, (_, i) => zoomScaleAt(state, lerp(clip.start, clip.end, i / samples))),
+      entryScale: zoomScaleAt(state, clip.start + horizonOf(clip)),
+    };
+    counts.set(samples, waveform);
+  }
+  return waveform;
 }
 
 /** Kept for callers that need a clip's own engagement. */
@@ -416,7 +471,7 @@ function clipShape(
   end: number,
   lane: number,
   label: string,
-  opts: { selected?: boolean; iconName?: string; reveal?: number; onDown?: () => void; zoom?: ZoomClip; zoomFrom?: number } = {},
+  opts: { selected?: boolean; iconName?: string; reveal?: number; onDown?: () => void; zoom?: ZoomClip; zoomClips?: ZoomClip[] } = {},
 ) {
   const { ctx, t } = ui;
   const p = PALETTE[kind];
@@ -451,16 +506,16 @@ function clipShape(
   ctx.stroke();
   ctx.globalAlpha = 1;
 
-  // zoom clips draw their camera curve: the zoom-in ramp, then the plateau
+  // Sample the same evaluated scale as the preview, including incoming states and exits.
   if (opts.zoom && w >= 32) {
     const clip = opts.zoom;
     const ramp = horizonOf(clip);
     const anchorX = x0 + Math.min(1, ramp / Math.max(0.001, clip.end - clip.start)) * w;
     const plateauY = Math.max(6, h * 0.14);
     const yOf = (n: number) => y + h - n * (h - plateauY);
-    const top = zoomHeight(clip.zoom);
-    const from = opts.zoomFrom ?? 1;
-    const samples = Math.max(8, Math.min(48, Math.round((anchorX - x0) / 5)));
+    const samples = Math.max(8, Math.min(64, Math.ceil(w / 4)));
+    const waveform = zoomWaveform(opts.zoomClips ?? [clip], clip, samples);
+    const top = zoomHeight(waveform.entryScale);
     ctx.save();
     rr(ctx, x0, y, w, h, radius);
     ctx.clip();
@@ -469,16 +524,13 @@ function clipShape(
     area.moveTo(x0, y + h);
     for (let i = 0; i <= samples; i += 1) {
       const k = i / samples;
-      // a joined clip's wave starts from the level its neighbour holds
-      const z = from + (clip.zoom - from) * zoomProgress(clip, k * ramp);
-      const px = x0 + k * (anchorX - x0);
+      const z = waveform.scales[i];
+      const px = x0 + k * w;
       const py = yOf(zoomHeight(z));
       if (i === 0) curve.moveTo(px, py);
       else curve.lineTo(px, py);
       area.lineTo(px, py);
     }
-    curve.lineTo(x0 + w, yOf(top));
-    area.lineTo(x0 + w, yOf(top));
     area.lineTo(x0 + w, y + h);
     area.closePath();
     ctx.fillStyle = t.dark ? "rgba(255,147,0,0.09)" : "rgba(255,147,0,0.14)";
@@ -766,8 +818,8 @@ export function drawEditor(ui: UI, state: EditorState, h: EditorHandlers, static
     if (!staticOnly) drawCameraLane(ui, state, h, lane(2));
     clipShape(ui, "clip-sys", "system", 0, DURATION, 3, "", { reveal: lane(3) });
     if (lane(3) > 0.99) waveform(ui, 0, DURATION, 3, PALETTE.system.border, 1.3);
-    clipShape(ui, "clip-mic", "microphone", 0.8, 21.4, 4, "", { reveal: lane(4) });
-    if (lane(4) > 0.99) waveform(ui, 0.8, 21.4, 4, PALETTE.microphone.border, 4.1);
+    clipShape(ui, "clip-mic", "microphone", 0.8, DURATION - 2.6, 4, "", { reveal: lane(4) });
+    if (lane(4) > 0.99) waveform(ui, 0.8, DURATION - 2.6, 4, PALETTE.microphone.border, 4.1);
     if (!staticOnly) drawZoomLane(ui, state, h, lane(5));
     if (!staticOnly) drawCaptionLane(ui, state, h, lane(6));
 
@@ -839,7 +891,7 @@ function drawTransportControls(ui: UI, state: EditorState, h: EditorHandlers) {
 }
 
 /** Parts whose pixels actually change with playback, drawn above the cached shell. */
-export function drawEditorDynamic(ui: UI, state: EditorState, h: EditorHandlers, inspector = drawInspector) {
+export function drawEditorDynamic(ui: UI, state: EditorState, h: EditorHandlers, inspector = drawInspector, tracks = drawTimelineEffects) {
   ui = { ...ui, timelineScale: state.timelineScale, timelineOffset: state.timelineOffset };
   const { ctx, t } = ui;
   const part = (from: number, to: number) => ease(clamp((state.chrome - from) / (to - from)));
@@ -864,15 +916,21 @@ export function drawEditorDynamic(ui: UI, state: EditorState, h: EditorHandlers,
   const lA = part(0.45, 0.85);
   if (lA > 0) {
     ctx.save(); ctx.globalAlpha = lA;
-    const lane = (i: number) => ease(clamp((state.chrome - 0.5 - i * 0.05) / 0.3));
     ctx.save(); ctx.beginPath(); ctx.rect(0, TIMELINE_Y + RULER_H, EW, EH - TIMELINE_Y); ctx.clip();
-    drawCameraLane(ui, state, h, lane(2)); drawZoomLane(ui, state, h, lane(5));
-    drawCaptionLane(ui, state, h, lane(6)); ctx.restore(); drawPlayhead(ui, state);
+    tracks(ui, state, h); ctx.restore(); drawPlayhead(ui, state);
     drawTimelineScrollbar(ui, state, h);
     if (!ui.timelineLabelsHidden) drawTimelineLabels(ui, state);
     ctx.restore();
   }
   ctx.restore();
+}
+
+/** Authored effect tracks do not depend on playback time. */
+export function drawTimelineEffects(ui: UI, state: EditorState, h: EditorHandlers) {
+  const lane = (i: number) => ease(clamp((state.chrome - 0.5 - i * 0.05) / 0.3));
+  drawCameraLane(ui, state, h, lane(2));
+  drawZoomLane(ui, state, h, lane(5));
+  drawCaptionLane(ui, state, h, lane(6));
 }
 
 /** Fixed lane titles are composited above the scrolling, blurred tracks. */
@@ -881,7 +939,6 @@ export function drawTimelineLabels(ui: UI, state: EditorState) {
   ctx.save();
   icon(ui.ctx, "layout-grid", 36, TIMELINE_Y + 15, 13, t.text2);
   LANES.forEach((label, i) => {
-    ctx.globalAlpha *= i === 6 ? 0.35 + 0.65 * state.captionsShown : 1;
     text(ctx, label, 16, laneY(i) + 17.5, { size: 11, color: t.text2 });
   });
   ctx.restore();
@@ -913,7 +970,7 @@ function drawZoomLane(ui: UI, state: EditorState, h: EditorHandlers, reveal: num
         selected: sel.kind === "zoom" && sel.index === i,
         reveal: reveal,
         zoom: clip,
-        zoomFrom: zoomEntryLevel(state.zoomClips, clip),
+        zoomClips: state.zoomClips,
         onDown: () => {
           state.selection = { kind: "zoom", index: i };
           state.time = Math.min(clip.end - 0.4, Math.max(clip.start + 0.8, state.time));
@@ -925,12 +982,8 @@ function drawZoomLane(ui: UI, state: EditorState, h: EditorHandlers, reveal: num
 
 function drawCaptionLane(ui: UI, state: EditorState, h: EditorHandlers, reveal: number) {
   const sel = state.selection;
-    const capReveal = state.captionsShown * reveal;
-    const capClips: Array<[number, number, string]> = [
-      [9.4, 11.0, ""],
-      [11.1, 12.6, ""],
-      [12.7, 14.3, ""],
-    ];
+    const capReveal = reveal;
+    const capClips = CAPTION_CLIPS;
     const tokens = captionTokens(state.captionText);
     const third = Math.ceil(tokens.length / 3);
     const joiner = /\s/.test(state.captionText) ? " " : "";
@@ -1700,7 +1753,7 @@ export function drawScreenshotWindow(ui: UI, state: EditorState, h: EditorHandle
   ctx.clip();
   ctx.translate(sx, sy);
   ctx.scale(k, k);
-  drawRecordedApp(ctx, 19.2);
+  drawRecordedApp(ctx, SCREENSHOT_TIME);
   ctx.restore();
 
   drawScreenshotAnnotations(ctx, state, a, sx, sy, sw, sh, k);

@@ -9,7 +9,7 @@
  * removed background pixel becomes a particle that drifts up and away.
  */
 import { CameraMaskGL } from "./camera-gl";
-import { squircle } from "./kit";
+import { squircle, recordRenderCost } from "./kit";
 import { SPRINGS, springStep } from "./spring";
 
 /**
@@ -134,6 +134,7 @@ export function setCameraPlaybackVisible(visible: boolean) {
 export function startCameraPlayback(scrub = false) {
   scrollControlled = scrub;
   requestedTime = 0;
+  dissolveKey = ""; particles = null; dissolveWarmed = false;
   const media = document.createElement("video");
   media.src = "/feature-media/camera-portrait-loop.mp4";
   media.muted = true;
@@ -148,7 +149,20 @@ export function startCameraPlayback(scrub = false) {
   video = media;
   decodedFrame = -1;
   const play = () => { if (!scrollControlled && playbackVisible && !document.hidden && media.paused) void media.play().catch(() => {}); };
-  const ready = () => window.dispatchEvent(new Event("xp-camera-frame-ready"));
+  let warmedVideo = false, videoWarmup = 0;
+  const ready = () => {
+    if (!warmedVideo && media.readyState >= 2 && !media.seeking && typeof requestIdleCallback === "function") {
+      warmedVideo = true;
+      // The video is 420×316; its 256px particle buffer is one row taller
+      // than the fallback photo's. Warm the decoded dimensions, not the photo.
+      videoWarmup = requestIdleCallback(() => {
+        if (video !== media || dissolveKey) return;
+        updateVideoFrame(); particles = null; dissolveWarmed = false;
+        prepareDissolve();
+      });
+    }
+    window.dispatchEvent(new Event("xp-camera-frame-ready"));
+  };
   const metadata = () => setCameraPlaybackTime(requestedTime);
   media.addEventListener("loadedmetadata", metadata);
   media.addEventListener("loadeddata", ready);
@@ -159,6 +173,7 @@ export function startCameraPlayback(scrub = false) {
     document.removeEventListener("pointerdown", play);
     media.removeEventListener("loadedmetadata", metadata);
     media.removeEventListener("loadeddata", ready);
+    if (videoWarmup) cancelIdleCallback(videoWarmup);
     media.removeEventListener("seeked", ready);
     media.pause();
     media.removeAttribute("src");
@@ -166,7 +181,7 @@ export function startCameraPlayback(scrub = false) {
     media.remove();
     if(bubbleShadow)bubbleShadow.width=bubbleShadow.height=1;bubbleShadow=null;bubbleShadowKey="";
     if(shadowSprite)shadowSprite.width=shadowSprite.height=1;shadowSprite=null;shadowKey="";shadowSource=null;
-    if (video === media) { video = null; scrollControlled = false; maskRenderer?.dispose(); maskRenderer = undefined; }
+    if (video === media) { if (dissolveWarmup) cancelIdleCallback(dissolveWarmup); dissolveWarmed = false; geometry = null; particles = null; video = null; scrollControlled = false; maskRenderer?.dispose(); maskRenderer = undefined; }
   };
 }
 
@@ -253,6 +268,7 @@ function pixelNoise(x: number, y: number, seed: number) {
 
 type Particles = {
   count: number;
+  indices: Uint32Array;
   sx: Float32Array;
   sy: Float32Array;
   colors: Uint8Array;
@@ -281,37 +297,28 @@ let marginX = 0;
 let marginY = 0;
 let dissolveCanvas: HTMLCanvasElement | null = null;
 let dissolvePixels: ImageData | null = null;
+let dissolveWarmup = 0;
+let dissolveWarmed = false;
 
 function rgbaOf(img: HTMLImageElement | HTMLCanvasElement, w: number, h: number) {
   const c = document.createElement("canvas");
   c.width = w;
   c.height = h;
-  const g = c.getContext("2d", { willReadFrequently: true });
+  const g = c.getContext("2d");
   if (!g) return null;
   g.drawImage(img, 0, 0, w, h);
   return g.getImageData(0, 0, w, h).data;
 }
 
-function prepareDissolve() {
-  if (!original || !cutout || particles) return;
-  const scale = Math.min(1, MAX_DIM / Math.max(original.width, original.height));
-  dissolveW = Math.max(1, Math.round(original.width * scale));
-  dissolveH = Math.max(1, Math.round(original.height * scale));
-  const a = rgbaOf(original, dissolveW, dissolveH);
-  const b = rgbaOf(cutout, dissolveW, dissolveH);
-  if (!a || !b) return;
-  // room for particles to drift up and to the right of the frame
-  marginX = Math.round(dissolveW * 0.45);
-  marginY = Math.round(dissolveH * 0.55);
-  canvasW = dissolveW + marginX * 2;
-  canvasH = dissolveH + marginY * 2;
-  let count = 0;
-  for (let i = 3; i < a.length; i += 4) if (a[i] > b[i]) count += 1;
-  const p: Particles = {
-    count,
-    sx: new Float32Array(count),
-    sy: new Float32Array(count),
-    colors: new Uint8Array(count * 4),
+type ParticleGeometry = Pick<Particles, "sx" | "sy" | "delays" | "travels" | "dirs" | "phases" | "speeds" | "lifetimes" | "swayA" | "swayF" | "launch" | "moveDuration" | "cosDir" | "sinDir" | "vx" | "vy">;
+let geometry: { w: number; h: number; values: ParticleGeometry } | null = null;
+
+/** Noise and trajectories depend only on pixel coordinates, not the video frame. */
+function particleGeometry(w: number, h: number): ParticleGeometry {
+  if (geometry?.w === w && geometry.h === h) return geometry.values;
+  const count = w * h;
+  const p = {
+    sx: new Float32Array(count), sy: new Float32Array(count),
     delays: new Float32Array(count),
     travels: new Float32Array(count),
     dirs: new Float32Array(count),
@@ -327,44 +334,77 @@ function prepareDissolve() {
     vx: new Float64Array(count),
     vy: new Float64Array(count),
   };
+  const maxX = Math.max(1, w - 1);
+  for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+    const n = y * w + x;
+    p.sx[n] = Math.round(w * 0.45) + x;
+    p.sy[n] = Math.round(h * 0.55) + y;
+    p.delays[n] = (x / maxX) * 0.18 + pixelNoise(x, y, 1) * 0.22;
+    p.travels[n] = 125 + pixelNoise(x, y, 2) * 225;
+    p.dirs[n] = pixelNoise(x, y, 3) - 0.5;
+    p.phases[n] = pixelNoise(x, y, 4) * Math.PI * 2;
+    p.speeds[n] = SETTINGS.speedMin + pixelNoise(x, y, 5) * (SETTINGS.speedMax - SETTINGS.speedMin);
+    p.lifetimes[n] = SETTINGS.durationMin + pixelNoise(x, y, 6) * (SETTINGS.durationMax - SETTINGS.durationMin);
+    p.swayA[n] = 0.65 + pixelNoise(x, y, 7) * 0.7;
+    p.swayF[n] = 0.72 + pixelNoise(x, y, 8) * 0.68;
+    // Retain double precision and the original Float32 inputs so trajectories
+    // stay identical; these terms depend on the particle, never on elapsed time.
+    p.launch[n] = Math.min(p.delays[n] * LAUNCH_WINDOW, p.lifetimes[n] * 0.35);
+    p.moveDuration[n] = Math.max(1, p.lifetimes[n] - p.launch[n]);
+    const dir = BASE_DIRECTION + p.dirs[n] * 1.1 * SETTINGS.chaos;
+    p.cosDir[n] = Math.cos(dir);
+    p.sinDir[n] = Math.sin(dir);
+    p.vx[n] = p.cosDir[n] * p.travels[n] * SETTINGS.spread * p.speeds[n];
+    p.vy[n] = (p.sinDir[n] * p.travels[n] - 18) * SETTINGS.spread * p.speeds[n];
+  }
+  geometry = {w, h, values:p};
+  return p;
+}
+
+function prepareDissolve() {
+  if (!original || !cutout || particles) return;
+  const started = performance.now();
+  const scale = Math.min(1, MAX_DIM / Math.max(original.width, original.height));
+  dissolveW = Math.max(1, Math.round(original.width * scale));
+  dissolveH = Math.max(1, Math.round(original.height * scale));
+  const a = rgbaOf(original, dissolveW, dissolveH);
+  const b = rgbaOf(cutout, dissolveW, dissolveH);
+  if (!a || !b) return;
+  // room for particles to drift up and to the right of the frame
+  marginX = Math.round(dissolveW * 0.45);
+  marginY = Math.round(dissolveH * 0.55);
+  canvasW = dissolveW + marginX * 2;
+  canvasH = dissolveH + marginY * 2;
+  let count = 0;
+  for (let i = 3; i < a.length; i += 4) if (a[i] > b[i]) count += 1;
+  const geo = particleGeometry(dissolveW, dissolveH);
+  const p: Particles = { ...geo, count, indices: new Uint32Array(count), colors: new Uint8Array(a) };
   let n = 0;
-  const maxX = Math.max(1, dissolveW - 1);
-  for (let y = 0; y < dissolveH; y += 1) {
-    for (let x = 0; x < dissolveW; x += 1) {
-      const i = (y * dissolveW + x) * 4;
-      const removed = Math.max(0, a[i + 3] - b[i + 3]);
-      if (!removed) continue;
-      p.sx[n] = marginX + x;
-      p.sy[n] = marginY + y;
-      p.colors[n * 4] = a[i];
-      p.colors[n * 4 + 1] = a[i + 1];
-      p.colors[n * 4 + 2] = a[i + 2];
-      p.colors[n * 4 + 3] = removed;
-      p.delays[n] = (x / maxX) * 0.18 + pixelNoise(x, y, 1) * 0.22;
-      p.travels[n] = 125 + pixelNoise(x, y, 2) * 225;
-      p.dirs[n] = pixelNoise(x, y, 3) - 0.5;
-      p.phases[n] = pixelNoise(x, y, 4) * Math.PI * 2;
-      p.speeds[n] = SETTINGS.speedMin + pixelNoise(x, y, 5) * (SETTINGS.speedMax - SETTINGS.speedMin);
-      p.lifetimes[n] = SETTINGS.durationMin + pixelNoise(x, y, 6) * (SETTINGS.durationMax - SETTINGS.durationMin);
-      p.swayA[n] = 0.65 + pixelNoise(x, y, 7) * 0.7;
-      p.swayF[n] = 0.72 + pixelNoise(x, y, 8) * 0.68;
-      // Retain double precision and the original Float32 inputs so trajectories
-      // stay identical; these terms depend on the particle, never on elapsed time.
-      p.launch[n] = Math.min(p.delays[n] * LAUNCH_WINDOW, p.lifetimes[n] * 0.35);
-      p.moveDuration[n] = Math.max(1, p.lifetimes[n] - p.launch[n]);
-      const dir = BASE_DIRECTION + p.dirs[n] * 1.1 * SETTINGS.chaos;
-      p.cosDir[n] = Math.cos(dir);
-      p.sinDir[n] = Math.sin(dir);
-      p.vx[n] = p.cosDir[n] * p.travels[n] * SETTINGS.spread * p.speeds[n];
-      p.vy[n] = (p.sinDir[n] * p.travels[n] - 18) * SETTINGS.spread * p.speeds[n];
-      n += 1;
-    }
+  for (let i = 0; i < a.length; i += 4) {
+    const removed = Math.max(0, a[i + 3] - b[i + 3]);
+    if (!removed) continue;
+    p.indices[n++] = i / 4;
+    p.colors[i + 3] = removed;
   }
   particles = p;
-  dissolveCanvas = document.createElement("canvas");
-  dissolveCanvas.width = canvasW;
-  dissolveCanvas.height = canvasH;
-  dissolvePixels = null;
+  dissolveCanvas ??= document.createElement("canvas");
+  if (dissolveCanvas.width !== canvasW || dissolveCanvas.height !== canvasH) {
+    dissolveCanvas.width = canvasW; dissolveCanvas.height = canvasH;
+    dissolvePixels = null;
+  }
+  if (!dissolveWarmed && !dissolveKey && typeof requestIdleCallback === "function") {
+    if (dissolveWarmup) cancelIdleCallback(dissolveWarmup);
+    const times = [0, 200, 600, 1200];
+    const next = () => {
+      dissolveWarmup = requestIdleCallback(() => {
+        if (particles !== p) return;
+        renderDissolve(times.shift()!);
+        if (times.length) next(); else dissolveWarmed = true;
+      });
+    };
+    next();
+  }
+  recordRenderCost("camera-dissolve-prepare", started, {count});
 }
 
 export const DISSOLVE_MS = SETTINGS.durationMax + 100;
@@ -374,6 +414,7 @@ function renderDissolve(elapsed: number) {
   if (!particles || !dissolveCanvas) return null;
   const g = dissolveCanvas.getContext("2d");
   if (!g) return null;
+  const started = performance.now();
   const img = dissolvePixels ??= g.createImageData(canvasW, canvasH);
   const out = img.data;
   out.fill(0);
@@ -388,7 +429,8 @@ function renderDissolve(elapsed: number) {
     out[idx + 2] = p.colors[ci + 2];
     out[idx + 3] = Math.min(255, alpha);
   };
-  for (let i = 0; i < p.count; i += 1) {
+  for (let particle = 0; particle < p.count; particle += 1) {
+    const i = p.indices[particle];
     const life = p.lifetimes[i];
     if (elapsed >= life) continue;
     const move = Math.min(1, Math.max(0, elapsed - p.launch[i]) / p.moveDuration[i]);
@@ -434,6 +476,7 @@ function renderDissolve(elapsed: number) {
     }
   }
   g.putImageData(img, 0, 0);
+  recordRenderCost("camera-dissolve-render", started, {elapsed, count:p.count});
   return dissolveCanvas;
 }
 

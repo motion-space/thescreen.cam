@@ -75,6 +75,49 @@ function pressProgress(key: Shown, time: number) {
 
 export type KeyOverlaySettings = { show: boolean; style: KeyStyle; position: number };
 
+const keySprites = new Map<string, { canvas: HTMLCanvasElement; pad: number; density: number }>();
+function keySprite(label: string, w: number, h: number, density: number, pressed: boolean) {
+  const key = [label, w, h, density, pressed].join(":");
+  let sprite = keySprites.get(key);
+  if (!sprite) {
+    const pad = h * 0.5, canvas = document.createElement("canvas");
+    canvas.width = Math.ceil((w + pad * 2) * density);
+    canvas.height = Math.ceil((h + pad * 2) * density);
+    const c = canvas.getContext("2d")!;
+    c.setTransform(density, 0, 0, density, pad * density, pad * density);
+    macBookKey(c, {x:0,y:0,w,h}, label, pressed);
+    sprite = {canvas,pad,density}; keySprites.set(key,sprite);
+    while (keySprites.size > 128) {const first=keySprites.keys().next().value!,old=keySprites.get(first)!;keySprites.delete(first);old.canvas.width=old.canvas.height=1;}
+  }
+  return sprite;
+}
+
+/** Prepare the real chord sprites in idle slices, including the first Return. */
+export function warmKeySprites(comp: {w:number;h:number}, pixelsPerUnit: number) {
+  if (typeof requestIdleCallback !== "function" || typeof createImageBitmap !== "function") return () => {};
+  const density = Math.max(2, Math.pow(2, Math.ceil(Math.log2(pixelsPerUnit))));
+  const labels = [...new Set(KEY_PRESSES.flatMap(press => [...press.mods, press.label]))];
+  const h = Math.min(comp.w * 0.078 * 0.56, comp.h * 0.16);
+  const jobs = [density, density / 2].filter(d => d >= 2).flatMap(d => labels.flatMap(label => [false,true].map(pressed => () => keySprite(label,h*spec(label).units,h,d,pressed))));
+  let idle = 0, stopped = false;
+  const next = () => {
+    if (stopped || !jobs.length) return;
+    idle = requestIdleCallback(async () => {
+      if (stopped) return;
+      const sprite = jobs.shift()!();
+      try { const bitmap = await createImageBitmap(sprite.canvas); bitmap.close(); } catch {}
+      next();
+    });
+  };
+  next();
+  return () => { stopped = true; cancelIdleCallback(idle); };
+}
+
+export function disposeKeySprites() {
+  for (const {canvas} of keySprites.values()) canvas.width = canvas.height = 1;
+  keySprites.clear();
+}
+
 /** Draws the overlay inside `comp` (world units) at `time`. */
 export function drawKeyOverlay(ctx: CanvasRenderingContext2D, comp: { x: number; y: number; w: number; h: number }, time: number, settings: KeyOverlaySettings, captionTop?: number) {
   if (!settings.show) return;
@@ -104,7 +147,13 @@ export function drawKeyOverlay(ctx: CanvasRenderingContext2D, comp: { x: number;
     const pp = pressProgress(key, time);
     const s = 1 + (PRESSED_SCALE - 1) * pp;
     const rect = { x: x + (w - w * s) / 2, y: y + (keyH - keyH * s) / 2, w: w * s, h: keyH * s };
-    if (style === 0) macBookKey(ctx, rect, key.label, time < key.up && time >= key.down);
+    if (style === 0) {
+      // Cache above the output's pixel density; press motion still scales and
+      // positions every rendered frame, with the original cap and shadow.
+      const density = Math.max(2, Math.pow(2, Math.ceil(Math.log2(Math.abs(ctx.getTransform().a)))));
+      const sprite = keySprite(key.label, w, keyH, density, time < key.up && time >= key.down);
+      ctx.drawImage(sprite.canvas, rect.x - sprite.pad * s, rect.y - sprite.pad * s, sprite.canvas.width / density * s, sprite.canvas.height / density * s);
+    }
     else if (style === 1) flatKey(ctx, rect, key.label);
     else raisedKey(ctx, rect, key.label, pp);
     x += w + gap;

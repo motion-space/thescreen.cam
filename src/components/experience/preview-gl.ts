@@ -25,7 +25,7 @@ uniform vec2 uOpticalStorage;
 uniform vec2 uOpticalSize;
 uniform float uPixelScale;
 uniform vec4 uCaption; // local preview pixels: x, y, width, height
-uniform vec2 uCaptionStyle; // corner radius, reveal opacity
+uniform vec3 uCaptionStyle; // corner radius, reveal opacity, background mode
 
 uniform float uMotionA;
 uniform vec2 uMotionB;
@@ -212,6 +212,28 @@ vec4 captionGlass(vec2 p, vec4 backdrop) {
   float sdf = length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - radius;
   float aa = max(0.75, uPixelScale);
   if (sdf > aa) return backdrop;
+  // Plain backdrop blur: sample neighbouring scene pixels without glass refraction or rim lighting.
+  if (uCaptionStyle.z < 1.5) {
+    float sigma = max(1.0, radius * 0.65);
+    vec3 blurred = vec3(0.0);
+    float weightSum = 0.0;
+    for (int y = -3; y <= 3; y++) {
+      for (int x = -3; x <= 3; x++) {
+        vec2 offset = vec2(float(x), float(y)) * 0.9;
+        float weight = exp(-0.5 * dot(offset, offset));
+        vec2 samplePoint = p + offset * sigma;
+        // Prefilter each footprint so spaced taps cannot leave sharp text ghosts.
+        vec3 sampleColor = uPlaneOn == 0
+          ? textureLod(uBase, clamp(samplePoint, vec2(0.5), uSize - 0.5) / uBaseStorage, log2(max(1.0, sigma * 0.9))).rgb
+          : scene(samplePoint).rgb;
+        blurred += sampleColor * weight;
+        weightSum += weight;
+      }
+    }
+    vec3 color = mix(blurred / weightSum, vec3(0.04, 0.04, 0.05), 0.36);
+    float cover = (1.0 - smoothstep(-aa, aa, sdf)) * uCaptionStyle.y;
+    return mix(backdrop, vec4(color, 1.0), cover);
+  }
   vec2 normal = normalize(sign(local) * max(q, vec2(0.001)));
   float rim = 1.0 - smoothstep(0.0, radius * 0.75, -sdf);
   vec2 uv = p - normal * rim * rim * radius * 0.22;
@@ -240,7 +262,7 @@ void main() {
 `;
 
 export type PreviewEffects = {
-  caption?: { x: number; y: number; w: number; h: number; radius: number; alpha: number } | null;
+  caption?: { x: number; y: number; w: number; h: number; radius: number; alpha: number; mode: 1 | 2 } | null;
   base: HTMLCanvasElement;
   width: number;
   height: number;
@@ -366,10 +388,14 @@ export class PreviewGL {
     gl.viewport(0, 0, e.width, e.height);
     gl.useProgram(this.program);
     this.upload(0, e.base);
+    if (e.caption?.mode === 1) {
+      gl.generateMipmap(gl.TEXTURE_2D);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR_MIPMAP_LINEAR);
+    } else gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
     const L = this.loc;
     const caption = e.caption;
     gl.uniform4f(L.uCaption, caption?.x ?? 0, caption?.y ?? 0, caption?.w ?? 0, caption?.h ?? 0);
-    gl.uniform2f(L.uCaptionStyle, caption?.radius ?? 0, caption?.alpha ?? 0);
+    gl.uniform3f(L.uCaptionStyle, caption?.radius ?? 0, caption?.alpha ?? 0, caption?.mode ?? 1);
     gl.uniform2f(L.uSize, e.width, e.height);
     gl.uniform2f(L.uBaseStorage, this.textureSizes[0].w, this.textureSizes[0].h);
     gl.uniform1f(L.uPixelScale, Math.max(0.2, e.pixelScale));

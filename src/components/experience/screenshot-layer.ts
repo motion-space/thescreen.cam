@@ -2,7 +2,7 @@ import { drawScreenshotWindow, drawScreenshotAnnotations, SHOT, SHOT_PADS, clamp
 import { ShadowPads } from "./shadow-pad";
 import { Anim, HitRegistry, type UI } from "./kit";
 
-/** The captured source is fixed at 19.2s; only annotations animate. */
+/** The captured source uses the tour’s capture time; only annotations animate. */
 export class ScreenshotLayer {
   private canvas = document.createElement("canvas");
   private hits = new HitRegistry();

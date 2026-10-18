@@ -1,3 +1,4 @@
+import { RECORDING_DURATION, STORY as T } from "./story-timing";
 import { measureWidth } from "./kit";
 /**
  * The app "being recorded" inside the editor preview: a Linear-style issue
@@ -179,20 +180,6 @@ const DETAIL = { x: 700, y: PANEL.y, w: PANEL.x + PANEL.w - 700, h: PANEL.h };
 export const ATTACHMENT = { x: DETAIL.x + 28, y: 214, w: DETAIL.w - 56, h: Math.round(((DETAIL.w - 56) * 9) / 16) };
 const PLAY = { x: ATTACHMENT.x + ATTACHMENT.w / 2, y: ATTACHMENT.y + ATTACHMENT.h / 2 };
 
-/* ---------- story timing ---------- */
-
-const T = {
-  menuOpen: 4.0,
-  done: 5.4,
-  toastEnd: 8.6,
-  openDetail: 10.2,
-  focusComment: 11.4,
-  typeStart: 11.75,
-  submit: 14.12,
-  play: 16.6,
-  closeDetail: 23.7,
-};
-
 /* ---------- typing: a comment, then ⌘↩ to send ---------- */
 
 export const TYPED_COMMENT = "Looks great, ship it!";
@@ -254,6 +241,7 @@ export const TARGETS = {
   openRow: { x: COL.title + 110, y: ROW_479.y + ROW_H / 2 },
   /** the comment box at the bottom of the detail panel */
   comment: { x: DETAIL.x + 150, y: DETAIL.y + DETAIL.h - 40 },
+  activity: { x: DETAIL.x + 220, y: ATTACHMENT.y + ATTACHMENT.h + 178 },
   title: { x: DETAIL.x + 28, y: 72, w: DETAIL.w - 56, h: 30 },
   attachment: ATTACHMENT,
   play: PLAY,
@@ -436,6 +424,8 @@ function attachmentPalette() {
 
 function drawAttachment(ctx: CanvasRenderingContext2D, time: number) {
   const a = ATTACHMENT;
+  const view = visibleAppBounds(ctx);
+  if (a.x >= view.x + view.w || a.y >= view.y + view.h || a.x + a.w <= view.x || a.y + a.h <= view.y) return;
   const P = attachmentPalette();
   const playing = time >= T.play;
   const pt = playing ? (time - T.play) * 1.6 : 0; // playback time
@@ -471,6 +461,8 @@ function drawAttachment(ctx: CanvasRenderingContext2D, time: number) {
   ctx.fillStyle = P.window;
   ctx.fill();
   ctx.restore();
+  paintCachedLayer(ctx, `attachment-window:${appThemeKey()}`, win, c => {
+    const ctx = c;
   ["#ff5f57", "#febc2e", "#28c840"].forEach((col, i) => {
     ctx.beginPath();
     ctx.arc(win.x + 7 + i * 6, win.y + 6.5, 1.8, 0, Math.PI * 2);
@@ -495,6 +487,7 @@ function drawAttachment(ctx: CanvasRenderingContext2D, time: number) {
   ctx.fillStyle = C.accent;
   ctx.fill();
   text(ctx, "Export", btn.x + btn.w / 2, btn.y + 7.5, { size: 7, weight: 600, color: "#fff", align: "center" });
+  });
   ctx.restore();
   // a soft focus ring breathing on the target
   if (playing) {
@@ -517,18 +510,14 @@ function drawAttachment(ctx: CanvasRenderingContext2D, time: number) {
     return `00:00:${String(sec).padStart(2, "0")}:${String(f).padStart(2, "0")}`;
   };
   const sx = pv.x + pv.w + 20;
-  text(ctx, "TIMECODE", sx, pv.y + 7, { size: 6, weight: 600, color: P.label });
-  text(ctx, tc(pt), sx, pv.y + 21, { size: 12, weight: 600, color: P.strong, family: MONO });
-  const rows: Array<[string, string, string?]> = [
-    ["ZOOM", `${zoom.toFixed(2)}×`, P.dark ? "#ffb547" : "#c26a00"],
-    ["FOCUS", "f/2.8 · 50 mm"],
-    ["BLUR", `${Math.round(30 + 20 * Math.sin(pt * 2))}%`],
-  ];
-  rows.forEach(([label, value, color], i) => {
-    const y = pv.y + 42 + i * 13;
-    text(ctx, label, sx, y, { size: 6.5, weight: 600, color: P.label });
-    text(ctx, value, sx + 36, y, { size: 6.5, weight: 500, color: color ?? P.value, family: MONO });
+  paintCachedLayer(ctx, `attachment-readout:${appThemeKey()}`, {x:sx-2,y:pv.y,w:a.x+a.w-sx+2,h:82}, c => {
+    text(c, "TIMECODE", sx, pv.y + 7, { size: 6, weight: 600, color: P.label });
+    ["ZOOM", "FOCUS", "BLUR"].forEach((label, i) => text(c, label, sx, pv.y + 42 + i * 13, { size: 6.5, weight: 600, color: P.label }));
+    text(c, "f/2.8 · 50 mm", sx + 36, pv.y + 55, { size: 6.5, weight: 500, color: P.value, family: MONO });
   });
+  text(ctx, tc(pt), sx, pv.y + 21, { size: 12, weight: 600, color: P.strong, family: MONO });
+  text(ctx, `${zoom.toFixed(2)}×`, sx + 36, pv.y + 42, { size: 6.5, weight: 500, color: P.dark ? "#ffb547" : "#c26a00", family: MONO });
+  text(ctx, `${Math.round(30 + 20 * Math.sin(pt * 2))}%`, sx + 36, pv.y + 68, { size: 6.5, weight: 500, color: P.value, family: MONO });
   // export progress: a ring with its percentage
   const ringC = { x: a.x + a.w - 30, y: a.y + 30 };
   const done = playing ? clamp01(0.18 + progress * 0.8) : 0.18;
@@ -548,12 +537,14 @@ function drawAttachment(ctx: CanvasRenderingContext2D, time: number) {
   // ---- timeline: zoom curve, audio, clips, playhead ----
   const tl = { x: a.x + 16, y: a.y + a.h * 0.6, w: a.w - 32, h: a.h * 0.32 };
   const lane = tl.h / 3;
+  const ph = tl.x + progress * tl.w;
+  paintCachedLayer(ctx, `attachment-timeline:${appThemeKey()}`, { x: tl.x - 6, y: tl.y - 14, w: tl.w + 12, h: tl.h + 16 }, c => {
+    const ctx = c;
   for (let i = 0; i < 3; i += 1) {
     rr(ctx, tl.x - 4, tl.y + i * lane + 1.5, tl.w + 8, lane - 3, 5);
     ctx.fillStyle = P.lane;
     ctx.fill();
   }
-  const ph = tl.x + progress * tl.w;
 
   // zoom curve: an area under the curve and round keyframes, like the editor's zoom lane
   const curveY = (u: number) => tl.y + lane * 0.85 - (0.5 - 0.5 * Math.cos(u * Math.PI * 4)) * lane * 0.6;
@@ -590,18 +581,6 @@ function drawAttachment(ctx: CanvasRenderingContext2D, time: number) {
     const label = i % 2 ? "2.0×" : "1.0×";
     text(ctx, label, Math.min(px + 5, tl.x + tl.w - 12), py + (i % 2 ? 8 : -6), { size: 6, weight: 600, color: P.dark ? "#ffc773" : "#a35a00" });
   }
-
-  // audio: mirrored bars, brighter where the playhead has been
-  const wy = tl.y + lane * 1.5;
-  for (let i = 0; i < 96; i += 1) {
-    const x = tl.x + (i / 96) * tl.w;
-    const amp = Math.abs(Math.sin(i * 0.7 + pt * 5) * Math.cos(i * 0.23 - pt * 2.3));
-    const h = 1.6 + amp * lane * 0.62;
-    rr(ctx, x, wy - h / 2, 1.8, h, 0.9);
-    ctx.fillStyle = x <= ph ? P.waveOn : P.waveOff;
-    ctx.fill();
-  }
-
   // clips
   const clip = (x: number, w: number, fillC: string, line: string, label: string, color: string) => {
     const y = tl.y + lane * 2 + 3;
@@ -615,6 +594,23 @@ function drawAttachment(ctx: CanvasRenderingContext2D, time: number) {
   };
   clip(tl.x, tl.w * 0.42, P.clipZoom, P.clipZoomLine, "Zoom · 1.0× ↔ 2.0×", P.clipZoomText);
   clip(tl.x + tl.w * 0.45, tl.w * 0.33, P.clipCap, P.clipCapLine, "Click export and every zoom lands…", P.clipCapText);
+
+  });
+
+  // audio: mirrored bars, brighter where the playhead has been
+  const wy = tl.y + lane * 1.5;
+  // Bars never overlap. One path per colour preserves every pixel while
+  // avoiding 96 separate fill/style submissions per animated frame.
+  const played = new Path2D(), upcoming = new Path2D();
+  for (let i = 0; i < 96; i += 1) {
+    const x = tl.x + (i / 96) * tl.w;
+    const amp = Math.abs(Math.sin(i * 0.7 + pt * 5) * Math.cos(i * 0.23 - pt * 2.3));
+    const h = 1.6 + amp * lane * 0.62;
+    (x <= ph ? played : upcoming).roundRect(x, wy - h / 2, 1.8, h, 0.9);
+  }
+  ctx.fillStyle = P.waveOn; ctx.fill(played);
+  ctx.fillStyle = P.waveOff; ctx.fill(upcoming);
+
 
   // playhead
   ctx.fillStyle = "#e5484d";
@@ -671,9 +667,12 @@ const SPRITE_BUDGET = 64 * 1024 * 1024;
 const TILE = 256;
 
 function spriteCanvas() { return document.createElement("canvas"); }
+const appViewports = new WeakMap<CanvasRenderingContext2D, Bounds>();
 function visibleAppBounds(ctx: CanvasRenderingContext2D): Bounds {
   const inv = ctx.getTransform().inverse();
-  const corners = [[0,0],[ctx.canvas.width,0],[0,ctx.canvas.height],[ctx.canvas.width,ctx.canvas.height]]
+  const viewport = appViewports.get(ctx) ?? { x: 0, y: 0, w: ctx.canvas.width, h: ctx.canvas.height };
+  const { x: vx, y: vy, w: vw, h: vh } = viewport;
+  const corners = [[vx,vy],[vx+vw,vy],[vx,vy+vh],[vx+vw,vy+vh]]
     .map(([x,y]) => inv.transformPoint(new DOMPoint(x,y)));
   const x = Math.min(...corners.map(p=>p.x)), y = Math.min(...corners.map(p=>p.y));
   return { x, y, w: Math.max(...corners.map(p=>p.x))-x, h: Math.max(...corners.map(p=>p.y))-y };
@@ -689,8 +688,13 @@ function paintCachedLayer(ctx: CanvasRenderingContext2D, key: string, bounds: Bo
   const top = tiled ? Math.max(Math.floor(bounds.y/TILE),Math.floor(view.y/TILE))*TILE : bounds.y;
   const right = tiled ? Math.min(Math.ceil((bounds.x+bounds.w)/TILE),Math.ceil((view.x+view.w)/TILE))*TILE : bounds.x+bounds.w;
   const bottom = tiled ? Math.min(Math.ceil((bounds.y+bounds.h)/TILE),Math.ceil((view.y+view.h)/TILE))*TILE : bounds.y+bounds.h;
-  for (let y=top;y<bottom;y+=tiled?TILE:bounds.h) for (let x=left;x<right;x+=tiled?TILE:bounds.w) {
-    const w = Math.min(tiled?TILE:bounds.w,right-x), h = Math.min(tiled?TILE:bounds.h,bottom-y), pad = 2;
+  for (let gy=top;gy<bottom;gy+=tiled?TILE:bounds.h) for (let gx=left;gx<right;gx+=tiled?TILE:bounds.w) {
+    // Edge tiles contain only this layer's real bounds. A 44px issue row must
+    // not allocate/rasterise a full 256px tile (or paint neighbouring rows).
+    const x = Math.max(bounds.x, gx), y = Math.max(bounds.y, gy);
+    const w = Math.min(bounds.x + bounds.w, tiled ? gx + TILE : right) - x;
+    const h = Math.min(bounds.y + bounds.h, tiled ? gy + TILE : bottom) - y;
+    const pad = 2;
     const id = [key,scale,x,y,w,h].join("|");
     let layer = pool.get(id);
     if (!layer) {
@@ -706,8 +710,8 @@ function paintCachedLayer(ctx: CanvasRenderingContext2D, key: string, bounds: Bo
     ctx.drawImage(layer.canvas,pad*scale,pad*scale,w*scale,h*scale,x,y,w,h);
   }
   while ((tiled ? highPixels > 28*1024*1024 : spritePixels > SPRITE_BUDGET) && pool.size > 1) {
-    // Tiny overview sprites must survive high-resolution detail/lens allocations.
-    const first = (!tiled ? [...pool].find(([,entry])=>entry.scale>1)?.[0] : undefined) ?? pool.keys().next().value!;
+    // Retain overview scales and small overlay sprites when large detail rasters compete for the budget.
+    const first = (!tiled ? [...pool].find(([,entry])=>entry.scale>2 && entry.pixels>1024*1024)?.[0] : undefined) ?? pool.keys().next().value!;
     const old = pool.get(first)!;
     pool.delete(first); if(tiled)highPixels-=old.pixels;else spritePixels-=old.pixels;
     old.canvas.width = old.canvas.height = 1;
@@ -715,8 +719,18 @@ function paintCachedLayer(ctx: CanvasRenderingContext2D, key: string, bounds: Bo
 }
 
 /** Content and overlays are cached separately: fades move bitmaps, not hundreds of text/path commands. */
-export function drawRecordedApp(ctx: CanvasRenderingContext2D, time = 0) {
-  const t = ((time%24)+24)%24, cursor = cursorAt(t), theme = appThemeKey();
+export function drawRecordedApp(ctx: CanvasRenderingContext2D, time = 0, viewport?: Bounds) {
+  const previous = appViewports.get(ctx);
+  if (viewport) appViewports.set(ctx, viewport);
+  try { drawRecordedAppVisible(ctx, time); }
+  finally {
+    if (previous) appViewports.set(ctx, previous);
+    else appViewports.delete(ctx);
+  }
+}
+
+function drawRecordedAppVisible(ctx: CanvasRenderingContext2D, time: number) {
+  const t = ((time % RECORDING_DURATION) + RECORDING_DURATION) % RECORDING_DURATION, cursor = cursorAt(t), theme = appThemeKey();
   const menuOpen = t>=T.menuOpen && t<T.done;
   const detail = t>=T.openDetail && t<T.closeDetail+0.3;
   const row = ROWS.findIndex(({y})=>!menuOpen && inside(cursor,{x:PANEL.x,y,w:PANEL.w,h:ROW_H}) && !(detail && cursor.x>DETAIL.x));
@@ -768,9 +782,11 @@ export function drawRecordedApp(ctx: CanvasRenderingContext2D, time = 0) {
     if (t>=T.submit) {
       const dx=DETAIL.x+28, ay=ATTACHMENT.y+ATTACHMENT.h+58, y=ay+120, fresh=springIn(t-T.submit);
       ctx.save(); ctx.globalAlpha *= fresh; ctx.translate(0,(1-fresh)*8);
-      avatar(ctx,["CJ","#e5484d"],dx+9,y,9);
-      text(ctx,`Cats Juice: ${TYPED_COMMENT}`,dx+26,y+0.5,{size:12.5,color:C.text2});
-      text(ctx,"now",DETAIL.x+DETAIL.w-28,y+0.5,{size:12,color:C.faint,align:"right"}); ctx.restore();
+      paintCachedLayer(ctx, `activity:${theme}`, {x:dx-2,y:y-14,w:DETAIL.w-52,h:28}, c => {
+        avatar(c,["CJ","#e5484d"],dx+9,y,9);
+        text(c,`Cats Juice: ${TYPED_COMMENT}`,dx+26,y+0.5,{size:12.5,color:C.text2});
+        text(c,"now",DETAIL.x+DETAIL.w-28,y+0.5,{size:12,color:C.faint,align:"right"});
+      }); ctx.restore();
     }
     ctx.restore();
   }
@@ -800,6 +816,7 @@ export function warmRecordedApp() {
     const c=scratch.getContext("2d")!;c.setTransform(scale,0,0,scale,-x*scale,-y*scale);return c;
   };
   jobs.push(()=>drawRecordedApp(context(1,0,0,CW,CH),8));
+  for (const scale of [2, 4]) jobs.push(() => drawRecordedApp(context(scale, 0, 0, CW, CH), 19.4));
   for(const scale of [1,2,4]) for(const focused of [false,true]) jobs.push(()=>{
     const bounds={x:DETAIL.x-60,y:DETAIL.y-60,w:DETAIL.w+120,h:DETAIL.h+120};
     paintCachedLayer(context(scale,bounds.x,bounds.y,bounds.w,bounds.h),`detail:${appThemeKey()}:${focused}`,bounds,c=>paintDetail(c,focused?T.focusComment+0.1:19.2,false,true));
@@ -828,7 +845,7 @@ export function disposeRecordedAppCaches() {
 /* ---------- the app ---------- */
 
 export function drawRecordedAppRaw(ctx: CanvasRenderingContext2D, time = 0, attachment = true, overlays = true, rows = true) {
-  const t = ((time % 24) + 24) % 24;
+  const t = ((time % RECORDING_DURATION) + RECORDING_DURATION) % RECORDING_DURATION;
   const cursor = cursorAt(t);
 
   ctx.save();
@@ -1132,21 +1149,24 @@ type Move = { t: number; x: number; y: number; dur?: number };
 
 const HOME = { x: 720, y: 430 };
 const MOVES: Move[] = [
-  { t: 0.6, x: 520, y: ROW_482.y + 22 },
-  { t: 2.4, x: COL.status + 1, y: ROW_482.y + ROW_H / 2 + 1 },
+  { t: 0.1, x: 520, y: ROW_482.y + 22 },
+  { t: 1.15, x: COL.status + 1, y: ROW_482.y + ROW_H / 2 + 1 },
   // status menu: down to "Done"
-  { t: 4.5, x: MENU.x + 70, y: menuItemY(4) + MENU.item / 2 },
-  { t: 6.3, x: 640, y: 380 },
-  { t: 8.9, x: COL.title + 110, y: ROW_479.y + ROW_H / 2 },
+  { t: 2.1, x: MENU.x + 70, y: menuItemY(4) + MENU.item / 2 },
+  { t: 3.1, x: 640, y: 380 },
+  { t: 4.1, x: COL.title + 110, y: ROW_479.y + ROW_H / 2 },
   // detail panel
-  { t: 10.75, x: DETAIL.x + 150, y: DETAIL.y + DETAIL.h - 40 },
-  { t: 14.6, x: DETAIL.x + 260, y: 300 },
-  { t: 15.6, x: PLAY.x + 2, y: PLAY.y + 2 },
-  { t: 17.3, x: ATTACHMENT.x + ATTACHMENT.w * 0.62, y: ATTACHMENT.y + ATTACHMENT.h * 0.3 },
+  { t: 5.1, x: TARGETS.detailStatus.x, y: TARGETS.detailStatus.y },
+  { t: 5.8, x: PLAY.x + 2, y: PLAY.y + 2 },
+  { t: 7.0, x: ATTACHMENT.x + ATTACHMENT.w * 0.62, y: ATTACHMENT.y + ATTACHMENT.h * 0.3 },
   // lens stops: timecode (small, strong), waveform (large, gentle), keyframes (medium)
-  { t: 18.15, x: ATTACHMENT.x + ATTACHMENT.w * 0.6, y: ATTACHMENT.y + 30 },
-  { t: 20.4, x: ATTACHMENT.x + ATTACHMENT.w * 0.42, y: ATTACHMENT.y + ATTACHMENT.h * 0.78 },
-  { t: 22.15, x: ATTACHMENT.x + ATTACHMENT.w * 0.78, y: ATTACHMENT.y + ATTACHMENT.h * 0.66 },
+  { t: 8.05, x: ATTACHMENT.x + ATTACHMENT.w * 0.6, y: ATTACHMENT.y + 30 },
+  { t: 9.15, x: ATTACHMENT.x + ATTACHMENT.w * 0.42, y: ATTACHMENT.y + ATTACHMENT.h * 0.78 },
+  { t: 10.25, x: ATTACHMENT.x + ATTACHMENT.w * 0.78, y: ATTACHMENT.y + ATTACHMENT.h * 0.66 },
+  // Narration runs over the playing attachment; reach the comment as it ends.
+  { t: 11.4, x: DETAIL.x + 260, y: 300, dur: 0.36 },
+  { t: 14.9, x: TARGETS.comment.x, y: TARGETS.comment.y },
+  { t: 19.1, x: DETAIL.x + 260, y: 300 },
   { t: 23.62, x: HOME.x, y: HOME.y, dur: 0.36 },
 ];
 
@@ -1155,15 +1175,15 @@ export const CURSOR_KEYS: Array<{ t: number; x: number; y: number; click: true }
   { t: T.menuOpen, x: MOVES[1].x, y: MOVES[1].y, click: true },
   { t: T.done, x: MOVES[2].x, y: MOVES[2].y, click: true },
   { t: T.openDetail, x: MOVES[4].x, y: MOVES[4].y, click: true },
-  { t: T.focusComment, x: MOVES[5].x, y: MOVES[5].y, click: true },
-  { t: T.play, x: MOVES[7].x, y: MOVES[7].y, click: true },
+  { t: T.play, x: PLAY.x + 2, y: PLAY.y + 2, click: true },
+  { t: T.focusComment, x: TARGETS.comment.x, y: TARGETS.comment.y, click: true },
 ];
 
 /** Lens stops: [start, end, size 0..1, magnification]. */
 export const LENS_STOPS: Array<[number, number, number, number]> = [
-  [18.5, 20.6, 0.2, 3.2],
-  [20.6, 22.3, 0.62, 1.6], // joined: the loupe morphs instead of closing
-  [22.3, 23.3, 0.38, 2.4], // joined again
+  [8.4, 9.5, 0.2, 3.2],
+  [9.5, 10.6, 0.62, 1.6], // joined: the loupe morphs instead of closing
+  [10.6, 11.4, 0.38, 2.4], // joined again
 ];
 
 const fittsDuration = (d: number) => 0.14 + 0.1 * Math.log2(1 + d / 24);
@@ -1212,7 +1232,7 @@ function sampleLeg(leg: Leg, time: number) {
 }
 
 export function cursorAt(time: number) {
-  const t = ((time % 24) + 24) % 24;
+  const t = ((time % RECORDING_DURATION) + RECORDING_DURATION) % RECORDING_DURATION;
   let pos = { x: HOME.x, y: HOME.y };
   for (const leg of LEGS) {
     if (t < leg.t0) break;

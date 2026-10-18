@@ -5,12 +5,26 @@ import { createServer } from 'node:http';
 import { statSync, createReadStream, existsSync, readdirSync, mkdirSync, writeFileSync } from 'node:fs';
 import { homedir } from 'node:os';
 import { resolve, join } from 'node:path';
+function compositorStageFrames(events) {
+ const marks=events.filter(e=>e.name==='TimeStamp'&&e.args?.data?.message?.startsWith('profile:'));
+ return marks.filter(e=>e.args.data.message.endsWith(':start')).map(start=>{
+  const name=start.args.data.message.split(':')[1];
+  const end=marks.find(e=>e.pid===start.pid&&e.ts>start.ts&&e.args.data.message==='profile:'+name+':end');
+  if(!end)return {name,passed:false,presented:0,dropped:0,partial:0};
+  const counts={};
+  for(const e of events)if(e.name==='PipelineReporter'&&e.pid===start.pid&&e.ts>=start.ts&&e.ts<=end.ts&&e.args?.frame_reporter&&e.args.frame_reporter.frame_type!=='FORKED') {
+   const state=e.args.frame_reporter.state;counts[state]=(counts[state]??0)+1;
+  }
+  const presented=counts.STATE_PRESENTED_ALL??0,dropped=counts.STATE_DROPPED??0,partial=counts.STATE_PRESENTED_PARTIAL??0;
+  return {name,presented,dropped,partial,passed:presented>=Math.floor((end.ts-start.ts)/1e6*60)-1&&dropped===0&&partial===0};
+ });
+}
 const label = process.argv[2] ?? 'profile';
 const url = process.argv[3] ?? 'http://localhost:4399';
 const scale = Number(process.argv[4] ?? 2);
 const viewportWidth = Number(process.env.PROFILE_WIDTH ?? 1280);
 const viewportHeight = Number(process.env.PROFILE_HEIGHT ?? 900);
-const cpuRate = Number(process.env.PROFILE_CPU_RATE ?? process.argv[5] ?? 1);
+const cpuRate = Number(process.env.PROFILE_CPU_RATE ?? (process.argv[5]?.startsWith('--') ? 1 : process.argv[5]) ?? 1);
 const samplingUs = Number(process.env.PROFILE_SAMPLING_US ?? (process.argv.includes("--low-overhead") ? 10000 : 1000));
 const extended = process.env.PROFILE_EXTENDED === '1';
 const cold = (process.env.PROFILE_COLD_MEDIA === '1' || process.argv.includes('--cold'));
@@ -68,10 +82,20 @@ try {
   const originalClear=CanvasRenderingContext2D.prototype.clearRect,scopes=new WeakMap();
   CanvasRenderingContext2D.prototype.clearRect=function(...args){
    let scope=scopes.get(this);
-   if(scope===undefined){scope=this.canvas.closest('.xp')?'hero':this.canvas.closest('#export')?'devices':'';scopes.set(this,scope)}
+   if(scope===undefined){scope=this.canvas.closest?.('.xp')?'hero':this.canvas.closest?.('#export')?'devices':'';scopes.set(this,scope)}
    if(scope)window.__xpDraws[scope]++;
    return originalClear.apply(this,args);
   };
+ `});
+ if(process.env.PROFILE_UPLOADS==='1') await send('Page.addScriptToEvaluateOnNewDocument',{source:`
+   window.__xpUploads=[];window.__xpCanvasResizes=[];
+   for(const proto of [WebGLRenderingContext.prototype,WebGL2RenderingContext.prototype])for(const method of ['texSubImage2D','texImage2D','generateMipmap']) {
+     const original=proto[method];proto[method]=function(...args){const start=performance.now();const result=original.apply(this,args);const ms=performance.now()-start;
+       if(ms>1){const source=args.at(-1);window.__xpUploads.push({method,ms,stage:window.__profileStage,w:source?.width??source?.videoWidth,h:source?.height??source?.videoHeight});}return result;};
+   }
+   for(const property of ['width','height']) {const descriptor=Object.getOwnPropertyDescriptor(HTMLCanvasElement.prototype,property);
+     Object.defineProperty(HTMLCanvasElement.prototype,property,{...descriptor,set(value){const start=performance.now();descriptor.set.call(this,value);const ms=performance.now()-start;if(ms>1)window.__xpCanvasResizes.push({property,ms,stage:window.__profileStage,w:this.width,h:this.height});}});
+   }
  `});
  if(cold) { await send('Network.enable'); await send('Network.setCacheDisabled',{cacheDisabled:true}); }
  if(process.argv.includes('--block-fonts')) {await send('Network.enable');await send('Network.setBlockedURLs',{urls:['*fonts.googleapis.com*','*fonts.gstatic.com*']});}
@@ -93,9 +117,12 @@ try {
  const stats=[],longTaskRecords=[];let longTasks=0,longTaskMs=0;
  const observer=new PerformanceObserver(list=>{for(const e of list.getEntries()){longTasks++;longTaskMs+=e.duration;longTaskRecords.push({at:e.startTime,ms:e.duration,stage:window.__profileStage});}});observer.observe({type:'longtask',buffered:false});
  const stages=[['hero',0,.025],['overview',.1,.15],['zoom',.18,.28],['3d',.3,.385],['lens',.405,.475],['captions',.49,.58],['keyboard',.6,.685],['camera',.71,.795],['screenshot',.85,.94],['below-hero',1.15,1.18]];
+ if(${process.env.PROFILE_VALIDATE_LENS==='1'||process.env.PROFILE_VALIDATE_CAMERA_READBACK==='1'}) stages.length=0;
+ if(${process.env.PROFILE_REVERSE==='1'}) { stages.reverse(); for(const stage of stages) [stage[1],stage[2]]=[stage[2],stage[1]]; }
  if(${process.env.PROFILE_REST_ONLY==='1'}) { stages.length=0; for(const id of ['export','performance','features','docs']){const el=document.getElementById(id);if(!el)continue;const box=el.getBoundingClientRect(),top=box.top+scrollY;stages.push([id+'-section',top/span,Math.max(top,top+box.height-innerHeight*.4)/span]);} stages.push(['footer-section',(document.querySelector('footer').getBoundingClientRect().top+scrollY-innerHeight*.5)/span,(document.documentElement.scrollHeight-innerHeight)/span]); }
  if(${cold}) { const a=document.getElementById('features'),b=document.getElementById('docs'); stages.length=0; stages.push(['cold-media',(a.getBoundingClientRect().top+scrollY-innerHeight*1.5)/span,(b.getBoundingClientRect().bottom+scrollY-innerHeight*.3)/span]); }
  if(${extended} && !${cold}) { stages.push(['idle-keyboard',.65,.65],['idle-camera',.76,.76],['idle-screenshot',.9,.9],['rest-of-page',1,(document.documentElement.scrollHeight-innerHeight)/span]); }
+ if (${JSON.stringify(process.env.PROFILE_STAGES ?? '')}) {const selected=${JSON.stringify((process.env.PROFILE_STAGES ?? '').split(','))};for(let i=stages.length-1;i>=0;i--)if(!selected.includes(stages[i][0]))stages.splice(i,1);}
  for(const [name,initialFrom,initialTo] of stages){
   let from=initialFrom,to=initialTo;
   if(${process.env.PROFILE_REST_ONLY==='1'}) {
@@ -111,19 +138,22 @@ try {
    }
   }
   window.scrollTo({top:span*from,behavior:'instant'});await new Promise(r=>setTimeout(r,${cold}?0:500));
+  console.timeStamp('profile:'+name+':start');
   const drawStart={...window.__xpDraws};
   const gaps=[],slowFrames=[];let prev; window.__profileStage=name;const start=performance.now();const duration=(name==='rest-of-page'||name==='cold-media')?10000:2200;
   await new Promise(resolve=>{const tick=now=>{if(prev){gaps.push(now-prev);if(now-prev>25)slowFrames.push({ms:now-prev,y:scrollY,at:now});}prev=now;const p=Math.min(1,(now-start)/duration);window.scrollTo({top:span*(from+(to-from)*p),behavior:'instant'});if(p<1)requestAnimationFrame(tick);else resolve();};requestAnimationFrame(tick);});
+  console.timeStamp('profile:'+name+':end');
   const sorted=[...gaps].sort((a,b)=>a-b),sum=gaps.reduce((a,b)=>a+b,0);
   stats.push({name,renderedFrames:{hero:window.__xpDraws.hero-drawStart.hero,devices:window.__xpDraws.devices-drawStart.devices},slowFrames,visibility:document.visibilityState,focused:document.hasFocus(),frames:gaps.length,fps:1000*gaps.length/sum,p50:sorted[Math.floor(sorted.length*.5)],p95:sorted[Math.floor(sorted.length*.95)],worst:Math.max(...gaps),over33ms:gaps.filter(x=>x>33.5).length});
  }
  await new Promise(r=>setTimeout(r,20));
- observer.disconnect();return {startedAt,stats,longTasks,longTaskMs,longTaskRecords,renderCosts:window.__xpMeasures};
+ observer.disconnect();return {startedAt,stats,longTasks,longTaskMs,longTaskRecords,renderCosts:window.__xpMeasures,gpuUploads:window.__xpUploads,canvasResizes:window.__xpCanvasResizes};
  })()`);
  const after=await send('Performance.getMetrics');
  const cpuAfter=await call('SystemInfo.getProcessInfo');
+ let compositorFrames;
  const {profile}=profiled?await send('Profiler.stop'):{profile:{nodes:[],samples:[],timeDeltas:[]}};
- if((process.env.PROFILE_TRACE==='1'||process.argv.includes('--trace'))){const done=new Promise(r=>traceDone=r);await call('Tracing.end');await done;writeFileSync(resolve(out,label+'.trace.json'),JSON.stringify({traceEvents}));}
+ if((process.env.PROFILE_TRACE==='1'||process.argv.includes('--trace'))){const done=new Promise(r=>traceDone=r);await call('Tracing.end');await done;writeFileSync(resolve(out,label+'.trace.json'),JSON.stringify({traceEvents}));compositorFrames=compositorStageFrames(traceEvents);}
  writeFileSync(resolve(out,label+'.cpuprofile'),JSON.stringify(profile));
  const nodes=new Map(profile.nodes.map(n=>[n.id,n]));const counts=new Map();let total=0;
  for(let i=0;i<(profile.samples??[]).length;i++){const node=nodes.get(profile.samples[i]);const ms=(profile.timeDeltas?.[i]??1000)/1000;total+=ms;const f=node?.callFrame;const key=(f?.functionName||'(anonymous)')+' '+(f?.url?.split('/').slice(-2).join('/')??'')+':'+((f?.lineNumber??0)+1);counts.set(key,(counts.get(key)??0)+ms);}
@@ -132,8 +162,59 @@ try {
  const beforeCpu=new Map(cpuBefore.processInfo.map(p=>[p.id,p.cpuTime]));
  const processCpuPercent={};
  for(const p of cpuAfter.processInfo){const percent=100*(p.cpuTime-(beforeCpu.get(p.id)??p.cpuTime))/delta.Timestamp;processCpuPercent[p.type]=(processCpuPercent[p.type]??0)+percent;}
- const summary={pageIntegrity:await evaluate(`({url:location.href,experience:!!document.querySelector(".xp-canvas"),camera:!!document.querySelector("video[data-camera-loop]")})`),initialReadiness,finalReadiness:await evaluate("({readyState:document.readyState,fonts:document.fonts.status})"),blockedFonts:process.argv.includes('--block-fonts'),profiled,runtimeErrors,label,url,cpuRate,samplingUs,extended,renderer,measurements,processCpuPercent,rendererMainThreadBusyPercent:100*delta.TaskDuration/delta.Timestamp,scriptSeconds:delta.ScriptDuration,layoutSeconds:delta.LayoutDuration,styleSeconds:delta.RecalcStyleDuration,heapMB:after.metrics.find(m=>m.name==='JSHeapUsedSize')?.value/1048576,hotspots:[...counts].sort((a,b)=>b[1]-a[1]).slice(0,24).map(([frame,ms])=>({frame,ms,pct:100*ms/total}))};
+ const summary={compositorFrames,pageIntegrity:await evaluate(`({url:location.href,experience:!!document.querySelector(".xp-canvas"),camera:!!document.querySelector("video[data-camera-loop]")})`),initialReadiness,finalReadiness:await evaluate("({readyState:document.readyState,fonts:document.fonts.status})"),blockedFonts:process.argv.includes('--block-fonts'),profiled,runtimeErrors,label,url,cpuRate,samplingUs,extended,renderer,measurements,processCpuPercent,rendererMainThreadBusyPercent:100*delta.TaskDuration/delta.Timestamp,scriptSeconds:delta.ScriptDuration,layoutSeconds:delta.LayoutDuration,styleSeconds:delta.RecalcStyleDuration,heapMB:after.metrics.find(m=>m.name==='JSHeapUsedSize')?.value/1048576,hotspots:[...counts].sort((a,b)=>b[1]-a[1]).slice(0,24).map(([frame,ms])=>({frame,ms,pct:100*ms/total}))};
  if(!summary.pageIntegrity.experience || !summary.pageIntegrity.camera || runtimeErrors.length){writeFileSync(resolve(out,label+'.json'),JSON.stringify(summary,null,2));throw Error('Page integrity failed: '+JSON.stringify({page:summary.pageIntegrity,runtimeErrors}));}
+ if (process.env.PROFILE_VALIDATE_CAMERA_READBACK === '1') {
+   summary.cameraReadbackValidation = await evaluate(`(async()=>{
+     const {CameraMaskGL}=await import('/src/components/experience/camera-gl.ts');
+     const video=document.createElement('video');video.muted=true;video.preload='auto';
+     video.src=document.querySelector('video[data-camera-loop]').currentSrc;
+     await new Promise(resolve=>video.addEventListener('loadeddata',resolve,{once:true}));
+     const mask=new CameraMaskGL(), color=document.createElement('canvas');
+     const w=video.videoWidth/2,h=video.videoHeight; color.width=w;color.height=h;
+     const scale=Math.min(1,256/Math.max(w,h)),dw=Math.round(w*scale),dh=Math.round(h*scale);
+     const capture=(source,cpu)=>{const c=document.createElement('canvas');c.width=dw;c.height=dh;
+       const g=c.getContext('2d',cpu?{willReadFrequently:true}:{});g.drawImage(source,0,0,dw,dh);return g.getImageData(0,0,dw,dh).data;};
+     const frames=[];
+     for(const time of [.1,.7,1.5,2.3]) {
+       video.currentTime=time;await new Promise(resolve=>video.addEventListener('seeked',resolve,{once:true}));
+       color.getContext('2d').drawImage(video,0,0,w,h,0,0,w,h); const cutout=mask.render(video);
+       for(const [kind,source] of [['color',color],['alpha',cutout]]){
+         const a=capture(source,true),b=capture(source,false);let pixels=0,maxChannelError=0,totalError=0;
+         for(let i=0;i<a.length;i+=4){let changed=false;for(let k=0;k<4;k++){const error=Math.abs(a[i+k]-b[i+k]);if(error)changed=true;maxChannelError=Math.max(maxChannelError,error);totalError+=error;}if(changed)pixels++;}
+         frames.push({time,kind,pixels,maxChannelError,meanChannelError:totalError/a.length});
+       }
+     }
+     mask.dispose();video.removeAttribute('src');video.load();return {width:dw,height:dh,frames};
+   })()`);
+ }
+ if (process.env.PROFILE_VALIDATE_LENS === '1') {
+   summary.lensPixelValidation = await evaluate(`(async()=>{
+     const {Preview}=await import('/src/components/experience/preview.ts');
+     const {createState,EW,EH}=await import('/src/components/experience/editor.ts');
+     await document.fonts.ready;
+     const optimized=new Preview(),reference=new Preview();
+     const fullScene=reference.drawScene.bind(reference);
+     reference.drawScene=(ctx,state,screen,camera,planeMode,radius,spatial)=>fullScene(ctx,state,screen,camera,planeMode,radius,spatial);
+     const a=document.createElement('canvas'),b=document.createElement('canvas');
+     a.width=b.width=EW*2;a.height=b.height=EH*2;
+     const ca=a.getContext('2d',{willReadFrequently:true}),cb=b.getContext('2d',{willReadFrequently:true});
+     const state=createState(false,'Click export and every zoom lands exactly where you placed it.');state.chrome=1;state.camera.show=false;
+     const sequence=[8.4,8.41,8.6,8.94,9.0,9.49,9.5,9.6,9.8,10.04,10.59,10.6,10.7,10.99,11.0,11.2,11.39,11.4];
+     let frames=0,differentPixels=0,maxChannelError=0;const failures=[];
+     for(const time of [...sequence,...sequence.toReversed()]){
+       state.time=time;
+       for(const c of [ca,cb]){c.setTransform(1,0,0,1,0,0);c.clearRect(0,0,a.width,a.height);c.setTransform(2,0,0,2,0,0);}
+       optimized.draw(ca,state,2,14);reference.draw(cb,state,2,14);
+       const x=ca.getImageData(0,0,a.width,a.height).data,y=cb.getImageData(0,0,b.width,b.height).data;
+       let changed=0,maximum=0;
+       for(let i=0;i<x.length;i+=4){let delta=0;for(let k=0;k<4;k++)delta=Math.max(delta,Math.abs(x[i+k]-y[i+k]));if(delta){changed++;maximum=Math.max(maximum,delta);}}
+       if(changed)failures.push({time,differentPixels:changed,maxChannelError:maximum});
+       differentPixels+=changed;maxChannelError=Math.max(maxChannelError,maximum);frames++;
+     }
+     optimized.dispose();reference.dispose();return {frames,differentPixels,maxChannelError,failures};
+   })()`);
+ }
  if (process.env.PROFILE_IDLE === '1') {
    summary.idle = [];
    for (const [name, progress] of [['keyboard',.65],['camera',.76],['screenshot',.9],['offscreen',1.15]]) {
@@ -178,6 +259,12 @@ try {
      const shot=await send('Page.captureScreenshot',{format:'png'});writeFileSync(resolve(out,label+'-'+name+'.png'),Buffer.from(shot.data,'base64'));
    }
  }
+ if (process.env.PROFILE_REQUIRE_60 === '1') {
+   summary.frameBudgetVerification = measurements.stats.filter(s=>['keyboard','camera'].includes(s.name)).map(s=>({name:s.name,passed:s.fps>=59.9 && s.worst<=20 && s.renderedFrames.hero>=s.frames,fps:s.fps,worst:s.worst,painted:s.renderedFrames.hero,callbacks:s.frames+1}));
+ }
  writeFileSync(resolve(out,label+'.json'),JSON.stringify(summary,null,2));
+ if(summary.frameBudgetVerification && summary.compositorFrames?.some(s=>['keyboard','camera'].includes(s.name)&&!s.passed))throw Error('Compositor presentation verification failed: '+JSON.stringify(summary.compositorFrames));
+ if(summary.frameBudgetVerification?.some(s=>!s.passed))throw Error('60 fps verification failed: '+JSON.stringify(summary.frameBudgetVerification));
+ if(summary.lensPixelValidation?.differentPixels)throw Error('Lens pixel validation failed: '+JSON.stringify(summary.lensPixelValidation.failures));
  console.log(JSON.stringify({label, cpuRate, samplingUs, busy:summary.rendererMainThreadBusyPercent,longTasks:measurements.longTasks,stages:measurements.stats.map(s=>({name:s.name,fps:s.fps,renderedFrames:s.renderedFrames,p95:s.p95,worst:s.worst}))},null,2));
 } finally {socket?.close();child.kill('SIGTERM');staticServer?.close();}

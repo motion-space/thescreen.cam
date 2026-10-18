@@ -1,3 +1,4 @@
+import { CHAPTERS, tourTimeAt } from "./story-timing";
 import { ScreenshotLayer } from "./screenshot-layer";
 import { drawPanel, warmPanel, warmShadow, disposePanelShadows } from "./panel-shadow";
 /**
@@ -42,7 +43,7 @@ import {
   TL_X0, TL_X1, TIMELINE_Y,
 } from "./editor";
 import { Anim, HitRegistry, type Hit, type Theme, type UI, makeTheme, squircle } from "./kit";
-import { KEY_STYLES, type KeyStyle } from "./keyboard";
+import { KEY_STYLES, disposeKeySprites, warmKeySprites, type KeyStyle } from "./keyboard";
 import { startCameraPlayback, setCameraPlaybackVisible, setCameraPlaybackTime, setCameraScrollControlled } from "./camera";
 import { Preview, warmCaptions } from "./preview";
 import { ATTACHMENT, CH, CW, setAppTheme, warmRecordedApp, disposeRecordedAppCaches } from "./recorded-app";
@@ -121,17 +122,6 @@ const KEYS: Key[] = [
   { p: 0.99062, rect: R.world, area: "overview" },
   { p: 1, rect: R.world, area: "overview" },
 ];
-
-/** Chapters: scroll span, mapped playback range, and autopilot selection. */
-const CHAPTERS = [
-  { key: "zoom", from: 0.16, to: 0.28, scrub: [0.1825, 0.28], time: [2.6, 8.9] },
-  { key: "zoom3d", from: 0.28, to: 0.385, scrub: [0.3025, 0.385], time: [14.0, 17.8] },
-  { key: "lens", from: 0.385, to: 0.475, scrub: [0.4075, 0.475], time: [18.3, 23.4] },
-  { key: "captions", from: 0.475, to: 0.58, scrub: [0.4975, 0.58], time: [9.2, 14.5] },
-  { key: "keyboard", from: 0.58, to: 0.69, scrub: [0.6, 0.676], time: [11.4, 14.45] },
-  { key: "camera", from: 0.69, to: 0.8, scrub: [0.715, 0.78], time: [14.6, 17.6] },
-  { key: "screenshot", from: 0.8, to: 0.95, scrub: [0.8, 0.815], time: [16.8, 16.8] },
-] as const;
 
 // Chapter entry points shared by the rail and navigation buttons.
 const CHAPTER_STOPS = CHAPTERS.map(ch => ch.key === "screenshot" ? .89 : ch.scrub[0] + .004);
@@ -425,6 +415,8 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
     screenshotLayer.draw(ui,state,handlers,editorDensity,true);
     const captionDensity=Math.max(...[.49,.58,...KEYS.filter(k=>k.p>=.49&&k.p<=.58).map(k=>k.p)].map(p=>cameraAt(p,W,H).z*dpr));
     const stopCaptionWarmup=warmCaptions(state,captionDensity);
+    const keyDensity=Math.max(...[.6,.685,...KEYS.filter(k=>k.p>=.6&&k.p<=.685).map(k=>k.p)].map(p=>cameraAt(p,W,H).z*dpr));
+    const stopKeyWarmup=warmKeySprites(COMP,keyDensity);
     const ro = new ResizeObserver(resize);
     ro.observe(canvas);
 
@@ -444,7 +436,7 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
       return clamp(-rect.top / Math.max(1, span));
     };
 
-    /** The scroll position is the only playback clock; chapters map their own demos. */
+    /** The scroll position samples one continuous recording across all chapters. */
     const applyScroll = (p: number) => {
       const index = CHAPTERS.findIndex((c) => p >= c.from && p < c.to);
       const next = p < CHAPTERS[0].from ? -1 : index === -1 ? CHAPTERS.length : index;
@@ -478,16 +470,11 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
           state.tab = 0;
         }
       }
-      const ch = CHAPTERS[chapter];
-      if (ch && controlled) {
-        const k = clamp((p - ch.scrub[0]) / (ch.scrub[1] - ch.scrub[0]));
-        state.time = lerp(ch.time[0], ch.time[1], k);
-      }
+      if (controlled) state.time = tourTimeAt(p);
     };
 
     const derived = (p: number) => {
       state.chrome = clamp((p - 0.035) / 0.085);
-      state.captionsShown = clamp((p - 0.49) / 0.0225) * (1 - clamp((p - 0.58) / 0.015));
       state.flash = clamp(1 - Math.abs(p - 0.81875) / 0.009);
       state.shot = clamp((p - 0.824) / 0.02625);
       state.annotate = clamp((p - 0.86) / 0.075);
@@ -979,6 +966,8 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
       screenshotLayer.dispose();
       stopWarmup();
       disposeRecordedAppCaches();
+      stopKeyWarmup();
+      disposeKeySprites();
       disposePanelShadows();
 
 

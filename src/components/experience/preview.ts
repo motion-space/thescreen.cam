@@ -1,3 +1,4 @@
+import { CAPTION } from "./story-timing";
 import { measureWidth } from "./kit";
 /**
  * The editor preview. The scene (background + recorded screen) is drawn with
@@ -13,6 +14,7 @@ import {
   activeZoom,
   type ZoomClip,
   zoomAt,
+  zoomScaleAt,
   horizonOf,
   padShadow,
   captionTokens,
@@ -62,7 +64,7 @@ export function cameraTarget(time: number) {
 function clipView(clip: ZoomClip, time: number, screen: Screen) {
   const comp = COMP;
   const focus = clip.manual ? clip.focus : cameraTarget(time);
-  const S = Math.max(1.0001, clip.zoom);
+  const S = Math.max(1, clip.zoom);
   // the composition shrunk by S, centred on the focus but kept inside the
   // recorded screen so no background shows at full zoom
   const w1 = comp.w / S;
@@ -111,12 +113,16 @@ export function spatial(state: EditorState, time: number, screen: Screen) {
   const z = activeZoom(state, time);
   if (!z || z.clip.mode !== 1) return null;
   const clip = z.clip;
+  const transition = zoomAt(state, time);
+  const fromFlat = transition?.from?.mode === 0 ? transition.from : null;
+  // The client's incoming frame carries scale/offset while spatial presentation blends in.
+  const incoming = fromFlat ? camera2D(state, clip.start - 1e-7, screen) : null;
+  const blend = incoming ? transition!.u : z.f;
   const span = Math.max(0.0001, clip.end - clip.start);
   const orbit = clamp((time - clip.start) / span);
-  const yaw = ((lerp(-30, -10, ease(orbit)) * Math.PI) / 180) * z.f;
-  const pitch = ((lerp(16, 8, orbit) * Math.PI) / 180) * z.f;
-  // push in towards the cursor: the 3D move is also a zoom
-  const push = 1 + (clip.zoom * 0.4 + 0.1) * z.f;
+  const yaw = ((lerp(-30, -10, ease(orbit)) * Math.PI) / 180) * blend;
+  const pitch = ((lerp(16, 8, orbit) * Math.PI) / 180) * blend;
+  const push = zoomScaleAt(state, time);
   const focal = lerp(1100, 2400, clip.focal);
   const aim = cameraTarget(time);
   const fu = aim.x / CW;
@@ -135,14 +141,13 @@ export function spatial(state: EditorState, time: number, screen: Screen) {
   };
   // keep the focus point drifting towards the centre of the frame
   const f = raw(fu, fv);
-  const pull = 0.75 * z.f;
-  const shiftX = -f.x * pull;
-  const shiftY = -f.y * pull;
+  const shiftX = incoming ? lerp(cx * incoming.s + incoming.ox - cx, -f.x * 0.75, blend) : -f.x * 0.75 * blend;
+  const shiftY = incoming ? lerp(cy * incoming.s + incoming.oy - cy, -f.y * 0.75, blend) : -f.y * 0.75 * blend;
   const project = (u: number, v: number) => {
     const r = raw(u, v);
     return { x: cx + r.x + shiftX, y: cy + r.y + shiftY, d: r.d };
   };
-  return { project, focusDepth: f.d, f: z.f, aperture: 1 };
+  return { project, focusDepth: f.d, f: blend, zoomScale: push, aperture: 1 };
 }
 
 function clicks(time: number) {
@@ -261,7 +266,7 @@ export class Preview {
     const time = state.time;
     // Reuse only an identical source frame (e.g. a paused preview while the
     // outer camera moves). Advancing time always paints; there is no rate cap.
-    const settings = JSON.stringify([state.background, state.zoomClips, state.motionBlur, state.captions, state.captionsShown, state.captionText, appThemeKey(), meshTextureVersion()]);
+    const settings = JSON.stringify([state.background, state.zoomClips, state.motionBlur, state.captions, state.captionText, appThemeKey(), meshTextureVersion()]);
     renderSource = time !== this.sourceTime || settings !== this.sourceSettings || !this.gl?.texture;
     // Resolution steps in quarter octaves, so the buffers are not reallocated
     // (and the content re-quantised) on every frame of a camera zoom; the
@@ -273,7 +278,7 @@ export class Preview {
     const ph = Math.max(2, Math.ceil(comp.h * kq));
     const k = pw / comp.w;
     const ky = ph / comp.h;
-    const caption = state.captions.background === 2 ? captionLayout(ctx, state, comp) : undefined;
+    const caption = state.captions.background > 0 ? captionLayout(ctx, state, comp) : undefined;
     const screen = screenRectIn(comp, state.background.padding);
     const cam = camera2D(state, time, screen);
     const prev = camera2D(state, time - FRAME, screen);
@@ -339,7 +344,13 @@ export class Preview {
         o.clearRect(0, 0, ow, ow);
         // world q → ((q - c) * backingMag + c - box) * k
         o.setTransform(k * backingMag, 0, 0, k * backingMag, (curWorld.x * (1 - backingMag) - box.x) * k, (curWorld.y * (1 - backingMag) - box.y) * k);
-        this.drawScene(o, state, screen, cam, false, screenRadius, null);
+        // The shader never samples beyond this aperture (refraction bends inward).
+        // Cull source tiles against those exact pixels, not the oversized backing canvas.
+        const sampleRadius = (r * k + 2) * samplingRatio;
+        this.drawScene(o, state, screen, cam, false, screenRadius, null, {
+          x: ow / 2 - sampleRadius, y: ow / 2 - sampleRadius,
+          w: sampleRadius * 2, h: sampleRadius * 2,
+        });
       }
     }
 
@@ -386,7 +397,7 @@ export class Preview {
         width: pw,
         height: ph,
         pixelScale: Math.min(pw, ph) / 1080,
-        caption: caption ? { x: (caption.bx - comp.x) * k, y: (caption.by - comp.y) * ky, w: caption.boxW * k, h: caption.boxH * ky, radius: caption.fs * 0.7 * k, alpha: caption.a } : null,
+        caption: caption ? { x: (caption.bx - comp.x) * k, y: (caption.by - comp.y) * ky, w: caption.boxW * k, h: caption.boxH * ky, radius: caption.fs * 0.7 * k, alpha: caption.a, mode: state.captions.background as 1 | 2 } : null,
         motion: state.motionBlur ? motion : { a: 1, bx: 0, by: 0 },
         blur: 0.5,
         waves,
@@ -420,6 +431,17 @@ export class Preview {
       ctx.fillStyle = "#000";
       ctx.fillRect(comp.x, comp.y, comp.w, comp.h); ctx.restore();
     } else ctx.drawImage(output, comp.x, comp.y, comp.w, comp.h);
+    if (!this.gl && caption && state.captions.background === 1) {
+      // Canvas fallback also blurs the footage, before the sharp text is composed.
+      ctx.save();
+      rr(ctx, caption.bx, caption.by, caption.boxW, caption.boxH, caption.fs * 0.7);
+      ctx.clip();
+      ctx.globalAlpha *= caption.a;
+      const matrix = ctx.getTransform();
+      ctx.filter = `blur(${caption.fs * 0.7 * 0.65 * Math.hypot(matrix.a, matrix.b)}px)`;
+      ctx.drawImage(output, comp.x, comp.y, comp.w, comp.h);
+      ctx.restore();
+    }
 
     // ---- cursor, with the client's directional motion blur ----
     const before = cursorAt(time - FRAME);
@@ -454,7 +476,7 @@ export class Preview {
     squircle(ctx, comp.x, comp.y, comp.w, comp.h, radius);
     ctx.clip();
     // the camera overlay shrinks with the screen camera's zoom (2D scale, or the 3D push)
-    const zoomScale = sp && z ? 1 + (z.clip.zoom - 1) * z.f : cam.s;
+    const zoomScale = sp ? sp.zoomScale : cam.s;
     drawCamera(ctx, comp, state.camera, time, performance.now(), reducedMotion, zoomScale);
     const captionBounds = drawCaptions(ctx, state, comp, !!this.gl);
     drawKeyOverlay(ctx, comp, time, state.keys, state.captions.bottom ? captionBounds?.y : undefined);
@@ -516,6 +538,7 @@ export class Preview {
     planeMode: boolean,
     screenRadius: number,
     sp: ReturnType<typeof spatial>,
+    viewport?: Rect,
   ) {
     c.save();
     c.translate(cam.ox, cam.oy);
@@ -558,28 +581,43 @@ export class Preview {
       c.shadowOffsetX = 0;
       c.shadowOffsetY = 0;
     } else {
-      // the backdrop only holds the background; the shadow is drawn per frame from
-      // a cached raster, so dragging the shadow pads never re-bakes this bitmap
-      const key = JSON.stringify([state.background.frame, state.background.padding]);
-      if (key !== this.backdropKey) {
-        const scale = 4;
-        const bw=Math.ceil(COMP.w*scale), bh=Math.ceil(COMP.h*scale);
-        if(this.backdrop.width!==bw || this.backdrop.height!==bh) { this.backdrop.width=bw;this.backdrop.height=bh; }
-        const b = this.backdrop.getContext("2d")!;
-        b.setTransform(scale, 0, 0, scale, -COMP.x * scale, -COMP.y * scale);
-        paintFrameBackground(b, COMP, state.background.frame);
-        this.backdropKey = key;
+      // At close zoom the opaque recording can completely cover the backing
+      // canvas. Do not submit the large backdrop/shadow textures underneath
+      // pixels that the recording will replace. Keep a two-pixel guard for AA.
+      const m = c.getTransform();
+      const view = viewport ?? { x: 0, y: 0, w: c.canvas.width, h: c.canvas.height };
+      const covered = (px: number, py: number) => {
+        const x = (px - m.e) / m.a, y = (py - m.f) / m.d;
+        const r = Math.max(screenRadius, 12 * screen.s);
+        const dx = Math.max(screen.x + r - x, 0, x - (screen.x + screen.w - r));
+        const dy = Math.max(screen.y + r - y, 0, y - (screen.y + screen.h - r));
+        return Math.hypot(dx, dy) < r - 2 / Math.min(m.a, m.d);
+      };
+      const opaque = [0, 1].every(i => [0, 1].every(j => covered(view.x + i * view.w, view.y + j * view.h)));
+      if (!opaque) {
+        // the backdrop only holds the background; the shadow is drawn per frame from
+        // a cached raster, so dragging the shadow pads never re-bakes this bitmap
+        const key = JSON.stringify([state.background.frame, state.background.padding]);
+        if (key !== this.backdropKey) {
+          const scale = 4;
+          const bw=Math.ceil(COMP.w*scale), bh=Math.ceil(COMP.h*scale);
+          if(this.backdrop.width!==bw || this.backdrop.height!==bh) { this.backdrop.width=bw;this.backdrop.height=bh; }
+          const b = this.backdrop.getContext("2d")!;
+          b.setTransform(scale, 0, 0, scale, -COMP.x * scale, -COMP.y * scale);
+          paintFrameBackground(b, COMP, state.background.frame);
+          this.backdropKey = key;
+        }
+        c.drawImage(this.backdrop, COMP.x, COMP.y, COMP.w, COMP.h);
+        // Shadow only (no filled underlay): a light rim under the window would
+        // shimmer against its vector edge whenever the camera zooms.
+        drawShadow(c, screen.x, screen.y, screen.w, screen.h, screenRadius, shade.blur, shade.alpha, shade.ox, shade.oy);
       }
-      c.drawImage(this.backdrop, COMP.x, COMP.y, COMP.w, COMP.h);
-      // Shadow only (no filled underlay): a light rim under the window would
-      // shimmer against its vector edge whenever the camera zooms.
-      drawShadow(c, screen.x, screen.y, screen.w, screen.h, screenRadius, shade.blur, shade.alpha, shade.ox, shade.oy);
       c.save();
       rr(c, screen.x, screen.y, screen.w, screen.h, screenRadius);
       c.clip();
       c.translate(screen.x, screen.y);
       c.scale(screen.s, screen.s);
-      drawRecordedApp(c, state.time);
+      drawRecordedApp(c, state.time, viewport);
       c.restore();
     }
     c.restore();
@@ -594,12 +632,12 @@ let captionPixels = 0;
 
 function captionLayout(ctx: CanvasRenderingContext2D, state: EditorState, comp: Rect) {
   const time = state.time;
-  const capStart = 9.6;
-  const capEnd = 14.2;
-  if (!(state.captions.enabled && state.captionsShown > 0.5 && time > capStart - 0.3 && time < capEnd + 0.3)) return;
-  const a = clamp(Math.min((time - (capStart - 0.3)) / 0.3, (capEnd + 0.3 - time) / 0.3));
+  const capStart = CAPTION.start;
+  const capEnd = CAPTION.end;
+  if (!(state.captions.enabled && time > capStart - CAPTION.fade && time < capEnd + CAPTION.fade)) return;
+  const a = clamp(Math.min((time - (capStart - CAPTION.fade)) / CAPTION.fade, (capEnd + CAPTION.fade - time) / CAPTION.fade));
   const tokens = captionTokens(state.captionText);
-  const progress = clamp((time - capStart) / (capEnd - capStart - 0.6));
+  const progress = clamp((time - capStart) / (capEnd - capStart - CAPTION.readTail));
   const fs = Math.round(lerp(14, 22, state.captions.size));
   ctx.font = font(fs, 650);
   const joiner = /\s/.test(state.captionText) ? " " : "";
@@ -621,7 +659,7 @@ function captionLayout(ctx: CanvasRenderingContext2D, state: EditorState, comp: 
   return { a, tokens, progress, fs, joiner, lines, lineH, boxW, boxH, bx, by, bounds };
 }
 
-export function drawCaptions(ctx: CanvasRenderingContext2D, state: EditorState, comp: Rect, glassRendered = false): Rect | undefined {
+export function drawCaptions(ctx: CanvasRenderingContext2D, state: EditorState, comp: Rect, backgroundRendered = false): Rect | undefined {
   const layout = captionLayout(ctx, state, comp);
   if (!layout) return;
   const { a, tokens, progress, fs, joiner, lines, lineH, boxW, boxH, bx, by, bounds } = layout;
@@ -629,7 +667,7 @@ export function drawCaptions(ctx: CanvasRenderingContext2D, state: EditorState, 
   const read = state.captions.readAlong ? Math.floor(progress*tokens.length+0.0001) : tokens.length;
   const matrix=ctx.getTransform();
   const scale=Math.max(captionSprite.scale,Math.ceil(Math.max(Math.hypot(matrix.a,matrix.b),Math.hypot(matrix.c,matrix.d))*2)/2);
-  const key=JSON.stringify([scale,state.captionText,state.captions,read,comp.w,comp.h,glassRendered]);
+  const key=JSON.stringify([scale,state.captionText,state.captions,read,comp.w,comp.h,backgroundRendered]);
   const target=ctx, pad=12, x0=bx-pad, y0=by-pad;
   const present=()=>{target.globalAlpha=a;target.drawImage(captionSprite.canvas!,x0,y0,captionSprite.canvas!.width/scale,captionSprite.canvas!.height/scale);target.restore();};
   const cached=captionSprites.get(key);
@@ -641,9 +679,9 @@ export function drawCaptions(ctx: CanvasRenderingContext2D, state: EditorState, 
   ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,width,height);ctx.save();ctx.setTransform(scale,0,0,scale,-x0*scale,-y0*scale);
   ctx.globalAlpha = 1;
   const mode = state.captions.background;
-  if (mode > 0 && !(mode === 2 && glassRendered)) {
+  if (mode > 0 && !backgroundRendered) {
     rr(ctx, bx, by, boxW, boxH, fs * 0.7);
-    ctx.fillStyle = mode === 2 ? "rgba(36,36,40,0.5)" : "rgba(10,10,12,0.68)";
+    ctx.fillStyle = mode === 2 ? "rgba(36,36,40,0.5)" : "rgba(10,10,12,0.36)";
     ctx.fill();
     if (mode === 2) {
       const sheen = ctx.createLinearGradient(bx, by, bx, by + boxH);
@@ -698,9 +736,9 @@ export function warmCaptions(state: EditorState,density: number) {
     if(stopped||index>count){scratch.width=scratch.height=1;return;}
     idle=requestIdleCallback(async()=>{
       if(stopped)return;
-      const time=state.time,shown=state.captionsShown;
-      try{state.time=9.6+4*(index+0.001)/Math.max(1,count);state.captionsShown=1;drawCaptions(ctx,state,COMP,true);}
-      finally{state.time=time;state.captionsShown=shown;}
+      const time=state.time;
+      try{state.time=CAPTION.start+(CAPTION.end-CAPTION.start-CAPTION.readTail)*(index+0.001)/Math.max(1,count);drawCaptions(ctx,state,COMP,true);}
+      finally{state.time=time;}
       index++;
       if(captionSprite.canvas)try{const bitmap=await createImageBitmap(captionSprite.canvas);bitmap.close();}catch{}
       next();
