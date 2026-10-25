@@ -1,3 +1,20 @@
+# 1.0.12
+
+<!-- highlights
+- In-app update reminders and release highlights
+- Smoother editing on long projects
+- Improved screenshot selection and quick actions
+-->
+
+- Get Microsoft Store update reminders in the app, check for updates in Settings > About, and see highlights of what's new.
+- Edit long projects more smoothly, with faster preview updates, audio waveforms, cursor changes, and keyboard tracks.
+- Keep typed values and pending camera edits through editor refreshes, and save the latest edits reliably.
+- Select screenshot windows and areas on the same overlays used for recording, over a frozen screen; release to capture an area, or press Escape or right-click to cancel.
+- Refreshed screenshot quick actions have smoother corners, a steadier pointer, and menus that keep the card open while you use them.
+- The editor opens at the intended size on scaled displays, and the export dialog stays centered when its phase changes.
+- Interface text and menus follow the app language, with more consistent text weights.
+- Send a saved crash report directly from the next-launch crash notice.
+
 # 1.0.11
 
 <!-- highlights
