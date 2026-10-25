@@ -1,3 +1,19 @@
+# 1.0.12
+
+<!-- highlights
+- Store update reminders with what's new
+- Screenshots select like recordings
+- Faster editing in long recordings
+-->
+
+- ScreenCam now tells you when an update is available in the Microsoft Store and shows what's new in it.
+- Window and area screenshots now use the same selection as recordings: the screen freezes under the selection, an area is captured as soon as you release the mouse, a window as soon as you click it, and Esc or a right-click cancels.
+- The screenshot quick actions card now matches the recording card: its More menu opens instantly inside the card without an extra taskbar button, Quick Look opens and closes with Space, Esc or a click outside, and the card stays active while you use its menu.
+- Editing long recordings is faster: toggling cursor and keyboard events, editing captions, typing values and dragging sliders respond sooner, and preview frames no longer hold up the interface.
+- The export progress and completion dialogs stay centred over the editor.
+- The editor opens at a comfortable default size on high-DPI displays.
+- Interface text follows the language chosen in ScreenCam, and Chinese text no longer looks overly bold.
+
 # 1.0.11
 
 <!-- highlights
