@@ -358,7 +358,11 @@ type LocaleTranslation = {
     eyebrow: string;
     intro: string;
     linkVersionLabel: string;
+    platformLabel: string;
     title: string;
+    windowsFallbackNote: string;
+    windowsIntro: string;
+    windowsTitle: string;
   };
   common: {
     skipToContent: string;
@@ -385,6 +389,7 @@ type LocaleTranslation = {
   };
   meta: {
     changelog: PageMeta;
+    changelogWindows: PageMeta;
     docs: PageMeta;
     home: PageMeta;
     motionBlurMask: PageMeta;
@@ -654,6 +659,10 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       changelog: {
         title: "Changelog - ScreenCam",
         description: "Follow ScreenCam release notes, product improvements, bug fixes, and update history.",
+      },
+      changelogWindows: {
+        title: "Windows Changelog - ScreenCam",
+        description: "Follow ScreenCam for Windows release notes and Microsoft Store update history.",
       },
       docs: {
         title: "Docs - ScreenCam",
@@ -1478,7 +1487,11 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       eyebrow: "Changelog",
       intro: "Product updates, fixes, and release notes.",
       linkVersionLabel: "Link to version",
+      platformLabel: "Platform",
       title: "ScreenCam Changelog",
+      windowsFallbackNote: "Windows release notes are currently available in English and Simplified Chinese.",
+      windowsIntro: "Updates, fixes, and release notes for ScreenCam on Windows.",
+      windowsTitle: "ScreenCam for Windows Changelog",
     },
     motionBlurTool: {
       addMaskAria: "Add mask",
@@ -1577,6 +1590,10 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       changelog: {
         title: "更新日志 - ScreenCam",
         description: "查看 ScreenCam 的版本说明、产品改进、问题修复和更新历史。",
+      },
+      changelogWindows: {
+        title: "Windows 版更新日志 - ScreenCam",
+        description: "查看 ScreenCam Windows 版的版本说明和 Microsoft Store 更新历史。",
       },
       docs: {
         title: "文档 - ScreenCam",
@@ -2342,7 +2359,11 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       eyebrow: "更新日志",
       intro: "产品更新、修复和版本说明。",
       linkVersionLabel: "链接到版本",
+      platformLabel: "平台",
       title: "ScreenCam 更新日志",
+      windowsFallbackNote: "Windows 版更新日志目前仅提供英文和简体中文版本。",
+      windowsIntro: "ScreenCam Windows 版的产品更新、修复和版本说明。",
+      windowsTitle: "ScreenCam Windows 版更新日志",
     },
     motionBlurTool: {
       addMaskAria: "添加遮罩",
@@ -2440,6 +2461,10 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       changelog: {
         title: "Changelog - ScreenCam",
         description: "Lies ScreenCam Versionshinweise, Produktverbesserungen, Fehlerbehebungen und Update-Historie.",
+      },
+      changelogWindows: {
+        title: "Windows-Changelog - ScreenCam",
+        description: "Lies die Versionshinweise von ScreenCam für Windows und die Update-Historie im Microsoft Store.",
       },
       docs: {
         title: "Docs - ScreenCam",
@@ -3227,7 +3252,11 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       eyebrow: "Changelog",
       intro: "Produktupdates, Fehlerbehebungen und Versionshinweise.",
       linkVersionLabel: "Link zu Version",
+      platformLabel: "Plattform",
       title: "ScreenCam Changelog",
+      windowsFallbackNote: "Die Windows-Versionshinweise sind derzeit nur auf Englisch und vereinfachtem Chinesisch verfügbar.",
+      windowsIntro: "Produktupdates, Fehlerbehebungen und Versionshinweise für ScreenCam unter Windows.",
+      windowsTitle: "ScreenCam für Windows Changelog",
     },
     motionBlurTool: {
       addMaskAria: "Maske hinzufügen",
@@ -3325,6 +3354,10 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       changelog: {
         title: "変更履歴 - ScreenCam",
         description: "ScreenCam のリリースノート、製品改善、バグ修正、更新履歴を確認できます。",
+      },
+      changelogWindows: {
+        title: "Windows 版変更履歴 - ScreenCam",
+        description: "ScreenCam for Windows のリリースノートと Microsoft Store での更新履歴を確認できます。",
       },
       docs: {
         title: "ドキュメント - ScreenCam",
@@ -4091,7 +4124,11 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       eyebrow: "変更履歴",
       intro: "製品アップデート、修正、リリースノート。",
       linkVersionLabel: "バージョンへのリンク",
+      platformLabel: "プラットフォーム",
       title: "ScreenCam 変更履歴",
+      windowsFallbackNote: "Windows 版の変更履歴は現在、英語と簡体字中国語でのみ提供しています。",
+      windowsIntro: "Windows 版 ScreenCam の製品アップデート、修正、リリースノート。",
+      windowsTitle: "ScreenCam for Windows 変更履歴",
     },
     motionBlurTool: {
       addMaskAria: "マスクを追加",
@@ -4189,6 +4226,10 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       changelog: {
         title: "변경 내역 - ScreenCam",
         description: "ScreenCam 릴리스 노트, 제품 개선, 버그 수정, 업데이트 기록을 확인하세요.",
+      },
+      changelogWindows: {
+        title: "Windows 변경 내역 - ScreenCam",
+        description: "Windows용 ScreenCam 릴리스 노트와 Microsoft Store 업데이트 기록을 확인하세요.",
       },
       docs: {
         title: "문서 - ScreenCam",
@@ -4955,7 +4996,11 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       eyebrow: "변경 내역",
       intro: "제품 업데이트, 수정 사항, 릴리스 노트.",
       linkVersionLabel: "버전 링크",
+      platformLabel: "플랫폼",
       title: "ScreenCam 변경 내역",
+      windowsFallbackNote: "Windows 변경 내역은 현재 영어와 중국어 간체로만 제공됩니다.",
+      windowsIntro: "Windows용 ScreenCam의 제품 업데이트, 수정 사항, 릴리스 노트.",
+      windowsTitle: "ScreenCam for Windows 변경 내역",
     },
     motionBlurTool: {
       addMaskAria: "마스크 추가",
@@ -5053,6 +5098,10 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       changelog: {
         title: "更新日誌 - ScreenCam",
         description: "檢視 ScreenCam 的版本說明、產品改進、問題修復和更新歷史。",
+      },
+      changelogWindows: {
+        title: "Windows 版更新日誌 - ScreenCam",
+        description: "檢視 ScreenCam Windows 版的版本說明和 Microsoft Store 更新歷史。",
       },
       docs: {
         title: "文件 - ScreenCam",
@@ -5818,7 +5867,11 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       eyebrow: "更新日誌",
       intro: "產品更新、修復和版本說明。",
       linkVersionLabel: "連結到版本",
+      platformLabel: "平台",
       title: "ScreenCam 更新日誌",
+      windowsFallbackNote: "Windows 版更新日誌目前僅提供英文和簡體中文版本。",
+      windowsIntro: "ScreenCam Windows 版的產品更新、修復和版本說明。",
+      windowsTitle: "ScreenCam Windows 版更新日誌",
     },
     motionBlurTool: {
       addMaskAria: "新增遮罩",
@@ -5916,6 +5969,10 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       changelog: {
         title: "Registro de cambios: ScreenCam",
         description: "Siga las notas de la versión del ScreenCam, las mejoras del producto, las correcciones de errores y el historial de actualizaciones.",
+      },
+      changelogWindows: {
+        title: "Registro de cambios de Windows: ScreenCam",
+        description: "Consulta las notas de la versión de ScreenCam para Windows y su historial de actualizaciones en Microsoft Store.",
       },
       docs: {
         title: "Documentos - ScreenCam",
@@ -6740,7 +6797,11 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       eyebrow: "Registro de cambios",
       intro: "ProActualizaciones de conductos, correcciones y notas de la versión.",
       linkVersionLabel: "Enlace a la versión",
+      platformLabel: "Plataforma",
       title: "Registro de cambios ScreenCam",
+      windowsFallbackNote: "Por ahora, las notas de la versión para Windows solo están disponibles en inglés y chino simplificado.",
+      windowsIntro: "Actualizaciones, correcciones y notas de la versión de ScreenCam para Windows.",
+      windowsTitle: "Registro de cambios de ScreenCam para Windows",
     },
     motionBlurTool: {
       addMaskAria: "Agregar máscara",
@@ -6839,6 +6900,10 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       changelog: {
         title: "Journal des modifications - ScreenCam",
         description: "Suivez les notes de version de ScreenCam, les améliorations du produit, les corrections de bugs et l'historique des mises à jour.",
+      },
+      changelogWindows: {
+        title: "Journal des modifications Windows - ScreenCam",
+        description: "Consultez les notes de version de ScreenCam pour Windows et l'historique des mises à jour sur le Microsoft Store.",
       },
       docs: {
         title: "Documents - ScreenCam",
@@ -7663,7 +7728,11 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       eyebrow: "Journal des modifications",
       intro: "Product mises à jour, correctifs et notes de version.",
       linkVersionLabel: "Lien vers la version",
+      platformLabel: "Plateforme",
       title: "Journal des modifications ScreenCam",
+      windowsFallbackNote: "Les notes de version Windows ne sont pour l'instant disponibles qu'en anglais et en chinois simplifié.",
+      windowsIntro: "Mises à jour, correctifs et notes de version de ScreenCam pour Windows.",
+      windowsTitle: "Journal des modifications de ScreenCam pour Windows",
     },
     motionBlurTool: {
       addMaskAria: "Ajouter un masque",
@@ -7762,6 +7831,10 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       changelog: {
         title: "Registro de alterações - ScreenCam",
         description: "Siga as notas de versão do ScreenCam, melhorias do produto, correções de bugs e histórico de atualizações.",
+      },
+      changelogWindows: {
+        title: "Registro de alterações do Windows - ScreenCam",
+        description: "Veja as notas de versão do ScreenCam para Windows e o histórico de atualizações na Microsoft Store.",
       },
       docs: {
         title: "Documentos - ScreenCam",
@@ -8586,7 +8659,11 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       eyebrow: "Registro de alterações",
       intro: "Atualizações, correções e notas de versão do Product.",
       linkVersionLabel: "Link para a versão",
+      platformLabel: "Plataforma",
       title: "Registro de alterações ScreenCam",
+      windowsFallbackNote: "Por enquanto, as notas de versão para Windows estão disponíveis apenas em inglês e chinês simplificado.",
+      windowsIntro: "Atualizações, correções e notas de versão do ScreenCam para Windows.",
+      windowsTitle: "Registro de alterações do ScreenCam para Windows",
     },
     motionBlurTool: {
       addMaskAria: "Adicionar máscara",
@@ -8685,6 +8762,10 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       changelog: {
         title: "Registro delle modifiche: ScreenCam",
         description: "Segui le note di rilascio di ScreenCam, i miglioramenti del prodotto, le correzioni di bug e la cronologia degli aggiornamenti.",
+      },
+      changelogWindows: {
+        title: "Registro delle modifiche Windows: ScreenCam",
+        description: "Consulta le note di rilascio di ScreenCam per Windows e la cronologia degli aggiornamenti su Microsoft Store.",
       },
       docs: {
         title: "Documenti: ScreenCam",
@@ -9509,7 +9590,11 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       eyebrow: "Registro delle modifiche",
       intro: "Proaggiornamenti, correzioni e note di rilascio del condotto.",
       linkVersionLabel: "Collegamento alla versione",
+      platformLabel: "Piattaforma",
       title: "ScreenCam Registro modifiche",
+      windowsFallbackNote: "Per ora le note di rilascio per Windows sono disponibili solo in inglese e cinese semplificato.",
+      windowsIntro: "Aggiornamenti, correzioni e note di rilascio di ScreenCam per Windows.",
+      windowsTitle: "Registro delle modifiche di ScreenCam per Windows",
     },
     motionBlurTool: {
       addMaskAria: "Aggiungi maschera",
