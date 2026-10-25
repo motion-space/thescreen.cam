@@ -1,5 +1,11 @@
 # 1.0.11
 
+<!-- highlights
+- Word-by-word captions, offline or cloud
+- New Screenshots settings and shutter sound
+- Send feedback from inside the app
+-->
+
 - Generate word-by-word captions for your recordings, either fully offline on your PC with a local Whisper model (downloaded on first use) or through a cloud transcription provider with your own API key.
 - Edit captions on the new caption lane, in the Captions inspector, or in the Edit Captions window; select a caption to play it back, see its waveform, and adjust the timing of individual words.
 - Caption styles, including blur and glass backgrounds, appear in the preview and in exports, and presets now save the caption look.
@@ -15,6 +21,12 @@
 
 # 1.0.10
 
+<!-- highlights
+- Screenshots now available to everyone
+- Double-click a selection to capture
+- Faster screenshots, including on HDR
+-->
+
 - Screenshots are now available to everyone instead of being an experimental setting, with entries in the recording toolbar and the tray menu.
 - Double-click inside a selected area to take the screenshot.
 - The area outside the selection is shaded while you select on a frozen screen.
@@ -25,11 +37,23 @@
 
 # 1.0.9
 
+<!-- highlights
+- New first-run welcome tour
+- Sharper toolbar icons at 150% scaling
+- Cleaner Settings window
+-->
+
 - A first-run welcome tour introduces recording and editing, as in the macOS app.
 - Recording toolbar icons are sharper at 150% display scaling, and Chinese window titles and labels in the selection bar are easier to read.
 - The Settings window no longer shows a redundant Close button.
 
 # 1.0.8
+
+<!-- highlights
+- Redesigned recording toolbar with pause
+- GIF export and copy to clipboard
+- Faster background exports with HEVC
+-->
 
 - Redesigned recording toolbar matching the macOS app, with acrylic capsule cards, live audio meters, smooth transitions, and buttons to mute the camera, microphone, system audio, and keyboard overlay while recording.
 - Pause and resume recordings from the toolbar or the tray menu, which now shows the current recording state.
@@ -56,6 +80,12 @@
 
 # 1.0.7
 
+<!-- highlights
+- Mesh gradient backgrounds with noise texture
+- Refreshed sliders and segmented controls
+- Fixed startup without Visual C++ runtime
+-->
+
 - Mesh gradient backgrounds, plus an optional noise texture with adjustable density, intensity, and size.
 - Refreshed sliders and segmented controls matching the macOS app.
 - Support for 365-day ScreenCam Pro codes.
@@ -63,9 +93,19 @@
 
 # 1.0.5
 
+<!-- highlights
+- Smaller download, about 120 MB installed
+-->
+
 - Smaller download: the installed app shrinks from about 214 MB to about 120 MB.
 
 # 1.0.4
+
+<!-- highlights
+- First release on the Microsoft Store
+- Record a display, window or area
+- Zooms, cursor styles and MP4 export
+-->
 
 - First release of ScreenCam for Windows on the Microsoft Store.
 - Record a display, a window, or an area, with camera, microphone, and system audio.
