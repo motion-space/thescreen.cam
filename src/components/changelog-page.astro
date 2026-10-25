@@ -1,26 +1,42 @@
 ---
 import "../styles/global.css";
 import type { Locale } from "../lib/i18n";
-import { defaultLocale } from "../lib/i18n";
+import { defaultLocale, localizedPath } from "../lib/i18n";
 import { getTranslation } from "../lib/translations";
 import { Footer } from "./footer";
 import PageHead from "./page-head.astro";
 import { SiteHeader } from "./site-header";
 
+type ChangelogPlatform = "macos" | "windows";
+
 interface Props {
   locale: Locale;
+  platform?: ChangelogPlatform;
 }
 
-const { locale } = Astro.props;
+const { locale, platform = "macos" } = Astro.props;
 const t = getTranslation(locale);
-const meta = t.meta.changelog;
 const copy = t.changelog;
-const path = "/changelog";
-const changelogs = import.meta.glob("../../changelogs/*.md", { eager: true });
-const changelogModule = (
-  changelogs[`../../changelogs/${locale}.md`] ?? changelogs[`../../changelogs/${defaultLocale}.md`]
-) as { Content: any };
+const isWindows = platform === "windows";
+const meta = isWindows ? t.meta.changelogWindows : t.meta.changelog;
+const macPath = "/changelog";
+const windowsPath = "/changelog/windows";
+const path = isWindows ? windowsPath : macPath;
+
+// macOS notes are copied from motion-space/screen-cam (changelogs/*.md, every site locale);
+// Windows notes from motion-space/screen-cam-win (changelogs/windows/*.md, English and Simplified Chinese).
+const macChangelogs = import.meta.glob("../../changelogs/*.md", { eager: true });
+const windowsChangelogs = import.meta.glob("../../changelogs/windows/*.md", { eager: true });
+const changelogs = isWindows ? windowsChangelogs : macChangelogs;
+const directory = isWindows ? "../../changelogs/windows" : "../../changelogs";
+const localizedModule = changelogs[`${directory}/${locale}.md`];
+const changelogModule = (localizedModule ?? changelogs[`${directory}/${defaultLocale}.md`]) as { Content: any };
 const Content = changelogModule.Content;
+const showsFallbackNote = isWindows && !localizedModule;
+const platforms = [
+  { id: "macos", label: "macOS", href: localizedPath(locale, macPath) },
+  { id: "windows", label: "Windows", href: localizedPath(locale, windowsPath) },
+] as const;
 ---
 
 <!doctype html>
@@ -32,7 +48,8 @@ const Content = changelogModule.Content;
     <a class="skip-link" href="#main">{t.common.skipToContent}</a>
     <SiteHeader
       copy={t.header}
-      currentPath={path}
+      currentPath={macPath}
+      languagePath={path}
       languageLabel={t.footer.language}
       locale={locale}
       client:load
@@ -43,9 +60,19 @@ const Content = changelogModule.Content;
         <div class="changelog-hero">
           <div>
             <p class="eyebrow">{copy.eyebrow}</p>
-            <h1>{copy.title}</h1>
-            <p class="legal-updated">{copy.intro}</p>
+            <h1>{isWindows ? copy.windowsTitle : copy.title}</h1>
+            <p class="legal-updated">{isWindows ? copy.windowsIntro : copy.intro}</p>
           </div>
+          <nav class="changelog-platforms" aria-label={copy.platformLabel}>
+            {
+              platforms.map((item) => (
+                <a href={item.href} aria-current={item.id === platform ? "page" : undefined}>
+                  {item.label}
+                </a>
+              ))
+            }
+          </nav>
+          {showsFallbackNote && <p class="changelog-fallback-note">{copy.windowsFallbackNote}</p>}
         </div>
 
         <div class="changelog-markdown">
