@@ -1,10 +1,11 @@
 # 1.0.13
 
 <!-- highlights
-- Fixed startup crashes with decimal-comma regional formats
+- Fixes a crash at launch in many regions
 -->
 
-- Fixed a startup crash when Windows uses a comma as the decimal separator, such as in German, French or Russian regional formats.
+- Fixed ScreenCam closing right after it starts when Windows uses a regional format with a decimal comma, such as German, French, Russian, Polish, Slovenian or Brazilian Portuguese.
+- Crash reports are now saved and offered reliably whatever the regional format or calendar.
 
 # 1.0.12
 
