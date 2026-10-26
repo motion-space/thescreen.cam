@@ -5,3 +5,11 @@
 
 /transitions/index.json
   Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+
+/devices/iphone-duo/manifest.json
+  Cache-Control: no-cache
+/devices/index.json
+  Cache-Control: no-cache
+/devices/iphone-duo/1.0.0/device.scdevice
+  Cache-Control: public, max-age=31536000, immutable
+  Content-Type: application/octet-stream

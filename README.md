@@ -102,6 +102,17 @@ The standalone `scripts/transitions/transition-pack.mjs` tool lets users author,
 validate, and pack self-contained `.sctransition` shader files for local import. Publishing an
 updated official catalog requires the externally stored Ed25519 signing key.
 
+## Device Catalog
+
+Native data-only device resources live in `content/devices/iphone-duo/1.0.0/`. They are delivered separately from the ScreenCam App.
+
+```bash
+npm run devices:build
+npm run devices:test
+```
+
+The normal build publishes `/api/devices.json`, `/devices/iphone-duo/manifest.json`, and an immutable versioned `device.scdevice`. The manifest declares recording-kind restrictions, colors, postures, compatibility, sizes and SHA-256. `SCDEVICE1` indexes raw-deflate file payloads with individual hashes; the App verifies and installs them before enabling Duo recording. Model provenance and preserved source settings are in the device's `NOTICE.txt` and `source-config.json`. Bump the device version before changing published asset contents. Generated `public/devices/` output is ignored.
+
 ## Project Structure
 
 - `src/pages/`: Astro routes and API endpoints

@@ -1,0 +1,18 @@
+iPhone Duo Lotus scene assets
+Visual reference: https://iduo.youware.app/
+Original asset host: https://www.apple.com/v/iphone-duo/e/static/
+Scene: scenes/iPhoneDuo_US_L_avif.lsd
+Asset revision: dIFKSKvliUSYOBw/MszYeqEKDgnBqxc
+
+This resource replaces the earlier ios27-duo-kit procedural approximation.
+The model geometry, skinning animation, material parameters, textures, reflector
+cards, and HDR environments originate from the referenced Apple Lotus scene.
+These assets are not covered by the Apache-2.0 license of ios27-duo-kit.
+Original asset rights remain with their respective owners.
+
+ScreenCam conversion: native geometry with five-degree fold samples, rigid-node
+transforms, PNG material maps, and linear half-float radiance cubes generated from
+the authored reflector-card configuration (PT_Landscape) and HDR environments.
+ACESFilmic tone mapping and per-material environment layers/exposure are retained.
+Recorded screen pixels replace the original wallpapers and UI at render time.
+See source-config.json for original scene configuration and source SHA-256 hashes.

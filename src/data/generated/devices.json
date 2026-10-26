@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "devices": [
+    {
+      "schemaVersion": 1,
+      "id": "iphone-duo",
+      "name": "iPhone Duo",
+      "version": "1.0.0",
+      "rendererSchemaVersion": 2,
+      "requiredRecordingKind": "iphoneDuo",
+      "colors": [
+        "white",
+        "black"
+      ],
+      "postures": [
+        "foldedLandscape",
+        "foldedPortrait",
+        "tent",
+        "laptop",
+        "unfoldedLandscape",
+        "unfoldedPortrait",
+        "slightlyFolded"
+      ],
+      "package": {
+        "url": "/devices/iphone-duo/1.0.0/device.scdevice",
+        "size": 4753341,
+        "installedSize": 25358683,
+        "sha256": "e8fccbdc3bc910a821b38793b3ab8d4c4ec22628e3ad24631b52ab78404d313d"
+      }
+    }
+  ]
+}
