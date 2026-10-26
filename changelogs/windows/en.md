@@ -1,3 +1,27 @@
+# 1.0.13
+
+<!-- highlights
+- Fixes a crash at launch in many regions
+-->
+
+- Fixed ScreenCam closing right after it starts when Windows uses a regional format with a decimal comma, such as German, French, Russian, Polish, Slovenian or Brazilian Portuguese.
+- Crash reports are now saved and offered reliably whatever the regional format or calendar.
+
+# 1.0.12
+
+<!-- highlights
+- Store update reminders with what's new
+- Screenshots select like recordings
+- Faster editing in long recordings
+-->
+
+- Get notified of Microsoft Store updates and see what's new.
+- Screenshot selection now works like recording selection.
+- Redesigned screenshot quick actions card with a faster menu.
+- Faster editing in long recordings.
+- Export dialogs stay centred, and the editor opens at a better size.
+- Interface text follows the app language, and Chinese text is no longer too bold.
+
 # 1.0.11
 
 <!-- highlights
