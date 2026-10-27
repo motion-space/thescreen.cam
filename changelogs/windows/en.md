@@ -1,3 +1,12 @@
+# 1.0.17
+
+<!-- highlights
+- Clearer versions and release notes for updates
+-->
+
+- Update notices show the matching Microsoft Store catalog version when available, with a link to the full release notes between your installed version and that version.
+- Missing version information or release notes are clearly indicated, while available Store updates remain accessible.
+
 # 1.0.16
 
 <!-- highlights
