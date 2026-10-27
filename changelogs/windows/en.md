@@ -1,3 +1,11 @@
+# 1.0.15
+
+<!-- highlights
+- Click the tray icon to restore your editor
+-->
+
+- Clicking the system tray icon now brings the open editor or its dialog to the front, restoring the editor if it is minimized.
+
 # 1.0.14
 
 <!-- highlights
