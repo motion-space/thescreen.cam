@@ -1,3 +1,40 @@
+# 1.4.0
+
+- Grave iPhone Duo com modelos metálicos brancos e pretos disponíveis para download.
+- Acompanhe os ângulos reais de abertura do iPhone Duo com o Xcode ou edite clipes de pose com transições suaves entre visualizações 3D.
+- Digite diretamente a velocidade de reprodução dos clipes, até 60×.
+- Ative ou desative o escurecimento ao redor da área de gravação.
+- Grave celulares Android por USB com prévia ao vivo e faixas de áudio separadas.
+- Verifique automaticamente as atualizações da App Store e atualize pelo editor.
+- Personalize o efeito de clique Wave do cursor, salve os padrões e alterne os efeitos pelo menu.
+- Adicione uma lupa de vidro a vídeos e capturas de tela com ampliação, tamanho e escurecimento externo ajustáveis. Os vídeos oferecem transições de zoom com duração ajustável e passagem suave do zoom em tela cheia para a lupa. Clipes de lupa divididos mantêm transições suaves entre segmentos adjacentes.
+- A super-resolução local melhora o texto ampliado, incluindo as prévias da lupa. Os resultados são gerados e salvos em segundo plano; a imagem original continua visível durante o processamento. Ativada por padrão e ajustável nas configurações de tela. Escolha Fast ou Quality; Fast é o padrão.
+- A edição de vários clipes agora vem disponível por padrão. Durante a inserção, as marcações da linha do tempo permanecem alinhadas, os clipes existentes se movem suavemente e o novo clipe se expande ao ser posicionado.
+- A barra lateral da biblioteca de mídia memoriza sua visibilidade e largura e pode ser redimensionada para ficar mais estreita.
+- Escolha entre oito transições de clipes com animações de mola globais e por transição.
+- Baixe efeitos de transição em lote ou importe shaders GLSL/Metal personalizados, com um modelo para agentes criarem efeitos.
+- Abra arquivos de vídeo diretamente ou pelo Finder como rascunhos editáveis.
+- Adicione um mockup de celular genérico com cores selecionáveis, raio dos cantos ajustável e tamanho e posição do recorte superior ajustáveis.
+- Redimensione as anotações de gravações e capturas de tela sem tamanho mínimo.
+- As prévias de clipes com zoom permanecem dentro da tela de saída.
+- Clipes e legendas só são agrupados em trechos densos da linha do tempo, com prévia ao passar o cursor e zoom centrado no ponto clicado.
+- Quando uma entrada falha, as faixas de gravação disponíveis continuam ativas e um aviso é exibido.
+- O desfoque de movimento do zoom não estica mais as bordas dos quadros nas prévias e exportações.
+- As transições e a troca de clipes ficam mais fluidas.
+- Projetos com muitos clipes e legendas ficam mais fluidos ao dividir clipes, ampliar, rolar e passar o cursor pela linha do tempo.
+- Encerre o aplicativo normalmente após salvar e fechar os projetos de edição.
+- Exporte mais rápido gravações com super-resolução, lupas de vidro, fundos animados, clipes repetidos e transições, preservando os detalhes da lupa durante o zoom.
+- A reprodução e a navegação nas transições de distorção ficam mais fluidas em prévias grandes.
+- Exporte vídeos com modelos de iPhone Duo mais rápido, preservando os detalhes da tela.
+
+# 1.3.3
+
+- A edição de vários clipes vem desativada por padrão. Ela pode ser ativada em “Recursos experimentais” para importar, visualizar e combinar vídeos e projetos .cam.
+- A seleção de janelas para gravação voltou a funcionar de forma confiável.
+- As sobreposições de teclado não exibem mais uma tecla Fn extra ao gravar teclas de seta, navegação e função.
+- As prévias dos cartões de atalho pausam ao arrastar a posição de reprodução e retomam ao soltar, caso estivessem em reprodução.
+- O ajuste da duração dos clipes gravados responde melhor ao arrastar.
+
 # 1.3.2
 
 - Pré-visualize a captura do iPhone antes e durante a gravação, com molduras redimensionáveis, orientação automática e Dynamic Island correspondente ao modelo. Os controles mudam no mesmo lugar e seguem o tema do app.

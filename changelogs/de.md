@@ -1,3 +1,40 @@
+# 1.4.0
+
+- Nimm iPhone Duo mit herunterladbaren Metallmodellen in Weiß und Schwarz auf.
+- Erfasse die tatsächlichen Scharnierwinkel des iPhone Duo mit Xcode oder bearbeite Posenclips mit fließenden 3D-Ansichtsübergängen.
+- Gib die Wiedergabegeschwindigkeit von Clips direkt ein, bis zu 60-fach.
+- Schalte die Abdunklung der Umgebung bei Bereichsaufnahmen ein oder aus.
+- Nimm Android-Smartphones per USB mit Live-Vorschau und separaten Audiospuren auf.
+- Lass automatisch nach App-Store-Updates suchen und starte Updates direkt im Editor.
+- Passe den Wave-Klickeffekt des Mauszeigers an, speichere Standardwerte und wechsle Effekte über ein Menü.
+- Füge Videos und Screenshots eine Glaslupe mit einstellbarer Vergrößerung, Größe und Abdunklung der Umgebung hinzu. Videos unterstützen anpassbare Zoom-Übergänge und flüssige Wechsel vom Vollbildzoom zur Lupe. Geteilte Lupenclips gehen auch zwischen benachbarten Segmenten flüssig ineinander über.
+- Lokale Superauflösung verbessert vergrößerten Bildschirmtext, auch in der Lupenvorschau. Ergebnisse werden im Hintergrund erstellt und gespeichert; währenddessen bleibt das Originalbild sichtbar. Standardmäßig aktiviert und in den Bildschirmeinstellungen anpassbar. Wähle Fast oder Quality; standardmäßig ist Fast ausgewählt.
+- Die Mehrclip-Bearbeitung ist jetzt standardmäßig verfügbar. Beim Einfügen bleiben die Zeitleistenmarkierungen ausgerichtet, vorhandene Clips rücken flüssig zur Seite und der neue Clip wird nach dem Platzieren erweitert.
+- Die Seitenleiste der Mediathek merkt sich Sichtbarkeit und Breite und lässt sich schmaler einstellen.
+- Wähle aus acht Clip-Übergängen mit globalen Federanimationen und eigenen Einstellungen pro Übergang.
+- Lade Übergangseffekte gesammelt herunter oder importiere eigene GLSL-/Metal-Shader. Eine Agent-Vorlage hilft beim Erstellen von Effekten.
+- Öffne Videodateien direkt oder über den Finder als bearbeitbare Entwürfe.
+- Füge ein generisches Smartphone-Mockup mit wählbaren Farben, einstellbarem Eckenradius und anpassbarer Größe und Position der Notch hinzu.
+- Ändere die Größe von Markierungen in Aufnahmen und Screenshots ohne Mindestgröße.
+- Zoom-Clip-Vorschauen bleiben auf die Ausgabefläche begrenzt.
+- Clips und Untertitel werden nur in dicht belegten Bereichen der Zeitleiste gruppiert, mit Vorschau beim Darüberfahren und Zoom um die angeklickte Stelle.
+- Bei Ausfall einer Eingabe laufen die verfügbaren Aufnahmespuren weiter, und eine Warnung erscheint.
+- Bewegungsunschärfe beim Zoomen verzerrt die Bildränder in Vorschau und Export nicht mehr.
+- Übergänge und Clipwechsel werden flüssiger wiedergegeben.
+- Projekte mit vielen Clips und Untertiteln reagieren beim Teilen von Clips, Zoomen und Scrollen in der Zeitleiste sowie beim Darüberfahren flüssiger.
+- Beende die App zuverlässig nach dem Speichern und Schließen von Editor-Projekten.
+- Exportiere Aufnahmen mit Superauflösung, Glaslupen, animierten Hintergründen, wiederholten Clips und Übergängen schneller; Lupendetails bleiben beim Zoomen erhalten.
+- Verzerrungsübergänge lassen sich in großen Vorschauen flüssiger abspielen und durchsuchen.
+- Exportiere Videos mit iPhone-Duo-Modellen schneller und bewahre dabei Bildschirmdetails.
+
+# 1.3.3
+
+- Die Multi-Clip-Bearbeitung ist standardmäßig deaktiviert und kann unter „Experimentelle Funktionen“ zum Importieren, Vorschauen und Kombinieren von Videos und .cam-Projekten aktiviert werden.
+- Fenster lassen sich wieder zuverlässig für die Aufnahme auswählen.
+- Tastatureinblendungen zeigen bei Pfeil-, Navigations- und Funktionstasten keine zusätzliche Fn-Taste mehr an.
+- Vorschauen in Schnellzugriffskarten pausieren beim Ziehen der Abspielposition und setzen die Wiedergabe nach dem Loslassen fort, falls sie zuvor liefen.
+- Das Anpassen der Länge von Aufnahmeclips per Ziehen reagiert flüssiger.
+
 # 1.3.2
 
 - Die iPhone-Aufnahme lässt sich vor und während der Aufnahme live ansehen, mit anpassbarer Rahmengröße, automatischer Ausrichtung und zum Modell passender Dynamic Island. Bedienelemente wechseln an derselben Stelle und passen sich dem App-Design an.

@@ -1,3 +1,40 @@
+# 1.4.0
+
+- Registra iPhone Duo con modelli metallici bianchi e neri scaricabili.
+- Segui gli angoli di apertura reali di iPhone Duo con Xcode oppure modifica le clip di posa con transizioni fluide tra le viste 3D.
+- Inserisci direttamente la velocità di riproduzione delle clip, fino a 60×.
+- Attiva o disattiva l’oscuramento intorno all’area di registrazione.
+- Registra telefoni Android tramite USB con anteprima dal vivo e tracce audio separate.
+- Controlla automaticamente gli aggiornamenti dell’App Store e aggiorna dall’editor.
+- Personalizza l’effetto di clic Wave del cursore, salva le impostazioni predefinite e cambia effetto dal menu.
+- Aggiungi una lente di vetro a video e screenshot con ingrandimento, dimensioni e oscuramento esterno regolabili. I video supportano transizioni di zoom con durata regolabile e passaggi fluidi dallo zoom a schermo intero alla lente. Le clip della lente divise mantengono transizioni fluide tra segmenti adiacenti.
+- La super risoluzione locale migliora il testo ingrandito, anche nelle anteprime della lente. I risultati vengono generati e salvati in background; durante l’elaborazione resta visibile l’immagine originale. Attiva per impostazione predefinita e regolabile nelle impostazioni dello schermo. Scegli Fast o Quality; Fast è la modalità predefinita.
+- Il montaggio multi-clip è ora disponibile per impostazione predefinita. Durante l’inserimento, le tacche della timeline restano allineate, le clip esistenti si spostano con fluidità e la nuova clip si espande dopo il posizionamento.
+- La barra laterale della libreria multimediale ricorda visibilità e larghezza e può essere ridotta ulteriormente.
+- Scegli tra otto transizioni tra clip con animazioni a molla globali e per ogni transizione.
+- Scarica effetti di transizione in blocco o importa shader GLSL/Metal personalizzati. Un modello per agenti aiuta a creare effetti.
+- Apri file video direttamente o dal Finder come bozze modificabili.
+- Aggiungi un mockup di telefono generico con colori selezionabili, raggio degli angoli regolabile e notch regolabile per dimensioni e posizione.
+- Ridimensiona le annotazioni di registrazioni e screenshot senza dimensioni minime.
+- Le anteprime delle clip con zoom restano entro i limiti della tela di output.
+- Le clip e i sottotitoli vengono raggruppati solo nelle aree dense della timeline, con anteprime al passaggio del mouse e zoom centrato sul punto cliccato.
+- Se una sorgente di ingresso non funziona, le tracce di registrazione disponibili restano attive e viene mostrato un avviso.
+- La sfocatura di movimento dello zoom non deforma più i bordi del fotogramma nelle anteprime e nelle esportazioni.
+- Le transizioni e il passaggio tra clip sono più fluidi.
+- Nei progetti con molte clip e sottotitoli, divisione delle clip, zoom, scorrimento e passaggio del mouse sulla timeline sono più fluidi.
+- Chiudi l’app in modo affidabile dopo aver salvato e chiuso i progetti di montaggio.
+- Esporta più velocemente registrazioni con super risoluzione, lenti di vetro, sfondi animati, clip ripetute e transizioni, mantenendo i dettagli della lente durante lo zoom.
+- La riproduzione e la ricerca nelle transizioni di distorsione sono più fluide nelle anteprime grandi.
+- Esporta più velocemente i video con modelli di iPhone Duo mantenendo i dettagli dello schermo.
+
+# 1.3.3
+
+- Il montaggio multi-clip è disattivato per impostazione predefinita. Può essere attivato in “Funzioni sperimentali” per importare, visualizzare in anteprima e combinare video e progetti .cam.
+- Ripristinata la selezione affidabile delle finestre da registrare.
+- Le sovrimpressioni della tastiera non mostrano più un tasto Fn aggiuntivo quando si registrano tasti freccia, di navigazione e funzione.
+- Le anteprime delle schede di accesso rapido si interrompono mentre si trascina la posizione di riproduzione e riprendono al rilascio se erano in riproduzione.
+- La regolazione della durata delle clip registrate tramite trascinamento è più reattiva.
+
 # 1.3.2
 
 - Visualizza l’anteprima dell’iPhone prima e durante la registrazione, con cornici ridimensionabili, orientamento automatico e Dynamic Island adatta al modello. I controlli cambiano nella stessa posizione e seguono il tema dell’app.

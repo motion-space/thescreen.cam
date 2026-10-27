@@ -1,3 +1,40 @@
+# 1.4.0
+
+- Graba iPhone Duo con modelos metálicos descargables en blanco y negro.
+- Sigue los ángulos reales de apertura de iPhone Duo con Xcode o edita clips de pose con transiciones suaves entre vistas 3D.
+- Introduce directamente la velocidad de reproducción de los clips, hasta 60×.
+- Activa o desactiva el oscurecimiento del entorno en la grabación de áreas.
+- Graba teléfonos Android por USB con vista previa en directo y pistas de audio independientes.
+- Busca actualizaciones de App Store automáticamente y actualiza desde el editor.
+- Personaliza el efecto de clic Wave del cursor, guarda valores predeterminados y cambia de efecto desde un menú.
+- Añade una lupa de cristal a vídeos y capturas con aumento, tamaño y oscurecimiento exterior ajustables. Los vídeos admiten transiciones de zoom con duración ajustable y cambios fluidos desde el zoom de pantalla completa. Los clips de lupa divididos mantienen transiciones fluidas entre segmentos adyacentes.
+- Mejora el texto ampliado con superresolución local, también en la vista previa de la lupa. Los resultados se generan y guardan en segundo plano; mientras tanto se muestra la imagen original. Se activa de forma predeterminada y se ajusta en los ajustes de pantalla. Elige Fast o Quality; Fast es el modo predeterminado.
+- La edición multiclip ya está disponible de forma predeterminada. Al insertar clips, las marcas de la línea de tiempo siguen alineadas, los clips existentes se apartan con suavidad y el nuevo clip se expande al colocarlo.
+- La barra lateral de la biblioteca multimedia recuerda su visibilidad y anchura, y se puede reducir más.
+- Elige entre ocho transiciones de clips con animaciones de resorte globales y por transición.
+- Descarga efectos de transición en lote o importa shaders GLSL/Metal personalizados, con una plantilla para que los agentes creen efectos.
+- Abre archivos de vídeo directamente o desde Finder como borradores editables.
+- Añade una maqueta de teléfono genérico con colores seleccionables, radio de esquina ajustable y una muesca de tamaño y posición ajustables.
+- Redimensiona las anotaciones de grabaciones y capturas de pantalla sin un tamaño mínimo.
+- Las vistas previas de clips con zoom se mantienen dentro del lienzo de salida.
+- Los clips y subtítulos solo se agrupan en las zonas densas de la línea de tiempo, con vista previa al pasar el cursor y zoom centrado en el punto donde haces clic.
+- Si falla una fuente de entrada, las pistas de grabación disponibles siguen funcionando y se muestra una advertencia.
+- El desenfoque de movimiento del zoom ya no estira los bordes del fotograma en la vista previa ni en la exportación.
+- Las transiciones y los cambios de clip se reproducen con mayor fluidez.
+- Dividir clips, ampliar, desplazar y recorrer la línea de tiempo con el cursor resulta más fluido en proyectos con muchos clips y subtítulos.
+- Cierra la aplicación de forma fiable tras guardar y cerrar los proyectos de edición.
+- Exporta más rápido grabaciones con superresolución, lupas de cristal, fondos animados, clips repetidos y transiciones, conservando el detalle de la lupa durante el zoom.
+- La reproducción y la búsqueda en transiciones de distorsión son más fluidas en vistas previas grandes.
+- Exporta más rápido los vídeos con modelos de iPhone Duo sin perder detalle en la pantalla.
+
+# 1.3.3
+
+- La edición de varios clips está desactivada por defecto. Puede activarse en “Funciones experimentales” para importar, previsualizar y combinar vídeos y proyectos .cam.
+- La selección de ventanas para grabar vuelve a funcionar de forma fiable.
+- Las superposiciones de teclado ya no muestran una tecla Fn adicional al grabar teclas de flecha, navegación y función.
+- Las vistas previas de las tarjetas de acceso rápido se pausan al arrastrar la posición de reproducción y se reanudan al soltar si se estaban reproduciendo.
+- El ajuste de la duración de los clips grabados responde con mayor fluidez al arrastrar.
+
 # 1.3.2
 
 - Previsualiza la captura del iPhone antes y durante la grabación, con marcos redimensionables, orientación automática y Dynamic Island adaptada al modelo. Los controles cambian en el mismo lugar y siguen el tema de la app.
