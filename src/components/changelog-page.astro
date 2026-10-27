@@ -1,7 +1,8 @@
 ---
 import "../styles/global.css";
 import type { Locale } from "../lib/i18n";
-import { defaultLocale, localizedPath } from "../lib/i18n";
+import { defaultLocale, localizedPath, siteUrl } from "../lib/i18n";
+import { getWindowsChangelogFeed } from "../lib/windows-changelog";
 import { getTranslation } from "../lib/translations";
 import { Footer } from "./footer";
 import PageHead from "./page-head.astro";
@@ -33,6 +34,19 @@ const localizedModule = changelogs[`${directory}/${locale}.md`];
 const changelogModule = (localizedModule ?? changelogs[`${directory}/${defaultLocale}.md`]) as { Content: any };
 const Content = changelogModule.Content;
 const showsFallbackNote = isWindows && !localizedModule;
+const windowsEntries = isWindows ? getWindowsChangelogFeed(siteUrl).versions : [];
+const windowsNotesLocale = locale === "zh-Hans" ? "zh-Hans" : "en";
+const rangeCopy = locale === "zh-Hans" ? {
+  title: "从 {from} 到 {to} 的更新内容",
+  missing: "这一版本的更新日志尚未同步，请稍后重试。",
+  invalid: "更新日志的版本范围无效。",
+  all: "查看所有版本",
+} : {
+  title: "Changes from {from} to {to}",
+  missing: "Release notes for this version are not available yet. Please try again later.",
+  invalid: "The release-note version range is invalid.",
+  all: "View all versions",
+};
 const platforms = [
   { id: "macos", label: "macOS", href: localizedPath(locale, macPath) },
   { id: "windows", label: "Windows", href: localizedPath(locale, windowsPath) },
@@ -75,8 +89,19 @@ const platforms = [
           {showsFallbackNote && <p class="changelog-fallback-note">{copy.windowsFallbackNote}</p>}
         </div>
 
+        {isWindows && <div id="windows-changelog-range" class="mb-10" hidden
+          data-title={rangeCopy.title} data-missing={rangeCopy.missing} data-invalid={rangeCopy.invalid}>
+          <h2 data-range-title></h2>
+          <p data-range-message role="status"></p>
+          <a href={localizedPath(locale, windowsPath)}>{rangeCopy.all}</a>
+        </div>}
         <div class="changelog-markdown">
-          <Content />
+          {isWindows ? windowsEntries.map((entry) => (
+            <div class="windows-changelog-release" data-windows-changelog-version={entry.version}>
+              <h1 id={entry.version.replaceAll(".", "")}>{entry.version}</h1>
+              <ul>{entry.notes[windowsNotesLocale].map((note) => <li>{note}</li>)}</ul>
+            </div>
+          )) : <Content />}
         </div>
       </article>
     </main>
@@ -92,6 +117,27 @@ const platforms = [
 
         heading.textContent = "";
         heading.append(link);
+      }
+    </script>
+
+    <script>
+      import { selectChangelogRange } from "../lib/windows-changelog-range";
+      const rangePanel = document.getElementById("windows-changelog-range");
+      if (rangePanel) {
+        const sections = Array.from(document.querySelectorAll<HTMLElement>("[data-windows-changelog-version]"));
+        const result = selectChangelogRange(window.location.search, sections.map((section) => section.dataset.windowsChangelogVersion!));
+        if (result.status !== "all") {
+          rangePanel.hidden = false;
+          const title = rangePanel.querySelector<HTMLElement>("[data-range-title]")!;
+          const message = rangePanel.querySelector<HTMLElement>("[data-range-message]")!;
+          title.textContent = result.status === "invalid" ? rangePanel.dataset.invalid! :
+            rangePanel.dataset.title!.replace("{from}", result.from).replace("{to}", result.to);
+          message.textContent = result.status === "missing" ? rangePanel.dataset.missing! : "";
+          message.hidden = result.status !== "missing";
+          const included = new Set(result.status === "ready" ? result.versions : []);
+          for (const section of sections) section.hidden = !included.has(section.dataset.windowsChangelogVersion!);
+          sections.find((section) => !section.hidden)?.classList.add("first-visible-release");
+        }
       }
     </script>
 

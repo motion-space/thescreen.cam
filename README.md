@@ -18,6 +18,12 @@ ScreenCam is a native macOS screen recording app. This repository contains the p
 
 ## Local Development
 
+Use Node.js 22.18+ (or Node.js 24). `npm run changelog:test` verifies Windows release-note
+range filtering. Windows changelog links accept `?from=1.0.13&to=1.0.15`: the installed
+lower version is excluded, the upper version is included, and a missing upper release is
+shown explicitly rather than presenting a partial diff. English and Simplified Chinese
+use the same feed data and numeric version comparison as the app.
+
 Install dependencies:
 
 ```bash
