@@ -1,3 +1,12 @@
+# 1.0.16
+
+<!-- highlights
+- Fixed missed Microsoft Store updates
+-->
+
+- Fixed Check for Updates incorrectly reporting that ScreenCam is up to date when Microsoft Store has an update available.
+- Update reminders are checked again after restarting, preventing outdated prompts and keeping later updates visible.
+
 # 1.0.15
 
 <!-- highlights
