@@ -1,3 +1,17 @@
+# 1.0.14
+
+<!-- highlights
+- Smoother cursor motion and blur
+- Fixed toolbar white blocks after waking
+- More reliable updates and restarting
+-->
+
+- Smoother cursor motion blur, with more consistent cursor sampling in new recordings.
+- Fixed white blocks in the recording toolbar and improved its recovery after sleep or display changes.
+- Update prompts stay visible beside the toolbar and no longer offer the version already installed.
+- Improved exit and restart reliability.
+- Fixed missing tooltip text on the system tray icon.
+
 # 1.0.13
 
 <!-- highlights
