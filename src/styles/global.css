@@ -568,6 +568,14 @@
     @apply top-[0.3em];
   }
 
+  .windows-changelog-release:not(:first-child):not(.first-visible-release) h1 {
+    @apply pt-14;
+  }
+
+  .windows-changelog-release:not(:first-child):not(.first-visible-release) h1::before {
+    @apply top-[calc(3.5rem+0.3em)];
+  }
+
   .changelog-markdown h1 a {
     @apply text-foreground no-underline transition-colors hover:text-accent-ink;
   }

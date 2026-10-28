@@ -1,3 +1,51 @@
+# 1.0.18
+
+<!-- highlights
+- Split screen and camera tracks together
+-->
+
+- Splitting a screen recording now also splits the camera track at the same point, keeping your screen, camera and recorded audio edits together.
+
+# 1.0.17
+
+<!-- highlights
+- Clearer versions and release notes for updates
+-->
+
+- Update notices show the matching Microsoft Store catalog version when available, with a link to the full release notes between your installed version and that version.
+- Missing version information or release notes are clearly indicated, while available Store updates remain accessible.
+
+# 1.0.16
+
+<!-- highlights
+- Fixed missed Microsoft Store updates
+-->
+
+- Fixed Check for Updates incorrectly reporting that ScreenCam is up to date when Microsoft Store has an update available.
+- Update reminders are checked again after restarting, preventing outdated prompts and keeping later updates visible.
+
+# 1.0.15
+
+<!-- highlights
+- Click the tray icon to restore your editor
+-->
+
+- Clicking the system tray icon now brings the open editor or its dialog to the front, restoring the editor if it is minimized.
+
+# 1.0.14
+
+<!-- highlights
+- Smoother cursor motion and blur
+- Fixed toolbar white blocks after waking
+- More reliable updates and restarting
+-->
+
+- Smoother cursor motion blur, with more consistent cursor sampling in new recordings.
+- Fixed white blocks in the recording toolbar and improved its recovery after sleep or display changes.
+- Update prompts stay visible beside the toolbar and no longer offer the version already installed.
+- Improved exit and restart reliability.
+- Fixed missing tooltip text on the system tray icon.
+
 # 1.0.13
 
 <!-- highlights

@@ -13,7 +13,7 @@
     "cursors:check": "node scripts/build-cursors.mjs --check",
     "mockups:build": "node scripts/build-mockups.mjs",
     "dev": "NODE_ENV=development astro dev --mode development",
-    "build": "npm run devices:build && npm run cursors:check && npm run transitions:check && npm run mesh-backgrounds:check && astro build",
+    "build": "npm run changelog:test && npm run devices:build && npm run cursors:check && npm run transitions:check && npm run mesh-backgrounds:check && astro build",
     "build:with-bgm": "npm run bgm:build && npm run click-sounds:build && npm run cursors:build && npm run mockups:build && npm run transitions:check && astro build",
     "preview": "npm run build && wrangler dev",
     "deploy": "npm run build && wrangler deploy",
@@ -24,7 +24,8 @@
     "mesh-backgrounds:build": "node scripts/build-mesh-backgrounds.mjs",
     "mesh-backgrounds:check": "node scripts/build-mesh-backgrounds.mjs --check",
     "devices:build": "node scripts/build-devices.mjs",
-    "devices:test": "node --test scripts/devices/*.test.mjs"
+    "devices:test": "node --test scripts/devices/*.test.mjs",
+    "changelog:test": "node --experimental-strip-types --test scripts/tests/windows-changelog-range.test.mjs"
   },
   "devDependencies": {
     "@astrojs/sitemap": "^3.2.1",
