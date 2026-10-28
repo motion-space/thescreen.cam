@@ -1,3 +1,40 @@
+# 1.4.0
+
+- Enregistrez iPhone Duo avec des modèles métalliques blancs et noirs à télécharger.
+- Suivez les angles d’ouverture réels d’iPhone Duo avec Xcode ou modifiez les clips de pose avec des transitions fluides entre les vues 3D.
+- Saisissez directement la vitesse de lecture des clips, jusqu’à 60×.
+- Activez ou désactivez l’assombrissement autour de la zone d’enregistrement.
+- Enregistrez les téléphones Android par USB avec aperçu en direct et pistes audio séparées.
+- Recherchez automatiquement les mises à jour de l’App Store et lancez-les depuis l’éditeur.
+- Personnalisez l’effet de clic Wave du curseur, enregistrez les réglages par défaut et changez d’effet depuis un menu.
+- Ajoutez une loupe en verre aux vidéos et captures d’écran avec un grossissement, une taille et un assombrissement extérieur réglables. Les vidéos prennent en charge des transitions de zoom à durée réglable et un passage fluide du zoom plein écran à la loupe. Les clips de loupe scindés conservent des transitions fluides entre segments adjacents.
+- La super-résolution locale améliore le texte agrandi, y compris dans l’aperçu de la loupe. Les résultats sont générés et enregistrés en arrière-plan ; l’image d’origine reste affichée pendant le traitement. Activée par défaut et réglable dans les paramètres d’écran. Choisissez Fast ou Quality ; Fast est sélectionné par défaut.
+- Le montage multiclips est désormais disponible par défaut. Lors de l’insertion, les graduations de la timeline restent alignées, les clips existants se décalent en douceur et le nouveau clip s’élargit une fois placé.
+- La barre latérale de la bibliothèque multimédia mémorise son affichage et sa largeur, et peut être réduite davantage.
+- Choisissez parmi huit transitions entre clips avec des animations à ressort globales et par transition.
+- Téléchargez des effets de transition en lot ou importez des shaders GLSL/Metal personnalisés. Un modèle pour agents est fourni pour créer des effets.
+- Ouvrez des fichiers vidéo directement ou depuis le Finder comme brouillons modifiables.
+- Ajoutez une maquette de téléphone générique avec des couleurs au choix, un rayon des coins réglable et une encoche réglable en taille et en position.
+- Redimensionnez les annotations des enregistrements et des captures d’écran sans taille minimale.
+- Les aperçus des clips avec zoom restent dans les limites du canevas de sortie.
+- Les clips et les sous-titres ne sont regroupés que dans les zones denses de la timeline, avec un aperçu au survol et un zoom centré sur le point cliqué.
+- Lorsqu’une source d’entrée échoue, les pistes d’enregistrement disponibles restent actives et un avertissement s’affiche.
+- Le flou de mouvement lors des zooms n’étire plus les bords de l’image dans l’aperçu ni à l’export.
+- La lecture des transitions et les changements de clip sont plus fluides.
+- Les projets contenant de nombreux clips et sous-titres sont plus fluides lors du découpage des clips, du zoom, du défilement et du survol de la timeline.
+- Quittez l’application de façon fiable après avoir enregistré et fermé les projets de montage.
+- Exportez plus vite les enregistrements avec super-résolution, loupes en verre, fonds animés, clips répétés et transitions, tout en conservant les détails de la loupe pendant les zooms.
+- La lecture et la navigation dans les transitions de distorsion sont plus fluides dans les grands aperçus.
+- Exportez plus rapidement les vidéos avec des modèles d’iPhone Duo tout en préservant les détails de l’écran.
+
+# 1.3.3
+
+- Le montage multiclips est désactivé par défaut. Il peut être activé dans « Fonctions expérimentales » pour importer, prévisualiser et assembler des vidéos et des projets .cam.
+- La sélection des fenêtres à enregistrer fonctionne à nouveau de manière fiable.
+- Les incrustations du clavier n’affichent plus de touche Fn supplémentaire lors de l’enregistrement des touches fléchées, de navigation et de fonction.
+- Les aperçus des cartes de raccourcis se mettent en pause pendant le déplacement de la tête de lecture et reprennent au relâchement s’ils étaient en cours de lecture.
+- Le réglage de la durée des clips enregistrés par glissement est plus réactif.
+
 # 1.3.2
 
 - Prévisualisez la capture de l’iPhone avant et pendant l’enregistrement, avec un cadre redimensionnable, une orientation automatique et une Dynamic Island adaptée au modèle. Les commandes changent sur place et suivent le thème de l’app.

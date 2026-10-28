@@ -1,3 +1,40 @@
+# 1.4.0
+
+- Record iPhone Duo with downloadable white and black metal models.
+- Track iPhone Duo hinge angles with Xcode, or edit pose clips with smooth 3D view transitions.
+- Enter clip playback speeds directly, up to 60×.
+- Toggle surrounding dimming for area recording.
+- Record Android phones over USB with live preview and separate audio.
+- Check for App Store updates automatically and update from the editor.
+- Customize the Wave cursor click effect with saved defaults and a click-effect menu.
+- Add a glass loupe to videos and screenshots with adjustable magnification, size, and surrounding dimming. Videos support timed zoom transitions and smooth transitions from full-frame zoom. Split loupe clips transition smoothly between adjacent segments.
+- Enhance zoomed screen text with local super-resolution, including loupe previews. Results are prepared and saved in the background; the original image remains available while processing. Enabled by default and adjustable in Screen settings. Choose Fast or Quality mode, with Fast selected by default.
+- Multi-clip editing is now available by default, with aligned timeline ticks and a smoother clip insertion preview that expands after placement.
+- The Media Library sidebar remembers its visibility and width, and can be resized more narrowly.
+- Choose from eight clip transitions with global and per-transition spring animations.
+- Download transition effects in bulk or import custom GLSL/Metal shaders, with an agent template for creating effects.
+- Open video files directly or from Finder as editable drafts.
+- Add a generic phone mockup with selectable colors, adjustable corner radius, and adjustable notch size and position.
+- Resize recording and screenshot annotations without a minimum size.
+- Zoom clip previews stay within the output canvas.
+- Timeline clips and captions group only when densely packed, with hover previews and zooming centered on where you click.
+- Keep available recording tracks running and show a warning when an input fails.
+- Zoom motion blur no longer stretches frame edges in previews or exports.
+- Transitions and clip switching play more smoothly.
+- Projects with many clips and captions respond more smoothly to clip splitting, timeline zooming, scrolling, and hovering.
+- Quit the app reliably after saving and closing editor workspaces.
+- Export screen recordings faster with super-resolution, glass loupes, animated backgrounds, repeated clips, and transitions, while preserving loupe detail during zooms.
+- Distortion transitions play and seek more smoothly in large previews.
+- Export iPhone Duo model videos faster while preserving screen detail.
+
+# 1.3.3
+
+- Multi-clip editing is available in Experimental, off by default, to import, preview, and combine videos and .cam projects.
+- Restored reliable window selection for recording.
+- Keyboard overlays no longer show an extra Fn key for arrow, navigation, and function keys.
+- Shortcut-card previews pause while scrubbing and resume on release if they were playing.
+- Adjusting recording-clip lengths stays responsive while dragging.
+
 # 1.3.2
 
 - Preview iPhone capture before and during recording with resizable device frames, automatic orientation, model-matched Dynamic Island, and controls that switch in place and follow the app theme.
