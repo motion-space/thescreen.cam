@@ -1,3 +1,14 @@
+# 1.0.19
+
+<!-- highlights
+- Faster screen recording startup
+- Fixed editor foreground activation from the tray and preview card
+-->
+
+- Prepare recording resources earlier and prepare screen capture and audio during the start sound, reducing the wait for first and repeated screen recordings.
+- Removed unnecessary performance sampling from recording startup while keeping the full start sound.
+- Fixed the editor staying behind other apps when restoring ScreenCam from the tray or clicking Edit on a preview card.
+
 # 1.0.18
 
 <!-- highlights
