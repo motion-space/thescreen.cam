@@ -1,3 +1,11 @@
+# 1.0.18
+
+<!-- highlights
+- Split screen and camera tracks together
+-->
+
+- Splitting a screen recording now also splits the camera track at the same point, keeping your screen, camera and recorded audio edits together.
+
 # 1.0.17
 
 <!-- highlights
