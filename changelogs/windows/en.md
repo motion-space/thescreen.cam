@@ -1,3 +1,13 @@
+# 1.0.20
+
+<!-- highlights
+- Refreshed recording toolbar material
+- Clearer editor header
+-->
+
+- Updated the recording toolbar to use Windows system Acrylic material, with a solid-color fallback when unavailable.
+- Gave the light-theme editor header a subtle gray background to better separate it from the content.
+
 # 1.0.19
 
 <!-- highlights
