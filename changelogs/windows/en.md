@@ -1,3 +1,11 @@
+# 1.0.21
+
+<!-- highlights
+- Finish long recordings faster
+-->
+
+- Stopping a recording is much faster, especially for long recordings: audio is encoded while you record, and saving avoids copying video files when possible.
+
 # 1.0.20
 
 <!-- highlights
