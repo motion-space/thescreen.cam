@@ -1,3 +1,13 @@
+# 1.0.22
+
+<!-- highlights
+- More reliable camera start
+-->
+
+- When the camera fails to open at the start of a recording, ScreenCam now waits briefly and tries again once. If it still cannot open, it explains that the camera may be in use by another app or unavailable.
+- A denied camera permission is now reported as a permission problem.
+- Improved diagnostics for recording start/stop failures and moments when the app stops responding, to help us find and fix issues faster.
+
 # 1.0.21
 
 <!-- highlights
