@@ -1,0 +1,3 @@
+User-supplied source archive: iphone-air.zip
+Normalized with Blender; original source meshes retained.
+Source redistribution rights must follow the original asset license.

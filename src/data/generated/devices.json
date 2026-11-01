@@ -23,9 +23,902 @@
       ],
       "package": {
         "url": "/devices/iphone-duo/1.0.0/device.scdevice",
-        "size": 4753341,
+        "size": 4751962,
         "installedSize": 25358683,
-        "sha256": "e8fccbdc3bc910a821b38793b3ab8d4c4ec22628e3ad24631b52ab78404d313d"
+        "sha256": "1ddf12c2048982612da12dd2caaed985f58c4c4e9cb570486858d62c851437a8"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "iphone-17",
+      "name": "iPhone 17",
+      "version": "1.0.3",
+      "rendererSchemaVersion": 2,
+      "requiredRecordingKind": "singleScreen",
+      "colors": [
+        "black",
+        "white",
+        "mist-blue",
+        "sage",
+        "lavender"
+      ],
+      "posePresets": [
+        {
+          "id": "front",
+          "name": "Front",
+          "localizedNames": {
+            "en": "Front",
+            "zh-Hans": "正面",
+            "zh-Hant": "正面",
+            "ja": "正面",
+            "ko": "정면",
+            "de": "Vorderseite",
+            "es": "Frente",
+            "fr": "Face avant",
+            "pt-BR": "Frente",
+            "it": "Fronte"
+          },
+          "rotation": {
+            "pitchDegrees": 0,
+            "yawDegrees": 0,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "left",
+          "name": "Left angle",
+          "localizedNames": {
+            "en": "Left angle",
+            "zh-Hans": "左侧倾斜",
+            "zh-Hant": "左側傾斜",
+            "ja": "左斜め",
+            "ko": "왼쪽 기울기",
+            "de": "Linke Ansicht",
+            "es": "Ángulo izquierdo",
+            "fr": "Angle gauche",
+            "pt-BR": "Ângulo esquerdo",
+            "it": "Angolo sinistro"
+          },
+          "rotation": {
+            "pitchDegrees": 15,
+            "yawDegrees": -30,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "right",
+          "name": "Right angle",
+          "localizedNames": {
+            "en": "Right angle",
+            "zh-Hans": "右侧倾斜",
+            "zh-Hant": "右側傾斜",
+            "ja": "右斜め",
+            "ko": "오른쪽 기울기",
+            "de": "Rechte Ansicht",
+            "es": "Ángulo derecho",
+            "fr": "Angle droit",
+            "pt-BR": "Ângulo direito",
+            "it": "Angolo destro"
+          },
+          "rotation": {
+            "pitchDegrees": 15,
+            "yawDegrees": 30,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "back",
+          "name": "Back",
+          "localizedNames": {
+            "en": "Back",
+            "zh-Hans": "背面",
+            "zh-Hant": "背面",
+            "ja": "背面",
+            "ko": "후면",
+            "de": "Rückseite",
+            "es": "Atrás",
+            "fr": "Dos",
+            "pt-BR": "Verso",
+            "it": "Retro"
+          },
+          "rotation": {
+            "pitchDegrees": 0,
+            "yawDegrees": 180,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "landscape",
+          "name": "Landscape",
+          "localizedNames": {
+            "en": "Landscape",
+            "zh-Hans": "横向",
+            "zh-Hant": "橫向",
+            "ja": "横向き",
+            "ko": "가로",
+            "de": "Querformat",
+            "es": "Horizontal",
+            "fr": "Paysage",
+            "pt-BR": "Paisagem",
+            "it": "Orizzontale"
+          },
+          "rotation": {
+            "pitchDegrees": 0,
+            "yawDegrees": 0,
+            "rollDegrees": 90
+          }
+        },
+        {
+          "id": "bottom",
+          "name": "Bottom view",
+          "localizedNames": {
+            "en": "Bottom view",
+            "zh-Hans": "底部视角",
+            "zh-Hant": "底部視角",
+            "ja": "底面",
+            "ko": "하단 보기",
+            "de": "Unterseite",
+            "es": "Vista inferior",
+            "fr": "Vue du dessous",
+            "pt-BR": "Vista inferior",
+            "it": "Vista dal basso"
+          },
+          "rotation": {
+            "pitchDegrees": -78,
+            "yawDegrees": 0,
+            "rollDegrees": 0
+          }
+        }
+      ],
+      "postures": [],
+      "package": {
+        "url": "/devices/iphone-17/1.0.3/device.scdevice",
+        "size": 1070380,
+        "installedSize": 6120509,
+        "sha256": "5fc6aff0fd04bcec03a8bf48bd88217f35bf215730d64ddaa524b6636fd8d72b"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "iphone-17-pro",
+      "name": "iPhone 17 Pro",
+      "version": "1.0.3",
+      "rendererSchemaVersion": 2,
+      "requiredRecordingKind": "singleScreen",
+      "colors": [
+        "silver",
+        "cosmic-orange",
+        "deep-blue"
+      ],
+      "posePresets": [
+        {
+          "id": "front",
+          "name": "Front",
+          "localizedNames": {
+            "en": "Front",
+            "zh-Hans": "正面",
+            "zh-Hant": "正面",
+            "ja": "正面",
+            "ko": "정면",
+            "de": "Vorderseite",
+            "es": "Frente",
+            "fr": "Face avant",
+            "pt-BR": "Frente",
+            "it": "Fronte"
+          },
+          "rotation": {
+            "pitchDegrees": 0,
+            "yawDegrees": 0,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "left",
+          "name": "Left angle",
+          "localizedNames": {
+            "en": "Left angle",
+            "zh-Hans": "左侧倾斜",
+            "zh-Hant": "左側傾斜",
+            "ja": "左斜め",
+            "ko": "왼쪽 기울기",
+            "de": "Linke Ansicht",
+            "es": "Ángulo izquierdo",
+            "fr": "Angle gauche",
+            "pt-BR": "Ângulo esquerdo",
+            "it": "Angolo sinistro"
+          },
+          "rotation": {
+            "pitchDegrees": 15,
+            "yawDegrees": -30,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "right",
+          "name": "Right angle",
+          "localizedNames": {
+            "en": "Right angle",
+            "zh-Hans": "右侧倾斜",
+            "zh-Hant": "右側傾斜",
+            "ja": "右斜め",
+            "ko": "오른쪽 기울기",
+            "de": "Rechte Ansicht",
+            "es": "Ángulo derecho",
+            "fr": "Angle droit",
+            "pt-BR": "Ângulo direito",
+            "it": "Angolo destro"
+          },
+          "rotation": {
+            "pitchDegrees": 15,
+            "yawDegrees": 30,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "back",
+          "name": "Back",
+          "localizedNames": {
+            "en": "Back",
+            "zh-Hans": "背面",
+            "zh-Hant": "背面",
+            "ja": "背面",
+            "ko": "후면",
+            "de": "Rückseite",
+            "es": "Atrás",
+            "fr": "Dos",
+            "pt-BR": "Verso",
+            "it": "Retro"
+          },
+          "rotation": {
+            "pitchDegrees": 0,
+            "yawDegrees": 180,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "landscape",
+          "name": "Landscape",
+          "localizedNames": {
+            "en": "Landscape",
+            "zh-Hans": "横向",
+            "zh-Hant": "橫向",
+            "ja": "横向き",
+            "ko": "가로",
+            "de": "Querformat",
+            "es": "Horizontal",
+            "fr": "Paysage",
+            "pt-BR": "Paisagem",
+            "it": "Orizzontale"
+          },
+          "rotation": {
+            "pitchDegrees": 0,
+            "yawDegrees": 0,
+            "rollDegrees": 90
+          }
+        },
+        {
+          "id": "bottom",
+          "name": "Bottom view",
+          "localizedNames": {
+            "en": "Bottom view",
+            "zh-Hans": "底部视角",
+            "zh-Hant": "底部視角",
+            "ja": "底面",
+            "ko": "하단 보기",
+            "de": "Unterseite",
+            "es": "Vista inferior",
+            "fr": "Vue du dessous",
+            "pt-BR": "Vista inferior",
+            "it": "Vista dal basso"
+          },
+          "rotation": {
+            "pitchDegrees": -78,
+            "yawDegrees": 0,
+            "rollDegrees": 0
+          }
+        }
+      ],
+      "postures": [],
+      "package": {
+        "url": "/devices/iphone-17-pro/1.0.3/device.scdevice",
+        "size": 790046,
+        "installedSize": 5369724,
+        "sha256": "9e9b90ce47a25602df7dfd725b11501bf2663374469905995b8492822498f548"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "iphone-17-pro-max",
+      "name": "iPhone 17 Pro Max",
+      "version": "1.0.3",
+      "rendererSchemaVersion": 2,
+      "requiredRecordingKind": "singleScreen",
+      "colors": [
+        "silver",
+        "cosmic-orange",
+        "deep-blue"
+      ],
+      "posePresets": [
+        {
+          "id": "front",
+          "name": "Front",
+          "localizedNames": {
+            "en": "Front",
+            "zh-Hans": "正面",
+            "zh-Hant": "正面",
+            "ja": "正面",
+            "ko": "정면",
+            "de": "Vorderseite",
+            "es": "Frente",
+            "fr": "Face avant",
+            "pt-BR": "Frente",
+            "it": "Fronte"
+          },
+          "rotation": {
+            "pitchDegrees": 0,
+            "yawDegrees": 0,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "left",
+          "name": "Left angle",
+          "localizedNames": {
+            "en": "Left angle",
+            "zh-Hans": "左侧倾斜",
+            "zh-Hant": "左側傾斜",
+            "ja": "左斜め",
+            "ko": "왼쪽 기울기",
+            "de": "Linke Ansicht",
+            "es": "Ángulo izquierdo",
+            "fr": "Angle gauche",
+            "pt-BR": "Ângulo esquerdo",
+            "it": "Angolo sinistro"
+          },
+          "rotation": {
+            "pitchDegrees": 15,
+            "yawDegrees": -30,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "right",
+          "name": "Right angle",
+          "localizedNames": {
+            "en": "Right angle",
+            "zh-Hans": "右侧倾斜",
+            "zh-Hant": "右側傾斜",
+            "ja": "右斜め",
+            "ko": "오른쪽 기울기",
+            "de": "Rechte Ansicht",
+            "es": "Ángulo derecho",
+            "fr": "Angle droit",
+            "pt-BR": "Ângulo direito",
+            "it": "Angolo destro"
+          },
+          "rotation": {
+            "pitchDegrees": 15,
+            "yawDegrees": 30,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "back",
+          "name": "Back",
+          "localizedNames": {
+            "en": "Back",
+            "zh-Hans": "背面",
+            "zh-Hant": "背面",
+            "ja": "背面",
+            "ko": "후면",
+            "de": "Rückseite",
+            "es": "Atrás",
+            "fr": "Dos",
+            "pt-BR": "Verso",
+            "it": "Retro"
+          },
+          "rotation": {
+            "pitchDegrees": 0,
+            "yawDegrees": 180,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "landscape",
+          "name": "Landscape",
+          "localizedNames": {
+            "en": "Landscape",
+            "zh-Hans": "横向",
+            "zh-Hant": "橫向",
+            "ja": "横向き",
+            "ko": "가로",
+            "de": "Querformat",
+            "es": "Horizontal",
+            "fr": "Paysage",
+            "pt-BR": "Paisagem",
+            "it": "Orizzontale"
+          },
+          "rotation": {
+            "pitchDegrees": 0,
+            "yawDegrees": 0,
+            "rollDegrees": 90
+          }
+        },
+        {
+          "id": "bottom",
+          "name": "Bottom view",
+          "localizedNames": {
+            "en": "Bottom view",
+            "zh-Hans": "底部视角",
+            "zh-Hant": "底部視角",
+            "ja": "底面",
+            "ko": "하단 보기",
+            "de": "Unterseite",
+            "es": "Vista inferior",
+            "fr": "Vue du dessous",
+            "pt-BR": "Vista inferior",
+            "it": "Vista dal basso"
+          },
+          "rotation": {
+            "pitchDegrees": -78,
+            "yawDegrees": 0,
+            "rollDegrees": 0
+          }
+        }
+      ],
+      "postures": [],
+      "package": {
+        "url": "/devices/iphone-17-pro-max/1.0.3/device.scdevice",
+        "size": 6361275,
+        "installedSize": 19236115,
+        "sha256": "88b74a592f0cd1f63fd4d1c6811b8180928bd1ddd56347261a14ed4a7a4263de"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "iphone-air",
+      "name": "iPhone Air",
+      "version": "1.0.5",
+      "rendererSchemaVersion": 2,
+      "requiredRecordingKind": "singleScreen",
+      "colors": [
+        "space-black",
+        "cloud-white",
+        "light-gold",
+        "sky-blue"
+      ],
+      "posePresets": [
+        {
+          "id": "front",
+          "name": "Front",
+          "localizedNames": {
+            "en": "Front",
+            "zh-Hans": "正面",
+            "zh-Hant": "正面",
+            "ja": "正面",
+            "ko": "정면",
+            "de": "Vorderseite",
+            "es": "Frente",
+            "fr": "Face avant",
+            "pt-BR": "Frente",
+            "it": "Fronte"
+          },
+          "rotation": {
+            "pitchDegrees": 0,
+            "yawDegrees": 0,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "left",
+          "name": "Left angle",
+          "localizedNames": {
+            "en": "Left angle",
+            "zh-Hans": "左侧倾斜",
+            "zh-Hant": "左側傾斜",
+            "ja": "左斜め",
+            "ko": "왼쪽 기울기",
+            "de": "Linke Ansicht",
+            "es": "Ángulo izquierdo",
+            "fr": "Angle gauche",
+            "pt-BR": "Ângulo esquerdo",
+            "it": "Angolo sinistro"
+          },
+          "rotation": {
+            "pitchDegrees": 15,
+            "yawDegrees": -30,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "right",
+          "name": "Right angle",
+          "localizedNames": {
+            "en": "Right angle",
+            "zh-Hans": "右侧倾斜",
+            "zh-Hant": "右側傾斜",
+            "ja": "右斜め",
+            "ko": "오른쪽 기울기",
+            "de": "Rechte Ansicht",
+            "es": "Ángulo derecho",
+            "fr": "Angle droit",
+            "pt-BR": "Ângulo direito",
+            "it": "Angolo destro"
+          },
+          "rotation": {
+            "pitchDegrees": 15,
+            "yawDegrees": 30,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "back",
+          "name": "Back",
+          "localizedNames": {
+            "en": "Back",
+            "zh-Hans": "背面",
+            "zh-Hant": "背面",
+            "ja": "背面",
+            "ko": "후면",
+            "de": "Rückseite",
+            "es": "Atrás",
+            "fr": "Dos",
+            "pt-BR": "Verso",
+            "it": "Retro"
+          },
+          "rotation": {
+            "pitchDegrees": 0,
+            "yawDegrees": 180,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "landscape",
+          "name": "Landscape",
+          "localizedNames": {
+            "en": "Landscape",
+            "zh-Hans": "横向",
+            "zh-Hant": "橫向",
+            "ja": "横向き",
+            "ko": "가로",
+            "de": "Querformat",
+            "es": "Horizontal",
+            "fr": "Paysage",
+            "pt-BR": "Paisagem",
+            "it": "Orizzontale"
+          },
+          "rotation": {
+            "pitchDegrees": 0,
+            "yawDegrees": 0,
+            "rollDegrees": 90
+          }
+        },
+        {
+          "id": "bottom",
+          "name": "Bottom view",
+          "localizedNames": {
+            "en": "Bottom view",
+            "zh-Hans": "底部视角",
+            "zh-Hant": "底部視角",
+            "ja": "底面",
+            "ko": "하단 보기",
+            "de": "Unterseite",
+            "es": "Vista inferior",
+            "fr": "Vue du dessous",
+            "pt-BR": "Vista inferior",
+            "it": "Vista dal basso"
+          },
+          "rotation": {
+            "pitchDegrees": -78,
+            "yawDegrees": 0,
+            "rollDegrees": 0
+          }
+        }
+      ],
+      "postures": [],
+      "package": {
+        "url": "/devices/iphone-air/1.0.5/device.scdevice",
+        "size": 748147,
+        "installedSize": 6304620,
+        "sha256": "40468198bdb533af42440b1bbf4f8fe22b128b9958fb31d77a7cbdec30e11a96"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "iphone-18-pro",
+      "name": "iPhone 18 Pro",
+      "version": "1.0.3",
+      "rendererSchemaVersion": 2,
+      "requiredRecordingKind": "singleScreen",
+      "colors": [
+        "silver",
+        "black",
+        "burgundy",
+        "glacier"
+      ],
+      "posePresets": [
+        {
+          "id": "front",
+          "name": "Front",
+          "localizedNames": {
+            "en": "Front",
+            "zh-Hans": "正面",
+            "zh-Hant": "正面",
+            "ja": "正面",
+            "ko": "정면",
+            "de": "Vorderseite",
+            "es": "Frente",
+            "fr": "Face avant",
+            "pt-BR": "Frente",
+            "it": "Fronte"
+          },
+          "rotation": {
+            "pitchDegrees": 0,
+            "yawDegrees": 0,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "left",
+          "name": "Left angle",
+          "localizedNames": {
+            "en": "Left angle",
+            "zh-Hans": "左侧倾斜",
+            "zh-Hant": "左側傾斜",
+            "ja": "左斜め",
+            "ko": "왼쪽 기울기",
+            "de": "Linke Ansicht",
+            "es": "Ángulo izquierdo",
+            "fr": "Angle gauche",
+            "pt-BR": "Ângulo esquerdo",
+            "it": "Angolo sinistro"
+          },
+          "rotation": {
+            "pitchDegrees": 15,
+            "yawDegrees": -30,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "right",
+          "name": "Right angle",
+          "localizedNames": {
+            "en": "Right angle",
+            "zh-Hans": "右侧倾斜",
+            "zh-Hant": "右側傾斜",
+            "ja": "右斜め",
+            "ko": "오른쪽 기울기",
+            "de": "Rechte Ansicht",
+            "es": "Ángulo derecho",
+            "fr": "Angle droit",
+            "pt-BR": "Ângulo direito",
+            "it": "Angolo destro"
+          },
+          "rotation": {
+            "pitchDegrees": 15,
+            "yawDegrees": 30,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "back",
+          "name": "Back",
+          "localizedNames": {
+            "en": "Back",
+            "zh-Hans": "背面",
+            "zh-Hant": "背面",
+            "ja": "背面",
+            "ko": "후면",
+            "de": "Rückseite",
+            "es": "Atrás",
+            "fr": "Dos",
+            "pt-BR": "Verso",
+            "it": "Retro"
+          },
+          "rotation": {
+            "pitchDegrees": 0,
+            "yawDegrees": 180,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "landscape",
+          "name": "Landscape",
+          "localizedNames": {
+            "en": "Landscape",
+            "zh-Hans": "横向",
+            "zh-Hant": "橫向",
+            "ja": "横向き",
+            "ko": "가로",
+            "de": "Querformat",
+            "es": "Horizontal",
+            "fr": "Paysage",
+            "pt-BR": "Paisagem",
+            "it": "Orizzontale"
+          },
+          "rotation": {
+            "pitchDegrees": 0,
+            "yawDegrees": 0,
+            "rollDegrees": 90
+          }
+        },
+        {
+          "id": "bottom",
+          "name": "Bottom view",
+          "localizedNames": {
+            "en": "Bottom view",
+            "zh-Hans": "底部视角",
+            "zh-Hant": "底部視角",
+            "ja": "底面",
+            "ko": "하단 보기",
+            "de": "Unterseite",
+            "es": "Vista inferior",
+            "fr": "Vue du dessous",
+            "pt-BR": "Vista inferior",
+            "it": "Vista dal basso"
+          },
+          "rotation": {
+            "pitchDegrees": -78,
+            "yawDegrees": 0,
+            "rollDegrees": 0
+          }
+        }
+      ],
+      "postures": [],
+      "package": {
+        "url": "/devices/iphone-18-pro/1.0.3/device.scdevice",
+        "size": 4856727,
+        "installedSize": 16149793,
+        "sha256": "ca2f91edf4e107d4d54b0817b740bfebdc2fab758036456be20c12ecdecb8459"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "iphone-18-pro-max",
+      "name": "iPhone 18 Pro Max",
+      "version": "1.0.3",
+      "rendererSchemaVersion": 2,
+      "requiredRecordingKind": "singleScreen",
+      "colors": [
+        "silver",
+        "black",
+        "burgundy",
+        "glacier"
+      ],
+      "posePresets": [
+        {
+          "id": "front",
+          "name": "Front",
+          "localizedNames": {
+            "en": "Front",
+            "zh-Hans": "正面",
+            "zh-Hant": "正面",
+            "ja": "正面",
+            "ko": "정면",
+            "de": "Vorderseite",
+            "es": "Frente",
+            "fr": "Face avant",
+            "pt-BR": "Frente",
+            "it": "Fronte"
+          },
+          "rotation": {
+            "pitchDegrees": 0,
+            "yawDegrees": 0,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "left",
+          "name": "Left angle",
+          "localizedNames": {
+            "en": "Left angle",
+            "zh-Hans": "左侧倾斜",
+            "zh-Hant": "左側傾斜",
+            "ja": "左斜め",
+            "ko": "왼쪽 기울기",
+            "de": "Linke Ansicht",
+            "es": "Ángulo izquierdo",
+            "fr": "Angle gauche",
+            "pt-BR": "Ângulo esquerdo",
+            "it": "Angolo sinistro"
+          },
+          "rotation": {
+            "pitchDegrees": 15,
+            "yawDegrees": -30,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "right",
+          "name": "Right angle",
+          "localizedNames": {
+            "en": "Right angle",
+            "zh-Hans": "右侧倾斜",
+            "zh-Hant": "右側傾斜",
+            "ja": "右斜め",
+            "ko": "오른쪽 기울기",
+            "de": "Rechte Ansicht",
+            "es": "Ángulo derecho",
+            "fr": "Angle droit",
+            "pt-BR": "Ângulo direito",
+            "it": "Angolo destro"
+          },
+          "rotation": {
+            "pitchDegrees": 15,
+            "yawDegrees": 30,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "back",
+          "name": "Back",
+          "localizedNames": {
+            "en": "Back",
+            "zh-Hans": "背面",
+            "zh-Hant": "背面",
+            "ja": "背面",
+            "ko": "후면",
+            "de": "Rückseite",
+            "es": "Atrás",
+            "fr": "Dos",
+            "pt-BR": "Verso",
+            "it": "Retro"
+          },
+          "rotation": {
+            "pitchDegrees": 0,
+            "yawDegrees": 180,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "landscape",
+          "name": "Landscape",
+          "localizedNames": {
+            "en": "Landscape",
+            "zh-Hans": "横向",
+            "zh-Hant": "橫向",
+            "ja": "横向き",
+            "ko": "가로",
+            "de": "Querformat",
+            "es": "Horizontal",
+            "fr": "Paysage",
+            "pt-BR": "Paisagem",
+            "it": "Orizzontale"
+          },
+          "rotation": {
+            "pitchDegrees": 0,
+            "yawDegrees": 0,
+            "rollDegrees": 90
+          }
+        },
+        {
+          "id": "bottom",
+          "name": "Bottom view",
+          "localizedNames": {
+            "en": "Bottom view",
+            "zh-Hans": "底部视角",
+            "zh-Hant": "底部視角",
+            "ja": "底面",
+            "ko": "하단 보기",
+            "de": "Unterseite",
+            "es": "Vista inferior",
+            "fr": "Vue du dessous",
+            "pt-BR": "Vista inferior",
+            "it": "Vista dal basso"
+          },
+          "rotation": {
+            "pitchDegrees": -78,
+            "yawDegrees": 0,
+            "rollDegrees": 0
+          }
+        }
+      ],
+      "postures": [],
+      "package": {
+        "url": "/devices/iphone-18-pro-max/1.0.3/device.scdevice",
+        "size": 4479988,
+        "installedSize": 15148109,
+        "sha256": "8b2c5cdecbb32699f89c7115cb9478831aa9a4ff201e586599f63bc8aaefa640"
       }
     }
   ]

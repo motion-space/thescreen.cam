@@ -1,0 +1,3 @@
+User-supplied source archive: apple-iphone-18-pro-max-burgundy-2026.zip
+Normalized with Blender; original source meshes retained.
+Source redistribution rights must follow the original asset license.
