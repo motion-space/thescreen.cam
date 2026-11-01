@@ -1,3 +1,11 @@
+# 1.0.23
+
+<!-- highlights
+- Smoother capsule shapes
+-->
+
+- Capsule buttons and toolbars now ease their curves into the straight edges, like iOS 26.
+
 # 1.0.22
 
 <!-- highlights
