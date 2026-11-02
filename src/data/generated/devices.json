@@ -23,9 +23,9 @@
       ],
       "package": {
         "url": "/devices/iphone-duo/1.0.0/device.scdevice",
-        "size": 4751962,
+        "size": 4753341,
         "installedSize": 25358683,
-        "sha256": "1ddf12c2048982612da12dd2caaed985f58c4c4e9cb570486858d62c851437a8"
+        "sha256": "e8fccbdc3bc910a821b38793b3ab8d4c4ec22628e3ad24631b52ab78404d313d"
       }
     },
     {
@@ -42,6 +42,112 @@
         "sage",
         "lavender"
       ],
+      "phoneModel": {
+        "id": "iphone-17",
+        "name": "iPhone 17",
+        "colors": [
+          "black",
+          "white",
+          "mist-blue",
+          "sage",
+          "lavender"
+        ],
+        "screenSize": {
+          "width": 1206,
+          "height": 2622
+        },
+        "modelIdentifiers": [
+          "iPhone18,3"
+        ],
+        "rendererSchemaVersion": 2,
+        "finishes": [
+          {
+            "id": "black",
+            "name": "Black",
+            "swatchHex": "#252629",
+            "localizedNames": {
+              "de": "Schwarz",
+              "zh-Hans": "黑色",
+              "ja": "ブラック",
+              "en": "Black",
+              "es": "Negro",
+              "it": "Nero",
+              "ko": "블랙",
+              "zh-Hant": "黑色",
+              "pt-BR": "Preto",
+              "fr": "Noir"
+            }
+          },
+          {
+            "id": "white",
+            "name": "White",
+            "swatchHex": "#e8e9e5",
+            "localizedNames": {
+              "de": "Weiß",
+              "zh-Hans": "白色",
+              "ja": "ホワイト",
+              "en": "White",
+              "es": "blanco",
+              "it": "Bianco",
+              "ko": "화이트",
+              "zh-Hant": "白色",
+              "pt-BR": "Branco",
+              "fr": "Blanc"
+            }
+          },
+          {
+            "id": "mist-blue",
+            "name": "Mist Blue",
+            "swatchHex": "#a8baca",
+            "localizedNames": {
+              "de": "Nebelblau",
+              "zh-Hans": "雾蓝色",
+              "ja": "ミストブルー",
+              "en": "Mist Blue",
+              "es": "Azul niebla",
+              "it": "Blu nebbia",
+              "ko": "미스트 블루",
+              "zh-Hant": "霧藍色",
+              "pt-BR": "Névoa Azul",
+              "fr": "Bleu brume"
+            }
+          },
+          {
+            "id": "sage",
+            "name": "Sage",
+            "swatchHex": "#aab8a4",
+            "localizedNames": {
+              "de": "Salbei",
+              "zh-Hans": "鼠尾草色",
+              "ja": "セージ",
+              "en": "Sage",
+              "es": "sabio",
+              "it": "Saggio",
+              "ko": "세이지",
+              "zh-Hant": "鼠尾草色",
+              "pt-BR": "Sábio",
+              "fr": "Sauge"
+            }
+          },
+          {
+            "id": "lavender",
+            "name": "Lavender",
+            "swatchHex": "#b9aecb",
+            "localizedNames": {
+              "de": "Lavendel",
+              "zh-Hans": "薰衣草紫",
+              "ja": "ラベンダー",
+              "en": "Lavender",
+              "es": "lavanda",
+              "it": "Lavanda",
+              "ko": "라벤더",
+              "zh-Hant": "薰衣草紫",
+              "pt-BR": "Lavanda",
+              "fr": "Lavande"
+            }
+          }
+        ]
+      },
       "posePresets": [
         {
           "id": "front",
@@ -173,9 +279,9 @@
       "postures": [],
       "package": {
         "url": "/devices/iphone-17/1.0.3/device.scdevice",
-        "size": 1070380,
+        "size": 1061031,
         "installedSize": 6120509,
-        "sha256": "5fc6aff0fd04bcec03a8bf48bd88217f35bf215730d64ddaa524b6636fd8d72b"
+        "sha256": "d9dcdfd9344de16183af0c491076240f56890dea681951690bfa85081b8f2c1b"
       }
     },
     {
@@ -190,6 +296,76 @@
         "cosmic-orange",
         "deep-blue"
       ],
+      "phoneModel": {
+        "id": "iphone-17-pro",
+        "name": "iPhone 17 Pro",
+        "colors": [
+          "silver",
+          "cosmic-orange",
+          "deep-blue"
+        ],
+        "screenSize": {
+          "width": 1206,
+          "height": 2622
+        },
+        "modelIdentifiers": [
+          "iPhone18,1"
+        ],
+        "rendererSchemaVersion": 2,
+        "finishes": [
+          {
+            "id": "silver",
+            "name": "Silver",
+            "swatchHex": "#d8d9d7",
+            "localizedNames": {
+              "de": "Silber",
+              "zh-Hans": "银色",
+              "ja": "シルバー",
+              "en": "Silver",
+              "es": "Plata",
+              "it": "Argento",
+              "ko": "실버",
+              "zh-Hant": "銀色",
+              "pt-BR": "Prata",
+              "fr": "Argent"
+            }
+          },
+          {
+            "id": "cosmic-orange",
+            "name": "Cosmic Orange",
+            "swatchHex": "#d96d34",
+            "localizedNames": {
+              "de": "Cosmic Orange",
+              "zh-Hans": "宇宙橙",
+              "ja": "コズミックオレンジ",
+              "en": "Cosmic Orange",
+              "es": "Naranja Cósmica",
+              "it": "Arancione Cosmico",
+              "ko": "코스믹 오렌지",
+              "zh-Hant": "宇宙橙",
+              "pt-BR": "Laranja Cósmica",
+              "fr": "Orange cosmique"
+            }
+          },
+          {
+            "id": "deep-blue",
+            "name": "Deep Blue",
+            "swatchHex": "#263951",
+            "localizedNames": {
+              "de": "Tiefblau",
+              "zh-Hans": "深蓝色",
+              "ja": "ディープブルー",
+              "en": "Deep Blue",
+              "es": "azul profundo",
+              "it": "Blu profondo",
+              "ko": "딥 블루",
+              "zh-Hant": "深藍色",
+              "pt-BR": "Azul Profundo",
+              "fr": "Bleu profond"
+            }
+          }
+        ]
+      },
       "posePresets": [
         {
           "id": "front",
@@ -321,9 +497,9 @@
       "postures": [],
       "package": {
         "url": "/devices/iphone-17-pro/1.0.3/device.scdevice",
-        "size": 790046,
+        "size": 789727,
         "installedSize": 5369724,
-        "sha256": "9e9b90ce47a25602df7dfd725b11501bf2663374469905995b8492822498f548"
+        "sha256": "0fb54bd8ed293fa7802dffe0341c71ef84993b41af855e27a68208e5936ae4f6"
       }
     },
     {
@@ -338,6 +514,76 @@
         "cosmic-orange",
         "deep-blue"
       ],
+      "phoneModel": {
+        "id": "iphone-17-pro-max",
+        "name": "iPhone 17 Pro Max",
+        "colors": [
+          "silver",
+          "cosmic-orange",
+          "deep-blue"
+        ],
+        "screenSize": {
+          "width": 1320,
+          "height": 2868
+        },
+        "modelIdentifiers": [
+          "iPhone18,2"
+        ],
+        "rendererSchemaVersion": 2,
+        "finishes": [
+          {
+            "id": "silver",
+            "name": "Silver",
+            "swatchHex": "#d8d9d7",
+            "localizedNames": {
+              "de": "Silber",
+              "zh-Hans": "银色",
+              "ja": "シルバー",
+              "en": "Silver",
+              "es": "Plata",
+              "it": "Argento",
+              "ko": "실버",
+              "zh-Hant": "銀色",
+              "pt-BR": "Prata",
+              "fr": "Argent"
+            }
+          },
+          {
+            "id": "cosmic-orange",
+            "name": "Cosmic Orange",
+            "swatchHex": "#d96d34",
+            "localizedNames": {
+              "de": "Cosmic Orange",
+              "zh-Hans": "宇宙橙",
+              "ja": "コズミックオレンジ",
+              "en": "Cosmic Orange",
+              "es": "Naranja Cósmica",
+              "it": "Arancione Cosmico",
+              "ko": "코스믹 오렌지",
+              "zh-Hant": "宇宙橙",
+              "pt-BR": "Laranja Cósmica",
+              "fr": "Orange cosmique"
+            }
+          },
+          {
+            "id": "deep-blue",
+            "name": "Deep Blue",
+            "swatchHex": "#263951",
+            "localizedNames": {
+              "de": "Tiefblau",
+              "zh-Hans": "深蓝色",
+              "ja": "ディープブルー",
+              "en": "Deep Blue",
+              "es": "azul profundo",
+              "it": "Blu profondo",
+              "ko": "딥 블루",
+              "zh-Hant": "深藍色",
+              "pt-BR": "Azul Profundo",
+              "fr": "Bleu profond"
+            }
+          }
+        ]
+      },
       "posePresets": [
         {
           "id": "front",
@@ -469,9 +715,9 @@
       "postures": [],
       "package": {
         "url": "/devices/iphone-17-pro-max/1.0.3/device.scdevice",
-        "size": 6361275,
+        "size": 6364487,
         "installedSize": 19236115,
-        "sha256": "88b74a592f0cd1f63fd4d1c6811b8180928bd1ddd56347261a14ed4a7a4263de"
+        "sha256": "ade838466cb82bbc11db12bcb4280a5725c5a586fc7e9e27acb63e70f66692e9"
       }
     },
     {
@@ -487,6 +733,94 @@
         "light-gold",
         "sky-blue"
       ],
+      "phoneModel": {
+        "id": "iphone-air",
+        "name": "iPhone Air",
+        "colors": [
+          "space-black",
+          "cloud-white",
+          "light-gold",
+          "sky-blue"
+        ],
+        "screenSize": {
+          "width": 1260,
+          "height": 2736
+        },
+        "modelIdentifiers": [
+          "iPhone18,4"
+        ],
+        "rendererSchemaVersion": 2,
+        "finishes": [
+          {
+            "id": "space-black",
+            "name": "Space Black",
+            "swatchHex": "#25282b",
+            "localizedNames": {
+              "de": "Space Schwarz",
+              "zh-Hans": "深空黑",
+              "ja": "スペースブラック",
+              "en": "Space Black",
+              "es": "Negro espacial",
+              "it": "Spazio nero",
+              "ko": "스페이스 블랙",
+              "zh-Hant": "深空黑",
+              "pt-BR": "Espaço Preto",
+              "fr": "Espace noir"
+            }
+          },
+          {
+            "id": "cloud-white",
+            "name": "Cloud White",
+            "swatchHex": "#e5e6df",
+            "localizedNames": {
+              "de": "Wolkenweiß",
+              "zh-Hans": "云白色",
+              "ja": "クラウドホワイト",
+              "en": "Cloud White",
+              "es": "nube blanca",
+              "it": "Nuvola bianca",
+              "ko": "클라우드 화이트",
+              "zh-Hant": "雲白色",
+              "pt-BR": "Nuvem Branca",
+              "fr": "Nuage Blanc"
+            }
+          },
+          {
+            "id": "light-gold",
+            "name": "Light Gold",
+            "swatchHex": "#e4d6ba",
+            "localizedNames": {
+              "de": "Hellgold",
+              "zh-Hans": "浅金色",
+              "ja": "ライトゴールド",
+              "en": "Light Gold",
+              "es": "Oro claro",
+              "it": "Oro chiaro",
+              "ko": "라이트 골드",
+              "zh-Hant": "淺金色",
+              "pt-BR": "Ouro claro",
+              "fr": "Or clair"
+            }
+          },
+          {
+            "id": "sky-blue",
+            "name": "Sky Blue",
+            "swatchHex": "#b6cedd",
+            "localizedNames": {
+              "de": "Himmelblau",
+              "zh-Hans": "天蓝色",
+              "ja": "スカイブルー",
+              "en": "Sky Blue",
+              "es": "azul cielo",
+              "it": "Cielo blu",
+              "ko": "스카이 블루",
+              "zh-Hant": "天藍色",
+              "pt-BR": "Azul celeste",
+              "fr": "Bleu ciel"
+            }
+          }
+        ]
+      },
       "posePresets": [
         {
           "id": "front",
@@ -618,9 +952,9 @@
       "postures": [],
       "package": {
         "url": "/devices/iphone-air/1.0.5/device.scdevice",
-        "size": 748147,
+        "size": 752066,
         "installedSize": 6304620,
-        "sha256": "40468198bdb533af42440b1bbf4f8fe22b128b9958fb31d77a7cbdec30e11a96"
+        "sha256": "d69d05e4b49232c08676ddb259f3d4e317191eb48d04e758d426182f30672ace"
       }
     },
     {
@@ -636,6 +970,94 @@
         "burgundy",
         "glacier"
       ],
+      "phoneModel": {
+        "id": "iphone-18-pro",
+        "name": "iPhone 18 Pro",
+        "colors": [
+          "silver",
+          "black",
+          "burgundy",
+          "glacier"
+        ],
+        "screenSize": {
+          "width": 1206,
+          "height": 2622
+        },
+        "modelIdentifiers": [
+          "iPhone19,1"
+        ],
+        "rendererSchemaVersion": 2,
+        "finishes": [
+          {
+            "id": "silver",
+            "name": "Silver",
+            "swatchHex": "#d8d9d7",
+            "localizedNames": {
+              "de": "Silber",
+              "zh-Hans": "银色",
+              "ja": "シルバー",
+              "en": "Silver",
+              "es": "Plata",
+              "it": "Argento",
+              "ko": "실버",
+              "zh-Hant": "銀色",
+              "pt-BR": "Prata",
+              "fr": "Argent"
+            }
+          },
+          {
+            "id": "black",
+            "name": "Black",
+            "swatchHex": "#252629",
+            "localizedNames": {
+              "de": "Schwarz",
+              "zh-Hans": "黑色",
+              "ja": "ブラック",
+              "en": "Black",
+              "es": "Negro",
+              "it": "Nero",
+              "ko": "블랙",
+              "zh-Hant": "黑色",
+              "pt-BR": "Preto",
+              "fr": "Noir"
+            }
+          },
+          {
+            "id": "burgundy",
+            "name": "Burgundy",
+            "swatchHex": "#67313d",
+            "localizedNames": {
+              "de": "Burgunderrot",
+              "zh-Hans": "勃艮第红",
+              "ja": "バーガンディ",
+              "en": "Burgundy",
+              "es": "Burdeos",
+              "it": "Bordeaux",
+              "ko": "버건디",
+              "zh-Hant": "勃艮第紅",
+              "pt-BR": "Bordô",
+              "fr": "Bordeaux"
+            }
+          },
+          {
+            "id": "glacier",
+            "name": "Glacier",
+            "swatchHex": "#b9d7e1",
+            "localizedNames": {
+              "de": "Gletscherblau",
+              "zh-Hans": "冰川蓝",
+              "ja": "Glacier",
+              "en": "Glacier",
+              "es": "Glacier",
+              "it": "Glacier",
+              "ko": "Glacier",
+              "zh-Hant": "冰川蓝",
+              "pt-BR": "Glacier",
+              "fr": "Glacier"
+            }
+          }
+        ]
+      },
       "posePresets": [
         {
           "id": "front",
@@ -767,9 +1189,9 @@
       "postures": [],
       "package": {
         "url": "/devices/iphone-18-pro/1.0.3/device.scdevice",
-        "size": 4856727,
+        "size": 4862770,
         "installedSize": 16149793,
-        "sha256": "ca2f91edf4e107d4d54b0817b740bfebdc2fab758036456be20c12ecdecb8459"
+        "sha256": "5ade68b8d922723abd71f3178ed778f905dbcad2232420a7bf82a4adf44504ff"
       }
     },
     {
@@ -785,6 +1207,94 @@
         "burgundy",
         "glacier"
       ],
+      "phoneModel": {
+        "id": "iphone-18-pro-max",
+        "name": "iPhone 18 Pro Max",
+        "colors": [
+          "silver",
+          "black",
+          "burgundy",
+          "glacier"
+        ],
+        "screenSize": {
+          "width": 1320,
+          "height": 2868
+        },
+        "modelIdentifiers": [
+          "iPhone19,2"
+        ],
+        "rendererSchemaVersion": 2,
+        "finishes": [
+          {
+            "id": "silver",
+            "name": "Silver",
+            "swatchHex": "#d8d9d7",
+            "localizedNames": {
+              "de": "Silber",
+              "zh-Hans": "银色",
+              "ja": "シルバー",
+              "en": "Silver",
+              "es": "Plata",
+              "it": "Argento",
+              "ko": "실버",
+              "zh-Hant": "銀色",
+              "pt-BR": "Prata",
+              "fr": "Argent"
+            }
+          },
+          {
+            "id": "black",
+            "name": "Black",
+            "swatchHex": "#252629",
+            "localizedNames": {
+              "de": "Schwarz",
+              "zh-Hans": "黑色",
+              "ja": "ブラック",
+              "en": "Black",
+              "es": "Negro",
+              "it": "Nero",
+              "ko": "블랙",
+              "zh-Hant": "黑色",
+              "pt-BR": "Preto",
+              "fr": "Noir"
+            }
+          },
+          {
+            "id": "burgundy",
+            "name": "Burgundy",
+            "swatchHex": "#67313d",
+            "localizedNames": {
+              "de": "Burgunderrot",
+              "zh-Hans": "勃艮第红",
+              "ja": "バーガンディ",
+              "en": "Burgundy",
+              "es": "Burdeos",
+              "it": "Bordeaux",
+              "ko": "버건디",
+              "zh-Hant": "勃艮第紅",
+              "pt-BR": "Bordô",
+              "fr": "Bordeaux"
+            }
+          },
+          {
+            "id": "glacier",
+            "name": "Glacier",
+            "swatchHex": "#b9d7e1",
+            "localizedNames": {
+              "de": "Gletscherblau",
+              "zh-Hans": "冰川蓝",
+              "ja": "Glacier",
+              "en": "Glacier",
+              "es": "Glacier",
+              "it": "Glacier",
+              "ko": "Glacier",
+              "zh-Hant": "冰川蓝",
+              "pt-BR": "Glacier",
+              "fr": "Glacier"
+            }
+          }
+        ]
+      },
       "posePresets": [
         {
           "id": "front",
@@ -916,9 +1426,9 @@
       "postures": [],
       "package": {
         "url": "/devices/iphone-18-pro-max/1.0.3/device.scdevice",
-        "size": 4479988,
+        "size": 4485821,
         "installedSize": 15148109,
-        "sha256": "8b2c5cdecbb32699f89c7115cb9478831aa9a4ff201e586599f63bc8aaefa640"
+        "sha256": "18827a664d127d843c79aa1e5b633fd44a8e41acd97dfc2fdc0a74f37e819f38"
       }
     }
   ]

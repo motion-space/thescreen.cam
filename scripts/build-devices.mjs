@@ -5,19 +5,18 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const defaultVersion = '1.0.0';
-const phoneColors = {
- 'iphone-17': ['black','white','mist-blue','sage','lavender'],
- 'iphone-17-pro': ['silver','cosmic-orange','deep-blue'],
- 'iphone-17-pro-max': ['silver','cosmic-orange','deep-blue'],
- 'iphone-air': ['space-black','cloud-white','light-gold','sky-blue'],
- 'iphone-18-pro': ['silver','black','burgundy','glacier'],
- 'iphone-18-pro-max': ['silver','black','burgundy','glacier'],
-};
-const versions = Object.fromEntries(Object.keys(phoneColors).map(id => [id, id === 'iphone-air' ? '1.0.5' : '1.0.3']));
+const catalog = JSON.parse(await readFile(path.join(root, 'content/devices/catalog.json'), 'utf8'));
+if (catalog.schemaVersion !== 1 || !Array.isArray(catalog.devices)) throw new Error('Unsupported device catalog');
 const manifests = [];
-for (const id of ['iphone-duo', ...Object.keys(phoneColors)]) {
-const version = versions[id] ?? defaultVersion;
+for (const device of catalog.devices) {
+const { id, version, phoneModel } = device;
+if (!/^[a-z0-9-]+$/.test(id) || !/^[0-9]+\.[0-9]+\.[0-9]+$/.test(version)) throw new Error('Invalid device identity');
+if (phoneModel && (phoneModel.id !== id || phoneModel.rendererSchemaVersion !== device.rendererSchemaVersion
+    || !phoneModel.finishes.length || new Set(phoneModel.colors).size !== phoneModel.colors.length
+    || JSON.stringify(phoneModel.finishes.map(f => f.id)) !== JSON.stringify(phoneModel.colors)
+    || ![phoneModel.screenSize.width, phoneModel.screenSize.height].every(n => Number.isInteger(n) && n > 0 && n <= 16384))) {
+  throw new Error(`Invalid phone metadata: ${id}`);
+}
 const input = path.join(root, 'content/devices', id, version);
 const output = path.join(root, 'public/devices', id, version);
 const sha = data => createHash('sha256').update(data).digest('hex');
@@ -36,8 +35,9 @@ const pack = Buffer.concat([Buffer.from('SCDEVICE1'), size, header, ...blobs]);
 await writeFile(path.join(output, 'device.scdevice'), pack);
 const model = JSON.parse(await readFile(path.join(input, 'model.json'), 'utf8'));
 const manifest = {
-  schemaVersion: 1, id, name: id.replace('iphone', 'iPhone').replaceAll('-', ' ').replace(' pro', ' Pro').replace(' max', ' Max').replace(' air', ' Air').replace(' duo', ' Duo'), version, rendererSchemaVersion: 2,
-  requiredRecordingKind: id === 'iphone-duo' ? 'iphoneDuo' : 'singleScreen', colors: phoneColors[id] ?? ['white', 'black'],
+  schemaVersion: 1, id, name: device.name, version, rendererSchemaVersion: device.rendererSchemaVersion,
+  requiredRecordingKind: phoneModel ? 'singleScreen' : 'iphoneDuo', colors: phoneModel?.colors ?? ['white', 'black'],
+  ...(phoneModel ? { phoneModel } : {}),
   posePresets: model.posePresets,
   postures: id !== 'iphone-duo' ? [] : ['foldedLandscape','foldedPortrait','tent','laptop','unfoldedLandscape','unfoldedPortrait','slightlyFolded'],
   package: { url: `/devices/${id}/${version}/device.scdevice`, size: pack.length,

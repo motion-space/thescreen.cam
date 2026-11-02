@@ -113,6 +113,14 @@ npm run devices:test
 
 The normal build publishes `/api/devices.json`, `/devices/iphone-duo/manifest.json`, and an immutable versioned `device.scdevice`. The manifest declares recording-kind restrictions, colors, postures, compatibility, sizes and SHA-256. `SCDEVICE1` indexes raw-deflate file payloads with individual hashes; the App verifies and installs them before enabling Duo recording. Model provenance and preserved source settings are in the device's `NOTICE.txt` and `source-config.json`. Bump the device version before changing published asset contents. Generated `public/devices/` output is ignored.
 
+Single-screen phones are described in `content/devices/catalog.json`; the build script discovers the device list from that data file. To add a model without changing the App:
+
+1. Add its versioned data-only renderer resources under `content/devices/<id>/<version>/`.
+2. Add a catalog entry with `id`, `version`, `name`, `rendererSchemaVersion`, and `phoneModel`. The descriptor contains the same `id`/`name`, `colors`, `screenSize` in native pixels, `modelIdentifiers` for USB recognition, `rendererSchemaVersion`, and `finishes` (stable `id`, display `name`, `swatchHex`, optional `localizedNames`).
+3. Run `npm run devices:build` and `npm run devices:test`, then publish the API and generated resources together through the normal deployment workflow.
+
+Current single-screen clients support manifest schema 1 and renderer schema 2. Each entry is checked independently: future renderer versions, invalid metadata and unrelated recording kinds are excluded from the phone picker. Keep this 3D catalog separate from `/api/mockups.json`; static-list older Apps do not read it and will not display newly published models. Existing per-device manifests retain their schema and color IDs, so older Apps can still download the models they already know. The new App stores a descriptor snapshot with each selected model; such projects require workspace reader 19 and automation capability `supportsDynamicPhone3DModels`.
+
 ## Project Structure
 
 - `src/pages/`: Astro routes and API endpoints
