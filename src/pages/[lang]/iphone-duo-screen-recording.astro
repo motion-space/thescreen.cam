@@ -1,0 +1,10 @@
+---
+import IphoneDuoPage from "../../components/iphone-duo-page.astro";
+import { getLocalizedStaticPaths } from "../../lib/i18n";
+
+export const getStaticPaths = getLocalizedStaticPaths;
+
+const { locale } = Astro.props;
+---
+
+<IphoneDuoPage locale={locale} />
