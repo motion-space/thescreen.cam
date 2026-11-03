@@ -1,3 +1,16 @@
+# 1.0.25
+
+<!-- highlights
+- More reliable recording start and save
+-->
+
+- If a recording does not start within 30 seconds, ScreenCam now stops trying and tells you, and you can cancel while it is starting. A recording that gets stuck saving now ends with an error after 5 minutes instead of waiting forever.
+- When the camera, a microphone or system audio fails as a recording stops, the rest of the recording is kept. If the encoder fails partway through, ScreenCam tries to save what was already recorded.
+- Closing ScreenCam during a recording now gives it more time to finish saving.
+- ScreenCam now closes properly when Windows installs an update, and reopens afterward.
+- The crop and caption windows close by themselves if they crash, so the editor no longer stays blocked. The preview also tries to recover after a graphics driver reset.
+- You can close the unlock window if Microsoft Store does not respond.
+
 # 1.0.24
 
 <!-- highlights
