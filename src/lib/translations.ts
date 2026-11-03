@@ -50,6 +50,7 @@ export type FooterCopy = {
   };
   resourceLinks: {
     alternatives?: string;
+    iphoneDuo?: string;
     bgm: string;
     changelog: string;
     cursors: string;
@@ -645,6 +646,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       },
       resourceLinks: {
         alternatives: "Alternatives",
+        iphoneDuo: "iPhone Duo recording",
         bgm: "BGM",
         changelog: "Changelog",
         cursors: "Cursors",
@@ -1576,6 +1578,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       },
       resourceLinks: {
         alternatives: "替代方案",
+        iphoneDuo: "iPhone Duo 录屏",
         bgm: "BGM",
         changelog: "更新日志",
         cursors: "鼠标指针",
@@ -2447,6 +2450,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       },
       resourceLinks: {
         alternatives: "Alternativen",
+        iphoneDuo: "iPhone Duo aufnehmen",
         bgm: "BGM",
         changelog: "Changelog",
         cursors: "Mauszeiger",
@@ -3340,6 +3344,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       },
       resourceLinks: {
         alternatives: "代替ツール",
+        iphoneDuo: "iPhone Duo 画面収録",
         bgm: "BGM",
         changelog: "変更履歴",
         cursors: "カーソル",
@@ -4212,6 +4217,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       },
       resourceLinks: {
         alternatives: "대안",
+        iphoneDuo: "iPhone Duo 화면 녹화",
         bgm: "BGM",
         changelog: "변경 내역",
         cursors: "커서",
@@ -5084,6 +5090,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       },
       resourceLinks: {
         alternatives: "替代方案",
+        iphoneDuo: "iPhone Duo 螢幕錄影",
         bgm: "BGM",
         changelog: "更新日誌",
         cursors: "滑鼠指標",
@@ -5955,6 +5962,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       },
       resourceLinks: {
         alternatives: "Alternativas",
+        iphoneDuo: "Grabar iPhone Duo",
         bgm: "BGM",
         changelog: "Registro de cambios",
         cursors: "Cursores",
@@ -6886,6 +6894,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       },
       resourceLinks: {
         alternatives: "Alternatives",
+        iphoneDuo: "Enregistrer l’iPhone Duo",
         bgm: "BGM",
         changelog: "Journal des modifications",
         cursors: "Curseurs",
@@ -7817,6 +7826,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       },
       resourceLinks: {
         alternatives: "Alternativas",
+        iphoneDuo: "Gravar iPhone Duo",
         bgm: "BGM",
         changelog: "Registro de alterações",
         cursors: "Cursores",
@@ -8748,6 +8758,7 @@ const rawTranslations: Record<Locale, RawLocaleTranslation> = {
       },
       resourceLinks: {
         alternatives: "Alternative",
+        iphoneDuo: "Registrare iPhone Duo",
         bgm: "BGM",
         changelog: "Registro delle modifiche",
         cursors: "Cursori",
