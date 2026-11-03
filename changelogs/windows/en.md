@@ -1,3 +1,11 @@
+# 1.0.24
+
+<!-- highlights
+- More reliable recording start
+-->
+
+- Fixed an occasional problem where a recording could stay on "Starting...": the Stop and Cancel buttons stayed unavailable while the screen was already being recorded, and system audio came out silent.
+
 # 1.0.23
 
 <!-- highlights
