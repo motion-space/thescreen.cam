@@ -1,3 +1,4 @@
+import { tr } from "./mock-i18n";
 import { CAPTION_CLIPS, RECORDING_DURATION, SCREENSHOT_TIME, STORY } from "./story-timing";
 import { drawPanel, drawShadow } from "./panel-shadow";
 import { DEFAULT_ANGLE, DEFAULT_STRENGTH, type PadPoint, type PadRects, ShadowPads, padValueText, shadowOffset, shadowStrength } from "./shadow-pad";
@@ -673,21 +674,28 @@ export function drawEditor(ui: UI, state: EditorState, h: EditorHandlers, static
     text(ctx, "Product walkthrough", 180, 20.5, { size: 12, weight: 500, color: t.text });
     const tw = measure(ctx, "Product walkthrough", 12, 500);
     text(ctx, `${fmt(DURATION)} · 2,880×1,800`, 188 + tw, 20.5, { size: 12, color: t.text2 });
-    // centre
-    icon(ctx, "proportions", 650, 20, 14, t.text2);
-    text(ctx, "Auto", 663, 20.5, { size: 12, weight: 500, color: t.text });
-    icon(ctx, "crop", 712, 20, 14, t.text2);
-    text(ctx, "Crop", 725, 20.5, { size: 12, weight: 500, color: t.text });
+    // centre (measured, so longer translations keep their spacing)
+    const autoW = measure(ctx, "Auto", 12, 500), cropW = measure(ctx, "Crop", 12, 500);
+    const centreX = 650 + (101 - (49 + autoW + cropW)) / 2;
+    icon(ctx, "proportions", centreX, 20, 14, t.text2);
+    text(ctx, "Auto", centreX + 13, 20.5, { size: 12, weight: 500, color: t.text });
+    const cropX = centreX + 13 + autoW + 23;
+    icon(ctx, "crop", cropX, 20, 14, t.text2);
+    text(ctx, "Crop", cropX + 13, 20.5, { size: 12, weight: 500, color: t.text });
     // right
-    icon(ctx, "sliders-horizontal", 1262, 20, 14, t.text2);
-    text(ctx, "Presets", 1275, 20.5, { size: 12, weight: 500, color: t.text });
+    const exW = Math.max(94, measure(ctx, "Export", 12, 600) + 50);
+    const exX = 1428 - exW;
+    const presetsW = measure(ctx, "Presets", 12, 500);
+    const presetsX = Math.min(1275, exX - 14 - presetsW);
+    icon(ctx, "sliders-horizontal", presetsX - 13, 20, 14, t.text2);
+    text(ctx, "Presets", presetsX, 20.5, { size: 12, weight: 500, color: t.text });
     const exH = ui.hover === "hdr-export";
-    rr(ctx, 1334, 8, 94, 24, 6);
+    rr(ctx, exX, 8, exW, 24, 6);
     ctx.fillStyle = exH ? shade(t.accent, -0.08) : t.accent;
     ctx.fill();
-    icon(ctx, "share", 1352, 20, 14, "#fff");
-    text(ctx, "Export", 1366, 20.5, { size: 12, weight: 600, color: "#fff" });
-    ui.hits.add({ id: "hdr-export", x: 1334, y: 8, w: 94, h: 24, cursor: "pointer" });
+    icon(ctx, "share", exX + 18, 20, 14, "#fff");
+    text(ctx, "Export", exX + 32, 20.5, { size: 12, weight: 600, color: "#fff" });
+    ui.hits.add({ id: "hdr-export", x: exX, y: 8, w: exW, h: 24, cursor: "pointer" });
     }
     ctx.restore();
   }
@@ -2002,7 +2010,7 @@ export function drawScreenshotAnnotations(ctx: CanvasRenderingContext2D, state: 
       ctx.textAlign = "right";
       ctx.strokeText("Ship it!", sx0 - 12, sy0);
       ctx.fillStyle = "#fff";
-      ctx.fillText("Ship it!", sx0 - 12, sy0);
+      ctx.fillText(tr("Ship it!"), sx0 - 12, sy0);
       ctx.restore();
     }
   }

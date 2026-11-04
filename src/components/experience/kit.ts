@@ -1,3 +1,4 @@
+import { tr } from "./mock-i18n";
 /**
  * Canvas UI kit for the ScreenCam editor replica.
  * Tokens and control metrics come from the Windows editor
@@ -121,11 +122,12 @@ export function text(
   ctx.fillStyle = opts.color;
   ctx.textAlign = opts.align ?? "left";
   ctx.textBaseline = opts.baseline ?? "middle";
-  ctx.fillText(value, x, y);
+  ctx.fillText(tr(value), x, y);
 }
 
 const measuredWidths = new Map<string, number>();
-export function measureWidth(ctx: CanvasRenderingContext2D, value: string) {
+export function measureWidth(ctx: CanvasRenderingContext2D, source: string) {
+  const value = tr(source);
   const key = [ctx.font,ctx.fontKerning,ctx.letterSpacing,ctx.wordSpacing,ctx.direction,value].join("\u0000");
   let width = measuredWidths.get(key);
   if (width === undefined) {

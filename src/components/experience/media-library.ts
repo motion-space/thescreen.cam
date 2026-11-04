@@ -1,3 +1,4 @@
+import { tr } from "./mock-i18n";
 import { HEADER, PREVIEW, type EditorHandlers, type EditorState } from "./editor";
 import { MEDIA_LIBRARY_MIN_WIDTH, MEDIA_LIBRARY_MAX_WIDTH, visibleMediaLibraryWidth } from "./preview-layout";
 import { MONO, icon, rr, text, type UI } from "./kit";
@@ -78,7 +79,7 @@ export class MediaLibraryLayer {
         // Keep long titles on one line, just like the native cards.
         c.save(); c.beginPath(); c.rect(x + 5, y + cardH - 21, cardW - 10, 19); c.clip();
         icon(c, asset.kind === "audio" ? "music" : asset.kind === "project" ? "layers" : "video", x + 11, y + cardH - 11, 9, t.text2);
-        let title = asset.title;
+        let title = tr(asset.title);
         c.font = '11px -apple-system, BlinkMacSystemFont, sans-serif';
         while (c.measureText(title).width > cardW - 29) title = title.slice(0, -2).trimEnd() + "…";
         text(c, title, x + 20, y + cardH - 10.5, { size: 11, color: t.text });

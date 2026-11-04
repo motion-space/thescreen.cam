@@ -52,6 +52,7 @@ import { ATTACHMENT, CH, CW, setAppTheme, warmRecordedApp, disposeRecordedAppCac
 import { FrameBlurGL } from "./preview-gl";
 import { SPRINGS, springEase, springSettle, SpringValue } from "./spring";
 import { EditorLayer } from "./editor-layer";
+import { setMockLocale } from "./mock-i18n";
 
 type Rect = { x: number; y: number; w: number; h: number };
 type AreaName = "hero" | "overview" | "card";
@@ -237,6 +238,7 @@ export function Experience({ copy, currentPath = "/", headerCopy, languageLabel,
   const [demo, setDemo] = useState({ style: 0 as KeyStyle, remove: false, sticker: false });
   const demoRef = useRef(demo);
   const [active, setActive] = useState(-1);
+  setMockLocale(locale);
   const showcase = useMemo(() => getShowcaseCopy(locale), [locale]);
 
   useEffect(() => {
