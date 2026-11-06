@@ -1,0 +1,4 @@
+User-supplied source: Apple_Pro_Display_XDR.usdz
+SHA-256: f3467bab746ead0a36e2c93c8e28542f4abac8ebdf9266b848b555c94801ebeb
+Original meshes and material textures retained; finishes are visual approximations requested by the user.
+Normalized and rigged with Blender. Redistribution rights remain with original asset owners.

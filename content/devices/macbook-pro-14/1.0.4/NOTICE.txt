@@ -1,0 +1,4 @@
+User-supplied source: MacBook_Pro_14-inch_M5.usdz
+SHA-256: f539d0b5eebd0139076189a73eecd59e5485029dcd3ad14b1959b01fac7f1036
+Original meshes and material textures retained; finishes are visual approximations requested by the user.
+Normalized and rigged with Blender. Redistribution rights remain with original asset owners.

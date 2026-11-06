@@ -1,0 +1,11 @@
+{
+  "schemaVersion": 1,
+  "profiles": {
+    "anodized-aluminum": {
+      "metalness": 0.85,
+      "roughness": 0.72,
+      "clearcoat": 0,
+      "clearcoatRoughness": 1
+    }
+  }
+}

@@ -1,0 +1,4 @@
+User-supplied source: Apple_Macbook_Air_15_Space_Gray_2023.usdz
+SHA-256: 0bc2abc8aa2bebc78c780d5c9c95c6b094bf7edf78d59167eb6e88a611013b77
+Original meshes and material textures retained; finishes are visual approximations requested by the user.
+Normalized and rigged with Blender. Redistribution rights remain with original asset owners.

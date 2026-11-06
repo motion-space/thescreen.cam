@@ -1,0 +1,4 @@
+User-supplied source: macbook_pro_M3_16_inch_2024.usdz
+SHA-256: f630dd3dbbbb81008d0020bcf0f03e59eb92d0fccabfee0d033f60ddf46da297
+Original meshes and material textures retained; finishes are visual approximations requested by the user.
+Normalized and rigged with Blender. Redistribution rights remain with original asset owners.

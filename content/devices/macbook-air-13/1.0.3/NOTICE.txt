@@ -1,0 +1,4 @@
+User-supplied source: Macbook_Air.usdz
+SHA-256: 34cf2a41ad79399623bc6cb269a27ae203e00e69c6d866be9aba5c3b3030c466
+Original meshes and material textures retained; finishes are visual approximations requested by the user.
+Normalized and rigged with Blender. Redistribution rights remain with original asset owners.

@@ -12,6 +12,29 @@
         "white",
         "black"
       ],
+      "parameters": [
+        {
+          "id": "hinge-angle",
+          "name": "Opening angle",
+          "localizedNames": {
+            "en": "Opening angle",
+            "zh-Hans": "开合角度",
+            "zh-Hant": "開合角度",
+            "ja": "開閉角度",
+            "ko": "열림 각도",
+            "de": "Öffnungswinkel",
+            "es": "Ángulo de apertura",
+            "fr": "Angle d’ouverture",
+            "it": "Angolo di apertura",
+            "pt-BR": "Ângulo de abertura"
+          },
+          "minimum": 0,
+          "maximum": 180,
+          "defaultValue": 180,
+          "step": 1,
+          "binding": "duoHinge"
+        }
+      ],
       "postures": [
         "foldedLandscape",
         "foldedPortrait",
@@ -146,7 +169,8 @@
               "fr": "Lavande"
             }
           }
-        ]
+        ],
+        "deviceKind": "phone"
       },
       "posePresets": [
         {
@@ -364,7 +388,8 @@
               "fr": "Bleu profond"
             }
           }
-        ]
+        ],
+        "deviceKind": "phone"
       },
       "posePresets": [
         {
@@ -582,7 +607,8 @@
               "fr": "Bleu profond"
             }
           }
-        ]
+        ],
+        "deviceKind": "phone"
       },
       "posePresets": [
         {
@@ -819,7 +845,8 @@
               "fr": "Bleu ciel"
             }
           }
-        ]
+        ],
+        "deviceKind": "phone"
       },
       "posePresets": [
         {
@@ -1056,7 +1083,8 @@
               "fr": "Glacier"
             }
           }
-        ]
+        ],
+        "deviceKind": "phone"
       },
       "posePresets": [
         {
@@ -1293,7 +1321,8 @@
               "fr": "Glacier"
             }
           }
-        ]
+        ],
+        "deviceKind": "phone"
       },
       "posePresets": [
         {
@@ -1430,6 +1459,1006 @@
         "installedSize": 15148109,
         "sha256": "18827a664d127d843c79aa1e5b633fd44a8e41acd97dfc2fdc0a74f37e819f38"
       }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "macbook-air-13",
+      "name": "MacBook Air 13-inch",
+      "version": "1.0.3",
+      "rendererSchemaVersion": 3,
+      "requiredRecordingKind": "singleScreen",
+      "colors": [
+        "sky-blue",
+        "silver",
+        "starlight",
+        "midnight"
+      ],
+      "phoneModel": {
+        "id": "macbook-air-13",
+        "name": "MacBook Air 13-inch",
+        "colors": [
+          "sky-blue",
+          "silver",
+          "starlight",
+          "midnight"
+        ],
+        "screenSize": {
+          "width": 2560,
+          "height": 1664
+        },
+        "modelIdentifiers": [],
+        "rendererSchemaVersion": 3,
+        "finishes": [
+          {
+            "id": "sky-blue",
+            "name": "Sky Blue",
+            "swatchHex": "#b6cedd",
+            "localizedNames": {
+              "de": "Himmelblau",
+              "zh-Hans": "天蓝色",
+              "ja": "スカイブルー",
+              "en": "Sky Blue",
+              "es": "azul cielo",
+              "it": "Cielo blu",
+              "ko": "스카이 블루",
+              "zh-Hant": "天藍色",
+              "pt-BR": "Azul celeste",
+              "fr": "Bleu ciel"
+            }
+          },
+          {
+            "id": "silver",
+            "name": "Silver",
+            "swatchHex": "#d8d9d7",
+            "localizedNames": {
+              "de": "Silber",
+              "zh-Hans": "银色",
+              "ja": "シルバー",
+              "en": "Silver",
+              "es": "Plata",
+              "it": "Argento",
+              "ko": "실버",
+              "zh-Hant": "銀色",
+              "pt-BR": "Prata",
+              "fr": "Argent"
+            }
+          },
+          {
+            "id": "starlight",
+            "name": "Starlight",
+            "swatchHex": "#e8dfce",
+            "localizedNames": {
+              "en": "Starlight",
+              "zh-Hans": "星光色",
+              "zh-Hant": "星光色",
+              "ja": "スターライト",
+              "ko": "스타라이트",
+              "de": "Polarstern",
+              "es": "Blanco estrella",
+              "fr": "Lumière stellaire",
+              "it": "Galassia",
+              "pt-BR": "Estelar"
+            }
+          },
+          {
+            "id": "midnight",
+            "name": "Midnight",
+            "swatchHex": "#2e3642",
+            "localizedNames": {
+              "en": "Midnight",
+              "zh-Hans": "午夜色",
+              "zh-Hant": "午夜色",
+              "ja": "ミッドナイト",
+              "ko": "미드나이트",
+              "de": "Mitternacht",
+              "es": "Medianoche",
+              "fr": "Minuit",
+              "it": "Mezzanotte",
+              "pt-BR": "Meia-noite"
+            }
+          }
+        ],
+        "followsSourceOrientation": false,
+        "parameters": [
+          {
+            "id": "lid-angle",
+            "name": "Screen opening angle",
+            "localizedNames": {
+              "en": "Screen opening angle",
+              "zh-Hans": "屏幕开合角度",
+              "zh-Hant": "螢幕開合角度",
+              "ja": "画面の開閉角度",
+              "ko": "화면 열림 각도",
+              "de": "Bildschirmöffnungswinkel",
+              "es": "Ángulo de apertura",
+              "fr": "Angle d’ouverture",
+              "it": "Angolo di apertura",
+              "pt-BR": "Ângulo de abertura"
+            },
+            "minimum": 0,
+            "maximum": 135,
+            "defaultValue": 110,
+            "step": 1,
+            "binding": "joint"
+          }
+        ],
+        "layoutSize": {
+          "width": 3163,
+          "height": 2938
+        },
+        "deviceKind": "laptop"
+      },
+      "posePresets": [
+        {
+          "id": "front",
+          "name": "Front",
+          "localizedNames": {
+            "en": "Front",
+            "zh-Hans": "正面"
+          },
+          "rotation": {
+            "pitchDegrees": 0,
+            "yawDegrees": 0,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "three-quarter",
+          "name": "Three-quarter",
+          "localizedNames": {
+            "en": "Three-quarter",
+            "zh-Hans": "侧前方"
+          },
+          "rotation": {
+            "pitchDegrees": 5,
+            "yawDegrees": -25,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "rear",
+          "name": "Rear",
+          "localizedNames": {
+            "en": "Rear",
+            "zh-Hans": "背面"
+          },
+          "rotation": {
+            "pitchDegrees": 0,
+            "yawDegrees": 180,
+            "rollDegrees": 0
+          }
+        }
+      ],
+      "postures": [],
+      "package": {
+        "url": "/devices/macbook-air-13/1.0.3/device.scdevice",
+        "size": 2837340,
+        "installedSize": 9914761,
+        "sha256": "b1a5a5610c6c60f8161b26ebaad87d018ce3da24a386d4224ffba840603664db"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "macbook-air-15",
+      "name": "MacBook Air 15-inch",
+      "version": "1.0.2",
+      "rendererSchemaVersion": 3,
+      "requiredRecordingKind": "singleScreen",
+      "colors": [
+        "sky-blue",
+        "silver",
+        "starlight",
+        "midnight"
+      ],
+      "phoneModel": {
+        "id": "macbook-air-15",
+        "name": "MacBook Air 15-inch",
+        "colors": [
+          "sky-blue",
+          "silver",
+          "starlight",
+          "midnight"
+        ],
+        "screenSize": {
+          "width": 2880,
+          "height": 1864
+        },
+        "modelIdentifiers": [],
+        "rendererSchemaVersion": 3,
+        "finishes": [
+          {
+            "id": "sky-blue",
+            "name": "Sky Blue",
+            "swatchHex": "#b6cedd",
+            "localizedNames": {
+              "de": "Himmelblau",
+              "zh-Hans": "天蓝色",
+              "ja": "スカイブルー",
+              "en": "Sky Blue",
+              "es": "azul cielo",
+              "it": "Cielo blu",
+              "ko": "스카이 블루",
+              "zh-Hant": "天藍色",
+              "pt-BR": "Azul celeste",
+              "fr": "Bleu ciel"
+            }
+          },
+          {
+            "id": "silver",
+            "name": "Silver",
+            "swatchHex": "#d8d9d7",
+            "localizedNames": {
+              "de": "Silber",
+              "zh-Hans": "银色",
+              "ja": "シルバー",
+              "en": "Silver",
+              "es": "Plata",
+              "it": "Argento",
+              "ko": "실버",
+              "zh-Hant": "銀色",
+              "pt-BR": "Prata",
+              "fr": "Argent"
+            }
+          },
+          {
+            "id": "starlight",
+            "name": "Starlight",
+            "swatchHex": "#e8dfce",
+            "localizedNames": {
+              "en": "Starlight",
+              "zh-Hans": "星光色",
+              "zh-Hant": "星光色",
+              "ja": "スターライト",
+              "ko": "스타라이트",
+              "de": "Polarstern",
+              "es": "Blanco estrella",
+              "fr": "Lumière stellaire",
+              "it": "Galassia",
+              "pt-BR": "Estelar"
+            }
+          },
+          {
+            "id": "midnight",
+            "name": "Midnight",
+            "swatchHex": "#2e3642",
+            "localizedNames": {
+              "en": "Midnight",
+              "zh-Hans": "午夜色",
+              "zh-Hant": "午夜色",
+              "ja": "ミッドナイト",
+              "ko": "미드나이트",
+              "de": "Mitternacht",
+              "es": "Medianoche",
+              "fr": "Minuit",
+              "it": "Mezzanotte",
+              "pt-BR": "Meia-noite"
+            }
+          }
+        ],
+        "followsSourceOrientation": false,
+        "parameters": [
+          {
+            "id": "lid-angle",
+            "name": "Screen opening angle",
+            "localizedNames": {
+              "en": "Screen opening angle",
+              "zh-Hans": "屏幕开合角度",
+              "zh-Hant": "螢幕開合角度",
+              "ja": "画面の開閉角度",
+              "ko": "화면 열림 각도",
+              "de": "Bildschirmöffnungswinkel",
+              "es": "Ángulo de apertura",
+              "fr": "Angle d’ouverture",
+              "it": "Angolo di apertura",
+              "pt-BR": "Ângulo de abertura"
+            },
+            "minimum": 0,
+            "maximum": 135,
+            "defaultValue": 110,
+            "step": 1,
+            "binding": "joint"
+          }
+        ],
+        "layoutSize": {
+          "width": 3540,
+          "height": 3225
+        },
+        "deviceKind": "laptop"
+      },
+      "posePresets": [
+        {
+          "id": "front",
+          "name": "Front",
+          "localizedNames": {
+            "en": "Front",
+            "zh-Hans": "正面"
+          },
+          "rotation": {
+            "pitchDegrees": 0,
+            "yawDegrees": 0,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "three-quarter",
+          "name": "Three-quarter",
+          "localizedNames": {
+            "en": "Three-quarter",
+            "zh-Hans": "侧前方"
+          },
+          "rotation": {
+            "pitchDegrees": 5,
+            "yawDegrees": -25,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "rear",
+          "name": "Rear",
+          "localizedNames": {
+            "en": "Rear",
+            "zh-Hans": "背面"
+          },
+          "rotation": {
+            "pitchDegrees": 0,
+            "yawDegrees": 180,
+            "rollDegrees": 0
+          }
+        }
+      ],
+      "postures": [],
+      "package": {
+        "url": "/devices/macbook-air-15/1.0.2/device.scdevice",
+        "size": 2977780,
+        "installedSize": 9643002,
+        "sha256": "78a94b64e0ec0c3afb4e814206ba4368f208a57c528c3e08b27a8eda337f25c5"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "macbook-pro-14",
+      "name": "MacBook Pro 14-inch",
+      "version": "1.0.4",
+      "rendererSchemaVersion": 3,
+      "requiredRecordingKind": "singleScreen",
+      "colors": [
+        "silver",
+        "space-gray",
+        "midnight"
+      ],
+      "phoneModel": {
+        "id": "macbook-pro-14",
+        "name": "MacBook Pro 14-inch",
+        "colors": [
+          "silver",
+          "space-gray",
+          "midnight"
+        ],
+        "screenSize": {
+          "width": 3024,
+          "height": 1964
+        },
+        "modelIdentifiers": [],
+        "rendererSchemaVersion": 3,
+        "finishes": [
+          {
+            "id": "silver",
+            "name": "Silver",
+            "swatchHex": "#d8d9d7",
+            "localizedNames": {
+              "de": "Silber",
+              "zh-Hans": "银色",
+              "ja": "シルバー",
+              "en": "Silver",
+              "es": "Plata",
+              "it": "Argento",
+              "ko": "실버",
+              "zh-Hant": "銀色",
+              "pt-BR": "Prata",
+              "fr": "Argent"
+            }
+          },
+          {
+            "id": "space-gray",
+            "name": "Space Gray",
+            "swatchHex": "#77787b",
+            "localizedNames": {
+              "en": "Space Gray",
+              "zh-Hans": "深空灰",
+              "zh-Hant": "太空灰色",
+              "ja": "スペースグレイ",
+              "ko": "스페이스 그레이",
+              "de": "Space Grau",
+              "es": "Gris espacial",
+              "fr": "Gris sidéral",
+              "it": "Grigio siderale",
+              "pt-BR": "Cinza-espacial"
+            }
+          },
+          {
+            "id": "midnight",
+            "name": "Midnight",
+            "swatchHex": "#2e3642",
+            "localizedNames": {
+              "en": "Midnight",
+              "zh-Hans": "午夜色",
+              "zh-Hant": "午夜色",
+              "ja": "ミッドナイト",
+              "ko": "미드나이트",
+              "de": "Mitternacht",
+              "es": "Medianoche",
+              "fr": "Minuit",
+              "it": "Mezzanotte",
+              "pt-BR": "Meia-noite"
+            }
+          }
+        ],
+        "followsSourceOrientation": false,
+        "parameters": [
+          {
+            "id": "lid-angle",
+            "name": "Screen opening angle",
+            "localizedNames": {
+              "en": "Screen opening angle",
+              "zh-Hans": "屏幕开合角度",
+              "zh-Hant": "螢幕開合角度",
+              "ja": "画面の開閉角度",
+              "ko": "화면 열림 각도",
+              "de": "Bildschirmöffnungswinkel",
+              "es": "Ángulo de apertura",
+              "fr": "Angle d’ouverture",
+              "it": "Angolo di apertura",
+              "pt-BR": "Ângulo de abertura"
+            },
+            "minimum": 0,
+            "maximum": 135,
+            "defaultValue": 110,
+            "step": 1,
+            "binding": "joint"
+          }
+        ],
+        "layoutSize": {
+          "width": 3251,
+          "height": 3024
+        },
+        "deviceKind": "laptop"
+      },
+      "posePresets": [
+        {
+          "id": "front",
+          "name": "Front",
+          "localizedNames": {
+            "en": "Front",
+            "zh-Hans": "正面"
+          },
+          "rotation": {
+            "pitchDegrees": 0,
+            "yawDegrees": 0,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "three-quarter",
+          "name": "Three-quarter",
+          "localizedNames": {
+            "en": "Three-quarter",
+            "zh-Hans": "侧前方"
+          },
+          "rotation": {
+            "pitchDegrees": 5,
+            "yawDegrees": -25,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "rear",
+          "name": "Rear",
+          "localizedNames": {
+            "en": "Rear",
+            "zh-Hans": "背面"
+          },
+          "rotation": {
+            "pitchDegrees": 0,
+            "yawDegrees": 180,
+            "rollDegrees": 0
+          }
+        }
+      ],
+      "postures": [],
+      "package": {
+        "url": "/devices/macbook-pro-14/1.0.4/device.scdevice",
+        "size": 4502341,
+        "installedSize": 14725843,
+        "sha256": "bc05c8ebb1749862a46d123ee2aa409473052f325364474fccdb69bab46bdf0a"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "macbook-pro-16",
+      "name": "MacBook Pro 16-inch",
+      "version": "1.0.4",
+      "rendererSchemaVersion": 3,
+      "requiredRecordingKind": "singleScreen",
+      "colors": [
+        "silver",
+        "space-gray",
+        "midnight"
+      ],
+      "phoneModel": {
+        "id": "macbook-pro-16",
+        "name": "MacBook Pro 16-inch",
+        "colors": [
+          "silver",
+          "space-gray",
+          "midnight"
+        ],
+        "screenSize": {
+          "width": 3456,
+          "height": 2234
+        },
+        "modelIdentifiers": [],
+        "rendererSchemaVersion": 3,
+        "finishes": [
+          {
+            "id": "silver",
+            "name": "Silver",
+            "swatchHex": "#d8d9d7",
+            "localizedNames": {
+              "de": "Silber",
+              "zh-Hans": "银色",
+              "ja": "シルバー",
+              "en": "Silver",
+              "es": "Plata",
+              "it": "Argento",
+              "ko": "실버",
+              "zh-Hant": "銀色",
+              "pt-BR": "Prata",
+              "fr": "Argent"
+            }
+          },
+          {
+            "id": "space-gray",
+            "name": "Space Gray",
+            "swatchHex": "#77787b",
+            "localizedNames": {
+              "en": "Space Gray",
+              "zh-Hans": "深空灰",
+              "zh-Hant": "太空灰色",
+              "ja": "スペースグレイ",
+              "ko": "스페이스 그레이",
+              "de": "Space Grau",
+              "es": "Gris espacial",
+              "fr": "Gris sidéral",
+              "it": "Grigio siderale",
+              "pt-BR": "Cinza-espacial"
+            }
+          },
+          {
+            "id": "midnight",
+            "name": "Midnight",
+            "swatchHex": "#2e3642",
+            "localizedNames": {
+              "en": "Midnight",
+              "zh-Hans": "午夜色",
+              "zh-Hant": "午夜色",
+              "ja": "ミッドナイト",
+              "ko": "미드나이트",
+              "de": "Mitternacht",
+              "es": "Medianoche",
+              "fr": "Minuit",
+              "it": "Mezzanotte",
+              "pt-BR": "Meia-noite"
+            }
+          }
+        ],
+        "followsSourceOrientation": false,
+        "parameters": [
+          {
+            "id": "lid-angle",
+            "name": "Screen opening angle",
+            "localizedNames": {
+              "en": "Screen opening angle",
+              "zh-Hans": "屏幕开合角度",
+              "zh-Hant": "螢幕開合角度",
+              "ja": "画面の開閉角度",
+              "ko": "화면 열림 각도",
+              "de": "Bildschirmöffnungswinkel",
+              "es": "Ángulo de apertura",
+              "fr": "Angle d’ouverture",
+              "it": "Angolo di apertura",
+              "pt-BR": "Ângulo de abertura"
+            },
+            "minimum": 0,
+            "maximum": 135,
+            "defaultValue": 110,
+            "step": 1,
+            "binding": "joint"
+          }
+        ],
+        "layoutSize": {
+          "width": 3699,
+          "height": 3396
+        },
+        "deviceKind": "laptop"
+      },
+      "posePresets": [
+        {
+          "id": "front",
+          "name": "Front",
+          "localizedNames": {
+            "en": "Front",
+            "zh-Hans": "正面"
+          },
+          "rotation": {
+            "pitchDegrees": 0,
+            "yawDegrees": 0,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "three-quarter",
+          "name": "Three-quarter",
+          "localizedNames": {
+            "en": "Three-quarter",
+            "zh-Hans": "侧前方"
+          },
+          "rotation": {
+            "pitchDegrees": 5,
+            "yawDegrees": -25,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "rear",
+          "name": "Rear",
+          "localizedNames": {
+            "en": "Rear",
+            "zh-Hans": "背面"
+          },
+          "rotation": {
+            "pitchDegrees": 0,
+            "yawDegrees": 180,
+            "rollDegrees": 0
+          }
+        }
+      ],
+      "postures": [],
+      "package": {
+        "url": "/devices/macbook-pro-16/1.0.4/device.scdevice",
+        "size": 4076589,
+        "installedSize": 12179893,
+        "sha256": "5a2d7049ea170f83b7f4fd0ae4666bc781c741f307a04aeee256cc9d71fe08da"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "pro-display-xdr",
+      "name": "Pro Display XDR",
+      "version": "1.0.4",
+      "rendererSchemaVersion": 3,
+      "requiredRecordingKind": "singleScreen",
+      "colors": [
+        "silver"
+      ],
+      "phoneModel": {
+        "id": "pro-display-xdr",
+        "name": "Pro Display XDR",
+        "colors": [
+          "silver"
+        ],
+        "screenSize": {
+          "width": 6016,
+          "height": 3384
+        },
+        "modelIdentifiers": [],
+        "rendererSchemaVersion": 3,
+        "finishes": [
+          {
+            "id": "silver",
+            "name": "Silver",
+            "swatchHex": "#d8d9d7",
+            "localizedNames": {
+              "de": "Silber",
+              "zh-Hans": "银色",
+              "ja": "シルバー",
+              "en": "Silver",
+              "es": "Plata",
+              "it": "Argento",
+              "ko": "실버",
+              "zh-Hant": "銀色",
+              "pt-BR": "Prata",
+              "fr": "Argent"
+            }
+          }
+        ],
+        "followsSourceOrientation": false,
+        "parameters": [
+          {
+            "id": "tilt",
+            "name": "Display tilt",
+            "localizedNames": {
+              "en": "Display tilt",
+              "zh-Hans": "显示器俯仰角度",
+              "zh-Hant": "顯示器俯仰角度",
+              "ja": "ディスプレイの傾き",
+              "ko": "디스플레이 기울기",
+              "de": "Displayneigung",
+              "es": "Inclinación de la pantalla",
+              "fr": "Inclinaison de l’écran",
+              "it": "Inclinazione dello schermo",
+              "pt-BR": "Inclinação da tela"
+            },
+            "minimum": -5,
+            "maximum": 25,
+            "defaultValue": 0,
+            "step": 1,
+            "binding": "joint"
+          }
+        ],
+        "layoutSize": {
+          "width": 7467,
+          "height": 6136
+        },
+        "deviceKind": "display"
+      },
+      "posePresets": [
+        {
+          "id": "front",
+          "name": "Front",
+          "localizedNames": {
+            "en": "Front",
+            "zh-Hans": "正面"
+          },
+          "rotation": {
+            "pitchDegrees": 0,
+            "yawDegrees": 0,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "three-quarter",
+          "name": "Three-quarter",
+          "localizedNames": {
+            "en": "Three-quarter",
+            "zh-Hans": "侧前方"
+          },
+          "rotation": {
+            "pitchDegrees": 5,
+            "yawDegrees": -25,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "rear",
+          "name": "Rear",
+          "localizedNames": {
+            "en": "Rear",
+            "zh-Hans": "背面"
+          },
+          "rotation": {
+            "pitchDegrees": 0,
+            "yawDegrees": 180,
+            "rollDegrees": 0
+          }
+        }
+      ],
+      "postures": [],
+      "package": {
+        "url": "/devices/pro-display-xdr/1.0.4/device.scdevice",
+        "size": 8638425,
+        "installedSize": 20463628,
+        "sha256": "981e916e284139a03f5166c8e2221486de3eef8fe818fe5edacad8f63d4ece45"
+      }
+    },
+    {
+      "schemaVersion": 1,
+      "id": "studio-display",
+      "name": "Studio Display",
+      "version": "1.0.1",
+      "rendererSchemaVersion": 3,
+      "requiredRecordingKind": "singleScreen",
+      "colors": [
+        "silver"
+      ],
+      "phoneModel": {
+        "id": "studio-display",
+        "name": "Studio Display",
+        "colors": [
+          "silver"
+        ],
+        "screenSize": {
+          "width": 5120,
+          "height": 2880
+        },
+        "modelIdentifiers": [],
+        "rendererSchemaVersion": 3,
+        "finishes": [
+          {
+            "id": "silver",
+            "name": "Silver",
+            "swatchHex": "#d8d9d7",
+            "localizedNames": {
+              "de": "Silber",
+              "zh-Hans": "银色",
+              "ja": "シルバー",
+              "en": "Silver",
+              "es": "Plata",
+              "it": "Argento",
+              "ko": "실버",
+              "zh-Hant": "銀色",
+              "pt-BR": "Prata",
+              "fr": "Argent"
+            }
+          }
+        ],
+        "followsSourceOrientation": false,
+        "parameters": [
+          {
+            "id": "tilt",
+            "name": "Display tilt",
+            "localizedNames": {
+              "en": "Display tilt",
+              "zh-Hans": "显示器俯仰角度",
+              "zh-Hant": "顯示器俯仰角度",
+              "ja": "ディスプレイの傾き",
+              "ko": "디스플레이 기울기",
+              "de": "Displayneigung",
+              "es": "Inclinación de la pantalla",
+              "fr": "Inclinaison de l’écran",
+              "it": "Inclinazione dello schermo",
+              "pt-BR": "Inclinação da tela"
+            },
+            "minimum": -5,
+            "maximum": 25,
+            "defaultValue": 0,
+            "step": 1,
+            "binding": "joint"
+          }
+        ],
+        "layoutSize": {
+          "width": 6479,
+          "height": 4963
+        },
+        "deviceKind": "display"
+      },
+      "posePresets": [
+        {
+          "id": "front",
+          "name": "Front",
+          "localizedNames": {
+            "en": "Front",
+            "zh-Hans": "正面"
+          },
+          "rotation": {
+            "pitchDegrees": 0,
+            "yawDegrees": 0,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "three-quarter",
+          "name": "Three-quarter",
+          "localizedNames": {
+            "en": "Three-quarter",
+            "zh-Hans": "侧前方"
+          },
+          "rotation": {
+            "pitchDegrees": 5,
+            "yawDegrees": -25,
+            "rollDegrees": 0
+          }
+        },
+        {
+          "id": "rear",
+          "name": "Rear",
+          "localizedNames": {
+            "en": "Rear",
+            "zh-Hans": "背面"
+          },
+          "rotation": {
+            "pitchDegrees": 0,
+            "yawDegrees": 180,
+            "rollDegrees": 0
+          }
+        }
+      ],
+      "postures": [],
+      "package": {
+        "url": "/devices/studio-display/1.0.1/device.scdevice",
+        "size": 3807552,
+        "installedSize": 9884943,
+        "sha256": "bc0539b4bfe24336de27a18efe18d7ca87f874fc49f19b5f0e2737fdd6286c19"
+      }
+    }
+  ],
+  "groups": [
+    {
+      "id": "iphone-17-series",
+      "name": "iPhone 17 Series",
+      "localizedNames": {
+        "en": "iPhone 17 Series",
+        "zh-Hans": "iPhone 17 系列",
+        "zh-Hant": "iPhone 17 系列",
+        "ja": "iPhone 17シリーズ",
+        "ko": "iPhone 17 시리즈",
+        "de": "iPhone 17 Serie",
+        "es": "Serie iPhone 17",
+        "fr": "Gamme iPhone 17",
+        "it": "Serie iPhone 17",
+        "pt-BR": "Linha iPhone 17"
+      },
+      "deviceKind": "phone",
+      "deviceIDs": [
+        "iphone-17",
+        "iphone-17-pro",
+        "iphone-17-pro-max",
+        "iphone-air"
+      ],
+      "defaultDeviceID": "iphone-17"
+    },
+    {
+      "id": "iphone-18-series",
+      "name": "iPhone 18 Series",
+      "localizedNames": {
+        "en": "iPhone 18 Series",
+        "zh-Hans": "iPhone 18 系列",
+        "zh-Hant": "iPhone 18 系列",
+        "ja": "iPhone 18シリーズ",
+        "ko": "iPhone 18 시리즈",
+        "de": "iPhone 18 Serie",
+        "es": "Serie iPhone 18",
+        "fr": "Gamme iPhone 18",
+        "it": "Serie iPhone 18",
+        "pt-BR": "Linha iPhone 18"
+      },
+      "deviceKind": "phone",
+      "deviceIDs": [
+        "iphone-18-pro",
+        "iphone-18-pro-max"
+      ],
+      "defaultDeviceID": "iphone-18-pro"
+    },
+    {
+      "id": "macbook-pro",
+      "name": "MacBook Pro",
+      "deviceKind": "laptop",
+      "deviceIDs": [
+        "macbook-pro-14",
+        "macbook-pro-16"
+      ],
+      "defaultDeviceID": "macbook-pro-14"
+    },
+    {
+      "id": "macbook-air",
+      "name": "MacBook Air",
+      "deviceKind": "laptop",
+      "deviceIDs": [
+        "macbook-air-13",
+        "macbook-air-15"
+      ],
+      "defaultDeviceID": "macbook-air-13"
+    },
+    {
+      "id": "apple-display",
+      "name": "Apple Display",
+      "localizedNames": {
+        "en": "Apple Display",
+        "zh-Hans": "Apple 显示器",
+        "zh-Hant": "Apple 顯示器",
+        "ja": "Appleディスプレイ",
+        "ko": "Apple 디스플레이",
+        "de": "Apple Displays",
+        "es": "Pantallas Apple",
+        "fr": "Écrans Apple",
+        "it": "Monitor Apple",
+        "pt-BR": "Monitores Apple"
+      },
+      "deviceKind": "display",
+      "deviceIDs": [
+        "studio-display",
+        "pro-display-xdr"
+      ],
+      "defaultDeviceID": "studio-display"
     }
   ]
 }

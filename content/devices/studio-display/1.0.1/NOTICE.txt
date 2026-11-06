@@ -1,0 +1,4 @@
+User-supplied source: studio_display.usdz
+SHA-256: 30c3062a9dc6fa379afa971a343c6d97442a35340e03618b40442f865d62b4e2
+Original meshes and material textures retained; finishes are visual approximations requested by the user.
+Normalized and rigged with Blender. Redistribution rights remain with original asset owners.
