@@ -1,3 +1,15 @@
+# 1.0.26
+
+<!-- highlights
+- Recording speed edits now work correctly
+- More reliable recording and purchase recovery
+-->
+
+- Fixed recording clip speed changes snapping back to 1x. The total duration now updates after edits, and saved projects keep the selected clip speed.
+- If saving or opening a recording gets stuck after you stop, ScreenCam now shows an error instead of staying on "Processing Recording" indefinitely. If the recording was saved, the message explains how to reopen it.
+- Improved Restore Purchases to help recognize redeemed Pro access before the PC's local license finishes syncing.
+- Fixed the recording toolbar turning black after Windows restarts the desktop compositor.
+
 # 1.0.25
 
 <!-- highlights
