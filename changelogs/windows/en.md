@@ -1,3 +1,11 @@
+# 1.0.27
+
+<!-- highlights
+- Better problem diagnostics
+-->
+
+- ScreenCam now records more detailed diagnostics when saving a recording fails, a recording is slow to start, an editor action fails or the app quits unexpectedly (sent only if you allow usage data), so we can find and fix problems faster.
+
 # 1.0.26
 
 <!-- highlights
