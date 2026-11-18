@@ -1,3 +1,13 @@
+# 1.0.28
+
+<!-- highlights
+- Click zoom now matches the macOS app
+-->
+
+- Fixed every single click being recorded as a double click, which made the automatic click zoom closer than intended (2.18x instead of 2x). New recordings now zoom in the same amount as on macOS.
+- New full-screen recordings now start without a background, padding, rounded corners or shadow, as on macOS. Window and area recordings still start with the wallpaper background.
+- New window recordings now match the window's own rounded corners (square when the window is maximized) instead of always using a larger fixed radius.
+
 # 1.0.27
 
 <!-- highlights
