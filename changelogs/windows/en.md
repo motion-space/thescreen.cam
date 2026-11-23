@@ -7,6 +7,8 @@
 
 - Fixed recordings sometimes failing to save with an "access denied" error after you stop, which happened when antivirus software, Windows Search or a sync app briefly opened the new files. ScreenCam now waits for those files to be released instead of giving up.
 - If saving a recording still fails, ScreenCam now keeps the recording safe and the error window offers Retry save, Save to another folder and Show raw video, so the recording is no longer lost.
+- Fixed very small area and window recordings (less than about 160 pixels wide or 128 pixels tall) failing to save on some graphics cards.
+- When a recording can't be saved, the error message now only suggests checking disk space if the disk is actually full.
 - Smoother, more stable recording frame rate, especially on high refresh rate (120 Hz and above) displays and while a game or other app keeps the GPU busy.
 
 # 1.0.28
